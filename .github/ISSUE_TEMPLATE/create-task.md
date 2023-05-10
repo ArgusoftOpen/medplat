@@ -1,7 +1,7 @@
 ---
 name: Create Task
 about: Create a task for collaborator to carry out
-title: TASK
+title: 'TASK: '
 labels: ''
 assignees: ''
 
