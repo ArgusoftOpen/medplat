@@ -1,0 +1,14 @@
+<div ng-if="config.htmlData && aboveData && data.tableToDisplay.body.length > 0"
+    ng-bind-html="aboveData | trustAsHtml">
+</div>
+<div ng-switch="config.layout">
+    <div ng-switch-when="dynamicReport1">
+        <div ng-include="'app/common/directives/dynamicview/layouts/dynamic-report1.tmpl.html'"></div>
+    </div>
+    <div ng-switch-when="dynamicReportWithPagination">
+        <div ng-include="'app/common/directives/dynamicview/layouts/dynamic-report-with-pagination.tmpl.html'"></div>
+    </div>
+</div>
+<div ng-if="config.htmlData && belowData && data.tableToDisplay.body.length > 0"
+    ng-bind-html="belowData | trustAsHtml">
+</div>

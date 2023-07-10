@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="16dp">
+
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_background"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/medicine_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="start"
+            android:textAppearance="@style/CustomAnswerView"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/dosage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="3dp"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:id="@+id/layer1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/frequency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="Frequency : "
+                    android:textColor="@color/listTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/roboto_bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:hintEnabled="false"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="0dp" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/frequency_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLength="1"
+                    android:textColor="@color/listTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/roboto_bold"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="3dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layer2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="Duration : "
+                    android:textColor="@color/listTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/roboto_bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:hintEnabled="false"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="0dp" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/duration_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLength="2"
+                    android:textColor="@color/listTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="3dp"
+                    app:fontFamily="@font/roboto_bold" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inventory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="3dp"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:id="@+id/layer3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="Quantity : "
+                    android:textColor="@color/listTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/roboto_bold" />
+
+                <EditText
+                    android:id="@+id/quantity_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:textColor="@color/listTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/roboto_bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layer4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="Stock : "
+                    android:textColor="@color/listTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/roboto_bold" />
+
+                <EditText
+                    android:id="@+id/stock_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:textColor="@color/listTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/roboto_bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/instruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="3dp"
+            android:weightSum="1"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/special_instruction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.4"
+                android:ellipsize="end"
+                android:text="Special Instruction : "
+                android:textColor="@color/listTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto_bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                android:layout_weight="0.6"
+                android:layout_gravity="center"
+                android:paddingHorizontal="0dp" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/special_instruction_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:textColor="@color/listTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="3dp"
+                    app:fontFamily="@font/roboto_bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

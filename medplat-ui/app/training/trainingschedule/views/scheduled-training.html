@@ -1,0 +1,240 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <button class="btn btn-primary float-right" ui-sref="techo.training.schedule">Schedule</button>
+        </div>
+        <div class="col-12 mb-15">
+            <div class="cst-table table-responsive" style="overflow: auto; max-height: calc(100vh - 184px);"
+                id="training-scroll">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <colgroup>
+                        <col style="width: 5%">
+                        <col style="width: 10%">
+                        <col style="width: 10%">
+                        <col style="width: 10%">
+                        <col style="width: 15%">
+                        <col style="width: 15%" ng-if="scheduledTraining.invisible != true">
+                        <col style="width: 12%">
+                        <col style="width: 8%">
+                        <col style="width: 14%">
+                        <col style="width: 10%">
+                        <col style="width: 5%" ng-if="scheduledTraining.invisible != true">
+                    </colgroup>
+                    <thead class="cst-thead">
+                        <tr>
+                            <th title="#">#</th>
+                            <th class="filter-col">
+                                <span class="text active" title="Course">Course</span>
+                            </th>
+                            <th>Course Type</th>
+                            <th class="filter-col">
+                                <span class="text active" title="Module">Module</span>
+                            </th>
+                            <th class="filter-col">
+                                Organization Unit
+                            </th>
+                            <th class="filter-col" ng-if="scheduledTraining.invisible != true">
+                                <span class="text active" title="Course Trainer (Primary)">Primary Trainer</span>
+                            </th>
+                            <th class="filter-col">
+                                <span class="text active" title="Start Date">Scheduled</span>
+                            </th>
+                            </th>
+                            <th class="filter-col">
+                                Attendees
+                            </th>
+                            <th class="filter-col">
+                                Completion Marked
+                            </th>
+                            <th class="filter-col">
+                                Status
+                            </th>
+                            <th class="filter-col" title="Action" ng-if="scheduledTraining.invisible != true">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody" infinite-scroll-distance="0"
+                        infinite-scroll='scheduledTraining.getTrainingStatuses()'
+                        infinite-scroll-container='"#training-scroll"' infinite-scroll-immediate-check="true">
+                        <tr
+                            ng-repeat="training in scheduledTraining.trainingScheduleList|orderBy:scheduledTraining.orderByField:scheduledTraining.reverseSort">
+                            <td class="break"
+                                ng-class="{'bold' : (training.trainerId == scheduledTraining.userDetail.id)}">
+                                {{$index + 1}}</td>
+                            <td class="break"
+                                ng-class="{'bold' : (training.trainerId == scheduledTraining.userDetail.id)}">
+                                {{training.courseName}}</td>
+                            <td>{{training.courseType|emptylabel}}</td>
+                            <td class="break"
+                                ng-class="{'bold' : (training.trainerId == scheduledTraining.userDetail.id)}">
+                                {{training.module != null ? training.module : '-'}}</td>
+                            <td class="break"
+                                ng-class="{'bold' : (training.trainerId == scheduledTraining.userDetail.id)}">
+                                {{training.location}}</td>
+                            <td class="break" ng-if="scheduledTraining.invisible != true"
+                                ng-class="{'bold' : (training.trainerId == scheduledTraining.userDetail.id)}">
+                                {{training.trainer != " " ? training.trainer : '-'}}</td>
+                            <td class="break"
+                                ng-class="{'bold' : (training.trainerId == scheduledTraining.userDetail.id)}">
+                                {{training.effectiveDate|date : 'dd/MM/yyyy'}}
+                                {{training.expirationDate|date : '- dd/MM/yyyy'}}</td>
+                            <td class="break"
+                                ng-class="{'bold' : (training.trainerId == scheduledTraining.userDetail.id)}">
+                                <a ng-class="{disabled:training.total===0}" href="javascript:void(0)"
+                                    ng-click="scheduledTraining.drillDown(training)">{{training.total}}
+                                </a>
+                            </td>
+                            <td class="break"
+                                ng-class="{'bold' : (training.trainerId == scheduledTraining.userDetail.id)}">
+                                {{training.completed != null ? training.completed : '-'}}</td>
+                            <td class="break"
+                                ng-class="{'bold' : (training.trainerId == scheduledTraining.userDetail.id)}">
+                                <div ng-switch="scheduledTraining.getStatus(training)">
+                                    <div ng-switch-when="1">
+                                        <span class="status-badge badge-primary">Completed</span>
+                                    </div>
+                                    <div ng-switch-when="7">
+                                        <span class="status-badge badge-primary">Completed</span>
+                                    </div>
+                                    <div ng-switch-when="2">
+                                        <span class="status-badge badge-warning" ng-if="training.courseType == 'ONLINE'">Scheduled</span>
+                                        <span class="status-badge badge-warning" ng-if="training.courseType != 'ONLINE'">Update<br />Pending</span>
+                                    </div>
+                                    <div ng-switch-when="3">
+                                        <span class="status-badge badge-warning">Pending<br />Certification</span>
+                                    </div>
+                                    <div ng-switch-when="4">
+                                        <span class="status-badge badge-info">Ongoing</span>
+                                    </div>
+                                    <div ng-switch-when="6">
+                                        <span class="status-badge badge-success">Upcoming</span>
+                                    </div>
+                                    <div ng-switch-when="5">
+                                        <span class="status-badge badge-danger">{{scheduledTraining.canMarkAttendance ==
+                                            true ? 'Pending' : 'Locked'}}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="action-cell" ng-if="scheduledTraining.invisible != true">
+                                <ul class="action-item" ng-if="training.courseType!=='ONLINE'"
+                                    ng-class="{'nocursor':(scheduledTraining.getStatus(training) == 1 || (scheduledTraining.getStatus(training) == 5 && !scheduledTraining.canMarkAttendance) || (training.trainerId != scheduledTraining.userDetail.id && !scheduledTraining.canMarkAttendance))}">
+                                    <li>
+                                        <a ng-class="{'disabledLink':(scheduledTraining.getStatus(training) == 1 || (scheduledTraining.getStatus(training) == 5 && !scheduledTraining.canMarkAttendance) || (training.trainerId != scheduledTraining.userDetail.id && !scheduledTraining.canMarkAttendance))}"
+                                            href="javascript:void(0)" class="action-icon edit-icon"
+                                            ng-click="scheduledTraining.rescheduleTraining(training)">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr ng-if="scheduledTraining.trainingScheduleList.length < 1">
+                            <td colspan="{{scheduledTraining.invisible != true ? 11 : 9}}">
+                                <div class="col-12 mb-15">
+                                    <div class="no-data-placeholder">
+                                        <h5>No training programs are scheduled for you...</h5>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div small-div">
+        <span class="filter-toggle" ng-click="scheduledTraining.toggleFilter(); scheduledTraining.getTrainingStateConstants()">Filter</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Search</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12">
+                    <label class="form-group control control-radio"> Online Course
+                        <input type="radio" name="online" ng-model="scheduledTraining.type"
+                            value="ONLINE" form-control
+                            ng-change="scheduledTraining.filterCourseType()">
+                        <div class="control_indicator"></div>
+                    </label>
+                    <label class="form-group control control-radio ml-2"> Offline Course
+                        <input type="radio" name="offline" value="OFFLINE" ng-model="scheduledTraining.type"
+                            ng-change="scheduledTraining.filterCourseType()" form-control>
+                        <div class="control_indicator"></div>
+                    </label>
+                </div>
+                <div class="col-12 mt-3" ng-if="scheduledTraining.type">
+                    <label for="module" control-label>Select Course</label>
+                    <select class="form-control cst-form-control" form-control ng-model="scheduledTraining.courseId"
+                        chosen-directive="scheduledTraining.courseList"
+                        ng-options="course.course_id as course.course_name for course in scheduledTraining.courseList">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+                <!-- <div class="col-12 mt-3">
+                    <label for="module" control-label>Select Module</label>
+                    <select class="form-control cst-form-control" form-control
+                        ng-model="scheduledTraining.courseModuleId"
+                        ng-change="scheduledTraining.getCoursesByModuleId(scheduledTraining.courseModuleId)"
+                        ng-options="value.id as value.fieldValue for value in scheduledTraining.moduleConstants">
+                        <option value="">Select</option>
+                    </select>
+                </div> -->
+                <!-- <div class="col-12">
+                    <label style="margin-top: 4%" for="from_date" control-label>From Date</label>
+                    <div class="{{::inputClass}} form-group" style="margin-bottom: 0px">
+                        <input name="from_date" type="text" datepicker class="disabled-input" id="from_date"
+                            ng-model="scheduledTraining.dateFrom" max-date-month="scheduledTraining.todayDate"
+                            ng-required="true" form-control>
+                    </div>
+                </div>
+                <div class="col-12 mt-3">
+                    <label for="data[dateTo]" control-label>To Date</label>
+                    <div class="{{::inputClass}} form-group">
+                        <input name="to_date" type="text" datepicker class="disabled-input" id="to_date"
+                            ng-model="scheduledTraining.dateTo" min-date-month="scheduledTraining.dateFrom"
+                            max-date-month="scheduledTraining.todayDate" ng-required="true" form-control>
+                    </div>
+                </div> -->
+                <div class="col-12 mt-3">
+                    <label for="scheduledDateRange" control-label>Scheduled Date</label>
+                    <daterangepicker name="scheduledDateRange" class="disabled-input"
+                        ng-model="scheduledTraining.dateRange" form-control></daterangepicker>
+                </div>
+                <div class="col-12 mt-3">
+                    <label for="statusOfTraining" control-label>Status of Training</label>
+                    <select class="form-control cst-form-control" form-control
+                        ng-model="scheduledTraining.statusOfTraining"
+                        ng-options="states.training_state as states.training_state for states in scheduledTraining.trainingStateConstants">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <ng-form name="scheduledTraining.locationForm">
+                        <location-directive ng-model="scheduledTraining.selectedLocationId"
+                            selected-location="scheduledTraining.selectedLocation" template-type="'inline'"
+                            fetch-according-to-user-aoi="true"> </location-directive>
+                        <br>
+                    </ng-form>
+                </div>
+            </div>    
+            <div class="row mt-3">
+                <!-- <div class="col-12">
+                    <label class="control control-checkbox">Show Past Programs
+                        <input type="checkbox" ng-model="scheduledTraining.isShowPast" />
+                        <div class="control_indicator"></div>
+                    </label>
+                </div> -->
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter"
+                            ng-click="scheduledTraining.toggleFilter()">Close</button>
+                        <button class="btn btn-primary search-filter" ng-click="scheduledTraining.submit()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

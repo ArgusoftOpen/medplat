@@ -1,0 +1,423 @@
+<div class="container-fluid fhsr-verification">
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <div class="card cst-card">
+                <div class="card-title" role="tab">
+                    <h4 class="text">
+                        <a id="card1" class="collapse-link d-block" data-toggle="collapse" href="#collapse1"
+                            ng-click="toggle7 = !toggle7">
+                            <span data-toggle="tooltip">
+                                FHS families detail report
+                            </span>
+                        </a>
+                        <ul class="control-list">
+                            <li ng-if="fhsdashboard.lastUpdateDate != null">
+                                Last Updated at {{fhsdashboard.lastUpdateDate| date : "dd-MM-yyyy HH:mm:ss"}}
+                            </li>
+                            <li ng-if="toggle7 && fhsdashboard.showDetailViewFlag" ng-click="fhsdashboard.saveExcel()">
+                                <span>
+                                    <em class="fa fa-file-excel-o" uib-tooltip="Download excel"></em>
+                                </span>
+                            </li>
+                            <li ng-if="toggle7 && fhsdashboard.showDetailViewFlag" ng-click="fhsdashboard.printPdf()">
+                                <span>
+                                    <em class="fa fa-print" uib-tooltip="Print pdf"></em>
+                                </span>
+                            </li>
+                            <li ng-if="toggle7"
+                                ng-click="fhsdashboard.getFamiliesAndMembers(fhsdashboard.familiesAndMembers[fhsdashboard.familiesAndMembers.length - 1].id)">
+                                <span>
+                                    <em class="fa fa-refresh"></em>
+                                </span>
+                            </li>
+                            <li data-toggle="collapse" href="#collapse1" ng-click="toggle7 = !toggle7">
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle7,'ion-minus':toggle7}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class=" collapse" id="collapse1" aria-labelledby="heading1">
+                    <div class="card-body">
+                        <!-- Count detail for -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <ul class="simple-breadcrumbs">
+                                    <li class="text-muted" ng-class="{'current': $last}"
+                                        ng-repeat="member in fhsdashboard.familiesAndMembers">
+                                        <a href="javascript:void(0);"
+                                            ng-click="fhsdashboard.getFamiliesAndMembers(member.id, member.name, member.type)">{{member.name}}
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="btn-group pull-right" data-toggle="buttons">
+                                    <div class="btn btn-primary active" ng-click="fhsdashboard.showBarGraph()">
+                                        <input type="radio" style="visibility: hidden" name="options" id="option1"
+                                            ng-selected="true">
+                                        <em class="fa fa-bar-chart"></em>
+                                    </div>
+                                    <div class="btn btn-primary" ng-click="fhsdashboard.showDetailView()"
+                                        id="showDetails">
+                                        <input type="radio" style="visibility: hidden" name="options" id="option2">
+                                        <em class="fa fa-list"></em>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div ng-if="fhsdashboard.showDetailViewFlag">
+                                    <div class="cst-table table-responsive max-height-500">
+                                        <table class="table table-sm table-striped table-bordered header-fixed"
+                                            id="fhsdetails-table">
+                                            <thead class="cst-thead">
+                                                <tr>
+                                                    <th data-toggle="tooltip">
+                                                        Location</th>
+                                                    <th ng-if="!fhsdashboard.isDistrict" data-toggle="tooltip">
+                                                        Sub Location</th>
+                                                    <th data-toggle="tooltip">
+                                                        Imported From eMamta</th>
+                                                    <th data-toggle="tooltip">
+                                                        Imported eMamta Member</th>
+                                                    <th data-toggle="tooltip">
+                                                        To be
+                                                        processed</th>
+                                                    <th data-toggle="tooltip">
+                                                        In Reverification</th>
+                                                    <th data-toggle="tooltip">
+                                                        Verified</th>
+                                                    <th data-toggle="tooltip">
+                                                        Archived
+                                                    </th>
+                                                    <th data-toggle="tooltip">
+                                                        New Families Added
+                                                    </th>
+                                                    <th data-toggle="tooltip"
+                                                        ng-bind-template="Total Families in {{fhsdashboard.appName}}">
+                                                    </th>
+                                                    <th data-toggle="tooltip"
+                                                        ng-bind-template="Total Members in {{fhsdashboard.appName}}">
+                                                    </th>
+                                                    <th data-toggle="tooltip">
+                                                        Total
+                                                        Children Under 1 Year</th>
+                                                    <th data-toggle="tooltip">
+                                                        Total
+                                                        Children Under 5 Years</th>
+                                                    <th data-toggle="tooltip"
+                                                        title="Percetage Completion = ((Verified + Archived) * 100) / Imported from emamta ">
+                                                        Percentage Completion</th>
+                                                    <th data-toggle="tooltip">No. of
+                                                        Field Workers</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-if="!fhsdashboard.isDistrict" class="cst-tbody">
+                                                <tr ng-repeat-start="memberDetails in fhsdashboard.familiesAndMemberDetails"
+                                                    ng-init="fhsdashboard.village = memberDetails.locationType != fhsdashboard.villageType">
+                                                    <td rowspan='{{memberDetails.childs.length + 2}}'>
+                                                        <a ng-if="memberDetails.id != null"
+                                                            ng-class="{disabled: memberDetails.locationType == fhsdashboard.villageType || memberDetails.locationType == fhsdashboard.urbanArea || fhsdashboard.familiesAndMembers.length == 4}"
+                                                            ng-click="fhsdashboard.getFamiliesAndMembers(memberDetails.id, memberDetails.value, memberDetails.locationType)"
+                                                            href="javascript:void(0);">{{memberDetails.value}}</a>
+                                                        <span
+                                                            ng-if="memberDetails.id == null">{{memberDetails.value}}</span>
+                                                    </td>
+                                                <tr ng-repeat="child in memberDetails.childs">
+                                                    <td>{{child.value}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
+                                                        {{child.importedFromEmamta}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
+                                                        {{!child.importedFromEmamtaMember ? 0 : child.importedFromEmamtaMember}}
+                                                    </td>
+                                                    <td
+                                                        ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
+                                                        {{child.unverifiedFHS}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
+                                                        {{child.inReverification}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
+                                                        {{child.verifiedFHS}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
+                                                        {{child.archivedFHS}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
+                                                        {{child.newFamily}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
+                                                        {{child.newFamily + child.verifiedFHS}}</td>
+                                                    <td ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}"
+                                                        ng-if="child.totalMember">{{child.totalMember}}</td>
+                                                    <td ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}"
+                                                        ng-if="!child.totalMember">0</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
+                                                        {{child.totalMemberUnder1Year}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
+                                                        {{child.totalMemberUnder5Year}}</td>
+                                                    <td ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
+                                                                'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}"
+                                                        ng-bind="child.percentage > 100 ? 100 : child.percentage"></td>
+                                                    <td ng-if="child.worker"><a ng-class="{disabled: child.worker == 0}"
+                                                            ng-click="fhsdashboard.navigateToFamilyReport(child.id)"
+                                                            href="javascript:void(0);">{{child.worker}}</a></td>
+                                                    <td ng-if="!child.worker"><a ng-class="{disabled: !child.worker}"
+                                                            ng-click="fhsdashboard.navigateToFamilyReport(child.id)"
+                                                            href="javascript:void(0);">0</a></td>
+                                                </tr>
+                                                <tr ng-repeat-end>
+                                                    <th>Total</th>
+                                                    <td>{{memberDetails.importedFromEmamta}}</td>
+                                                    <td>{{!memberDetails.importedFromEmamtaMember ? 0 : memberDetails.importedFromEmamtaMember}}
+                                                    </td>
+                                                    <td>{{memberDetails.unverifiedFHS}}</td>
+                                                    <td>{{memberDetails.inReverification}}</td>
+                                                    <td>{{memberDetails.verifiedFHS}}</td>
+                                                    <td>{{memberDetails.archivedFHS}}</td>
+                                                    <td>{{memberDetails.newFamily}}</td>
+                                                    <td>{{memberDetails.newFamily + memberDetails.verifiedFHS}}</td>
+                                                    <td ng-if="memberDetails.totalMember">{{memberDetails.totalMember}}
+                                                    </td>
+                                                    <td ng-if="!memberDetails.totalMember">0</td>
+                                                    <td>{{memberDetails.totalMemberUnder1Year}}</td>
+                                                    <td>{{memberDetails.totalMemberUnder5Year}}</td>
+                                                    <td
+                                                        ng-bind="memberDetails.percentage > 100 ? 100 : memberDetails.percentage">
+                                                    </td>
+                                                    <td ng-if="memberDetails.worker && memberDetails.id != null"><a
+                                                            ng-class="{disabled: memberDetails.worker == 0}"
+                                                            ng-click="fhsdashboard.navigateToFamilyReport(memberDetails.id)"
+                                                            href="javascript:void(0);">{{memberDetails.worker}}</a></td>
+                                                    <td ng-if="!memberDetails.worker && memberDetails.id != null"><a
+                                                            ng-class="{disabled: !memberDetails.worker}"
+                                                            ng-click="fhsdashboard.navigateToFamilyReport(memberDetails.id)"
+                                                            href="javascript:void(0);">0</a></td>
+
+                                                    <td ng-if="memberDetails.worker && memberDetails.id == null">
+                                                        {{memberDetails.worker}}</td>
+                                                    <td ng-if="!memberDetails.worker && memberDetails.id == null">0</td>
+                                                </tr>
+                                                <tr
+                                                    ng-if="fhsdashboard.familiesAndMemberDetails.length < 1 && !fhsdashboard.isFamiliesAndMembers">
+                                                    <td colspan="10">
+                                                        <p class="card-text">No records found...</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody ng-if="fhsdashboard.isDistrict" class="cst-tbody">
+                                                <tr ng-repeat="memberDetails in fhsdashboard.familiesAndMemberDetails"
+                                                    ng-init="fhsdashboard.village = memberDetails.locationType != fhsdashboard.villageType">
+                                                    <td>
+                                                        <a ng-if="memberDetails.id != null"
+                                                            ng-class="{disabled: memberDetails.locationType == fhsdashboard.villageType || memberDetails.locationType == fhsdashboard.urbanArea || fhsdashboard.familiesAndMembers.length == 4}"
+                                                            ng-click="fhsdashboard.getFamiliesAndMembers(memberDetails.id, memberDetails.value, memberDetails.locationType)"
+                                                            href="javascript:void(0);">{{memberDetails.value}}</a>
+                                                        <span
+                                                            ng-if="memberDetails.id == null">{{memberDetails.value}}</span>
+                                                    </td>
+                                                    <td
+                                                        ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
+                                                        {{memberDetails.importedFromEmamta}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
+                                                        {{!memberDetails.importedFromEmamtaMember ? 0 : memberDetails.importedFromEmamtaMember}}
+                                                    </td>
+                                                    <td
+                                                        ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
+                                                        {{memberDetails.unverifiedFHS}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
+                                                        {{memberDetails.inReverification}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
+                                                        {{memberDetails.verifiedFHS}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
+                                                        {{memberDetails.archivedFHS}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
+                                                        {{memberDetails.newFamily}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
+                                                        {{memberDetails.newFamily + memberDetails.verifiedFHS}}</td>
+                                                    <td ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}"
+                                                        ng-if="memberDetails.totalMember">{{memberDetails.totalMember}}
+                                                    </td>
+                                                    <td ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}"
+                                                        ng-if="!memberDetails.totalMember">0</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
+                                                        {{memberDetails.totalMemberUnder1Year}}</td>
+                                                    <td
+                                                        ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
+                                                        {{memberDetails.totalMemberUnder5Year}}</td>
+                                                    <td ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
+                                                        'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}"
+                                                        ng-bind="memberDetails.percentage > 100 ? 100 : memberDetails.percentage">
+                                                    </td>
+                                                    <td ng-if="memberDetails.worker && memberDetails.id != null">
+                                                        <a ng-class="{disabled: memberDetails.worker == 0}"
+                                                            ng-click="fhsdashboard.navigateToFamilyReport(memberDetails.id)"
+                                                            href="javascript:void(0);">{{memberDetails.worker}}</a>
+                                                    </td>
+                                                    <td ng-if="!memberDetails.worker && memberDetails.id != null">
+                                                        <a ng-class="{disabled: !memberDetails.worker}"
+                                                            ng-click="fhsdashboard.navigateToFamilyReport(memberDetails.id)"
+                                                            href="javascript:void(0);">0</a>
+                                                    </td>
+                                                    <td ng-if="memberDetails.worker && memberDetails.id == null">
+                                                        {{memberDetails.worker}}</td>
+                                                    <td ng-if="!memberDetails.worker && memberDetails.id == null">0</td>
+                                                </tr>
+                                                <tr
+                                                    ng-if="fhsdashboard.familiesAndMemberDetails.length < 1 && !fhsdashboard.isFamiliesAndMembers">
+                                                    <td colspan="10">
+                                                        <p class="card-text">No records found...</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot class="print-footer">
+                                                <tr>
+                                                    <td>
+                                                        {{fhsdashboard.footer}}
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <ul class="legend">
+                                        <li><span class="p1"></span>Below 25 percentage</li>
+                                        <li><span class="p2"></span>25 percentage to 35 percentage</li>
+                                        <li><span class="p3"></span>35 percentage to 50 percentage</li>
+                                        <li><span class="p4"></span>Above 50 percentage</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4 justify-content-center">
+                            <div class="col-8">
+                                <div id="bargraph" ng-if="fhsdashboard.showbar">
+                                    <canvas ng-if="!fhsdashboard.emptyDataMassageFlag" id="bar" class="chart chart-bar "
+                                        chart-data="fhsdashboard.bars" chart-labels="fhsdashboard.labels"
+                                        chart-series="fhsdashboard.series" chart-options="fhsdashboard.chartOptions"
+                                        chart-click="fhsdashboard.onClickBarChartFunction"
+                                        chart-colors="fhsdashboard.colors">
+                                    </canvas>
+                                    <span ng-if="fhsdashboard.emptyDataMassageFlag">
+                                        {{ fhsdashboard.emptyDataMassage}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-div">
+                <span class="filter-toggle" ng-click="fhsdashboard.toggleFilter()">Select Location</span>
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="filter-div-title">Select Location</h5>
+                    </div>
+                </div>
+                <div class="filter-div-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <ng-form name="fhsdashboard.locationForm">
+                                <location-directive ng-model="fhsdashboard.selectedLocationId"
+                                    selected-location="fhsdashboard.selectedLocation" template-type="'inline'"
+                                    fetch-upto-level="fhsdashboard.fetchUptoLevel" fetch-according-to-user-aoi="true">
+                                </location-directive>
+                                <br>
+                            </ng-form>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                            <div class="form-group text-right">
+                                <button class="btn btn-secondary close-filter"
+                                    ng-click="fhsdashboard.toggleFilter()">Close</button>
+                                <button class="btn btn-primary search-filter"
+                                    ng-click="fhsdashboard.submit()">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-12">
+            <!-- <p style="color:red">* રોજ થયેલ ફેમિલી સ્વાસ્થ્ય સર્વે ના આંકડા સુધરવાનો સમય સવારે ૮ વાગ્યે અને સાંજે ૭
+                વાગ્યે છે. તે દરમિયાન કરેલ
+                કામગીરી ના આંકડા અહીં સુધરશે નહિ તેની નોંધ લેવી.
+            </p> -->
+        </div>
+        <div class="col-12 col-md-12">
+            <div class="card cst-card">
+                <div class="card-title" role="tab">
+                    <h4 class="text">
+                        <a class="collapse-link d-block" data-toggle="collapse" onclick="return false;"
+                            href="#collapsesix" ng-click="toggle6 = !!!toggle6;
+                                    fhsdashboard.getstarperformers()">
+                            <span data-toggle="tooltip">Star
+                                Performers of the day</span>
+                            <em class="pull-right" ng-class="{'ion-plus':!toggle6,'ion-minus':toggle6}"></em>
+                        </a>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapsesix" aria-labelledby="headingsix">
+                    <div class="card-body"
+                        ng-if="fhsdashboard.starperformers.length < 1 && fhsdashboard.performerloaded">
+                        <p class="card-text text-center">No records found...</p>
+                    </div>
+                    <div class="card-body" ng-if="fhsdashboard.starperformers.length > 0">
+                        <div class="cst-table table-responsive  mCustomScrollbar max-height-300">
+                            <table class="table table-sm table-striped table-bordered header-fixed"
+                                ng-if="fhsdashboard.performerloaded">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th>Person Name</th>
+                                        <th>Records Submitted</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr ng-repeat="person in fhsdashboard.starperformers">
+                                        <td>{{person.person_name}}</td>
+                                        <td>{{person.record_submitted}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

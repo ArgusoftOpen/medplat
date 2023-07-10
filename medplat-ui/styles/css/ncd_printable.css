@@ -1,0 +1,47 @@
+
+*{
+    -webkit-print-color-adjust: exact;
+}
+body{
+    padding: 0;
+    margin: 0;
+}
+.main-title{
+    text-align: center;
+    width: 100%;
+}
+
+.w-50{
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+}
+.w-100{
+    width: 100%;
+    border-top: 1px solid #ebebeb;
+    margin-top: 10px;
+}
+
+.mb-15{
+    margin-bottom: 15px;
+}
+
+.br-1{
+    border-right: 1px solid #ebebeb;
+}
+
+table{
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table tr th{
+    background: #ebebeb;
+}
+table tr td, table tr th{
+    border: 1px solid #ebebeb;
+    padding: 5px;
+    text-align: left;
+    font-size: 14px;
+}

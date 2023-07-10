@@ -1,0 +1,181 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        Facilty Performance Data
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="facilityPerformanceForm" id="facilityPerformanceForm" novalidate>
+                        <div class="row">
+                            <div class="col-12">
+                                <div ng-if="facilityPerformanceController.isTemporaryFeatureEnable"
+                                    class="alert alert-info" style="margin: 0 12px 16px;">
+                                    You will be able to insert old entries by entering a past date. No edit will be
+                                    allowed if you have already entered the values for a date in the past. This
+                                    facility will be available only Between Wednesday, 16th October 2019 and Monday,
+                                    25th
+                                    October 2019 - after this last 3 days will be accepted as the entry date.
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group" ng-if="facilityPerformanceController.institutes != null">
+                                    <validate for='facility' required-msg="Select a value">
+                                        <label for="facility" control-label uib-tooltip="Health Infrastructure*">Health
+                                            Infrastructure</label>
+                                        <select class="form-control cst-form-control" form-control
+                                            ng-model="facilityPerformanceController.facilityPerformanceDto.healthInfrastructureId"
+                                            name="facility" id="facility"
+                                            ng-change="facilityPerformanceController.getData(facilityPerformanceForm,true)"
+                                            required>
+                                            <option value=""> Select</option>
+                                            <option value="{{facility.id}}"
+                                                ng-repeat="facility in facilityPerformanceController.institutes">
+                                                {{facility.name}}</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div
+                                    ng-if='facilityPerformanceController.facilityPerformanceDto.healthInfrastructureId!=null'>
+                                    <div class="form-group">
+                                        <validate for='performanceDate' required-msg="Select performance date">
+                                            <label for="performanceDate" uib-tooltip="Date*" control-label>Date</label>
+                                            <input type="text" class='cst-form-control'
+                                                style="float: inherit; padding: 0;" datepicker tabindex="8"
+                                                name="performanceDate" form-control
+                                                ng-change="facilityPerformanceController.getData(facilityPerformanceForm,true)"
+                                                min-date='facilityPerformanceController.minDate'
+                                                max-date='facilityPerformanceController.maxDate'
+                                                ng-model="facilityPerformanceController.facilityPerformanceDto.performanceDate"
+                                                required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div ng-if='(facilityPerformanceController.isTemporaryFeatureEnable
+                                        && facilityPerformanceController.facilityPerformanceDto.performanceDate
+                                        && !facilityPerformanceController.isProcessing)
+                                        || !facilityPerformanceController.isTemporaryFeatureEnable'>
+                                        <div class="form-group">
+                                            <validate for='noOfOpdAttended' required-msg="Enter No Of OPDs Attended">
+                                                <label><span class="info_type" uib-tooltip="No Of OPDs Attended*"
+                                                        control-label>No Of OPDs Attended</label>
+                                                <input type="text" min="0" max="10000" numbers-only
+                                                    class="form-control cst-form-control" form-control
+                                                    name="noOfOpdAttended" id="noOfOpdAttended"
+                                                    ng-model="facilityPerformanceController.facilityPerformanceDto.noOfOpdAttended"
+                                                    ng-readonly="facilityPerformanceController.isTemporaryFeatureEnable && facilityPerformanceController.isUpdateMode"
+                                                    required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for='noOfIpdAttended' required-msg="Enter No Of IPDs Attended">
+                                                <label><span class="info_type" uib-tooltip="No Of IPDs Attended*"
+                                                        control-label>No Of IPDs Attended</label>
+                                                <input type="text" min="0" max="10000" numbers-only
+                                                    class="form-control cst-form-control" form-control
+                                                    name="noOfIpdAttended" id="noOfIpdAttended"
+                                                    ng-model="facilityPerformanceController.facilityPerformanceDto.noOfIpdAttended"
+                                                    ng-readonly="facilityPerformanceController.isTemporaryFeatureEnable && facilityPerformanceController.isUpdateMode"
+                                                    required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <label uib-tooltip="No Of Deliveres Conducted">No Of Deliveres
+                                                Conducted</label>
+                                            <input type="text" min="0" max="10000" numbers-only
+                                                class="form-control cst-form-control" form-control
+                                                name="noOfDeliveresConducted" id="noOfDeliveresConducted"
+                                                ng-model="facilityPerformanceController.facilityPerformanceDto.noOfDeliveresConducted"
+                                                ng-readonly="true">
+                                        </div>
+                                        <div class="form-group">
+                                            <label uib-tooltip="No Of C-Section Conducted">No Of C-Section
+                                                Conducted</label>
+                                            <input type="text" min="0" max="10000" numbers-only
+                                                class="form-control cst-form-control" form-control
+                                                name="noOfSectionConducted" id="noOfSectionConducted"
+                                                ng-model="facilityPerformanceController.facilityPerformanceDto.noOfSectionConducted"
+                                                ng-readonly="true">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div
+                                    ng-if='(facilityPerformanceController.facilityPerformanceDto.healthInfrastructureId!=null) &&
+                                                                ((facilityPerformanceController.isTemporaryFeatureEnable
+                                                                && facilityPerformanceController.facilityPerformanceDto.performanceDate
+                                                                && !facilityPerformanceController.isProcessing)
+                                                                || !facilityPerformanceController.isTemporaryFeatureEnable)'>
+                                    <div class="form-group">
+                                        <validate for='noOfMajorOperationConducted'
+                                            required-msg="Enter No Of Major Operation Conducted">
+                                            <label uib-tooltip="No Of Major Operation Conducted*"><span
+                                                    class="info_type" control-label>No Of Major
+                                                    Operation
+                                                    Conducted</label>
+                                            <input type="text" min="0" max="10000" numbers-only
+                                                class="form-control cst-form-control" form-control
+                                                name="noOfMajorOperationConducted" id="noOfMajorOperationConducted"
+                                                ng-model="facilityPerformanceController.facilityPerformanceDto.noOfMajorOperationConducted"
+                                                ng-readonly="facilityPerformanceController.isTemporaryFeatureEnable && facilityPerformanceController.isUpdateMode"
+                                                required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='noOfMinorOperationConducted'
+                                            required-msg="Enter No Of Minor Operation Conducted">
+                                            <label uib-tooltip="No Of Minor Operation Conducted*"><span
+                                                    class="info_type" control-label>No Of Minor
+                                                    Operation
+                                                    Conducted</label>
+                                            <input type="text" min="0" max="10000" numbers-only
+                                                class="form-control cst-form-control" form-control
+                                                name="noOfMinorOperationConducted" id="noOfMinorOperationConducted"
+                                                ng-model="facilityPerformanceController.facilityPerformanceDto.noOfMinorOperationConducted"
+                                                ng-readonly="facilityPerformanceController.isTemporaryFeatureEnable && facilityPerformanceController.isUpdateMode"
+                                                required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='noOfLaboratoryTestConducted'
+                                            required-msg="Enter No Of Laboratory Test Conducted">
+                                            <label uib-tooltip="No Of Laboratory Test Conducted*"><span
+                                                    class="info_type" control-label>No Of
+                                                    Laboratory Test
+                                                    Conducted</label>
+                                            <input type="text" min="0" max="10000" numbers-only
+                                                class="form-control cst-form-control" form-control
+                                                name="noOfLaboratoryTestConducted" id="noOfLaboratoryTestConducted"
+                                                ng-model="facilityPerformanceController.facilityPerformanceDto.noOfLaboratoryTestConducted"
+                                                ng-readonly="facilityPerformanceController.isTemporaryFeatureEnable && facilityPerformanceController.isUpdateMode"
+                                                required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-5">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary"
+                                    ng-if="!(facilityPerformanceController.isTemporaryFeatureEnable && facilityPerformanceController.isUpdateMode)"
+                                    ng-click="facilityPerformanceController.createOrUpdateFacilitiyPerformance(facilityPerformanceForm)"
+                                    ng-bind="facilityPerformanceController.isUpdateMode?'Update':'Save'">
+                                    <em class="fa fa-floppy-o"></em>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

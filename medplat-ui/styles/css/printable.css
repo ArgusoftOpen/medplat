@@ -1,0 +1,334 @@
+.print_logo {
+    width: 60px;
+    height: auto;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.page_title {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.print_header {
+    display: block;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+@media print {
+    
+    .row {
+        display: flex;
+    }
+
+    .col-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    .align-center-h {
+        text-align: center;
+    }
+
+    .align-center-v {
+        vertical-align: middle !important;
+    }
+
+    .mb-8 {
+        margin-bottom: 8px;
+    }
+
+    .mb-12 {
+        margin-bottom: 12px;
+    }
+
+    .fs-16 {
+        font-size: 16px;
+    }
+
+    .fs-18 {
+        font-size: 18px;
+    }
+
+    .dark-background {
+        background-color: rgba(0, 0, 0, .10);
+    }
+
+    .container-fluid {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    
+    table td:last-child textarea {
+        display: none
+    }
+
+    table th:last-child textarea {
+        display: none
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .dynamicTablePrint {
+        max-height: unset !important;
+        overflow: hidden !important;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 4px;
+    }
+
+    th {
+        border: 1px solid #ddd;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: black;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    h2 {
+        text-align: center
+    }
+
+    h5 {
+        text-align: center
+    }    
+
+    td .print-input {
+        border: none;
+        color: black;
+    }
+
+    @page {
+        size: auto;
+        margin-bottom: 50px;
+    }
+
+    tfoot tr td {
+        border: none;
+    }
+
+    .print-footer {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin-bottom: 0mm;
+        margin-top: 0.5mm;
+        padding: -0.5mm;
+    }
+
+    /*    table th:first-child,tr:first-child {
+            width: 10%
+        }*/
+
+    a {
+        text-decoration: none !important;
+        color: black;
+    }
+
+    .no-print {
+        display: none;
+    }
+
+    .width-10 {
+        width: 10%
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    .benificiary-head {
+        color: green;
+    }
+
+    .benificiary-pregnant {
+        color: red;
+    }
+
+    .benificiary-child {
+        color: blue;
+    }
+
+    .form-group {
+        position: relative
+    }
+
+    .row-filter {
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    .col-filter-3 {
+        flex: 0 0 15%;
+        max-width: 15%;
+    }
+
+    .col-filter-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .printable{
+        display: block;
+    }
+}
+
+/* START - Family report print css till next comment */
+
+.print-page {
+    background: #ffffff;
+    -webkit-print-color-adjust: exact;
+    font-size: 11px;
+    line-height: 20px;
+}
+
+.print-wrapper {
+    padding: 15px;
+    background: #ffffff;
+    font-size: 11px;
+    line-height: 20px;
+}
+
+.print-wrapper .col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.print-wrapper .col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.print-wrapper .col-5 {
+    padding-left: 15px;
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+}
+
+.print-wrapper .col-3 {
+    padding-left: 15px;
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.main-title {
+    font-size: 16px;
+}
+
+.sub-title {
+    text-align: left;
+    font-size: 14px;
+    margin: 0;
+}
+
+.box-header {
+    background: #ebebeb !important;
+    padding: 5px 10px;
+    border: 1px solid #ebebeb;
+    -webkit-print-color-adjust: exact;
+}
+
+.box-body {
+    border: 1px solid #ebebeb;
+    border-top: 0;
+    padding: 10px;
+}
+
+.info label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: flex;
+}
+
+.info label span.info_type {
+    /*width: 200px;*/
+    font-weight: bold;
+}
+
+.info label span.data {
+    font-weight: normal;
+    margin-left: 2px;
+}
+
+.nopadding {
+    padding: 0px;
+    margin: 2px;
+}
+
+.info ul {
+    list-style-type: none;
+}
+
+tbody {
+    background-color: white;
+}
+
+@media print {
+    .print-table th {
+        background-color: #f1f1f1 !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .icon {
+        margin-bottom: 5px;
+        width: 20px;
+    }
+
+    .icon-id img {
+        width: 25px;
+    }
+
+    footer {
+        page-break-after: always;
+    }
+}
+
+.print-logo img {
+    width: 60px;
+    height: 40px;
+    position: absolute;
+    left: 15px;
+}
+
+.print-logo h1 {
+    line-height: 40px;
+    text-align: center;
+}
+
+.ml-15 {
+    margin-left: 15px !important;
+}
+
+.border-right {
+    border-right: 1px solid #e6e0e0;
+}
+
+/* END - Family report print */
+
+.page-footer,
+.page-footer-space {
+    height: 20px;
+}
+
+.page-footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}

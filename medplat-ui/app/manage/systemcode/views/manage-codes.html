@@ -1,0 +1,154 @@
+<style>
+    .align-center-h {
+        text-align: center;
+    }
+
+    .align-center-v {
+        vertical-align: middle !important;
+    }
+
+    .mb-8 {
+        margin-bottom: 8px;
+    }
+
+    .mb-12 {
+        margin-bottom: 12px;
+    }
+
+    .fs-16 {
+        font-size: 16px;
+    }
+
+    .fs-18 {
+        font-size: 18px;
+    }
+
+    .dark-background {
+        background-color: rgba(0, 0, 0, .10);
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="row col-md-12   mb-15  inline-form" ng-form="ctrl.addForm">
+                <div class="col-md-12 col-xl-3 padding-left-right-0">
+                    <div class="form-group">
+                        <validate for="tables" required-msg="Select Table">
+                            <label for="tables" class="control-label col-xl-3" control-label>Table:</label>
+                            <select name="tables" form-control class="form-control cst-form-control col-xl-9" required
+                                    ng-model="ctrl.table.key"
+                                    ng-options="table.key as table.name for table in ctrl.tables"
+                                    ng-change="ctrl.onChangeTable(ctrl.table)">
+                                <option value="">Select</option>
+                            </select>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-3 padding-left-right-0" ng-if="ctrl.table.key == 'LIST_VALUE'">
+                    <div class="form-group">
+                        <validate for="forms" required-msg="Select Form">
+                            <label for="forms" class="control-label col-xl-3" control-label>Form:</label>
+                            <select name="forms" form-control class="form-control cst-form-control col-xl-9" required
+                                    ng-model="ctrl.newValue.formId"
+                                    ng-options="form.key as form.name for form in ctrl.forms"
+                                    ng-change="ctrl.retrieveFieldsForForm(ctrl.newValue.formId)">
+                                <option value="">Select</option>
+                            </select>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+                <div class=" col-md-12 col-xl-3 padding-left-right-0" ng-if="ctrl.table.key == 'LIST_VALUE'">
+                    <div class="form-group">
+                        <validate for="reportname" required-msg="Select Field">
+                            <label for="reportname" class="control-label col-xl-3" control-label>Field</label>
+                            <select id="reportname" name="reportname" class="form-control cst-form-control col-xl-9" form-control
+                                    ng-options="field as field.field for field in ctrl.fieldsForForm track by field.field_key"
+                                    ng-model="ctrl.newValue.field" required
+                                    ng-change="ctrl.retrieveActiveListValueDetails(ctrl.newValue.field.field)">
+                                <option value="">Select</option>
+                            </select>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-md-12 col-xl-2 ml-auto" ng-if="ctrl.activeListValueDetails.length > 0">
+                    <div class="form-group">
+                        <input type="text" ng-model="ctrl.search" class="form-control cst-form-control" id="search"
+                               placeholder="Search text" style="width:100%">
+                    </div>
+                </div>
+                <!-- <div> -->
+                    <!-- For ICD Manage -->
+                    <!-- <button class="btn btn-primary" style="float: right" ng-click="ctrl.manageIcd()">Load ICD/SNOMED Codes</button> -->
+                <!-- </div> -->
+
+            </div>
+        </div>
+        <div class="col-12 mb-15" ng-if="ctrl.table.key == 'LIST_VALUE' && (!ctrl.activeListValueDetails || ctrl.activeListValueDetails.length == 0)">
+            <div class="no-data-placeholder">
+                <h5>Sorry No System Code configured!</h5>
+            </div>
+        </div>
+
+        <div class="col-12 mb-15" ng-if="ctrl.activeListValueDetails.length > 0">
+            <div class="cst-table table-responsive table-set-height">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <colgroup>
+                        <col class="medium-col">
+                        <col class="medium-col">
+                        <col ng-repeat="columnName in ctrl.columnNames" class="medium-col">
+                        <col class="medium-col">
+                    </colgroup>
+                    <thead class="cst-thead">
+                        <tr>
+                            <th id="name" class="filter-col">Index</th>
+                            <th id="smsTemplate" class="filter-col">Value<span class="pull-right sort">
+                                </span></th>
+                            <th id="systemCode" ng-repeat="columnName in ctrl.columnNames" class="filter-col">
+                                {{columnName}}<span class="pull-right sort">
+                                </span></th>
+                            <th id="edit" class="filter-col">Edit<span class="pull-right sort">
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr ng-repeat="listValueDetail in ctrl.activeListValueDetails| filter : ctrl.search  |
+                            orderBy : ctrl.orderByField : ctrl.reverseOrder "
+                            ng-if="(ctrl.activeListValueDetails.length > 0)">
+                            <td data-test="{{$index}}"> {{$index + 1}}</td>
+                            <td data-test="{{listValueDetail.value}}"> {{listValueDetail.name}} </td>
+                            <td ng-repeat="columnName in ctrl.columnNames" id="codeValues"
+                                data-test="{{ctrl.findSystemCode(columnName, listValueDetail.SYSTEM_CODE).code}}">
+                                {{ctrl.findSystemCode(columnName, listValueDetail.SYSTEM_CODE).code}}
+                                <em popover-placement="'top'" data-html="true"
+                                    ng-if="ctrl.findSystemCode(columnName, listValueDetail.SYSTEM_CODE)"
+                                    uib-popover-html="ctrl.findSystemCode(columnName,listValueDetail.SYSTEM_CODE).description"
+                                    popover-trigger="'mouseenter'" class="fa fa-question-circle-o pull-right">
+                                </em>
+                            </td>
+                            <td>
+                                <ul class="action-item">
+                                    <li>
+                                        <a class="action-icon edit-icon" ng-click="ctrl.editCode(listValueDetail)">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr ng-if="(!ctrl.activeListValueDetails ||
+                                    (ctrl.activeListValueDetails | filter : ctrl.search).length == 0)">
+                            <td colspan="{{ctrl.columnNames.length + 3}}">
+                                No System Code available.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

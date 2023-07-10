@@ -1,0 +1,11 @@
+<style>
+    .mb-10 {
+        margin-bottom: 10px !important;
+    }
+</style>
+<div class="col-{{config.size}}" ng-repeat="(elementIndex, element) in elements">
+    <generate-repeatable-template-directive element="element" constraint-config="constraintConfig"
+        class="{{config.cssClasses}}" style="{{getDynamicStyles()}}" sibling-elements="siblingElements"
+        element-index="elementIndex" iterator-indices-map="iteratorIndicesMap">
+    </generate-repeatable-template-directive>
+</div>

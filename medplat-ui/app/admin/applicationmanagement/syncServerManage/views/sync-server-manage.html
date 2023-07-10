@@ -1,0 +1,67 @@
+<style>
+    .fa-rotate {
+        -webkit-transform: rotate(133deg);
+        -moz-transform: rotate(133deg);
+        -ms-transform: rotate(133deg);
+        -o-transform: rotate(133deg);
+        transform: rotate(133deg);
+    }
+
+    .fa-rotate:hover {
+        font-size: 20px;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="section-title">
+                <h4 class="text">Serever List </h4>
+                <button class="btn btn-primary float-right" data-test="add-query-btn"
+                    ng-click="syncServerCtrl.openAddEditModal()"> Add Server </button>
+                <input class="float-right" type="text" ng-model="search" id="search" placeholder="Search Server"
+                    style="margin-right:10px ">
+            </div>
+        </div>
+        <div class="col-12 mb-15">
+            <div class="cst-table table-responsive">
+                <table aria-describedby="table"
+                    class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th id="ServerName" style="width: 30%;">Server Name</th>
+                            <th id="Host" style="width: 25%; white-space: initial;">Host</th>
+                            <th id="Is Active" style="width: 10%; white-space: initial;">Is Active</th>                            
+                            <th id="Actions" style="width: 5%;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr ng-repeat="server in syncServerCtrl.serverList | filter: { server_name : search }"
+                            ng-if="syncServerCtrl.serverList.length > 0">
+                            <td style="word-break: break-all;">{{server.server_name}}</td>
+                            <td>
+                                {{server.host_url}}</td>
+                            <td>{{server.is_active | yesOrNo}}</td>
+                            <td class="action-cell">
+                                <ul class="action-item">
+                                    <li>
+                                        <a class="action-icon edit-icon"
+                                            ng-click="syncServerCtrl.openAddEditModal(server)">
+                                        </a>                                        
+                                    </li>
+                                    <li>           
+                                        <em class="fa fa-key fa-lg fa-rotate" style="color: #2a7dce;vertical-align: 50%;" ng-click="syncServerCtrl.changePassword(server)"></em>                                        
+                                    </li>                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr
+                            ng-if="(!syncServerCtrl.serverList.length || syncServerCtrl.serverList.length.length === 0)">
+                            <td colspan="6">No Server Details Available</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>    
+</div>

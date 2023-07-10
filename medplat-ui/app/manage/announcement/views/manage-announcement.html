@@ -1,0 +1,256 @@
+<style>
+    .input-group-append {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    #healthFacilities_chosen {
+        width: calc(100% - 105px) !important;
+    }
+
+    .health-facility .valid-feedback {
+        right: 125px;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{ctrl.updateMode?'Update Announcement':'Add Announcement'}}
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="ctrl.announcementForm" id="announcementForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-sub-title">
+                                    Announcement details
+                                </h5>
+                                <div>
+                                    <div class="form-group">
+                                        <validate for="subject" required-msg=" Enter Subject">
+                                            <label for="subject" control-label>Subject</label>
+                                            <textarea form-control maxlength="899" rows="4" cols="51"
+                                                ng-model="ctrl.announcementObject.subject" name="subject" id="subject"
+                                                required></textarea>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for="role" required-msg=" Select Role">
+                                            <label for="role" control-label>Send to</label>
+                                            <select multiple chosen-directive class="form-control cst-form-control"
+                                                form-control ng-model="ctrl.announcementObject.role" name="role"
+                                                id="role" required ng-change="ctrl.sendToChanged()">
+                                                <option value="S" ng-if="ctrl.env!=='uttarakhand'">
+                                                    Setu
+                                                </option>
+                                                <option value="A" ng-if="ctrl.env!=='uttarakhand'">
+                                                    ASHA
+                                                </option>
+                                                <option value="E" ng-if="ctrl.env!=='uttarakhand'">
+                                                    ERT
+                                                </option>
+                                                <option value="F" ng-if="ctrl.env!=='uttarakhand'">
+                                                    FHW
+                                                </option>
+                                                <option value="KIOSK" ng-if="ctrl.env==='uttarakhand'">
+                                                    Kiosk
+                                                </option>
+                                                <option value="MRP" ng-if="ctrl.env==='uttarakhand'">
+                                                    MRP
+                                                </option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group health-facility"
+                                        ng-if="ctrl.env==='uttarakhand' && ctrl.healthInfraList.length">
+                                        <validate for="healthFacilities" required-msg=" Select Health Facility">
+                                            <label for="healthFacilities" control-label>Health Facility</label>
+                                            <div class="input-group">
+                                                <select multiple chosen-directive="ctrl.healthInfraList"
+                                                    class="form-control cst-form-control" form-control
+                                                    ng-model="ctrl.announcementObject.healthFacilities"
+                                                    name="healthFacilities" id="healthFacilities"
+                                                    ng-disabled="ctrl.announcementObject.sendToAll" required
+                                                    ng-options="h.id as h.name for h in ctrl.healthInfraList">
+                                                </select>
+                                                <div class="input-group-append">
+                                                    <label class="control control-checkbox" style="width:20%">Send to
+                                                        All
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.announcementObject.sendToAll"
+                                                            ng-change="ctrl.sendToAllChanged()">
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='startDate' required-msg="Select Date">
+                                            <label for="startDate" control-label>From date</label>
+                                            <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                name="fromDate" form-control ng-model="ctrl.announcementObject.fromDate"
+                                                ng-change="ctrl.checkTimeValidity()" required
+                                                min-date="ctrl.todayFormatted">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='startTime' required-msg="Select Time" time-msg="Invalid Time">
+                                            <label for="startTime" control-label>
+                                                From Time
+                                            </label>
+                                            <input class="form-control cst-form-control" type="time" form-control
+                                                id="startTime" name="startTime"
+                                                ng-model="ctrl.announcementObject.fromTime"
+                                                ng-change="ctrl.checkTimeValidity()" required />
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="!ctrl.updateMode">
+                                        <label for="mediatype" class="control-label" control-label>Upload Media
+                                            ?</label>
+                                        <label class="control control-radio">No
+                                            <input value="no" name="No" type="radio"
+                                                ng-model="ctrl.announcementObject.announcementType"
+                                                ng-change="ctrl.announcementTypeChanged('no')" required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio">Yes
+                                            <input value="yes" name="Yes" type="radio"
+                                                ng-model="ctrl.announcementObject.announcementType" required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="ctrl.updateMode && ctrl.announcementObject.mediaName">
+                                        <label class="control-label">Uploaded Media</label>
+                                        <span href="javascript:void(0)"
+                                            class="text-center alert alert-success">{{ctrl.announcementObject.mediaName}}</span>
+                                        <i ng-if="ctrl.announcementObject.mediaExists" aria-hidden="true"
+                                            class="fa fa-check fa-1x"></i>
+                                        <i ng-if="!ctrl.announcementObject.mediaExists" aria-hidden="true"
+                                            class="fa fa-times fa-1x"></i>
+                                        <span ng-if="!ctrl.announcementObject.mediaExists" style="color: red;">File does
+                                            not exist!</span>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="ctrl.announcementObject.announcementType === 'yes' && !ctrl.updateMode">
+                                        <validate for="mediatype" required-msg="Select multimedia type">
+                                            <label for="mediatype" class="control-label" control-label>MultiMedia
+                                                Type</label>
+                                            <select id="mediatype" name="mediatype"
+                                                class="form-control cst-form-control"
+                                                required="ctrl.announcementObject.announcementType === 'yes'"
+                                                form-control ng-model="ctrl.announcementObject.mediatype">
+                                                <option value="audio">Audio</option>
+                                                <option value="video">Video</option>
+                                                <option value="image">Image</option>
+                                                <option value="pdf">PDF</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div style="margin-left: 160px" class="form-group"
+                                        ng-if="ctrl.announcementObject.mediatype != null && ctrl.announcementObject.announcementType === 'yes' && !ctrl.updateMode"
+                                        flow-init="ctrl.uploadFile" flow-file-added="ctrl.upload($file, $event, $flow)"
+                                        flow-files-submitted="ctrl.uploadFn($files, $event, $flow)"
+                                        flow-file-success="ctrl.getUploadResponse( $file, $message, $flow )">
+                                        <button class="btn btn-secondary" flow-attrs="{accept:'video/*'}"
+                                            ng-if="ctrl.announcementObject.mediatype == 'video' && (!ctrl.flow.files.length > 0)"
+                                            flow-btn>Upload File</button>
+                                        <button class="btn btn-secondary" flow-attrs="{accept:'audio/*'}"
+                                            ng-if="ctrl.announcementObject.mediatype == 'audio' && (!ctrl.flow.files.length > 0)"
+                                            flow-btn>Upload File</button>
+                                        <button class="btn btn-secondary" flow-attrs="{accept:'image/*'}"
+                                            ng-if="ctrl.announcementObject.mediatype == 'image' && (!ctrl.flow.files.length > 0)"
+                                            flow-btn>Upload File</button>
+                                        <button class="btn btn-secondary" flow-attrs="{accept:'pdf/*'}"
+                                            ng-if="ctrl.announcementObject.mediatype == 'pdf' && (!ctrl.flow.files.length > 0)"
+                                            flow-btn>Upload File</button>
+                                        <div ng-repeat="file in ctrl.flow.files">
+
+                                            <div class="progress" ng-class="{active: file.isUploading()}"
+                                                ng-if="file.progress() !== 1">
+                                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                                    role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                                                    aria-valuemax="100"
+                                                    ng-style="{width: (file.progress() * 100) + '%'}"
+                                                    style="width: 100%;">
+                                                </div>
+                                            </div>
+                                            <div ng-if="file.progress() !== 1" class="mt-2 alert alert-success ">
+                                                <span class="text-center">{{file.name}} Uploading...<em
+                                                        class="fa fa-cog fa-spin fa-1x"></em></span>
+                                            </div>
+                                            <div ng-if="file.progress() === 1" class="mt-2 alert alert-success"
+                                                style="float:left">
+                                                <span class="text-center"> {{file.name}} Uploaded Successfully <em
+                                                        class="fa fa-check fa-1x"></em></span>
+                                            </div>
+                                            <button class="btn btn-danger" style="cursor: pointer;margin-top: 7px;"
+                                                ng-click="ctrl.removeFile()">Cancel upload</button>
+                                        </div>
+                                        <span class="text-danger" ng-if="ctrl.isError"
+                                            ng-bind="ctrl.errorMessage"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 inline-form" style="border-left: 1px solid #e5e5e5;"
+                                ng-if="ctrl.env!=='uttarakhand'">
+                                <h5 class="card-sub-title">
+                                    Location
+                                </h5>
+                                <ng-form name="ctrl.locationForm" isolate-form>
+                                    <location-directive selected-location="ctrl.selectedLocation"
+                                        required-upto-level="1" fetch-according-to-user-aoi="true"
+                                        fetch-upto-level="ctrl.maxAllowedLevel"> </location-directive>
+                                    <br>
+                                    <div class="pull-right">
+                                        <button class="btn btn-primary" type="button"
+                                            ng-click="ctrl.selectedArea()">Add</button>
+                                    </div> <br>
+                                </ng-form>
+                                <hr>
+                                <div class="form-group  mt-5">
+                                    <label for="addedAreas">Added Areas</label>
+                                    <div class="form-control cst-form-control min-height-65 h-auto">
+                                        <div ng-repeat="fields in ctrl.validatedLocations">
+                                            {{fields.locationFullName}} &nbsp;<em class="fa fa-times pointer-cursor red"
+                                                style="cursor: pointer"
+                                                ng-click="ctrl.removeSelectedArea(fields, $index)"></em>
+                                        </div>
+                                    </div>
+                                    <span ng-if="ctrl.duplicateEntry" class="text-danger ml-160">
+                                        This area is already added. Please add another
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-5">
+                            <div class="float-right">
+                                <button ng-if="!ctrl.updateMode" type="submit" class="btn btn-primary"
+                                    ng-click="ctrl.saveAnnouncement(announcementForm)"
+                                    ng-disabled="ctrl.isUploading || ctrl.isSaving"><em class="fa fa-floppy-o"></em>
+                                    Save & Continue</button>
+                                <button ng-if="ctrl.updateMode" type="submit" class="btn btn-primary"
+                                    ng-click="ctrl.updateAnnouncement(announcementForm)"
+                                    ng-disabled="ctrl.isUploading || ctrl.isSaving"><em class="fa fa-floppy-o"></em>
+                                    Update & Continue</button>
+                                <!-- <button class="btn btn-secondary" ui-sref="techo.manage.announcements">Back</button> -->
+                                <button class="btn btn-secondary">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.argusoft.sewa.android.app"
+    tools:ignore="LockedOrientationActivity">
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <queries>
+        <provider android:authorities="${applicationId}.provider" />
+    </queries>
+
+    <application
+        android:name=".SewaApplication_"
+        android:allowBackup="false"
+        android:allowClearUserData="false"
+        android:hardwareAccelerated="true"
+        android:icon="${appIcon}"
+        android:roundIcon="${appIconRound}"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/techo_app"
+        android:usesCleartextTraffic="true"
+        android:vmSafeMode="true">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+        <receiver
+            android:name=".receiver.BootingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".service.GPSTracker" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_baseline_notifications_24" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
+
+        <service
+            android:name=".fcm.MyFirebaseMessagingService_"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name=".util.GenericFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+<!--        <meta-data-->
+<!--            android:name="com.google.android.geo.API_KEY"-->
+<!--            android:value="AIzaSyAR3Q9KdgOLj961yNRtPi1iuoVjyHXcuPk" /> &lt;!&ndash; todo change in production&ndash;&gt;-->
+
+        <activity
+            android:name=".activity.WelcomeActivity_"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/techo_app">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FHSActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DataQualityActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MamtaDayActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AnnouncementActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WorkLogActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DynamicFormActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CustomVideoPlayerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.DisplayMorbiditiesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CustomMandatoryVideoPlayerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CustomPhotoCaptureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CFHCActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".qrscanner.QRScannerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.DownloadProgressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AboutActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WorkStatusActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NotificationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AssignFamilyActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MoveToProductionActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyPeopleActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyPeopleAwwActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HighRiskPregnancyActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CustomImageViewerActivity_"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CustomPDFViewerActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FHSAwwActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NotificationAwwActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NCDScreeningAshaActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NcdScreeningFhwActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CbacDetailsActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyPeopleAshaActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NCDRegisterFHWActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LibraryActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MigrateOutActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MigrateInActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MigrationInConfirmationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MigrationOutConfirmationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MigrationRevertActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NotificationAshaActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FHSAshaActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NPCBScreening_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WorkRegisterActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WorkRegisterLineListActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PhoneNumberVerificationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NotificationOtherServicesActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HighRiskAshaActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NcdRegisterAshaActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WorkRegisterAshaActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ReportedEventConfirmationNotificationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FhwDeliveryConfirmationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FhwMemberMigrationConfirmationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FhwDeathConfirmationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FamilyMigrationOutActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FamilyMergeActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FamilySplitActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FamilyMigrationInConfirmationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FhwFamilyMigrationConfirmationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TakeHomeRation_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DailyNutritionActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PregnancyStatusActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeScreenActivityRBSK_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HeadToToeScreeningActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MobileNumberValidationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeScreenMenuActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MenuActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.OPDFacilityActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MemberGeriatricListActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TravellersScreeningActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.IDSP2Activity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GenericHomeScreenActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LocationSelectionActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FamilyMigrationRevertActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PersonalHistoryDetailsActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LMSActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LMSVideoPlayerActivity_"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.LmsQuestionModuleActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LmsProgressReportActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LmsInteractiveQuestionModuleActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".lms.LmsCourseListActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".lms.LmsCourseDetailActivity_"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".lms.LmsAnswerViewActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NDHMHealthIdManagementActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NDHMHealthIdCaptureActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NDHMHealthIdCreationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NDHMOfflineHealthIdManagementActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NDHMOfflineHealthIdCreationActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AbhaNumberActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NcdConfirmationFhwActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NcdWeeklyVisitFhwActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".lms.LmsAnswerReviewViewActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LmsSimulationActivity_"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.QRCodeActivity_"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.MapsMarkerActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FingerPrintScannerActivity_"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

@@ -1,0 +1,70 @@
+<style>
+    .text-align-center {
+        text-align: center;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row mb-15 ">
+        <div class="col-12 text-right">
+            <input type="text" ng-model="ctrl.search.type" ng-model-options="{ debounce: 500 }"
+                ng-change="ctrl.searchData(true)" id="search" placeholder="Search HealthInfra"
+                data-test="search-ctrl">
+            <button class="btn btn-primary " ng-click="ctrl.saveMapping()">Add New</button>
+            <em class="ion-arrow-left-c ng-scope" style="cursor: pointer; font-size: 20px;float: left" onclick="history.back()"></em>
+        </div>
+        <div class="col-12 mb-15" ng-if="!ctrl.listOfHeathInfrastructures || ctrl.listOfHeathInfrastructures.length == 0">
+            <div class="no-data-placeholder">
+                <h5>Sorry No Health Infrastructure Mapping available!</h5>
+            </div>
+        </div>
+        <div class="col-12 ">
+            <div class="cst-table table-responsive table-set-height">
+                <table class="table table-sm table-striped table-bordered header-fixed"
+                    infinite-scroll-distance="0" infinite-scroll='ctrl.searchData()'
+                    ng-if="ctrl.listOfHeathInfrastructures.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Health Infrastructure Type</th>
+                            <th>Location Type</th>
+                            <th>State</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="infraObject in ctrl.listOfHeathInfrastructures">
+                            <td>
+                                {{infraObject.value}}
+                            </td>
+                            <td>{{(infraObject.name) |emptylabel}}</td>
+                            <td>{{(infraObject.state) |emptylabel}}</td>
+                            <td class="action-cell">
+                                <ul class="action-item">
+                                    <li>
+                                        <a href="#" class="action-icon edit-icon" onclick="return false;"
+                                            ng-click="ctrl.saveMapping(infraObject)">
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <a class="action-icon more-icon"></a>
+                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                            aria-labelledby="moreDropdown" x-placement="bottom-end">
+                                            <li ng-if="infraObject.state === 'ACTIVE'"
+                                                ng-click="ctrl.deleteMapping(infraObject.health_infra_type_id, false, true)">
+                                                <a><strong>Mark as </strong> Inactive</a>
+                                            </li>
+                                            <li ng-if="infraObject.state === 'INACTIVE'"
+                                                ng-click="ctrl.deleteMapping(infraObject.health_infra_type_id, true, false)">
+                                                <a><strong>Mark as </strong> Active</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

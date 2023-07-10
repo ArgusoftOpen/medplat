@@ -1,0 +1,120 @@
+<div class="container-fluid">
+    <form name="featureCtrl.feature_sync_form">
+        <div class="row col-12">
+            <!-- Server Type -->
+            <div class="col-5">
+                <div class="section-title bottom-spacer-20 inline-form">
+                    <div class="form-group">
+                        <validate for="serverType" required-msg="select server Type">
+                            <strong><label for="serverType" control-label data-toggle="tooltip"
+                                    title="Select Server">Select Server </label></strong>
+                            <select chosen-directive="featureCtrl.serverList" class="form-control cst-form-control"
+                                form-control name="serverType" ng-change="featureCtrl.changeServer()" id="serverType" ng-model="featureCtrl.selectedServer"
+                                ng-options="server.server_name for server in featureCtrl.serverList"
+                                ng-required="true">
+                            </select>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Type -->
+            <div class="col-5">
+                <div class="section-title bottom-spacer-20 inline-form">
+                    <div class="form-group">
+                        <validate for="FeatureType" required-msg="select feature Type">
+                            <strong><label for="FeatureType" control-label data-toggle="tooltip"
+                                    title="Select Feature Type">Select Feature Type </label></strong>
+                            <select chosen-directive="featureCtrl.featureTypeList" class="form-control cst-form-control"
+                                form-control name="FeatureType" id="FeatureType"
+                                ng-change="featureCtrl.changeFeatureType()" ng-model="featureCtrl.selectedFeatureType"
+                                ng-options="featureType for featureType in featureCtrl.featureTypeList"
+                                ng-required="true">
+                            </select>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- All Feature Items -->
+        <div class="row" ng-show="featureCtrl.selectedFeatureType">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!-- Search,Sync,Async -->
+                    <div class="col-12 mb-15">
+                        <!-- <div class="section-title">
+                            <h4 class="text">Feature Items List </h4>
+                            <button class="btn btn-success float-right" style="margin-left: 1%;" ng-disabled="featureCtrl.feature_sync_form.$invalid" data-test="add-query-btn"
+                                ng-click="featureCtrl.saveAllconfiguration('Sync')"> Sync With Server </button>
+                            <button class="btn btn-danger float-right" ng-disabled="featureCtrl.feature_sync_form.$invalid" data-test="add-query-btn"
+                                ng-click="featureCtrl.saveAllconfiguration('Async')"> Async with Server </button>
+                            <input class="float-right" type="text" ng-model="featureCtrl.search" ng-model-options="{ debounce: 500 }" ng-change="featureCtrl.getSearchedItem()" id="search" placeholder="Search Feature Item Name"
+                                style="margin-right:10px ">
+                        </div> -->
+                    </div>
+                    <!-- Feature item Display -->
+                    <div class="col-12 mb-15">
+                        <div class="cst-table table-responsive" id="sync-feature-manage">
+                            <table aria-describedby="table"
+                                class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="Actions" style="width: 5%;">
+                                            <i ng-class=" featureCtrl.sortType === 'desc' ? 'fa fa-sort-desc' : 'fa fa-sort-asc' " aria-hidden="true" ng-click="featureCtrl.sorting()"></i>
+                                            <label control-label class="control control-checkbox">
+                                                <input checked="" id="selectAllCheckbox" name="fieldName" form-control type="checkbox" ng-model="all" ng-click="featureCtrl.select()">
+                                                <div class="control_indicator" style="left:4%"></div>
+                                            </label>
+                                        </th>
+                                        <th id="itemName" style="width: 30%;">Item Name</th>
+                                        <th id="itemName" style="width: 30%;">Status
+                                            &nbsp;&nbsp;<i ng-class=" featureCtrl.assignSortType === 'desc' ? 'fa fa-sort-desc' : 'fa fa-sort-asc' " aria-hidden="true" ng-click="featureCtrl.assignSorting()"></i>
+                                        </th>
+                                        <!-- <th id="featureType" style="width: 30%; white-space: initial;">Feature Type</th> -->
+                                        <!-- <th id="serverName" style="width: 30%; white-space: initial;">Synced with Server name
+                                            <i ng-class=" featureCtrl.assignSortType === 'desc' ? 'fa fa-sort-desc' : 'fa fa-sort-asc' " aria-hidden="true" ng-click="featureCtrl.assignSorting()"></i>
+                                        </th> -->
+                                    </tr>
+                                </thead>
+
+                                <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                            infinite-scroll='featureCtrl.getFeatureList(true)'
+                                            infinite-scroll-container='"#sync-feature-manage"'
+                                            infinite-scroll-immediate-check="false">
+                                    <tr ng-repeat="item in featureCtrl.featureToBeList | filter: { feature_name : featureCtrl.search }"
+                                        ng-if="featureCtrl.featureToBeList.length > 0">
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li>
+                                                    <label control-label class="control control-checkbox">
+                                                        <input checked="checked" name="fieldName" form-control type="checkbox"
+                                                            ng-model="item.selected" >
+                                                        <div class="control_indicator" style="left: 18%;"></div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td style="word-break: break-all;">{{item.feature_name | emptylabel}}</td>
+                                        <!-- <td>{{item.feature_type}}</td> -->
+                                        <!-- <td>{{item.server_names | emptylabel}}</td> -->
+                                        <td>{{item.server_names.split(',').indexOf(featureCtrl.selectedServer.server_name) >= 0  ? 'Assigned' : 'UnAssigned'}}</td>
+                                    </tr>
+                                    <tr
+                                        ng-if="(!featureCtrl.featureToBeList.length || featureCtrl.featureToBeList.length === 0)">
+                                        <td colspan="6">No Feature Item Details Available</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

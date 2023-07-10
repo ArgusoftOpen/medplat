@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12 mb-15">
+            <div class="cst-tab" ng-if="menuconfig.pageSet">
+                <uib-tabset active='menuconfig.selectedTab'>
+                    <uib-tab index="'fhs'" heading="FHS" select='menuconfig.getTabData("fhs")'>
+                        <div ng-include="'app/admin/menufeature/views/menu-feature-tab.html'" data-test="tab-fhs"></div>
+                    </uib-tab>
+                    <!-- <uib-tab index="'ncd'" heading="NCD" select='menuconfig.getTabData("ncd")'>
+                        <div ng-include="'app/admin/menufeature/views/menu-feature-tab.html'"></div>
+                    </uib-tab> -->
+                    <uib-tab index="'training'" heading="Training" select='menuconfig.getTabData("training")'>
+                        <div ng-include="'app/admin/menufeature/views/menu-feature-tab.html'"></div>
+                    </uib-tab>
+                    <uib-tab index="'manage'" heading="Manage" select='menuconfig.getTabData("manage")'>
+                        <div ng-include="'app/admin/menufeature/views/menu-feature-tab.html'"></div>
+
+                    </uib-tab>
+                    <uib-tab index="'admin'" heading="Admin" select='menuconfig.getTabData("admin")'>
+                        <div ng-include="'app/admin/menufeature/views/menu-feature-tab.html'"></div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>

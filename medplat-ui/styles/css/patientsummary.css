@@ -1,0 +1,682 @@
+.patient-img {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.patient-img--big {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.no-style {
+    list-style: none;
+    padding: 0;
+}
+
+.showList {
+    cursor: pointer;
+    color: #5aaaff;
+    text-decoration: underline;
+}
+
+.oral-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.oral-list--icon {
+    width: 30px;
+    height: auto;
+    margin-right: 5px;
+}
+
+.oral-list--item {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+    margin-bottom: 10px;
+    border: 1px solid #dadada;
+    background: #f1f1f1;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.oral-list--item:hover {
+    background: #2b7dce;
+    color: #ffffff;
+}
+
+.oral-list--item.active {
+    background: #2b7dce;
+    color: #ffffff;
+}
+
+.oral-list--radio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.cst-tab-white-style>.nav-tabs {
+    display: inline-flex;
+}
+
+.cst-tab-white-style>.tab-content {
+    height: calc(100vh - 178px);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.cst-tab-white-style>.nav-tabs a {
+    background: #ffffff;
+    border-top: 1px solid #dfdfdf !important;
+}
+
+.cst-tab-white-style>.nav-tabs li:last-child a {
+    border-top-right-radius: 5px;
+    border-right: 1px solid #dfdfdf !important;
+}
+
+.cst-tab-white-style>.nav-tabs li:first-child a {
+    border-top-left-radius: 5px;
+    border-left: 1px solid #dfdfdf !important;
+}
+
+.patient-summary {
+    background: #ffffff;
+    height: calc(100vh - 140px);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    overflow-y: auto;
+    border: 1px solid #dfdfdf;
+}
+
+.patient-vital h6 {
+    color: #6c757d;
+}
+
+.patient-vital {
+    margin-bottom: 10px;
+}
+
+.patient-vital span {
+    float: right;
+    font-size: 120%;
+    color: #333333;
+}
+
+.input-box--inner .form-group:last-of-type {
+    margin-bottom: 1rem;
+}
+
+.add-row-btn {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    width: 28px;
+    height: 28px;
+    background: #a5adb5;
+    border-radius: 50%;
+    color: #ffffff;
+    text-align: center;
+    line-height: 30px;
+    bottom: 14px;
+    right: 25px;
+}
+
+.add-row-btn:focus,
+.add-row-btn:hover {
+    background: #5a6268;
+    color: #ffffff;
+}
+
+.link-text {
+    font-size: 16px;
+    color: #333333;
+    text-decoration: none;
+    margin-top: 10px;
+    display: block;
+    font-weight: 600;
+}
+
+.diseases-item {
+    display: none;
+    background: #ffffff;
+    padding: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    min-height: calc(100vh - 272px);
+}
+
+.diseases-list a {
+    text-decoration: none !important;
+}
+
+.via-list-parent {
+    margin: -1rem;
+}
+
+.via-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.via-list-title {
+    color: #ffffff;
+    background: #f1f1f1;
+    padding: 7px;
+    display: block;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.via-list-item-list {
+    list-style: disc;
+    padding: 8px;
+    margin-left: 17px;
+}
+
+.border-success {
+    border: 1px solid #28a745;
+}
+
+.border-danger {
+    border: 1px solid #dc3545;
+}
+
+.border-warning {
+    border: 1px solid #ffc107;
+}
+
+.via-list-title .via-list-radio {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.list-header {
+    list-style: none;
+    font-weight: 500 !important;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.oral-point-list{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+
+.oral-point-list .oral-location-item{
+    display: block;
+    height: 25px;
+    width: 25px;
+    background: #2b7dce;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.oral-mouth-image{
+    position: relative;
+    width: 370px;
+    height: 480px;
+    margin: 0 auto;
+}
+
+.oral-mouth-image img{
+    width: 370px;
+    height: 480px;
+    margin: 0 auto;
+    display: block;
+}
+
+.oral-point-1{
+    top: 60px;
+    left: 52px;
+}
+
+.oral-point-2{
+    top: 15px;
+    left: calc(50% - 7px);
+    transform: translateX(-50%);
+}
+
+.oral-point-3{
+    top: 60px;
+    right: 60px;
+}
+
+.oral-point-4{
+    top: 160px;
+    left: 52px;
+    
+}
+
+.oral-point-5{
+    top: 80px;
+    left: calc(50% - 7px);
+    transform: translateX(-50%);
+}
+
+.oral-point-6{
+    top: 160px;
+    right: 52px;
+
+    
+}
+
+.oral-point-7{
+    top: 238px;
+    left: 35px;
+}
+
+.oral-point-8{
+    top: 220px;
+    left: calc(50% - 2px);
+    transform: translateX(-50%);
+}
+
+.oral-point-9{
+    
+    top: 235px;
+    right: 35px;
+    
+}
+
+.oral-point-10{
+    top: 310px;
+    left: 60px;
+}
+
+.oral-point-11{
+    top: 280px;
+    left: calc(50% - 2px);
+    transform: translateX(-50%);
+}
+
+.oral-point-12{
+
+    top: 310px;
+    right: 53px;
+
+    
+}
+
+.oral-point-13{
+    top: 397px;
+    left: 60px;
+}
+
+.oral-point-14{
+    top: 373px;
+    left: calc(50% + 5px);
+    transform: translateX(-50%);
+}
+
+.oral-point-15{
+    top: 390px;
+    right: 53px;
+    
+}
+
+.oral-point-16{
+    top: 446px;
+    left: calc(50% + 5px);
+    transform: translateX(-50%);
+}
+
+.oral-point-list .oral-location-item input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.oral-point-list .oral-location-item.selected{
+    background: #dc3545;
+}
+
+.oral-location-details{
+    display: none;
+    white-space: nowrap;
+    background: #dc3545;
+    border-radius: 5px;
+    padding: 4px 8px;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(-50%);
+    color: #ffffff;
+}
+
+.oral-location-details::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 7px 0 7px;
+    border-color: #dc3545 transparent transparent transparent;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.oral-location-item:hover .oral-location-details{
+    display: block;
+}
+
+.breast-image{
+    position: relative;
+    width: 605px;
+    height: 391px;
+    margin: 0 auto;
+}
+.breast-image img{
+    width: 605px;
+    height: 391px;
+    margin: 0 auto;
+    display: block;
+}
+.breast-point-list .breast-location-item input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+.breast-point-list .breast-location-item.selected{
+    background: #dc3545;
+}
+.breast-location-details{
+    display: none;
+    white-space: nowrap;
+    background: #dc3545;
+    border-radius: 5px;
+    padding: 4px 8px;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(-50%);
+    color: #ffffff;
+}
+.breast-location-details::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 7px 0 7px;
+    border-color: #dc3545 transparent transparent transparent;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.breast-location-item:hover .breast-location-details{
+    display: block;
+}
+.breast-point-list{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.breast-point-list .breast-location-item{
+    display: block;
+    height: 20px;
+    width: 20px;
+    background: #2b7dce;
+    border-radius: 50%;
+    position: absolute;
+}
+.breast-point-1{
+    top: 142px;
+    left: 205px;
+}
+.breast-point-2{
+    top: 172px;
+    left: 231px;
+}
+.breast-point-3{
+    top: 211px;
+    left: 242px;
+}
+.breast-point-4{
+    top: 248px;
+    left: 231px;
+}
+.breast-point-5{
+    top: 277px;
+    left: 206px;
+}
+.breast-point-6{
+    top: 286px;
+    left: 164px;
+}
+.breast-point-7{
+    top: 278px;
+    left: 119px;
+}
+.breast-point-8{
+    top: 250px;
+    left: 97px;
+}
+.breast-point-9{
+    top: 212px;
+    left: 85px;
+}
+.breast-point-10{
+    top: 169px;
+    left: 93px;
+}
+.breast-point-11{
+    top: 144px;
+    left: 119px;
+}
+.breast-point-12{
+    top: 127px;
+    left: 163px;
+}
+.breast-point-13{
+    top: 142px;
+    left: calc(264px + 205px);
+}
+.breast-point-14{
+    top: 172px;
+    left: calc(264px + 231px);
+}
+.breast-point-15{
+    top: 211px;
+    left: calc(264px + 242px);
+}
+.breast-point-16{
+    top: 248px;
+    left: calc(264px + 231px);
+}
+.breast-point-17{
+    top: 277px;
+    left: calc(264px + 206px);
+}
+.breast-point-18{
+    top: 286px;
+    left: calc(264px + 164px);
+}
+.breast-point-19{
+    top: 278px;
+    left: calc(264px + 119px);
+}
+.breast-point-20{
+    top: 250px;
+    left: calc(264px + 97px);
+}
+.breast-point-21{
+    top: 212px;
+    left: calc(264px + 85px);
+}
+.breast-point-22{
+    top: 169px;
+    left: calc(264px + 93px);
+}
+.breast-point-23{
+    top: 144px;
+    left: calc(264px + 119px);
+}
+.breast-point-24{
+    top: 127px;
+    left: calc(264px + 163px);
+}
+.cervical-image{
+    position: relative;
+    width: 465px;
+    height: 494px;
+    margin: 0 auto;
+}
+.cervical-image img{
+    width: 465px;
+    height: 494px;
+    margin: 0 auto;
+    display: block;
+}
+.cervical-point-list .cervical-location-item input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+.cervical-point-list .cervical-location-item.selected{
+    background: #dc3545;
+}
+.cervical-location-details{
+    display: none;
+    white-space: nowrap;
+    background: #dc3545;
+    border-radius: 5px;
+    padding: 4px 8px;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(-50%);
+    color: #ffffff;
+}
+.cervical-location-details::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 7px 0 7px;
+    border-color: #dc3545 transparent transparent transparent;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.cervical-location-item:hover .cervical-location-details{
+    display: block;
+}
+.cervical-point-list{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.cervical-point-list .cervical-location-item{
+    display: block;
+    height: 25px;
+    width: 25px;
+    background: #2b7dce;
+    border-radius: 50%;
+    position: absolute;
+}
+.cervical-point-1{
+    top: 107px;
+    left: 274px;
+}
+.cervical-point-2{
+    top: 160px;
+    left: 323px;
+}
+.cervical-point-3{
+    top: 227px;
+    left: 338px;
+}
+.cervical-point-4{
+    top: 296px;
+    left: 319px;
+}
+.cervical-point-5{
+    top: 344px;
+    left: 274px;
+}
+.cervical-point-6{
+    top: 365px;
+    left: 208px;
+}
+.cervical-point-7{
+    top: 345px;
+    left: 143px;
+}
+.cervical-point-8{
+    top: 293px;
+    left: 94px;
+}
+.cervical-point-9{
+    top: 227px;
+    left: 77px;
+}
+.cervical-point-10{
+    top: 156px;
+    left: 94px;
+}
+.cervical-point-11{
+    top: 106px;
+    left: 140px;
+}
+.cervical-point-12{
+    top: 85px;
+    left: 207px;
+}
+.tc{
+    text-align: center;
+}

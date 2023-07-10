@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Create RCH Data Sync Request</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="locationForm" id="locationForm" novalidate>
+
+                                    <location-directive ng-model="rdmc.locationId" selected-location="rdmc.selectedLocation"
+                                    required-upto-level = "rdmc.requiredUptoLevel"
+                                    template-type="'twoPart'" fetch-according-to-user-aoi="true"> </location-directive>
+
+
+                            <div class="card-footer mt-5">
+                                <div class="float-right">
+                                    <button type="submit" class="btn btn-primary" ng-click="rdmc.create(locationForm)">
+                                        <em class="fa fa-floppy-o"></em> Create Request</button>
+                                    <button class="btn btn-secondary" ui-sref="techo.manage.rchdatamigration">Back</button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

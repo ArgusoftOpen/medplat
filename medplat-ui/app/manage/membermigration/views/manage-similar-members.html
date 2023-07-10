@@ -1,0 +1,102 @@
+<div class="container-fluid" ng-if="sm.pageLoaded">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Member Information
+                        <div class=" pull-right" style="width: 14%">
+                            <button class="btn btn-secondary" ng-click="sm.goBack()">Cancel</button>
+                            <div class="btn-group     open" role="group" style="
+                                 float: right;">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Actions
+                                </button>
+                                <div class="dropdown-menu memberInfoDropDown" aria-labelledby="btnGroupDrop1"
+                                    x-placement="bottom-start">
+                                    <a class="dropdown-item" ng-click="sm.openLocationModal()">Update Location</a>
+                                    <a class="dropdown-item" ng-click="sm.markAsRollback()">RollBack</a>
+                                    <a class="dropdown-item" ng-click="sm.markAsLFU()">Mark As LFU</a>
+                                </div>
+                            </div>
+                        </div>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Basic Information </dt>
+                        <dd class="col-sm-9">
+                            <dl class="row">
+                                <dt class="col-sm-4">Name</dt>
+                                <dd class="col-sm-8">{{sm.member.fullname|emptylabel}}</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-sm-4">Contact Number</dt>
+                                <dd class="col-sm-8">{{sm.member.contactnumber|emptylabel}}</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-sm-4">Location From</dt>
+                                <dd class="col-sm-8">{{sm.member.locationfromname|emptylabel}}</dd>
+                            </dl>
+
+                        </dd>
+                        <dt class="col-sm-3">Family Information </dt>
+                        <dd class="col-sm-9">
+                            <dl class="row">
+                                <dt class="col-sm-4">Family Id</dt>
+                                <dd class="col-sm-8">{{sm.member.familyid|emptylabel}}</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-sm-4">Head Of Family(Contact Number)</dt>
+                                <dd class="col-sm-8">
+                                    {{sm.member.headname|emptylabel}}({{sm.member.headcontactnumber|emptylabel}})</dd>
+                            </dl>
+                        </dd>
+                        <dt class="col-sm-3">Fhw Information </dt>
+                        <dd class="col-sm-9">
+                            <dl class="row">
+                                <dt class="col-sm-4">Name</dt>
+                                <dd class="col-sm-8">{{sm.member.fhwname|emptylabel}}</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-sm-4">Contact Number</dt>
+                                <dd class="col-sm-8">{{sm.member.fhwcontactnumber|emptylabel}}</dd>
+                            </dl>
+                        </dd>
+                        <dt class="col-sm-3">Children</dt>
+                        <dd class="col-sm-9 cst-table table-responsive">
+                            <table class="table table-sm table-striped table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Unique Health Id</th>
+                                        <th scope="col">Date of Birth</th>
+                                        <th scope="col">Weight</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr ng-repeat="child in sm.member.child">
+                                        <td ng-bind="$index + 1">
+                                        </td>
+                                        <td ng-bind="child.fullname">
+                                        </td>
+                                        <td ng-bind="child.uniquehealthid">
+                                        </td>
+                                        <td ng-bind="child.dob | date:angularDateFormat">
+                                        </td>
+                                        <td ng-bind="child.weight| number:0">
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="!sm.member.child || sm.member.child.length == 0">
+                                        <td colspan="5">No children</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

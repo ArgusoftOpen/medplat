@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Query Excel Sheet Generator</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 inline-form">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xl-2">
+                                        <label control-label>Enter your query:</label>
+                                    </div>
+                                    <div class="col-xl-10">
+                                        <div class="row">
+                                            <div class="col-xl-11">
+                                                <textarea class="form-control cst-form-control" style="width: 100%"
+                                                    rows="8" form-control name="queryValue" required
+                                                    ng-model="excelGenereatorController.queryValue"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-2">
+                                        <label control-label>File Name:</label>
+                                    </div>
+                                    <div class="col-xl-10">
+                                        <div class="row">
+                                            <div class="col-xl-11">
+                                                <input class="form-control cst-form-control" style="width: 100%"
+                                                    form-control name="fileName" required
+                                                    ng-model="excelGenereatorController.fileName">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-secondary" ng-click="excelGenereatorController.queryValue = null">Clear
+                            Query</button>
+                        <button class="btn btn-primary" ng-click="excelGenereatorController.downloadExcel()">Download
+                            Excel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

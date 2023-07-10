@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4 class="text">IUCD Removal Details</h4>
+</div>
+<div class="modal-body" style="overflow: inherit">
+    <h6>IUCD Insertion Date : {{fpOperateDate| date:'dd/MM/yyyy'}}</h6>
+    <br>
+    <form class="inline-form" name="iucdRemovalForm" novalidate>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <validate for='iucdRemovalDate' pattern-msg="Select Date">
+                        <label for="iucdRemovalDate" control-label style="width: auto;float: left">
+                            IUCD Removal Date :
+                        </label>
+                        <input type="text" datepicker tabindex="8" name="iucdRemovalDate" form-control
+                            max-date="maxDate" min-date="minDate" ng-model="iucdObject.iucdRemovalDate" required>
+                    </validate>
+                    <validate for="iucdRemovalReason" pattern-msg="Enter Removal Reason">
+                        <label for="iucdRemovalReason" control-label
+                            style="width: auto;float: left ; margin-top: 15px;">
+                            IUCD Removal Reason :
+                        </label>
+                        <input form-control type="text" name="iucdRemovalReason" placeholder="Enter Removal Reason"
+                            style="width: auto;margin-top: 15px; display: unset;" class="form-control" maxlength='255'
+                            ng-model="iucdObject.iucdRemovalReason" required>
+                    </validate>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Save</button>
+    <button class="btn btn-secondary" ng-click="cancel()">Cancel</button>
+</div>

@@ -1,0 +1,4 @@
+<div class="alert alert-danger valid-feedback" data-test="input-Error"
+    ng-if="getObjectKeys(formElement.$error).length && hasError()">
+    {{getMessage(getObjectKeys(formElement.$error)[0])}}
+</div>

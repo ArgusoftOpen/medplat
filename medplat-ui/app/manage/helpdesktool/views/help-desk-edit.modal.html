@@ -1,0 +1,102 @@
+<div class="modal-header">
+    <h4 class="text">Perform action</h4>
+</div>
+<div class="modal-body" style="overflow: inherit">
+    <div class="row">
+        <div class="col-12">
+            <span style="color: red" ng-if="data.note1 && data.oldGender=='F'"> NOTE: {{data.note1}}</span>
+            <span style="color: red" ng-if="data.note2 && data.oldGender=='M'"> NOTE: {{data.note2}}</span>
+            <form ng-if="!data.isDeliveryUpdateLocation && !data.isGenderChange" class="inline-form" role="form"
+                name="pregRegDateChange" id="pregRegDateChange" novalidate>
+                <div class="form-group">
+                    <validate for='pregRegDateChange' required-msg="Enter date">
+                        <div class="col-6">
+                            <label style="width: auto"><span class="info_type"
+                                    control-label>{{data.title}}</span></label>
+                        </div>
+                        <div class="col-6">
+                            <input style="width:100%" type="text" datepicker max-date="data.maxDate"
+                                min-date="data.minDate" tabindex="8" name="pregRegDate" form-control
+                                ng-model="data.date" required>
+                        </div>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </form>
+            <form ng-if="data.isDeliveryUpdateLocation" class="inline-form" role="form"
+                name="editwpdcontroller.deliveryPlaceChange" id="deliveryPlaceChange" novalidate>
+                <div class="form-group" style="margin-top: 3%">
+                    <validate for='deliveryPlace' required-msg="Select a value">
+                        <label for="deliveryPlace" control-label>Delivery Place</label>
+                        <select class="form-control cst-form-control" form-control
+                            ng-model="editwpdcontroller.wpdObject.deliveryPlace"
+                            ng-change="editwpdcontroller.deliveryPlaceChanged()" name="deliveryPlace" id="deliveryPlace"
+                            required>
+                            <option value="" selected>--Select--</option>
+                            <option value="HOSP">Hospital</option>
+                            <option value="ON_THE_WAY"
+                                ng-if="editwpdcontroller.wpdObject.typeOfDelivery != 'CAESAREAN'">On the way</option>
+                            <option value="HOME">HOME</option>
+                            <option value="108_AMBULANCE">108 Ambulance</option>
+                        </select>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group" ng-if="editwpdcontroller.wpdObject.deliveryPlace === 'HOSP'">
+                    <validate for='institutionType' required-msg="Select a value">
+                        <label for="institutionType" control-label>Institution Type</label>
+                        <select class="form-control cst-form-control" form-control
+                            ng-model="editwpdcontroller.wpdObject.institutionType"
+                            ng-change="editwpdcontroller.retrieveHospitalsByInstitutionType()" name="institutionType"
+                            id="institutionType" required>
+                            <option value="" selected>--Select--</option>
+                            <option value="{{institutionType.id}}"
+                                ng-repeat="institutionType in editwpdcontroller.institutionTypes">
+                                {{institutionType.value}}</option>
+                        </select>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group"
+                    ng-if="(editwpdcontroller.wpdObject.deliveryPlace === 'HOSP') && editwpdcontroller.showOtherInstitutes">
+                    <validate for='hospital' required-msg="Select a value">
+                        <label style="vertical-align: middle;white-space: initial" control-label>Hospital</label>
+                        <select class="form-control cst-form-control" form-control chosen-directive name="hospital"
+                            ng-model="editwpdcontroller.wpdObject.institute" required>
+                            <option value="" selected>--Select--</option>
+                            <option ng-if="editwpdcontroller.wpdObject.institutionType==1013" value="-1">Other</option>
+                            <option ng-repeat="institute in editwpdcontroller.otherInstitutes" value="{{institute.id}}">
+                                {{institute.name}}</option>
+                        </select>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+
+            </form>
+            <form ng-if="data.isGenderChange" class="inline-form" name="data.genderChange" novalidate>
+                <div class="form-group" style="margin-top: 3%">
+                    <validate for='gender' required-msg="Select a value">
+                        <label for="gender" control-label>Gender</label>
+                        <select class="form-control cst-form-control" form-control ng-model="data.gender" name="gender"
+                            id="gender" required>
+                            <option value="" selected>--Select--</option>
+                            <option value="M" ng-if="data.oldGender!='M'">Male</option>
+                            <option value="F" ng-if="data.oldGender!='F'">Female</option>
+                            <option value="T" ng-if="data.oldGender!='T'">Transgender</option>
+                        </select>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="submit" form="deliveryPlaceChange" ng-if="data.isDeliveryUpdateLocation"
+        ng-click="editwpdcontroller.updateDeliveryPlace(editwpdcontroller.deliveryPlaceChange)">Save</button>
+    <button class="btn btn-primary" ng-if="data.isGenderChange" ng-click="updateGender()">Save</button>
+    <button class="btn btn-primary" ng-if="!data.isDeliveryUpdateLocation && !data.isGenderChange"
+        ng-click="saveData()">Save</button>
+    <button class="btn btn-secondary" ng-click="cancel()">Cancel</button>
+</div>

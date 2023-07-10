@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp"
+    android:background="@drawable/custom_alert_option_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:textSize="14sp"
+        android:text="@string/color_codes"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:drawablePadding="8dp"
+        android:layout_marginVertical="8dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvHofCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:textSize="14sp"
+        android:text="@string/head_of_family"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/ic_hofcode"
+        android:drawablePadding="8dp"
+        android:layout_marginVertical="2dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPwCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:textSize="14sp"
+        android:text="@string/pregnant_woman"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/ic_pwcode"
+        android:drawablePadding="8dp"
+        android:layout_marginVertical="2dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvChildCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:textSize="14sp"
+        android:text="@string/children_under_5_years"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/ic_child_code"
+        android:drawablePadding="8dp"
+        android:layout_marginVertical="2dp"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginVertical="4dp"
+        android:text="ok"/>
+</LinearLayout>

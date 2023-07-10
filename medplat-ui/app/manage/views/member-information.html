@@ -1,0 +1,1711 @@
+<div class="container-fluid" ng-if="memberInfo.memberObj.familyId == null">
+    <h5>Search Member</h5>
+</div>
+<div class="container-fluid" ng-if="memberInfo.paramDataFlag">
+    <!-- <a class="ion-arrow-left-c" style="cursor: pointer; font-size: 25px;color: black"
+        ui-sref="techo.manage.searchfeature({familyId: memberInfo.memberObj.familyId})" /> -->
+    <a class="ion-arrow-left-c" style="cursor: pointer; font-size: 25px;color: black" />
+</div>
+<div class="container-fluid" ng-if="memberInfo.memberObj.familyId">
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <div class="card cst-card">
+                <div id="card1" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse1" ng-click="toggle1 = !toggle1" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Member Information">Member Information</span>
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-minus':!toggle1,'ion-plus':toggle1}"></em>
+                                </span>
+                            </li>
+                        </ul>
+
+                    </h4>
+
+                </div>
+                <div class="collapse show" id="collapse1">
+                    <div class="card-body inline-form" ng-if="memberInfo.memberObj.memberId">
+                        <form role="form" name="searchInformationForm" id="searchInformationForm">
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Name</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.memberName}}({{(memberInfo.memberObj.uniqueHealthId)}})
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Member Type</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.isChild === "Yes" ? 'Child' : (memberInfo.memberObj.isPregnantFlag == true ? 'Mother' : (memberInfo.memberObj.isEligibleCouple  === "Yes" ? 'Eligible Couple': ((memberInfo.memberObj.reasonForNotEligibleCouple  === "" || memberInfo.memberObj.reasonForNotEligibleCouple  === null)   ? "Regular": 'Regular (Reason: '+ memberInfo.memberObj.reasonForNotEligibleCouple + ')')))}}{{memberInfo.memberObj.familyHeadFlag == true ? '(Head of Family)' : ""}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Date Of Birth</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6" ng-if="memberInfo.memberObj">
+                                            {{memberInfo.memberObj.dob == null ? 'Not Available' : memberInfo.memberObj.dob| date:'dd/MM/yyyy'}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Family Id</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{ memberInfo.memberObj.familyId == null ? 'Not Available' :memberInfo.memberObj.familyId }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12 row">
+                                <!-- <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Has Aadhar verified</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.aadharAvailable}}
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Mobile Number</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.mobileNumber == null? 'Not Available' : memberInfo.memberObj.mobileNumber}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Is Pregnant</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.isPregnantFlag == true ? 'Yes' : 'No'}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Gender</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.gender == 'M' ? 'Male' : 'Female'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Member State</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.memberState == null ? 'Not Available' : memberInfo.memberObj.memberState}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Server Created On</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.createdOn == null ? 'Not Available' : memberInfo.memberObj.createdOn| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>IFSC</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.ifsc == null ? 'Not Available': memberInfo.memberObj.ifsc}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Modified On</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.modifiedOn == null ? 'Not Available' : memberInfo.memberObj.modifiedOn}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Account Number</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.accountNumber == null ? 'Not Available': memberInfo.memberObj.accountNumber}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>ASHA Name</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.ashaName == null ? 'Not Available' : memberInfo.memberObj.ashaName}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Location</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.memberLocation == null ? 'Not Available': memberInfo.memberObj.memberLocation}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>FHW Name</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.fhwName == null ? 'Not Available' : memberInfo.memberObj.fhwName}}
+                                            <span ng-if="memberInfo.memberObj.fhwName"><br />(UserName:
+                                                {{memberInfo.memberObj.fhwusername}} ,</span> <br />
+                                            <span ng-if="memberInfo.memberObj.fhwMobileNumber">Mobile Number:
+                                                {{memberInfo.memberObj.fhwMobileNumber == null ? 'Not Available' : memberInfo.memberObj.fhwMobileNumber}})</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Area</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.areaHierarchy == null ? 'Not Available': memberInfo.memberObj.areaHierarchy}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Family State</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.familyState == null ? 'Not Available': memberInfo.memberObj.familyState}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6" ng-if="memberInfo.memberObj.contraceptionMethod">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Last Contraception Used</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.contraceptionMethod == null ? 'Not Available': memberInfo.memberObj.contraceptionMethod}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card" ng-if="memberInfo.memberObj.isChild === 'Yes'">
+                <div id="card2" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse2" ng-click="toggle2 = !toggle2" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Child Information">Child Information</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle2,'ion-minus':toggle2}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+
+                <div class="collapse" id="collapse2">
+                    <div class="card-body inline-form">
+                        <form role="form" name="childrenInformationForm" id="childrenInformationForm">
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Mother Name</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.motherName == null ? 'Not Available': memberInfo.memberObj.motherName}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Weight</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.weight == null ? 'Not Available' : memberInfo.memberObj.weight}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Haemoglobin</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.haemoglobin == null ? 'Not Available' : memberInfo.memberObj.haemoglobin}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Child Service Visit Dates</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <div ng-if="memberInfo.memberObj.childServiceVisitDatesList != null">
+                                                <table>
+                                                    <tr
+                                                        ng-repeat="childServiceVisitDate in memberInfo.childServiceVisitDatesList">
+                                                        <td>Visit
+                                                            {{memberInfo.childServiceVisitDatesList.length - $index}} :
+                                                        </td>
+                                                        <td>{{childServiceVisitDate}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <span ng-if="memberInfo.memberObj.childServiceVisitDatesList == null">
+                                                Not Available
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>All Given Vaccines</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <div ng-if="memberInfo.memberObj.immunisationGiven != null">
+                                                <table>
+                                                    <tr>
+                                                        <th>Vaccine</th>
+                                                        <th>Given Date</th>
+                                                    </tr>
+
+                                                    <tr
+                                                        ng-repeat="child in memberInfo.immunisationGivenList| orderBy:'-'">
+                                                        <td>{{child.key}}</td>
+                                                        <td>{{child.value}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <span ng-if="memberInfo.memberObj.immunisationGiven == null">
+                                                Not Available
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card cst-card" ng-if="memberInfo.memberObj.isPregnantFlag">
+                <div id="card3" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse3" ng-click="toggle3 = !toggle3" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Mother Information">Mother Information</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle3,'ion-minus':toggle3}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse3">
+                    <div class="card-body inline-form">
+                        <form role="form" name="motherInformationForm" id="motherInformationForm">
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Anc Visit Dates</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <div ng-if="memberInfo.memberObj.ancVisitDatesList != null">
+                                                <table>
+                                                    <tr ng-repeat="child in memberInfo.ancVisitDatesList">
+                                                        <td>Visit {{$index + 1}} : </td>
+                                                        <td>{{child}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <span ng-if="memberInfo.memberObj.ancVisitDatesList == null">
+                                                Not Available
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>All Given Vaccines </strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <div ng-if="memberInfo.memberObj.immunisationGiven != null">
+                                                <table>
+                                                    <tr>
+                                                        <th class="col-2">Vaccine</th>
+                                                        <th class="col-2">Given Date</th>
+                                                    </tr>
+
+                                                    <tr
+                                                        ng-repeat="child in memberInfo.immunisationGivenList| orderBy:'-'">
+                                                        <td class="col-2">{{child.key}}</td>
+                                                        <td class="col-2">{{child.value}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <span ng-if="memberInfo.memberObj.immunisationGiven == null">
+                                                Not Available
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Weight(in KG)</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.weight == null ? 'Not Available' : memberInfo.memberObj.weight}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Haemoglobin</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{memberInfo.memberObj.haemoglobin == null ? 'Not Available' : memberInfo.memberObj.haemoglobin}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card" ng-if="memberInfo.memberObj.pregnancyRegistrationDetailDtos.length > 0">
+                <div id="card4" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse4" ng-click="toggle4 = !toggle4" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Pregnancy Registration Detail">Pregnancy Registration
+                            Detail</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle4,'ion-minus':toggle4}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse4">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="pregnancy_registration_detail-form" id="pregnancy_registration_detail-form">
+                                    <table
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th>Techo Pregnancy Reg Det Id</th>
+                                                <th>Family Id</th>
+                                                <th>Server Created On</th>
+                                                <th>Created By</th>
+                                                <th>Registration Date</th>
+                                                <th>LMP Date</th>
+                                                <th>EDD/Delivery Date</th>
+                                                <th>Pregnancy State</th>
+                                                <th>Current Location</th>
+                                                <th>Location</th>
+                                                <th>Emamta Pregnancy Registration Number</th>
+                                                <th>Family Id</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr
+                                                ng-repeat="women in memberInfo.memberObj.pregnancyRegistrationDetailDtos">
+                                                <td>
+                                                    {{women.pregId == null ? 'Not Available' : women.pregId}}
+                                                </td>
+                                                <td>
+                                                    {{women.familyId == null ? 'Not Available' : women.familyId}}
+                                                </td>
+                                                <td>
+                                                    {{women.createdOn == null ? 'Not Available' : women.createdOn| date:'dd/MM/yyyy  HH:mm:ss' }}
+                                                </td>
+                                                <td>
+                                                    {{women.usrfullname == null ? 'Not Available' : women.usrfullname}}
+                                                    <span ng-if="women.username">({{women.username}})</span>
+                                                </td>
+                                                <td>
+                                                    {{women.registrationDate == null ? 'Not Available' : women.registrationDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{women.lmpDate == null ? 'Not Available' : women.lmpDate| date:'dd/MM/yyyy'}}
+                                                </td>
+                                                <td>
+                                                    {{women.expectedDeliveryDate == null ? 'Not Available' : women.expectedDeliveryDate| date:'dd/MM/yyyy'}}
+                                                </td>
+                                                <td>
+                                                    {{women.state == null? 'Not Available' : women.state}}
+                                                </td>
+                                                <td>
+                                                    {{women.currentlocationname == null? 'Not Available' : women.currentlocationname}}
+                                                </td>
+                                                <td>
+                                                    {{women.locationname == null? 'Not Available' : women.locationname}}
+                                                </td>
+                                                <td>
+                                                    {{women.motherRegNo == null ? 'Not Available' : women.motherRegNo}}
+                                                </td>
+                                                <td>
+                                                    {{women.pregFamilyId == null ? 'Not Available' : women.pregFamilyId}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card" ng-if="memberInfo.memberObj.ancInfoObj.length > 0">
+                <div id="card10" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse10" ng-click="toggle10 = !toggle10" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="ANC Information">ANC Information</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle10,'ion-minus':toggle10}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse10">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="anv_information-form" id="anc_information-form">
+                                    <table
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th>Techo Pregnancy Reg Det Id</th>
+
+                                                <th>Family ID</th>
+                                                <th>Mobile Start Date</th>
+                                                <th>Mobile End Date</th>
+                                                <th>Service Date</th>
+                                                <th>Created By</th>
+                                                <th>Server Created On</th>
+                                                <th>Location Name</th>
+                                                <th>LMP</th>
+                                                <th>Dangerous Sign</th>
+                                                <th>Weight(in KG)</th>
+                                                <th>Is JSY Beneficiary</th>
+                                                <th>Is KPSY Beneficiary</th>
+                                                <th>Is IAY Beneficiary</th>
+                                                <th>IS Chiranjeevi Yojna Beneficiary</th>
+                                                <th>ANC Place</th>
+                                                <th>Systolic BP</th>
+                                                <th>Diastolic BP</th>
+                                                <th>Member Height</th>
+                                                <th>Foetal Height</th>
+                                                <th>Foetal Heart Sound</th>
+                                                <th>IFA Tablets Given</th>
+                                                <th>FA Tablets Given</th>
+                                                <th>Calcium Tablets Given</th>
+                                                <th>HBOSAG Test</th>
+                                                <th>Blood Sugar Test</th>
+                                                <th>Is Urine Test Done</th>
+                                                <th>Is Albendazole Given</th>
+                                                <th>Referral Place</th>
+                                                <th>Dead Flag</th>
+                                                <th>Other Dangerous Sign</th>
+                                                <th>Member Status</th>
+                                                <th>EDD/Expected Delivery </th>
+                                                <th>Notification Id</th>
+                                                <th>Death Date</th>
+                                                <th>VDRL Test</th>
+                                                <th>HIV Test</th>
+                                                <th>Place Of Death</th>
+                                                <th>Haemoglobin Count</th>
+                                                <th>Death Reason</th>
+                                                <th>JSY Payment Done</th>
+                                                <th>Last Delivery Outcome</th>
+                                                <th>Expected Delivery Place</th>
+                                                <th>Family Planning Method</th>
+                                                <th>Foetal Position</th>
+
+                                                <th>Other Previous Pregnancy Complication</th>
+                                                <th>Foetal Movement</th>
+                                                <th>Referral Done</th>
+                                                <th>Urine Albumin</th>
+                                                <th>Urine Sugar</th>
+                                                <th>Is High Risk Case</th>
+                                                <th>Blood Group</th>
+                                                <th>Sugar Test</th>
+                                                <th>Sickle Cell Test</th>
+                                                <th>Dangerous Sign Id</th>
+                                                <th>family id(long)</th>
+                                                <th>Member Id</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="ancInfo in memberInfo.memberObj.ancInfoObj">
+                                                <td>
+                                                    {{ancInfo.pregnancy_reg_det_id == null ? 'Not Available' : ancInfo.pregnancy_reg_det_id}}
+                                                </td>
+
+                                                <td>
+                                                    {{ancInfo.familyid == null ? 'Not Available' : ancInfo.familyid}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.mobile_start_date == null ? 'Not Available' : ancInfo.mobile_start_date| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.mobile_end_date == null ? 'Not Available' : ancInfo.mobile_end_date| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.service_date == null ? 'Not Available' : ancInfo.service_date| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.usrfullname == null ? 'Not Available' : ancInfo.usrfullname}}
+                                                    <span ng-if="ancInfo.username">({{ancInfo.username}})</span>
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.created_on == null ? 'Not Available' : ancInfo.created_on| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.locationname == null ? 'Not Available' : ancInfo.locationname}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.lmp == null ? 'Not Available' : ancInfo.lmp| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.dangeroussign == null ? 'Not Available' : ancInfo.dangeroussign}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.weight == null ? 'Not Available' : ancInfo.weight}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.jsy_beneficiary == null ? 'Not Available' : ancInfo.jsy_beneficiary == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.kpsy_beneficiary == null ? 'Not Available' : ancInfo.kpsy_beneficiary == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.iay_beneficiary == null ? 'Not Available' : ancInfo.iay_beneficiary == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.chiranjeevi_yojna_beneficiary == null ? 'Not Available' : ancInfo.chiranjeevi_yojna_beneficiary == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.ancplacename == null ? 'Not Available' : ancInfo.ancplacename}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.systolic_bp == null ? 'Not Available' : ancInfo.systolic_bp}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.diastolic_bp == null ? 'Not Available' : ancInfo.diastolic_bp}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.member_height == null ? 'Not Available' : ancInfo.member_height}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.foetal_height == null ? 'Not Available' : ancInfo.foetal_height}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.foetal_heart_sound == null ? 'Not Available' : ancInfo.foetal_heart_sound == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.ifa_tablets_given == null ? 'Not Available' : ancInfo.ifa_tablets_given}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.fa_tablets_given == null ? 'Not Available' : ancInfo.fa_tablets_given}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.calcium_tablets_given == null ? 'Not Available' : ancInfo.calcium_tablets_given}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.hbsag_test == null ? 'Not Available' : ancInfo.hbsag_test}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.blood_sugar_test == null ? 'Not Available' : ancInfo.blood_sugar_test}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.urine_test_done == null ? 'Not Available' : ancInfo.urine_test_done == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.albendazole_given == null ? 'Not Available' : ancInfo.albendazole_given == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.referralplacename == null ? 'Not Available' : ancInfo.referralplacename}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.dead_flag == null ? 'Not Available' : ancInfo.dead_flag == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.other_dangerous_sign == null ? 'Not Available' : ancInfo.other_dangerous_sign}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.member_status == null ? 'Not Available' : ancInfo.member_status}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.edd == null ? 'Not Available' : ancInfo.edd| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.notification_id == null ? 'Not Available' : ancInfo.notification_id}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.death_date == null ? 'Not Available' : ancInfo.death_date| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.vdrl_test == null ? 'Not Available' : ancInfo.vdrl_test}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.hiv_test == null ? 'Not Available' : ancInfo.hiv_test}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.place_of_death == null ? 'Not Available' : ancInfo.place_of_death}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.haemoglobin_count == null ? 'Not Available' : ancInfo.haemoglobin_count}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.death_reason == null ? 'Not Available' : ancInfo.death_reason}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.jsy_payment_done == null ? 'Not Available' : ancInfo.jsy_payment_done}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.last_delivery_outcome == null ? 'Not Available' : ancInfo.last_delivery_outcome}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.expected_delivery_place == null ? 'Not Available' : ancInfo.expected_delivery_place}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.family_planning_method == null ? 'Not Available' : ancInfo.family_planning_method}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.foetal_position == null ? 'Not Available' : ancInfo.foetal_position}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.other_previous_pregnancy_complication == null ? 'Not Available' : ancInfo.other_previous_pregnancy_complication}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.foetal_movement == null ? 'Not Available' : ancInfo.foetal_movement}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.referral_done == null ? 'Not Available' : ancInfo.referral_done}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.urine_albumin == null ? 'Not Available' : ancInfo.urine_albumin}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.urine_sugar == null ? 'Not Available' : ancInfo.urine_sugar}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.is_high_risk_case == null ? 'Not Available' : ancInfo.is_high_risk_case == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.blood_group == null ? 'Not Available' : ancInfo.blood_group}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.sugar_test_after_food_val == null ? 'Not Available' : ancInfo.sugar_test_after_food_val}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.sickle_cell_test == null ? 'Not Available' : ancInfo.sickle_cell_test}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.dangerous_sign_id == null ? 'Not Available' : ancInfo.dangerous_sign_id}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.ancfamilyid == null ? 'Not Available' : ancInfo.ancfamilyid}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.member_id == null ? 'Not Available' : ancInfo.member_id}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card" ng-if="memberInfo.memberObj.wpdMotherDtos.length > 0">
+                <div id="card5" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse5" ng-click="toggle5 = !toggle5" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="WPD Mother Information">WPD Mother Information</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle5,'ion-minus':toggle5}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse5">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="wpd_mother_information-form" id="wpd_mother_information-form">
+                                    <table
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th>Techo Pregnancy Reg Det Id</th>
+                                                <th>Family Id</th>
+                                                <th>Mobile Start Date</th>
+                                                <th>Mobile End Date</th>
+                                                <th>Server Created On</th>
+                                                <th>Created By</th>
+                                                <th>Date Of Delivery</th>
+                                                <th>Mother Status</th>
+                                                <th>Location</th>
+                                                <th>Has Delivery Happened</th>
+                                                <th>Is CorticoSteroid Given</th>
+                                                <th>Is Preterm Birth</th>
+                                                <th>Delivery Place</th>
+                                                <th>Type Of Hospital</th>
+                                                <th>Delivery Done By</th>
+                                                <th>Type Of Delivery</th>
+                                                <th>Is Mother Alive</th>
+                                                <th>Health Infrastructure Id</th>
+                                                <th>Other Danger Signs</th>
+                                                <th>Referral Done</th>
+                                                <th>Referral Place</th>
+                                                <th>Is Discharged</th>
+                                                <th>Discharge Date</th>
+                                                <th>Breast Feeding In One Hour</th>
+                                                <th>Mtp Done At</th>
+                                                <th>Mtp Performed By</th>
+                                                <th>Death Date</th>
+                                                <th>Place Of Death</th>
+                                                <th>Is High Risk Case</th>
+                                                <th>Pregnancy Outcome</th>
+                                                <th>Is Misoprostol Given</th>
+                                                <th>Free Drop Delivery</th>
+                                                <th>Delivery Person</th>
+                                                <th>High Risk Sign</th>
+                                                <th>Death Reason Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="wpdMother in memberInfo.memberObj.wpdMotherDtos">
+                                                <td>
+                                                    {{wpdMother.pregnancyRegDetId == null ? 'Not Available' : wpdMother.pregnancyRegDetId}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.familyId == null ? 'Not Available' : wpdMother.familyId}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.mobileStartDate == null ? 'Not Available' : wpdMother.mobileStartDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.mobileEndDate == null ? 'Not Available' : wpdMother.mobileEndDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.createdOn == null ? 'Not Available' : wpdMother.createdOn| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.usrfullname == null ? 'Not Available' : wpdMother.usrfullname}}
+                                                    <span ng-if="wpdMother.username">({{wpdMother.username}})</span>
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.dateOfDelivery == null ? 'Not Available' : wpdMother.dateOfDelivery| date:'dd/MM/yyyy  HH:mm:ss' }}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.memberStatus == null ? 'Not Available' : (wpdMother.memberStatus)}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.locationname == null ? 'Not Available' : (wpdMother.locationname)}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.hasDeliveryHappened == null ? 'Not Available' : (wpdMother.hasDeliveryHappened == true ? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.corticoSteroidGiven == null ? 'Not Available' : (wpdMother.corticoSteroidGiven == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.isPretermBirth == null ? 'Not Available' : (wpdMother.isPretermBirth == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.deliveryPlace == null ? 'Not Available' : wpdMother.deliveryPlace}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.typeofhospitalvalue == null ? 'Not Available' : wpdMother.typeofhospitalvalue}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.deliveryDoneBy == null ? 'Not Available' : wpdMother.deliveryDoneBy}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.typeOfDelivery == null ? 'Not Available' : wpdMother.typeOfDelivery}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.motherAlive == null ? 'Not Available' : (wpdMother.motherAlive == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.healthInfrastructureId == null ? 'Not Available' : wpdMother.healthInfrastructureId}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.otherDangerSigns == null ? 'Not Available' : wpdMother.otherDangerSigns}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.referralDone == null ? 'Not Available' : wpdMother.referralDone}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.referralplacename == null ? 'Not Available' : wpdMother.referralplacename}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.isDischarged == null ? 'Not Available' : (wpdMother.isDischarged == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.dischargeDate == null ? 'Not Available' : wpdMother.dischargeDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.breastFeedingInOneHour == null ? 'Not Available' : (wpdMother.breastFeedingInOneHour == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.mtpDoneAt == null ? 'Not Available' : wpdMother.mtpDoneAt}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.mtpPerformedBy == null ? 'Not Available' : wpdMother.mtpPerformedBy}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.deathDate == null ? 'Not Available' : wpdMother.deathDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.placeOfDeath == null ? 'Not Available' : wpdMother.placeOfDeath}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.isHighRiskCase == null ? 'Not Available' : (wpdMother.isHighRiskCase == true? 'Yes' : 'No')}}
+                                                </td>
+
+                                                <td>
+                                                    {{wpdMother.pregnancyOutcome == null ? 'Not Available' : wpdMother.pregnancyOutcome}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.misoprostolGiven == null ? 'Not Available' : (wpdMother.misoprostolGiven == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.freeDropDelivery == null ? 'Not Available' : wpdMother.freeDropDelivery}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.deliveryPerson == null ? 'Not Available' : wpdMother.deliveryPerson}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.highRisks == null ? 'Not Available' : wpdMother.highRisks}}
+                                                </td>
+                                                <td>
+                                                    {{wpdMother.deathdata == null ? 'Not Available' : wpdMother.deathdata}}
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card" ng-if="memberInfo.memberObj.wpdChildDtos.length > 0">
+                <div id="card6" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse6" ng-click="toggle6 = !toggle6" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="WPD Child Information">WPD Child Information</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle6,'ion-minus':toggle6}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse6">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="wpd_child_information-form" id="wpd_child_information-form">
+                                    <table
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th>Family Id</th>
+                                                <th>Mobile Start Date</th>
+                                                <th>Mobile End Date</th>
+                                                <th>Server Created On</th>
+                                                <th>Created By</th>
+                                                <th>Date Of Delivery</th>
+                                                <th>Location Name</th>
+                                                <th>Pregnancy Outcome</th>
+                                                <th>Child Gender</th>
+                                                <th>Child Birth Weight(in KG)</th>
+
+                                                <th>Is Child Cried</th>
+                                                <th>Member Status</th>
+                                                <th>Breast Feeding</th>
+                                                <th>Kangaroo Care</th>
+                                                <th>Breast Crawl</th>
+                                                <th>Congenital Deformity Other</th>
+                                                <th>Child Other Danger Sign</th>
+                                                <th>Child Referral Reason</th>
+                                                <th>Child Referral Transport</th>
+                                                <th>Child Referral Place</th>
+                                                <th>Congenital Deformity Present</th>
+                                                <th>Child Danger Signs</th>
+                                                <th>Immunisation Details</th>
+                                                <th>Was Premature</th>
+                                                <th>Name</th>
+                                                <th>Type Of Delivery</th>
+                                                <th>Death Date</th>
+                                                <th>Death Reason</th>
+                                                <th>Is High Risk Case</th>
+                                                <th>Place Of Death</th>
+                                                <th>Dangerous Sign</th>
+                                                <th>Deformity Sign</th>
+                                                <th>Family Id</th>
+                                                <th>Wpd Mother Id</th>
+                                                <th>Mother Id</th>
+                                                <th>Wpd Child Id</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="wpdChild in memberInfo.memberObj.wpdChildDtos">
+                                                <td>
+                                                    {{wpdChild.familyId == null ? 'Not Available' : wpdChild.familyId }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.startDate == null ? 'Not Available' : wpdChild.startDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.endDate == null ? 'Not Available' : wpdChild.endDate| date:'dd/MM/yyyy  HH:mm:ss' }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.createdOn == null ? 'Not Available' : wpdChild.createdOn| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.usrfullname == null ? 'Not Available' : wpdChild.usrfullname}}
+                                                    <span ng-if="wpdChild.username">({{wpdChild.username}})</span>
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.deliveryDate == null ? 'Not Available' : wpdChild.deliveryDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.locationname == null ? 'Not Available' : wpdChild.locationname }}
+                                                </td>
+
+                                                <td>
+                                                    {{wpdChild.pregnancyOutcome == null ? 'Not Available' : wpdChild.pregnancyOutcome }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.childGender == null ? 'Not Available' : wpdChild.childGender }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.childBirthWeight == null ? 'Not Available' : wpdChild.childBirthWeight }}
+                                                </td>
+
+                                                <td>
+                                                    {{wpdChild.childCry == null ? 'Not Available' : (wpdChild.childCry == true? 'Yes' : 'No') }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.memberStatus == null ? 'Not Available' : wpdChild.memberStatus }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.breastFeeding == null ? 'Not Available' : (wpdChild.breastFeeding == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.kangarooCare == null ? 'Not Available' : (wpdChild.kangarooCare == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.breastCrawl == null ? 'Not Available' : (wpdChild.breastCrawl == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.congenitalDeformityOther == null ? 'Not Available' : wpdChild.congenitalDeformityOther }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.childOtherDangerSign == null ? 'Not Available' : wpdChild.childOtherDangerSign }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.childReferralReason == null ? 'Not Available' : wpdChild.childReferralReason }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.childReferralTransport == null ? 'Not Available' : wpdChild.childReferralTransport }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.referralplacename == null ? 'Not Available' : wpdChild.referralplacename }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.congenitalDeformityPresent == null ? 'Not Available' : wpdChild.congenitalDeformityPresent }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.childDangerSigns == null ? 'Not Available' : wpdChild.childDangerSigns }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.immunisationDetails == null ? 'Not Available' : wpdChild.immunisationDetails }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.wasPremature == null ? 'Not Available' : (wpdChild.wasPremature == true? 'Yes' : 'No') }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.name == null ? 'Not Available' : wpdChild.name }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.typeOfDelivery == null ? 'Not Available' : wpdChild.typeOfDelivery }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.deathDate == null ? 'Not Available' : wpdChild.deathDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.deathReason == null ? 'Not Available' : wpdChild.deathReason }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.isHighRiskCase == null ? 'Not Available' : (wpdChild.isHighRiskCase == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.placeOfDeath == null ? 'Not Available' : wpdChild.placeOfDeath }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.dangeroussign == null ? 'Not Available' : wpdChild.dangeroussign }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.deformitysign == null ? 'Not Available' : wpdChild.deformitysign }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.wpdChildFamilyId == null ? 'Not Available' : wpdChild.wpdChildFamilyId }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.wpdMotherId == null ? 'Not Available' : wpdChild.wpdMotherId }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.motherId == null ? 'Not Available' : wpdChild.motherId }}
+                                                </td>
+                                                <td>
+                                                    {{wpdChild.wpdchildid == null ? 'Not Available' : wpdChild.wpdchildid }}
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card" ng-if="memberInfo.memberObj.pncMotherDtos.length > 0">
+                <div id="card7" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse7" ng-click="toggle7 = !toggle7" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="PNC Mother Information">PNC Mother Information</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle7,'ion-minus':toggle7}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse7">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="pnc_mother_information-form" id="pnc_mother_information-form">
+                                    <table
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th>Techo Pregnancy Reg Det Id</th>
+                                                <th>Family Id</th>
+                                                <th>Mobile Start Date</th>
+                                                <th>Mobile End Date</th>
+                                                <th>Server Created On</th>
+                                                <th>Created By</th>
+
+                                                <th>Date Of Delivery</th>
+                                                <th>Service Date</th>
+                                                <th>Member Status</th>
+                                                <th>Location Name</th>
+                                                <th>Is Alive</th>
+                                                <th>Ifa Tablets Given</th>
+                                                <th>Other Danger Sign</th>
+                                                <th>Mother Referral Done</th>
+                                                <th>Referral Place</th>
+                                                <th>Family Planning Method</th>
+                                                <th>Fp Insert Operate Date</th>
+                                                <th>Death Date</th>
+                                                <th>Place Of Death</th>
+                                                <th>Death Reason</th>
+                                                <th>Other Death Reason</th>
+                                                <th>Is High Risk Case</th>
+                                                <th>Danger Sign Info</th>
+                                                <th>Death Sign Info</th>
+                                                <th>Pnc Master Id</th>
+                                                <th>Mother Id</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="pncMother in memberInfo.memberObj.pncMotherDtos">
+                                                <td>
+                                                    {{pncMother.pregnancyRegDetId == null ? 'Not Available' : pncMother.pregnancyRegDetId}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.familyid == null ? 'Not Available' : pncMother.familyid}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.mobileStartDate == null ? 'Not Available' : pncMother.mobileStartDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.mobileEndDate == null ? 'Not Available' : pncMother.mobileEndDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.createdOn == null ? 'Not Available' : pncMother.createdOn| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.usrfullname == null ? 'Not Available' : pncMother.usrfullname}}
+                                                    <span ng-if="pncMother.username">({{pncMother.username}})</span>
+                                                </td>
+
+                                                <td>
+                                                    {{pncMother.dateOfDelivery == null ? 'Not Available' : (pncMother.dateOfDelivery | date:'dd/MM/yyyy  HH:mm:ss')}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.serviceDate == null ? 'Not Available' : (pncMother.serviceDate | date:'dd/MM/yyyy  HH:mm:ss')}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.memberStatus == null ? 'Not Available' : pncMother.memberStatus}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.locationname == null ? 'Not Available' : pncMother.locationname}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.isAlive == null ? 'Not Available' : (pncMother.isAlive == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.ifaTabletsGiven == null ? 'Not Available' : pncMother.ifaTabletsGiven}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.otherDangerSign == null ? 'Not Available' : pncMother.otherDangerSign}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.motherReferralDone == null ? 'Not Available' : pncMother.motherReferralDone}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.referralplacename == null ? 'Not Available' : pncMother.referralplacename}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.familyPlanningMethod == null ? 'Not Available' : pncMother.familyPlanningMethod}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.fpInsertOperateDate == null ? 'Not Available' : pncMother.fpInsertOperateDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.deathDate == null ? 'Not Available' : pncMother.deathDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.placeOfDeath == null ? 'Not Available' : pncMother.placeOfDeath}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.deathReason == null ? 'Not Available' : pncMother.deathReason}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.otherDeathReason == null ? 'Not Available' : pncMother.otherDeathReason}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.isHighRiskCase == null ? 'Not Available' : (pncMother.isHighRiskCase == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.deathsigndata == null ? 'Not Available' : pncMother.deathsigndata }}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.dangersigndata == null ? 'Not Available' : pncMother.dangersigndata }}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.pncMasterId == null ? 'Not Available' : (pncMother.pncMasterId)}}
+                                                </td>
+                                                <td>
+                                                    {{pncMother.motherId == null ? 'Not Available' : pncMother.motherId }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card" ng-if="memberInfo.memberObj.pncChildDtos.length > 0">
+                <div id="card8" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse8" ng-click="toggle8 = !toggle8" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="PNC Child Information">PNC Child Information</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle8,'ion-minus':toggle8}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse8">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="pnc_child_information-form" id="pnc_child_information-form">
+                                    <table
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th>Techo Pregnancy Reg Det Id</th>
+                                                <th>Family Id</th>
+                                                <th>Server Created On</th>
+                                                <th>Created By</th>
+                                                <th>Service Date</th>
+                                                <th>Is Alive</th>
+                                                <th>Children Status</th>
+                                                <th>Location Name</th>
+                                                <th>Other Danger</th>
+                                                <th>Weight(in KG)</th>
+                                                <th>Death Date</th>
+                                                <th>Death Reason</th>
+                                                <th>Death Place</th>
+                                                <th>Referral Place</th>
+                                                <th>Death Other Reason</th>
+                                                <th>Referral</th>
+                                                <th>Danger Signs</th>
+                                                <th>PNC Master Id</th>
+                                                <th>PNC Chilld Id</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="pncChild in memberInfo.memberObj.pncChildDtos">
+                                                <td>
+                                                    {{pncChild.pregId == null ? 'Not Available' : pncChild.pregId}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.familyid == null ? 'Not Available' : pncChild.familyid}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.createdOn == null ? 'Not Available' : pncChild.createdOn| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.usrfullname == null ? 'Not Available' : pncChild.usrfullname}}
+                                                    <span ng-if="women.username">({{women.username}})</span>
+                                                </td>
+                                                <td>
+                                                    {{pncChild.serviceDate == null ? 'Not Available' : (pncChild.serviceDate | date:'dd/MM/yyyy  HH:mm:ss')}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.isAlive == null ? 'Not Available' : (pncChild.isAlive == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.memberStatus == null ? 'Not Available' : (pncChild.memberStatus)}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.locationname == null ? 'Not Available' : (pncChild.locationname)}}
+                                                </td>
+
+                                                <td>
+                                                    {{pncChild.childDeathOtherReason == null ? 'Not Available' : pncChild.childDeathOtherReason}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.childWeight == null ? 'Not Available' : pncChild.childWeight}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.childDeathDate == null ? 'Not Available' : pncChild.childDeathDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.childDeathReason == null ? 'Not Available' : pncChild.childDeathReason}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.childDeathPlace == null ? 'Not Available' : pncChild.childDeathPlace}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.referralplacename == null ? 'Not Available' : pncChild.referralplacename}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.childDeathOtherReason == null ? 'Not Available' : pncChild.childDeathOtherReason}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.childReferral == null ? 'Not Available' : pncChild.childReferral}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.childDangerSigns == null ? 'Not Available' : pncChild.childDangerSigns}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.pncMasterId == null ? 'Not Available' : (pncChild.pncMasterId)}}
+                                                </td>
+                                                <td>
+                                                    {{pncChild.pncChildId == null ? 'Not Available' : (pncChild.pncChildId)}}
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card cst-card" ng-if="memberInfo.memberObj.childServiceMasterDtos.length > 0">
+                <div id="card9" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse9" ng-click="toggle9 = !toggle9" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Child Service Information">Child Service Information</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle9,'ion-minus':toggle9}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse9">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="child_service_information-form" id="child_service_information-form">
+                                    <table
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th>Family Id</th>
+                                                <th>Member Status</th>
+                                                <th>Techo Created On</th>
+                                                <th>Created By</th>
+                                                <th>Mobile Start Date</th>
+                                                <th>Mobile End Date</th>
+                                                <th>Location Name</th>
+                                                <th>Service Date</th>
+                                                <th>Is Alive</th>
+                                                <th>Death Date</th>
+                                                <th>Place Of Death</th>
+                                                <th>Death Reason</th>
+                                                <th>Other Death Reason</th>
+                                                <th>Weight(in KG)</th>
+                                                <th>Ifa Syrup Given</th>
+                                                <th>Complementary Feeding Started</th>
+                                                <th>Complementary Feeding Start Period</th>
+                                                <th>Diseases</th>
+                                                <th>Other Diseases</th>
+                                                <th>Is Treatment Done</th>
+                                                <th>Mid Arm Circumference</th>
+                                                <th>Height</th>
+                                                <th>Have Pedal Edema</th>
+                                                <th>Exclusively Breastfeded</th>
+                                                <th>Any Vaccination Pending</th>
+
+                                                <th>SdScore</th>
+                                                <th>Member Id</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="childService in memberInfo.memberObj.childServiceMasterDtos">
+                                                <td>
+                                                    {{childService.familyId == null ? 'Not Available' : childService.familyId}}
+                                                </td>
+                                                <td>
+                                                    {{childService.memberStatus == null ? 'Not Available' : childService.memberStatus}}
+                                                </td>
+                                                <td>
+                                                    {{childService.createdOn == null ? 'Not Available' : childService.createdOn| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{childService.usrfullname == null ? 'Not Available' : childService.usrfullname}}
+                                                    <span
+                                                        ng-if="childService.username">({{childService.username}})</span>
+                                                </td>
+                                                <td>
+                                                    {{childService.mobileStartDate == null ? 'Not Available' : childService.mobileStartDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{childService.mobileEndDate == null ? 'Not Available' : childService.mobileEndDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{childService.locationname == null ? 'Not Available' : childService.locationname}}
+                                                </td>
+                                                <td>
+                                                    {{childService.serviceDate == null ? 'Not Available' : childService.serviceDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{childService.isAlive == null ? 'Not Available' : (childService.isAlive == true? 'Yes' : 'No') }}
+                                                </td>
+                                                <td>
+                                                    {{childService.deathDate == null ? 'Not Available' : childService.deathDate| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{childService.placeOfDeath == null ? 'Not Available' : childService.placeOfDeath}}
+                                                </td>
+                                                <td>
+                                                    {{childService.deathReason == null ? 'Not Available' : childService.deathReason}}
+                                                </td>
+                                                <td>
+                                                    {{childService.otherDeathReason == null ? 'Not Available' : childService.otherDeathReason}}
+                                                </td>
+                                                <td>
+                                                    {{childService.weight == null ? 'Not Available' : childService.weight}}
+                                                </td>
+                                                <td>
+                                                    {{childService.ifaSyrupGiven == null ? 'Not Available' : (childService.ifaSyrupGiven == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{childService.complementaryFeedingStarted == null ? 'Not Available' : (childService.complementaryFeedingStarted == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{childService.complementaryFeedingStartPeriod == null ? 'Not Available' : childService.complementaryFeedingStartPeriod}}
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        {{diesease == null ? 'Not Available': diesease}}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    {{childService.otherDiseases == null ? 'Not Available' : childService.otherDiseases}}
+                                                </td>
+                                                <td>
+                                                    {{childService.isTreatementDone == null ? 'Not Available' : childService.isTreatementDone}}
+                                                </td>
+                                                <td>
+                                                    {{childService.midArmCircumference == null ? 'Not Available' : childService.midArmCircumference}}
+                                                </td>
+                                                <td>
+                                                    {{childService.height == null ? 'Not Available' : childService.height}}
+                                                </td>
+                                                <td>
+                                                    {{childService.havePedalEdema == null ? 'Not Available' : (childService.havePedalEdema == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{childService.exclusivelyBreastfeded == null ? 'Not Available' : (childService.exclusivelyBreastfeded == true? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{childService.anyVaccinationPending == null ? 'Not Available' : (childService.anyVaccinationPending == true? 'Yes' : 'No')}}
+                                                </td>
+
+                                                <td>
+                                                    {{childService.sdScore == null ? 'Not Available' : childService.sdScore}}
+                                                </td>
+                                                <td>
+                                                    {{childService.memberId == null ? 'Not Available' : childService.memberId}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="filter-div" ng-if="!memberInfo.paramDataFlag">
+    <span class="filter-toggle" style="left:-95px" ng-click="memberInfo.toggleFilter()">Search Member</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="queform.searchForm" novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <div style="margin-top: 10px">
+                        <input type="text" name="uniqueHealthId" form-control ng-model="memberInfo.uniqueHealthId"
+                            placeholder="Enter unique Health Id" class="form-control"
+                            ng-keyup="$event.keyCode == 13 ? memberInfo.enterSubmit() : null" required autofocus />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter"
+                            ng-click="memberInfo.toggleFilter()">Close</button>
+                        <button class="btn btn-primary search-filter" ng-click="memberInfo.submit()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="cst-backdrop" ng-if="!memberInfo.paramDataFlag"></div>

@@ -1,0 +1,150 @@
+<div class="tab-pane fade show " id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="row">
+        <div class="col-xl-2 pr-0">
+            <div class="section-title-small">
+                <h4 class="text">Lists of Sub Menus</h4>
+            </div>
+            <div class="custom-search">
+                <input type="text" class="form-control cst-form-control" placeholder="Search"
+                    ng-model="menuconfig.searchQuery">
+            </div>
+            <ul class="menu-configuration-list">
+                <li class="menu-items" ng-class="{'current':config === menuconfig.loadedConfig}"
+                    ng-repeat="config in configList = (menuconfig.menuList| filter: menuconfig.search)"
+                    ng-click="menuconfig.loadConfig(config)">
+                    <span>{{config.name}}
+                        <span ng-if="config.groupName">
+                            <small>
+                                <em>
+                                    ({{config.groupName + (config.subGroupName ? ' / ' : '') + config.subGroupName}})
+                                </em>
+                            </small>
+                        </span>
+                    </span>
+                </li>
+                <li ng-if="configList.length === 0" class="list-group-item">
+                    No features for search query.
+                </li>
+            </ul>
+        </div>
+        <div class="col-xl-10 pl-0">
+            <div class="section-title-small">
+                <h4 class="text" style="float: left; line-height: 20px;">{{menuconfig.loadedConfig.name}}
+                    <small ng-if="menuconfig.loadedConfig.groupName">
+                        <em>
+                            ({{menuconfig.loadedConfig.groupName + (menuconfig.loadedConfig.subGroupName ? ' / ' : '') + menuconfig.loadedConfig.subGroupName}})
+                        </em>
+                    </small>
+                </h4>
+                &nbsp;
+                <a href="javascript:void(0)" target="_blank"
+                    ui-sref="techo.admin.manageSystemConstraintForms({ menuConfigId : menuconfig.loadedConfig.id })">
+                    Manage Forms
+                </a>
+            </div>
+            <div class="menu-details">
+                <div class="row align-items-top light-bottom-border">
+                    <div class="col-xl-2">
+                        <div class="section-title-small">
+                            <h4 class="text"><em class="fa fa-cogs"></em> Access Rights</h4>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">User</label>
+                            <selectize config='menuconfig.selectizeOptions' placeholder="Select User"
+                                options='menuconfig.loadedConfig.allUsers' ng-model="menuconfig.loadedConfig.userIds">
+                            </selectize>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Role</label>
+                            <select id="designation" name="designation" class="form-control"
+                                chosen-directive="menuconfig.loadedConfig.allDesignation" data-placeholder='Select Role'
+                                multiple ng-model="menuconfig.loadedConfig.designationIds"
+                                ng-options="option.id as option.name disable when (!option.enabled) for option in menuconfig.loadedConfig.allDesignation | orderBy:'name'">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-2">
+                        <div class="form-group">
+                            <button class="btn btn-primary"
+                                ng-disabled="menuconfig.loadedConfig.userIds.length === 0 && menuconfig.loadedConfig.designationIds.length === 0"
+                                ng-click="menuconfig.saveMenuConfig(menuconfig.loadedConfig)">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-7">
+                    <div class="col-12">
+                        <div class="cst-table table-responsive" style="height: calc(100vh - 361px);">
+                            <table class="table table-fixed table-sm table-striped table-bordered header-fixed"
+                                ng-if="menuconfig.loadedConfig.rightList.length > 0">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col style="width: 80px;">
+                                </colgroup>
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Name</th>
+                                        <th>Features</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr ng-repeat="right in menuconfig.loadedConfig.rightList| orderBy:['designationId', 'userId']"
+                                        data-test="access-right-row">
+                                        <td class="col-xs-2" data-test="type {{right.code}}">
+                                            {{right.code}}
+                                        </td>
+                                        <td class="col-xs-2" data-test="name {{right.displayName}}">
+                                            {{right.displayName}}
+                                        </td>
+                                        <td class="col-xs-7 no-padding">
+                                            <label class="control control-checkbox"
+                                                ng-repeat="(featureName, fearureValue) in right.featureJson"
+                                                data-test="{{right.displayName}} {{featureName}}">
+                                                {{ !!menuconfig.displayFeatureNameMap[featureName] ? menuconfig.displayFeatureNameMap[featureName]: featureName }}
+                                                <input icheck type="checkbox"
+                                                    ng-change="menuconfig.featureUpdated(right)"
+                                                    ng-model="right.featureJson[featureName]">
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="col-xs-4 icheck-label no-padding-right">
+                                            </label>
+                                        </td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li><a href="#" class="action-icon delete-icon"
+                                                        ng-click='menuconfig.deleteConfigModal(right.id, menuconfig.loadedConfig)'></a>
+                                                </li>
+                                                <li class="dropdown-toggle" id="moreDropdown{{$index}}"
+                                                    ng-if="right.featureJson" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <a href="#" class="action-icon more-icon"></a>
+                                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                        aria-labelledby="moreDropdown{{$index}}">
+                                                        <li><a ng-click="menuconfig.checkAll(right)">Check All</a></li>
+                                                        <li><a ng-click="menuconfig.unCheckAll(right)">Check None</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div ng-show="menuconfig.loadedConfig.rightList.length === 0 || !menuconfig.loadedConfig.rightList"
+                                class="no-data-placeholder">
+                                <h5>No Rights assigned</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h4 class="text">Lost To Follow-up</h4>
+    <button type="button" class="close" ng-click="cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+    <label>Are you sure you want to mark this member as Lost to Follow-up ?</label>
+    <br>
+    <label class="control control-checkbox">Do you want to mark it out of state ?
+        <input type="checkbox" ng-model="outOfState">
+        <div class="control_indicator"></div>
+    </label>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="ok(outOfState)">Save</button>
+</div>

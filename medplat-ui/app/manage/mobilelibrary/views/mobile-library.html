@@ -1,0 +1,306 @@
+<style>
+    .bootstrap-tagsinput {
+        margin: 0;
+        width: 100%;
+        padding: 0.5rem 0.75rem 0;
+        font-size: 1rem;
+        line-height: 1.25;
+        transition: border-color 0.15s ease-in-out;
+        display: contents;
+
+    }
+
+    .bootstrap-tagsinput .label-info {
+        display: inline-block;
+        background-color: #636c72;
+        padding: 0 .4em .15em;
+        border-radius: .25rem;
+        margin-bottom: 0.4em;
+    }
+
+    .bootstrap-tagsinput input {
+        height: calc(2.25rem + 2px);
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 2px;
+        font-size: 1em;
+        border-color: #c7c7c7;
+        padding: 5px;
+        box-shadow: inset 0px 0px 1px 1px rgb;
+        transition: all .5s;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .bootstrap-tagsinput .tag [data-role="remove"]:after {
+        content: '\00d7';
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Mobile Library</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="mobileLibrary.uploadFileForm" id="uploadFileForm" novalidate>
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="card-sub-title">
+                                    Upload File Details
+                                </h5>
+                                <div>
+                                    <div class="form-group" ng-repeat="level in mobileLibrary.levels">
+                                        <label class="col-6" ng-if="$index==0" for="folders" control-label>
+                                            Main folder
+                                        </label>
+                                        <label class="col-6" ng-if="$index!=0" for="folders" control-label>
+                                            Sub folder
+                                        </label>
+                                        <select class="col-6 form-control cst-form-control" form-control
+                                            ng-model="level.selectedFolder" name="fcategory{{$index}}"
+                                            ng-change="mobileLibrary.getFolderHierarchy(level.selectedFolder,$index)"
+                                            ng-options="folder as folder for folder in level.folderNames"
+                                            id="category{{$index}}">
+                                            <option value="">--Select--</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description" class="col-6" control-label></label>
+                                        <button class="btn btn-primary" ng-click="mobileLibrary.openModal()">
+                                            Add new folder
+                                        </button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description" class="col-6" control-label>Description</label>
+                                        <input type="text" class="form-control cst-form-control col-6" form-control
+                                            placeholder="Enter file description" maxlength="300" name="description"
+                                            id="description" ng-model="mobileLibrary.description">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tags" class="col-6" control-label>Tags</label>
+                                        <input type="text" class="form-control cst-form-control col-6" form-control
+                                            placeholder="Enter tags for easy search" maxlength="300" name="tags"
+                                            id="tags" ng-model="mobileLibrary.tags">
+                                    </div>
+                                    <label for="upload" control-label>Choose file to Upload by clicking on the Upload
+                                        button:</label>
+                                    <div class="form-group">
+                                        <div class="col-md-10  col-sm-12 text-center mx-auto"
+                                            flow-init="mobileLibrary.uploadFile"
+                                            flow-file-added="mobileLibrary.upload($file, $event, $flow)"
+                                            flow-files-submitted="mobileLibrary.uploadFn($files, $event, $flow)"
+                                            flow-file-success="mobileLibrary.getUploadResponse( $file, $message, $flow )">
+                                            <div ng-repeat="file in mobileLibrary.flow.files">
+                                                <div class="progress" ng-class="{active: file.isUploading()}"
+                                                    ng-if="file.progress() !== 1">
+                                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                                        role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                                                        aria-valuemax="100"
+                                                        ng-style="{width: (file.progress() * 100) + '%'}"
+                                                        style="width: 100%;">
+                                                    </div>
+                                                </div>
+                                                <div ng-if="file.progress() !== 1" class="mt-2 alert alert-success ">
+                                                    <span class="text-center">"{{file.name}}" Uploading...<em
+                                                            class="fa fa-cog fa-spin fa-1x"></em></span>
+                                                </div>
+                                                <div ng-if="file.progress() === 1" class="mt-2 alert alert-success ">
+                                                    <span class="text-center">
+                                                        <em class="fa fa-check fa-1x"></em>
+                                                        {{file.name}}, Uploaded Successfully
+                                                    </span>
+                                                    <span class="pull-right">
+                                                        <em class="fa fa-close fa-1x" style="cursor: pointer"
+                                                            ng-click="mobileLibrary.removeDocument(file.name)">
+                                                        </em>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <button flow-btn class="mx-auto btn btn-primary bg-success"><em
+                                                    class="ion-ios-cloud-upload-outline"></em>
+                                                Upload</button>
+                                            <p style="color: #aaa;">Only 3gp, .pdf, .mp4, .mp3, .png and .jpg files
+                                                allowed</p>
+                                            <div ng-if="mobileLibrary.isFormatError"
+                                                class="mx-auto mt-4 alert alert-danger">
+                                                <span class="text-center">Please upload valid format file!!</span>
+                                            </div>
+                                            <div ng-if="mobileLibrary.isSizeError"
+                                                class="mx-auto mt-4 alert alert-danger">
+                                                <span class="text-center">Your file is larger than 50MB. Plase upload
+                                                    valid size(< 50MB) file!!</span>
+                                            </div>
+                                            <div ng-if="mobileLibrary.isDataLoading === true"
+                                                class="mx-auto mt-4 alert alert-info">
+                                                <span class="text-center processing-cog">Processing...
+                                                    <i class="fa fa-cog fa-spin fa-1x"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="alert alert-danger valid-feedback"
+                                            ng-if="mobileLibrary.isUploadFileError">
+                                            Please wait, file is uploading....
+                                        </div>
+                                    </div>
+                                    <label for="filesLocation" control-label>Files at location:
+                                        {{mobileLibrary.folderPath}}</label>
+                                    <div class="col-12 mb-15">
+                                        <div class="cst-table table-responsive" style="overflow: auto">
+                                            <table
+                                                class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                                <colgroup>
+                                                    <col class="small-col">
+                                                    <col class="large-col">
+                                                    <col class="small-col">
+                                                    <col class="small-col">
+                                                </colgroup>
+                                                <thead class="cst-thead">
+                                                    <tr>
+                                                        <th class="filter-col">File Name
+                                                        </th>
+                                                        <th class="filter-col">Description
+                                                        </th>
+                                                        <th class="filter-col">Tags
+                                                        </th>
+                                                        <th class="filter-col">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="cst-tbody">
+                                                    <tr ng-repeat="file in mobileLibrary.fileNames  | filter : search| orderBy : orderByField : reverseSort "
+                                                        ng-if="mobileLibrary.fileNames.length > 0">
+                                                        <td> {{file.fileName}}</td>
+                                                        <td>
+                                                            {{file.description==null? 'N/A':file.description}}
+                                                        </td>
+                                                        <td>
+                                                            {{file.tag==null? 'N/A':file.tag}}
+                                                        </td>
+                                                        <td class="action-cell">
+                                                            <ul class="action-item">
+                                                                <li ng-click="mobileLibrary.toggleFilter(file)"><a
+                                                                        class="action-icon edit-icon"></a></li>
+                                                                <li class="dropdown-toggle" id="moreDropdown"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                    <a class="action-icon more-icon"></a>
+                                                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                                        aria-labelledby="moreDropdown"
+                                                                        x-placement="bottom-end">
+                                                                        <li ng-if="file.state === 'ACTIVE'"
+                                                                            ng-click="mobileLibrary.toggleState(file)">
+                                                                            <a><b>Unpublish</b></a>
+                                                                        </li>
+                                                                        <li ng-if="file.state === 'INACTIVE'"
+                                                                            ng-click="mobileLibrary.toggleState(file)">
+                                                                            <a><b>Publish</b></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    <tr
+                                                        ng-if="(!mobileLibrary.fileNames || (mobileLibrary.fileNames).length == 0)">
+                                                        <td colspan="3"> No files are available </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer mt-5">
+                                        <div class="float-right">
+                                            <button ng-if="true" type="submit" class="btn btn-primary"
+                                                ng-click="mobileLibrary.uploadDocumentFile(uploadFileForm)"
+                                                ng-disabled="false"><i class="fa fa-floppy-o"></i> Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <hr>
+    <div ng-style="mobileLibrary.isFilterOpen?{'width':'500px'}:{}"
+        ng-class="mobileLibrary.isFilterOpen ? 'filter-div active no-print' : 'filter-div no-print'">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Edit Description</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <form role="form" name="mobileLibrary.editDiscriptionForm" novalidate>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="name" control-label>File Name</label>
+                            <input readonly type="text" class="form-control cst-form-control" form-control
+                                placeholder="Enter name" maxlength="300" name="name" id="name"
+                                ng-model="mobileLibrary.fileObject.fileName" required>
+                        </div>
+                        <div class="form-group">
+                            <validate for='name' required-msg="Enter Discription">
+                                <label for="name" control-label> Description</label>
+                                <textarea type="text" class="form-control cst-form-control" form-control
+                                    placeholder="Enter description" name="description" id="description"
+                                    ng-model="mobileLibrary.fileObject.description" required></textarea>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <label for="tags1" control-label>Tags</label>
+                            <input class="form-control" type="text" name="tags" data-role="tagsinput"
+                                id="tagstoggle" ng-model="mobileLibrary.fileObject.tags" placeholder="Enter tags for easy search" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <hr>
+                            <div class="form-group text-right">
+                                <button class="btn btn-secondary close-filter"
+                                    ng-click="mobileLibrary.toggleFilter()">Close</button>
+                                <button type="submit" class="btn btn-primary search-filter"
+                                    ng-click="mobileLibrary.updateDescription()">Update</button>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="actionModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text">Add Folder</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" name="mobileLibrary.folderForm" id="folderForm" novalidate>
+                    <h6> Folder will be added at location: {{mobileLibrary.folderPath}}</h6>
+                    <div class="form-group">
+                        <label for="foldername" control-label>Folder Name</label>
+                        <input type="text" class="form-control cst-form-control" form-control
+                            placeholder="Enter folder name" maxlength="300" name="foldername" id="foldername"
+                            ng-model="mobileLibrary.folderName"
+                            ng-change="mobileLibrary.folderName = mobileLibrary.folderName.toUpperCase()">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="mobileLibrary.closeModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary" ng-click="mobileLibrary.createFolder()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

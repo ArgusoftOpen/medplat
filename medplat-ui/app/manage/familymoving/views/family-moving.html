@@ -1,0 +1,168 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-body ">
+                    <form name="fm.searchForm" novalidate>
+                        <div class="row">
+                            <div
+                                ng-class="{'col-10':fm.searchBy !== 'LOCATION' && fm.canSearchByLocation,'col-5':(fm.searchBy === 'LOCATION' && (fm.canSearchByFamilyId || fm.canSearchByMemberHealthId)),'col-2':(fm.searchBy === 'LOCATION' && !fm.canSearchByFamilyId && !fm.canSearchByMemberHealthId),'col-8':!fm.canSearchByLocation}">
+                                <div class="form-group row">
+                                    <div
+                                        ng-class="{'col-6':fm.searchBy !== 'LOCATION' && fm.canSearchByLocation ,'col-12':fm.searchBy === 'LOCATION','col-5':!fm.canSearchByLocation}">
+                                        <label style="width:70px; ">Search By: </label>
+                                        <label class="control control-radio" ng-if='fm.canSearchByFamilyId'>Family ID
+                                            <input value="FAMILYID" name="search" type="radio" ng-model="fm.searchBy"
+                                                required ng-change="fm.searchString = '';
+                                                                    fm.selectedSearchLocation = [];
+                                                                    fm.selectedSearchLocationId = [];
+                                                                    fm.selectedLocation = [];
+                                                                    fm.searchForm.$setPristine();">
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio" ng-if="fm.canSearchByMemberHealthId">Member
+                                            Health Id
+                                            <input value="MEMBERID" name="search" type="radio" ng-model="fm.searchBy"
+                                                required ng-change="fm.searchString = '';
+                                                                    fm.selectedSearchLocation = [];
+                                                                    fm.selectedSearchLocationId = [];
+                                                                    fm.selectedLocation = [];
+                                                                    fm.searchForm.$setPristine();">
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio" ng-if="fm.canSearchByLocation">Location
+                                            <input value="LOCATION" name="search" type="radio" ng-model="fm.searchBy"
+                                                required ng-change="fm.searchString = '';
+                                                    fm.selectedSearchLocation = []; fm.searchForm.$setPristine();">
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                    </div>
+                                    <div ng-if="(fm.searchBy === 'FAMILYID' && fm.canSearchByFamilyId) || (fm.searchBy === 'MEMBERID' && fm.canSearchByMemberHealthId)"
+                                        class="col-6">
+                                        <validate for="{{fm.searchBy}}" mask-msg="Enter Search String">
+                                            <input type="text" name="{{fm.searchBy}}" ng-model="fm.searchString"
+                                                placeholder="Add ' , ' to search multiple Family" required="true"
+                                                form-control class="col-12" ng-trim="false" />
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div ng-if="fm.searchBy === 'LOCATION' && fm.canSearchByLocation" class='col-4'>
+                                <location-directive template-type="'twoPart'" ng-model="fm.selectedSearchLocationId"
+                                    selected-location="fm.selectedLocation" required-upto-level="7" fetch-upto-level="8"
+                                    fetch-according-to-user-aoi="true"> </location-directive>
+                            </div>
+                            <div class="col-2" ng-style="(fm.searchBy === 'LOCATION') ? {'margin-top': '30px'} : {}">
+                                <button type="submit" class="btn btn-sm btn-primary" ng-click="fm.searchFamily()"
+                                    ng-disabled="!fm.canSearchByFamilyId && !fm.canSearchByMemberHealthId && !fm.canSearchByLocation">Search
+                                </button>
+                            </div>
+                            <div ng-if="fm.canSearchArchived" class="col-2">
+                                <label class="control control-checkbox">Search Archives also
+                                    <input type="checkbox" ng-model="fm.isArchivedFamily" />
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                    <br><br>
+                    <div class="row">
+                        <div class="col-8" style="height: calc(100vh - 261px);overflow: auto;">
+                            <h5 class="card-title">
+                                Family List
+                            </h5>
+                            <div>
+                                <table
+                                    class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th style="width: 2%;">
+                                                <label class="control control-checkbox"
+                                                    style="min-width:0px !important; ">
+                                                    <input type="checkbox" icheck ng-model="fm.allSelected"
+                                                        ng-change="fm.selectAll()" />
+                                                    <div class="control_indicator"
+                                                        style="border:1px solid #6c6a6a !important;"></div>
+                                                </label>
+                                            </th>
+                                            <th style="width: 5%;">#</th>
+                                            <th>Family ID</th>
+                                            <th>Head of Family</th>
+                                            <th>No of Members</th>
+                                            <th>Location</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cst-tbody">
+                                        <tr ng-repeat="family in fm.familiesToBePushed"
+                                            ng-if="fm.familiesToBePushed.length > 0">
+                                            <td>
+                                                <label class="control control-checkbox"
+                                                    style="min-width:0px !important; ">
+                                                    <input type="checkbox" icheck ng-model="family.isSelected"
+                                                        ng-change="fm.changeSelection()" />
+                                                    <div class="control_indicator"
+                                                        style="border:1px solid #6c6a6a !important;"></div>
+                                                </label>
+                                            </td>
+                                            <td>{{$index + 1}}</td>
+                                            <td ng-bind="family.familyId"></td>
+                                            <td>
+                                                <span ng-if="!family.hof">N.A</span>
+                                                <span ng-if="family.hof"
+                                                    ng-bind="(family.hof.firstName + ' ' + family.hof.middleName + ' ' + family.hof.lastName)"></span>
+                                            </td>
+                                            <td>
+                                                <span ng-repeat="member in family.members"
+                                                    ng-if="family.members.length > 0">
+                                                    <span
+                                                        ng-bind="member.firstName + ' ' + member.middleName + ' ' + member.lastName"></span>
+                                                    <span ng-if="$index !== (family.members.length - 1)">,</span>
+                                                </span>
+                                                <span ng-if="family.members.length === 0">N.A</span>
+                                            </td>
+                                            <td ng-bind="family.location | emptylabel"></td>
+                                        </tr>
+                                        <tr ng-if="!fm.familyList || fm.familiesToBePushed.length === 0">
+                                            <td colspan="6">No Family Available!</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-4 inline-form" style="border-left: 1px solid #e5e5e5;">
+                            <h5 class="card-sub-title" style="margin-bottom: 10px;">
+                                Choose Target Location for Selected Families
+                            </h5>
+                            <div>
+                                <ng-form name="fm.locationForm">
+                                    <location-directive ng-model="fm.selectedLocationId"
+                                        selected-location="fm.selectedMoveLocation"
+                                        required-upto-level="fm.isVerifiedFamily == true ? 8 : 7"
+                                        fetch-upto-level="fm.isVerifiedFamily == true ? 8 : 7"
+                                        fetch-according-to-user-aoi="true" on-change="fm.locationChange()">
+                                    </location-directive>
+                                    <br>
+                                    <div class="pull-right">
+                                        <button ng-disabled="!fm.selectedFamilyIds || fm.selectedFamilyIds.length === 0"
+                                            class="btn btn-primary" type="button"
+                                            ng-click="fm.moveFamilyLocation()">Move</button>
+                                        <button ng-if="fm.canMarkUnverified"
+                                            ng-disabled="!fm.selectedFamilyIds || fm.selectedFamilyIds.length === 0"
+                                            class="btn btn-primary" type="button" ng-click="fm.markAsUnverified()">Send
+                                            for verification</button>
+                                    </div> <br>
+                                </ng-form>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

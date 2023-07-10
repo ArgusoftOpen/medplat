@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title mb-0">
+                    <div class="float-left">
+                        <h4 class="text">Flyway Query</h4>
+                    </div>
+                </div>
+                <form role="form" name="locationForm" id="locationForm" novalidate>
+                    <div ng-if="mdctrl.isPublicKeyword" class="card-header" style="background-color: #ff00001c; margin-bottom: .75rem;">
+                        <span class="text-danger">Please remove public keyword from the query</span>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="col-2"></div>
+                        <div class="col-8"><span style="white-space: pre-wrap;">{{mdctrl.text}}</span></div>
+                        <div class="col-2"></div>
+                    </div>
+                    <div class="card-footer mt-5">
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-primary" ng-click="mdctrl.downloadCheckForPublicKeyword()">
+                                <em class="fa fa-floppy-o"></em> Download</button>
+                            <button type="submit" class="btn btn-primary" ng-click="mdctrl.copyQuery()">
+                                <em class="fa fa-floppy-o"></em> Copy</button>
+                            <button class="btn btn-secondary" ng-click="mdctrl.cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

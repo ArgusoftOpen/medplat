@@ -1,0 +1,632 @@
+<style>
+    .card-sub-title {
+        font-size: 15px;
+        color: black;
+    }
+
+    .mt-10 {
+        margin-top: 10px;
+    }
+
+    .pl-0 {
+        padding-left: 0;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{hi.editMode?'Edit Health Facility':'Add Health Facility'}}</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form name="hi.manageHealthInfrastructureForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card-sub-title"> Details</div>
+                                <div class="form-group">
+                                    <validate for="name" required-msg="Enter Name">
+                                        <label for="name" control-label>Name</label>
+                                        <input type="text" id="name" required form-control
+                                            class="form-control cst-form-control" name="name"
+                                            ng-model="hi.infrastructure.name">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="nameG" required-msg="Enter Name in English"
+                                        pattern-msg="Special Characters not allowed">
+                                        <label for="nameG" control-label>Name(in English)</label>
+                                        <input type="text" required form-control class="form-control cst-form-control"
+                                            name="nameG" ng-model="hi.infrastructure.nameinenglish"
+                                            ng-pattern="/^[^']*$/">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="locationType" required-msg="Select Type">
+                                        <label for="locationType" control-label> Type</label>
+                                        <select form-control required class="form-control cst-form-control"
+                                            ng-change="hi.infrastructureTypeChanged(true)" name="locationType"
+                                            ng-model="hi.infrastructure.type"
+                                            ng-options="type.id as  type.value for type in hi.types">
+                                            <option value=''>Please Select.....</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="hi.env==='uttarakhand'">
+                                    <validate for="abhayParimitiId" required-msg="Enter machine ID">
+                                        <label for="abhayParimitiId" control-label>Abhay Parimiti ID</label>
+                                        <input type="text" id="abhayParimitiId" required form-control
+                                            class="form-control cst-form-control" name="abhayParimitiId"
+                                            ng-model="hi.infrastructure.abhayParimitiId">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="address" required-msg="Select Type"
+                                        pattern-msg="Special Characters not allowed">
+                                        <label for="address" control-label>Address</label>
+                                        <textarea form-control type="text" name="address" id="address"
+                                            class="form-control cst-form-control" ng-model="hi.infrastructure.address"
+                                            ng-pattern="/^[^']*$/"></textarea>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="hi.infrastructure.iscmtc || hi.infrastructure.isnrc">
+                                    <validate for='fundedBy' required-msg="Please select a value">
+                                        <label for="fundedBy" control-label>Funded by</label>
+                                        <select class="form-control cst-form-control" form-control
+                                            ng-model="hi.infrastructure.fundedBy" name="fundedBy" id="fundedBy">
+                                            <option value="" selected>--Select--</option>
+                                            <option value="NHM">NHM</option>
+                                            <option value="GATISHEEL">Gatisheel</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address" control-label>Postal Code</label>
+                                    <input numbers-only type="text" class="form-control cst-form-control"
+                                        ng-model="hi.infrastructure.postalcode">
+                                </div>
+                                <div class="form-group">
+                                    <validate for='geolocation' required-msg="Please enter value">
+                                        <label for="geolocation" control-label>Geo Location</label>
+                                        <input placeholder="Latitude" style="width: calc((100% - 168px) / 2);
+                                           margin-right: 4px;" type="text" numbers-only decimalallowed="true"
+                                            class=" form-control cst-form-control" ng-model="hi.infrastructure.latitude"
+                                            name="geolocation" id="geolocation" form-control
+                                            ng-required="hi.env==='uttarakhand'">
+                                        <input placeholder="Longitude" style="width: calc((100% - 180px) / 2);
+                                           margin-left: 4px;" type="text" numbers-only decimalallowed="true"
+                                            class=" form-control cst-form-control" form-control name="geolocation"
+                                            id="geolocation" ng-model="hi.infrastructure.longitude"
+                                            ng-required="hi.env==='uttarakhand'">
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <label for="noOfBeds" control-label>No. of Beds</label>
+                                    <input type="text" numbers-only class="form-control cst-form-control"
+                                        ng-model="hi.infrastructure.noOfBeds" max="9999">
+                                </div>
+                                <div class="form-group" ng-if="hi.env!=='uttarakhand'">
+                                    <label for="noOfPpe" control-label>No. of PPE</label>
+                                    <input type="text" numbers-only class="form-control cst-form-control"
+                                        ng-model="hi.infrastructure.noOfPpe">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" control-label>National Identification <br> Number</label>
+                                    <input type="text" numbers-only limit-to=10 class="form-control cst-form-control"
+                                        ng-model="hi.infrastructure.nin">
+                                </div>
+                                <div class="form-group" ng-if="hi.env!=='uttarakhand'">
+                                    <label for="name" control-label>E-Mamta Id</label>
+                                    <input type="text" class="form-control cst-form-control"
+                                        ng-model="hi.infrastructure.emamtaid">
+                                </div>
+                                <div class="form-group" ng-if="hi.env!=='uttarakhand'">
+                                    <label for="name" control-label>Landline Number</label>
+                                    <input type="text" numbers-only limit-to=10 class="form-control cst-form-control"
+                                        ng-model="hi.infrastructure.landlinenumber">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" control-label>Mobile Number</label>
+                                    <input type="text" numbers-only limit-to=10 class="form-control cst-form-control"
+                                        ng-model="hi.infrastructure.mobilenumber">
+                                </div>
+                                <div class="form-group">
+                                    <validate for="email" email-msg="Enter valid email">
+                                        <label for="email" control-label>Email</label>
+                                        <input type="email" form-control name="email"
+                                            class="form-control cst-form-control" ng-model="hi.infrastructure.email">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='contactPersonName'>
+                                        <label for="contactPersonName" control-label>Contact Person Name</label>
+                                        <input type="text" class="form-control cst-form-control" form-control
+                                            name="contactPersonName" id="contactPersonName"
+                                            ng-model="hi.infrastructure.contactPersonName">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='contactNumber' maxlength-msg="Invalid mobile number"
+                                        minlength-msg="Invalid mobile number">
+                                        <label for="contactNumber" control-label>Contact Number</label>
+                                        <input type="text" numbers-only class="form-control cst-form-control"
+                                            form-control placeholder="Enter contact no" name="contactNumber"
+                                            max-length="10" min-length="10" id="contactNumber"
+                                            ng-model="hi.infrastructure.contactNumber">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="hi.editMode">
+                                    <label>Location</label>
+                                    <span>{{hi.infrastructure.locationname}}</span>
+                                    <label class="form-group control control-checkbox" style="float:right"
+                                        ng-if="hi.user.canChangeLocation">
+                                        <input ng-model="hi.changeLocation" type="checkbox"
+                                            ng-change="hi.selectedLocation={};hi.infrastructure.locationid=hi.locationIdCopy">
+                                        <div class="control_indicator checkbox-success"></div>
+                                        Change Location
+                                    </label>
+                                </div>
+                                <div class="form-group" ng-if="!hi.editMode || hi.changeLocation">
+                                    <location-directive ng-model="hi.infrastructure.locationid" template-type="'inline'"
+                                        selected-location="hi.selectedLocation" fetch-according-to-user-aoi="true"
+                                        fetch-upto-level="hi.fetchUpToLevel"
+                                        required-upto-level="hi.requiredUpToLevel || hi.fetchUpToLevel"
+                                        on-change="hi.locationChange()">
+                                    </location-directive>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-6 inline-form" style="border-left: 1px solid #e5e5e5;">
+                                <div ng-if="hi.allowedFacilities.length">
+                                    <h4 class="card-sub-title"> Facilities</h4>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('FRU')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isfru" type="checkbox"
+                                                        ng-disabled="!hi.user.canEditFru">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    FRU
+                                                </label>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="hi.allowedFacilities.includes('FULL_TIME_PEDIATRICIAN')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.ispediatrician"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditPediatrician">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Full Time Pediatrician
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('CMTC')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.iscmtc"
+                                                        ng-change="hi.nutritionChange()"
+                                                        ng-disabled="!hi.user.canEditCmtc" type="checkbox">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    CMTC
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('NRC')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isnrc"
+                                                        ng-change="hi.nutritionChange()"
+                                                        ng-disabled="!hi.user.canEditNrc" type="checkbox">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    NRC
+                                                </label>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="hi.allowedFacilities.includes('FULL_TIME_GYNECOLOGIST')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isgynaec"
+                                                        ng-disabled="!hi.user.canEditGynaec" type="checkbox">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Full Time Gynecologist
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('SNCU')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.issncu"
+                                                        ng-disabled="!hi.user.canEditSncu" type="checkbox">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    SNCU
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('BLOOD_BANK')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isbloodbank"
+                                                        ng-disabled="!hi.user.canEditBloodBank" type="checkbox">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Blood Bank
+                                                </label>
+                                            </div>
+                                            <!-- <div class="form-group" ng-if="hi.allowedFacilities.includes('NCD')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.forncd"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditNcd">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    NCD
+                                                </label>
+                                            </div> -->
+                                            <div class="form-group"
+                                                ng-if="hi.allowedFacilities.includes('CP_CONFIRMATION_CENTER')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input
+                                                        ng-model="hi.infrastructure.facilities.iscpconfirmationcenter"
+                                                        type="checkbox"
+                                                        ng-disabled="(!hi.user.canEditBloodBank || hi.selectedLocation && hi.selectedLocation.finalSelected.level == 2 || !hi.selectedLocation && hi.infrastructure.locationtype == 'S') || ((!hi.selectedLocation.finalSelected || (hi.selectedLocation.finalSelected.optionSelected && hi.selectedLocation.finalSelected.level == 2) || (!hi.selectedLocation.finalSelected.optionSelected && hi.selectedLocation.finalSelected.level - 1 <= 2)))">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    CP Confirmation Center
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('HWC')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input type="checkbox" ng-model="hi.infrastructure.facilities.ishwc"
+                                                        ng-disabled="!hi.user.canEditHWC">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    HWC
+                                                </label>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="hi.allowedFacilities.includes('NO_REPORTING_UNIT')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isNoReportingUnit"
+                                                        type="checkbox">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    No reporting Unit
+                                                </label>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="hi.allowedFacilities.includes('COVID_HOSPITAL')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isCovidHospital"
+                                                        ng-change="hi.onChangeIsCovidHospital()" type="checkbox"
+                                                        ng-disabled="!hi.user.canEditCovid19Hospital">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Covid Hospital
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('COVID_LAB')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isCovidLab"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditCovid19Lab">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Covid Lab
+                                                </label>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="hi.allowedFacilities.includes('CHIRANJIVI_YOJANA')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.ischiranjeevischeme"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditChiranjeevi">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Chiranjivi Yojana
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('BALSAKHA_1')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isBalsakha1"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditBalsakha1">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Balsakha-1
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('BALSAKHA_3')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isBalsakha3"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditBalsakha3">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Balsakha-3
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('USG')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isUsgFacility"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditUsgFacility">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    USG facility
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('REFERRAL')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isReferralFacility"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditReferralFacility">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Referral Facility
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('MA_YOJANA')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isMaYojna"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditMaYojna">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    MA yojana
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('PMJAY')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.ispmjy"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditPmjayFacility">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    PMJAY facility
+                                                </label>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="hi.allowedFacilities.includes('NPCB_REFERRAL')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isNpcb"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditNpcb">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    NPCB referral center
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="hi.allowedFacilities.includes('IDSP')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.isIdsp"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditIdsp">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    IDSP
+                                                </label>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="hi.allowedFacilities.includes('VENTILATORS')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.hasVentilators"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditVentilators">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Ventilators
+                                                </label>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="hi.allowedFacilities.includes('DEFIBRILLATORS')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.hasDefibrillators"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditDefibrillators">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Defibrillators
+                                                </label>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="hi.allowedFacilities.includes('OXYGEN_CYLINDERS')">
+                                                <label class="form-group control control-checkbox">
+                                                    <input ng-model="hi.infrastructure.facilities.hasOxygenCylinders"
+                                                        type="checkbox" ng-disabled="!hi.user.canEditOxygenCylinders">
+                                                    <div class="control_indicator checkbox-success"></div>
+                                                    Oxygen Cylinders
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card cst-card" style="margin-top: 30px;"
+                                    ng-if="hi.categoryList.length > 0 && hi.env!=='uttarakhand'">
+                                    <div class="card-title">
+                                        <div class="float-left">
+                                            <h4 class="text">Category</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body inline-form">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group"
+                                                    ng-repeat="category in hi.categoryList track by $index">
+                                                    <label class="form-group control control-checkbox">
+                                                        <input ng-model="category.isChecked" type="checkbox"
+                                                            ng-change="hi.checkForLabTest(category)"
+                                                            ng-disabled="!hi.user.canEditLabTest">
+                                                        <div class="control_indicator checkbox-success"></div>
+                                                        {{category.value}}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card cst-card" style="margin-top: 30px;"
+                                    ng-if="hi.labTestList.length > 0 && hi.env!=='uttarakhand'">
+                                    <div class="card-title">
+                                        <div class="float-left">
+                                            <h4 class="text">Lab Tests</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body inline-form">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group"
+                                                    ng-repeat="labTest in hi.labTestList track by $index">
+                                                    <label class="form-group control control-checkbox">
+                                                        <input ng-model="labTest.isChecked" type="checkbox"
+                                                            ng-disabled="!hi.user.canEditLabTest">
+                                                        <div class="control_indicator checkbox-success"></div>
+                                                        {{labTest.name}} (<small>{{labTest.categoryName}}</small>)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form name="hi.manageWardDetailsForm" novalidate>
+                        <div class="row">
+                            <div class="col-12 inline-form mt-10" ng-if="hi.infrastructure.isCovidHospital">
+                                <div class="form-group">
+                                    <label class="card-sub-title">
+                                        Ward Details
+                                    </label>
+                                    <button type="button" class="btn btn-primary" ng-click="hi.addWard()"
+                                        ng-disabled="!hi.user.canEditCovid19Hospital">
+                                        Add Ward
+                                    </button>
+                                </div>
+                                <div class="accordion" id="wardDetailsAccordion">
+                                    <div ng-repeat="wardDetail in hi.wardDetails">
+                                        <div class="card">
+                                            <div class="card-header pl-0" style="cursor: pointer;"
+                                                data-toggle="collapse" data-target="#collapseWardDetail{{$index}}"
+                                                aria-expanded="false" aria-controls="collapseWardDetail{{$index}}"
+                                                id="wardDetailHeading{{$index}}">
+                                                <h5 class="mb-0">
+                                                    <button class="btn btn-link" style="text-decoration: none;"
+                                                        type="button">
+                                                        Ward #{{$index + 1}}
+                                                        {{wardDetail.wardName ? ' (' + wardDetail.wardName + ')' : ''}}
+                                                    </button>
+                                                </h5>
+                                            </div>
+
+                                            <div id="collapseWardDetail{{$index}}"
+                                                class="collapse {{$index === 0 ? 'show': ''}}"
+                                                aria-labelledby="wardDetailHeading{{$index}}"
+                                                data-parent="#wardDetailsAccordion">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <validate for='wardName{{$index}}'
+                                                                    required-msg="Enter Ward Name">
+                                                                    <label for='wardName{{$index}}'
+                                                                        uib-tooltip="Ward Name*" control-label>
+                                                                        Ward Name
+                                                                    </label>
+                                                                    <input type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="wardName{{$index}}"
+                                                                        id="wardName{{$index}}"
+                                                                        ng-model="wardDetail.wardName" maxlength="99"
+                                                                        required
+                                                                        ng-disabled="!hi.user.canEditCovid19Hospital">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <validate for="wardType{{$index}}"
+                                                                    required-msg="Enter Ward Type">
+                                                                    <label uib-tooltip="Ward Type"
+                                                                        for="wardType{{$index}}" control-label>
+                                                                        Ward Type
+                                                                    </label>
+                                                                    <select form-control required
+                                                                        class="form-control cst-form-control"
+                                                                        name="wardType{{$index}}"
+                                                                        id="wardType{{$index}}"
+                                                                        ng-model="wardDetail.wardType"
+                                                                        ng-options="wardType.id as wardType.value for wardType in hi.wardTypes"
+                                                                        ng-disabled="!hi.user.canEditCovid19Hospital">
+                                                                        <option value="">--Select--</option>
+                                                                    </select>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <validate for='status{{$index}}'
+                                                                    required-msg="Select Status">
+                                                                    <label for='status{{$index}}' control-label>
+                                                                        Status
+                                                                    </label>
+                                                                    <select class="form-control cst-form-control"
+                                                                        form-control name="status{{$index}}"
+                                                                        id="status{{$index}}"
+                                                                        ng-model="wardDetail.status" required
+                                                                        ng-disabled="!hi.user.canEditCovid19Hospital">
+                                                                        <option value="">--Select--</option>
+                                                                        <option value="ACTIVE">Active</option>
+                                                                        <option value="INACTIVE">Inactive</option>
+                                                                    </select>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <validate for='numberOfBeds{{$index}}'
+                                                                    required-msg="Input a value">
+                                                                    <label for='numberOfBeds{{$index}}'
+                                                                        uib-tooltip="Number of Beds" control-label>
+                                                                        Number of Beds
+                                                                    </label>
+                                                                    <input type="text" numbers-only
+                                                                        decimalallowed="false"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="numberOfBeds{{$index}}"
+                                                                        id="numberOfBeds{{$index}}"
+                                                                        ng-model="wardDetail.numberOfBeds"
+                                                                        ng-disabled="!hi.user.canEditCovid19Hospital">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <validate for='numberOfVentilatorsType1{{$index}}'
+                                                                    required-msg="Input a value">
+                                                                    <label for='numberOfVentilatorsType1{{$index}}'
+                                                                        uib-tooltip="Number of Ventilators"
+                                                                        control-label>
+                                                                        Number of Ventilators
+                                                                    </label>
+                                                                    <input type="text" numbers-only
+                                                                        decimalallowed="false"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control
+                                                                        name="numberOfVentilatorsType1{{$index}}"
+                                                                        id="numberOfVentilatorsType1{{$index}}"
+                                                                        ng-model="wardDetail.numberOfVentilatorsType1"
+                                                                        ng-disabled="!hi.user.canEditCovid19Hospital">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card-footer mt-5">
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-primary" ng-click="hi.save()">
+                                <em class="fa fa-floppy-o"></em> Save & Continue</button>
+                            <button class="btn btn-secondary" ng-click="hi.goBack();">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="linkFacility" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="text">Link Health Facility (HFR)</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>Do you want to link Facility with HFR</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="hi.showHpModal()">Link Facility</button>
+                    <button class="btn btn-secondary" ng-click="hi.cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

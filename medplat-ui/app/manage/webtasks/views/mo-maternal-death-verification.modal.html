@@ -1,0 +1,72 @@
+<div class="modal-header">
+    <h4 class="text">Perform action</h4>
+</div>
+<div class="modal-body">
+    <h3>Maternal Death Verification</h3>
+    <div class="row" style="padding: 10px">
+        <div class="col-6">
+            <h6 ng-if="maternalDeathVerificationMo.task.details['Birth date'] != null">
+                Birth Date : {{maternalDeathVerificationMo.task.details['Birth date']}}
+            </h6>
+            <h6 ng-if="maternalDeathVerificationMo.task.details['Death date'] != null">
+                Death Date : {{maternalDeathVerificationMo.task.details['Death date']}}
+            </h6>
+            <h6 ng-if="maternalDeathVerificationMo.task.details['Death Reason'] != null">
+                Death Reason : {{maternalDeathVerificationMo.task.details['Death Reason']}}
+            </h6>
+            <h6 ng-if="maternalDeathVerificationMo.task.details['Family Contact Detail'] != null">
+                Family Contact Detail : {{maternalDeathVerificationMo.task.details['Family Contact Detail']}}
+            </h6>
+        </div>
+        <div class="col-6">
+            <h6 ng-if="maternalDeathVerificationMo.task.details['Death Type'] != null">
+                Death Type : {{maternalDeathVerificationMo.task.details['Death Type']}}
+            </h6>
+            <h6 ng-if="maternalDeathVerificationMo.task.details['Last delivery date'] != null">
+                Last Delivery Date : {{maternalDeathVerificationMo.task.details['Last delivery date']}}
+            </h6>
+            <h6 ng-if="maternalDeathVerificationMo.task.details['Location'] != null">
+                Location : {{maternalDeathVerificationMo.task.details['Location']}}
+            </h6>
+            <h6 ng-if="maternalDeathVerificationMo.task.details['FHW Name'] != null">
+                FHW Name : {{maternalDeathVerificationMo.task.details['FHW Name']}}
+            </h6>
+        </div>
+    </div>
+    <hr>
+    <form class="inline-form" role="form" name="maternalDeathVerificationMoForm" id="maternalDeathVerificationMoForm"
+        novalidate>
+        <div class="form-group">
+            <validate for='actionKey' required-msg="Select a value">
+                <label><span class="info_type" control-label>Action</span></label>
+                <select class="form-control cst-form-control" form-control
+                    ng-model="maternalDeathVerificationMo.actionKey" name="actionKey" id="actionKey" required>
+                    <option value="">--Select--</option>
+                    <option ng-repeat="action in actionsList" ng-value="action">{{action.displayText}}</option>
+                </select>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group">
+            <validate for='verbalAutopsy' required-msg=" Select a value">
+                <label for="verbalAutopsy" name="verbalAutopsy" id="verbalAutopsy" class="long control-label"
+                    control-label><span class="info_type">Verbal Autopsy</span></label>
+                <label class="control control-radio mt-10">Yes
+                    <input ng-value="true" name="apetiteTest" form-control type="radio"
+                        ng-model="maternalDeathVerificationMo.verbalAutopsy" required>
+                    <div class="control_indicator"></div>
+                </label>
+                <label class="control control-radio mt-10">No
+                    <input ng-value="false" name="apetiteTest" form-control type="radio"
+                        ng-model="maternalDeathVerificationMo.verbalAutopsy" required>
+                    <div class="control_indicator"></div>
+                </label>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Save</button>
+    <button class="btn btn-secondary" ng-click="cancel()">Cancel</button>
+</div>

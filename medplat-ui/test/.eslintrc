@@ -1,0 +1,76 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:protractor/recommended"
+    ],
+    "plugins": [
+        "protractor"
+    ],
+    "rules": {
+        "no-prototype-builtins": 0,
+        "max-params": [
+            "error",
+            {
+                "max": 10
+            }
+        ],
+        "camelcase": [
+            "warn",
+            {
+                "properties": "always"
+            }
+        ],
+        "no-console": "off",
+        "semi": [
+            "error"
+        ],
+        "protractor/no-browser-sleep": "off",
+        "no-unused-vars": [
+            "error"
+        ],
+        "no-const-assign": [
+            "error"
+        ],
+        "no-var": [
+            "error"
+        ],
+        "prefer-template": [
+            "error"
+        ],
+        "prefer-const": [
+            "error"
+        ],
+        "quotes": [
+            "warn",
+            "single",
+            {
+                "allowTemplateLiterals": true
+            }
+        ]
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "protractor": true
+    },
+    "globals": {
+        "afterAll": true,
+        "afterEach": true,
+        "beforeAll": true,
+        "beforeEach": true,
+        "browser": true,
+        "by": true,
+        "describe": true,
+        "element": true,
+        "expect": true,
+        "fail": true,
+        "it": true,
+        "protractor": true,
+        "__dirname": true,
+        "process": true
+    }
+}

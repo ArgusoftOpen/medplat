@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    Login
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="logout">LOGOUT</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="language">LANGUAGE</string>
+
+    About
+    <string name="techo">TeCHO+</string>
+    <string name="in_collaboration_with">In collaboration with</string>
+    <string name="techo_description_eng">A low code comprehensive primary Healthcare platform to reliably track, manage and improve SDG 3 indicators in large scale public health implementations</string>
+    <string name="techo_description_telugu">ఈ యాప్ ప్రత్యేకంగా స్పెషలిస్టులు, వైద్య అధికారులు మరియు ఎఎన్ఎంల కోసం రూపొందించబడింది. \nఈ యాప్ ద్వారా అధిక ప్రమాదం ఉన్న గర్భాలని గుర్తించడం, చికిత్స మరియు ఆ స్థితి నిర్వహణకి సంబంధించిన అవగాహన మరియు నైపుణ్యాలని మీరు నేర్చుకోవచ్చు. \nదీని ద్వారా సకాలంలో సరైన సమాచారం పొంది సురక్షితమైన గర్భధారణలు అలాగే తల్లీబిడ్డలు ఆరోగ్యకరంగా ఉండేలా సహాయపడండి.</string>
+    <string name="techo_uttarakhand_description_eng">App for health volunteers to screen members who are on their way for chardham yatra</string>
+
+    <string name="government_of_gujarat">Government of Gujarat</string>
+    <string name="national_health_mission">National Health Mission</string>
+    <string name="sewa_rural">Sewa Rural</string>
+    <string name="unicef">UNICEF</string>
+    <string name="gvk_emri">GVK EMRI</string>
+    <string name="argusoft">Argusoft</string>
+    <string name="medplat">MedPlat</string>
+
+    Common
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="dash">-</string>
+
+    Buttons
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="more">More</string>
+    <string name="ok">Ok</string>
+
+    Menus
+    <string name="home">Home</string>
+    <string name="refresh">Refresh</string>
+    <string name="about">About</string>
+
+    Navigation Drawer
+    <string name="name">Name</string>
+    <string name="role">FHW</string>
+
+    RBSK Body Layout
+    <string name="front_body">Front</string>
+    <string name="back_body">Back</string>
+    <string name="front_body_image">Front Body</string>
+    <string name="back_body_image">Back Body</string>
+
+    QR Scan
+    <string name="turn_off_flashlight">FlashLight off</string>
+    <string name="turn_on_flashlight">FlashLight on</string>
+    <string name="message_for_qr_scan">Place a QR code inside the viewfinder rectangle to scan it.</string>
+
+    Pregnancy Registration
+    <string name="registration">Registration</string>
+    <string name="registration_description">This is the static description of Registration.</string>
+    <string name="anc_visit">ANC Visit</string>
+    <string name="anc_visit_description">This is the static description of ANC Visit.</string>
+    <string name="blood_test">Blood Test</string>
+    <string name="weight">Weight</string>
+    <string name="vaccines">Vaccines</string>
+    <string name="tablets">Tablets</string>
+    <string name="folic_acid">Folic Acid</string>
+    <string name="iron_folic_acid">Iron/Folic Acid</string>
+    <string name="calcium">Calcium</string>
+
+    Submit Page
+    <string name="thank_you_for_information">Thank you for Information</string>
+    <string name="submit">Submit</string>
+    <string name="review">Review</string>
+    <string name="review_answer">Review Answers</string>
+
+    OTP Verification
+    <string name="verification_code_sent">Verification code sent…</string>
+    <string name="zero_seconds">0s</string>
+    <string name="request_verification_code">Request verification code</string>
+    <string name="enter_verification_code">Enter verification code</string>
+    <string name="verify_verification_code">Verify verification code</string>
+    <string name="notice_message">Notice Message</string>
+    <string name="please_read_out_the_following_to_the_beneficiary_and_ask_for_their_permission">Please read out the following to the Beneficiary and ask for their permission</string>
+    <string name="i_am_giving_my_consent_for_receiving_health_service_reminders_and_information_about_health_benefit_schemes_on_whatsapp">I am giving my consent for receiving health service reminders and information about health benefit schemes on WhatsApp</string>
+
+    <string name="capture">Capture</string>
+
+    <string name="no_image_available">No image available</string>
+    <string name="pregnancy_months">Pregnancy Months</string>
+    <string name="breast_examination">Breast Examination</string>
+    <string name="calender">Calender</string>
+    <string name="icons">Icons</string>
+    <string name="audio">Audio</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="oral_examination">Oral Examination</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="defect">Defect</string>
+
+    <string name="add">Add</string>
+    <string name="error">Error</string>
+    <string name="loading">Loading</string>
+    <string name="_00_00">00:00</string>
+    <!-- NDHM Verification -->
+    <string name="health_id">Enter beneficiary\'s NDHM Health ID</string>
+    <string name="health_id_hint">healthId@sbx</string>
+    <string name="announcement">Announcement</string>
+    <string name="record_the_beneficiary_response">Record the Beneficiary Response</string>
+    <string name="skip">Skip</string>
+    <string name="ready_for_the_quiz">Ready for the Quiz?</string>
+    <string name="test_your_course_skill_in_our_short_quiz_section">Test your course skill in our short quiz section!</string>
+    <string name="put_everything_you_ve_learned_to_the_test_and_show_how_much_you_ve_learnt_so_far">Put everything you\'ve learned to the test and show how much you\'ve learnt so far..</string>
+    <string name="_10_questions_15_20_minutes">10 questions 15 – 20 minutes</string>
+    <string name="let_s_start">Let\'s Start</string>
+    <string name="well_done_you_ve_completed_the_quiz">Well done you\'ve completed the quiz!</string>
+    <string name="_25">25%</string>
+    <string name="restart_quiz">Restart Quiz</string>
+    <string name="done">Done</string>
+    <string name="lock_quiz_and_view_answer">Lock Quiz and View Answer</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="cervical_examination">Cervical Examination</string>
+    <string name="menuArchive">Archive</string>
+    <string name="menuRestore">Restore</string>
+    <string name="msg_course_archived">Course is archived.</string>
+    <string name="msg_course_restored">Course is restored.</string>
+    <string name="head_of_family">Head Of Family</string>
+    <string name="pregnant_woman">Pregnant Woman</string>
+    <string name="children_under_5_years">Children Under 5 Years</string>
+    <string name="color_codes">Color Codes</string>
+    <string name="health_advisory_for">Health advisory for</string>
+    <string name="screening_report">Screening Report</string>
+    <string name="blood_npressure">Blood \nPressure</string>
+    <string name="spo2_nlevel">SpO2 \nLevel</string>
+    <string name="blood_nsugar">Blood \nSugar</string>
+    <string name="advisory">Advisory</string>
+    <string name="connect_with_nearest_mrp_to_understand_on_further_travel">Connect with nearest MRP to understand on further travel</string>
+    <string name="refer_health_facility">Refer to health facility</string>
+    <string name="take_precautions">Take precautions</string>
+    <string name="no_risks_found">No Risks Found</string>
+    <string name="follow_general_advisory">Follow general advisory</string>
+    <string name="high_risk">High Risk</string>
+    <string name="moderate">Moderate Risk</string>
+    <string name="normal">Low Risk</string>
+    <string name="advisory_for_normal_health">No potential high risk found! </string>
+    <string name="advisory_for_deteriorating_health">Wait at least 24 hours at a lower altitude before attempting to ascend further \n\nStay hydrated. Add electrolyte mix to your water to supplement \n\nEat light but full. Consume less spicy foods and foods which are easy to digest</string>
+    <string name="download_pdf">Download &amp; Print PDF</string>
+    <string name="temperature_n_in_farenheit">Temperature\nin Fahrenheit</string>
+    <string name="request_status">Request status</string>
+    <string name="request_reason">Request reason</string>
+    <string name="rejected_reason">Rejection reason</string>
+    <string name="on_the_way">On the way!</string>
+    <string name="request_from">Request from</string>
+    <string name="request_to">Request to</string>
+    <string name="enter_completion_feedback_if_you_want_to_mark_this_request_as_completed">Enter completion feedback if you want to mark this request as completed</string>
+    <string name="enter_feedback">Enter feedback</string>
+    <string name="please_wait_while_we_are_fetching_health_data_from_device">Please wait while we are fetching health data from device</string>
+    <string name="cancel">Cancel</string>
+    <string name="get_results_for_assigned_HI">All screenings of Pilgrims</string>
+    <string name="proceed_for_treatment">Proceed for Treatment</string>
+    <string name="treatment_details_for">Treatment Details For</string>
+    <string name="symptoms">Symptoms</string>
+    <string name="other_symptoms">Other Symptoms</string>
+    <string name="diagnosis">Diagnosis</string>
+    <string name="other_diagnosis">Other Diagnosis</string>
+    <string name="medicines_lbl">Medicines</string>
+    <string name="other_medicines">Other Medicines</string>
+    <string name="course_of_treatment">Course Of Treatment</string>
+    <string name="lbl_treatment">Treatment</string>
+    <string name="lbl_screening">Screening</string>
+    <string name="lbl_registered">Registered</string>
+    <string name="referred_status">Referred Status</string>
+    <string name="contact_details">Contact details:</string>
+    <string name="consent_checkbox">The tourist is aware of the health risks and is still willing to continue the yatra.</string>
+</resources>

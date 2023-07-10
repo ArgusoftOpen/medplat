@@ -1,0 +1,26 @@
+<style>
+    .mb-10 {
+        margin-bottom: 10px !important;
+    }
+</style>
+<generate-card-template-directive ng-if="element.type === 'CARD'" class="{{cardClasses}}" config="element.config"
+    elements="element.elements" constraint-config="constraintConfig" sibling-elements="siblingElements"
+    element-index="elementIndex" iterator-indices-map="iteratorIndicesMap">
+</generate-card-template-directive>
+<generate-row-template-directive ng-if="element.type === 'ROW'" class="{{rowClasses}}" config="element.config"
+    elements="element.elements" constraint-config="constraintConfig" sibling-elements="siblingElements"
+    element-index="elementIndex" iterator-indices-map="iteratorIndicesMap">
+</generate-row-template-directive>
+<generate-col-template-directive ng-if="element.type === 'COL'" class="{{colClasses}}" config="element.config"
+    elements="element.elements" constraint-config="constraintConfig" sibling-elements="siblingElements"
+    element-index="elementIndex" iterator-indices-map="iteratorIndicesMap">
+</generate-col-template-directive>
+<div ng-if="element.type === 'CUSTOM_HTML'">
+    <span ng-bind-html="::(element.config.html | trustAsHtml)"></span>
+</div>
+<div ng-if="element.type === 'TECHO_FORM_FIELD'">
+    <techo-form-field-directive
+        config-json="constraintConfig[element.config.fieldName + '__' + element.config.fieldType]"
+        config="element.config" iterator-indices-map="iteratorIndicesMap">
+    </techo-form-field-directive>
+</div>

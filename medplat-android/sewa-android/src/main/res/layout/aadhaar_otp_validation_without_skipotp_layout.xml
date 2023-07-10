@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/description"
+        style="@style/CustomQuestionView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginVertical="30dp"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:text="@string/description" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/otpText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconMode="password_toggle"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_verification_code"
+            android:inputType="textPassword"
+            android:maxLength="6" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/verifyOtpBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/verify_verification_code"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/resend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:paddingStart="5dp"
+            android:paddingEnd="0dp"
+            android:text="Resend OTP"
+            android:textColor="@color/labelColor"
+            android:textSize="14sp" />
+
+
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/timer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="@string/zero_seconds"
+            android:gravity="end"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cancel_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:text="Cancel"
+        android:textAlignment="center"
+        android:textColor="@color/labelColor"
+        android:textSize="15sp"
+        android:visibility="gone"/>
+
+</LinearLayout>

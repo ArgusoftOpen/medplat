@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="360dp"
+    android:layout_height="344dp"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/cervical_dg"
+        android:contentDescription="@string/cervical_examination" />
+
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox1"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="215dp"
+        android:layout_marginTop="43dp"
+        android:checked="false"
+        android:tag="1" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox2"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="258dp"
+        android:layout_marginTop="87dp"
+        android:checked="false"
+        android:tag="2" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox3"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="273dp"
+        android:layout_marginTop="144dp"
+        android:checked="false"
+        android:tag="3" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox4"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="258dp"
+        android:layout_marginTop="205dp"
+        android:checked="false"
+        android:tag="4" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox5"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="213dp"
+        android:layout_marginTop="248dp"
+        android:checked="false"
+        android:tag="5" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox6"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="260dp"
+        android:checked="false"
+        android:tag="6" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox7"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="248dp"
+        android:checked="false"
+        android:tag="7" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox8"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="203dp"
+        android:checked="false"
+        android:tag="8" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox9"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="144dp"
+        android:checked="false"
+        android:tag="9" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox10"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="85dp"
+        android:checked="false"
+        android:tag="10" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox11"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="41dp"
+        android:checked="false"
+        android:tag="11" />
+
+    <CheckBox
+        android:id="@+id/cervical_chkBox12"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="26dp"
+        android:checked="false"
+        android:tag="12" />
+
+</RelativeLayout>

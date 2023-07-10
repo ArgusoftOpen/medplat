@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h4 class="text">{{ctrl.editMode?'Edit':'Add'}} Mobile Feature Configuration </h4>
+    <button type="button" class="close" ng-click="ctrl.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form name="ctrl.mobileFeatureForm" novalidate>
+        <div class="row mb-15 align-items-end">
+            <div class="col-12">
+                <div class="form-group">
+                    <validate for="constant" required-msg="Enter mobile constant field"
+                    pattern-msg="Alphanumeric, _ are only allowed">
+                        <label control-label>Mobile Constant</label>
+                        <input form-control name="constant" type="text" required ng-model="ctrl.feature.mobileConstant"
+                            class="form-control cst-form-control" ng-pattern="/(^[a-zA-Z0-9_]+$)/">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <validate for="feature" required-msg="Enter feature name field"
+                    pattern-msg="Alphanumeric are only allowed">
+                        <label control-label>Feature Name</label>
+                        <input form-control name="feature" type="text" required ng-model="ctrl.feature.featureName"
+                            class="form-control cst-form-control" ng-pattern="/(^[a-zA-Z0-9\s]+$)/">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <validate for="display" required-msg="Enter mobile display field"
+                    pattern-msg="Alphanumeric are only allowed">
+                        <label control-label>Mobile Display Name</label>
+                        <input form-control name="display" type="text" required
+                            ng-model="ctrl.feature.mobileDisplayName" class="form-control cst-form-control"
+                            ng-pattern="/(^[a-zA-Z0-9\s]+$)/">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="ctrl.ok()">Save</button>
+    <button type="button" class="btn btn-secondary" ng-click="ctrl.cancel()">Close</button>
+</div>

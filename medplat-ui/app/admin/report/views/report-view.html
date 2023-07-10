@@ -1,0 +1,84 @@
+<div class="container-fluid report-view" ng-if="rv.pageLoaded">
+    <div class="row ">
+        <div class="col-12 mb-15 " ng-if='rv.data.tableData.length > 0'>
+            <em class="ion-arrow-left-c" style="cursor: pointer; font-size: 20px;float: left" onclick="history.back()"
+                ng-if="rv.reportObj.configJson.isBackButtonRequired"></em>
+            <div class="pull-right " style="margin-right: 10px;font-size: 20px;">
+                <em ng-if="(rv.reportObj.configJson.isPrintOption == true || rv.reportObj.configJson.isPrintOption == undefined) && (rv.configLocationLevel == '' || rv.configLocationLevel == undefined || rv.reportObj.configJson.locationLevelSelected >= rv.configLocationLevel)"
+                    uib-tooltip="Print pdf" class="fa fa-print" style="cursor: pointer;"
+                    ng-click="rv.printReport()"></em>
+                <em ng-if="(rv.reportObj.configJson.isExcelOption == true || rv.reportObj.configJson.isExcelOption == undefined) && (rv.configLocationLevel == '' || rv.configLocationLevel == undefined || rv.reportObj.configJson.locationLevelSelected >= rv.configLocationLevel)"
+                    uib-tooltip="Download excel" class="fa fa-file-excel-o" style="cursor: pointer;"
+                    ng-click="rv.saveExcel()"></em>
+            </div>
+            <div style="margin-top: 5px;margin-left: 25px;float: left;max-width:300px"
+                ng-if="rv.reportObj.configJson.showDateAsOn">
+                <label>Date as on</label>
+                <h6>{{rv.currentDate}}</h6>
+            </div>
+            <div style="margin-top: 5px;margin-left: 25px;display: inline-block;max-width:300px"
+                ng-repeat="display in  rv.reportObj.configJson.filterDisplay">
+                <label>{{display.displayName}}</label>
+                <h6>{{display.value|emptylabel}}</h6>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 10px;" ng-if="rv.reportObj.configJson.isProvideSearch == true">
+        <div class="col-md-3">
+            Search By:
+            <select class="form-control" ng-model='rv.config.SearchTerm' chosen-directive>
+                <option ng-repeat="(index , header) in rv.data.tableToDisplay.header"
+                    ng-if="!header.fieldName.includes('hidden_') && !rv.isFilter" value="{{header.fieldName}}">{{header.fieldName}}</option>
+                <option ng-repeat="(index , header) in rv.headerForSearch"
+                    ng-if="!header.fieldName.includes('hidden_') && rv.isFilter" value="{{header.fieldName}}">{{header.fieldName}}</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            Search Options:
+            <select class="form-control" ng-model='rv.config.searchOption'>
+                <optgroup label="Text Related options:">
+                    <option value="exactMatch">Exact Match</option>
+                    <option value="contains">Contains</option>
+                </optgroup>
+                <optgroup label="Numeric Related options:">
+                    <option value="equal">Equal to (=)</option>
+                    <option value="notEqual">Not Equal (!=)</option>
+                    <option value="greater">Greater than (>)</option>
+                    <option value="less">Less than (<) </option>
+                    <option value="greaterEqual">Greater than equal to (>=) </option>
+                    <option value="lessEqual">Less than equal to (<=) </option>
+                </optgroup>
+                <optgroup label="Generic options:">
+                    <option value="nullValue">Null values</option>
+                    <option value="notNullValue">Not null values</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-md-3" ng-if="rv.config.searchOption !== 'notNullValue' && rv.config.searchOption !== 'nullValue'">
+            Search Key:
+            <input type="text" class="form-control" ng-model="rv.config.searchKeyword">
+        </div>
+        <div class="col-md-3" style="margin-top: 20px;">
+            <button class="btn btn-primary" ng-click="rv.filterData()">Search</button>
+            <button class="btn btn-primary" ng-click="rv.clearSearch()">Clear search</button>
+        </div>
+    </div>
+    <div class="row" ng-if="rv.config.searchitem.length>0" style="display: inline-flex; margin: 10px;">
+        <div ng-repeat="item in rv.config.searchitem">
+            <span style="background-color: lightgray; border-radius: 5px; padding: 5px;">
+                {{item.SearchTerm}} : {{item.searchOption}} {{item.searchKeyword}} &nbsp;<em class="fa fa-times pointer-cursor red" ng-click="rv.removeSelectedArea(item, $index)"></em>
+            </span>
+            &nbsp
+        </div>
+    </div> 
+    <div class="col-12 mb-15">
+        <div>
+            <div id="printableReport">
+                <ng-form name="rv.reportForm">
+                    <dynamicview config="rv.reportObj.configJson" paging-service="rv.pagingService" data="rv.data" navigationstate="rv.reportObj.menuConfig.navigationState"
+                        filter-search="rv.searchFilter(reset,isSearch,isDownloadOffline)"></dynamicview>
+                </ng-form>
+            </div>
+        </div>
+    </div>
+</div>

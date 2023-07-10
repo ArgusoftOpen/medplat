@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="techo_app" parent="@style/Theme.Techo">
+
+        <item name="textInputStyle">@style/CustomTextInputLayout</item>
+
+        <item name="android:fontFamily">@font/roboto_regular</item>
+
+        <item name="autoCompleteTextViewStyle">@style/CustomAutoCompleteTextView</item>
+
+        <item name="android:windowBackground">@color/bodyBackground</item>
+
+        <item name="actionButtonStyle">@style/CustomMenuActionButton</item>
+
+<!--        <item name="toolbarNavigationButtonStyle">@style/CustomHomeActionButton</item>-->
+
+        <item name="editTextStyle">@style/CustomTextInputEditText</item>
+
+        <item name="buttonStyle">@style/CustomButton</item>
+
+        <item name="checkboxStyle">@style/CustomCheckBox</item>
+
+        <item name="radioButtonStyle">@style/CustomRadioButton</item>
+
+        <item name="android:spinnerStyle">@style/CustomSpinner</item>
+
+    </style>
+
+    <style name="techo_training_app" parent="@style/Theme.Techo">
+
+        <item name="textInputStyle">@style/TrainingCustomTextInputLayout</item>
+
+        <item name="android:fontFamily">@font/roboto_regular</item>
+
+        <item name="autoCompleteTextViewStyle">@style/CustomAutoCompleteTextView</item>
+
+        <item name="android:windowBackground">@color/training</item>
+
+        <item name="actionButtonStyle">@style/CustomMenuActionButton</item>
+
+        <item name="editTextStyle">@style/TrainingCustomTextInputEditText</item>
+
+        <item name="buttonStyle">@style/CustomButton</item>
+
+        <item name="checkboxStyle">@style/CustomCheckBox</item>
+
+        <item name="radioButtonStyle">@style/CustomRadioButton</item>
+
+        <item name="android:spinnerStyle">@style/TrainingCustomSpinner</item>
+
+    </style>
+
+</resources>

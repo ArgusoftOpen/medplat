@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="360dp"
+    android:layout_height="280dp"
+    android:layout_gravity="center">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/mouthdiagram"
+        android:contentDescription="@string/oral_examination" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox1"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/oral_chkBox10"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="23dp"
+        android:checked="false"
+        android:tag="1" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox2"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:checked="false"
+        android:tag="2" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox3"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/oral_chkBox2"
+        android:layout_alignStart="@+id/oral_chkBox12"
+        android:checked="false"
+        android:tag="3" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox4"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/oral_chkBox6"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="63dp"
+        android:checked="false"
+        android:tag="4" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox5"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/oral_chkBox2"
+        android:layout_centerHorizontal="true"
+        android:checked="false"
+        android:tag="5" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox6"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="78dp"
+        android:layout_marginEnd="68dp"
+        android:checked="false"
+        android:tag="6" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox7"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/oral_chkBox1"
+        android:checked="false"
+        android:tag="7" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox8"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:checked="false"
+        android:tag="8" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox9"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/oral_chkBox3"
+        android:checked="false"
+        android:tag="9" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox10"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/oral_chkBox4"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="84dp"
+        android:checked="false"
+        android:tag="10" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox11"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/oral_chkBox10"
+        android:layout_centerHorizontal="true"
+        android:checked="false"
+        android:tag="11" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox12"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/oral_chkBox6"
+        android:layout_alignTop="@+id/oral_chkBox10"
+        android:checked="false"
+        android:tag="12" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox13"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/oral_chkBox1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:checked="false"
+        android:tag="13" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox14"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/oral_chkBox13"
+        android:layout_centerHorizontal="true"
+        android:checked="false"
+        android:tag="14" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox15"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/oral_chkBox13"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="52dp"
+        android:checked="false"
+        android:tag="15" />
+
+    <CheckBox
+        android:id="@+id/oral_chkBox16"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:checked="false"
+        android:tag="16" />
+
+</RelativeLayout>

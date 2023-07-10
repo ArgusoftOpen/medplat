@@ -1,0 +1,180 @@
+<div class="container-fluid report-view">
+    <div class="row" ng-form="rl.manageTemplateForm">
+        <div class="col-12 mb-15">
+            <div>
+                <div class="row col-md-12   mb-15  inline-form" ng-form="vnm.addForm">
+                    <div class="col-md-12 col-xl-4">
+                        <div class="form-group">
+                            <validate for="forms" required-msg="Select Form">
+                                <label for="forms" class="control-label" control-label>Form:</label>
+                                <select name="forms" form-control class="form-control cst-form-control" required
+                                    ng-model="vnm.newValue.formId"
+                                    ng-options="form.key as form.name for form in vnm.forms"
+                                    ng-change="vnm.retrieveFieldsForForm(vnm.newValue.formId)">
+                                    <option value="">Select</option>
+                                </select>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class=" col-md-12 col-xl-4">
+                        <div class="form-group">
+                            <validate for="reportname" required-msg="Select Field">
+                                <label for="reportname" class="control-label" control-label>Field</label>
+                                <select id="reportname" name="reportname" class="form-control cst-form-control"
+                                    form-control
+                                    ng-options="field as field.field for field in vnm.fieldsForForm track by field.field_key"
+                                    ng-model="vnm.newValue.field" required
+                                    ng-change="vnm.retrieveValuesForField(vnm.newValue.field.field_key)">
+                                    <option value="">Select</option>
+                                </select>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 no-padding text-right">
+                        <button class="btn btn-primary" ng-click="vnm.openAddEditModal()">Add New</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-15" ng-if="!vnm.valuesForSelectedFields || vnm.valuesForSelectedFields.length == 0">
+                <div class="no-data-placeholder">
+                    <h5>Sorry No Multimedia and values configured!</h5>
+                </div>
+            </div>
+            <div class="col-12 " ng-if="vnm.valuesForSelectedFields.length > 0">
+                <div class="cst-table table-responsive">
+                    <table aria-describedby="table" class="table table-sm table-striped table-bordered header-fixed">
+                        <thead>
+                            <tr>
+                                <th id="id" style="width:10%">Sr. no</th>
+                                <th id="id">Values</th>
+                                <th id="id">Status</th>
+                                <th id="id"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="object in vnm.valuesForSelectedFields">
+                                <td>
+                                    {{$index + 1}}
+                                </td>
+                                <td>
+                                    {{object.value}}
+                                </td>
+                                <td>
+                                    <span ng-if="object.is_active" ng-bind="'Active'"></span>
+                                    <span ng-if="!object.is_active" ng-bind="'Inactive'"></span>
+                                </td>
+                                <td class="action-cell">
+                                    <ul class="action-item">
+                                        <li>
+                                            <a href="#" onclick="return false;" class="action-icon edit-icon"
+                                                ng-click="vnm.openAddEditModal(object)"></a>
+                                        </li>
+                                        <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <a href="#" onclick="return false;" class="action-icon more-icon"></a>
+                                            <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                aria-labelledby="moreDropdown">
+                                                <li ng-click="vnm.openMultiMediaPlayer(object)"
+                                                    ng-if=" object.multimedia_type && vnm.newValue.field.field_type === 'M'">
+                                                    <a href="javascript:void(0)">View</a>
+                                                </li>
+                                                <li ng-click="vnm.deleteModal(object)" ng-if=" object.is_active">
+                                                    <a href="javascript:void(0)">Mark as Inactive</a>
+                                                </li>
+                                                <li ng-click="vnm.deleteModal(object)" ng-if=" !object.is_active">
+                                                    <a href="javascript:void(0)">Mark as Active</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="filter-div  no-print">
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="filter-div-title">Configure New Value</h5>
+                </div>
+            </div>
+            <div class="filter-div-body">
+                <div class="row">
+                    <div class="col-12" ng-form="vnm.addModalForm" isolate-form>
+                        <div class="form-group" ng-if="vnm.newValue.field.field_type != 'M'">
+                            <validate for="value" required-msg="Enter value">
+                                <label for="value" class="control-label">Value<span
+                                        class="required-asterisk">*</span></label>
+                                <input type="text" class="form-control cst-form-control" required form-control
+                                    id="value" name="value" ng-model="vnm.newValue.value">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group" ng-if="vnm.newValue.field.field_type == 'M'">
+                            <validate for="subgroup" required-msg="Select multimedia type">
+                                <label for="subgroup" class="control-label" control-label>MultiMedia Type</label>
+                                <select id="subgroup" name="subgroup" class="form-control cst-form-control" required
+                                    form-control ng-model="vnm.newValue.mulitmediaType"
+                                    ng-change="vnm.newValue.multimediaAllowedType={accept:'video/*'}">
+                                    <option value="">Select</option>
+                                    <option value="image">Image</option>
+                                    <option value="audio">Audio</option>
+                                    <option value="video">Video</option>
+                                </select>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group" ng-if="vnm.newValue.field.field_type == 'M'" flow-init="vnm.uploadFile"
+                            flow-file-added="vnm.upload($file, $event, $flow)"
+                            flow-files-submitted="vnm.uploadFn($files, $event, $flow)"
+                            flow-file-success="vnm.getUploadResponse( $file, $message, $flow )">
+                            <button class="btn btn-secondary" flow-attrs="{accept:'video/*'}"
+                                ng-if="vnm.newValue.mulitmediaType=='video'" flow-btn>Upload File</button>
+                            <button class="btn btn-secondary" flow-attrs="{accept:'audio/*'}"
+                                ng-if="vnm.newValue.mulitmediaType=='audio'" flow-btn>Upload File</button>
+                            <button class="btn btn-secondary" flow-attrs="{accept:'image/*'}"
+                                ng-if="vnm.newValue.mulitmediaType=='image'" flow-btn>Upload File</button>
+                            <span class="" ng-if="vnm.editMode && (!vnm.flow.files)">{{vnm.newValue.value}}
+                                uploaded</span>
+                            <div ng-repeat="file in vnm.flow.files">
+                                <div class="progress" ng-class="{active: file.isUploading()}"
+                                    ng-if="file.progress() !== 1">
+                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                        role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                        ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                                    </div>
+                                </div>
+                                <div ng-if="file.progress() !== 1" class="mt-2 alert alert-success ">
+                                    <span class="text-center">{{file.name}} Uploading...
+                                        <i aria-hidden="true" class="fa fa-cog fa-spin fa-1x"></i>
+                                    </span>
+                                </div>
+                                <div ng-if="file.progress() === 1" class="mt-2 alert alert-success ">
+                                    <span class="text-center"> {{file.name}} Uploaded Successfully
+                                        <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="text-danger" ng-if="vnm.isError" ng-bind="vnm.errorMessage"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr>
+                        <div class="form-group text-right">
+                            <button class="btn btn-secondary close-filter" ng-click="vnm.clearValues()">Close</button>
+                            <button class="btn btn-primary search-filter" ng-click="vnm.addValue()">
+                                <span ng-if="!vnm.editMode">Add</span>
+                                <span ng-if="vnm.editMode">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

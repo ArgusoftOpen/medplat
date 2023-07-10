@@ -1,0 +1,184 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 padding-left-0">
+            <div class="card cst-card">
+                <div id="card1" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse1" ng-click="toggle1 = !toggle1" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="All Table List">All Table List</span>
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle1,'ion-minus':toggle1}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse1">
+                    <div class="card-body inline-form">
+                        <div class="cst-table table-responsive" style="max-height: 50vh;">
+                            <div ng-if="querymanagement.isTableLoading">
+                                <em class="fa fa-cog fa-spin fa-2x"></em>
+                            </div>
+                            <div ng-if="!querymanagement.isTableLoading">
+                                <input type="text" ng-model="querymanagement.search" style="margin: 5px;width: 250px;"
+                                    id="search" placeholder="Search table Name">
+                                <br />
+                                <table
+                                    class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                    style="table-layout: auto">
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th>Sr</th>
+                                            <th>Size&nbsp;</th>
+                                            <th>Table Name&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cst-tbody">
+                                        <tr
+                                            ng-repeat="data in querymanagement.tables | filter : { tablename : querymanagement.search }">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{data.size_pretty}}</td>
+                                            <td>
+                                                <a href ng-click="querymanagement.tableClicked(data.tablename)">
+                                                    {{data.tablename}}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card">
+                <div id="card2" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse2" ng-click="toggle2 = !toggle2" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Query History">Query History</span>
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle2,'ion-minus':toggle2}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse2">
+                    <div class="card-body inline-form">
+                        <div class="cst-table table-responsive" style="max-height: 50vh;">
+                            <div ng-if="querymanagement.isHistoryLoading">
+                                <em class="fa fa-cog fa-spin fa-2x"></em>
+                            </div>
+                            <div ng-if="!querymanagement.isHistoryLoading">
+                                <input type="text" ng-model="querymanagement.searchHistory"
+                                    style="margin: 5px;width: 200px;" id="searchHistory"
+                                    placeholder="Search in History">
+                                <button type="submit" class="btn btn-primary"
+                                    ng-click="querymanagement.loadQueryHistory()">Search</button>
+                                <br />
+                                <table
+                                    class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                    style="table-layout: auto">
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th>Index</th>
+                                            <th>Query</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cst-tbody">
+                                        <tr ng-repeat="data in querymanagement.historyTables">
+                                            <td>{{$index + 1}}</td>
+                                            <td>
+                                                <a href
+                                                    ng-click="querymanagement.tableHistoryClicked(data.query)">{{data.query}}</a>
+                                                <br />
+                                                <span class="small">Executed on :
+                                                    {{data.created_on| date:'dd-MM-yyyy h:mm:ss a' }}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9 padding-left-0">
+            <div class="col-12 padding-left-0">
+                <div class="form-group">
+                    <textarea class="form-control" rows="7" cols="50" ng-model="querymanagement.query" name="query"
+                        id="query"></textarea>
+                </div>
+                <div class="col-12 padding-left-0">
+                    <div class="col-7 float-left  padding-left-0 d-flex">
+                        <input placeholder="Enter Excel Filename" class="form-control cst-form-control col-5"
+                            form-control name="fileName" required ng-model="querymanagement.fileName">
+                        <button class="btn btn-primary col-4 ml-2" ng-click="querymanagement.downloadExcel()">Download
+                            Excel</button>
+                    </div>
+                    <div class="col-5 float-right">
+                        <a href ng-click="querymanagement.popuateDBstateQuery()">Populate State Query</a>
+                        <button type="submit" class="btn btn-success "
+                            ng-click="querymanagement.retrieveQuery()">Retrieve Data</button>
+                        <button type="submit" class="btn btn-danger "
+                            ng-click="querymanagement.executeQuery()">Execute</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 margin-top-75">
+                <div ng-if="querymanagement.errorQuery != null && querymanagement.errorData != null">
+                    <span style="color: red">
+                        {{querymanagement.errorData}}
+                    </span>
+                </div>
+                <div ng-if="!!querymanagement.tableData">
+                    <span>Total rows fetched &#58; <strong>{{querymanagement.tableData.length}}</strong></span>
+                    <div class="cst-table table-responsive" id="discharge-scroll" style="max-height: 45vh">
+                        <table class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                            style="table-layout: auto">
+                            <thead class="cst-thead">
+                                <tr>
+                                    <th ng-if="querymanagement.headers.length > 0">Index</th>
+                                    <th ng-repeat="header in querymanagement.headers">{{header}}</th>
+                                    <th ng-if="querymanagement.query === querymanagement.dBstateQuery">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cst-tbody">
+                                <tr ng-repeat="data in querymanagement.tableData"
+                                    ng-if="querymanagement.query === querymanagement.dBstateQuery"
+                                    ng-style="{'background-color': (data.waiting === true ) ? 'salmon' }">
+
+                                    <td>{{$index + 1}}</td>
+                                    <td ng-repeat="header in querymanagement.headers">
+                                        <div ng-if="header === 'state_change'">
+                                            {{ data[header]|date:'yyyy-MM-dd HH:mm:ss' }}
+                                        </div>
+                                        <div ng-if="header !== 'state_change'">
+                                            {{ data[header]}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-danger"
+                                            ng-click="querymanagement.killProcess(data.pid)">KILL PROCESS</button>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="data in querymanagement.tableData"
+                                    ng-if="querymanagement.query !== querymanagement.dBstateQuery">
+                                    <td>{{$index + 1}}</td>
+                                    <td ng-repeat="header in querymanagement.headers">
+                                        {{ data[header]}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

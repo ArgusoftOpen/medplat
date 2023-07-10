@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3 class="text">View Exception</h3>
+</div>
+<div class="modal-body">
+    <div class="col-12 mb-15 mt-15">
+        <div class="cst-table table-responsive" ng-if="eventException" style="max-height: none;">
+            <div>
+                <strong>Exception :</strong>
+            </div>
+            <pre style="overflow-wrap: break-word;">
+                {{eventException.exceptionString}}
+            </pre>
+            <div ng-if="eventException.systemTriggerOn" class="mt-2">
+                <strong>Triggered On :
+                </strong>{{eventException.systemTriggerOn | date:'dd/MM/yyyy  h:mm a'}}
+            </div>
+            <div ng-if="eventException.processedOn">
+                <strong>Processed On : </strong>
+                {{eventException.processedOn | date:'dd/MM/yyyy  h:mm a'}}
+            </div>
+        </div>
+        <div ng-if="!eventException">
+            No Exception Occurred
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" ng-click="close()">Close</button>
+</div>

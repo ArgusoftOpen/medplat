@@ -1,0 +1,267 @@
+<div class="container-fluid" ng-if="!mobileManageInfo.userObj">
+    <h5>Search Installed App Information</h5>
+</div>
+<div class="container-fluid" ng-if="mobileManageInfo.versionBasedAppInstallCounts != null">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="table-section">
+                <div class="card-body col-12 col-md-12" style="padding: 0px">
+                    <div class="cst-table-responsive">
+                        <table
+                            class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                            <caption style="caption-side: top;text-align: center;padding: 0px">Version Based Application
+                                Install Counts</caption>
+                            <thead class="cst-thead">
+                                <tr>
+                                    <th ng-repeat="data in mobileManageInfo.versionBasedAppInstallCounts">
+                                        {{data.text_version}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="cst-tbody">
+                                <tr>
+                                    <td ng-repeat="data in mobileManageInfo.versionBasedAppInstallCounts">
+                                        {{data.count}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+<div class="container-fluid" ng-if="mobileManageInfo.userObj">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div id="card12" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse12" ng-click="toggle12 = !toggle12" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Installed App Info">Installed Application Information</span>
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-minus':!toggle1,'ion-plus':toggle1}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse show" id="collapse12">
+                    <div class="card-body inline-form">
+                        <form role="form" name="installedAppInfoForm" id="installedAppInfoForm">
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>User Name</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{mobileManageInfo.userObj[0].username}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="col-12 row">
+                                <div class="container-fluid" ng-if="mobileManageInfo.userObj">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card cst-card"
+                                                ng-repeat="imeiInfo in mobileManageInfo.installedDisplayList">
+
+                                                <div ng-if="$index === 0">
+                                                    <div id="card$index" role="tab"
+                                                        class="card-title collapse-link d-block" data-toggle="collapse"
+                                                        ng-href="#collapse{{$index}}"
+                                                        ng-click="toggle$index = !toggle$index" style="cursor: pointer">
+                                                        <h4 class="text">
+                                                            <span data-toggle="tooltip"
+                                                                title="Installed App Information">IMEI number:
+                                                                {{imeiInfo.key}}</span>
+                                                            <ul class="control-list">
+                                                                <li>
+                                                                    <span>
+                                                                        <em
+                                                                            ng-class="{'ion-minus':!(toggle$index),'ion-plus':toggle$index}">
+                                                                        </em>
+                                                                    </span>
+                                                                </li>
+                                                            </ul>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="collapse show" id="collapse{{$index}}">
+                                                        <div class="card-body inline-form">
+                                                            <form role="form" name="userInstalledAppInfoForm"
+                                                                id="userInstalledAppInfoForm">
+                                                                <div>
+                                                                    <div class="table-section">
+                                                                        <div class="card-body col-12 col-md-12">
+                                                                            <div class="cst-table-responsive">
+                                                                                <form name="installed_app"
+                                                                                    id="installed_app">
+                                                                                    <table
+                                                                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                                                                        <div>
+                                                                                            <span
+                                                                                                ng-if="mobileManageInfo.displayButtonConditionally(imeiInfo.key)">
+                                                                                                <button
+                                                                                                    class="btn btn-primary search-filter"
+                                                                                                    ng-click="mobileManageInfo.unblockImei(imeiInfo.key);">
+                                                                                                    Unblock the Mobile
+                                                                                                </button>
+                                                                                            </span>
+                                                                                            <span
+                                                                                                ng-if="!mobileManageInfo.displayButtonConditionally(imeiInfo.key)">
+                                                                                                <button
+                                                                                                    class="btn btn-danger search-filter"
+                                                                                                    ng-click="mobileManageInfo.blockImei(imeiInfo.key);">
+                                                                                                    Block the Mobile
+                                                                                                </button>
+                                                                                            </span>
+                                                                                            <span>
+                                                                                                <button
+                                                                                                    class="btn btn-danger search-filter"
+                                                                                                    ng-click="mobileManageInfo.deleteDtabaseByImei(imeiInfo.key);">Delete
+                                                                                                    the
+                                                                                                    database</button>
+                                                                                            </span>
+                                                                                        </div>
+                                                                                        <br />
+                                                                                    </table>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div ng-if="$index !== 0">
+                                                    <div id="card$index" role="tab"
+                                                        class="card-title collapse-link d-block" data-toggle="collapse"
+                                                        ng-href="#collapse{{$index}}"
+                                                        ng-click="toggle$index = !toggle$index" style="cursor: pointer">
+                                                        <h4 class="text">
+                                                            <span data-toggle="tooltip"
+                                                                title="Installed App Information">IMEI number:
+                                                                {{imeiInfo.key}}</span>
+                                                            <ul class="control-list">
+                                                                <li>
+                                                                    <span>
+                                                                        <em
+                                                                            ng-class="{'ion-minus':(toggle$index),'ion-plus':!toggle$index}">
+                                                                        </em>
+                                                                    </span>
+                                                                </li>
+                                                            </ul>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="collapse" id="collapse{{$index}}">
+                                                        <div class="card-body inline-form">
+                                                            <form role="form" name="userInstalledAppInfoForm"
+                                                                id="userInstalledAppInfoForm">
+                                                                <div>
+                                                                    <div class="table-section">
+                                                                        <div class="card-body col-12 col-md-12">
+                                                                            <div class="cst-table-responsive">
+                                                                                <form name="installed_app"
+                                                                                    id="installed_app">
+                                                                                    <table
+                                                                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                                                                        <div>
+                                                                                            <span
+                                                                                                ng-if="mobileManageInfo.displayButtonConditionally(imeiInfo.key)">
+                                                                                                <button
+                                                                                                    class="btn btn-primary search-filter"
+                                                                                                    ng-click="mobileManageInfo.unblockImei(imeiInfo.key);">Unblock
+                                                                                                    the Mobile</button>
+                                                                                            </span>
+                                                                                            <span
+                                                                                                ng-if="!mobileManageInfo.displayButtonConditionally(imeiInfo.key)">
+                                                                                                <button
+                                                                                                    class="btn btn-danger search-filter"
+                                                                                                    ng-click="mobileManageInfo.blockImei(imeiInfo.key);">Block
+                                                                                                    the Mobile</button>
+                                                                                            </span>
+                                                                                            <span>
+                                                                                                <button
+                                                                                                    class="btn btn-danger search-filter"
+                                                                                                    ng-click="mobileManageInfo.deleteDtabaseByImei(imeiInfo.key);">Delete
+                                                                                                    the
+                                                                                                    database</button>
+                                                                                            </span>
+                                                                                        </div>
+                                                                                        <br />
+                                                                                    </table>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="filter-div">
+    <span class="filter-toggle" style="left:-65px" ng-click="mobileManageInfo.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Installed App Information</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="user.searchForm" novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <div style="margin-top: 10px">
+                        User Name:
+                        <input type="text" name="username" form-control ng-model="mobileManageInfo.userName"
+                            placeholder="Enter Username" focus-me="focusInput" class="form-control"
+                            ng-keyup="$event.keyCode == 13 ? mobileManageInfo.enterSubmit() : null" required
+                            autofocus />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div style="margin-top: 10px">
+                        IMEI Number:
+                        <input type="text" name="imei" form-control ng-model="mobileManageInfo.imei"
+                            placeholder="Enter Imei" class="form-control"
+                            ng-keyup="$event.keyCode == 13 ? mobileManageInfo.enterSubmit() : null" autofocus />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter"
+                            ng-click="mobileManageInfo.toggleFilter()">Close</button>
+                        <button class="btn btn-primary search-filter"
+                            ng-click="mobileManageInfo.submit()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

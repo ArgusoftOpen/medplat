@@ -1,0 +1,258 @@
+<div class="modal-header">
+    <h4 class="text">Add {{typeconfig.type.type}} Configuration </h4>
+    <button type="button" class="close" ng-click="typeconfig.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+    <span>
+        <strong>Available Implicit Parameters</strong>:
+        <span ng-repeat="param in typeconfig.type.implicitParam" ng-bind="' ' + param"></span>
+    </span>
+    <hr>
+    <form name="typeconfig.mobileNotificaitonForm" novalidate>
+        <div>
+            <div class="form-group" ng-if="typeconfig.type.type === 'EXCEPTION'">
+                <validate for="excetionTypes" required-msg="Select Excetion">
+                    <label control-label>Excetion type</label>
+                    <select type="text" form-control name="excetionTypes" required
+                        ng-model="typeconfig.type.exceptionType" class="form-control cst-form-control">
+                        <option value="">Select</option>
+                        <option value="ImtechoUserException">ImtechoUserException</option>
+                        <option value="ImtechoSystemException">ImtechoSystemException</option>
+                        <option value="ImtechoMobileException">ImtechoMobileException</option>
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-if="typeconfig.type.type === 'EMAIL'">
+                <validate for="field" required-msg="Enter Email Id field name">
+                    <label control-label>Email Id Field Name</label>
+                    <input form-control name="field" type="text" required ng-model="typeconfig.type.baseDateFieldName"
+                        class="form-control cst-form-control">
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+
+            <div class="form-group" ng-if="typeconfig.type.type === 'PUSH_NOTIFICATION'">
+                <validate for="field" required-msg="Enter User Id field name">
+                    <label control-label>User Id field name</label>
+                    <input form-control name="field" type="text" required
+                        ng-model="typeconfig.type.pushNotificationConfigJson.userFieldName"
+                        class="form-control cst-form-control">
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-if="typeconfig.type.type == 'PUSH_NOTIFICATION'">
+                <validate for="notificationTypeId" required-msg="Select type ">
+                    <label control-label>Notification Type</label>
+                    <select form-control name="notificationTypeId" class="form-control cst-form-control"
+                        ng-options="notificationType.id as notificationType.type for notificationType in typeconfig.notificationTypeList"
+                        ng-model="typeconfig.type.pushNotificationConfigJson.notificationTypeId"
+                        ng-change="typeconfig.onNotificationTypeChange(typeconfig.type.pushNotificationConfigJson.notificationTypeId)" required>
+                        <option value="">Select</option>
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group"
+                ng-if="typeconfig.type.type === 'PUSH_NOTIFICATION' && typeconfig.type.pushNotificationConfigJson.notificationTypeId">
+                <validate for="contactField" required-msg="Enter heading">
+                    <label control-label>Notification Heading</label>
+                    <input form-control name="contactField" type="text" required
+                        ng-model="typeconfig.type.pushNotificationConfigJson.heading"
+                        class="form-control cst-form-control">
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group"
+                ng-if="typeconfig.type.type == 'PUSH_NOTIFICATION' && typeconfig.type.pushNotificationConfigJson.notificationTypeId">
+                <validate for="template" required-msg="Enter Template">
+                    <label control-label>Template</label>
+                    <textarea id="ckeditor" inline="true" ng-pattern="" name="template"
+                        class="form-control   cst-form-control " form-control
+                        ng-model="typeconfig.type.pushNotificationConfigJson.template">
+                </textarea>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+
+            <div class="form-group" ng-if="typeconfig.type.type === 'SMS'">
+                <validate for="contactField" required-msg="Enter Sms contact number field name">
+                    <label control-label>Sms Contact Number Field Name</label>
+                    <input form-control name="contactField" type="text" required
+                        ng-model="typeconfig.type.smsConfigJson.mobileNumberFieldName"
+                        class="form-control cst-form-control">
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-if="typeconfig.type.type === 'SMS'">
+                <validate for="smsTypeField" required-msg="Enter Sms Type Field">
+                    <div class="row">
+                        <label class="col-xl-7" control-label>
+                            Sms Type Field Value
+                        </label>
+                        <div class="col-xl-2">
+                            <label class="control control-checkbox float-right">Is Priority
+                                <input checked="checked" type="checkbox"
+                                    ng-model="typeconfig.type.smsConfigJson.isPriority">
+                                <div class="control_indicator"></div>
+                            </label>
+                        </div>
+                        <div class="col-xl-3">
+                            <label class="control control-checkbox float-right">Is Fixed Value
+                                <input checked="checked" type="checkbox"
+                                    ng-model="typeconfig.type.smsConfigJson.isSmsTypeFixed">
+                                <div class="control_indicator"></div>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="text" ng-model="typeconfig.type.smsConfigJson.smsTypeField"
+                        class="form-control cst-form-control" name="smsTypeField" form-control required>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-if="typeconfig.type.type == 'QUERY'">
+                <validate for="queryMaster" required-msg="Select query ">
+                    <label control-label>Query</label>
+                    <select form-control name="queryMaster" class="form-control cst-form-control"
+                        ng-options="query.code as query.code for query in typeconfig.queryMasters"
+                        ng-model="typeconfig.type.queryCode"
+                        ng-change="typeconfig.setImplicitParameters(typeconfig.type);">
+                        <option value="">Select</option>
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+
+            <div class="form-group" ng-if="typeconfig.type.type == 'SYSTEM_FUNCTION'">
+
+                <validate for="functionName" required-msg="Select System Function ">
+                    <label control-label>System Function</label>
+                    <select form-control name="systemFunction" class="form-control cst-form-control"
+                        ng-options="function.id as function.name+' ('+function.className+')' for function in typeconfig.systemFunctions"
+                        ng-model="typeconfig.type.systemFunctionId"
+                        ng-change="typeconfig.setFunctionParams(typeconfig.type)">
+                        <option value="">Select</option>
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-repeat="param in typeconfig.type.functionParams"
+                ng-if="typeconfig.type.type == 'SYSTEM_FUNCTION' && typeconfig.type.systemFunctionId">
+                <validate for="{{param.parameterName}}" required-msg="Enter {{parameterName}} mapping ">
+                    <div class="row">
+                        <label class="col-xl-9" control-label>{{param.parameterName}} Mapping
+                        </label>
+                        <div class="col-xl-3">
+                            <label class="control control-checkbox float-right">Is Fixed Value
+                                <input checked="checked" type="checkbox" ng-model="param.isFixed">
+                                <div class="control_indicator"></div>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="text" ng-model="param.mappingValue" class="form-control cst-form-control"
+                        name="{{param.parameterName}}" form-control>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-repeat="param in typeconfig.type.queryMasterParamJson"
+                ng-if="typeconfig.type.type == 'QUERY' && typeconfig.type.queryCode">
+                <validate for="{{param.parameterName}}" required-msg="Enter {{parameterName}} mapping ">
+                    <div class="row">
+                        <label class="col-xl-9" control-label>{{param.parameterName}} Mapping
+                        </label>
+                        <div class="col-xl-3">
+                            <label class="control control-checkbox float-right">Is Fixed Value
+                                <input checked="checked" type="checkbox" ng-model="param.isFixed">
+                                <div class="control_indicator"></div>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="text" ng-model="param.mappingValue" class="form-control cst-form-control"
+                        name="{{param.parameterName}}" form-control>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-if="typeconfig.type.type == 'EMAIL'">
+                <validate for="subject" required-msg="Enter email subject">
+                    <label control-label>Email Subject</label>
+                    <input name="subject" form-control type="text" required="" class="form-control cst-form-control"
+                        ng-model="typeconfig.type.emailSubject">
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-if="typeconfig.type.type == 'EMAIL'">
+                <validate for="template" required-msg="Enter {{typeconfig.type.type==='QUERY'?'query':'template'}}">
+                    <label control-label>{{typeconfig.type.type==='QUERY'?'Query':'Template'}}</label>
+                    <textarea id="ckeditor" ckeditor inline="true" name="template"
+                        class="form-control   cst-form-control " form-control ng-model="typeconfig.type.template">
+                    </textarea>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group"
+                ng-if="typeconfig.type.type == 'SMS' || (typeconfig.type.type == 'QUERY' && !typeconfig.type.queryCode)">
+                <validate for="template" required-msg="Enter {{typeconfig.type.type==='QUERY'?'Query':'template'}}">
+                    <label control-label>{{typeconfig.type.type==='QUERY'?'Query':'Template'}}</label>
+                    <textarea id="ckeditor" inline="true" ng-pattern="" name="template"
+                        class="form-control   cst-form-control " form-control ng-model="typeconfig.type.template">
+                    </textarea>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-if="typeconfig.type.type == 'EXCEPTION'">
+                <validate for="excetionMessage" required-msg="Enter message">
+                    <label control-label>Exception Message</label>
+                    <textarea id="ckeditor" inline="true" ng-pattern="" name="exceptionmessage"
+                        class="form-control   cst-form-control " form-control
+                        ng-model="typeconfig.type.exceptionMessage">
+                        </textarea>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-if="typeconfig.type.type != 'EXCEPTION' && typeconfig.type.type != 'SYSTEM_FUNCTION'">
+                <validate for="triggerWhen" required-msg="Select trigger when">
+                    <label control-label>Trigger When</label>
+                    <select type="text" form-control name="triggerWhen" required ng-model="typeconfig.type.trigerWhen"
+                        class="form-control cst-form-control">
+                        <option value="">Select</option>
+                        <option value="IMMEDIATELY">Immediately</option>
+                        <option value="AFTER">After</option>
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div ng-if="typeconfig.type.trigerWhen === 'AFTER'">
+                <div class="form-group">
+                    <validate for="Day" required-msg="Enter day">
+                        <label control-label>Day</label>
+                        <input name="Day" form-control type="text" ng-model="typeconfig.type.day"
+                            class="form-control cst-form-control">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for="Hour" required-msg="Enter hour">
+                        <label control-label>Hour</label>
+                        <input name="Hour" form-control type="text" ng-model="typeconfig.type.hour"
+                            class="form-control cst-form-control">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for="Minute" required-msg="Enter minute">
+                        <label control-label>Minute</label>
+                        <input name="Minute" form-control type="text" ng-model="typeconfig.type.miniute"
+                            class="form-control cst-form-control">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="typeconfig.ok()">Save</button>
+    <button type="button" class="btn btn-secondary" ng-click="typeconfig.cancel()">Close</button>
+</div>

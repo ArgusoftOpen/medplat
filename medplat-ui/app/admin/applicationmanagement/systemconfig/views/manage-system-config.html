@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{ctrl.headerText}}</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="ctrl.manageSystemConfigForm" id="manageSystemConfigForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-sub-title">
+                                    System Config Details
+                                </h5>
+                                <div>
+                                    <div class="form-group">
+                                        <validate for='key' required-msg="Enter System key">
+                                            <label for="key" control-label>System Key</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter System Key" maxlength="100" name="key" id="key"
+                                                ng-model="ctrl.config.key" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='value' required-msg="Enter value">
+                                            <label for="value" control-label>Value</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Key Value" maxlength="200" name="value" id="value"
+                                                ng-model="ctrl.config.value" ng-pattern="'.*'" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-5">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary"
+                                    ng-click="ctrl.onSave(ctrl.manageSystemConfigForm)">
+                                    <i aria-hidden="true" class="fa fa-floppy-o"></i>
+                                    {{ctrl.updateMode?'Update':'Save'}}
+                                </button>
+                                <button class="btn btn-secondary" ng-click="ctrl.chagneState()">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

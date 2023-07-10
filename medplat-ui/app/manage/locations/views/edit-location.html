@@ -1,0 +1,216 @@
+<div ng-if="editlocationctrl.isUpdate == true">
+    <div class="modal-header">
+        <h4 class="text">{{editlocationctrl.isUpdate == true ? 'Update Location' : 'Add Location'}}</h4>
+        <button type="button" class="close" ng-click="editlocationctrl.cancel()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card cst-card  no-border">
+                        <div class="card-body inline-form">
+                            <form role="form" name="locationForm" id="locationForm" novalidate>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="locationhiearchy" control-label>Location</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                name="locationhiearchy" ng-model="editlocationctrl.locationHierarchy"
+                                                ng-readonly="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label class="control control-checkbox">Change Location
+                                                <input ng-model="editlocationctrl.isChangeLocation"
+                                                    ng-change="editlocationctrl.onChangeLocation()" type="checkbox"
+                                                    ng-disabled="!editlocationctrl.rights.canEdit">
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3" ng-if="editlocationctrl.locationType == 'D'">
+                                            <label class="form-group control control-checkbox">
+                                                <input ng-model="editlocationctrl.flag" type="checkbox"
+                                                    ng-disabled="!editlocationctrl.rights.canEdit">
+                                                <div class="control_indicator checkbox-success"></div>
+                                                Is Aspirational District
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-group control control-checkbox"
+                                                ng-if="editlocationctrl.locationType == 'B'">
+                                                <input ng-model="editlocationctrl.flag" type="checkbox"
+                                                    ng-disabled="!editlocationctrl.rights.canEdit">
+                                                <div class="control_indicator checkbox-success"></div>
+                                                Is High Priority Taluka
+                                            </label>
+                                            <label class="form-group control control-checkbox"
+                                                ng-if="editlocationctrl.locationType == 'B'">
+                                                <input ng-model="editlocationctrl.containsCmtcCenter" type="checkbox"
+                                                    ng-disabled="!editlocationctrl.rights.canEdit">
+                                                <div class="control_indicator checkbox-success"></div>
+                                                Has CMTC Center
+                                            </label>
+                                            <label class="form-group control control-checkbox"
+                                                ng-if="editlocationctrl.locationType == 'B'">
+                                                <input ng-model="editlocationctrl.containsNrcCenter" type="checkbox"
+                                                    ng-disabled="!editlocationctrl.rights.canEdit">
+                                                <div class="control_indicator checkbox-success"></div>
+                                                Has NRC Center
+                                            </label>
+                                            <label class="form-group control control-checkbox"
+                                                ng-if="editlocationctrl.locationType == 'D'">
+                                                <input ng-model="editlocationctrl.cerebralPalsyModule" type="checkbox"
+                                                    ng-disabled="!editlocationctrl.rights.canEdit">
+                                                <div class="control_indicator checkbox-success"></div>
+                                                Cerebral Palsy Module
+                                            </label>
+                                            <label class="form-group control control-checkbox"
+                                                ng-if="editlocationctrl.locationType == 'B'">
+                                                <input ng-model="editlocationctrl.geoFencing" type="checkbox"
+                                                    ng-disabled="!editlocationctrl.rights.canEdit">
+                                                <div class="control_indicator checkbox-success"></div>
+                                                Geo Fencing
+                                            </label>
+                                            <label class="form-group control control-checkbox"
+                                                ng-if="['B', 'Z'].includes(editlocationctrl.locationType)"
+                                                uib-tooltip="Targeted approach to accelerate health outcome">
+                                                <input ng-model="editlocationctrl.isTaaho" type="checkbox"
+                                                    ng-disabled="!editlocationctrl.rights.canEdit">
+                                                <div class="control_indicator checkbox-success"></div>
+                                                Is TAAHO
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="editlocationctrl.isChangeLocation == true">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <location-directive selected-location="editlocationctrl.updatedLocation"
+                                                    template-type="'twoPart'"
+                                                    fetch-upto-level="editlocationctrl.requiredLevel"
+                                                    ng-disabled="!editlocationctrl.rights.canEdit"
+                                                    ng-model="editlocationctrl.selectedLocationId"
+                                                    required-upto-level="editlocationctrl.requiredLevel"
+                                                    fetch-according-to-user-aoi="true">
+                                                </location-directive>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <validate for="locationname" required-msg="Enter Location Name">
+                                                <label for="locationname" control-label>Location Name</label>
+                                                <input type="text" class="form-control cst-form-control" form-control
+                                                    placeholder="Enter Location Name" name="locationname"
+                                                    ng-model="editlocationctrl.locationName" required
+                                                    ng-disabled="!editlocationctrl.rights.canEdit">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <validate for="locationtype" required-msg="Select Location Type">
+                                                <label for="locationtype" control-label>Location Type</label>
+                                                <select class="form-control cst-form-control" name="locationType"
+                                                    ng-options="locationtype.type as locationtype.name for locationtype in editlocationctrl.locationTypes|  orderBy:'level'"
+                                                    ng-model="editlocationctrl.locationType" form-control
+                                                    ng-change="editlocationctrl.onChangeLocation(editlocationctrl.requiredLevel)"
+                                                    required>
+                                                    <option value="">Please Select.....</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="editlocationctrl.env!=='uttarakhand'">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="emamtaid" control-label>Emamta Id</label>
+                                            <input type="text" class="form-control cst-form-control"
+                                                ng-disabled="!editlocationctrl.rights.canEdit" form-control
+                                                placeholder="Enter Emamta Id" name="emamtaid"
+                                                ng-model="editlocationctrl.emamta">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <validate for="englishName" required-msg="Enter English Name">
+                                                <label for="englishName" control-label>English Name</label>
+                                                <input type="text" class="form-control cst-form-control" form-control
+                                                    placeholder="Enter English Name" name="englishName"
+                                                    ng-model="editlocationctrl.englishName" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <validate for="lgdCode" required-msg="Enter LGD Code">
+                                                <label for="lgdCode" control-label>LGD Code</label>
+                                                <input type="text" class="form-control cst-form-control" form-control
+                                                    placeholder="Enter LGD Code" name="lgdCode"
+                                                    ng-model="editlocationctrl.lgdCode"
+                                                    ng-required="editlocationctrl.locationType == 'D' || editlocationctrl.locationType == 'B' || editlocationctrl.locationType == 'V'"
+                                                    ng-disabled="!editlocationctrl.rights.canEditLGDCode">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="col-xl-1 float-right">
+                                            <a rel="noopener noreferrer" href='https://lgdirectory.gov.in'
+                                                target='_blank'>
+                                                <em popover-placement="'top'"
+                                                    uib-popover="If you do not know 'LGD Code' you can get these code from here"
+                                                    popover-trigger="'mouseenter'" class="fa fa-question-circle-o">
+                                                </em>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="mddsCode" control-label>MDDS Code</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter MDDS Code" name="mddsCode"
+                                                ng-model="editlocationctrl.mddsCode">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer mt-5">
+                                    <div class="float-right">
+                                        <button type="submit" class="btn btn-primary" ng-if="!editlocationctrl.isUpdate"
+                                            ng-click="editlocationctrl.create(locationForm)">
+                                            <em class="fa fa-floppy-o"></em> Save & Continue</button>
+                                        <button type="submit" class="btn btn-primary" ng-if="editlocationctrl.isUpdate"
+                                            ng-click="editlocationctrl.update(locationForm)">
+                                            Update</button>
+                                        <button class="btn btn-secondary"
+                                            ng-click="editlocationctrl.cancel()">Close</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

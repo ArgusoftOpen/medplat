@@ -1,0 +1,118 @@
+<style>
+    .inline-form .custom-container .chosen-container {
+        width: 100% !important;
+    }
+</style>
+<div ng-if="childLevel">
+    <div ng-if="option.hasOwnProperty('conditions')">
+        <div class="card cst-card">
+            <div class="card-title">
+                <h4 class="text" style="float: left;">{{option.conditions.rule}}</h4>
+                <div class="dropdown pull-right">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="javascript:void(0)" ng-click="addCondition(index)">Add
+                            Condition</a>
+                        <a class="dropdown-item" href="javascript:void(0)" ng-click="addGroup(index,'AND')">Add
+                            "AND" Group</a>
+                        <a class="dropdown-item" href="javascript:void(0)" ng-click="addGroup(index,'OR')">Add
+                            "OR" Group</a>
+                        <a class="dropdown-item" href="javascript:void(0)" ng-click="invertGroup(index)">Invert
+                            group</a>
+                        <a class="dropdown-item" href="javascript:void(0)" ng-click="deleteGroup(index)">Delete
+                            Group</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body inline-form">
+                <div class="row" ng-repeat="(index,op) in option.conditions.options track by $index">
+                    <div class="col-12">
+                        <condition-render-directive index="index" option="op" level="childLevel"
+                            options="option.conditions.options" field-master-dtos="fieldMasterDtos">
+                        </condition-render-directive>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="!option.hasOwnProperty('conditions')">
+        <a href="javascript:void(0)">#Condition{{index+1}}</a>
+        <div class="form-row">
+            <div class="col">
+                <validate for='{{array}}type{{index}}{{level}}' required-msg="Please select type">
+                    <select class="form-control cst-form-control" form-control name="{{array}}type{{index}}{{level}}"
+                        id="{{array}}type{{index}}{{level}}" ng-model="option.type" ng-required="true"
+                        ng-change="typeChanged(index)">
+                        <option value="">--Select Type--</option>
+                        <option value="DB">DB</option>
+                        <option value="FIELD">FIELD</option>
+                        <option value="CUSTOM">CUSTOM</option>
+                    </select>
+                </validate>
+            </div>
+            <div class="col custom-container" ng-if="option.type==='FIELD' && fieldMasterDtos.length">
+                <validate for='{{array}}fieldName{{index}}{{level}}' required-msg="Please enter field name">
+                    <select class="form-control cst-form-control" form-control
+                        name="{{array}}fieldName{{index}}{{level}}" id="{{array}}fieldName{{index}}{{level}}"
+                        chosen-directive="fieldMasterDtos" ng-model="option.fieldName" ng-required="true"
+                        ng-options="field.ngModel + '.' + field.fieldKey as field.fieldName + ' | ' + field.fieldType for field in fieldMasterDtos">
+                        <option value="">--Select field name--</option>
+                    </select>
+                </validate>
+            </div>
+            <div class="col" ng-if="option.type==='CUSTOM'">
+                <validate for='{{array}}expression{{index}}{{level}}' required-msg="Please enter field name">
+                    <input type="text" ng-pattern="/$/" class="form-control cst-form-control" form-control
+                        name="{{array}}expression{{index}}{{level}}" ng-required="true"
+                        id="{{array}}expression{{index}}{{level}}" ng-model="option.expression"
+                        placeholder="Enter expression">
+                </validate>
+            </div>
+            <div class="col" ng-if="option.type==='DB'">
+                <validate for='{{array}}queryCode{{index}}{{level}}' required-msg="Please enter query code">
+                    <input type="text" class="form-control cst-form-control" form-control
+                        name="{{array}}queryCode{{index}}{{level}}" ng-required="true"
+                        id="{{array}}queryCode{{index}}{{level}}" ng-model="option.queryCode"
+                        placeholder="Enter query code">
+                </validate>
+            </div>
+            <div class="col" ng-if="option.type!=='CUSTOM'">
+                <validate for='{{array}}operator{{index}}{{level}}' required-msg="Please select type">
+                    <select class="form-control cst-form-control" form-control
+                        name="{{array}}operator{{index}}{{level}}" id="{{array}}operator{{index}}{{level}}"
+                        ng-model="option.operator" ng-required="true" ng-change="operatorChanged(index)">
+                        <option value="">--Select Operator--</option>
+                        <option value="EQ">EQ</option>
+                        <option value="NQ">NQ</option>
+                        <option value="EQWithType">EQ with type</option>
+                        <option value="NQWithType">NQ with type</option>
+                        <option value="GT">GT</option>
+                        <option value="LT">LT</option>
+                        <option value="GTE">GTE</option>
+                        <option value="LTE">LTE</option>
+                        <option value="BT">BT</option>
+                    </select>
+                </validate>
+            </div>
+            <div class="col" ng-if="option.type!=='CUSTOM'">
+                <validate for='{{array}}value1{{index}}{{level}}' required-msg="Please enter value 1">
+                    <input type="text" class="form-control cst-form-control" form-control
+                        name="{{array}}value1{{index}}{{level}}" ng-required="true"
+                        id="{{array}}value1{{index}}{{level}}" ng-model="option.value1" placeholder="Enter value 1">
+                </validate>
+            </div>
+            <div class="col" ng-if="option.operator==='BT'">
+                <validate for='{{array}}value2{{index}}{{level}}' required-msg="Please enter value 2">
+                    <input type="text" class="form-control cst-form-control" form-control
+                        name="{{array}}value2{{index}}{{level}}" ng-required="true"
+                        id="{{array}}value2{{index}}{{level}}" ng-model="option.value2" placeholder="Enter value 2">
+                </validate>
+            </div>
+            <div class="col">
+                <input type="button" class="btn btn-danger" value="Delete" ng-click="deleteCondition(index)">
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container-fluid menu-view">
+    <div class="row" ng-form="rl.manageTemplateForm">
+        <div class="col-12 mb-15">
+            <div>
+                <div class="row mb-15 ">
+                    <div class="col-12 mb-15 text-right">
+                        <input type="text" ng-model="ctrl.menuName" ng-model-options="{ debounce: 500 }"
+                            ng-change="ctrl.searchData(true)" id="search" placeholder="Search Menu Name"
+                            data-test="search-menu">
+                        <button class="btn btn-primary " ui-sref="techo.manage.mobileMenuConfig">Configure New</button>
+                    </div>
+                    <div class="col-12 mb-15" ng-if="!ctrl.menus || ctrl.menus.length == 0">
+                        <div class="no-data-placeholder">
+                            <h5>Sorry No Menu available!</h5>
+                        </div>
+                    </div>
+                    <div class="col-12 ">
+                        <div class="cst-table table-responsive" id="label-scroll">
+                            <table class="table table-sm table-striped table-bordered header-fixed"
+                                infinite-scroll-distance="0" infinite-scroll='ctrl.searchData()'
+                                ng-if="ctrl.menus.length > 0">
+                                <thead>
+                                    <tr>
+                                        <th>Menu Name</th>
+                                        <th>Role Type</th>
+                                        <th>Features</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                    infinite-scroll='ctrl.searchData()'
+                                    infinite-scroll-disabled='ctrl.pagingService.pagingRetrivalOn'
+                                    infinite-scroll-container='"#label-scroll"'>
+                                    <tr ng-repeat="menuObject in ctrl.menus" ng-if="ctrl.menus.length > 0">
+                                        <td>
+                                            {{menuObject.menu_name | titlecase}}
+                                        </td>
+                                        <td>{{(menuObject.role_name| titlecase) |emptylabel}}</td>
+                                        <td>{{(menuObject.features| titlecase) |emptylabel}}</td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li>
+                                                    <a href="#" class="action-icon edit-icon"
+                                                        ui-sref="techo.manage.mobileMenuConfig({id:menuObject.id})">
+                                                    </a>
+                                                    <a href="#"
+                                                        ng-click="ctrl.deleteMenu(menuObject.id)"
+                                                        class="action-icon delete-icon">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="(!ctrl.menus || ctrl.menus.length === 0)">
+                                        <td colspan="10">No Menu Available</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
