@@ -259,7 +259,7 @@
                 <server.redirect.port>8181</server.redirect.port>
                 <server.is.secure>true</server.is.secure>
                 <jdbc.url>localhost</jdbc.url>
-                <jdbc.database>medplat2</jdbc.database>
+                <jdbc.database>medplat</jdbc.database>
                 <jdbc.username>postgres</jdbc.username>
                 <jdbc.password>argusadmin</jdbc.password>
                 <jdbc.port>5432</jdbc.port>
