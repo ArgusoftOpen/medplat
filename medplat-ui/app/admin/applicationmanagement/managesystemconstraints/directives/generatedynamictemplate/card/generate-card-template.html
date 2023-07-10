@@ -1,0 +1,57 @@
+<style>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+</style>
+<div class="card cst-card {{config.cssClasses}}" style="{{getDynamicStyles()}}">
+    <div class="card-title" ng-if="config.title && !config.isCollapsible">
+        <div class="float-left">
+            <h4 class="text" dynamic="config.title">
+            </h4>
+        </div>
+        <div class="float-right">
+            <em class="cursor-pointer fa fa-plus-circle fa-2x text-primary"
+                ng-if="config.isRepeatable && config.showAddRemoveButton && iteratorIndicesMap[config.ngModel] === 0"
+                title="Repeat this element" ng-click="repeatElement();">
+            </em>
+            <em class="cursor-pointer fa fa-trash-o fa-2x text-danger"
+                ng-if="config.isRepeatable && config.showAddRemoveButton && iteratorIndicesMap[config.ngModel] > 0"
+                title="Delete this repeated element" ng-click="deleteRepeatedElement()">
+            </em>
+        </div>
+    </div>
+    <div role="tab" class="card-title collapse-link d-block" ng-if="config.isCollapsible" data-toggle="collapse"
+        href="#toggleCollapsibleCard{{uuid}}" ng-click="toggleCollapsibleCard = !toggleCollapsibleCard"
+        style="cursor: pointer">
+        <h4 class="text">
+            <span data-toggle="tooltip">
+                {{config.title}}
+            </span>
+            <ul class="control-list">
+                <li>
+                    <span>
+                        <em ng-class="{'ion-plus':!toggleCollapsibleCard,'ion-minus':toggleCollapsibleCard}"></em>
+                    </span>
+                </li>
+            </ul>
+        </h4>
+    </div>
+    <div class="card-body inline-form mb-0" ng-if="!config.isCollapsible">
+        <div ng-repeat="(elementIndex, element) in elements">
+            <generate-repeatable-template-directive element="element" row-classes="'row'"
+                constraint-config="constraintConfig" sibling-elements="siblingElements" element-index="elementIndex"
+                iterator-indices-map="iteratorIndicesMap">
+            </generate-repeatable-template-directive>
+        </div>
+    </div>
+    <div class="collapse" id="toggleCollapsibleCard{{uuid}}" ng-if="config.isCollapsible">
+        <div class="card-body inline-form mb-0">
+            <div ng-repeat="(elementIndex, element) in elements">
+                <generate-repeatable-template-directive element="element" row-classes="'row'"
+                    constraint-config="constraintConfig" sibling-elements="siblingElements" element-index="elementIndex"
+                    iterator-indices-map="iteratorIndicesMap">
+                </generate-repeatable-template-directive>
+            </div>
+        </div>
+    </div>
+</div>

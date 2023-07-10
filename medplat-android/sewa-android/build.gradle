@@ -1,0 +1,123 @@
+apply plugin: 'com.android.application'
+
+final BUILD_DATE = new Date().format('ddMMM')
+
+android {
+    compileSdkVersion 32
+    flavorDimensions "default"
+    defaultConfig {
+        multiDexEnabled true
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "androidManifestFile": "$projectDir/src/main/AndroidManifest.xml".toString()
+                ]
+            }
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        medplat {
+            applicationId "com.argusoft.sewa.android.app"
+            minSdkVersion 21
+            targetSdkVersion 32
+            versionCode 118
+            versionName "4.1.10"
+            buildConfigField 'String', 'HOME_TITLE_LIVE', "\"TeCHO+\""
+            buildConfigField 'String', 'HOME_TITLE_TRAINING', "\"TeCHO+ Training\""
+            buildConfigField 'String', 'RELEASE_DATE', "\"10th July 2023\""
+            buildConfigField 'String', 'DB_NAME', "\"sewa_final.db\""
+            buildConfigField 'String', 'APK_NAME', "\"techo_app\""
+            buildConfigField 'int', 'DATABASE_VERSION', "201"
+            buildConfigField 'int', 'ATTEMPT_TO_UPLOAD', "3"
+            buildConfigField 'int', 'LOG_TO_DISPLAY', "15"
+            resValue "string", "app_name", "Medplat"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_launcher",
+                    appIconRound: "@mipmap/ic_launcher_round"
+            ]
+        }
+    }
+}
+
+project.android.applicationVariants.all { variant ->
+    //if (variant.buildType.name != 'debug') {
+        def url = project."${variant.flavorName}_${variant.buildType.name}_base_url"
+        variant.buildConfigField('String', 'BASE_URL', "\"${url}\"")
+        def trainingUrl = project."${variant.flavorName}_${variant.buildType.name}_base_url_training"
+        variant.buildConfigField('String', 'BASE_URL_TRAINING', "\"${trainingUrl}\"")
+    //}
+    variant.outputs.all {
+        outputFileName =  "$BUILD_DATE-${variant.flavorName}(${variant.versionName}).apk"
+    }
+}
+
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+def AAVersion = "4.8.0"
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // supports
+    implementation 'com.google.android.material:material:1.7.0-alpha03'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    // annotation processor
+    annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
+    annotationProcessor "org.androidannotations:ormlite:$AAVersion"
+    // dependencies
+    implementation "org.androidannotations:androidannotations-api:$AAVersion"
+    implementation "org.androidannotations:ormlite-api:$AAVersion"
+    implementation 'com.j256.ormlite:ormlite-android:5.1'
+    implementation 'joda-time:joda-time:2.3'
+    /*Add QR Library Here */
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+    //provided
+    implementation 'com.github.vihtarb:tooltip:0.1.9'
+    //Library For Reading PDF Files
+    implementation 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    implementation 'com.github.smart-fun:XmlToJson:1.5.1'
+
+    // Retrofit dependency
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.google.zxing:core:3.4.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.3.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging:23.1.2'
+}

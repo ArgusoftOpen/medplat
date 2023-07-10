@@ -1,0 +1,189 @@
+<div class="modal-header">
+    <h4 class="text">Update User</h4>
+</div>
+<div class="modal-body">
+    <div class="card-body inline-form">
+        <form role="form" name="updateProfile.userProfileUpdateForm" id="userProfileUpdateForm">
+            <div class="col-12 row">
+                <div class="form-group col-6">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>User Full Name</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-6">
+                            {{updateProfile.userObj.title}} {{updateProfile.userObj.firstName}}
+                            {{updateProfile.userObj.middleName}} {{updateProfile.userObj.lastName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>User Name</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-5">
+                            {{updateProfile.userObj.userName}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 row">
+                <div class="form-group col-6">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>User Role</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-5">
+                            <span
+                                ng-repeat="role in updateProfile.roleList| filter : { id : updateProfile.userObj.roleId } ">
+                                {{ role.name |emptylabel}}</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>CUG Phone Number</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-5">
+                            {{updateProfile.userObj.contactNumber == null ? 'Not Available' :
+                            updateProfile.userObj.contactNumber}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 row">
+                <div class="form-group col-6">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Email</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-5">
+                            {{updateProfile.userObj.emailId == null ? 'Not Available' : updateProfile.userObj.emailId}}
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="form-group col-6">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Aadhar Number</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-5">
+                            {{updateProfile.userObj.aadharNumber == null ? 'Not Available' :
+                            updateProfile.userObj.aadharNumber}}
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-12 row">
+                <div class="form-group col-6">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Preferred Language</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-5">
+                            <select name="prefferedLanguage" ng-model="updateProfile.userObj.prefferedLanguage">
+                                <option value="GU">{{updateProfile.localLanguage}}</option>
+                                <option value="EN">English</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Report Preferred Language</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-5">
+
+                            <select name="reportPreferredLanguage"
+                                ng-model="updateProfile.userObj.reportPreferredLanguage">
+                                <option value="GU">{{updateProfile.localLanguage}}</option>
+                                <option value="EN">English</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 row">
+                <div class="form-group col-6">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Gender</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-5">
+                            {{updateProfile.userObj.gender == 'M' ? 'Male' : 'Female'}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Login Code</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-5">
+                            {{!!updateProfile.userObj.loginCode ? updateProfile.userObj.loginCode : 'Not Available'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 row">
+                <div class="form-group col-6" ng-if="updateProfile.userObj.convoxId">
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Convox Id</strong>
+                        </div>
+                        <div class="col-1">
+                            <strong>:</strong>
+                        </div>
+                        <div class="col-5">
+                            {{updateProfile.userObj.convoxId}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer mt-2">
+        <div class="float-right">
+            <button type="submit" class="btn btn-primary" ng-click="updateProfile.updateUser(userProfileUpdateForm)"><em
+                    class="fa fa-floppy-o"></em> Update</button>
+            <button class="btn btn-secondary" ng-click="updateProfile.cancel()">Cancel</button>
+        </div>
+    </div>
+</div>

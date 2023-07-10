@@ -1,0 +1,380 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text" ng-show="!usercontroller.userUpdate">Add User</h4>
+                        <h4 class="text" ng-show="usercontroller.userUpdate">Update User</h4>
+                    </div>
+                    <div class="float-right">
+                        <button class="btn btn-primary "
+                            ng-if="usercontroller.userUpdate && usercontroller.rights.canEditPassword"
+                            ng-click="usercontroller.updatePassword(usercontroller.userObj.id)">Change
+                            Password</button>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="usercontroller.userForm" id="userForm" novalidate>
+                        <div class="row">
+
+                            <div class="col-6">
+                                <h5 class="card-sub-title">
+                                    User details
+                                </h5>
+                                <div>
+                                    <div class="form-group">
+                                        <validate for='role' required-msg=" Select user role">
+                                            <label for="role" control-label>User Role</label>
+                                            <select chosen-directive="usercontroller.roleList"
+                                                class="form-control cst-form-control" form-control
+                                                ng-options="role.id as role.name for role in usercontroller.roleList"
+                                                ng-change="usercontroller.retrieveLocationByRoleId();usercontroller.retrieveHealthInfrastructureByRole(usercontroller.userObj.roleId)"
+                                                ng-model="usercontroller.userObj.roleId" name="role" id="role" required>
+                                                <option value="">Please Select...</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='title'>
+                                            <label for="title" control-label>Title</label>
+
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="usercontroller.userObj.title" name="title" id="title"
+                                                ng-change="usercontroller.userObj.title == 'Mr' || usercontroller.userObj.title == 'Dr' ? usercontroller.userObj.gender = 'M' : usercontroller.userObj.gender = 'F'">
+                                                <option value="Mr">Mr.</option>
+                                                <option value="Ms">Ms.</option>
+                                                <option value="Mrs">Mrs.</option>
+                                                <option value="Dr">Dr.</option>
+
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='firstName' required-msg=" Enter First Name">
+                                            <label for="firstName" control-label>First Name</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter First Name" alphabets-only ng-trim="false"
+                                                name="firstName" remove-spaces id="firstName"
+                                                ng-blur="usercontroller.setUserName()" maxlength="90"
+                                                ng-model="usercontroller.userObj.firstName" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <validate for='middleName' required-msg=" Enter Middle Name">
+                                            <label for="middleName" control-label>Middle Name</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter Middle Name" alphabets-only name="middleName"
+                                                remove-spaces id="middleName" maxlength="90"
+                                                ng-blur="usercontroller.setUserName()"
+                                                ng-model="usercontroller.userObj.middleName">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='lastName' required-msg="Enter Last Name">
+                                            <label for="lastName" control-label>Last Name</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter Last Name" alphabets-only name="lastName"
+                                                remove-spaces id="lastName" ng-blur="usercontroller.setUserName()"
+                                                maxlength="90" ng-model="usercontroller.userObj.lastName"
+                                                ng-required="usercontroller.isLastNameMandatory">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                        <span class="alert alert-danger ml-160" ng-if="(usercontroller.userObj.firstName.length +
+                                              usercontroller.userObj.middleName.length +
+                                        usercontroller.userObj.lastName.length) >99">
+                                            <span>Maximum length of full name should be 99</span>
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Gender <span
+                                                class="required-asterisk">*</span></label>
+                                        <label class="control control-radio">Male
+                                            <input ng-disabled="usercontroller.userObj.title != 'Dr'" value="M"
+                                                name="Male" type="radio" ng-model="usercontroller.userObj.gender"
+                                                required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio">Female
+                                            <input ng-disabled="usercontroller.userObj.title != 'Dr'" value="F"
+                                                name="Female" type="radio" ng-model="usercontroller.userObj.gender"
+                                                required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='userName' required-msg=" Enter user Name"
+                                            pattern-msg="Username can consist of only alphanumeric values and underscore">
+                                            <label for="userName" control-label>User Name</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter user Name"
+                                                ng-class="{'is-invalid': usercontroller.res.checkuser === 'false' && usercontroller.userObj.userName}"
+                                                ng-keyup="usercontroller.manually = true" name="userName" id="userName"
+                                                maxlength="50" remove-spaces ng-model-options="{debounce: 200}"
+                                                ng-pattern="/^[a-zA-Z0-9_]+$/" ng-trim="false"
+                                                ng-change="usercontroller.userObj.userName = usercontroller.userObj.userName.toLowerCase();
+                                                                   usercontroller.checkUsername(usercontroller.userObj.userName)"
+                                                ng-disabled="usercontroller.userUpdate && !usercontroller.rights.canEditUserName"
+                                                ng-model="usercontroller.userObj.userName" required>
+                                            <small class="alert alert-danger checkbox-padding valid-feedback"
+                                                ng-if="usercontroller.res.checkuser === 'false' && usercontroller.userObj.userName">
+                                                {{usercontroller.userObj.userName}}&nbsp;User name not available</small>
+                                            <small class="alert alert-success valid-feedback checkbox-padding"
+                                                ng-if="usercontroller.res.checkuser === 'true' && usercontroller.userObj.userName">
+                                                {{usercontroller.userObj.userName}}&nbsp;User name available</small>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="!usercontroller.userUpdate">
+                                        <validate for='password' required-msg=" Enter Password"
+                                            minlength-msg="Password is invalid">
+                                            <label for="password" control-label>Password</label>
+                                            <div class="input-group">
+                                                <input type="{{usercontroller.isShowPass?'password':'text'}}"
+                                                    class="form-control cst-form-control" form-control name="password"
+                                                    id="password" ng-model="usercontroller.userObj.password"
+                                                    maxlength="50" tooltip-trigger="'focus'"
+                                                    ng-change="usercontroller.checkPassword()"
+                                                    uib-tooltip="Password must contain at least 8 characters comprising of one lowercase letter, one uppercase letter, one number and one special character. Password must not contain user name or application name. Password must not contain three or more consecutive characters"
+                                                    required />
+                                                <div class="input-group-append">
+                                                    <button tabindex="-1" class="btn btn-primary" name='showPassword'
+                                                        ng-model="usercontroller.isShowPass" type="button"><em
+                                                            ng-click="usercontroller.toggleShowPassword('showPassword')"
+                                                            ng-class="{'fa fa-eye':usercontroller.isShowPass,'fa fa-eye-slash':!usercontroller.isShowPass}"></em></button>
+                                                </div>
+                                                <meter max="4" id="password-strength-meter"
+                                                    style="margin-bottom: 0px;"></meter>
+                                                <p id="password-strength-text"></p>
+                                            </div>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="!usercontroller.userUpdate">
+                                        <validate for='retypepass' required-msg="  Enter password again">
+                                            <label for="retypepass" control-label>Confirm Password</label>
+                                            <div class="input-group">
+                                                <input type="{{usercontroller.isShowPass?'password':'text'}}"
+                                                    class="form-control cst-form-control" form-control name="retypepass"
+                                                    id="retypepass" ng-model="usercontroller.userObj.retypepass"
+                                                    maxlength="50" required />
+                                                <div class="input-group-append">
+                                                    <button tabindex="-1" class="btn btn-primary" name='showPassword'
+                                                        ng-model="usercontroller.isShowPass" type="button"><em
+                                                            ng-click="usercontroller.toggleShowPassword('showPassword')"
+                                                            ng-class="{'fa fa-eye':usercontroller.isShowPass,'fa fa-eye-slash':!usercontroller.isShowPass}"></em></button>
+                                                </div>
+                                            </div>
+                                            <span class="alert alert-danger valid-feedback"
+                                                ng-if="(usercontroller.userObj.retypepass !== usercontroller.userObj.password)">
+                                                <span> Password doesn't match</span>
+                                            </span>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='phoneNo' required-msg="Enter Phone Number">
+                                            <label for="phoneNo" control-label>Phone Number</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter Phone Number" limit-to="10" name="phoneNo"
+                                                id="phoneNo" ng-trim="false" numbers-only
+                                                ng-class="{'is-invalid': usercontroller.phoneNumberFlag}"
+                                                ng-model="usercontroller.userObj.contactNumber"
+                                                ng-required="usercontroller.isContactNumMandatory"
+                                                ng-change=" usercontroller.checkPhoneNumberOnChange(usercontroller.userObj.contactNumber)"
+                                                ng-blur="usercontroller.checkphoneNumber(null, usercontroller.userObj.contactNumber, usercontroller.userObj.id)">
+                                            <span class="alert alert-danger valid-feedback"
+                                                ng-if=" usercontroller.phoneNumberFlag">
+                                                <span>Phone Number is already Linked to another User
+                                                    {{usercontroller.showusernameinphone}}</span>
+                                            </span>
+                                            <span class="alert alert-danger valid-feedback"
+                                                ng-if=" usercontroller.checkPhoneNo || usercontroller.checkPhoneNolength">
+                                                <span>Phone Number should be of 10 digits.</span>
+                                            </span>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="usercontroller.isConvoxIdMandatory">
+                                        <validate for='convoxId' required-msg="Enter convoxId">
+                                            <label for="convoxId" control-label>Convox Id</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter valid convoxId" ng-pattern="/^\S{0,50}$/"
+                                                name="convoxId" id="convoxId"
+                                                ng-required="usercontroller.isConvoxIdMandatory"
+                                                ng-model="usercontroller.userObj.convoxId">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='emailId' required-msg="Enter Valid email"
+                                            pattern-msg="Enter Valid email pattern"
+                                            maxlength-msg="Maximum length of Email should be 254">
+                                            <label for="emailId" control-label>Email</label>
+                                            <input type="input" class="form-control cst-form-control" form-control
+                                                placeholder="Enter valid email"
+                                                ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" name="emailId" id="emailId"
+                                                ng-required="usercontroller.isEmailMandatory"
+                                                ng-model="usercontroller.userObj.emailId" maxlength="254">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+
+                                    <!-- <div class="form-group" ng-if="usercontroller.env!=='uttarakhand'">
+                                        <validate for='aadharNumber' required-msg="Enter valid Aadhar Number">
+                                            <label for="aadharNumber" control-label>Aadhar Number</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter Aadhar number" ng-trim="false" numbers-only
+                                                name="aadharNumber" limit-to="12" id="aadharNumber"
+                                                ng-class="{'is-invalid': usercontroller.aadharNumberFlag}"
+                                                ng-model="usercontroller.userObj.aadharNumber"
+                                                ng-required="usercontroller.isAadharNumMandatory"
+                                                ng-change="usercontroller.checkAadharNumberOnChange(usercontroller.userObj.aadharNumber);"
+                                                ng-blur="usercontroller.checkphoneNumber(usercontroller.userObj.aadharNumber, null, usercontroller.userObj.id)">
+                                            <span class="alert alert-danger valid-feedback"
+                                                ng-if="usercontroller.aadharNumberFlag">
+                                                <span>Aadhar Number is already Linked to another User
+                                                    {{usercontroller.showusernameinaadhar}}
+                                                </span>
+                                            </span>
+                                            <span class="alert alert-danger valid-feedback"
+                                                ng-if=" usercontroller.checkAadharNumber || usercontroller.checkAadharNolength">
+                                                <span>Aadhar Number should be of 12 digits.</span>
+                                            </span>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div> -->
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Preferred Language<span
+                                                class="required-asterisk">*</span></label>
+                                        <select class="form-control cst-form-control" name="prefferedLanguage"
+                                            ng-class="{'is-invalid':((usercontroller.userForm.prefferedLanguage.$invalid && usercontroller.userForm.prefferedLanguage.$dirty) || (usercontroller.userForm.prefferedLanguage.$invalid && usercontroller.userFormSubmitted))}"
+                                            ng-model="usercontroller.userObj.prefferedLanguage" required>
+                                            <option value="GU">{{usercontroller.localLanguage}}</option>
+                                            <option value="EN">English</option>
+                                        </select>
+                                        <span class="alert alert-danger valid-feedback"
+                                            ng-if="(usercontroller.userForm.prefferedLanguage.$invalid && usercontroller.userForm.prefferedLanguage.$dirty) || (usercontroller.userForm.prefferedLanguage.$invalid && usercontroller.userFormSubmitted)">
+                                            Select Preffered Language.
+                                        </span>
+                                    </div>
+                                    <div class="form-group" ng-if="usercontroller.isGeolocationMandatory">
+                                        <validate for='geolocation' required-msg="Please enter value">
+                                            <label for="geolocation" control-label>Geo Location</label>
+                                            <input placeholder="Latitude" style="width: calc((100% - 168px) / 2);
+                                               margin-right: 4px;" type="text" numbers-only decimalallowed="true"
+                                                class=" form-control cst-form-control"
+                                                ng-model="usercontroller.userObj.latitude" name="geolocation"
+                                                id="geolocation" form-control required>
+                                            <input placeholder="Longitude" style="width: calc((100% - 180px) / 2);
+                                               margin-left: 4px;" type="text" numbers-only decimalallowed="true"
+                                                class=" form-control cst-form-control" form-control name="geolocation"
+                                                id="geolocation" ng-model="usercontroller.userObj.longitude" required>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="!!usercontroller.userObj.loginCode">
+                                        <validate for='userLoginCode'>
+                                            <label for="userLoginCode" control-label>Login Code</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                name="userLoginCode" id="userLoginCode"
+                                                ng-model="usercontroller.userObj.loginCode" ng-readonly="true">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 inline-form" style="border-left: 1px solid #e5e5e5;">
+                                <h5 class="card-sub-title">
+                                    Area of Intervention
+                                </h5>
+                                <ng-form name="usercontroller.locationForm" isolate-form>
+                                    <location-directive selected-location="usercontroller.selectedLocation"
+                                        required-upto-level="1" fetch-according-to-user-aoi="true"
+                                        fetch-upto-level="usercontroller.maxAllowedLevel"> </location-directive>
+                                    <br>
+                                    <div class="pull-right">
+                                        <span ng-if="usercontroller.noRoleSelected && !usercontroller.userObj.roleId"
+                                            class="text-danger">Please
+                                            select a role to add area of intervention</span>
+                                        <button ng-disabled="usercontroller.isLocationButtonDisabled"
+                                            class="btn btn-primary" type="button"
+                                            ng-click="usercontroller.selectedArea()">Add</button>
+                                    </div> <br>
+                                </ng-form>
+                                <hr>
+                                <div class="form-group  mt-5">
+                                    <label for="exampleFormControlInput1">Added Areas </label>
+                                    <div class="form-control cst-form-control min-height-120 overflow-y-auto">
+                                        <div ng-repeat="fields in usercontroller.selectedLocationsId">
+                                            {{fields.locationFullName}} &nbsp;<em class="fa fa-times pointer-cursor red"
+                                                ng-click="usercontroller.removeSelectedArea(fields, $index)"></em>
+                                        </div>
+                                    </div>
+                                    <span ng-if="usercontroller.duplicateEntry" class="text-danger ml-160">
+                                        This area is already added. Please add another
+                                    </span>
+                                    <span ng-if="!usercontroller.duplicateEntry && usercontroller.isNotAllowedLocation"
+                                        class="text-danger ml-160">
+                                        The role you have selected is allowed to add only -
+                                        <span ng-repeat="location in usercontroller.locationNames">
+                                            {{location}}<span ng-if="!$last">,</span></span>.
+                                    </span>
+                                    <span ng-if="usercontroller.errorMsg && usercontroller.errorCode == 2"
+                                        class="text-danger ml-160">
+                                        {{usercontroller.errorMsg}}
+                                    </span>
+                                </div>
+                                <hr>
+                                <ng-form class="mt-5" ng-if="usercontroller.infrastructures.length > 0">
+                                    <div class="form-group">
+                                        <validate for='healthInfra' required-msg="Select Health Infrastructure">
+                                            <label for="healthInfra" control-label>Health Infrastructure</label>
+                                            <select name="healthInfra" chosen-directive="usercontroller.infrastructures"
+                                                multiple class="form-control cst-form-control" form-control
+                                                ng-model="usercontroller.userObj.infrastructureIds"
+                                                ng-change="usercontroller.infrastructureIdsChanged()"
+                                                ng-options="infra.infraid as infra.infrastructurename for infra in usercontroller.infrastructures "
+                                                placeholder="Select"
+                                                ng-required="usercontroller.isHealthInfraMandatory">
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="usercontroller.env==='uttarakhand'">
+                                        <label>Default Infrastructure</label>
+                                        <select chosen-directive="usercontroller.defaultHealthInfrastructuresList"
+                                            class="form-control"
+                                            ng-model="usercontroller.userObj.defaultHealthInfrastructure"
+                                            ng-options="infra.infraid as infra.infrastructurename for infra in usercontroller.defaultHealthInfrastructuresList"
+                                            placeholder="Select">
+                                        </select>
+                                    </div>
+
+                                </ng-form>
+
+                            </div>
+                        </div>
+
+                        <div class="card-footer mt-5">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary" ng-show="!usercontroller.userUpdate"
+                                    ng-click="usercontroller.saveUser(userForm)"><em class="fa fa-floppy-o"></em> Save &
+                                    Continue</button>
+                                <button type="submit" class="btn btn-primary" ng-show="usercontroller.userUpdate"
+                                    ng-click="usercontroller.updateUser(userForm)"><em class="fa fa-floppy-o"></em>
+                                    Update</button>
+                                <button class="btn btn-secondary" ui-sref="techo.manage.users">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <h4 class="dashboard-title inline">Family Health Survey Report </h4>
+            <div class="pull-right">
+                <a class="" ng-click="fhsreport.navigateToFhsDashboard()" href="javascript:void(0);"><i
+                        class="fa fa-arrow-left" aria-hidden="true">
+                        &nbsp;Back To dashboard
+                    </i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Family Health Detail </h4>
+                    </div>
+                    <div class="pull-right">
+                        <i ng-click="fhsreport.saveExcel()" uib-tooltip="Download excel"
+                            class="fa fa-file-excel-o excelglyphicon font-size-20" aria-hidden="true"
+                            title="Download excel"></i>
+                        <i ng-click="fhsreport.printPdf()" uib-tooltip="Print pdf"
+                            class="fa fa-print printglyphicon font-size-20 right-spacer-10" aria-hidden="true"
+                            title="Print"></i>
+                    </div>
+                </div>
+                <div class="table-responsive" style="overflow: auto;max-height: calc(100vh - 251px)">
+                    <table class="table table-sm table-striped table-bordered header-fixed" id="fhsreport-table">
+                        <thead class="cst-thead">
+                            <tr>
+                                <th>#</th>
+                                <th>Person</th>
+                                <th data-toggle="tooltip" title="ઈમમતામાંથી આવેલા કુટુંબોની સંખ્યા">Imported From eMamta
+                                </th>
+                                <th data-toggle="tooltip" title="ટેકોમાં ચકાસણી કરવાના બાકી રહેલા કુટુંબોની સંખ્યા">To
+                                    be processed</th>
+                                <th data-toggle="tooltip" title="ટેકોમાં ચકાસણી થયેલા કુટુંબની સંખ્યા">Verified</th>
+                                <th data-toggle="tooltip" title="'અહી રહેતા નથી' કરી ડીલીટ કરેલ કુટુંબની સંખ્યા">
+                                    Archived</th>
+                                <th data-toggle="tooltip" title="ટેકોમાં નવા બનાવેલા કુટુંબોની સંખ્યા">New Families
+                                    Added</th>
+                                <th data-toggle="tooltip" title="ટેકોમાં કુલ કુટુંબની સંખ્યા"
+                                    ng-bind-template="Total Families in {{fhsreport.appName}}"></th>
+                                <th data-toggle="tooltip" title="ટેકોમાં કુલ સભ્યની સંખ્યા"
+                                    ng-bind-template="Total Families in {{fhsreport.appName}}"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="cst-tbody">
+                            <tr ng-repeat="asha in fhsreport.ashaLists">
+                                <td class="text-center">{{$index + 1}}</td>
+                                <td class="text-center">{{asha.personName| uppercase}}</td>
+                                <td class="text-center">
+                                    <a ng-class="{disabled : asha.importedFromEmamta == 0}"
+                                        ui-sref="techo.report.view({id:'fhs_imported_emamta',type:'code',queryParams:({location_id:fhsreport.locationId,user_id:asha.id} | json)})">
+                                        {{asha.importedFromEmamta}}
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a ng-class="{disabled : asha.unverifiedFHS == 0}"
+                                        ui-sref="techo.report.view({id:'fhs_to_be_processed',type:'code',queryParams:({location_id:fhsreport.locationId,user_id:asha.id} | json)})">{{asha.unverifiedFHS}}</a>
+                                </td>
+                                <td class="text-center">
+                                    <a ng-class="{disabled : asha.verifiedFHS == 0}"
+                                        ui-sref="techo.report.view({id:'fhs_verified',type:'code',queryParams:({location_id:fhsreport.locationId,user_id:asha.id} | json)})">{{asha.verifiedFHS}}</a>
+                                </td>
+                                <td class="text-center">
+                                    <a ng-class="{disabled : asha.archivedFHS == 0}"
+                                        ui-sref="techo.report.view({id:'fhs_archived',type:'code',queryParams:({location_id:fhsreport.locationId,user_id:asha.id} | json)})">{{asha.archivedFHS}}</a>
+                                </td>
+                                <td class="text-center">
+                                    <a ng-class="{disabled : asha.newFamily == 0}"
+                                        ui-sref="techo.report.view({id:'fhs_new',type:'code',queryParams:({location_id:fhsreport.locationId,user_id:asha.id} | json)})">{{asha.newFamily}}</a>
+                                </td>
+                                <td class="text-center">
+                                    <a ng-class="{disabled : asha.totalFamily == 0}"
+                                        ui-sref="techo.report.view({id:'fhs_total',type:'code',queryParams:({location_id:fhsreport.locationId,user_id:asha.id} | json)})">{{asha.totalFamily}}</a>
+                                </td>
+                                <td class="text-center" ng-if="asha.totalMember">
+                                    <a ng-class="{disabled : asha.totalMember == 0}"
+                                        ui-sref="techo.report.view({id:'fhs_members',type:'code',queryParams:({location_id:fhsreport.locationId,user_id:asha.id} | json)})">{{asha.totalMember}}
+                                    </a>
+                                </td>
+                                <td class="text-center" ng-if="!asha.totalMember">0</td>
+                            </tr>
+                            <tr ng-if="!fhsreport.ashaLists || fhsreport.ashaLists.length === 0">
+                                <td colspan="10">
+                                    No records found...
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="print-footer">
+                            <tr>
+                                <td>
+                                    {{fhsreport.footer}}
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

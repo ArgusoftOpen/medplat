@@ -1,0 +1,229 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="section-title">
+                <div class="col-2 inline-form float-right">
+                    <div class="form-group">
+                        <input type="text" ng-model="search" class="form-control cst-form-control" id="search"
+                            placeholder="Search text" style="width:100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-15">
+            <div class="cst-table table-responsive" style="overflow: auto">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <colgroup>
+                        <col class="medium-col">
+                        <col class="medium-col">
+                        <col style="width:38px">
+                    </colgroup>
+                    <thead class="cst-thead">
+                        <tr>
+                            <th class="filter-col">Name
+                            </th>
+                            <th class="filter-col">Action By
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody" ng-if='manageWidgetsController.roleList'>
+                        <tr ng-repeat="notification in manageWidgetsController.notificationList  | filter : search| orderBy : orderByField : reverseSort "
+                            ng-if="manageWidgetsController.notificationList.length > 0">
+                            <td> {{notification.notificationName}}</td>
+                            <td> <span
+                                    ng-repeat="roleId in notification.roles">{{manageWidgetsController.getRoleNameByID(roleId)[0]}}<span
+                                        ng-if='notification.roles.length-1!=$index'>,</span></span>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary"
+                                    ng-click="manageWidgetsController.toggleFilter(true,notification)">Assign</button>
+                            </td>
+                        </tr>
+                        <tr
+                            ng-if="(!manageWidgetsController.notificationList || (manageWidgetsController.notificationList).length == 0)">
+                            <td colspan="4"> No notifications are available </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <hr>
+    <div ng-style="manageWidgetsController.isFilterOpen?{'width':'800px'}:{}"
+        ng-class="manageWidgetsController.isFilterOpen ? 'filter-div active no-print' : 'filter-div no-print'">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Assign Role</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <form role="form" name="manageWidgetsController.notificationUpdateForm" novalidate>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <validate for='name' required-msg="Enter Notification Name">
+                                <label for="name" control-label> Name</label>
+                                <input readonly type="text" class="form-control cst-form-control" form-control
+                                    placeholder="Enter name" maxlength="300" name="name" id="name"
+                                    ng-model="manageWidgetsController.notificationObject.notificationName" required>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <validate for='actionBy' required-msg="Enter action by">
+                                <label for="actionBy" control-label>Action By</label>
+                                <table style="width:100%">
+                                    <tbody class="cst-tbody">
+                                        <tr>
+                                            <td style="width:60%">
+                                                <select id="actionBy" name="actionBy" class="form-control"
+                                                    chosen-directive="manageWidgetsController.roleListForActionBy"
+                                                    data-placeholder='Select Role' multiple form-control
+                                                    ng-model="manageWidgetsController.notificationObject.selectedRoles"
+                                                    ng-options="role.id as role.name for role in manageWidgetsController.roleListForActionBy">
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </td>
+                                            <td style="width:40%;">
+                                                <button style="margin-left: 2%"
+                                                    ng-disabled="!(manageWidgetsController.notificationObject.selectedRoles) || (manageWidgetsController.notificationObject.selectedRoles.length==0)"
+                                                    class="btn btn-primary"
+                                                    ng-click="manageWidgetsController.addRolestoNotificationRoleList()">
+                                                    Add
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <table
+                                class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                <colgroup>
+                                    <col class="small-col">
+                                    <col class="small-col">
+                                </colgroup>
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th class="filter-col">Role Name(Action By)</th>
+                                        <th class="filter-col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr ng-repeat='roleId in manageWidgetsController.notificationObject.roles'>
+                                        <td>
+                                            {{manageWidgetsController.getRoleNameByID(roleId)[0]}}
+                                        </td>
+                                        <td><em class="fa fa-trash"
+                                                ng-click="manageWidgetsController.deleteRoleOfNotification($index)"></em>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px"
+                    ng-repeat="level in manageWidgetsController.notificationObject.escalationLevels">
+                    <div class="col-12 mb-15">
+                        <div class="table-responsive" style="overflow: visible">
+                            <table
+                                class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                <colgroup>
+                                    <col class="small-col">
+                                    <col class="small-col">
+                                    <col class="small-col">
+                                </colgroup>
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th class="filter-col">Escalation Level</th>
+                                        <th class="filter-col">Performer</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr>
+                                        <td>
+                                            <validate for='levelName' required-msg="Enter name">
+                                                <input readonly required name="{{$index}}levelName"
+                                                    id="{{$index}}levelName" form-control class="form-control abc"
+                                                    type="text" ng-model="level.name">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </td>
+                                        <td>
+                                            <validate for='escalatedBy' required-msg="Enter roles">
+                                                <select id="escalatedBy" name="escalatedBy" class="form-control"
+                                                    chosen-directive="level.escalationRoleList"
+                                                    data-placeholder='Select Role' multiple
+                                                    ng-model="level.levelPerformers" form-control
+                                                    ng-options="role.id as role.name for role in level.escalationRoleList">
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary"
+                                                ng-disabled="!(level.levelPerformers) || (level.levelPerformers.length==0)"
+                                                ng-click="manageWidgetsController.addRolesInPerformer(level,manageWidgetsController.notificationObject)">Add
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table ng-if='level.roles.length>0'
+                                class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                <colgroup>
+                                    <col class="small-col">
+                                    <col class="medium-col">
+                                    <col class="small-col">
+                                </colgroup>
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th class="filter-col">Name</th>
+                                        <th class="filter-col">Roles with perform action</th>
+                                        <th class="filter-col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr ng-repeat='roleId in level.roles'>
+                                        <td ng-if='$index==0' rowspan="{{level.roles.length}}">
+                                            {{level.name}}
+                                        </td>
+                                        <td>
+                                            <label class="control control-checkbox">
+                                                {{manageWidgetsController.getRoleNameByID(roleId)[0]}}
+                                                <input checked="checked" type="checkbox"
+                                                    ng-model="level.performAction[roleId]">
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <em class="fa fa-trash"
+                                                ng-click="manageWidgetsController.deleteRoleOFEscalationLevel(level,$index,manageWidgetsController.notificationObject)">
+                                            </em>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr>
+                        <div class="form-group text-right">
+                            <button class="btn btn-secondary close-filter"
+                                ng-click="manageWidgetsController.toggleFilter()">Close</button>
+                            <button type="submit" class="btn btn-primary search-filter"
+                                ng-click="manageWidgetsController.updateWebNotification()">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

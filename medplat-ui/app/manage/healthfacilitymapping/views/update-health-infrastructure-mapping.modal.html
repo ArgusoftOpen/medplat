@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h4 class="text">{{ctrl.isEdit?'Edit':'Add New'}} Health Infrastructure Type </h4>
+    <button type="button" class="close" ng-click="ctrl.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body" style="overflow: inherit;">
+    <form name="ctrl.mappingInfraForm" novalidate>
+        <div class="row mb-15 align-items-end">
+            <div class="col-12">
+                <div class="form-group">
+                    <validate for="infraType" required-msg="Enter health infra type field">
+                        <label control-label>Health Infra type</label>
+                        <input form-control name="infraType" type="text" required
+                            ng-model="ctrl.mapping.healthInfraType" class="form-control cst-form-control">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <validate for="location" required-msg="Select Location Type">
+                        <label control-label>Location type</label>
+                        <select ng-size="3" id="location" name="location" class="form-control cst-form-control"
+                            form-control chosen-directive="ctrl.allLocation" data-placeholder='Select Location Type'
+                            multiple ng-model="ctrl.mapping.locationType" required
+                            ng-options="option.name for option in ctrl.allLocation | orderBy:'name'">
+                        </select>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="allowedFacilities" control-label>
+                    Allowed Facilities / Attributes
+                </label>
+                <select chosen-directive="ctrl.allFacilities" class="form-control cst-form-control" form-control
+                    ng-model="ctrl.mapping.allowedFacilities" multiple name="allowedFacilities" id="allowedFacilities"
+                    ng-options="f.code as f.value for f in ctrl.allFacilities">
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="ctrl.ok()">Save</button>
+    <button type="button" class="btn btn-secondary" ng-click="ctrl.cancel()">Close</button>
+</div>

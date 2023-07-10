@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="cst-tab">
+                <uib-tabset active='pncsearchcontroller.selectedTab'>
+                    <uib-tab index="'pnc-search-list'" heading="PNC Search List">
+                        <div class="tab-pane fade show" id="pnc-search-list" role="tabpanel"
+                            aria-labelledby="pnc-search-list" aria-expanded="true">
+                            <div ng-if="pncsearchcontroller.memberDetails.length === 0">
+                                <div class="no-data-placeholder">
+                                    <h5>No Record Found!</h5>
+                                </div>
+                            </div>
+                            <div class="cst-table table-responsive table-set-height" style="overflow: auto;"
+                                id="member-scroll" ng-if="pncsearchcontroller.memberDetails.length > 0">
+                                <table aria-describedby="table"
+                                    class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                    style="table-layout: auto">
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th id="srno" style="width: 50px;">#</th>
+                                            <th id="memberId">Member ID</th>
+                                            <th id="memberName">Member Name</th>
+                                            <th id="contactDetails">Contact Details</th>
+                                            <th id="action">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                        infinite-scroll='pncsearchcontroller.searchData()'
+                                        infinite-scroll-disabled='pncsearchcontroller.pagingService.pagingRetrivalOn'
+                                        infinite-scroll-container='"#member-scroll"'>
+                                        <tr ng-repeat="member in pncsearchcontroller.memberDetails">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{member.unique_health_id}}({{member.family_id}})</td>
+                                            <td><span
+                                                    ng-bind="member.first_name + ' ' + member.middle_name + ' ' + member.last_name"></span>
+                                            </td>
+                                            <td ng-bind="member.mobile_number ? member.mobile_number : 'Not available'">
+                                            </td>
+                                            <td><button class="btn btn-primary"
+                                                    ui-sref="techo.manage.pncdynamic({id:member.id})">Fill
+                                                    form</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="medium-div filter-div">
+    <span style="left:-66px" class="filter-toggle" ng-click="pncsearchcontroller.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <search terms="pncsearchcontroller.terms" search-fn="pncsearchcontroller.searchData(reset)" search="pncsearchcontroller.search" 
+            search-form="pncsearchcontroller.searchForm" selected-location="pncsearchcontroller.selectedLocation" selected-location-id="pncsearchcontroller.selectedLocationId"
+            close-fn="pncsearchcontroller.toggleFilter()"></search>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

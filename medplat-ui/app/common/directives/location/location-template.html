@@ -1,0 +1,72 @@
+<div style="color: red;" ng-if="noLocationInHierarchyMessage">
+    Could not retrieve {{noLocationInHierarchyMessage}}. Please add it first
+</div>
+<div ng-if="templateType === 'inline'">
+    <ng-form name='form.locationForm'>
+        <div class="form-group" ng-repeat="location in locations" ng-init="onFirstRun(location)">
+            <label>{{location.locationLabel}}
+                <span class="required-asterisk" ng-if='location.level <= requiredUptoLevel'>*</span>
+            </label>
+            <select ng-if="location.level != multipalOnLevel" class="form-control cst-form-control"
+                ng-class="{'is-invalid':(form.locationForm['level' + location.level].$dirty && form.locationForm['level' + location.level].$invalid || (form.locationForm.$$parentForm.$submitted && form.locationForm['level' + location.level].$invalid))}"
+                ng-required='location.level<=requiredUptoLevel' name='level{{location.level}}'
+                ng-options="option as option.name for option in location.locationDetails track by option.id"
+                chosen-directive="location.locationDetails"
+                ng-model="selectedLocation['level' + location.level]" ng-change="onLocationChange(location)"
+                ng-disabled="disabled" data-test="select-{{location.locationLabel}}">
+                <option value="">Select</option>
+            </select>
+            <select ng-if="location.level == multipalOnLevel" chosen-directive="selectedLocation.locationArrays" multiple="true"
+                class="form-control cst-form-control"
+                ng-class="{'is-invalid':(form.locationForm['level' + location.level].$dirty && form.locationForm['level' + location.level].$invalid || (form.locationForm.$$parentForm.$submitted && form.locationForm['level' + location.level].$invalid))}"
+                ng-required='location.level<=requiredUptoLevel' name='level{{location.level}}'
+                ng-options="option as option.name for option in location.locationDetails track by option.id"
+                chosen-directive="location.locationDetails"
+                ng-model="selectedLocation['level' + location.level]" ng-change="onLocationChange(location)"
+                ng-disabled="disabled" data-test="select-{{location.locationLabel}}">
+                <option value="">Select</option>
+            </select>
+            <span class="alert alert-danger valid-feedback"
+                ng-if="(form.locationForm['level' + location.level].$dirty && form.locationForm['level' + location.level].$invalid || (form.locationForm.$$parentForm.$submitted && form.locationForm['level' + location.level].$invalid))">
+                Please select {{location.locationLabel}}
+            </span>
+        </div>
+        <div class="form-group" ng-if="demographicFilterRequired == true">
+            <label>Demographic
+            </label>
+            <select class="form-control cst-form-control" ng-model="selectedLocation.selectedDemographic"
+                ng-change='onDemographicChange()'>
+                <option value="">Both</option>
+                <option value="U">Urban</option>
+                <option value="R">Rural</option>
+            </select>
+        </div>
+    </ng-form>
+</div>
+<div ng-if="templateType === 'twoPart'">
+    <ng-form name="form.locationForm">
+        <div class="row ">
+            <div class="col-6" ng-repeat="location in locations" ng-init="index = $index; onFirstRun(location)">
+                <div class="form-group " ng-class="{'form-group-mb-1': !$last && ($index - 1) % 2 === 0}">
+                    <label>{{location.locationLabel}}
+                        <span class="required-asterisk" ng-if='location.level <= requiredUptoLevel'>*</span>
+                    </label>
+                    <select tabindex="{{$index + 1}}" class="form-control cst-form-control"
+                        ng-init="form.locationForm['level' + location.level].$dirty = false"
+                        ng-class="{'is-invalid':(form.locationForm['level' + location.level].$dirty && form.locationForm['level' + location.level].$invalid || (form.locationForm.$$parentForm.$submitted && form.locationForm['level' + location.level].$invalid))}"
+                        ng-required='location.level<=requiredUptoLevel' name='level{{location.level}}'
+                        ng-options="option as option.name for option in location.locationDetails track by option.id"
+                        chosen-directive="location.locationDetails"
+                        ng-model="selectedLocation['level' + location.level]" ng-change="onLocationChange(location)"
+                        ng-disabled="disabled" data-test="select-{{location.locationLabel}}">
+                        <option value="">Select</option>
+                    </select>
+                    <span class="alert alert-danger valid-feedback"
+                        ng-if="((form.locationForm['level' + location.level].$dirty && form.locationForm['level' + location.level].$invalid) || (form.locationForm.$$parentForm.$submitted && form.locationForm['level' + location.level].$invalid))">
+                        Please select {{location.locationLabel}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </ng-form>
+</div>

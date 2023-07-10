@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h4 class="text">Select File Type</h4>
+</div>
+<form role="form" name="fileTypeCtrl.fileTypeForm" id="fileTypeForm" novalidate>
+    <div class="modal-body" style="overflow: inherit;max-height: none">
+        <div class="inline-form">
+            <div class="row">
+                <div class="col-10 bottom-spacer-20">
+                    <div class="form-group">
+                        <validate for='fileType' required-msg="Select File Type">
+                            <label for="fileType" control-label>Type</label>
+                            <select class="form-control cst-form-control" form-control ng-model="fileTypeCtrl.fileType"
+                                name="locationId" id="fileType" required>
+                                <option value="" selected>--Select--</option>
+                                <option value="PDF" selected>Pdf</option>
+                                <option value="EXCEL" selected>Excel</option>
+                            </select>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit" ng-click="fileTypeCtrl.submit()">Save</button>
+            <button class="btn btn-secondary" ng-click="fileTypeCtrl.cancel()">Cancel</button>
+        </div>
+    </div>
+</form>

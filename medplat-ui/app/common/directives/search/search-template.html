@@ -1,0 +1,237 @@
+<style>
+    @media only screen and (max-width: 850px){
+        .medium-div{
+            width: 300px;
+            right: -304px;
+        }
+        .label{
+            margin-left: 0%; 
+            margin-top: 0px;
+        }
+        br{
+            display: none;
+        }
+    }
+</style>
+<form name="searchForm" novalidate>
+    <div class="row">
+        <div class="col-12" ng-if="memberType.length > 0">
+            <div class="form-group">
+                <label>Search For: </label>
+                <label class="control control-radio ml-2" ng-repeat="type in memberType">{{type}}
+                    <input type="radio" name="{{type}}" icheck ng-model="search.searchFor"
+                        ng-change="ctrl.resetSearchString()" value="{{type}}" />
+                    <div class="control_indicator"></div>
+                </label>
+            </div>
+        </div>
+        <div class="col-12" ng-if="((memberType.length > 0 && memberType.includes(search.searchFor)) || memberType.length === 0) && filteredLabels.length > 0">
+            <div class="form-group">
+                <label>Search By: </label>
+                <div ng-repeat="label in filteredLabels">
+                    <div ng-if="$index % 3 === 0">
+                        <label ng-repeat="label in filteredLabels.slice($index, $index + 3)" class="control control-radio ml-2 mb-2">{{label.name}}
+                            <input type="radio" name="search" icheck ng-model="search.searchBy"
+                                ng-change="resetSearchString()" value="{{label.value}}" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <br>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="search.searchBy === 'organization unit'">
+                    <location-directive template-type="'twoPart'" ng-model="selectedLocation['locationId']"
+                        selected-location="selectedLocation" required-upto-level="filteredLabels[selectedIndex].config.requiredUptoLevel"
+                        fetch-upto-level="filteredLabels[selectedIndex].config.fetchUptoLevel" template-type="'inline'" 
+                        fetch-according-to-user-aoi="filteredLabels[selectedIndex].config.isFetchAoi"> </location-directive>
+                </div>
+                <div ng-if="search.searchBy === 'name'">
+                    <location-directive template-type="'twoPart'" ng-model="selectedLocation['locationId']"
+                        selected-location="selectedLocation" required-upto-level="filteredLabels[selectedIndex].config.requiredUptoLevel"
+                        fetch-upto-level="tfilteredLabels[selectedIndex].config.fetchUptoLevel" template-type="'inline'" 
+                        fetch-according-to-user-aoi="filteredLabels[selectedIndex].config.isFetchAoi"> </location-directive>
+                    <div class="form-group" style="width: 48%;">
+                        <validate for="name" minlength-msg="Name should be at least {{filteredLabels[selectedIndex].config.minlength}} characters"
+                            maxlength-msg="Name should should not be more than {{filteredLabels[selectedIndex].config.maxlength}} characters"
+                            required-msg="Please enter the name">
+                            <input style="margin-top: 10px;" type="text" name="name" form-control
+                                maxlength="{{filteredLabels[selectedIndex].config.maxlength}}" minlength="{{filteredLabels[selectedIndex].config.minlength}}" id="name"
+                                ng-model="search.searchString" placeholder="Enter Name" class="form-control"
+                                required />
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+                <div ng-if="search.searchBy === 'lmp'">
+                    <location-directive template-type="'twoPart'" ng-model="selectedLocation['locationId']"
+                        selected-location="selectedLocation" required-upto-level="filteredLabels[selectedIndex].config.requiredUptoLevel"
+                        fetch-upto-level="filteredLabels[selectedIndex].config.fetchUptoLevel" template-type="'inline'" 
+                        fetch-according-to-user-aoi="filteredLabels[selectedIndex].config.isFetchAoi"> </location-directive>
+                    <div class="form-group" style="width: 48%;">
+                        <validate for='lmp' required-msg="Select LMP Date">
+                            <input type="text" style="float:left; margin-top: 10px;" datepicker tabindex="8"
+                                name="lmp" form-control id="lmp"
+                                min-date="filteredLabels[selectedIndex].config.minDate" max-date="filteredLabels[selectedIndex].config.maxDate"
+                                ng-model="search.searchString" required/>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+                <div ng-if="search.searchBy === 'edd'">
+                    <location-directive template-type="'twoPart'" ng-model="selectedLocation['locationId']"
+                        selected-location="selectedLocation" required-upto-level="filteredLabels[selectedIndex].config.requiredUptoLevel"
+                        fetch-upto-level="filteredLabels[selectedIndex].config.fetchUptoLevel" template-type="'inline'" 
+                        fetch-according-to-user-aoi="filteredLabels[selectedIndex].config.isFetchAoi"> </location-directive>
+                    <div class="form-group" style="width: 48%;">
+                        <validate for='edd' required-msg="Select EDD Date">
+                            <input type="text" style="float:left; margin-top: 10px;" datepicker tabindex="8"
+                                name="edd" form-control id="edd" id="edd"
+                                min-date="filteredLabels[selectedIndex].config.minDate" max-date="filteredLabels[selectedIndex].config.maxDate"
+                                ng-model="search.searchString" required/>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'village name'">
+                    <label>Search village</label>
+                    <selectize class="form-control cst-form-control disabled-input"
+                        ng-model="selectedLocation['locationId']" config='locationSelectizeWpd'>
+                        <option value=''>Select</option>
+                    </selectize>
+                </div>
+                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'mobile number'">
+                    <validate for="mobileNumber" minlength-msg="Mobile number should be at least {{filteredLabels[selectedIndex].config.minlength}} digits"
+                        maxlength-msg="Mobile number should should not be more than {{filteredLabels[selectedIndex].config.maxlength}} digits"
+                        required-msg="Please enter the mobile number">
+                        <input type="number" name="mobileNumber" form-control id="mobileNumber"
+                            ng-model="search.searchString" placeholder='Enter contact number'
+                            class="form-control" maxlength="{{filteredLabels[selectedIndex].config.maxlength}}" minlength="{{filteredLabels[selectedIndex].config.minlength}}" required />
+                        <placeholder></placeholder>
+                    </validate>
+                    <label style="margin-top:2%" class="form-group control control-checkbox">
+                        <input ng-model="search.familyMobileNumber" type="checkbox">
+                        <div class="control_indicator checkbox-success"></div>
+                        Search mobile number in family
+                    </label>
+                </div>
+                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'member id'">
+                    <validate for="memberId" pattern-msg='Enter Valid details'
+                        minlength-msg="Member id should be at least {{filteredLabels[selectedIndex].config.minlength}} characters"
+                        maxlength-msg="Member id should should not be more than {{filteredLabels[selectedIndex].config.maxlength}} characters"
+                        required-msg="Please enter the member id">
+                        <input type="text" name="memberId" form-control
+                            ng-model="search.searchString" id="memberId"
+                            maxlength="{{filteredLabels[selectedIndex].config.maxlength}}" minlength="{{filteredLabels[selectedIndex].config.memberId.minlength}}"
+                            placeholder="Enter {{search.searchBy}}" class="form-control" required />
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'family id'">
+                    <validate for="familyId" pattern-msg='Enter Valid details'
+                        minlength-msg="Family id should be at least {{filteredLabels[selectedIndex].config.minlength}} characters"
+                        maxlength-msg="Family id should should not be more than {{filteredLabels[selectedIndex].config.maxlength}} characters"
+                        required-msg="Please enter the family id">
+                        <input type="text" name="familyId" form-control
+                            ng-model="search.searchString" id="familyId"
+                            maxlength="{{filteredLabels[selectedIndex].config.maxlength}}" minlength="{{filteredLabels[selectedIndex].config.minlength}}"
+                            placeholder="Enter {{search.searchBy}}" class="form-control" required />
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'maaVatsalya'">
+                    <validate for="maaVatsalya" pattern-msg='Enter Valid details'
+                        minlength-msg="Maa Vatsalya no. should be at least {{filteredLabels[selectedIndex].config.minlength}} characters"
+                        maxlength-msg="Maa Vatsalya no. should should not be more than {{filteredLabels[selectedIndex].config.maxlength}} characters"
+                        required-msg="Please enter the Maa Vatsalya no.">
+                        <input type="text" name="maaVatsalya" form-control
+                            ng-model="search.searchString" id="maaVatsalya"
+                            maxlength="{{filteredLabels[selectedIndex].config.maxlength}}" minlength="{{filteredLabels[selectedIndex].config.minlength}}"
+                            placeholder="Enter Maa Vatsalya Card no." class="form-control" required />
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'abha number'">
+                    <validate for="abhaNumber"
+                        required-msg="Please enter the abha number"
+                        healthid-msg="Please enter a valid abha number">
+                        <input type="text" name="abhaNumber" form-control id="abhaNumber"
+                            ng-model="search.searchString" placeholder="Enter Abha Number" ng-change="validateAbhaNumber(search.searchString)"
+                            class="form-control" required />
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'abha address'">
+                    <validate for="abhaAddress" pattern-msg='Enter Valid details'
+                        minlength-msg="Abha Address should be at least {{filteredLabels[selectedIndex].config.minlength}} characters"
+                        maxlength-msg="Abha Address should not be more than {{filteredLabels[selectedIndex].config.maxlength}} characters"
+                        required-msg="Please enter the abha address">
+                        <input type="text" name="abhaAddress" form-control id="abhaAddress"
+                            ng-model="search.searchString" placeholder="Enter Abha Address"
+                            maxlength="{{filteredLabels[selectedIndex].config.maxlength}}" minlength="{{filteredLabels[selectedIndex].config.minlength}}"
+                            class="form-control" required />
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div ng-if="search.searchBy === 'dob'">
+                    <location-directive template-type="'twoPart'"
+                        ng-model="selectedLocation['locationId']"
+                        selected-location="selectedLocation" fetch-upto-level="filteredLabels[selectedIndex].config.fetchUptoLevel"
+                        required-upto-level="filteredLabels[selectedIndex].config.requiredUptoLevel" template-type="'inline'" fetch-according-to-user-aoi="filteredLabels[selectedIndex].config.isFetchAoi">
+                    </location-directive>
+                    <div class="form-group">
+                        <validate for='dob' pattern-msg="Select Date" required-msg="Please select dob">
+                            <input type="text" style="width: 48%;float:left;" datepicker tabindex="8"
+                                name="dob" form-control id="dob" min-date="filteredLabels[selectedIndex].config.minDate" max-date="filteredLabels[selectedIndex].config.maxDate"
+                                ng-model="search.searchString" required>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+                <!-- <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'disease'">
+                    <label for="disease" control-label>
+                        Select Disease
+                    </label>
+                    <select class="form-control cst-form-control" form-control
+                        ng-model="search.searchString" name="disease" id="disease">
+                        <option value="All" selected>All</option>
+                        <option value="HT">Hypertension</option>
+                        <option value="D">Diabetes</option>
+                        <option value="O">Oral</option>
+                        <option value="B">Breast</option>
+                        <option value="C">Cervical</option>
+                    </select>
+                </div> -->
+                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'pmjay'">
+                    <validate for="pmjay" pattern-msg='Enter Valid Number'
+                        minlength-msg="PMJAY Card no. should be at least {{filteredLabels[selectedIndex].config.minlength}} characters"
+                        maxlength-msg="PMJAY Card no. should not be more than {{filteredLabels[selectedIndex].config.maxlength}} characters"
+                        required-msg="Please enter the PMJAY card no.">
+                        <input type="text" name="pmjay" form-control
+                            ng-model="search.searchString" id="pmjay"
+                            maxlength="{{filteredLabels[selectedIndex].config.maxlength}}" minlength="{{filteredLabels[selectedIndex].config.minlength}}"
+                            placeholder='Enter PMJAY Card number' class="form-control" required />
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'ration'">
+                    <validate for="ration" pattern-msg='Enter Valid Number'
+                        minlength-msg="Ration Card no. should be at least {{filteredLabels[selectedIndex].config.minlength}} characters"
+                        maxlength-msg="Ration Card no. should not be more than {{filteredLabels[selectedIndex].config.maxlength}} characters"
+                        required-msg="Please enter the ration card no.">
+                        <input type="text" name="ration" form-control
+                            ng-model="search.searchString" id="ration"
+                            maxlength="{{filteredLabels[selectedIndex].config.maxlength}}" minlength="{{filteredLabels[selectedIndex].config.minlength}}"
+                            placeholder='Enter Ration Card number' class="form-control" required />
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" ng-if="((memberType.length > 0 && memberType.includes(search.searchFor)) || memberType.length === 0) && filteredLabels.length > 0">
+            <hr>
+            <div class="form-group text-right">
+                <button class="btn btn-secondary close-filter" ng-click="closeFn()">Close</button>
+                <button type="submit" class="btn btn-primary search-filter" ng-disabled="!search.searchBy" ng-click="searchFn({reset: true})">Search</button>
+            </div>
+        </div>
+    </div>
+</form>

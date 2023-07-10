@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4 class="text">Are you sure you want to make RCH Data Sync Request?</h4>
+    <button type="button" class="close" ng-click="rchModal.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="section-title">
+        <h4 class="text">Last RCH Data Sync Details</h4>
+    </div>
+    <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed"
+        style="table-layout: fixed">
+        <tr ng-if="rchModal.lastSync.length>0">
+            <td>Executed On</td>
+            <td>{{rchModal.lastSync[0].executed_on | date : 'dd-MM-yyyy'}}</td>
+        </tr>
+        <tr ng-if="rchModal.lastSync.length == 0" class="no-data-placeholder">
+            <td colspan="2"> Sorry No Past Request Record </td>
+        </tr>
+    </table>
+
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="rchModal.submit()">Continue</button>
+    <button type="button" class="btn btn-secondary" ng-click="rchModal.cancel()">Close</button>
+</div>

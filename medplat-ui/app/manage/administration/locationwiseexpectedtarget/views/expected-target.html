@@ -1,0 +1,379 @@
+<style>
+    .align-center-h {
+        text-align: center;
+    }
+
+    .align-right-h {
+        text-align: right;
+        float: right;
+    }
+
+    .count-match {
+        background-color: green;
+        color: white;
+    }
+
+    .count-not-match {
+        background-color: red;
+        color: white;
+    }
+</style>
+<div class="container-fluid fhsr-verification">
+    <div class="row" ng-if="expectedTargetController.currentLocation">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div>
+                        <h4 class="text align-center-h">Targets to be distributed</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <div class="row">
+                        <div class="col-12 md-15">
+                            <div class="cst-table table-responsive">
+                                <form role="form" name="expectedTargetController.targetDistributionForm"
+                                    aria-label="targetDistributionForm" id="targetDistributionForm" novalidate>
+                                    <table aria-describedby="table"
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th id="SrNo" style="width: 5%;">#</th>
+                                                <th id="LocationName" class="white-space-unset">Location Name</th>
+                                                <th id="NoOfMotherRegistered" class="white-space-unset">No Of Mother
+                                                    Registered</th>
+                                                <th id="NoOfExpectedDeliveryRegistered" class="white-space-unset">
+                                                    No Of Expected Delivery Registered
+                                                </th>
+                                                <th id="NoOfexpectedvaccinationdose" class="white-space-unset">
+                                                    No Of expected vaccination dose(ELA,DPT,OPV,Measles,Vitamin A)
+                                                </th>
+                                                <th id="NoOfexpectedvaccinationdose" class="white-space-unset">
+                                                    2nd Year No Of expected vaccination dose(DPT Booster 1st & 2nd Dose,
+                                                    OPV Booster,
+                                                    Measles 2nd Dose and Vitamin A 2nd Dose)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr>
+                                                <td></td>
+                                                <td>{{expectedTargetController.currentLocation.name}}
+                                                    ({{expectedTargetController.currentLocation.type | locationName}})
+                                                    <em style="float: right;color: red"
+                                                        ng-if="expectedTargetController.currentLocation.state===expectedTargetController.lockedState"
+                                                        class="fa fa-lock fa-lg"></em>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <validate for="expectedMotherReg"
+                                                            required-msg="Enter No Of Mother Registered">
+                                                            <input style="width: 100%;" type="number" min="0"
+                                                                max="100000000" pattern="^[0-9]*$"
+                                                                class="form-control cst-form-control print-input"
+                                                                form-control name="expectedMotherReg"
+                                                                id="expectedMotherReg"
+                                                                ng-disabled="expectedTargetController.disableState"
+                                                                ng-model="expectedTargetController.currentLocation.Expected_Mthr_Reg"
+                                                                required>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <validate for="expectedDeliveryReg"
+                                                            required-msg="Enter No Of Expected Delivery Registered">
+                                                            <input style="width: 100%;" type="number" min="0"
+                                                                max="100000000" pattern="^[0-9]*$"
+                                                                class="form-control cst-form-control print-input"
+                                                                form-control name="expectedDeliveryReg"
+                                                                id="expectedDeliveryReg"
+                                                                ng-disabled="expectedTargetController.disableState"
+                                                                ng-model="expectedTargetController.currentLocation.Expected_Del_Reg"
+                                                                required>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <validate for='eLADPTOPVMesVitA1Dose'
+                                                            required-msg="Enter No Of expected vaccination dose">
+                                                            <input style="width: 100%;" type="number" min="0"
+                                                                max="100000000" pattern="^[0-9]*$"
+                                                                class="form-control cst-form-control print-input"
+                                                                form-control name="eLADPTOPVMesVitA1Dose"
+                                                                id="eLADPTOPVMesVitA1Dose"
+                                                                ng-disabled="expectedTargetController.disableState"
+                                                                ng-model="expectedTargetController.currentLocation.ELA_DPT_OPV_Mes_VitA_1Dose"
+                                                                required>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <validate for='2ndeLADPTOPVMesVitA1Dose'
+                                                            required-msg="Enter 2nd Year No Of expected vaccination dose">
+                                                            <input style="width: 100%;" type="number" min="0"
+                                                                max="100000000" pattern="^[0-9]*$"
+                                                                class="form-control cst-form-control print-input"
+                                                                form-control name="2ndeLADPTOPVMesVitA1Dose"
+                                                                id="2ndeLADPTOPVMesVitA1Dose"
+                                                                ng-disabled="expectedTargetController.disableState"
+                                                                ng-model="expectedTargetController.currentLocation.ELA_DPT_OPV_Mes_VitA_2Dose"
+                                                                required>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" ng-if="expectedTargetController.selectedLocationLevel===0">
+                        <div class="col-12 text-center">
+                            <div class="btn btn-primary"
+                                ng-if="expectedTargetController.currentLocation.state===expectedTargetController.draftState"
+                                ng-click="expectedTargetController.saveStateTarget(expectedTargetController.draftState)">
+                                <em class="fa fa-floppy-o"></em>
+                                Save
+                            </div>
+                            <div class="btn btn-danger"
+                                ng-if="expectedTargetController.rights.canLock && (expectedTargetController.currentLocation.state===expectedTargetController.draftState || expectedTargetController.currentLocation.state===expectedTargetController.unlockedState)"
+                                ng-click="expectedTargetController.saveStateTarget(expectedTargetController.lockedState)">
+                                <em class="fa fa-lock"></em>
+                                Save & Lock
+                            </div>
+                            <div class="btn btn-success"
+                                ng-if="expectedTargetController.rights.canLock && expectedTargetController.rights.canUnlock && expectedTargetController.currentLocation.state===expectedTargetController.lockedState"
+                                ng-click="expectedTargetController.unlockStateTarget()">
+                                <em class="fa fa-unlock"></em>
+                                Unlock
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="float-right">
+                <i class="fa fa-print " aria-hidden="true" uib-tooltip="Print pdf"
+                    style="cursor: pointer;font-size: 20px" title="Print PDF"
+                    ng-click="expectedTargetController.printReport()">
+                </i>
+                <i ng-click="expectedTargetController.saveExcel()" style="cursor: pointer;font-size: 20px"
+                    uib-tooltip="Download excel" class="fa fa-file-excel-o  excelglyphicon font-size-20"
+                    aria-hidden="true" title="Download excel">
+                </i>
+            </div>
+        </div>
+        <div class="col-12 md-15" id="printableDiv">
+            <div class="cst-table table-responsive" ng-if="expectedTargetController.locationList.length > 0">
+                <form role="form" name="expectedTargetController.expectedTargetForm" aria-label="expectedTargetForm"
+                    id="expectedTargetForm" novalidate>
+                    <table aria-describedby="table"
+                        class="table table-sm table-striped filter-table table-fixed table-bordered">
+                        <thead class="cst-thead">
+                            <tr>
+                                <th id="SrNo" style="width: 5%;">#</th>
+                                <th id="LocationName" class="white-space-unset">Location Name</th>
+                                <th id="NoOfMotherRegistered" class="white-space-unset">No Of Mother Registered</th>
+                                <th id="NoOfExpectedDeliveryRegistered" class="white-space-unset">
+                                    No Of Expected Delivery Registered
+                                </th>
+                                <th id="NoOfexpectedvaccinationdose" class="white-space-unset">
+                                    No Of expected vaccination dose(ELA,DPT,OPV,Measles,Vitamin A)
+                                </th>
+                                <th id="NoOfexpectedvaccinationdose" class="white-space-unset">
+                                    2nd Year No Of expected vaccination dose(DPT Booster 1st & 2nd Dose, OPV Booster,
+                                    Measles 2nd Dose and Vitamin A 2nd Dose)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="cst-tbody">
+                            <tr ng-repeat="location in expectedTargetController.locationList">
+                                <td>{{$index + 1}}</td>
+                                <td>{{::location.name}}</td>
+                                <td>
+                                    <div class="form-group">
+                                        <validate for="expectedMotherReg{{$index}}"
+                                            required-msg="Enter No Of Mother Registered">
+                                            <input type="number" min="0" max="100000000" pattern="^[0-9]*$"
+                                                class="form-control cst-form-control print-input" form-control
+                                                name="expectedMotherReg{{$index}}" id="expectedMotherReg{{$index}}"
+                                                ng-disabled="expectedTargetController.disableCurrentLocationLevel"
+                                                ng-change="expectedTargetController.calculateTotal('MOTHER_REGISTERED')"
+                                                ng-model="location.Expected_Mthr_Reg" required>
+                                        </validate>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <validate for="expectedDeliveryReg{{$index}}"
+                                            required-msg="Enter No Of Expected Delivery Registered">
+                                            <input type="number" min="0" max="100000000" pattern="^[0-9]*$"
+                                                class="form-control cst-form-control print-input" form-control
+                                                name="expectedDeliveryReg{{$index}}" id="expectedDeliveryReg{{$index}}"
+                                                ng-disabled="expectedTargetController.disableCurrentLocationLevel"
+                                                ng-change="expectedTargetController.calculateTotal('DELIVERY_REGISTERED')"
+                                                ng-model="location.Expected_Del_Reg" required>
+                                        </validate>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <validate for='eLADPTOPVMesVitA1Dose{{$index}}'
+                                            required-msg="Enter No Of expected vaccination dose">
+                                            <input type="number" min="0" max="100000000" pattern="^[0-9]*$"
+                                                class="form-control cst-form-control print-input" form-control
+                                                name="eLADPTOPVMesVitA1Dose{{$index}}"
+                                                id="eLADPTOPVMesVitA1Dose{{$index}}"
+                                                ng-disabled="expectedTargetController.disableCurrentLocationLevel"
+                                                ng-change="expectedTargetController.calculateTotal('VACCINATION_1')"
+                                                ng-model="location.ELA_DPT_OPV_Mes_VitA_1Dose" required>
+                                        </validate>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <validate for='2ndeLADPTOPVMesVitA2Dose{{$index}}'
+                                            required-msg="Enter 2nd Year No Of expected vaccination dose">
+                                            <input type="number" min="0" max="100000000" pattern="^[0-9]*$"
+                                                class="form-control cst-form-control print-input" form-control
+                                                name="2ndeLADPTOPVMesVitA2Dose{{$index}}"
+                                                id="2ndeLADPTOPVMesVitA2Dose{{$index}}"
+                                                ng-disabled="expectedTargetController.disableCurrentLocationLevel"
+                                                ng-change="expectedTargetController.calculateTotal('VACCINATION_2')"
+                                                ng-model="location.ELA_DPT_OPV_Mes_VitA_2Dose" required>
+                                        </validate>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><strong>Total </strong><em style="float: right;color: red"
+                                        ng-if="expectedTargetController.currentLocationLevelState===expectedTargetController.lockedState"
+                                        class="fa fa-lock fa-lg"></em></td>
+                                <td><strong>{{expectedTargetController.total.motherRegistered}}</strong></td>
+                                <td><strong>{{expectedTargetController.total.deliveryRegistered}}</strong></td>
+                                <td><strong>{{expectedTargetController.total.vaccinationDose}}</strong></td>
+                                <td><strong>{{expectedTargetController.total.year2ndVaccinationDose}}</strong></td>
+                            </tr>
+                            <tr class="no-print">
+                                <td></td>
+                                <td><strong>Difference</strong></td>
+                                <td
+                                    ng-class="expectedTargetController.difference.motherRegistered===0?'count-match':'count-not-match'">
+                                    {{expectedTargetController.difference.motherRegistered}}</td>
+                                <td
+                                    ng-class="expectedTargetController.difference.deliveryRegistered===0?'count-match':'count-not-match'">
+                                    {{expectedTargetController.difference.deliveryRegistered}}</td>
+                                <td
+                                    ng-class="expectedTargetController.difference.vaccinationDose===0?'count-match':'count-not-match'">
+                                    {{expectedTargetController.difference.vaccinationDose}}</td>
+                                <td
+                                    ng-class="expectedTargetController.difference.year2ndVaccinationDose===0?'count-match':'count-not-match'">
+                                    {{expectedTargetController.difference.year2ndVaccinationDose}}</td>
+                            </tr>
+                            <tr class="no-print"
+                                ng-if="expectedTargetController.currentLocationLevelState === expectedTargetController.draftState && !expectedTargetController.disableCurrentLocationLevel">
+                                <td></td>
+                                <td></td>
+                                <td class="text-center">
+                                    <div class="btn btn-primary"
+                                        ng-click="expectedTargetController.saveMotherRegistered()"><em
+                                            class="fa fa-floppy-o"></em> Save
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn btn-primary"
+                                        ng-click="expectedTargetController.saveDeliveryRegistered()"><em
+                                            class="fa fa-floppy-o"></em> Save
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn btn-primary" ng-click="expectedTargetController.saveVaccination1()">
+                                        <em class="fa fa-floppy-o"></em> Save
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn btn-primary" ng-click="expectedTargetController.saveVaccination2()">
+                                        <em class="fa fa-floppy-o"></em> Save
+                                </td>
+                            </tr>
+                            <tr class="no-print">
+                                <td></td>
+                                <td></td>
+                                <td class="text-center" colspan="4">
+                                    <div class="btn btn-danger"
+                                        ng-if="expectedTargetController.rights.canLock && !expectedTargetController.disableCurrentLocationLevel && (expectedTargetController.currentLocationLevelState===expectedTargetController.draftState || expectedTargetController.currentLocationLevelState===expectedTargetController.unlockedState)"
+                                        ng-click="expectedTargetController.saveAndLockExpectedTarget()">
+                                        <em class="fa fa-lock"></em>
+                                        Save & Lock
+                                    </div>
+                                    <div class="btn btn-success"
+                                        ng-if="expectedTargetController.rights.canLock && expectedTargetController.rights.canUnlock && expectedTargetController.currentLocationLevelState===expectedTargetController.lockedState"
+                                        ng-click="expectedTargetController.unlockExpectedTarget()">
+                                        <em class="fa fa-unlock"></em>
+                                        Unlock
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="print-footer">
+                            <tr>
+                                <td colspan="8">
+                                    {{expectedTargetController.footer}}
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div active">
+        <span class="filter-toggle" ng-click="expectedTargetController.toggleFilter()">Select Location</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Select Location</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <ng-form name="expectedTargetController.locationForm">
+                <div class="row">
+                    <div class="col-12">
+                        <location-directive ng-model="expectedTargetController.selectedLocationIdFromFilter"
+                            fetch-according-to-user-aoi="true" fetch-upto-level="5" required-upto-level="1"
+                            passed-location-level="expectedTargetController.locationLevel"
+                            selected-location="expectedTargetController.selectedLocation">
+                        </location-directive>
+                        <br>
+                    </div>
+                    <div class="col-12">
+                        <validate for='financialyear' required-msg="Please select financial year">
+                            <label for="financialyear" control-label>Select Financial Year</label>
+                            <select class="form-control cst-form-control" form-control
+                                ng-model="expectedTargetController.expectedTargetDto.financialYear" name="financialyear"
+                                id="financialyear"
+                                ng-options="range.year as range.year for range in expectedTargetController.financialYearRanges"
+                                required>
+                                <option value="">--Select--</option>
+                            </select>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                    <div class="col-12">
+                        <hr>
+                        <div class="form-group text-right">
+                            <button class="btn btn-secondary close-filter"
+                                ng-click="expectedTargetController.toggleFilter()">Close</button>
+                            <button class="btn btn-primary search-filter"
+                                ng-click="expectedTargetController.searchLocation(true)">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+        </div>
+    </div>
+</div>

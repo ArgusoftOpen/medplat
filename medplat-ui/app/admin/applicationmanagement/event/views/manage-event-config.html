@@ -1,0 +1,228 @@
+<div class="container-fluid">
+    <div class="row" ng-form="eventConfig.manageTemplateForm">
+        <div class="col-12 mb-15">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Add Event Configuration</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-15">
+                        <div class="col-12 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <validate for='name' required-msg="Enter name">
+                                    <label control-label>Name</label>
+                                    <input type="text" class="form-control cst-form-control" form-control
+                                        ng-model="eventConfig.eventObj.name" name="name" id="name" required>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <validate for='Description' required-msg="Select report type">
+                                    <label for="Description" control-label>Description</label>
+                                    <textarea type="text" class="form-control cst-form-control" form-control
+                                        ng-model="eventConfig.eventObj.description" name="Description" id="Description"
+                                        rows="3"></textarea>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-15">
+                        <div class="col-12 col-lg-6 col-xl-6">
+                            <div class="form-group form-group-mb-1">
+                                <validate for="menuType" required-msg="Select event type">
+                                    <label for="menuType" control-label>Event Type</label>
+                                    <select id="reportgroup" name="menuType" class="form-control cst-form-control"
+                                        form-control ng-model="eventConfig.eventObj.eventType"
+                                        ng-change='eventConfig.onEventChange()' required>
+                                        <option value="">Select</option>
+                                        <option value="FORM_SUBMITTED">Form Submitted</option>
+                                        <option value="TIMMER_BASED">Timer Based</option>
+                                        <option value="MANUAL">Manual</option>
+                                    </select>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-6"
+                            ng-if="eventConfig.eventObj.eventType === 'FORM_SUBMITTED'">
+                            <div class="form-group">
+                                <validate for="Form" required-msg="Select form type">
+                                    <label for="Form" control-label>Form Type</label>
+                                    <select id="reportgroup" name="Form" class="form-control cst-form-control"
+                                        ng-model="eventConfig.eventObj.form"
+                                        ng-options="form as form.name for form in eventConfig.forms"
+                                        chosen-directive="eventConfig.forms" form-control>
+                                        <option value="">None</option>
+                                    </select>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-6" ng-if="eventConfig.eventObj.eventType === 'MANUAL'">
+                            <div class="form-group">
+                                <validate for="Event" required-msg="Select form type">
+                                    <label for="Event" control-label>Event</label>
+                                    <select id="Event" name="Event" class="form-control cst-form-control"
+                                        ng-model="eventConfig.eventObj.eventTypeDetailCode"
+                                        ng-options="key as value for (key,value) in eventConfig.events" form-control>
+                                        <option value="">None</option>
+                                    </select>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-6" ng-if="eventConfig.eventObj.eventType === 'TIMMER_BASED'">
+                            <div class="form-group">
+                                <validate for="triggerWhen" required-msg="Select trigger when">
+
+                                    <label for="triggerWhen" control-label>Trigger When</label>
+                                    <select id="reportgroup" name="triggerWhen" class="form-control cst-form-control"
+                                        form-control ng-model="eventConfig.eventObj.trigerWhen"
+                                        ng-change="eventConfig.onTriggerWhenChange()" required>
+                                        <option value=""> Select</option>
+                                        <option value="IMMEDIATELY">Immediately</option>
+                                        <option value="AFTER">After</option>
+                                        <option value="MONTHLY">Monthly</option>
+                                        <option value="DAILY">Daily</option>
+                                        <option value="HOURLY">Hourly</option>
+                                        <option value="MINUTE">Minutely</option>
+                                    </select>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-6"
+                            ng-if="eventConfig.eventObj.trigerWhen == 'AFTER' || eventConfig.eventObj.trigerWhen === 'MONTHLY'">
+                            <div class="form-group form-group-mb-1">
+                                <validate for="day" required-msg="Enter day">
+                                    <label control-label> Day</label>
+                                    <input type="number" class="form-control cst-form-control" form-control
+                                        ng-model="eventConfig.eventObj.day" name="day" id="day" required>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-6"
+                            ng-if="eventConfig.eventObj.trigerWhen === 'AFTER' || eventConfig.eventObj.trigerWhen === 'MONTHLY' || eventConfig.eventObj.trigerWhen === 'DAILY'">
+                            <div class="form-group">
+                                <validate for="hour" required-msg="Enter hour">
+                                    <label control-label> Hour</label>
+                                    <input type="number" class="form-control cst-form-control" form-control
+                                        ng-model="eventConfig.eventObj.hour" name="hour" id="day" required>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-6"
+                            ng-if="eventConfig.eventObj.trigerWhen  && eventConfig.eventObj.trigerWhen !== 'IMMEDIATELY' ">
+                            <div class="form-group">
+                                <validate for="minute" required-msg="Enter minute">
+                                    <label control-label> Minute</label>
+                                    <input type="number" class="form-control cst-form-control" form-control
+                                        ng-model="eventConfig.eventObj.minute" name="minute" id="day" required>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-15">
+                        <div class="col-12">
+                            <h4 class="card-sub-title">Add Configuration
+                                <button class="btn btn-primary pull-right" ng-click="eventConfig.addConfiguration()">
+                                    Add
+                                </button>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row  mb-15 ">
+                        <div class="col-12">
+                            <div class="cst-table table-responsive">
+                                <table class="table table-sm table-striped table-bordered header-fixed">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 60%;">
+                                                Query
+                                            </th>
+                                            <th>
+                                                Condition
+                                            </th>
+                                            <th>
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-form="eventConfig.configurationForm.form{{$index}}" isolate-form
+                                            ng-repeat="config in eventConfig.eventObj.notificationConfigDetails"
+                                            ng-if="eventConfig.eventObj.notificationConfigDetails.length > 0">
+                                            <td>
+                                                <div class="form-group ">
+                                                    <validate for="query{{$index}}" required-msg="Enter query">
+                                                        <textarea class="form-control cst-form-control" required=""
+                                                            name="query{{$index}}" form-control ng-model="config.query"
+                                                            ng-blur="eventConfig.setImplicitParam(config)" rows="3">
+                                                        </textarea>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                    <strong ng-repeat="param in config.implicitParam"
+                                                        ng-bind="' '+param">
+                                                    </strong>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span jq-sortable sort-data="config.conditions">
+                                                    <span jq-sortable-item ng-repeat="condition in config.conditions">
+                                                        <span jq-sortable-handle>
+                                                            <em class="ion-android-more-vertical"></em>
+                                                        </span>
+                                                        <span>{{condition.condition | emptylabel:'No condition specified'}}</span>
+                                                        <em class="fa fa-pencil"
+                                                            ng-click="eventConfig.openConditionModal(config, condition,$index)"></em>
+                                                        <em class="fa fa-trash"
+                                                            ng-click="eventConfig.deleteCondition(config, condition)"></em>
+                                                        <br ng-if="$index + 1 != config.conditions.length">
+                                                        <hr ng-if="$index + 1 != config.conditions.length">
+                                                    </span>
+                                                </span>
+                                                <span ng-if="!config.conditions || config.conditions.length == 0">
+                                                    No Conditions added
+                                                </span>
+                                                <em class="fa fa-plus pointer-cursor"
+                                                    ng-click="eventConfig.openConditionModal(config)"></em>
+                                            </td>
+                                            <td ng-click="eventConfig.deleteConfig(config)" class="action-cell">
+                                                <ul class="action-item pointer-cursor">
+                                                    <li><a class="action-icon delete-icon "></a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            ng-if="!eventConfig.eventObj.notificationConfigDetails || eventConfig.eventObj.notificationConfigDetails.length === 0">
+                                            <td colspan="3">
+                                                No Configuration added
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-secondary" ui-sref="techo.notification.all">Cancel</button>
+                    <button class="btn btn-primary" ng-click="eventConfig.saveEvent()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="large-div filter-div">
+        <div ng-include='"app/admin/applicationmanagement/event/views/condition-config.html"'></div>
+    </div>
+    <div class="cst-backdrop"></div>
+</div>

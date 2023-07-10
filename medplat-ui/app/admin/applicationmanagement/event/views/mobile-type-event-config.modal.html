@@ -1,0 +1,164 @@
+<div class="modal-header">
+    <h4 class="text">{{typeconfig.editMode?'Edit':'Add'}} Mobile Notification Configuration </h4>
+    <button type="button" class="close" ng-click="typeconfig.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+    <span>
+        <strong>Available Implicit Parameters</strong>:
+        <span ng-repeat="param in typeconfig.type.implicitParam" ng-bind="' ' + param"></span>
+    </span>
+    <hr>
+    <form name="typeconfig.mobileNotificaitonForm" novalidate>
+        <div class="row mb-15 align-items-end">
+            <div class="col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <validate for="type" required-msg="Select notification type">
+                        <label control-label>Notification Type</label>
+                        <select type="text" form-control name="type" ng-model="typeconfig.type.mobileNotification"
+                            ng-options="type as type.notificationName for type in typeconfig.notificationTypes"
+                            class="form-control cst-form-control">
+                            <option value="">Select</option>
+                        </select>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+            <div class="col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <validate for="field" required-msg="Enter base date field">
+                        <label control-label>Base Date Field Name</label>
+                        <input form-control name="field" type="text" required
+                            ng-model="typeconfig.type.baseDateFieldName" class="form-control cst-form-control">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+            <div class="col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <label>Ref code Field Name</label>
+                    <input form-control name="field" type="text" ng-model="typeconfig.type.refCode"
+                        class="form-control cst-form-control">
+                </div>
+            </div>
+            <div class="col-lg-12 col-xl-3" ng-if="typeconfig.type.mobileNotification.notificationFor === 'USER'">
+                <div class="form-group">
+                    <validate for="userField" required-msg="Enter base date field">
+                        <label control-label>User Field Name</label>
+                        <input form-control name="userField" type="text" required
+                            ng-model="typeconfig.type.userFieldName" class="form-control cst-form-control">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+            <div class="col-lg-12 col-xl-3" ng-if="typeconfig.type.mobileNotification.notificationFor === 'MEMBER'">
+                <div class="form-group">
+                    <validate for="memberfield" required-msg="Enter base date field">
+                        <label control-label>Member Field Name</label>
+                        <input form-control name="memberfield" type="text" required
+                            ng-model="typeconfig.type.memberFieldName" class="form-control cst-form-control">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+            <div class="col-lg-12 col-xl-3"
+                ng-if="typeconfig.type.mobileNotification.notificationFor === 'FAMILY' || typeconfig.type.mobileNotification.notificationFor === 'MEMBER'">
+                <div class="form-group">
+                    <validate for="familyfield" required-msg="Enter base date field">
+                        <label control-label>Family Field Name</label>
+                        <input form-control name="familyfield" type="text" required
+                            ng-model="typeconfig.type.familyFieldName" class="form-control cst-form-control">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+            <div class="col-lg-12 col-xl-3 mt-15">
+                <div class="">
+                    <button type="button" class="btn btn-secondary " ng-click="typeconfig.addMobileNotification()">Add
+                        Configuration</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row  mb-15 ">
+            <div class="col-12">
+                <div class="cst-table table-responsive">
+                    <table class="table table-sm table-striped table-bordered header-fixed">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Code
+                                </th>
+                                <th>
+                                    Added days for schedule
+                                </th>
+                                <th>
+                                    Added days for due
+                                </th>
+                                <th>
+                                    Added days for expiry
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-form="typeconfig.mobileForm.form{{$index}}" isolate-form
+                                ng-repeat="config in typeconfig.type.mobileNotificationConfigs"
+                                ng-if="typeconfig.type.mobileNotificationConfigs.length > 0">
+                                <td>
+                                    <div class="form-group">
+                                        <validate for="code" required-msg="Enter code">
+                                            <input form-control name="code" required="" type="text"
+                                                class="form-control cst-form-control"
+                                                ng-model="config.notificationCode">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <validate for="numberOfDaysAddedForOnDate"
+                                            required-msg="Enter # of days to add">
+
+                                            <input type="number" name="numberOfDaysAddedForOnDate" form-control
+                                                class="form-control cst-form-control" required
+                                                ng-model="config.numberOfDaysAddedForOnDate">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control cst-form-control"
+                                        ng-model="config.numberOfDaysAddedForDueDate">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control cst-form-control"
+                                        ng-model="config.numberOfDaysAddedForExpiryDate">
+                                </td>
+                                <td ng-click="typeconfig.removeMobileConfig(config)" class="action-cell">
+                                    <ul class="action-item">
+                                        <li ng-click="typeconfig.deleteConfig(config)">
+                                            <a class="action-icon delete-icon"></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr
+                                ng-if="!typeconfig.type.mobileNotificationConfigs || typeconfig.type.mobileNotificationConfigs.length === 0">
+                                <td colspan="5">
+                                    No Mobile Configuration added
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="typeconfig.ok()">Save</button>
+    <button type="button" class="btn btn-secondary" ng-click="typeconfig.cancel()">Close</button>
+</div>

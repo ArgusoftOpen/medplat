@@ -1,0 +1,1076 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Record Details</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="card-sub-title">
+                            </h5>
+                            <div>
+                                <div class="form-group">
+                                    <label for="memberId" control-label>Child ID(Family ID)</label>
+                                    <label
+                                        style="width:auto">{{managechildservicecontroller.manageChildServiceObject.uniqueHealthId}}({{managechildservicecontroller.manageChildServiceObject.familyUniqueId}})</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberName" control-label>Child Name</label>
+                                    <label
+                                        style="width:auto">{{managechildservicecontroller.manageChildServiceObject.memberName}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberName" control-label>Gender</label>
+                                    <label
+                                        style="width:auto">{{managechildservicecontroller.manageChildServiceObject.gender=='M'?'Male':'Female'}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberLocation" control-label>Location</label>
+                                    <label
+                                        style="width:auto;white-space: inherit">{{managechildservicecontroller.manageChildServiceObject.locationHierarchy}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberCaste" control-label>Caste</label>
+                                    <label>{{managechildservicecontroller.manageChildServiceObject.caste}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <div class="form-group">
+                                    <label for="memberBenefits" control-label>Mother Contact No.</label>
+                                    <label>{{managechildservicecontroller.manageChildServiceObject.motherMobileNumber|emptylabel}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberBenefits" control-label>Date of Birth</label>
+                                    <label>{{managechildservicecontroller.manageChildServiceObject.dobDisplay}}</label>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="managechildservicecontroller.manageChildServiceObject.fhwName != null">
+                                    <label style="vertical-align: middle;white-space: initial" for="memberAnm"
+                                        control-label>FHW Name and Phone Number</label>
+                                    <label
+                                        style="vertical-align: middle;white-space: initial">{{managechildservicecontroller.manageChildServiceObject.fhwName}}
+                                        <span
+                                            ng-if="managechildservicecontroller.manageChildServiceObject.fhwNumber != null">({{managechildservicecontroller.manageChildServiceObject.fhwNumber}})</span></label>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="managechildservicecontroller.manageChildServiceObject.ashaName != null">
+                                    <label style="vertical-align: middle;white-space: initial" for="memberAsha"
+                                        control-label>ASHA Name and Phone Number</label>
+                                    <label
+                                        style="vertical-align: middle;white-space: initial">{{managechildservicecontroller.manageChildServiceObject.ashaName}}<span
+                                            ng-if="managechildservicecontroller.manageChildServiceObject.ashaNumber != null">({{managechildservicecontroller.manageChildServiceObject.ashaNumber}})</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Child Service Visit</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="managechildservicecontroller.managechildServiceForm"
+                        id="managechildServiceForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group"
+                                    ng-if="!managechildservicecontroller.manageChildServiceObject.motherMobileNumber">
+                                    <validate for='contactNumber' maxlength-msg="Invalid mobile number"
+                                        minlength-msg="Invalid mobile number">
+                                        <label style="vertical-align: middle;white-space: initial" for="contactNumber"
+                                            control-label>Contact Number</label>
+                                        <input type="text" numbers-only min-length="10" max-length="10"
+                                            class="form-control cst-form-control" form-control name="contactNumber"
+                                            id="contactNumber"
+                                            ng-model="managechildservicecontroller.manageChildServiceObject.contactNumber">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" style="margin-top: 2%">
+                                    <validate for='serviceDate' required-msg="Select Date">
+                                        <label style="vertical-align: middle;white-space: initial" for="serviceDate"
+                                            control-label>Service
+                                            Date</label>
+                                        <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                            name="serviceDate" form-control
+                                            ng-model="managechildservicecontroller.manageChildServiceObject.serviceDate"
+                                            ng-change= "managechildservicecontroller.manageChildServiceObject.deathDate > managechildservicecontroller.manageChildServiceObject.serviceDate ? managechildservicecontroller.manageChildServiceObject.deathDate = null : null"
+                                            min-date="managechildservicecontroller.minServiceDate"
+                                            max-date="managechildservicecontroller.todayDate" required>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" style="margin-top: 3%">
+                                    <validate for='deliveryPlace' required-msg="Select a value">
+                                        <label for="deliveryPlace" control-label>Place of Visit</label>
+                                        <select class="form-control cst-form-control" form-control
+                                            ng-model="managechildservicecontroller.manageChildServiceObject.deliveryPlace"
+                                            ng-change="managechildservicecontroller.deliveryPlaceChanged()"
+                                            name="deliveryPlace" id="deliveryPlace" required>
+                                            <option value="" selected>--Select--</option>
+                                            <option value="THISHOSP">This Hospital</option>
+                                            <option value="HOSP">Another Institution</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="managechildservicecontroller.manageChildServiceObject.deliveryPlace === 'HOSP'">
+                                    <validate for='institutionType' required-msg="Select a value">
+                                        <label for="institutionType" control-label>Institution Type</label>
+                                        <select class="form-control cst-form-control" form-control
+                                            ng-model="managechildservicecontroller.manageChildServiceObject.institutionType"
+                                            ng-change="managechildservicecontroller.retrieveHospitalsByInstitutionType()"
+                                            name="institutionType" id="institutionType" required>
+                                            <option value="" selected>--Select--</option>
+                                            <option value="{{institutionType.id}}"
+                                                ng-repeat="institutionType in managechildservicecontroller.institutionTypes">
+                                                {{institutionType.value}}</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group selectize-wpd-input"
+                                    ng-if="managechildservicecontroller.manageChildServiceObject.deliveryPlace === 'HOSP' && managechildservicecontroller.showOtherInstitutes">
+                                    <validate for='hospital' required-msg="Select a value">
+                                        <label style="white-space: initial" control-label>Hospital</label>
+                                        <selectize name="hospital" class="form-control cst-form-control" form-control
+                                            ng-model='managechildservicecontroller.manageChildServiceObject.institute'
+                                            ng-change="managechildservicecontroller.retrieveRolesForInstitute()"
+                                            config='managechildservicecontroller.selectizeObjectForOtherInstitute'
+                                            required>
+                                            <option value=''>--Select--</option>
+                                        </selectize>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="managechildservicecontroller.manageChildServiceObject.deliveryPlace === 'THISHOSP'">
+                                    <validate for='hospital' required-msg="Select a value">
+                                        <label style="vertical-align: middle;white-space: initial"
+                                            control-label>Hospital</label>
+                                        <select class="form-control cst-form-control" form-control chosen-directive
+                                            name="hospital"
+                                            ng-options="institute as institute.name for institute in managechildservicecontroller.institutes"
+                                            ng-model="managechildservicecontroller.manageChildServiceObject.institute"
+                                            ng-change="managechildservicecontroller.retrieveRolesForInstitute()"
+                                            ng-disabled="managechildservicecontroller.institutes.length == 1" required>
+                                            <option value="" selected>--Select--</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='isAlive' required-msg=" Select a value">
+                                        <label style="vertical-align: middle;white-space: initial" for="isAlive"
+                                            name="isAlive" class="control-label" control-label>Is Child Alive?</label>
+                                        <label style="margin-top:2%" class="control control-radio">Yes
+                                            <input ng-value="true" name="isAlive" type="radio"
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.isAlive"
+                                                ng-change="managechildservicecontroller.childAliveChanged()"
+                                                form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label style="margin-top:2%" class="control control-radio">No
+                                            <input ng-value="false" name="isAlive" type="radio"
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.isAlive"
+                                                ng-change="managechildservicecontroller.childAliveChanged()"
+                                                form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div ng-if="managechildservicecontroller.manageChildServiceObject.isAlive == false">
+                                    <div class="form-group">
+                                        <validate for='deathDate' required-msg="Select Date">
+                                            <label style="vertical-align: middle;white-space: initial" for="deathDate"
+                                                control-label>Death
+                                                Date</label>
+                                            <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                name="deathDate" form-control
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.deathDate"
+                                                max-date="managechildservicecontroller.manageChildServiceObject.serviceDate"
+                                                min-date="managechildservicecontroller.minDeathDate" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='placeOfDeath' required-msg="Select a value">
+                                            <label for="placeOfDeath" control-label>Death Place</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.placeOfDeath"
+                                                name="placeOfDeath" id="placeOfDeath" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="HOME">Home</option>
+                                                <option value="ON_THE_WAY">On the way</option>
+                                                <option value="HOSP">Hospital</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.placeOfDeath === 'HOSP'">
+                                        <validate for='institutionType' required-msg="Select a value">
+                                            <label for="institutionType" control-label>Institution Type</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.deathInfrastructureType"
+                                                ng-change="managechildservicecontroller.retrieveDeathHospitalsByInstitutionType()"
+                                                name="institutionType" id="institutionType" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="{{institutionType.id}}"
+                                                    ng-repeat="institutionType in managechildservicecontroller.institutionTypes">
+                                                    {{institutionType.value}}</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.placeOfDeath === 'HOSP' && managechildservicecontroller.showDeathInstitutes">
+                                        <validate for='hospital' required-msg="Select a value">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                control-label>Hospital</label>
+                                            <select class="form-control cst-form-control" form-control chosen-directive
+                                                name="hospital"
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.deathInfrastructureId"
+                                                required>
+                                                <option value="" selected>--Select--</option>
+                                                <option
+                                                    ng-repeat="institute in managechildservicecontroller.deathInstitutes"
+                                                    value="{{institute.id}}">{{institute.name}}</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='deathReason' required-msg="Select a value">
+                                            <label for="deathReason" control-label>Death Reason</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.deathReason"
+                                                name="deathReason" id="deathReason" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="{{deathReason.id}}"
+                                                    ng-repeat="deathReason in managechildservicecontroller.deathReasons">
+                                                    {{deathReason.value}}</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.deathReason == '878'">
+                                        <validate for='otherDeathReason' required-msg="Please enter other death reason">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="otherDeathReason" control-label>Other Death Reason</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                name="otherDeathReason" id="otherDeathReason"
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.otherDeathReason">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                                <div ng-if="managechildservicecontroller.manageChildServiceObject.isAlive">
+                                    <div class="form-group">
+                                        <validate for='weight' required-msg="Enter weight">
+                                            <label><span class="info_type" control-label>Weight (in Kg)</span></label>
+                                            <input type="number" max="25" min="0.1"
+                                                class="form-control cst-form-control" form-control name="weight"
+                                                id="weight" ng-change="managechildservicecontroller.calculateSdScore()"
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.weight"
+                                                required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="managechildservicecontroller.showHeight">
+                                        <validate for='height' required-msg="Enter height"
+                                            max-msg="Please enter valid height(Between 45-200)"
+                                            min-msg="Please enter valid height(Between 45-200)">
+                                            <label><span class="info_type" control-label>Height (in cm)</span></label>
+                                            <input type="number" max="200" min="45"
+                                                class="form-control cst-form-control" form-control name="height"
+                                                id="height" onkeypress="return !(event.charCode == 46)"
+                                                ng-change="managechildservicecontroller.calculateSdScore()"
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.height"
+                                                required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="managechildservicecontroller.showHeight">
+                                        <label class="long" style="vertical-align: middle;white-space: initial"><span
+                                                class="info_type" control-label>SD score of weight for
+                                                height</span></label>
+                                        <label class="long"
+                                            ng-if="managechildservicecontroller.manageChildServiceObject.sdScore != null"><span
+                                                class="info_type"
+                                                control-label>{{managechildservicecontroller.manageChildServiceObject.sdScoreDisplay}}</span></label>
+                                        <label class="long"
+                                            ng-if="managechildservicecontroller.manageChildServiceObject.sdScore == null"><span
+                                                class="info_type" control-label>--</span></label>
+                                    </div>
+                                    <div class="form-group" ng-if="managechildservicecontroller.showMuac">
+                                        <validate for='midArmCircumference' required-msg="Enter muac">
+                                            <label><span class="info_type" control-label>MUAC (in cm)</span></label>
+                                            <input type="number" max="26" min="6" class="form-control cst-form-control"
+                                                form-control name="midArmCircumference" id="midArmCircumference"
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.midArmCircumference"
+                                                required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="managechildservicecontroller.showMuac">
+                                        <validate for='havePedalEdema' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="havePedalEdema" class="control-label" control-label>Does the child
+                                                have pedal edema?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="havePedalEdema" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.havePedalEdema"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="havePedalEdema" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.havePedalEdema"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div
+                                        ng-repeat="immunisation in managechildservicecontroller.manageChildServiceObject.dueImmunisations">
+                                        <div class="form-group">
+                                            <validate for='{{immunisation}}' required-msg="Select Value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="{{immunisation}}" class="control-label" control-label>Is
+                                                    {{immunisation}} given?</label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="{{$index}}{{immunisation}}Yes"
+                                                        type="radio"
+                                                        ng-change="managechildservicecontroller.immunisationGivenChanged(immunisation, managechildservicecontroller.manageChildServiceObject.dob)"
+                                                        ng-model="managechildservicecontroller.manageChildServiceObject.immunisation[immunisation].given"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="{{$index}}{{immunisation}}No"
+                                                        type="radio"
+                                                        ng-change="managechildservicecontroller.immunisationGivenChanged(immunisation, managechildservicecontroller.manageChildServiceObject.dob)"
+                                                        ng-model="managechildservicecontroller.manageChildServiceObject.immunisation[immunisation].given"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div style="margin-bottom: 3%" class="form-group"
+                                            ng-if="managechildservicecontroller.manageChildServiceObject.immunisation[immunisation].given">
+                                            <validate for='{{immunisation}}date' required-msg="Select Date"
+                                                vaccine-msg="Invalid Vaccination Date">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="{{immunisation}}date" control-label>Date
+                                                    of giving {{immunisation}}</label>
+                                                <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                    name="{{immunisation}}date" form-control
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.immunisation[immunisation].date"
+                                                    ng-change="managechildservicecontroller.checkImmunisationValidation(managechildservicecontroller.manageChildServiceObject.dob, managechildservicecontroller.manageChildServiceObject.immunisation[immunisation].date, immunisation, managechildservicecontroller.manageChildServiceObject.immunisationGiven)"
+                                                    min-date="managechildservicecontroller.manageChildServiceObject.dob"
+                                                    max-date="managechildservicecontroller.todayDate" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 inline-form" style="border-left: 1px solid #e5e5e5;">
+                                <div ng-if="managechildservicecontroller.manageChildServiceObject.isAlive">
+                                    <div class="form-group">
+                                        <validate for='isIfaGiven' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial" for="isIfaGiven"
+                                                class="control-label" control-label>Is IFA Syrup Given?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="isIfaGiven" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.ifaSyrupGiven"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="isIfaGiven" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.ifaSyrupGiven"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.showComplementaryFeeding">
+                                        <validate for='complementaryFeedingStarted' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="complementaryFeedingStarted" class="control-label"
+                                                control-label>Has Complementary Feeding Started?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="complementaryFeedingStarted" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.complementaryFeedingStarted"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="complementaryFeedingStarted" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.complementaryFeedingStarted"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.complementaryFeedingStarted">
+                                        <validate for='complementaryFeedingStartPeriod' required-msg="Select a value">
+                                            <label for="complementaryFeedingStartPeriod" control-label>Complementary
+                                                Feeding Start Period</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.complementaryFeedingStartPeriod"
+                                                name="complementaryFeedingStartPeriod"
+                                                id="complementaryFeedingStartPeriod" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="BEFORE6">Before 6 months</option>
+                                                <option value="ENDOF6">End of 6 months</option>
+                                                <option value="AFTER6">After 6 months</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="vertical-align: middle;white-space: initial" for="dieseases"
+                                            control-label>Diseases (if any)</label>
+                                        <select chosen-directive="managechildservicecontroller.diseasesList"
+                                            class="form-control cst-form-control" form-control
+                                            ng-model="managechildservicecontroller.manageChildServiceObject.dieseases"
+                                            multiple="true" ng-change="managechildservicecontroller.isDiseaseOther()"
+                                            name="dieseases" id="dieseases">
+                                            <option
+                                                ng-if="!managechildservicecontroller.manageChildServiceObject.dieseases.includes('NONE')"
+                                                value="{{disease.id}}"
+                                                ng-repeat="disease in managechildservicecontroller.diseasesList">
+                                                {{disease.value}}</option>
+                                            <option value="-1"
+                                                ng-if="!managechildservicecontroller.manageChildServiceObject.dieseases.includes('NONE')">
+                                                Other</option>
+                                            <option value="NONE">None</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" ng-if="managechildservicecontroller.diseaseOtherSelected">
+                                        <validate for='otherDiseases' required-msg="Please enter other danger sign">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="otherDiseases" control-label>Please
+                                                mention other disease</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                name="otherDiseases" id="otherDangerSign"
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.otherDiseases">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='isTreatementDone' required-msg="Select a value">
+                                            <label for="isTreatementDone" control-label>Is Treatment Done?</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managechildservicecontroller.manageChildServiceObject.isTreatementDone"
+                                                name="isTreatementDone" id="isTreatementDone" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="YES">Yes</option>
+                                                <option value="NO">No</option>
+                                                <option value="NOT REQUIRED">Not required</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild <= 6">
+                                        <validate for='exclusivelyBreastfeded' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="exclusivelyBreastfeded" class="control-label" control-label>Is the
+                                                child exclusively breastfed?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="exclusivelyBreastfeded" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.exclusivelyBreastfeded"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="exclusivelyBreastfeded" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.exclusivelyBreastfeded"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="managechildservicecontroller.showCpQuestions">
+                            <hr
+                                ng-if="managechildservicecontroller.manageChildServiceObject.isAlive && managechildservicecontroller.manageChildServiceObject.ageOfChild >= 3 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 30">
+                            <div class="row"
+                                ng-if="managechildservicecontroller.manageChildServiceObject.isAlive && managechildservicecontroller.manageChildServiceObject.ageOfChild >= 3 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 30">
+                                <div class="col-6">
+                                    <h5 class="card-sub-title">
+                                        Cerebral Palsy Questions
+                                    </h5>
+                                    <p ng-if="!managechildservicecontroller.isAnyCpQuestionDisplay">No questions to be
+                                        displayed as cerebral palsy information for this child has already been
+                                        recorded.</p>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 3 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 8 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.holdHeadStraightCompleted">
+                                        <validate for='holdHeadStraight' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="holdHeadStraight" class="control-label" control-label>Can the child
+                                                hold their head straight?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="holdHeadStraight" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.holdHeadStraight"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="holdHeadStraight" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.holdHeadStraight"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 3 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 8 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.handsInMouthCompleted">
+                                        <validate for='handsInMouth' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="handsInMouth" class="control-label" control-label>Does the child
+                                                put his/her hands in their mouth?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="handsInMouth" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.handsInMouth"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="handsInMouth" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.handsInMouth"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 3 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 8 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.lookWhenSpeakCompleted">
+                                        <validate for='lookWhenSpeak' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="lookWhenSpeak" class="control-label" control-label>Does the child
+                                                look at you when you speak?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="lookWhenSpeak" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.lookWhenSpeak"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="lookWhenSpeak" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.lookWhenSpeak"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 9 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 14 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.sitWithoutHelpCompleted">
+                                        <validate for='sitWithoutHelp' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="sitWithoutHelp" class="control-label" control-label>Can the child
+                                                sit without help?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="sitWithoutHelp" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.sitWithoutHelp"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="sitWithoutHelp" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.sitWithoutHelp"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 9 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 14 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.kneelDownCompleted">
+                                        <validate for='kneelDown' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="kneelDown" class="control-label" control-label>Can the child kneel
+                                                down?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="kneelDown" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.kneelDown"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="kneelDown" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.kneelDown"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 9 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 14 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.avoidStrangersCompleted">
+                                        <validate for='avoidStrangers' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="avoidStrangers" class="control-label" control-label>Does the child
+                                                avoid strangers?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="avoidStrangers" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.avoidStrangers"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="avoidStrangers" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.avoidStrangers"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 9 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 14 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.understandNoCompleted">
+                                        <validate for='understandNo' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="understandNo" class="control-label" control-label>Does the child
+                                                understand "No"?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="understandNo" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.understandNo"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="understandNo" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.understandNo"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 15 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 23  && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.mimicOthersCompleted">
+                                        <validate for='mimicOthers' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="mimicOthers" class="control-label" control-label>Does the child try
+                                                to mimic others?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="mimicOthers" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.mimicOthers"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="mimicOthers" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.mimicOthers"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 15 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 23  && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.drinkFromGlassCompleted">
+                                        <validate for='drinkFromGlass' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="drinkFromGlass" class="control-label" control-label>Can drink from
+                                                a cup / glass?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="drinkFromGlass" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.drinkFromGlass"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="drinkFromGlass" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.drinkFromGlass"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 15 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 23  && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.runIndependentlyCompleted">
+                                        <validate for='runIndependently' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="runIndependently" class="control-label" control-label>Does the
+                                                child run independently?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="runIndependently" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.runIndependently"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="runIndependently" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.runIndependently"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 15 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 23  && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.holdThingsWithFingerCompleted">
+                                        <validate for='holdThingsWithFinger' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="holdThingsWithFinger" class="control-label" control-label>Can the
+                                                child hold things with thumb and one finger?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="holdThingsWithFinger" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.holdThingsWithFinger"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="holdThingsWithFinger" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.holdThingsWithFinger"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 24  && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 30 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.tellNameOfThingsCompleted">
+                                        <validate for='tellNameOfThings' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="tellNameOfThings" class="control-label" control-label>Can the child
+                                                tell the name of simple things?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="tellNameOfThings" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.tellNameOfThings"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="tellNameOfThings" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.tellNameOfThings"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 24  && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 30 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.flipPagesCompleted">
+                                        <validate for='flipPages' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="flipPages" class="control-label" control-label>Can the child flip
+                                                pages in a book?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="flipPages" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.flipPages"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="flipPages" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.flipPages"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 24  && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 30 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.kickBallCompleted">
+                                        <validate for='kickBall' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="kickBall" class="control-label" control-label>Can the child kick a
+                                                ball?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="kickBall" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.kickBall"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="kickBall" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.kickBall"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 3 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 8 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.makeNoiseWhenSpeakCompleted">
+                                        <validate for='makeNoiseWhenSpeak' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="makeNoiseWhenSpeak" class="control-label" control-label>Does the
+                                                child make noises and respond when you speak?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="makeNoiseWhenSpeak" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.makeNoiseWhenSpeak"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="makeNoiseWhenSpeak" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.makeNoiseWhenSpeak"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 3 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 8 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.lookInDirectionOfSoundCompleted">
+                                        <validate for='lookInDirectionOfSound' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="lookInDirectionOfSound" class="control-label" control-label>Does
+                                                the child look in the direction of the sound?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="lookInDirectionOfSound" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.lookInDirectionOfSound"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="lookInDirectionOfSound" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.lookInDirectionOfSound"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 9 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 14 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.enjoyPeekabooCompleted">
+                                        <validate for='enjoyPeekaboo' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="enjoyPeekaboo" class="control-label" control-label>Does the child
+                                                enjoy playing Peekaboo?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="enjoyPeekaboo" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.enjoyPeekaboo"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="enjoyPeekaboo" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.enjoyPeekaboo"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 9 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 14 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.respondsOnNameCallingCompleted">
+                                        <validate for='respondsOnNameCalling' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="respondsOnNameCalling" class="control-label" control-label>Responds
+                                                when his/her name is called?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="respondsOnNameCalling" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.respondsOnNameCalling"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="respondsOnNameCalling" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.respondsOnNameCalling"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 9 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 14 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.liftToysCompleted">
+                                        <validate for='liftToys' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="liftToys" class="control-label" control-label>Lifts toys that are
+                                                lying down?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="liftToys" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.liftToys"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="liftToys" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.liftToys"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 15 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 23  && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.lookWhenNameCalledCompleted">
+                                        <validate for='lookWhenNameCalled' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="lookWhenNameCalled" class="control-label" control-label>Does he/she
+                                                look at you when the name is called?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="lookWhenNameCalled" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.lookWhenNameCalled"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="lookWhenNameCalled" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.lookWhenNameCalled"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 15 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 23  && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.speakSimpleWordsCompleted">
+                                        <validate for='speakSimpleWords' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="speakSimpleWords" class="control-label" control-label>Can the child
+                                                speak simple words?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="speakSimpleWords" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.speakSimpleWords"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="speakSimpleWords" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.speakSimpleWords"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 15 && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 23  && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.understandInstructionsCompleted">
+                                        <validate for='understandInstructions' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="understandInstructions" class="control-label" control-label>Can the
+                                                child understand simple instructions?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="understandInstructions" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.understandInstructions"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="understandInstructions" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.understandInstructions"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 24  && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 30 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.climbUpDownStairsCompleted">
+                                        <validate for='climbUpDownStairs' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="climbUpDownStairs" class="control-label" control-label>Can the
+                                                child climb up and down stairs with help?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="climbUpDownStairs" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.climbUpDownStairs"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="climbUpDownStairs" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.climbUpDownStairs"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 24  && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 30 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.speakTwoSentencesCompleted">
+                                        <validate for='speakTwoSentences' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="speakTwoSentences" class="control-label" control-label>Can the
+                                                child speak two sentences?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="speakTwoSentences" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.speakTwoSentences"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="speakTwoSentences" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.speakTwoSentences"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managechildservicecontroller.manageChildServiceObject.ageOfChild >= 24  && managechildservicecontroller.manageChildServiceObject.ageOfChild <= 30 && managechildservicecontroller.manageChildServiceObject.isAlive && !managechildservicecontroller.manageChildServiceObject.cerebralDetails.likePlayingWithOtherChildrenCompleted">
+                                        <validate for='likePlayingWithOtherChildren' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial;width: 60%"
+                                                for="likePlayingWithOtherChildren" class="control-label"
+                                                control-label>Does the child like playing with other children?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="likePlayingWithOtherChildren" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.likePlayingWithOtherChildren"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="likePlayingWithOtherChildren" type="radio"
+                                                    ng-model="managechildservicecontroller.manageChildServiceObject.cerebralDetails.likePlayingWithOtherChildren"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-3">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary"
+                                    ng-click="managechildservicecontroller.saveChildVisit()"><span
+                                        class="fa fa-floppy-o"></i> Save & Continue</button>
+                                <button class="btn btn-secondary"
+                                    ng-click="managechildservicecontroller.goBack()">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

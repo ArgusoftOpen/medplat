@@ -1,0 +1,399 @@
+<style>
+    .mb-8 {
+        margin-bottom: 8px;
+    }
+
+    .no-data-placeholder {
+        padding: 25px 0px;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="cst-tab">
+                <uib-tabset active='outPatientTreatmentSearch.selectedTab'>
+                    <!-- Patient Registration tab -->
+                    <uib-tab heading="Registration" index=0
+                        ng-click="outPatientTreatmentSearch.resetSearchStringAndResult(); outPatientTreatmentSearch.retrieveOpdRegisteredPatients(); outPatientTreatmentSearch.search.searchBy = 'memberId'"
+                        ng-if="outPatientTreatmentSearch.canManageRegistration">
+                        <div ng-if="outPatientTreatmentSearch.selectedTab == 0">
+                            <div class="card cst-card" style="margin-bottom: 0;"
+                                ng-if="!outPatientTreatmentSearch.isHiddenSeachResult">
+                                <div class="card-title">
+                                    <div>
+                                        <h4 class="text">
+                                            Search Result
+                                            <em class="fa fa-times pointer-cursor" title="Hide Search Result"
+                                                style="float: right; font-size: 20px;"
+                                                ng-click="outPatientTreatmentSearch.isHiddenSeachResult = true;">
+                                            </em>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="card-body inline-form">
+                                    <div ng-if="outPatientTreatmentSearch.searchedMemberDetails.length === 0">
+                                        <div class="no-data-placeholder">
+                                            <h5>No Record Found!</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cst-table table-responsive" style="overflow: auto; max-height: 200px;"
+                                        id="member-scroll"
+                                        ng-if="outPatientTreatmentSearch.searchedMemberDetails.length > 0">
+                                        <table aria-describedby="table"
+                                            class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                            style="table-layout: auto">
+                                            <thead class="cst-thead">
+                                                <tr>
+                                                    <th class="white-space-unset" id="srno">#</th>
+                                                    <th class="white-space-unset" id="memberId">Member ID</th>
+                                                    <th class="white-space-unset" id="memberName">Member Name</th>
+                                                    <th class="white-space-unset" id="memberId">Location</th>
+                                                    <th class="white-space-unset" id="memberId">Age</th>
+                                                    <th class="white-space-unset" id="mobileNo">Mobile No</th>
+                                                    <th class="white-space-unset" id="action">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                                infinite-scroll='outPatientTreatmentSearch.searchMembers()'
+                                                infinite-scroll-disabled='outPatientTreatmentSearch.pagingService.pagingRetrivalOn'
+                                                infinite-scroll-container='"#member-scroll"'>
+                                                <tr
+                                                    ng-repeat="member in outPatientTreatmentSearch.searchedMemberDetails">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{member.uniqueHealthId | emptylabel}}</td>
+                                                    <td>{{member.name | emptylabel}}</td>
+                                                    <td>{{member.locationHierarchy | emptylabel}}</td>
+                                                    <td>{{member.age.replace("mon","month") | emptylabel}}</td>
+                                                    <td>{{member.mobileNumber | emptylabel}}</td>
+                                                    <td>
+                                                        <button class="btn btn-primary"
+                                                            ng-click="outPatientTreatmentSearch.registerOpdPatient(member)">
+                                                            Register Patient
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card cst-card" style="margin-bottom: 0;">
+                                <div class="card-title">
+                                    <div class="float-left">
+                                        <h4 class="text">
+                                            Registered Patients
+                                            ({{outPatientTreatmentSearch.selectedDate | date: 'dd/MM/yyyy'}})
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="card-body inline-form">
+                                    <div class="form-group">
+                                        <span class="col-3" for="searchDate"
+                                            uib-tooltip="Search Registered Members by Date">Search
+                                            Registered Members by Date</span>
+                                        <input class="col-3" type="text" style="float: inherit;" datepicker tabindex="8"
+                                            name="searchDate" id="searchDate"
+                                            max-date="outPatientTreatmentSearch.searchDate"
+                                            ng-change="outPatientTreatmentSearch.retrieveOpdRegisteredPatients(outPatientTreatmentSearch.selectedDate);"
+                                            ng-model="outPatientTreatmentSearch.selectedDate">
+                                    </div>
+                                    <div ng-if="outPatientTreatmentSearch.registeredPatientsDetails.length === 0">
+                                        <div class="no-data-placeholder">
+                                            <h5>No Record Found!</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cst-table table-responsive"
+                                        style="overflow: auto; max-height: calc(100vh - 300px);"
+                                        ng-if="outPatientTreatmentSearch.registeredPatientsDetails.length > 0">
+                                        <table aria-describedby="table"
+                                            class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                            style="table-layout: auto">
+                                            <thead class="cst-thead">
+                                                <tr>
+                                                    <th class="white-space-unset" id="srno">#</th>
+                                                    <th class="white-space-unset" id="memberId">Member ID</th>
+                                                    <th class="white-space-unset" id="memberName">Member Name</th>
+                                                    <th class="white-space-unset" id="memberId">Location</th>
+                                                    <th class="white-space-unset" id="memberId">Age</th>
+                                                    <th class="white-space-unset" id="action">Registration Date</th>
+                                                    <th class="white-space-unset" id="action">Health Infrastructure</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="cst-tbody">
+                                                <tr
+                                                    ng-repeat="member in outPatientTreatmentSearch.registeredPatientsDetails">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{member.uniqueHealthId | emptylabel}}</td>
+                                                    <td>{{member.name | emptylabel}}</td>
+                                                    <td>{{member.locationHierarchy | emptylabel}}</td>
+                                                    <td>{{member.age.replace("mon","month") | emptylabel}}</td>
+                                                    <td>{{member.registrationDate | date:'dd/MM/yyyy  HH:mm:ss'}}</td>
+                                                    <td>{{member.healthInfraName | emptylabel}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <!-- Patient Treatment tab -->
+                    <uib-tab heading="Treatment" index=1
+                        ng-click="outPatientTreatmentSearch.retrieveOpdPatientsForTreatment(); outPatientTreatmentSearch.resetSearchStringAndResult();"
+                        ng-if="outPatientTreatmentSearch.canManageTreatment">
+                        <div ng-if="outPatientTreatmentSearch.selectedTab == 1">
+                            <div ng-if="outPatientTreatmentSearch.registeredPatientsDetails.length === 0">
+                                <div class="no-data-placeholder">
+                                    <h5>No Record Found!</h5>
+                                </div>
+                            </div>
+                            <div class="cst-table table-responsive"
+                                style="overflow: auto; max-height: calc(100vh - 185px);"
+                                ng-if="outPatientTreatmentSearch.registeredPatientsDetails.length > 0">
+                                <table aria-describedby="table"
+                                    class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                    style="table-layout: auto">
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th class="white-space-unset" id="srno">#</th>
+                                            <th class="white-space-unset" id="memberId">Member ID</th>
+                                            <th class="white-space-unset" id="action">Registration Date</th>
+                                            <th class="white-space-unset" id="memberName">Member Name</th>
+                                            <th class="white-space-unset" id="memberId">Location</th>
+                                            <th class="white-space-unset" id="memberId">Age</th>
+                                            <th class="white-space-unset" id="action">Health Infrastructure</th>
+                                            <th class="white-space-unset" id="action">Fill form</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cst-tbody">
+                                        <tr ng-repeat="member in outPatientTreatmentSearch.registeredPatientsDetails">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{member.uniqueHealthId | emptylabel}}</td>
+                                            <td>{{member.registrationDate | date:'dd/MM/yyyy  HH:mm:ss'}}</td>
+                                            <td>{{member.name | emptylabel}}</td>
+                                            <td>{{member.locationHierarchy | emptylabel}}</td>
+                                            <td>{{member.age.replace("mon","month") | emptylabel}}</td>
+                                            <td>{{member.healthInfraName | emptylabel}}</td>
+                                            <td>
+                                                <button class="btn btn-primary"
+                                                    ui-sref="techo.manage.optTreatmentForm({id:member.opdMemberRegistrationId})">
+                                                    Fill Form
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <!-- Medicines tab -->
+                    <uib-tab heading="Medicines" index=2
+                        ng-click="outPatientTreatmentSearch.retrieveOpdPatientsForMedicines(); outPatientTreatmentSearch.resetSearchStringAndResult();"
+                        ng-if="outPatientTreatmentSearch.canManageMedicines">
+                        <div ng-if="outPatientTreatmentSearch.selectedTab == 2">
+                            <div ng-if="outPatientTreatmentSearch.patientsDetailsForMedicines.length === 0">
+                                <div class="no-data-placeholder">
+                                    <h5>No Record Found!</h5>
+                                </div>
+                            </div>
+                            <div class="cst-table table-responsive"
+                                style="overflow: auto; max-height: calc(100vh - 185px);"
+                                ng-if="outPatientTreatmentSearch.patientsDetailsForMedicines.length > 0">
+                                <table aria-describedby="table"
+                                    class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                    style="table-layout: auto">
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th class="white-space-unset" id="srno">#</th>
+                                            <th class="white-space-unset" id="memberId">Member ID</th>
+                                            <th class="white-space-unset" id="memberName">Member Name</th>
+                                            <th class="white-space-unset" id="memberId">Location</th>
+                                            <th class="white-space-unset" id="memberId">Age</th>
+                                            <th class="white-space-unset" id="action">Medicines Given Date</th>
+                                            <th class="white-space-unset" id="action">Health Infrastructure</th>
+                                            <th class="white-space-unset" id="action">Fill form</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cst-tbody">
+                                        <tr ng-repeat="member in outPatientTreatmentSearch.patientsDetailsForMedicines">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{member.uniqueHealthId | emptylabel}}</td>
+                                            <td>{{member.name | emptylabel}}</td>
+                                            <td>{{member.locationHierarchy | emptylabel}}</td>
+                                            <td>{{member.age.replace("mon","month") | emptylabel}}</td>
+                                            <td>{{member.medicinesGivenOn | date:'dd/MM/yyyy' | emptylabel}}</td>
+                                            <td>{{member.healthInfraName | emptylabel}}</td>
+                                            <td>
+                                                <button class="btn btn-primary"
+                                                    ui-sref="techo.manage.optMedicinesForm({id:member.opdMemberMasterId})">
+                                                    Fill Form
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <!-- Referred Patients -->
+                    <uib-tab heading="Referred Patients" index=3
+                        ng-click="outPatientTreatmentSearch.resetSearchStringAndResult(); outPatientTreatmentSearch.search.searchBy = 'organizationUnit'"
+                        ng-if="outPatientTreatmentSearch.canManageRegistration">
+                        <div ng-if="outPatientTreatmentSearch.selectedTab == 3">
+                            <div class="card cst-card" style="margin-bottom: 0;">
+                                <div class="card-title inline-form">
+                                    <div class="row">
+                                        <div class="form-group col-8 mb-0">
+                                            <label>
+                                                Search Result
+                                            </label>
+                                        </div>
+                                        <div class="form-group col-4 mb-0">
+                                            <label style="text-align: end;">
+                                                Select Source Type
+                                            </label>
+                                            <select class="form-control cst-form-control"
+                                                ng-model="outPatientTreatmentSearch.referredPatientsType"
+                                                ng-change="outPatientTreatmentSearch.onSelectReferredSourceType()">
+                                                <option value="IDSP_1">IDSP-1</option>
+                                                <option value="IDSP_2">IDSP-2</option>
+                                                <option value="MYTECHO">MyTeCHO</option>
+                                                <option value="TRAVELLERS">Travellers (COVID-19)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-12 mb-0">
+                                            <span>
+                                                <strong>IDSP-1 :</strong>
+                                                {{outPatientTreatmentSearch.referredPatientsCounts.idspReferredPatientsCount}}
+                                                record(s),
+                                            </span>
+                                            <span>
+                                                <strong>IDSP-2 :</strong>
+                                                {{outPatientTreatmentSearch.referredPatientsCounts.idsp2ReferredPatientsCount}}
+                                                record(s),
+                                            </span>
+                                            <span>
+                                                <strong>MyTeCHO :</strong>
+                                                {{outPatientTreatmentSearch.referredPatientsCounts.mytechoReferredPatientsCount}}
+                                                record(s),
+                                            </span>
+                                            <span>
+                                                <strong>Travellers (COVID-19) :</strong>
+                                                {{outPatientTreatmentSearch.referredPatientsCounts.covid19ReferredTravellersCount}}
+                                                record(s)
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body inline-form">
+                                    <div ng-if="outPatientTreatmentSearch.searchedMemberDetails.length === 0">
+                                        <div class="no-data-placeholder">
+                                            <h5>No Record Found!</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cst-table table-responsive"
+                                        style="overflow: auto; max-height: calc(100vh - 290px);" id="member-scroll"
+                                        ng-if="outPatientTreatmentSearch.searchedMemberDetails.length > 0">
+                                        <table aria-describedby="table"
+                                            class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                            style="table-layout: auto">
+                                            <thead class="cst-thead">
+                                                <tr>
+                                                    <th class="white-space-unset" id="srno">#</th>
+                                                    <th class="white-space-unset" id="memberId">Member ID</th>
+                                                    <th class="white-space-unset" id="memberName">Member Name</th>
+                                                    <th class="white-space-unset" id="location"
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType !== 'TRAVELLERS'">
+                                                        Location</th>
+                                                    <th class="white-space-unset" id="age"
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType !== 'TRAVELLERS'">
+                                                        Age</th>
+                                                    <th class="white-space-unset" id="mobileNo"
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType !== 'TRAVELLERS'">
+                                                        Mobile No</th>
+                                                    <th class="white-space-unset" id="id"
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType === 'TRAVELLERS'">
+                                                        Address</th>
+                                                    <th class="white-space-unset" id="id"
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType === 'TRAVELLERS'">
+                                                        Symptoms</th>
+                                                    <th class="white-space-unset" id="id"
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType === 'TRAVELLERS'">
+                                                        Other Symptoms</th>
+                                                    <th class="white-space-unset" id="mobileNo">Source Type</th>
+                                                    <th class="white-space-unset" id="action">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                                infinite-scroll='outPatientTreatmentSearch.searchMembers(false, true)'
+                                                infinite-scroll-disabled='outPatientTreatmentSearch.pagingService.pagingRetrivalOn'
+                                                infinite-scroll-container='"#member-scroll"'>
+                                                <tr
+                                                    ng-repeat="member in outPatientTreatmentSearch.searchedMemberDetails">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{member.uniqueHealthId | emptylabel}}</td>
+                                                    <td>{{member.name | emptylabel}}</td>
+                                                    <td
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType !== 'TRAVELLERS'">
+                                                        {{member.locationHierarchy | emptylabel}}</td>
+                                                    <td
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType !== 'TRAVELLERS'">
+                                                        {{member.age.replace("mon","month") | emptylabel}}</td>
+                                                    <td
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType !== 'TRAVELLERS'">
+                                                        {{member.mobileNumber | emptylabel}}</td>
+                                                    <td
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType === 'TRAVELLERS'">
+                                                        {{member.address | emptylabel}}</td>
+                                                    <td
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType === 'TRAVELLERS'">
+                                                        {{member.symptoms | emptylabel}}</td>
+                                                    <td
+                                                        ng-if="outPatientTreatmentSearch.referredPatientsType === 'TRAVELLERS'">
+                                                        {{member.otherSymptoms | emptylabel}}</td>
+                                                    <td>
+                                                        <span ng-if="member.idspRound">
+                                                            IDSP-{{member.idspRound}}
+                                                        </span>
+                                                        <span
+                                                            ng-if="outPatientTreatmentSearch.referredPatientsType === 'MYTECHO'">
+                                                            MyTeCHO
+                                                        </span>
+                                                        <span
+                                                            ng-if="outPatientTreatmentSearch.referredPatientsType === 'TRAVELLERS'">
+                                                            Travellers (COVID-19)
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <button ng-if="member.memberId" class="btn btn-primary"
+                                                            ng-click="outPatientTreatmentSearch.registerOpdPatient(member)">
+                                                            Register Patient
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="medium-div filter-div" ng-if="[0, 3].includes(outPatientTreatmentSearch.selectedTab)">
+    <span style="left:-66px" class="filter-toggle" ng-click="outPatientTreatmentSearch.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <search terms="outPatientTreatmentSearch.terms" search-fn="outPatientTreatmentSearch.searchMembers(reset)" search="outPatientTreatmentSearch.search" 
+            search-form="outPatientTreatmentSearch.searchForm" selected-location="outPatientTreatmentSearch.searchLocation" selected-location-id="outPatientTreatmentSearch.searchLocationId"
+            close-fn="outPatientTreatmentSearch.toggleFilter()"></search>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

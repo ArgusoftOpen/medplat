@@ -1,0 +1,113 @@
+<div class="modal-header">
+    <h3 class="text">Load ICD/SNOMED Code</h3>
+</div>
+<form role="form" name="manageIcdCtrl.manageIcdForm" novalidate id="manageIcdForm">
+    <div class="modal-body" style="overflow: inherit;max-height: none">
+        <div class="form-group">
+            <validate for='manageType' required-msg="Select Value">
+                <label for="manageType" class="control-label" control-label>Select Loading Type ?</label> &nbsp;&nbsp;
+                <label class="control control-radio">By Category Code
+                    <input value="code" name="manageType" type="radio"
+                        ng-model="manageIcdCtrl.manageType" form-control required>
+                    <div class="control_indicator"></div>
+                </label>
+                <label class="control control-radio">File Upload
+                    <input value="file" name="manageType" type="radio"
+                        ng-model="manageIcdCtrl.manageType" required>
+                    <div class="control_indicator"></div>
+                </label>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+
+        <div ng-if="manageIcdCtrl.manageType =='code'" class="inline-form">
+            <div class="row">
+                <span> <b>&nbsp;&nbsp;&nbsp;Please Select Code Category between {{manageIcdCtrl.startCodeFromSystem}} and {{manageIcdCtrl.endCodeFromSystem}} </b></span>
+                <!-- <div class="form-group col-6">
+                    <validate for='version' required-msg="Enter Version">
+                        <label for="version" control-label>Version</label>
+                        <input type="text" class="form-control cst-form-control" form-control placeholder="Enter Version"
+                            maxlength="2" numbers-only  name="version" id="version" ng-model="manageIcdCtrl.version" required>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group col-6">
+                    <validate for='releaseYear' required-msg="Enter Release Year">
+                        <label for="releaseYear" control-label>Release Year</label>
+                        <input type="text" class="form-control cst-form-control" form-control placeholder="Enter Release Year"
+                            maxlength="4" numbers-only  name="releaseYear" id="releaseYear" ng-model="manageIcdCtrl.releaseYear" required>
+                        <placeholder></placeholder>
+                    </validate>
+                </div> -->
+            </div>
+            <br>
+            <div class="row">
+                <div class="form-group col-6">
+                    <validate for='startCategoty' required-msg="Enter Starting Code">
+                        <label for="startCategoty" control-label>Starting Category <br> Code</label>
+                        <input type="text" class="form-control cst-form-control" form-control
+                            maxlength="3" placeholder="Enter Starting Code (A00-Z99) " name="startCodeCategoty"
+                            id="startCodeCategoty" ng-model="manageIcdCtrl.startingCodeCategory" ng-required="true">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+
+
+                <div class="form-group col-6">
+                    <validate for='endCodeCategory' required-msg="Enter Ending code Category">
+                        <label for="endCodeCategory" control-label>Ending Category <br> Code </label>
+                        <input type="text" class="form-control cst-form-control" form-control
+                            maxlength="3" placeholder="Enter Starting Code (A00-Z99)" name="endCodeCategory"
+                            id="endCodeCategory" ng-model="manageIcdCtrl.endingCodeCategory" ng-required="true">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+            </div>
+            <div class="alert alert-danger" ng-if="manageIcdCtrl.isDataInserting">
+                <strong>Processing!</strong> This Process may take longer than usual time.
+            </div>
+
+        </div>
+        <!-- For File Upload -->
+        <div ng-if="manageIcdCtrl.manageType =='file'" class="inline-form">
+            <label class="control-label">Upload TXT / CSV file</label>
+            <div class="form-group" flow-init="manageIcdCtrl.uploadFile"
+                flow-file-added="manageIcdCtrl.upload($file, $event, $flow)"
+                flow-files-submitted="manageIcdCtrl.uploadFn($files, $event, $flow)"
+                flow-file-success="manageIcdCtrl.getUploadResponse( $file, $message, $flow )"
+                flow-file-error="manageIcdCtrl.uploadError($file, $message, $flow )">
+                <button class="btn btn-success" flow-btn>Upload File</button>
+                <div ng-repeat="file in manageIcdCtrl.flow.files">
+                    <div class="progress" ng-class="{active: file.isUploading()}" ng-if="file.progress() !== 1">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar"
+                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                            ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                        </div>
+                    </div>
+                    <div ng-if="file.progress() !== 1" class="mt-2 alert alert-warning ">
+                        <span class="text-center">{{file.name}} File is Uploading..(This may take some time).<em class="fa fa-cog fa-spin fa-1x"></em></span>
+                    </div>
+                    <div ng-if="manageIcdCtrl.operationDone" class="mt-2 alert alert-success" style="float:left">
+                        <span class="text-center"> {{file.name}} Uploaded Successfully <em
+                                class="fa fa-check fa-1x"></em></span>
+                    </div>
+                </div>
+                <div class="alert alert-danger valid-feedback" ng-if="manageIcdCtrl.error">
+                    Error uploading file. Please try again
+                </div>
+            </div>
+            <div ng-if="manageIcdCtrl.manageType =='file'" class="modal-footer">
+                <button type="button" class="btn btn-secondary" ng-click="manageIcdCtrl.cancel()">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+    <div ng-if="manageIcdCtrl.manageType =='code'" class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="manageIcdCtrl.manageIcdForm.$invalid" ng-click="manageIcdCtrl.process()">Process</button>
+        <button type="button" class="btn btn-secondary" ng-click="manageIcdCtrl.cancel()">Cancel</button>
+    </div>
+
+
+</form>
+
+

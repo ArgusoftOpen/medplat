@@ -1,0 +1,112 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">
+                            {{ ctrl.editMode ? 'Edit Form Standard Field' : 'Add Form Standard Field' }}
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form name="ctrl.ManageSystemConstraintStandardField" id="ManageSystemConstraintStandardField"
+                        novalidate>
+                        <div class="row">
+                            <div class="col-6" style="margin-bottom: 1rem;">
+                                <div class="form-group">
+                                    <validate for="fieldKey" required-msg="Enter Field Key">
+                                        <label uib-tooltip="Field Key" for="fieldKey" control-label>
+                                            Field Key
+                                        </label>
+                                        <input type="text" id="fieldKey" name="fieldKey" form-control
+                                            ng-model="ctrl.systemConstraintStandardField.fieldKey"
+                                            class="form-control cst-form-control" placeholder="Enter Field Key"
+                                            ng-required="true" ng-disabled="false" maxlength="255">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <validate for='fieldType' required-msg="Select Field Type">
+                                        <label for='fieldType' control-label>
+                                            Field Type
+                                        </label>
+                                        <select class="form-control cst-form-control" form-control name="fieldType"
+                                            id="fieldType" ng-model="ctrl.systemConstraintStandardField.fieldType"
+                                            ng-required="!ctrl.editMode" ng-disabled="ctrl.editMode">
+                                            <option value="">--Select Field Type--</option>
+                                            <option value="SHORT_TEXT">Short Text</option>
+                                            <option value="LONG_TEXT">Long Text</option>
+                                            <option value="DROPDOWN">Dropdown</option>
+                                            <option value="CHECKBOX">Checkbox</option>
+                                            <option value="RADIO">Radio</option>
+                                            <option value="DATE">Date</option>
+                                            <option value="NUMBER">Number</option>
+                                            <option value="LOCATION_DIRECTIVE">
+                                                Location Directive
+                                            </option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <validate for="fieldName" required-msg="Enter Field Name">
+                                        <label uib-tooltip="Field Name" for="fieldName" control-label>
+                                            Field Name
+                                        </label>
+                                        <input type="text" id="fieldName" name="fieldName" form-control
+                                            ng-model="ctrl.systemConstraintStandardField.fieldName"
+                                            class="form-control cst-form-control" placeholder="Enter Field Name"
+                                            ng-required="true" ng-disabled="false" maxlength="255">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <validate for='category' required-msg="Select Category">
+                                        <label for='category' control-label uib-tooltip="Category">
+                                            Category
+                                        </label>
+                                        <select class="form-control cst-form-control" form-control ng-required="false"
+                                            ng-disabled="false" name="category" id="category"
+                                            ng-model="ctrl.systemConstraintStandardField.categoryId"
+                                            ng-options="option.id as option.value for option in ctrl.systemConstraintStandardFieldCategories">
+                                            <option value="">--Select Category--</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div> -->
+                                <div class="form-group">
+                                    <validate for='state' required-msg="Select State">
+                                        <label for='state' control-label>
+                                            State
+                                        </label>
+                                        <select class="form-control cst-form-control" form-control name="state"
+                                            id="state" ng-model="ctrl.systemConstraintStandardField.state"
+                                            ng-required="true">
+                                            <option value="">--Select--</option>
+                                            <option value="ACTIVE">Active</option>
+                                            <option value="INACTIVE">Inactive</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-5">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary" ng-click="ctrl.save()">
+                                    <em class="fa fa-floppy-o"></em>
+                                    Save
+                                </button>
+                                <button class="btn btn-secondary" ng-click="ctrl.goBack()">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

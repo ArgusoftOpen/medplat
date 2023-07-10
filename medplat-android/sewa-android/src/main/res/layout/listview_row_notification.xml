@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/notification_list_selector"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal"
+    android:padding="1dp"
+    android:weightSum="1">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notification_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.85"
+        android:padding="10dp"
+        android:textColor="@drawable/notification_list_text_selector"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_bold" />
+
+    <LinearLayout
+        android:id="@+id/notification_badge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="0.15"
+        android:background="@drawable/notification_badge_background"
+        android:gravity="center"
+        android:visibility="invisible">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notification_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="5dp"
+            android:textColor="@color/notificationBadgeTextColor"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

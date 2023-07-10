@@ -1,0 +1,11 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <generate-dynamic-template-directive class="row" constraint-config="ctrl.formConfigurations"
+                template-config="ctrl.webTemplateConfigs" on-all-components-loaded="ctrl.onAllComponentsLoaded()"
+                form="ctrl.facilityPerformanceForm" submit-fn="ctrl.saveFacilityPerformance()"
+                submit-btn-txt="ctrl.formButtonText" back-button-req="false">
+            </generate-dynamic-template-directive>
+        </div>
+    </div>
+</div>

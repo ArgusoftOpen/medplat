@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div ng-if="ctrl.families.length === 0">
+                <div class="no-data-placeholder">
+                    <h5>No Record Found!</h5>
+                </div>
+            </div>
+            <div class="card cst-card" style="margin-bottom: 0;" ng-if="ctrl.families.length > 0">
+                <div class="card-title">
+                    <div>
+                        <h4 class="text">
+                            Pending families count:
+                            {{ctrl.families[0].pendingCount + ' (' + ctrl.families[0].currentLocationHierarchy + ')'}}
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <div class="cst-table table-responsive" id="label-scroll" style="max-height: calc(100vh - 230px);">
+                        <table aria-describedby="table"
+                            class="table table-sm table-striped table-bordered header-fixed">
+                            <thead class="cst-thead">
+                                <tr>
+                                    <th id="th">Sr. No.</th>
+                                    <th id="th">Family ID</th>
+                                    <th id="th">Contact Person</th>
+                                    <th id="th">Head of Family</th>
+                                    <th id="th">Location Hierarchy</th>
+                                    <th id="th">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                infinite-scroll='ctrl.searchData(false, false, true)'
+                                infinite-scroll-disabled='ctrl.pagingService.pagingRetrivalOn'
+                                infinite-scroll-container='"#label-scroll"'>
+                                <tr ng-repeat="family in ctrl.families" ng-if="ctrl.families.length > 0">
+                                    <td>
+                                        {{$index + 1}}
+                                    </td>
+                                    <td>
+                                        {{family.family_id}}
+                                    </td>
+                                    <td>
+                                        {{family.contactPersonName + (family.contactPersonUniqueHealthId ? ' (' + family.contactPersonUniqueHealthId + ')' : '') | emptylabel}}
+                                    </td>
+                                    <td>
+                                        {{family.hofName + (family.hofUniqueHealthId ? ' (' + family.hofUniqueHealthId + ')' : '') | emptylabel}}
+                                    </td>
+                                    <td>
+                                        {{family.locationHierarchy}}
+                                    </td>
+                                    <td class="action-cell">
+                                        <ul class="action-item">
+                                            <li ng-click="ctrl.onUpdateFamilyArea(family)">
+                                                <a class="action-icon edit-icon"></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-div">
+            <span class="filter-toggle" ng-click="ctrl.toggleFilter()">Filter</span>
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="filter-div-title">Search</h5>
+                </div>
+            </div>
+            <div class="filter-div-body">
+                <div class="row">
+                    <div class="col-12" ng-form="ctrl.searchForm">
+                        <div class="form-group">
+                            <location-directive template-type="'inline'" ng-model="ctrl.searchLocationId"
+                                fetch-according-to-user-aoi="false" required-upto-level="1">
+                            </location-directive>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter" ng-click="ctrl.close()">Close</button>
+                        <button class="btn btn-primary search-filter"
+                            ng-click="ctrl.searchData(true, true, false);">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

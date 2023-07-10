@@ -1,0 +1,58 @@
+<div>
+    <ng-form name='form.infrastructureDirectiveForm'>
+        <div class="form-group" style="margin-top: 3%" ng-if="showDeliveryPlace">
+            <validate for='deliveryPlace' required-msg="Select a value">
+                <label for="deliveryPlace" control-label uib-tooltip="Delivery Place*">Delivery Place</label>
+                <select class="form-control cst-form-control" form-control ng-model="ngModel.deliveryPlace"
+                    ng-change="onDeliveryPlaceChange()" name="deliveryPlace" id="deliveryPlace" required
+                    ng-disabled="disabled">
+                    <option value="" selected>--Select--</option>
+                    <option value="HOSP">Hospital</option>
+                    <option value="ON_THE_WAY" ng-if="typeOfDelivery !== 'CAESAREAN'">On the way</option>
+                    <option value="HOME">HOME</option>
+                    <option value="108_AMBULANCE">108 Ambulance</option>
+                </select>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group"
+            ng-if="showOtherHospitals && ((showDeliveryPlace && ngModel.deliveryPlace === 'HOSP') || !showDeliveryPlace)">
+            <div class="form-group">
+                <validate for='institutionType' required-msg="Select a value">
+                    <label for="institutionType" control-label uib-tooltip="Institution Type*">Institution Type</label>
+                    <select class="form-control cst-form-control" form-control ng-model="ngModel.institutionType"
+                        ng-change="onInstitutionTypeChange()" name="institutionType" id="institutionType" required
+                        ng-disabled="disabled"
+                        ng-options="institutionType.id as institutionType.value for institutionType in institutionTypes">
+                        <option value="" selected>--Select--</option>
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group selectize-wpd-input" ng-if="!retrievingOtherHospitals && ngModel.institutionType">
+                <validate for="hospital" required-msg="Select a value">
+                    <label for="hospital" uib-tooltip="Hospital*" control-label>Hospital</label>
+                    <selectize name="hospital" class="form-control dont-set-width cst-form-control" form-control
+                        ng-model='ngModel.institute' config='selectizeObjectForOtherInstitute' required
+                        ng-disabled="disabled" name="hospital" id="hospital">
+                        <option value=''>--Select--</option>
+                    </selectize>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+        </div>
+        <div class="form-group"
+            ng-if="showThisHospitals && ((showDeliveryPlace && ngModel.deliveryPlace === 'HOSP') || !showDeliveryPlace)">
+            <validate for="hospital" required-msg="Select a value">
+                <label for="hospital" style="vertical-align: middle;white-space: initial" uib-tooltip="Hospital*"
+                    control-label>Hospital</label>
+                <select class="form-control cst-form-control" form-control chosen-directive name="hospital"
+                    id="hospital" ng-options="institute.id as institute.name for institute in thisInstitutes"
+                    ng-model="ngModel.institute" ng-disabled="institutes.length == 1 || disabled" required>
+                    <option value="" selected>--Select--</option>
+                </select>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </ng-form>
+</div>

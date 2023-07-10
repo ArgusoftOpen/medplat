@@ -1,0 +1,147 @@
+<script>
+    $(".header-fixed").tableHeadFixer();
+</script>
+<div class="container-fluid report-view">
+    <div class="row" ng-form="rl.manageTemplateForm">
+        <div class="col-12 mb-15">
+            <div>
+                <div class="row mb-15 ">
+                    <div class="col-12 mb-15 text-right">
+                        <input type="text" ng-model="report.reportName" ng-model-options="{ debounce: 500 }"
+                            ng-change="report.retrieveFilteredReports()" id="search" placeholder="Search Report Name"
+                            data-test="search-report">
+                        <button class="btn btn-secondary" ui-sref="techo.report.groups">Manage Group</button>
+                        <button class="btn btn-primary " ui-sref="techo.report.config">Configure New</button>
+                    </div>
+                    <div class="col-12 mb-15" ng-if="!report.reports || report.reports.length == 0">
+                        <div class="no-data-placeholder">
+                            <h5>Sorry No Reports available!</h5>
+                        </div>
+                    </div>
+                    <div class="col-12 ">
+                        <div class="cst-table table-responsive">
+                            <table class="table table-sm table-striped table-bordered header-fixed"
+                                infinite-scroll-distance="0" infinite-scroll='report.retrieveAll()'
+                                ng-if="report.reports.length > 0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%" ng-click="report.sortByField('report_name')">
+                                            <em sort order-column="report.order" sort-order="report.sortOrder" field-name="'reportName'"></em>
+                                            Report Name
+                                        </th>
+                                        <th style="width: 15%" ng-click="report.sortByField('report_type')">
+                                            <em sort order-column="report.order" sort-order="report.sortOrder" field-name="'reportType'"></em>
+                                            Report Type
+                                        </th>
+                                        <th style="width: 15%" ng-click="report.sortByField('menu_type')">
+                                            <em sort order-column="report.order" sort-order="report.sortOrder" field-name="'menuType'"></em>
+                                            Menu Type
+                                        </th>
+                                        <th style="width: 15%">Group</th>
+                                        <th style="width: 15%">Sub Group</th>
+                                        <th>Code</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="reportObject in report.reports">
+                                        <td>
+                                            <a ng-if="reportObject.reportType === 'DYNAMIC'" href="javascript:void(0)"
+                                                oncontextmenu="return false"
+                                                ng-click="report.navigateToState(reportObject)"
+                                                data-test="report-{{reportObject.name}}">{{reportObject.name}}</a>
+                                        </td>
+                                        <td>
+                                            {{reportObject.reportType|titlecase}}
+                                        </td>
+                                        <td>{{(reportObject.menuType|titlecase) |emptylabel}}</td>
+                                        <td>{{reportObject.parentGroup.groupName|emptylabel}}</td>
+                                        <td>{{reportObject.subGroup.groupName|emptylabel}}</td>
+                                        <td>{{reportObject.code|emptylabel}}</td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li>
+                                                    <a href="javscript:void(0)" class="action-icon edit-icon"
+                                                        ng-if="reportObject.reportType === 'DYNAMIC'"
+                                                        ui-sref="techo.report.config({id:reportObject.id})">
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" onclick="return false;"
+                                                        ng-click="report.deleteGroupModal(reportObject.id)"
+                                                        class="action-icon delete-icon">
+                                                    </a>
+                                                </li>
+                                                <!-- <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <a class="action-icon more-icon"></a>
+                                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                        aria-labelledby="moreDropdown" x-placement="bottom-end">
+                                                        <li ng-click="report.syncWithServer(reportObject)">
+                                                            <a>Sync with Server</a>
+                                                        </li>
+                                                    </ul>
+                                                </li> -->
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="filter-div  no-print">
+                    <span class="filter-toggle" ng-click="report.toggleFilter()">Filter</span>
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="filter-div-title">Filter</h5>
+                        </div>
+                    </div>
+                    <div class="filter-div-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="reportname" class="control-label">Menu Type</label>
+                                    <select id="reportname" name="menuType" class="form-control cst-form-control"
+                                        ng-change="report.onMenuTypeChange()"
+                                        ng-options="menutype as menutype|titlecase for menutype in report.menuTypes"
+                                        ng-model="report.menuType">
+                                        <option value="">None</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="parentgroup" class="control-label">Group</label>
+                                    <select id="parentgroup" name="parentgroup" class="form-control cst-form-control"
+                                        chosen-directive="report.parentGroup" ng-model="report.parentGroupId"
+                                        ng-options="option.id as option.groupName for option in report.parentGroup"
+                                        ng-change="report.parentGroupChanged(report.parentGroupId)">
+                                        <option value="">None</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subgroup" class="control-label">Sub Group</label>
+                                    <select id="subgroup" name="subgroup" class="form-control cst-form-control"
+                                        chosen-directive="report.subGroup" ng-model="report.subGroupId"
+                                        ng-options="option.id as option.groupName for option in report.subGroup"
+                                        ng-change="report.subGroupChanged(report.subGroupId)">
+                                        <option value="">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <hr>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-secondary close-filter"
+                                        ng-click="report.toggleFilter()">Close</button>
+                                    <button class="btn btn-primary search-filter"
+                                        ng-click="report.retrieveFilteredReports()">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

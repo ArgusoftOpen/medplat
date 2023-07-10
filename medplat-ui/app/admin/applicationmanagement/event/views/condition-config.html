@@ -1,0 +1,140 @@
+<div ng-form="eventConfig.conditionForm">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Add Field</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label control-label class="control control-checkbox">Is Condition Required
+                        <input checked="checked" name="fieldName" form-control type="checkbox"
+                            ng-model="eventConfig.newCondition.isConditionReq">
+                        <div class="control_indicator"></div>
+                    </label>
+                </div>
+                <div ng-if="eventConfig.newCondition.isConditionReq">
+                    <div class="form-group">
+                        <validate for="displayName" required-msg="Enter condition">
+                            <label for="displayName" control-label>Condition</label>
+                            <input type="text" form-control required maxlength="500"
+                                class="form-control cst-form-control" name="displayName"
+                                ng-model="eventConfig.newCondition.condition">
+                            <placeholder></placeholder>
+                        </validate>
+                        <strong ng-repeat="param in eventConfig.selectedConfig.implicitParam" ng-bind="' '+param">
+                        </strong>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="displayName" control-label>Description</label>
+                        <textarea form-control maxlength="500" class="form-control cst-form-control" name="description"
+                            ng-model="eventConfig.newCondition.description">
+                        </textarea>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-15">
+                    <div class="col-12">
+                        <h4 class="card-sub-title">Type Configuration</h4>
+                    </div>
+                </div>
+                <div ng-form="eventConfig.newTypeForm" isolate-form>
+                    <div class="row mb-15 align-items-end">
+                        <div class="col-12 col-lg-6 col-xl-4">
+                            <div class="form-group">
+                                <validate for="type" required-msg="Select type">
+                                    <label control-label>Type</label>
+                                    <select class=" form-control cst-form-control" required name="type" form-control
+                                        ng-model="eventConfig.newType.type">
+                                        <option value=""> Select</option>
+                                        <option value="SMS"> Sms Notification</option>
+                                        <option value="EMAIL">Email Notification</option>
+                                        <option value="QUERY">Query</option>
+                                        <option value="MOBILE">Mobile Notification</option>
+                                        <option value="EXCEPTION">Exception</option>
+                                        <Option value="SYSTEM_FUNCTION">System Function</Option>
+                                        <Option value="PUSH_NOTIFICATION">Push Notification</Option>
+                                    </select>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-2 col-xl-3 text-right">
+                            <button class=" btn btn-primary " ng-click="eventConfig.addTypeConfig()">Add</button>
+                            <button class=" btn btn-secondary "
+                                ng-click="eventConfig.newType = {};eventConfig.newTypeForm.$setPristine()">Clear</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  mb-15 ">
+                    <div class="col-12">
+                        <div class="cst-table table-responsive">
+                            <table class="table table-sm table-striped table-bordered header-fixed">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;"></th>
+                                        <th>
+                                            Type
+                                        </th>
+                                        <th>
+                                            {{eventConfig.newType.type=='EXCEPTION'?'Exception Message':'Template'}}
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody jq-sortable sort-data="eventConfig.newCondition.notificaitonConfigsType"
+                                    ng-if="!eventConfig.modalClosed">
+                                    <tr jq-sortable-item
+                                        ng-repeat="config in eventConfig.newCondition.notificaitonConfigsType"
+                                        ng-if="eventConfig.eventObj.notificationConfigDetails.length > 0">
+                                        <td jq-sortable-handle>
+                                            <em class="ion-android-more-vertical"></em>
+                                        </td>
+                                        <td ng-bind="config.type">
+                                        </td>
+                                        <td>
+                                            <span ng-if="config.template" ng-bind="config.template|emptylabel"></span>
+                                            <span ng-if="!config.template">
+                                                <span ng-if="config.type === 'QUERY'" ng-bind="config.queryCode"></span>
+                                                <span ng-if="config.type === 'MOBILE'"
+                                                    ng-bind="eventConfig.notificationTypeMap[config.mobileNotificationType]"></span>
+                                                <span ng-if="config.type === 'EXCEPTION'"
+                                                    ng-bind="config.exceptionMessage"></span>
+                                            </span>
+                                        </td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li><a class="action-icon edit-icon"
+                                                        ng-click="eventConfig.addTypeConfig(config,$index)"></a></li>
+                                                <li><a class="action-icon delete-icon"
+                                                        ng-click="eventConfig.deleteConditionConfig(config)"></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        ng-if="!eventConfig.newCondition.notificaitonConfigsType || eventConfig.newCondition.notificaitonConfigsType.length === 0">
+                                        <td colspan="4">
+                                            No Configuration added
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <hr>
+            <div class="form-group text-right">
+                <button class="btn btn-secondary " ng-click="eventConfig.toggleFilter()">Cancel</button>
+                <button class="btn btn-primary" ng-click="eventConfig.addCondition()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

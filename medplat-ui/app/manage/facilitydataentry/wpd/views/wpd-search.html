@@ -1,0 +1,463 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="cst-tab">
+                <uib-tabset active='queform.selectedTab'>
+                    <uib-tab index="'wpd-search-list'" heading="WPD Search List">
+                        <div class="tab-pane fade show" id="wpd-search-list" role="tabpanel"
+                            aria-labelledby="wpd-search-list" aria-expanded="true">
+                            <div ng-if="queform.memberDetails.length === 0">
+                                <div class="no-data-placeholder">
+                                    <h5>No Record Found!</h5>
+                                </div>
+                            </div>
+                            <div class="cst-table table-responsive table-set-height" id="member-scroll"
+                                ng-if="queform.memberDetails.length > 0">
+                                <table aria-describedby="table"
+                                    class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed">
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th style="width: 50px;" id="srno">#</th>
+                                            <th class="large-col" id="memberId">Member ID</th>
+                                            <th class="medium-col" id="memberName">Member Name</th>
+                                            <th class="extralarge-col" id="location">Location</th>
+                                            <th class="medium-col" id="contactDetails">Contact Details</th>
+                                            <th class="medium-col" id="bpl">BPL</th>
+                                            <th class="medium-col" id="caste">Caste</th>
+                                            <th class="large-col" id="benefitSchemes">Benefit Schemes</th>
+                                            <th class="medium-col" id="edd">EDD</th>
+                                            <th class="medium-col" id="lmp">LMP</th>
+                                            <th class="medium-col" id="bankAc">Bank A/c</th>
+                                            <th class="medium-col" id="ifsc">IFSC</th>
+                                            <th class="medium-col" id="status">Status</th>
+                                            <th class="medium-col" id="action">Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                        infinite-scroll-disabled="queform.pagingService.allRetrieved"
+                                        infinite-scroll='queform.retrieveFilteredMembers(false)'
+                                        infinite-scroll-container='"#member-scroll"'
+                                        infinite-scroll-immediate-check="false">
+                                        <tr ng-repeat="member in queform.memberDetails">
+                                            <td>
+                                                {{$index + 1}}
+                                            </td>
+                                            <td>{{member.uniqueHealthId}}({{member.familyId}})</td>
+                                            <td ng-bind="member.memberName"></td>
+                                            <td ng-bind="member.locationHierarchy"></td>
+                                            <td ng-bind="member.mobileNumber|emptylabel"></td>
+                                            <td ng-bind="member.bplFlag|yesOrNo|emptylabel"></td>
+                                            <td ng-bind="member.caste|emptylabel"></td>
+                                            <td ng-bind="member.benefits|emptylabel"></td>
+                                            <td ng-bind="member.edd|date:'dd/MM/yyyy'|emptylabel"></td>
+                                            <td ng-bind="member.lmpDate|date:'dd/MM/yyyy'|emptylabel"></td>
+                                            <td ng-bind="member.accountNumber|emptylabel">
+                                            </td>
+                                            <td ng-bind="member.ifsc|emptylabel"></td>
+                                            <td> {{member.wpdState === 'DELIVERY_DONE' ? 'Delivery Done' : 'Delivery Pending' }}</td>
+                                            <td class="action-cell"
+                                                ng-if="queform.rights && queform.rights.isShowHealthIdModal">
+                                                <ul class="action-item">
+                                                    <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <a href="#" class="action-icon more-icon"></a>
+                                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                            aria-labelledby="moreDropdown">
+                                                            <li ng-if="member.wpdState !== 'DELIVERY_DONE'">
+                                                                <a href="javascript:void(0)"
+                                                                    ng-click="queform.onClickFillForm(member.uniqueHealthId)"
+                                                                    data-test="Inactive-Btn">
+                                                                    Fill Form
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0)"
+                                                                    ng-click="queform.onClickHealthIdForm(member)"
+                                                                    data-test="Inactive-Btn">
+                                                                    Create/Print ABHA
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td
+                                                ng-if="!(queform.rights && queform.rights.isShowHealthIdModal)">
+                                                <button ng-if="member.wpdState !== 'DELIVERY_DONE'" class="btn btn-primary"
+                                                    ui-sref="techo.manage.wpd({id:member.uniqueHealthId})"> Fill
+                                                    form</button>
+                                                <p ng-if="member.wpdState === 'DELIVERY_DONE'">-</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="'discharge-list'" heading="Discharge Pending List"
+                        select="queform.wpdPendingDischargeTabSelected()">
+                        <div class="tab-pane fade show" id="discharge-list" role="tabpanel"
+                            aria-labelledby="discharge-list" aria-expanded="true">
+                            <div class="cst-table table-responsive table-set-height" id="discharge-scroll">
+                                <table aria-describedby="table"
+                                    class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                    style="table-layout: auto">
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th id="srno" style="width:50px">#</th>
+                                            <th id="memberId">Member ID</th>
+                                            <th id="memberName">Member Name</th>
+                                            <th id="deliveryDate">Delivery Date</th>
+                                            <th id="typeOfDelivery">Type of Delivery</th>
+                                            <th id="action" class="small-col">Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                        infinite-scroll='queform.retrieveFilteredMembers(false)'
+                                        infinite-scroll-container='"#member-scroll"'
+                                        infinite-scroll-immediate-check="false">
+                                        <tr ng-repeat="discharge in queform.pendingDischargeList">
+                                            <td>
+                                                {{$index + 1}}
+                                            </td>
+                                            <td>{{discharge.uniqueHealthId}}</td>
+                                            <td>{{discharge.name}}</td>
+                                            <td>{{discharge.deliveryDate|date:'dd/MM/yyyy'}}</td>
+                                            <td>{{discharge.typeOfDelivery}}</td>
+                                            <td><button class="btn btn-primary"
+                                                    ng-click="queform.markAsDischarged(discharge.id, discharge.deliveryDate, discharge.childDetails)">Mark
+                                                    as Discharged</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="dischargeModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="text">Discharge Details</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="inline-form" name="queform.dischargeForm">
+                        <div class="form-group">
+                            <validate for='dischargeDate' required-msg="Select Date">
+                                <label for="dischargeDate" control-label>Discharge Date</label>
+                                <input type="text" style="float: inherit;" datepicker tabindex="8" name="dischargeDate"
+                                    form-control ng-model="queform.dischargeObject.dischargeDate" required
+                                    max-date="queform.dischargeObject.maxDischargeDate"
+                                    min-date="queform.dischargeObject.deliveryDate">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <validate for='freeMedicines' required-msg=" Select a value">
+                                <label style="vertical-align: middle;white-space: initial" for="freeMedicines"
+                                    name="freeMedicines" class="control-label" control-label>Free medicines
+                                    dispensed?</label>
+                                <label style="margin-top:3%" class="control control-radio">Yes
+                                    <input ng-value="true" name="freeMedicines" type="radio"
+                                        ng-model="queform.dischargeObject.freeMedicines" form-control required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label style="margin-top:3%" class="control control-radio">No
+                                    <input ng-value="false" name="freeMedicines" type="radio"
+                                        ng-model="queform.dischargeObject.freeMedicines" form-control required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <validate for='freeDiet' required-msg=" Select a value">
+                                <label style="vertical-align: middle;white-space: initial" for="freeDiet"
+                                    name="freeDiet" class="control-label" control-label>Free diet provided?</label>
+                                <label style="margin-top:1%" class="control control-radio">Yes
+                                    <input ng-value="true" name="freeDiet" type="radio"
+                                        ng-model="queform.dischargeObject.freeDiet" form-control required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label style="margin-top:1%" class="control control-radio">No
+                                    <input ng-value="false" name="freeDiet" type="radio"
+                                        ng-model="queform.dischargeObject.freeDiet" form-control required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <validate for='freeLabTest' required-msg=" Select a value">
+                                <label style="vertical-align: middle;white-space: initial" for="freeLabTest"
+                                    name="freeLabTest" class="control-label" control-label>Free Lab Tests done?</label>
+                                <label style="margin-top:1%" class="control control-radio">Yes
+                                    <input ng-value="true" name="freeLabTest" type="radio"
+                                        ng-model="queform.dischargeObject.freeLabTest" form-control required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label style="margin-top:1%" class="control control-radio">No
+                                    <input ng-value="false" name="freeLabTest" type="radio"
+                                        ng-model="queform.dischargeObject.freeLabTest" form-control required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <validate for='freeBloodTransfusion' required-msg=" Select a value">
+                                <label style="vertical-align: middle;white-space: initial" for="freeBloodTransfusion"
+                                    name="freeBloodTransfusion" class="control-label" control-label>Free Blood
+                                    Transfusion done?</label>
+                                <label style="margin-top:3%" class="control control-radio">Yes
+                                    <input ng-value="true" name="freeBloodTransfusion" type="radio"
+                                        ng-model="queform.dischargeObject.freeBloodTransfusion" form-control required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label style="margin-top:3%" class="control control-radio">No
+                                    <input ng-value="false" name="freeBloodTransfusion" type="radio"
+                                        ng-model="queform.dischargeObject.freeBloodTransfusion" form-control required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <validate for='freeDropTransport' required-msg=" Select a value">
+                                <label style="vertical-align: middle;white-space: initial" for="freeDropTransport"
+                                    name="freeDropTransport" class="control-label" control-label>Free drop back/
+                                    referral transport provided?</label>
+                                <label style="margin-top:3%" class="control control-radio">Yes
+                                    <input ng-value="true" name="freeDropTransport" type="radio"
+                                        ng-model="queform.dischargeObject.freeDropTransport" form-control required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label style="margin-top:3%" class="control control-radio">No
+                                    <input ng-value="false" name="freeDropTransport" type="radio"
+                                        ng-model="queform.dischargeObject.freeDropTransport" form-control required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="container" style="padding: 0;">
+                            <div id="accordion">
+                                <div class="card" ng-repeat="childDetail in queform.dischargeObject.childDetails">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#collapse{{$index}}">
+                                            {{childDetail.name || ('Child ' + ($index + 1))}}
+                                        </a>
+                                    </div>
+                                    <div id="collapse{{$index}}" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div
+                                                ng-if="!childDetail.givenImmunisations.includes(queform.immunisations.IMMUNISATION_BCG)">
+                                                <div class="form-group">
+                                                    <validate for="isBcgGiven{{$index}}" required-msg="Select Value">
+                                                        <label for="isBcgGiven{{$index}}" class="control-label"
+                                                            control-label>Is BCG
+                                                            given?</label>
+                                                        <label class="control control-radio"
+                                                            style="margin-top: 10px;">Yes
+                                                            <input ng-value="true" name="isBcgGiven{{$index}}"
+                                                                type="radio" ng-change="childDetail.bcgDate = null;"
+                                                                ng-model="childDetail.isBcgGiven" form-control required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <label class="control control-radio"
+                                                            style="margin-top: 10px;">No
+                                                            <input ng-value="false" name="isBcgGiven{{$index}}"
+                                                                type="radio" ng-change="childDetail.opvDate = null;"
+                                                                ng-model="childDetail.isBcgGiven" form-control required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div style="margin-bottom: 3%" class="form-group"
+                                                    ng-if="childDetail.isBcgGiven">
+                                                    <validate for='bcgDate' required-msg="Select Date"
+                                                        vaccine-msg="Invalid Vaccination Date">
+                                                        <label style="vertical-align: middle;white-space: initial"
+                                                            for="bcgDate" control-label>Date
+                                                            of giving BCG</label>
+                                                        <input type="text" style="float: inherit;" datepicker
+                                                            tabindex="8" name="bcgDate" form-control
+                                                            ng-model="childDetail.bcgDate"
+                                                            ng-change="queform.checkImmunisationValidation(queform.dischargeObject.deliveryDate, childDetail.bcgDate, queform.immunisations.IMMUNISATION_BCG)"
+                                                            required min-date='queform.dischargeObject.deliveryDate'
+                                                            max-date='queform.maxBCGDate'>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                            <div
+                                                ng-if="!childDetail.givenImmunisations.includes(queform.immunisations.IMMUNISATION_OPV_0)">
+                                                <div class="form-group">
+                                                    <validate for="isOpvGiven{{$index}}" required-msg="Select Value">
+                                                        <label for="isOpvGiven{{$index}}" class="control-label"
+                                                            control-label>Is OPV
+                                                            given?</label>
+                                                        <label class="control control-radio"
+                                                            style="margin-top: 10px;">Yes
+                                                            <input ng-value="true" name="isOpvGiven{{$index}}"
+                                                                type="radio" ng-change="childDetail.opvDate = null;"
+                                                                ng-model="childDetail.isOpvGiven" form-control required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <label class="control control-radio"
+                                                            style="margin-top: 10px;">No
+                                                            <input ng-value="false" name="isOpvGiven{{$index}}"
+                                                                type="radio" ng-change="childDetail.opvDate = null;"
+                                                                ng-model="childDetail.isOpvGiven" form-control required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div style="margin-bottom: 3%" class="form-group"
+                                                    ng-if="childDetail.isOpvGiven">
+                                                    <validate for='opvDate' required-msg="Select Date"
+                                                        vaccine-msg="Invalid Vaccination Date">
+                                                        <label style="vertical-align: middle;white-space: initial"
+                                                            for="opvDate" control-label>Date
+                                                            of giving OPV</label>
+                                                        <input type="text" style="float: inherit;" datepicker
+                                                            tabindex="8" name="opvDate" form-control
+                                                            ng-model="childDetail.opvDate"
+                                                            ng-change="queform.checkImmunisationValidation(queform.dischargeObject.deliveryDate, childDetail.opvDate, queform.immunisations.IMMUNISATION_OPV_0)"
+                                                            required min-date='queform.dischargeObject.deliveryDate'
+                                                            max-date='queform.maxOPVDate'>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                            <div
+                                                ng-if="!childDetail.givenImmunisations.includes(queform.immunisations.IMMUNISATION_HEPATITIS_B_0)">
+                                                <div class="form-group">
+                                                    <validate for="isHepatitisBGiven{{$index}}"
+                                                        required-msg="Select Value">
+                                                        <label for="isHepatitisBGiven{{$index}}"
+                                                            class="long control-label" control-label>Is
+                                                            Hepatitis B given?</label>
+                                                        <label class="control control-radio"
+                                                            style="margin-top: 10px;">Yes
+                                                            <input ng-value="true" name="isHepatitisBGiven{{$index}}"
+                                                                type="radio"
+                                                                ng-change="childDetail.hepatitisBDate = null;"
+                                                                ng-model="childDetail.isHepatitisBGiven" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <label class="control control-radio"
+                                                            style="margin-top: 10px;">No
+                                                            <input ng-value="false" name="isHepatitisBGiven{{$index}}"
+                                                                type="radio"
+                                                                ng-change="childDetail.hepatitisBDate = null;"
+                                                                ng-model="childDetail.isHepatitisBGiven" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div style="margin-bottom: 3%" class="form-group"
+                                                    ng-if="childDetail.isHepatitisBGiven">
+                                                    <validate for='hepatitisBDate' required-msg="Select Date"
+                                                        vaccine-msg="Invalid Vaccination Date">
+                                                        <label style="vertical-align: middle;white-space: initial"
+                                                            for="hepatitisBDate" control-label>Date
+                                                            of giving Hepatitis B</label>
+                                                        <input type="text" style="float: inherit;" datepicker
+                                                            tabindex="8" name="hepatitisBDate" form-control
+                                                            ng-model="childDetail.hepatitisBDate"
+                                                            ng-change="queform.checkImmunisationValidation(queform.dischargeObject.deliveryDate, childDetail.hepatitisBDate, queform.immunisations.IMMUNISATION_HEPATITIS_B_0)"
+                                                            required min-date='queform.dischargeObject.deliveryDate'
+                                                            max-date='queform.maxHepatitisBDate'>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                            <div
+                                                ng-if="!childDetail.givenImmunisations.includes(queform.immunisations.IMMUNISATION_VITAMIN_K)">
+                                                <div class="form-group">
+                                                    <validate for='isVitaminKGiven{{$index}}'
+                                                        required-msg="Select Value">
+                                                        <label for="isVitaminKGiven{{$index}}" class="control-label"
+                                                            control-label>Is Vitamin
+                                                            K given?</label>
+                                                        <label class="control control-radio"
+                                                            style="margin-top: 10px;">Yes
+                                                            <input ng-value="true" name="isVitaminKGiven{{$index}}"
+                                                                type="radio"
+                                                                ng-change="childDetail.vitaminKDate = null;"
+                                                                ng-model="childDetail.isVitaminKGiven" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <label class="control control-radio"
+                                                            style="margin-top: 10px;">No
+                                                            <input ng-value="false" name="isVitaminKGiven{{$index}}"
+                                                                type="radio"
+                                                                ng-change="childDetail.vitaminKDate = null;"
+                                                                ng-model="childDetail.isVitaminKGiven" required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div style="margin-bottom: 3%" class="form-group"
+                                                    ng-if="childDetail.isVitaminKGiven">
+                                                    <validate for='vitaminKDate' required-msg="Select Date"
+                                                        vaccine-msg="Invalid Vaccination Date">
+                                                        <label style="vertical-align: middle;white-space: initial"
+                                                            for="vitaminKDate" control-label>Date
+                                                            of giving Vitamin K</label>
+                                                        <input type="text" style="float: inherit;" datepicker
+                                                            tabindex="8" name="vitaminKDate" form-control
+                                                            ng-model="childDetail.vitaminKDate"
+                                                            ng-change="queform.checkImmunisationValidation(queform.dischargeObject.deliveryDate, childDetail.vitaminKDate, queform.immunisations.IMMUNISATION_VITAMIN_K)"
+                                                            required min-date='queform.dischargeObject.deliveryDate'
+                                                            max-date='queform.maxVitaminKDate'>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"
+                        ng-click="queform.saveDischargeDetails()">Save</button>
+                    <button type="submit" class="btn btn-primary" ng-click="queform.cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="medium-div filter-div">
+    <span style="left:-66px" class="filter-toggle" ng-click="queform.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <search terms="queform.terms" search-fn="queform.retrieveFilteredMembers(reset)" search="queform.search" 
+            search-form="queform.searchForm" selected-location="queform.selectedLocation" selected-location-id="queform.selectedLocationId"
+            close-fn="queform.toggleFilter()"></search>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

@@ -1,0 +1,185 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Manage Location</h4>
+                    </div>
+                </div>
+                <form role="form" name="locationForm" id="locationForm" novalidate>
+                    <div class="card-body inline-form">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="locationType" control-label class="required">Select Location
+                                        Type</label>
+                                    <select class="form-control cst-form-control" name="locationType"
+                                        ng-options="type as type.name for type in addlocationctrl.locationTypes|  orderBy:'level'"
+                                        ng-model="addlocationctrl.requiredLevel"
+                                        ng-change="addlocationctrl.onChangeLocation(addlocationctrl.requiredLevel)"
+                                        required>
+                                        <option value="">Please Select.....</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="addlocationctrl.selectedType == 'D'">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="form-group control control-checkbox">
+                                        <input ng-model="addlocationctrl.isAspirationalDistrict" type="checkbox">
+                                        <div class="control_indicator checkbox-success"></div>
+                                        Is Aspirational District
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="form-group control control-checkbox"
+                                        ng-if="addlocationctrl.selectedType == 'B'">
+                                        <input ng-model="addlocationctrl.isHighPriorityTaluka" type="checkbox">
+                                        <div class="control_indicator checkbox-success"></div>
+                                        Is High Priority Taluka
+                                    </label>
+                                    <label class="form-group control control-checkbox"
+                                        ng-if="addlocationctrl.selectedType == 'B'">
+                                        <input ng-model="addlocationctrl.containsCmtcCenter" type="checkbox">
+                                        <div class="control_indicator checkbox-success"></div>
+                                        Has CMTC Center
+                                    </label>
+                                    <label class="form-group control control-checkbox"
+                                        ng-if="addlocationctrl.selectedType == 'B'">
+                                        <input ng-model="addlocationctrl.containsNrcCenter" type="checkbox">
+                                        <div class="control_indicator checkbox-success"></div>
+                                        Has NRC Center
+                                    </label>
+                                    <label class="form-group control control-checkbox"
+                                        ng-if="addlocationctrl.selectedType == 'D'">
+                                        <input ng-model="addlocationctrl.cerebralPalsyModule" type="checkbox">
+                                        <div class="control_indicator checkbox-success"></div>
+                                        Cerebral Palsy Module
+                                    </label>
+                                    <label class="form-group control control-checkbox"
+                                        ng-if="addlocationctrl.selectedType == 'B'">
+                                        <input ng-model="addlocationctrl.geoFencing" type="checkbox">
+                                        <div class="control_indicator checkbox-success"></div>
+                                        Geo Fencing
+                                    </label>
+                                    <label class="form-group control control-checkbox"
+                                        ng-if="['B', 'Z'].includes(addlocationctrl.selectedType)"
+                                        uib-tooltip="Targeted approach to accelerate health outcome">
+                                        <input ng-model="addlocationctrl.isTaaho" type="checkbox">
+                                        <div class="control_indicator checkbox-success"></div>
+                                        Is TAAHO
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="addlocationctrl.requiredLevel.level != null">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group" ng-if="addlocationctrl.requiredLevel.level > 1">
+                                        <location-directive selected-location="addlocationctrl.selectedLocation"
+                                            template-type="'twoPart'"
+                                            fetch-upto-level="addlocationctrl.requiredLevel.level - 1"
+                                            ng-model="addlocationctrl.selectedLocationId"
+                                            required-upto-level="addlocationctrl.requiredLevel.level - 1"
+                                            fetch-according-to-user-aoi="true">
+                                        </location-directive>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-6">
+                                    <validate for="locationname" required-msg="Enter Location Name">
+                                        <label for="locationname" control-label>Location Name</label>
+                                        <input type="text" auto-focus="addlocationctrl.focus"
+                                            class="form-control cst-form-control" form-control
+                                            placeholder="Enter Location Name" name="locationname"
+                                            ng-model="addlocationctrl.locationName" required>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="addlocationctrl.env!=='uttarakhand'">
+                            <div class="row">
+                                <div class="col-6">
+                                    <validate for="locationname">
+                                        <label for="emamtaid" control-label>Emamta Id</label>
+                                        <input type="text" class="form-control cst-form-control" form-control
+                                            placeholder="Enter Emamta Id" name="emamtaid"
+                                            ng-model="addlocationctrl.emamta">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-6">
+                                    <validate for="englishName" required-msg="Enter English Name">
+                                        <label for="englishName" control-label>English Name</label>
+                                        <input type="text" class="form-control cst-form-control" form-control
+                                            placeholder="Enter English Name" name="englishName"
+                                            ng-model="addlocationctrl.englishName" required>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-6">
+                                    <validate for="lgdCode" required-msg="Enter LGD Code">
+                                        <label for="lgdCode" control-label>LGD Code</label>
+                                        <input type="text" class="form-control cst-form-control" form-control
+                                            placeholder="Enter LGD Code" name="lgdCode"
+                                            ng-model="addlocationctrl.lgdCode"
+                                            ng-required="addlocationctrl.selectedType == 'D' || addlocationctrl.selectedType == 'B' || addlocationctrl.selectedType == 'V'">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="col-xl-1 float-right">
+                                    <a rel="noopener noreferrer" href='https://lgdirectory.gov.in' target='_blank'>
+                                        <em popover-placement="'top'"
+                                            uib-popover="If you do not know 'LGD Code' you can get these code from here"
+                                            popover-trigger="'mouseenter'" class="fa fa-question-circle-o">
+                                        </em>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-6">
+                                    <validate for="mddsCode">
+                                        <label for="mddsCode" control-label>MDDS Code</label>
+                                        <input type="text" class="form-control cst-form-control" form-control
+                                            placeholder="Enter MDDS Code" name="mddsCode"
+                                            ng-model="addlocationctrl.mddsCode">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer mt-5">
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-primary" ng-if="!addlocationctrl.isUpdate"
+                                ng-click="addlocationctrl.create(locationForm)">
+                                <em class="fa fa-floppy-o"></em> Save & Continue</button>
+                            <button class="btn btn-secondary" ui-sref="techo.manage.location">Back</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

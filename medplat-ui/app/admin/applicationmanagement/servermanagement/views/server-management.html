@@ -1,0 +1,120 @@
+<!-- Command Execution Section -->
+
+<form role="form" name="servermanagecontroller.serverManageForm" id="serverManageForm" novalidate>
+    <div class="inline-form col-6">
+        <div class="form-group">
+            <validate for='host' required-msg="Enter Host">
+                <label for="host" control-label> Host</label>
+                <input type="text" class="form-control cst-form-control" form-control placeholder="Enter host"
+                    name="host" id="host" ng-model="servermanagecontroller.host" required>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group">
+            <validate for='userName' required-msg="Enter user name">
+                <label for="userName" control-label> Username : </label>
+                <input type="text" class="form-control cst-form-control" form-control placeholder="Enter user name"
+                    name="userName" id="userName" ng-model="servermanagecontroller.userName" required>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group">
+            <validate for='password' required-msg="Enter password">
+                <label for="password" control-label> Password :</label>
+                <input type="text" class="form-control cst-form-control" form-control placeholder="Enter password"
+                    name="password" id="password" ng-model="servermanagecontroller.password" required>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group">
+            <validate for='command' required-msg="Enter command">
+                <label for="command" control-label> Command: </label>
+                <textarea form-control maxlength="899" rows="4" cols="47" ng-model="servermanagecontroller.command"
+                    name="command" required>
+                </textarea>
+
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary ml-160"
+                ng-click="servermanagecontroller.executeCommand()">Execute</button>
+        </div>
+    </div>
+    <div>
+        <label ng-if="!!servermanagecontroller.result">
+            Result :
+            <pre ng-bind-html="servermanagecontroller.result"></pre>
+        </label>
+    </div>
+    <!-- Database Backup file list -->
+    <div class="container-fluid users" ng-if="servermanagecontroller.DBBackupFileList.length > 0">
+        <div class="row">
+            <div class="col-12 mb-15">
+                <div class="section-title">
+                    <h4 class="text">Database backup files</h4>
+                </div>
+            </div>
+            <div class="col-12 mb-15" id="printableDiv">
+                <div class="cst-table table-responsive" style="overflow: auto;max-height: calc(100vh - 191px)"
+                    id="user-scroll">
+                    <table class="table table-sm table-striped filter-table table-auto table-bordered header-fixed">
+                        <tbody class="cst-tbody" infinite-scroll-distance="0" infinite-scroll-container='"#user-scroll"'
+                            infinite-scroll-immediate-check="true">
+                            <tr>
+                                <th>Filename</th>
+                                <th>Last Modified Time</th>
+                            </tr>
+                            <div>
+                                <tr ng-repeat="file in servermanagecontroller.DBBackupFileList">
+                                    <td>
+                                        <a target="_blank"
+                                            href="{{servermanagecontroller.apiPath+'/server/download?filePath='+servermanagecontroller.DBBackupFolderPath+'/'+file.fileName+'&access_token=' + servermanagecontroller.accessToken}}"
+                                            download>{{file.fileName}}
+                                        </a>
+                                    </td>
+                                    <td>{{file.lastModifiedDate}}</td>
+                                </tr>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Log file list -->
+    <div class="container-fluid users" ng-if="servermanagecontroller.LogFileList.length > 0">
+        <div class="row">
+            <div class="col-12 mb-15">
+                <div class="section-title">
+                    <h4 class="text">Log files</h4>
+                </div>
+            </div>
+            <div class="col-12 mb-15" id="printableDiv">
+                <div class="cst-table table-responsive" style="overflow: auto;max-height: calc(100vh - 191px)"
+                    id="user-scroll">
+                    <table class="table table-sm table-striped filter-table table-auto table-bordered header-fixed">
+                        <tbody class="cst-tbody" infinite-scroll-distance="0" infinite-scroll-container='"#user-scroll"'
+                            infinite-scroll-immediate-check="true">
+                            <tr>
+                                <th>Filename</th>
+                                <th>Last Modified Time</th>
+                            </tr>
+                            <div>
+                                <tr ng-repeat="file in servermanagecontroller.LogFileList">
+                                    <td>
+                                        <a target="_blank"
+                                            href="{{servermanagecontroller.apiPath+'/server/download?filePath='+servermanagecontroller.LogFolderPath+'/'+file.fileName+'&access_token=' + servermanagecontroller.accessToken}}"
+                                            download>{{file.fileName}}
+                                        </a>
+                                    </td>
+                                    <td>{{file.lastModifiedDate}}</td>
+                                </tr>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

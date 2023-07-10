@@ -1,0 +1,538 @@
+<div ng-form="rl.newFieldForm">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">{{rl.editMode?'Edit':'Add'}} Field</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <validate for="fieldName" required-msg="Enter field name"
+                        nameExist-msg="The field with same name exist. Please enter another field name">
+                        <label for="exampleFormControlInput1" control-label>Field/Parameter Name</label>
+                        <input type="text" class="form-control cst-form-control" name="fieldName" remove-spaces
+                            ng-trim="false" required maxlength="100"
+                            ng-change="rl.newField.fieldName = rl.newField.fieldName.toLowerCase()"
+                            ng-model="rl.newField.fieldName" form-control
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for="displayName" required-msg="Enter display name">
+                        <label for="displayName" control-label>Display Name</label>
+                        <input type="text" form-control required maxlength="100" class="form-control cst-form-control"
+                            name="displayName" ng-model="rl.newField.displayName"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for="displayType" required-msg="Enter display type">
+                        <label for="displayType" control-label>Display Type</label>
+                        <select class="form-control cst-form-control" name="displayType"
+                            ng-model="rl.newField.fieldType" form-control required
+                            ng-options="inputtype.key as inputtype.value for inputtype in rl.inputtypes|orderBy:'value'"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <option value="">Select</option>
+                        </select>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group" ng-if="rl.newField.fieldType === 'location'">
+                    <label control-label class="control control-checkbox">Fetch According To User Aoi
+                        <input checked="checked" type="checkbox" ng-model="rl.newField.fetchAccordingToUserAoi"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+                </div>
+                <div class="form-group" ng-if="rl.newField.fieldType === 'location'">
+                    <label control-label class="control control-checkbox">Demographic Location Filter
+                        <input checked="checked" type="checkbox" ng-model="rl.newField.demographicFilterRequired"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+                </div>
+                <div class="form-group" ng-if="rl.newField.fieldType === 'location'">
+                    <label for="displayName" control-label>Fetch Up to Level</label>
+                    <input type="text" form-control maxlength="100" class="form-control cst-form-control"
+                        name="maxLevel" ng-model="rl.newField.fetchUptoLevel"
+                        ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                </div>
+                <div class="form-group" ng-if="rl.newField.fieldType === 'location'">
+                    <label for="displayName" control-label>Required Up to Level</label>
+                    <input type="text" form-control maxlength="100" class="form-control cst-form-control"
+                        name="requiredUptoLevel" ng-model="rl.newField.requiredUptoLevel"
+                        ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                </div>
+                <div class="form-group">
+                    <label control-label class="control control-checkbox">Is Mandatory
+                        <input checked="checked" type="checkbox" ng-model="rl.newField.isMandatory"
+                            ng-change="rl.newField.isMandatory ? rl.newField.requiredUptoLevel = 1 : rl.newField.requiredUptoLevel = ''"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+                    <label control-label class="control control-checkbox">Is Url Param
+                        <input checked="checked" type="checkbox" ng-model="rl.newField.isUrlParam"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+                    <label control-label class="control control-checkbox">Is Hidden
+                        <input checked="checked" type="checkbox" ng-model="rl.newField.isHidden"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+
+                    <label class="control control-checkbox"
+                        ng-if="rl.newField.fieldType === 'comboForReport' || rl.newField.fieldType === 'selectizeForCombo' || rl.newField.fieldType === 'selectizeForMulti' || rl.newField.fieldType === 'multiselectForReport'">Is
+                        Query
+                        <input checked="checked" type="checkbox" ng-model="rl.newField.isQuery"
+                            ng-change="rl.newField.isQuery ? rl.newField.availableOptions = [] : rl.newField.query = ''"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+                </div>
+                <!-- Month Constraints -->
+                <div class="form-group" ng-if="rl.newField.fieldType === 'onlyMonthFromTo' ||
+                            rl.newField.fieldType === 'onlyMonth'">
+                    <div class="bottom-spacer-10">
+                        <label class="control control-checkbox verticle-align-top">Set Fixed Min Month
+                            <input checked="checked" type="checkbox" ng-model="rl.newField.ckSetFixedMinMonth"
+                                ng-change="!rl.newField.ckSetFixedMinMonth ? rl.newField.setFixedMinMonth = '' : ''"
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group display-inline-block col-7 pr-0">
+                            <validate for="setFixedMinMonth" required-msg="Select Min Month"
+                                ng-if="rl.newField.ckSetFixedMinMonth">
+                                <input name=" setFixedMinMonth" id="setFixedMinMonth" type="text" datepicker
+                                    class="input-group text-right bottom-spacer-10"
+                                    ng-model="rl.newField.setFixedMinMonth" date-options="{minMode: 'month'}"
+                                    datepicker-mode="'month'" date-month-format="true"
+                                    ng-required="rl.newField.ckSetFixedMinMonth" form-control
+                                    ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="bottom-spacer-20">
+                        <label class="control control-checkbox">Set Custom Min Month
+                            <input checked="checked" type="checkbox" ng-model="rl.newField.ckSetCustomMinMonth"
+                                ng-change="!rl.newField.ckSetCustomMinMonth ? rl.newField.setCustomMinMonth = '' : ''"
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group display-inline-block col-7 pl-0">
+                            <validate for="setCustomMinMonth" required-msg="Enter Last Number Of Months"
+                                ng-if="rl.newField.ckSetCustomMinMonth">
+                                <input name="setCustomMinMonth" id="setCustomMinMonth" type="number"
+                                    ng-model="rl.newField.setCustomMinMonth" class="form-control cst-form-control"
+                                    placeholder="Enter Last Number Of Months"
+                                    ng-required="rl.newField.ckSetCustomMinMonth" form-control>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="bottom-spacer-20">
+                        <label class="control control-checkbox verticle-align-top">Set Fixed Max Month
+                            <input checked="checked" type="checkbox" ng-model="rl.newField.ckSetFixedMaxMonth"
+                                ng-change="!rl.newField.ckSetFixedMaxMonth ? rl.newField.setFixedMaxMonth = '' : ''"
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group display-inline-block col-7 pr-0">
+                            <validate for="setFixedMaxMonth" required-msg="Select Min Month"
+                                ng-if="rl.newField.ckSetFixedMaxMonth">
+                                <input name=" setFixedMaxMonth" id="setMaxMonth" type="text" datepicker
+                                    class="input-group text-right bottom-spacer-10"
+                                    ng-model="rl.newField.setFixedMaxMonth" date-options="{minMode: 'month'}"
+                                    datepicker-mode="'month'" date-month-format="true"
+                                    ng-required="rl.newField.ckSetFixedMaxMonth" form-control
+                                    ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="bottom-spacer-20">
+                        <label class="control control-checkbox">Set Custom Max Month
+                            <input checked="checked" type="checkbox" ng-model="rl.newField.ckSetCustomMaxMonth"
+                                ng-change="!rl.newField.ckSetCustomMaxMonth ? rl.newField.setCustomMaxMonth = '' : ''"
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group display-inline-block col-7 pl-0">
+                            <validate for="setCustomMaxMonth" required-msg="Enter Future Number Of Months"
+                                ng-if="rl.newField.ckSetCustomMaxMonth">
+                                <input name="setCustomMaxMonth" id="setCustomMaxMonth" type="number"
+                                    ng-model="rl.newField.setCustomMaxMonth" class="form-control cst-form-control"
+                                    placeholder="Enter Future Number Of Months"
+                                    ng-required="rl.newField.ckSetCustomMaxMonth" form-control
+                                    ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="bottom-spacer-20">
+                        <label ng-if="rl.newField.fieldType === 'onlyMonthFromTo'" class="control control-checkbox"
+                            style="padding-right: 70px;">Set Range
+                            <input checked="checked" type="checkbox" ng-model="rl.newField.ckSetMonthRange"
+                                ng-change="!rl.newField.ckSetMonthRange ? rl.newField.setMonthRange = '' : ''"
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <div class="control_indicator"></div>
+                        </label>
+
+                        <div class="form-group display-inline-block col-7 pr-0"
+                            ng-if="rl.newField.fieldType === 'onlyMonthFromTo'">
+                            <validate for="setMonthRange" required-msg="Enter Last Number Of Days For Range"
+                                ng-if="rl.newField.ckSetMonthRange">
+                                <input name="setMonthRange" id="setMonthRange" type="number" min="1"
+                                    ng-model="rl.newField.setMonthRange" class="form-control cst-form-control"
+                                    placeholder="Enter Last Number Of Days For Range"
+                                    ng-required="rl.newField.ckSetMonthRange" form-control
+                                    ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <validate for='isSetDefault'>
+                            <label for="isSetDefault" uib-tooltip="Want to show default date?" class="control-label" control-label>
+                                Want to show default month?
+                            </label>
+                            <label class="control control-radio mt-10">Yes
+                                <input ng-value="true" name="isSetDefault" form-control type="radio"
+                                    ng-model="rl.newField.isSetDefault">
+                                <div class="control_indicator"></div>
+                            </label>
+                            <label class="control control-radio mt-10">No
+                                <input ng-value="false" name="isSetDefault" form-control type="radio"
+                                    ng-model="rl.newField.isSetDefault">
+                                <div class="control_indicator"></div>
+                            </label>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+                <!-- Date Constraints -->
+                <div class="form-group" ng-if="rl.newField.fieldType === 'dateFromTo' ||
+                            rl.newField.fieldType === 'dateRangePicker'|| rl.newField.fieldType === 'date'
+                     || rl.newField.fieldType === 'dateNTime'">
+                    <div class="bottom-spacer-10">
+                        <label class="control control-checkbox verticle-align-top">Set Fixed Min Date
+                            <input checked="checked" type="checkbox" ng-model="rl.newField.ckSetFixedMinDate"
+                                ng-change="!rl.newField.ckSetFixedMinDate ? rl.newField.setFixedMinDate = '' : ''"
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group display-inline-block col-7 pr-0">
+                            <validate for="setFixedMinDate" required-msg="Select Min Date"
+                                ng-if="rl.newField.ckSetFixedMinDate">
+                                <input name=" setFixedMinDate" id="setFixedMinDate" type="text" datepicker
+                                    class="input-group text-right bottom-spacer-10"
+                                    ng-model="rl.newField.setFixedMinDate" ng-required="rl.newField.ckSetFixedMinDate"
+                                    form-control ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="bottom-spacer-20">
+                        <label class="control control-checkbox">Set Custom Min Date
+                            <input checked="checked" type="checkbox" ng-model="rl.newField.ckSetCustomMinDate"
+                                ng-change="!rl.newField.ckSetCustomMinDate ? rl.newField.setCustomMinDate = '' : ''"
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group display-inline-block col-7 pl-0">
+                            <validate for="setCustomMinDate" required-msg="Enter Last Number Of Days"
+                                ng-if="rl.newField.ckSetCustomMinDate">
+                                <input name="setCustomMinDate" id="setCustomMinDate" type="number"
+                                    ng-model="rl.newField.setCustomMinDate" class="form-control cst-form-control"
+                                    placeholder="Enter Last Number Of Days" ng-required="rl.newField.ckSetCustomMinDate"
+                                    form-control ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="bottom-spacer-10">
+                        <label class="control control-checkbox verticle-align-top">Set Fixed Max Date
+                            <input checked="checked" type="checkbox" ng-model="rl.newField.ckSetFixedMaxDate"
+                                ng-change="!rl.newField.ckSetFixedMaxDate ? rl.newField.setFixedMaxDate = '' : ''"
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group display-inline-block col-7 pr-0">
+                            <validate for="setFixedMaxDate" required-msg="Select Min Date"
+                                ng-if="rl.newField.ckSetFixedMaxDate">
+                                <input name=" setFixedMaxDate" id="setFixedMaxDate" type="text" datepicker
+                                    class="input-group text-right bottom-spacer-10"
+                                    ng-model="rl.newField.setFixedMaxDate" ng-required="rl.newField.ckSetFixedMaxDate"
+                                    form-control ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="bottom-spacer-20">
+                        <label class="control control-checkbox">Set Custom Max Date
+                            <input checked="checked" type="checkbox" ng-model="rl.newField.ckSetCustomMaxDate"
+                                ng-change="!rl.newField.ckSetCustomMaxDate ? rl.newField.setCustomMaxDate = '' : ''"
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group display-inline-block col-7 pl-0">
+                            <validate for="setCustomMaxDate" required-msg="Enter Future Number Of Days"
+                                ng-if="rl.newField.ckSetCustomMaxDate">
+                                <input name="setCustomMaxDate" id="setCustomMaxDate" type="number"
+                                    ng-model="rl.newField.setCustomMaxDate" class="form-control cst-form-control"
+                                    placeholder="Enter Future Number Of Days"
+                                    ng-required="rl.newField.ckSetCustomMaxDate" form-control
+                                    ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="bottom-spacer-20" ng-if="rl.newField.fieldType === 'dateFromTo' ||
+                            rl.newField.fieldType === 'dateRangePicker'">
+                        <label class="control control-checkbox" style="padding-right: 58px;">Set Range
+                            <input checked="checked" type="checkbox" ng-model="rl.newField.ckSetDateRange"
+                                ng-change="!rl.newField.ckSetDateRange ? rl.newField.setDateRange = '' : ''"
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group display-inline-block col-7 pr-0">
+                            <validate for="setDateRange" required-msg="Enter Last Number Of Days For Range"
+                                ng-if="rl.newField.ckSetDateRange">
+                                <input name="setDateRange" id="setDateRange" type="number" min="1"
+                                    ng-model="rl.newField.setDateRange" class="form-control cst-form-control"
+                                    placeholder="Enter Last Number Of Days For Range"
+                                    ng-required="rl.newField.ckSetDateRange" form-control
+                                    ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="rl.newField.fieldType !== 'dateRangePicker'">
+                        <validate for='isSetDefault'>
+                            <label for="isSetDefault" uib-tooltip="Want to show default date?" class="control-label" control-label>
+                                Want to show default date?
+                            </label>
+                            <label class="control control-radio mt-10">Yes
+                                <input ng-value="true" name="isSetDefault" form-control type="radio"
+                                    ng-model="rl.newField.isSetDefault">
+                                <div class="control_indicator"></div>
+                            </label>
+                            <label class="control control-radio mt-10">No
+                                <input ng-value="false" name="isSetDefault" form-control type="radio"
+                                    ng-model="rl.newField.isSetDefault">
+                                <div class="control_indicator"></div>
+                            </label>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+                <!-- Default options -->
+                <div class="form-group" ng-if="rl.newField.isSetDefault">
+                    <div class="form-group" ng-if="rl.newField.fieldType === 'date' || rl.newField.fieldType === 'dateNTime'">
+                        <div class="form-group">
+                            <validate for='defaultValueOption'>
+                                <label for="defaultValueOption" uib-tooltip="Select Default value option" class="control-label" control-label>
+                                    Select Default value option
+                                </label>
+                                <br>
+                                <label class="control control-radio mt-10">Today
+                                    <input value="today" name="defaultValueOption" form-control type="radio"
+                                        ng-model="rl.newField.defaultValueOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label class="control control-radio mt-10">Yesterday
+                                    <input value="yesterday" name="defaultValueOption" form-control type="radio"
+                                        ng-model="rl.newField.defaultValueOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label class="control control-radio mt-10">Last N days
+                                    <input value="lastndays" name="defaultValueOption" form-control type="radio"
+                                        ng-model="rl.newField.defaultValueOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group display-inline-block col-7 pl-0">
+                            <validate for="setLastNdays" required-msg="Enter Last Number Of Days"
+                            ng-if="rl.newField.defaultValueOption === 'lastndays'">
+                                <input name="setLastNdays" id="setLastNdays" type="number" max="99" min="1"
+                                    ng-model="rl.newField.setLastNdays" class="form-control cst-form-control"
+                                    placeholder="Enter Last Number Of Days" ng-required="rl.newField.setLastNdays"
+                                    form-control ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="rl.newField.fieldType === 'dateFromTo'">
+                        <div class="form-group">
+                            <validate for='defaultValueOption'>
+                                <label for="defaultValueOption" uib-tooltip="Select Default value option" class="control-label" control-label>
+                                    Select Default value option
+                                </label>
+                                <br>
+                                <label class="control control-radio mt-10">Today & Yesterday
+                                    <input value="today&yesterday" name="defaultValueOption" form-control type="radio"
+                                        ng-model="rl.newField.defaultValueOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label class="control control-radio mt-10">Yesterday & Last N days
+                                    <input value="yesterday&lastndays" name="defaultValueOption" form-control type="radio"
+                                        ng-model="rl.newField.defaultValueOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label class="control control-radio mt-10">Today & Last N days
+                                    <input value="today&lastndays" name="defaultValueOption" form-control type="radio"
+                                        ng-model="rl.newField.defaultValueOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group display-inline-block col-7 pl-0">
+                            <validate for="setLastNdays" required-msg="Enter Last Number Of Days"
+                            ng-if="rl.newField.defaultValueOption === 'today&lastndays' || rl.newField.defaultValueOption === 'yesterday&lastndays'">
+                                <input name="setLastNdays" id="setLastNdays" type="number" max="99" min="1"
+                                    ng-model="rl.newField.setLastNdays" class="form-control cst-form-control"
+                                    placeholder="Enter Last Number Of Days" ng-required="rl.newField.setLastNdays"
+                                    form-control ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="rl.newField.fieldType === 'onlyMonthFromTo'">
+                        <div class="form-group">
+                            <validate for='defaultValueOption'>
+                                <label for="defaultValueOption" uib-tooltip="Select Default value option" class="control-label" control-label>
+                                    Select Default value option
+                                </label>
+                                <br>
+                                <label class="control control-radio mt-10">Current Month & Last Month
+                                    <input value="currentmonth&lastmonth" name="defaultValueOption" form-control type="radio"
+                                        ng-model="rl.newField.defaultValueOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label class="control control-radio mt-10">Current Month & Last N Month
+                                    <input value="current&lastnmonth" name="defaultValueOption" form-control type="radio"
+                                        ng-model="rl.newField.defaultValueOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group display-inline-block col-7 pl-0">
+                            <validate for="setLastNdays" required-msg="Enter Last Number Of Days"
+                            ng-if="rl.newField.defaultValueOption === 'current&lastnmonth'">
+                                <input name="setLastNdays" id="setLastNdays" type="number" max="99" min="1"
+                                    ng-model="rl.newField.setLastNdays" class="form-control cst-form-control"
+                                    placeholder="Enter Last Number Of Month" ng-required="rl.newField.setLastNdays"
+                                    form-control ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="rl.newField.fieldType === 'onlyMonth'">
+                        <div class="form-group">
+                            <validate for='defaultValueOption'>
+                                <label for="defaultValueOption" uib-tooltip="Select Default value option" class="control-label" control-label>
+                                    Select Default value option
+                                </label>
+                                <br>
+                                <label class="control control-radio mt-10">Current Month
+                                    <input value="currentmonth" name="defaultValueOption" form-control type="radio"
+                                        ng-model="rl.newField.defaultValueOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label class="control control-radio mt-10">Last Month
+                                    <input value="lastmonth" name="defaultValueOption" form-control type="radio"
+                                        ng-model="rl.newField.defaultValueOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"
+                    ng-if="rl.newField.isQuery && (rl.newField.fieldType === 'comboForReport' || rl.newField.fieldType === 'selectizeForCombo' || rl.newField.fieldType === 'selectizeForMulti' || rl.newField.fieldType === 'multiselectForReport')">
+                    <validate for="querytextarea" required-msg="Enter query"
+                        invalid-select-query-msg="Only select query is allowed">
+                        <label for="querytextarea" control-label>Display Query</label>
+                        <textarea name="querytextarea" form-control required rows="5"
+                            ng-blur='rl.onQueryChanged(rl.newField, $index)' class="form-control"
+                            ng-model="rl.newField.query"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)"></textarea>
+                        <span ng-bind="rl.newField.errorMsg" class="text-danger"></span>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for="querytextarea2" required-msg="Enter query"
+                        invalid-select-query-msg="Only select query is allowed">
+                        <label for="querytextarea2" control-label>Display Query</label>
+                        <textarea name="querytextarea2" form-control rows="5" class="form-control"
+                            ng-model="rl.newField.queryForParam"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)"></textarea>
+                        <span ng-bind="rl.newField.errorMsg" class="text-danger"></span>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group"
+                    ng-if="!rl.newField.isQuery && (rl.newField.fieldType === 'comboForReport' || rl.newField.fieldType === 'selectizeForCombo' || rl.newField.fieldType === 'selectizeForMulti' || rl.newField.fieldType === 'multiselectForReport')">
+                    <div validate for="options" required-msg="Please enter options">
+                        <label for="exampleFormControlInput1" control-label>Options</label>
+                        <selectize name="options" id="options{{::$index}}" required form-control
+                            ng-model="rl.newField.availableOptions" tag-obj="rl.newField.availableOptions"
+                            config="rl.selectizeOptions" parameter-data-type="rl.newField.dtype"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                            <placeholder></placeholder>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="rl.newField.fieldType === 'dateRangePicker'">
+                    <label>Range Options</label><br>
+                    <label control-label class="control control-checkbox">Last 7 days
+                        <input checked="checked" type="checkbox"
+                            ng-change="rl.onDateRangeChanges(rl.lastWeek, 'lastWeek')"
+                            ng-model="rl.newField.config.dateRangeOptions.isLastWeek"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+                    <label control-label class="control control-checkbox">Last Month
+                        <input checked="checked" type="checkbox"
+                            ng-change="rl.onDateRangeChanges(rl.lastMonth, 'lastMonth')"
+                            ng-model="rl.newField.config.dateRangeOptions.isLastMonth"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+                    <label control-label class="control control-checkbox">Last Year
+                        <input checked="checked" type="checkbox"
+                            ng-change="rl.onDateRangeChanges(rl.lastYear, 'lastYear')"
+                            ng-model="rl.newField.config.dateRangeOptions.isLastYear"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+                    <label control-label class="control control-checkbox">Financial Year
+                        <input checked="checked" type="checkbox"
+                            ng-change="rl.onDateRangeChanges(rl.financialYear, 'financialYear')"
+                            ng-model="rl.newField.config.dateRangeOptions.isFinancialYear"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr>
+                <div class="form-group text-right">
+                    <button class="btn btn-secondary " ng-click="rl.toggleFilter()">Cancel</button>
+                    <button class="btn btn-primary" ng-click="rl.addFieldToContainer()"
+                        ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">{{rl.editMode?'Save':'Add'}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/listview_selector"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lists_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/listview_text_color_selector"
+        android:textSize="14sp"
+        android:textAppearance="@style/ListTextView" />
+</LinearLayout>
+
+<!--    android:minHeight="?android:attr/listPreferredItemHeight"-->

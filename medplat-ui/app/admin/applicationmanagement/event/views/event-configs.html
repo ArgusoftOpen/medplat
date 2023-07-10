@@ -1,0 +1,115 @@
+<script>
+    $(".header-fixed").tableHeadFixer();
+</script>
+<div class="container-fluid eventConfigs-view">
+    <div class="row" ng-form="eventConfigs.manageTemplateForm">
+        <div class="col-12 mb-15">
+            <div>
+                <div class="row mb-15 ">
+                    <div class="col-12 mb-15 text-right">
+                        <input type="text" ng-model="search" id="search" placeholder="Search Name">
+                        <button class="btn btn-primary " ui-sref="techo.notification.config">Configure New</button>
+                    </div>
+                    <div class="col-12 mb-15"
+                        ng-if="!eventConfigs.configuredEvents || eventConfigs.configuredEvents.length == 0">
+                        <div class="no-data-placeholder">
+                            <h5>Sorry No Events Configured!</h5>
+                        </div>
+                    </div>
+                    <div class="col-12 ">
+                        <div class="cst-table table-responsive">
+
+                            <table class="table table-sm table-striped table-bordered header-fixed"
+                                ng-if="eventConfigs.configuredEvents.length > 0">
+                                <thead>
+                                    <tr>
+                                        <th> Name</th>
+                                        <th>Event Type</th>
+                                        <th>Trigger When</th>
+                                        <th>State</th>
+                                        <th>Status</th>
+                                        <th>Completion Time</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        ng-repeat="eventConfigsObject in eventConfigs.configuredEvents | filter : { name : search } ">
+                                        <td>
+                                            {{eventConfigsObject.name}}
+                                        </td>
+                                        <td>
+                                            {{eventConfigsObject.eventType==='TIMMER_BASED'?'TIMER_BASED':eventConfigsObject.eventType|titlecase}}
+                                            <span ng-if="eventConfigsObject.eventTypeDetailCode"
+                                                ng-bind="' - Event Code:'+eventConfigsObject.eventTypeDetailCode ">
+                                            </span>
+                                        </td>
+                                        <td>{{(eventConfigsObject.trigerWhen|titlecase) || 'N/A'}}
+                                            <span ng-if="eventConfigsObject.day">
+                                                <strong> Day:{{eventConfigsObject.day}}</strong>
+                                            </span>
+                                            <span ng-if="eventConfigsObject.hour">
+                                                <strong> Hour:{{eventConfigsObject.hour}}</strong>
+                                            </span>
+                                            <span ng-if="eventConfigsObject.minute">
+                                                <strong> Minute:{{eventConfigsObject.minute}}</strong>
+                                            </span>
+                                        </td>
+                                        <td>{{eventConfigsObject.state|titlecase}}</td>
+                                        <td>{{eventConfigsObject.status|titlecase}}</td>
+                                        <td>{{(eventConfigsObject.completionTime|date : 'dd-MM-yyyy HH:mm') || 'NA'}}
+                                        </td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li>
+                                                    <a href="javscript:void(0)" class="action-icon edit-icon"
+                                                        ui-sref="techo.notification.config({id:eventConfigsObject.id})">
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <a href="#" class="action-icon more-icon"></a>
+                                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                        aria-labelledby="moreDropdown" x-placement="bottom-end">
+                                                        <li ng-if="eventConfigsObject.state==='INACTIVE'">
+                                                            <a href="javascript:void(0)"
+                                                                ng-click="eventConfigs.delete(eventConfigsObject)">
+                                                                <strong>Mark as </strong> Active
+                                                            </a>
+                                                        </li>
+                                                        <li ng-if="eventConfigsObject.state==='ACTIVE'">
+                                                            <a href="javascript:void(0)"
+                                                                ng-click="eventConfigs.delete(eventConfigsObject)">
+                                                                <strong>Mark as </strong> Inactive
+                                                            </a>
+                                                        </li>
+                                                        <!-- <li ng-click="eventConfigs.syncWithServer(eventConfigsObject)">
+                                                            <a>Sync with Server</a>
+                                                        </li> -->
+                                                        <li ng-if="eventConfigsObject.eventType ==='TIMMER_BASED'">
+                                                            <a href="javascript:void(0)"
+                                                                ng-click="eventConfigs.runConfig(eventConfigsObject)">
+                                                                Run Event Now
+                                                            </a>
+                                                        </li>
+                                                        <li ng-if="eventConfigsObject.eventType ==='TIMMER_BASED'">
+                                                            <a href="javascript:void(0)"
+                                                                ng-click="eventConfigs.openExceptionsModal(eventConfigsObject)">
+                                                                Show Exceptions
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>

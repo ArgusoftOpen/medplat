@@ -1,0 +1,537 @@
+<div class="col-12 call-center">
+    <div class="col-12 bottom-spacer-20 padding-left-0">
+        <div class="row ">
+            <div class="col-6 text-center pt-10">
+                <div class="call-div">
+                    <div id="chart123"></div>
+                </div>
+            </div>
+            <div class="col-6 pt-10">
+                <div class="call-div">
+                    <div id="charParallel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 padding-left-0">
+        <div class="row  bottom-spacer-20">
+            <div class="col-6 text-center pt-10">
+                <div class="call-div">
+                    <div id="my_dataviz"></div>
+                </div>
+            </div>
+            <div class="col-6 pt-10  inline-form">
+                <div class="col-8 form-group pull-right pt-10">
+                    <label for="filter" class="control-label text-right">Filter by: </label>
+                    <select class="form-control cst-form-control" form-control name="filter" id="filter"
+                        ng-model="dashboardCtrl.selectedFilterIndicator"
+                        ng-options="indicator as indicator.key for indicator in dashboardCtrl.indicators"
+                        ng-change="callCenterDashBoardController.filterByPeriod()">
+                    </select>
+                </div>
+                <div class="call-div">
+                    <div id="lineChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-15">
+        <div class="text-center">
+            <div class="row" style="padding: 0 15px;">
+                <div class="indicator-class" ng-repeat="indicator in dashboardCtrl.indicators"
+                    ng-click="dashboardCtrl.onChangeIndicator(indicator)"
+                    ng-class="indicator.key === dashboardCtrl.selectedIndicator.key ? 'active-indicator' : 'inactive-indicator'">
+                    {{indicator.key}}
+                </div>
+            </div>
+        </div>
+        <!--Population Indicators-->
+        <div class="col-12 padding-left-right-0"
+            ng-show="dashboardCtrl.selectedIndicator.key ==='Population Indicators'">
+            <div class="cst-table table-responsive" style="overflow: auto">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th class="white-space-unset">Population Indicators</th>
+                            <th class="white-space-unset">NFHS 5</th>
+                            <th class="white-space-unset">Change from Previous Period to Current</th>
+                            <th class="white-space-unset">Change
+                            <th class="white-space-unset">Focus Locations</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr>
+                            <td>Sex Ratio of Total Population</td>
+                            <td>965</td>
+                            <td>
+                                <div id="populationScaleAxis1"></div>
+                            </td>
+                            <td rowspan="3">
+                                <div id="populationScale"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Sex Ratio at Birth</td>
+                            <td>955</td>
+                            <td>
+                                <div id="populationScaleAxis2"></div>
+                                <!-- 950<span class="dot" style="background-color:blue; margin-left: 5px"></span>
+                                <span class="dot" style="background-color:yellow;margin-right: 5px"></span>953 -->
+                            </td>
+                            <td><a href="#">Gandhinagar</a>,<a href="#">Bharuch</a></td>
+                        </tr>
+                        <tr>
+                            <td>Females above 6 who attended school (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="populationScaleAxis3"></div>
+                                <!-- 950<span class="dot" style="background-color:blue; margin-left: 5px"></span>
+                                <span class="dot" style="background-color:yellow;margin-right: 5px"></span>953 -->
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Infant & Child Mortality-->
+        <div class="col-12 padding-left-right-0"
+            ng-show="dashboardCtrl.selectedIndicator.key ==='Infant & Child Mortality'">
+            <div class="cst-table table-responsive" style="overflow: auto">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th class="white-space-unset">Infant & Child Mortality</th>
+                            <th class="white-space-unset">NFHS 5</th>
+                            <th class="white-space-unset">Change from Previous Period to Current</th>
+                            <th class="white-space-unset">Change
+                            <th class="white-space-unset">Focus Locations</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr>
+                            <td>Neonatal mortality rate(NNMR)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="infantScaleAxis1"></div>
+                            </td>
+                            <td rowspan="3">
+                                <div id="infantScale"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Infant mortality rate(IMR) </td>
+                            <td>955</td>
+                            <td>
+                                <div id="infantScaleAxis2"></div>
+                            </td>
+                            <td><a href="#">Gandhinagar</a>,<a href="#">Bharuch</a></td>
+                        </tr>
+                        <tr>
+                            <td>Under-five mortality rate(U5MR)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="infantScaleAxis3"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Family Planning and Unmet Needs-->
+        <div class="col-12 padding-left-right-0"
+            ng-show="dashboardCtrl.selectedIndicator.key ==='Family Planning and Unmet Needs'">
+            <div class="cst-table table-responsive" style="overflow: auto">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th class="white-space-unset">Family Planning and Unmet Needs</th>
+                            <th class="white-space-unset">NFHS 5</th>
+                            <th class="white-space-unset">Change from Previous Period to Current</th>
+                            <th class="white-space-unset">Change
+                            <th class="white-space-unset">Focus Locations</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr>
+                            <td>Any method6 </td>
+                            <td>965</td>
+                            <td>
+                                <div id="familyScaleAxis1"></div>
+                            </td>
+                            <td rowspan="4">
+                                <div id="familyScale"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Any modern method6 </td>
+                            <td>955</td>
+                            <td>
+                                <div id="familyScaleAxis2"></div>
+                            </td>
+                            <td><a href="#">Gandhinagar</a>,<a href="#">Bharuch</a></td>
+                        </tr>
+                        <tr>
+                            <td>Total unmet need (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="familyScaleAxis3"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Unmet need for spacing (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="familyScaleAxis4"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Maternal & Child Health-->
+        <div class="col-12 padding-left-right-0"
+            ng-show="dashboardCtrl.selectedIndicator.key ==='Maternal & Child Health'">
+            <div class="cst-table table-responsive" style="overflow: auto">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th class="white-space-unset">Maternal & Child Health</th>
+                            <th class="white-space-unset">NFHS 5</th>
+                            <th class="white-space-unset">Change from Previous Period to Current</th>
+                            <th class="white-space-unset">Change
+                            <th class="white-space-unset">Focus Locations</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr>
+                            <td>Mothers who had an antenatal check-up in the first trimester(%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="maternalScaleAxis1"></div>
+                            </td>
+                            <td rowspan="12">
+                                <div id="maternalScale"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Mothers who had at least 4 antenatal care visits(%) </td>
+                            <td>955</td>
+                            <td>
+                                <div id="maternalScaleAxis2"></div>
+                            </td>
+                            <td><a href="#">Gandhinagar</a>,<a href="#">Bharuch</a></td>
+                        </tr>
+                        <tr>
+                            <td>Mothers who received postnatal care from a doctor/nurse/LHV/ANM/midwife/other health
+                                personnel within 2 days of delivery (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="maternalScaleAxis3"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Children born at home who were taken to a health facility for a check-up within 24 hours
+                                of
+                                birth (%) </td>
+                            <td>965</td>
+                            <td>
+                                <div id="maternalScaleAxis4"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Children who received postnatal care from a doctor/nurse/LHV/ANM/midwife/other health
+                                personnel within 2 days of delivery (%) </td>
+                            <td>965</td>
+                            <td>
+                                <div id="maternalScaleAxis5"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Institutional births </td>
+                            <td>965</td>
+                            <td>
+                                <div id="maternalScaleAxis6"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Institutional births in public facility </td>
+                            <td>965</td>
+                            <td>
+                                <div id="maternalScaleAxis7"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Births in a public health facility that were delivered by caesarean section (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="maternalScaleAxis8"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Children age 12-23 months fully vaccinated based on information from vaccination card
+                                only
+                                (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="maternalScaleAxis9"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Children age 12-23 months who have received BCG (%)</td>
+                            <td>955</td>
+                            <td>
+                                <div id="maternalScaleAxis10"></div>
+                            </td>
+                            <td><a href="#">Gandhinagar</a>,<a href="#">Bharuch</a></td>
+                        </tr>
+                        <tr>
+                            <td>Children age 12-23 months who have received 3 doses of polio vaccine (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="maternalScaleAxis11"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Children age 12-23 months who have received 3 doses of penta or DPT vaccine (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="maternalScaleAxis12"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Feeding Practice, Nutrition & Anemia -->
+        <div class="col-12 padding-left-right-0"
+            ng-show="dashboardCtrl.selectedIndicator.key ==='Feeding Practice, Nutrition & Anemia'">
+            <div class="cst-table table-responsive" style="overflow: auto">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th class="white-space-unset">Feeding Practice, Nutrition & Anemia</th>
+                            <th class="white-space-unset">NFHS 5</th>
+                            <th class="white-space-unset">Change from Previous Period to Current</th>
+                            <th class="white-space-unset">Change
+                            <th class="white-space-unset">Focus Locations</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr>
+                            <td>Children under age 3 years breastfed within one hour of birth (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="feedingScaleAxis1"></div>
+                            </td>
+                            <td rowspan="4">
+                                <div id="feedingScale"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Children under age 6 months exclusively breastfed (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="feedingScaleAxis2"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Pregnant women age 15-49 years who are who are anemic (<11.0 gdl) (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="feedingScaleAxis3"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Pregnant women age 15-49 years who are severely anaemic (<7.0 gdl) % </td>
+                            <td>965</td>
+                            <td>
+                                <div id="feedingScaleAxis4"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--NCD Table-->
+        <!-- <div class="col-12 padding-left-right-0" ng-show="dashboardCtrl.selectedIndicator.key ==='NCD'">
+            <div class="cst-table table-responsive" style="overflow: auto">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th class="white-space-unset">NCD</th>
+                            <th class="white-space-unset">NFHS 5</th>
+                            <th class="white-space-unset">Change from Previous Period to Current</th>
+                            <th class="white-space-unset">Change
+                            <th class="white-space-unset">Focus Locations</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr>
+                            <td>Women: Blood sugar level - high (141-160 mg/dl) (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis1"></div>
+                            </td>
+                            <td rowspan="12">
+                                <div id="ncdScale"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Women: Blood sugar level - very high (>160 mg/dl) (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis2"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Women: Blood sugar level - high or very high (>140 mg/dl) or taking medicine to control
+                                blood sugar level (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis3"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Men: Blood sugar level - high (141-160 mg/dl) (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis4"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Men: Blood sugar level - very high (>160 mg/dl) (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis5"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Men: Blood sugar level - high or very high (>140 mg/dl) or taking medicine to control
+                                blood
+                                sugar level (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis6"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Women: Elevated blood pressure (Systolic ≥140 mm of Hg and/or Diastolic ≥90 mm of Hg) or
+                                taking medicine to control blood pressure (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis7"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Men:Elevated blood pressure (Systolic ≥140 mm of Hg and/or Diastolic ≥90 mm of Hg) or
+                                taking
+                                medicine to control blood pressure (%)</td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis8"></div>
+                            </td>
+                            <td><a href="#">Tapi</a>,<a href="#">Narmada</a></td>
+                        </tr>
+                        <tr>
+                            <td>Women: Ever undergone a screening test for cervical cancer (%) </td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis9"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Women: Ever undergone a breast examination for breast cancer (%) </td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis10"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Women: Ever undergone an oral cavity examination for oral cancer </td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis11"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Men: Ever undergone an oral cavity examination for oral cancer (%) </td>
+                            <td>965</td>
+                            <td>
+                                <div id="ncdScaleAxis12"></div>
+                            </td>
+                            <td><a href="#">Vadodara</a>,<a href="#">Surat</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+    </div>
+    <div class="filter-div" ng-if="!dashboardCtrl.noRolesAssignedToShow">
+        <span class="filter-toggle" ng-click="dashboardCtrl.toggleFilter()">Filter</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Filter</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12">
+                    <ng-form name="dashboardCtrl.locationForm">
+                        <location-directive selected-location="dashboardCtrl.selectedLocation" template-type="'inline'"
+                            fetch-according-to-user-aoi="true" fetch-upto-level="4"> </location-directive>
+                        <br>
+                    </ng-form>
+                </div>
+                <div class="col-12 form-group">
+                    <label for="duration" class="control-label">Duration</label>
+                    <select id="duration" name="duration" class="form-control cst-form-control"
+                        ng-model="dashboardCtrl.selectedDuration"
+                        ng-options="option.key as option.value for option in dashboardCtrl.duration" required>
+                        <option value="">Select</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr>
+                <div class="form-group text-right">
+                    <button class="btn btn-secondary close-filter"
+                        ng-click="dashboardCtrl.toggleFilter()">Close</button>
+                    <button class="btn btn-primary search-filter"
+                        ng-click="dashboardCtrl.fetchUsers('click')">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

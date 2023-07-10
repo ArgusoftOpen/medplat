@@ -1,0 +1,49 @@
+<div class="login-wrapper" style="margin-top: 150px">
+    <div>
+        <img alt="image" class="login-logo" src="img/medplat.png" style="height: 50px;">
+        <h3 class="login-header">Login</h3>
+        <div class="text-center bottom-spacer-10">
+            <div class="list-group-item-text alert alert-danger" ng-show="login.user.hasAuthError">
+                {{login.user.errorMessage}}
+            </div>
+        </div>
+        <div class=" inline-form">
+            <form class="" ng-show="isLoading !== true" name="login.loginForm" novalidate>
+                <div class="form-group">
+                    <validate for='username' required-msg="*Username is required">
+                        <input type="text" autocomplete="off" class="form-control cst-form-control" form-control
+                            style="width:calc(100% - 1px)" placeholder="Username" name="username" id="username"
+                            ng-model="login.user.username" required>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for='password' required-msg="*Password is required">
+                        <input type="password" class="form-control cst-form-control" form-control
+                            style="width:calc(100% - 1px)" placeholder="Password" name="password" id="password"
+                            ng-model="login.user.password" required>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary btn-block btn-login"
+                        ng-click='login.doLogin()'>Download</button>
+                </div>
+                <hr class="login-hr">
+                <ul class="logo-list d-block text-center">
+                    <li ng-repeat="imageData in login.logoImages">
+                        <a href="{{imageData.link}}" target="_blank" border="0">
+                            <img alt="image" src="{{imageData.source}}">
+                        </a>
+                    </li>
+                </ul>
+                <p style="text-align: justify;">
+                    <i>A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators especially in a public health context</i>
+                </p>
+                                <!-- <a href="http://www.argusoft.com/" target="_blank" border="0">
+                    <img alt="image" src="img/medplat.png" style="height: 50px;" class="mx-auto d-block">
+                </a> -->
+            </form>
+        </div>
+    </div>
+</div>

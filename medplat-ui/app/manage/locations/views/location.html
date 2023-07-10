@@ -1,0 +1,77 @@
+<div class="container-fluid fhsr-verification">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="float-right">
+                <button class="btn btn-primary float-right" ng-if="locationctrl.rights.canAdd"
+                    ui-sref="techo.manage.add-location">Add
+                    Location</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 md-15">
+            <div class="cst-table table-responsive" style="overflow: auto;max-height: calc(100vh - 169px)"
+                ng-if="locationctrl.locationList.length > 0">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <colgroup width="10%">
+                        <colgroup width="70%">
+                            <colgroup width="20%"
+                                ng-if="locationctrl.rights.canEdit || locationctrl.rights.canChangeTranslation">
+                            <thead class="cst-thead">
+                        <tr>
+                            <th>#</th>
+                            <th>Location Name</th>
+                            <th ng-if="locationctrl.rights.canEdit || locationctrl.rights.canChangeTranslation">Action
+                            </th>
+                        </tr>
+                        </thead>
+                    <tbody class="cst-tbody">
+                        <tr ng-repeat="location in locationctrl.locationList">
+                            <td>{{$index+1}}</td>
+                            <td>{{::location.name}}</td>
+                            <td class="action-cell"
+                                ng-if="locationctrl.rights.canEdit || locationctrl.rights.canChangeTranslation">
+                                <ul class="action-item">
+                                    <li>
+                                        <a href="javascript:void(0)" class="action-icon edit-icon"
+                                            ng-click="locationctrl.editLocation(location.id,location)"></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div active">
+        <span class="filter-toggle" ng-click="locationctrl.toggleFilter()">Select Location</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Select Location</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12">
+                    <ng-form name="locationctrl.locationForm">
+                        <location-directive ng-model="locationctrl.locationId"
+                            selected-location="locationctrl.selectedLocation"
+                            required-upto-level="locationctrl.requiredLevel" template-type="'inline'"
+                            fetch-according-to-user-aoi="true"> </location-directive>
+                        <br>
+                    </ng-form>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter"
+                            ng-click="locationctrl.toggleFilter()">Close</button>
+                        <button class="btn btn-primary search-filter" ng-click="locationctrl.submit()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

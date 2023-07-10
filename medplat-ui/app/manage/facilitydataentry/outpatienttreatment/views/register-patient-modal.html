@@ -1,0 +1,139 @@
+<style>
+    .display {
+        width: auto !important;
+    }
+
+    .mb-r1 {
+        margin-bottom: 1rem;
+    }
+</style>
+<div class="modal-header">
+    <h4 class="text" style="line-height: 1.5;">
+        Register OPD Patient
+    </h4>
+</div>
+<div class="modal-body"
+    style="overflow: inherit; overflow-y: auto; height: calc(100vh - 150px); max-height: calc(100vh - 150px);">
+    <div class="card cst-card">
+        <div class="card-title">
+            <div class="float-left">
+                <h4 class="text">Beneficiary Details</h4>
+            </div>
+        </div>
+        <div class="card-body inline-form">
+            <div class="row">
+                <div class="col-6 mb-r1">
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Member ID (Family ID) :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.patientDetail.uniqueHealthId | emptylabel}}
+                            ({{ctrl.patientDetail.familyId | emptylabel}})
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Mobile Number :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.patientDetail.mobileNumber | emptylabel}}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="display"><strong>ASHA Name (Contact Number) :</strong></label>
+                        <label class="display">
+                            {{ctrl.patientDetail.ashaName | emptylabel}}
+                            ({{ctrl.patientDetail.ashaContactNumber | emptylabel}})
+                        </label>
+                    </div>
+                    <div class="form-group" ng-if="ctrl.prefferedHealthId">
+                        <label class="display">
+                            <strong>ABHA Address :</strong>
+                        </label>
+                        <label class="display">
+                            <span ng-if="ctrl.healthIds">{{ctrl.healthIds}},</span>
+                            <span ng-if="ctrl.prefferedHealthId">
+                                <strong uib-tooltip="Preffered ABHA Address" style="color: #299a05;">{{ctrl.prefferedHealthId | emptylabel}}</strong>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-6 mb-r1">
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Name :</strong>
+                        </label>
+                        <label class="display">{{ctrl.patientDetail.name | emptylabel}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>DOB (Age) :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.patientDetail.dob | date:'dd/MM/yyyy' | emptylabel}}
+                            ({{ctrl.patientDetail.age.replace("mons","months") | emptylabel}})
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="display"><strong>ANM Name (Contact Number) :</strong></label>
+                        <label class="display">
+                            {{ctrl.patientDetail.anmName | emptylabel}}
+                            ({{ctrl.patientDetail.anmContactNumber | emptylabel}})
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Location :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.patientDetail.locationHierarchy | emptylabel}}
+                        </label>
+                    </div>
+                    <div class="form-group" ng-if="ctrl.patientDetail.idspRound">
+                        <label class="display">
+                            <strong>IDSP Round :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.patientDetail.idspRound}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-form name="ctrl.opdRegistrationForm">
+        <div class="row col-12">
+            <div class="form-group col-6">
+                <validate for="registrationDate" required-msg="Enter Registration Date">
+                    <label style="float: left;" for="registrationDate" control-label>Registration Date</label>
+                    <input name="registrationDate" type="text" datepicker id="registrationDate"
+                        ng-model="ctrl.registrationDate" form-control required>
+                    <placeholder></placeholder>
+                </validate>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group col-6">
+                <validate for='healthInfrastructure' required-msg="Select a value">
+                    <label for="healthInfrastructure" uib-tooltip="Health Infrastructure*" control-label>
+                        Health Infrastructure
+                    </label>
+                    <select class="form-control cst-form-control" form-control chosen-directive
+                        name="healthInfrastructure" id="healthInfrastructure"
+                        ng-options="healthInfrastructure.id as healthInfrastructure.name for healthInfrastructure in ctrl.healthInfrastructuresList"
+                        ng-model="ctrl.healthInfrastructureId" required>
+                        <option value="" selected>--Select--</option>
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+        </div>
+    </ng-form>
+</div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="ctrl.submit()">Submit</button>
+    <button type="button" class="btn btn-secondary" ng-click="ctrl.cancel()">Cancel</button>
+</div>

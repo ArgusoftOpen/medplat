@@ -1,0 +1,248 @@
+<style>
+    .mr-15 {
+        margin-right: 15px;
+    }
+
+    .title {
+        color: #2b7dce;
+    }
+
+    .align-center-h {
+        text-align: center;
+    }
+
+    .border-block {
+        border: 1px solid black;
+        padding: 2%;
+    }
+
+    .pointer-cursor {
+        cursor: pointer;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .dndDisabled {
+        cursor: default;
+        background-color: grey;
+    }
+
+    div[dnd-list] {
+        min-height: 50px;
+    }
+
+    div[dnd-list] .dndDraggingSource {
+        display: none;
+    }
+
+    div[dnd-list] .dndPlaceholder {
+        background-color: #ddd;
+        min-height: 40px;
+        list-style-type: none;
+        margin-bottom: 2%;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row" ng-if="ctrl.mobileTemplateConfig.length">
+        <div class="col-12">
+            <div class="card-title title">{{ctrl.systemConstraintFormMasterDto.formName}} Configuration</div>
+        </div>
+    </div>
+    <div class="row mb-15">
+        <div class="col-12">
+            <div class="btn btn-primary pull-right" ng-click="ctrl.goBack()">
+                Back
+            </div>
+            <div class="btn btn-success mr-15 pull-right" ng-click="ctrl.saveConfiguration()">
+                Save Configuration
+            </div>
+            <div class="btn btn-primary pull-right mr-15" ng-click="ctrl.addPage()">
+                Add Page
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 table-set-height-less" id="allFields">
+            <h5 class="align-center-h">All Fields</h5>
+            <div class="border-block pointer-cursor" dnd-list="ctrl.formFieldList" dnd-allowed-types="[]">
+                <p class="border-block" ng-repeat="field in ctrl.formFieldList" dnd-draggable="field"
+                    dnd-copied="ctrl.addQuestion(field)" dnd-effect-allowed="copy"
+                    dnd-disable-if="field.isAddedInMobileTemplate"
+                    ng-class="field.isAddedInMobileTemplate?'dndDisabled':''">
+                    {{field.fieldName + ' | ' + field.fieldType}} 
+                    <em ng-if="ctrl.isHidden(field)" class="fa fa-eye-slash"></em>
+                </p>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-8">
+            <form name="ctrl.mobileTemplateConfigForm" novalidate>
+                <div ng-repeat="(pageIndex,page) in ctrl.mobileTemplateConfig">
+                    <div class="card cst-card">
+                        <div id="card{{pageIndex+1}}" role="tab" class="card-title collapse-link d-block pointer-cursor"
+                            data-toggle="collapse" href="#collapse{{pageIndex+1}}">
+                            <h5 class="left">Page #{{pageIndex+1}}</h5>
+                            <div class="btn btn-danger pull-right" ng-click="ctrl.removePage(pageIndex)">
+                                Remove Page
+                            </div>
+                        </div>
+                        <div class="show" id="collapse{{pageIndex+1}}">
+                            <div class="container-fluid">
+                                <div class="row mt-15">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <validate for='pageNumber{{pageIndex}}'
+                                                required-msg="Please select a value">
+                                                <label for="pageNumber{{pageIndex}}" control-label>Page
+                                                    Number</label>
+                                                <input type="number" maxlength="10"
+                                                    class="form-control cst-form-control" form-control
+                                                    name="pageNumber{{pageIndex}}" id="pageNumber{{pageIndex}}"
+                                                    ng-model="page.pageNumber" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div dnd-list="page.questions">
+                                    <div ng-repeat="(questionIndex,question) in page.questions" dnd-draggable="question"
+                                        dnd-moved="page.questions.splice(questionIndex,1)" dnd-effect-allowed="move">
+                                        <div class="card cst-card mb-15">
+                                            <div class="card-title p-0 collapse-link pointer-cursor d-flex justify-content-between" role="tab">
+                                                <div class="col-7 p-2" id="questionCard{{pageIndex+1}}{{questionIndex+1}}" 
+                                                    data-toggle="collapse"
+                                                    href="#questionCollapse{{pageIndex+1}}{{questionIndex+1}}">
+                                                    <h6 class="left">{{question.fieldName}}   <em ng-if="ctrl.isHidden(question)" class="fa fa-eye-slash"></em></h6>
+                                                </div>
+                                                <div class="col-5  d-flex align-items-center justify-content-end">
+                                                    <div class="mr-15">
+                                                        <input id="endForm" 
+                                                        ng-click="ctrl.updateEndForm(pageIndex,questionIndex,question.isEndForm)"
+                                                        ng-model="question.isEndForm" type="checkbox"
+                                                        />
+                                                        End Form
+                                                    </div>
+                                                    <div class="btn btn-danger " ng-click="ctrl.removeQuestion(pageIndex,questionIndex)">
+                                                        Remove question</div>
+                                                </div>
+                                            </div>
+                                            <dnd-nodrag>
+                                                <div class="show"
+                                                    id="questionCollapse{{pageIndex+1}}{{questionIndex+1}}">
+                                                    <div class="container-fluid">
+                                                        <div class="row mb-15 mt-15">
+                                                            <div class="col-6"
+                                                                ng-if="ctrl.formFieldList[question.selectedFieldIndex].fieldType==='DROPDOWN'
+                                                                || ctrl.formFieldList[question.selectedFieldIndex].fieldType==='RADIO'
+                                                                || ctrl.formFieldList[question.selectedFieldIndex].fieldType==='CHECKBOX'
+                                                                || ctrl.formFieldList[question.selectedFieldIndex].fieldType==='CB'">
+                                                                <div class="form-group">
+                                                                    <validate
+                                                                        for='nextFieldBy{{questionIndex}}{{pageIndex}}'
+                                                                        required-msg="Please select a value">
+                                                                        <label
+                                                                            for="nextFieldBy{{questionIndex}}{{pageIndex}}"
+                                                                            control-label>Next Field By</label>
+                                                                        <select class="form-control cst-form-control"
+                                                                            form-control ng-model="question.nextFieldBy"
+                                                                            ng-change="ctrl.nextFieldByChanged(question)"
+                                                                            name="nextFieldBy{{questionIndex}}{{pageIndex}}"
+                                                                            id="nextFieldBy{{questionIndex}}{{pageIndex}}"
+                                                                            ng-required="!question.isEndForm">
+                                                                            <option value="">--Select--</option>
+                                                                            <option value="BY_FIELD">By Field</option>
+                                                                            <option value="BY_OPTIONS">By Options
+                                                                            </option>
+                                                                        </select>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group"
+                                                                    ng-if="question.nextFieldBy==='BY_FIELD'">
+                                                                    <validate
+                                                                        for='nextField{{questionIndex}}{{pageIndex}}'
+                                                                        required-msg="Please select a value">
+                                                                        <label
+                                                                            for="nextField{{questionIndex}}{{pageIndex}}"
+                                                                            control-label>Next Field</label>
+                                                                        <select class="form-control cst-form-control"
+                                                                            form-control ng-model="question.nextField"
+                                                                            name="nextField{{questionIndex}}{{pageIndex}}"
+                                                                            id="nextField{{questionIndex}}{{pageIndex}}"
+                                                                            ng-options="formField.uuid as formField.fieldName+' ('+formField.fieldType+')' for formField in ctrl.formFieldList"
+                                                                            chosen-directive="ctrl.formFieldList"
+                                                                            ng-required="!question.isEndForm">
+                                                                        </select>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-15"
+                                                            ng-if="question.nextFieldBy==='BY_OPTIONS'">
+                                                            <div class="col-2"></div>
+                                                            <div class="col-8">
+                                                                <div class="table-section">
+                                                                    <div class="cst-table-responsive"
+                                                                        style="overflow: inherit;">
+                                                                        <table aria-describedby="table"
+                                                                            class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                                                            <thead class="cst-thead">
+                                                                                <tr>
+                                                                                    <th id="option">Option</th>
+                                                                                    <th id="nextField">Next Field</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="cst-tbody">
+                                                                                <tr
+                                                                                    ng-repeat="(optionIndex,option) in question.nextFieldJson">
+                                                                                    <td>
+                                                                                        {{option.value}}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <validate
+                                                                                                for='nextField{{optionIndex}}'
+                                                                                                required-msg="Please select a value">
+                                                                                                <select
+                                                                                                    class="form-control cst-form-control"
+                                                                                                    form-control
+                                                                                                    ng-model="option.nextField"
+                                                                                                    name="nextField{{optionIndex}}"
+                                                                                                    id="nextField{{optionIndex}}"
+                                                                                                    ng-options="formField.uuid as formField.fieldName+' ('+formField.fieldType+')' for formField in ctrl.formFieldList"
+                                                                                                    chosen-directive="ctrl.formFieldList"
+                                                                                                    ng-required="!question.isEndForm">
+                                                                                                </select>
+                                                                                                <placeholder>
+                                                                                                </placeholder>
+                                                                                            </validate>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </dnd-nodrag>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

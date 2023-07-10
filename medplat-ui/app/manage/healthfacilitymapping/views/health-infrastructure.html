@@ -1,0 +1,320 @@
+<style>
+    .text-align-center {
+        text-align: center;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15 pull-right text-right">
+            <button class="btn btn-primary " ng-if="healthInfrastructure.currentUserRights.canManageHealthInfraType"
+                ui-sref="techo.manage.healthInfrastructureType">
+                Manage HealthInfra Type
+            </button>
+            <button class="btn btn-primary" ng-if="healthInfrastructure.currentUserRights.canAdd"
+                ng-click="healthInfrastructure.navigateToAdd()">
+                Add
+            </button>
+        </div>
+
+        <!-- <div class="col-12 form-group pull-right text-right"
+            ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility">
+            <label class="control control-checkbox">
+                Show pending HFR linking
+                <input type="checkbox" ng-click=" healthInfrastructure.filterList()"
+                    ng-model="healthInfrastructure.isToShowPending">
+                <div class="control_indicator"></div>
+            </label>
+        </div> -->
+
+        <div class="col-12 mb-15">
+            <div class="cst-tab">
+                <uib-tabset active='healthInfrastructure.selectedTab'
+                    ng-if="healthInfrastructure.currentUserRights.manageBasedOnLocation || healthInfrastructure.currentUserRights.manageBasedOnAssignment">
+                    <!-- Search Health Infrastructures -->
+                    <uib-tab heading="Search Health Infrastructures" index=0
+                        ng-click="healthInfrastructure.searchData(true)"
+                        ng-if="healthInfrastructure.currentUserRights.manageBasedOnLocation">
+                        <div class="cst-table table-responsive table-set-height" id="label-scroll"
+                            ng-if="healthInfrastructure.selectedTab === 0">
+                            <table aria-describedby="table"
+                                class="table table-sm table-striped table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="id" style="width: 10%">Name</th>
+                                        <th id="id" style="width: 10%">Type</th>
+                                        <th id="id" style="width: 15%">Address</th>
+                                        <th id="id" style="width: 15%">Location Hierachy</th>
+                                        <th id="id" style="width: 15%">Facilities Available</th>
+                                        <th id="id" ng-if="false"
+                                            style="width: 10%">HFR Facility Id</th>
+                                        <th id="id" ng-if="healthInfrastructure.currentUserRights.canEdit"
+                                            style="width: 5%;">
+                                            Actions</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                    infinite-scroll='healthInfrastructure.searchData()'
+                                    infinite-scroll-disabled='healthInfrastructure.pagingService.pagingRetrivalOn'
+                                    infinite-scroll-container='"#label-scroll"'>
+                                    <tr ng-repeat="hi in healthInfrastructure.listOfHeathInfrastructures"
+                                        ng-if="healthInfrastructure.listOfHeathInfrastructures.length > 0">
+                                        <td ng-bind="hi.name"></td>
+                                        <td
+                                            ng-bind="hi.hospitaltype | hospitaltypeDisplayName : healthInfrastructure.types ">
+                                        </td>
+                                        <td>{{!hi.address || hi.address == 'null' ? 'N.A' : hi.address}}</td>
+                                        <td ng-bind="hi.locationname"></td>
+                                        <td>
+                                            <ul class="default-list">
+                                                <li ng-if="hi.isfru">FRU
+                                                </li>
+                                                <li ng-if="hi.isnrc">NRC
+                                                </li>
+                                                <li ng-if="hi.iscmtc">CMTC
+                                                </li>
+                                                <li ng-if="hi.issncu">SNCU
+                                                </li>
+                                                <li ng-if="hi.isbloodbank">Blood Bank
+                                                </li>
+                                                <li ng-if="hi.isgynaec">Full time Gynecologist
+                                                </li>
+                                                <li ng-if="hi.ispediatrician">Full time Pediatrician
+                                                </li>
+                                                <li ng-if="hi.isconfirmationcenter">CP Confirmation Center
+                                                </li>
+                                                <!-- <li ng-if="hi.forncd">For NCD
+                                                </li> -->
+                                                <li ng-if="hi.ischiranjeevischeme">Chiranjivi Yojana
+                                                </li>
+                                                <li ng-if="hi.isbalsakha1">Balsakha-1
+                                                </li>
+                                                <li ng-if="hi.isbalsakha3">Balsakha-3
+                                                </li>
+                                                <li ng-if="hi.isusgfacility">USG facility
+                                                </li>
+                                                <li ng-if="hi.isreferralfacility">Referral Facility
+                                                </li>
+                                                <li ng-if="hi.ismayojna">MA yojana
+                                                </li>
+                                                <li ng-if="hi.ispmjy">PMJAY facility
+                                                </li>
+                                                <li ng-if="hi.isnpcb">NPCB referral center
+                                                </li>
+                                                <li ng-if="hi.ishwc">HWC
+                                                </li>
+                                                <li ng-if="hi.isidsp">IDSP
+                                                </li>
+                                                <li ng-if="hi.isnoreportingunit">No reporting Unit
+                                                </li>
+                                                <li ng-if="hi.iscovidhospital">Covid Hospital
+                                                </li>
+                                                <li ng-if="hi.iscovidlab">Covid Lab
+                                                </li>
+                                                <li ng-if="hi.hasventilators">Has Ventilators
+                                                </li>
+                                                <li ng-if="hi.hasdefibrillators">Has Defibrillators
+                                                </li>
+                                                <li ng-if="hi.hasoxygencylinders">Has Oxygen Cylinders
+                                                </li>
+                                            </ul>
+                                            <span
+                                                ng-if="!hi.isfru && !hi.isnrc && !hi.iscmtc && !hi.issncu && !hi.isbloodbank && !hi.isgynaec
+                                        && !hi.ispediatrician && !hi.isconfirmationcenter && !hi.forncd && !hi.ishwc && !hi.ischiranjeevischeme
+                                        && !hi.isbalsakha1 && !hi.isbalsakha3 && !hi.isusgfacility && !hi.isreferralfacility && !hi.ismayojna
+                                        && !hi.ispmjy && !hi.isnpcb && !hi.isnoreportingunit && !hi.iscovidhospital && !hi.iscovidlab  && !hi.hasventilators && !hi.hasdefibrillators && !hi.hasoxygencylinders">
+                                                No Facilities Available
+                                            </span>
+                                        </td>
+                                        <td
+                                            ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility && hi.hfrfacilityid">
+                                            {{hi.hfrfacilityid}}</td>
+                                        <!-- <td
+                                            ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility && !hi.hfrfacilityid">
+                                            <button class="btn btn-primary"
+                                                ng-click="healthInfrastructure.showModal(hi)">Link Facility
+                                                (HFR)</button>
+                                        </td> -->
+                                        <td class="action-cell" ng-if="healthInfrastructure.currentUserRights.canEdit">
+                                            <ul class="action-item">
+                                                <li ng-click="healthInfrastructure.navigateToEdit(hi.id)"><a
+                                                        class="action-icon edit-icon"></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        ng-if="(!healthInfrastructure.listOfHeathInfrastructures || healthInfrastructure.listOfHeathInfrastructures.length === 0)">
+                                        <td colspan="6" class="text-align-center">
+                                            No Health Infrastructures Available
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <!-- My Health Infrastructures -->
+                    <uib-tab heading="My Health Infrastructures" index=1
+                        ng-click="healthInfrastructure.searchData(true)"
+                        ng-if="healthInfrastructure.currentUserRights.manageBasedOnAssignment">
+                        <div class="cst-table table-responsive" id="label-scroll"
+                            ng-if="healthInfrastructure.selectedTab === 1">
+                            <table aria-describedby="table"
+                                class="table table-sm table-striped table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="id" style="width: 10%">Name</th>
+                                        <th id="id" style="width: 10%">Type</th>
+                                        <th id="id" style="width: 15%">Address</th>
+                                        <th id="id" style="width: 15%">Location Hierachy</th>
+                                        <th id="id" style="width: 15%">Facilities Available</th>
+                                        <th id="id" ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility"
+                                            style="width: 10%">HFR Facility Id</th>
+                                        <th id="id" ng-if="healthInfrastructure.currentUserRights.canEdit"
+                                            style="width: 5%;">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                    infinite-scroll='healthInfrastructure.searchData()'
+                                    infinite-scroll-disabled='healthInfrastructure.pagingService.pagingRetrivalOn'
+                                    infinite-scroll-container='"#label-scroll"'>
+                                    <tr ng-repeat="hi in healthInfrastructure.listOfHeathInfrastructures"
+                                        ng-if="healthInfrastructure.listOfHeathInfrastructures.length > 0">
+
+                                        <td ng-bind="hi.name"></td>
+                                        <td ng-bind="hi.type | hospitaltypeDisplayName : healthInfrastructure.types ">
+                                        </td>
+                                        <td>{{!hi.address || hi.address == 'null' ? 'N.A' : hi.address}}</td>
+                                        <td>{{hi.locationHierarchy | emptylabel}}</td>
+                                        <td>
+                                            <ul class="default-list">
+                                                <li ng-if="hi.is_fru">FRU
+                                                </li>
+                                                <li ng-if="hi.is_nrc">NRC
+                                                </li>
+                                                <li ng-if="hi.is_cmtc">CMTC
+                                                </li>
+                                                <li ng-if="hi.is_sncu">SNCU
+                                                </li>
+                                                <li ng-if="hi.is_blood_bank">Blood Bank
+                                                </li>
+                                                <li ng-if="hi.is_gynaec">Full time Gynecologist
+                                                </li>
+                                                <li ng-if="hi.is_pediatrician">Full time Pediatrician
+                                                </li>
+                                                <li ng-if="hi.is_cpconfirmationcenter">CP Confirmation Center
+                                                </li>
+                                                <li ng-if="hi.for_ncd">For NCD
+                                                </li>
+                                                <li ng-if="hi.is_chiranjeevi_scheme">Chiranjivi Yojana
+                                                </li>
+                                                <li ng-if="hi.is_balsakha1">Balsakha-1
+                                                </li>
+                                                <li ng-if="hi.is_balsakha3">Balsakha-3
+                                                </li>
+                                                <li ng-if="hi.is_usg_facility">USG facility
+                                                </li>
+                                                <li ng-if="hi.is_referral_facility">Referral Facility
+                                                </li>
+                                                <li ng-if="hi.is_ma_yojna">MA yojana
+                                                </li>
+                                                <li ng-if="hi.is_pmjy">PMJAY facility
+                                                </li>
+                                                <li ng-if="hi.is_npcb">NPCB referral center
+                                                </li>
+                                                <li ng-if="hi.is_hwc">HWC
+                                                </li>
+                                                <li ng-if="hi.is_idsp">IDSP
+                                                </li>
+                                                <li ng-if="hi.is_no_reporting_unit">No reporting Unit
+                                                </li>
+                                                <li ng-if="hi.is_covid_hospital">Covid Hospital
+                                                </li>
+                                                <li ng-if="hi.is_covid_lab">Covid Lab
+                                                </li>
+                                                <li ng-if="hi.has_ventilators">Has Ventilators
+                                                </li>
+                                                <li ng-if="hi.has_defibrillators">Has Defibrillators
+                                                </li>
+                                                <li ng-if="hi.has_oxygen_cylinders">Has Oxygen Cylinders
+                                                </li>
+                                            </ul>
+                                            <span
+                                                ng-if="!hi.is_fru && !hi.is_nrc && !hi.is_cmtc && !hi.is_sncu && !hi.is_blood_bank && !hi.is_gynaec
+                                                    && !hi.is_pediatrician && !hi.is_cpconfirmationcenter && !hi.for_ncd && !hi.is_chiranjeevi_scheme
+                                                    && !hi.is_balsakha1 && !hi.is_balsakha3 && !hi.is_usg_facility && !hi.is_referral_facility
+                                                    && !hi.is_ma_yojna && !hi.is_pmjy && !hi.is_npcb && !hi.is_hwc && !hi.is_idsp
+                                                    && !hi.is_no_reporting_unit && !hi.is_covid_hospital && !hi.is_covid_lab && !hi.has_ventilators && !hi.has_defibrillators && !hi.has_oxygen_cylinders">
+                                                No Facilities Available
+                                            </span>
+                                        </td>
+                                        <td
+                                            ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility && hi.hfrfacilityid">
+                                            {{hi.hfrfacilityid}}</td>
+                                        <td
+                                            ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility && !hi.hfrfacilityid">
+                                            <button class="btn btn-primary"
+                                                ng-click="healthInfrastructure.showModal(hi)">Link Facility
+                                                (HFR)</button>
+                                        </td>
+                                        <td class="action-cell" ng-if="healthInfrastructure.currentUserRights.canEdit">
+                                            <ul class="action-item">
+                                                <li ng-click="healthInfrastructure.navigateToEdit(hi.id)"><a
+                                                        class="action-icon edit-icon"></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        ng-if="(!healthInfrastructure.listOfHeathInfrastructures || healthInfrastructure.listOfHeathInfrastructures.length === 0)">
+                                        <td colspan="6" class="text-align-center">
+                                            No Health Infrastructures Available
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div"
+        ng-if="healthInfrastructure.selectedTab === 0 && healthInfrastructure.currentUserRights.manageBasedOnLocation">
+        <span class="filter-toggle" ng-click="healthInfrastructure.toggleFilter()">Filter</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Search</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12" ng-form="healthInfrastructure.searchForm">
+                    <div class="form-group">
+                        <location-directive ng-model="healthInfrastructure.search.locationId"
+                            fetch-according-to-user-aoi="true"></location-directive>
+                    </div>
+                    <div class="form-group">
+                        <label control-label>
+                            Type
+                        </label>
+                        <select form-control class="form-control cst-form-control"
+                            name="healthInfrastructure.search.name" ng-model="healthInfrastructure.search.type"
+                            ng-options="type.id as  type.value for type in healthInfrastructure.types">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr>
+                <div class="form-group text-right">
+                    <button class="btn btn-secondary close-filter"
+                        ng-click="healthInfrastructure.close()">Close</button>
+                    <button class="btn btn-primary search-filter" ng-click="healthInfrastructure.searchData(true);
+                                healthInfrastructure.toggleFilter();">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

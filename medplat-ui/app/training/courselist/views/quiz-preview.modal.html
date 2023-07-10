@@ -1,0 +1,229 @@
+<style>
+    .customScrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .customScrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .modal-l {
+        margin-top: 10px;
+    }
+
+    .cst-modal .modal-body{
+        max-height: none;
+    }
+
+    .arrow {
+        border: solid black;
+        border-width: 0 1px 1px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+
+    .up {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+
+    .row {
+        margin-right: 0;
+    }
+
+    .mobile-config-search input[type=text]>.dropdown-menu {
+        display: block;
+    }
+
+    #menu-search-data.user-data {
+        padding: 5px !important;
+        overflow: auto;
+        max-height: 200px;
+        display: block;
+        left: 0;
+    }
+
+    #menu-search-data.dropdown-menu a:hover {
+        color: #2b7dce !important;
+    }
+
+    .mobile-config-search input[type=text] {
+        width: 100%;
+    }
+
+    .smartphone {
+        position: relative;
+        max-width: 290px;
+        min-height: 400px;
+        margin: auto;
+        border: 16px black solid;
+        border-top-width: 60px;
+        border-bottom-width: 60px;
+        border-radius: 36px;
+    }
+
+    /* The horizontal line on the top of the device */
+    .smartphone:before {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 5px;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 10px;
+    }
+
+    /* The circle on the bottom of the device */
+    .smartphone:after {
+        content: '';
+        display: block;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        left: 50%;
+        bottom: -65px;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 50%;
+    }
+
+    /* The screen (or content) of the device */
+    .smartphone .content {
+        max-width: 355px;
+        height: 400px;
+        background: white;
+        overflow: auto;
+    }
+
+    .sorting-list ul[dnd-list] {
+        min-height: 42px;
+        padding-left: 0px;
+    }
+
+    .sorting-list ul[dnd-list] .dndDraggingSource {
+        display: none;
+    }
+
+    .sorting-list ul[dnd-list] .dndPlaceholder {
+        background-color: #ddd;
+        display: block;
+        min-height: 42px;
+    }
+
+    .sorting-list ul[dnd-list] li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+        display: block;
+        padding: 10px 15px;
+        margin-bottom: -1px;
+    }
+
+    .sorting-list:hover {
+        cursor: grabbing;
+    }
+
+    .sorting-list ul[dnd-list] li.selected {
+        background-color: #dff0d8;
+        color: #3c763d;
+    }
+</style>
+<div class="modal-header">
+    <h4 class="text">Quiz Preview</h4>
+    <button type="button" class="close" ng-click="quizPreviewModalCtrl.ok()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body" style="text-align: center;">
+    <div class="smartphone">
+        <div class="content customScrollbar">
+            <div class="row"
+                style="background-color: blue; color: white;height: 35px;display: block;text-align: center;font-weight: 900;">
+                <span>Learning Quiz</span>
+            </div>
+            <p style="margin-bottom: 0; color: blue; text-align: left; font-size: 13px;">
+                {{quizPreviewModalCtrl.section.sectionTitle}}</p>
+            <p style="color: gray; text-align: left;">{{quizPreviewModalCtrl.section.sectionDescription}}</p>
+            <div ng-repeat="(index, que) in quizPreviewModalCtrl.section.questions" style="text-align: left;">
+                <div class="card" style="margin: 7px;">
+                    <div class="card-header" ng-if="que.questionType!=='FILL_IN_THE_BLANKS'">
+                        Q{{index+1}} | <img ng-if="que.attachmentImage"
+                            ng-src="{{que.attachmentImage ? que.attachmentImage : 'img/media.png'}}"
+                            alt="Course Media. Image/Video/PDF/Audio" style="
+                        height: 100px;
+                        width: 100px;
+                        background-color: black;
+                    " /> {{que.questionTitle}}
+                    </div>
+                    <div class="card-header" ng-if="que.questionType==='FILL_IN_THE_BLANKS'">
+                        Q{{index+1}} | Please fill in the blanks
+                        <br>
+                        {{que.questionTitle}}
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <ul class="list-group list-group-flush" ng-if="que.questionType!=='MATCH_THE_FOLLOWING'">
+                            <li class="list-group-item" ng-repeat="opt in que.options">
+                                <i ng-if="que.questionType==='SINGLE_SELECT'" class="fa fa-circle-thin"></i>
+                                <i ng-if="que.questionType==='MULTI_SELECT'" class="fa fa-square-o"></i>
+                                <img ng-if="opt.attachmentImage"
+                                    ng-src="{{opt.attachmentImage ? opt.attachmentImage : 'img/media.png'}}"
+                                    alt="Course Media. Image/Video/PDF/Audio" style="
+                            height: 100px;
+                            width: 100px;
+                            background-color: black;
+                        " />
+                                {{opt.optionTitle}}
+                            </li>
+                        </ul>
+                        <div ng-if="que.questionType==='MATCH_THE_FOLLOWING'">
+                            <div style="width: 100%; min-height:30px; border-radius: 25px; background-color: blue; color: white; text-align: center; border: solid;"
+                                ng-repeat="rhs in que.rhs">
+                                <img ng-if="rhs.attachmentImage"
+                                    ng-src="{{rhs.attachmentImage ? rhs.attachmentImage : 'img/media.png'}}"
+                                    alt="Image/Video/PDF/Audio" style="
+                                        height: 100px;
+                                        width: 100px;
+                                        background-color: black;
+                                    " />
+                                {{rhs.optionTitle}}
+                            </div>
+                            <ol style="text-align: left; padding: 0; margin: 0;">
+                                <li class="list-group-item" ng-repeat="(index,lhs) in que.lhs">
+                                    {{index+1}}.
+                                    <img ng-if="lhs.attachmentImage"
+                                        ng-src="{{lhs.attachmentImage ? lhs.attachmentImage : 'img/media.png'}}"
+                                        alt="Image/Video/PDF/Audio" style="
+                                        height: 100px;
+                                        width: 100px;
+                                        background-color: black;
+                                    " />
+                                    {{lhs.optionTitle}}
+                                    <div
+                                        style="width: 100%; height:20px; border-radius: 25px; background-color: white; color: gray; border: dotted 1px;">
+                                        Drop Answer Here</div>
+                                </li>
+                            </ol>
+                        </div>
+                        <div ng-if="que.questionType==='FILL_IN_THE_BLANKS'">
+                            <div
+                                style="width: 100%; height:30px; background-color: white; color: gray; border: solid 1px;">
+                                Enter your answer here</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row"
+                style="background-color: blue; color: white;height: 30px;display: block;text-align: center;font-weight: 600;">
+                <span>Next</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="quizPreviewModalCtrl.ok()">OK</button>
+</div>

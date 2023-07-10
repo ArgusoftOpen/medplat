@@ -1,0 +1,74 @@
+<div class="container-fluid fhsr-verification">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="float-right">
+                <button class="btn btn-primary float-right"
+                    ui-sref="techo.manage.createsync({userId : rdm.userDetail.id})">Create RCH Data Sync
+                    Request</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 md-15">
+            <div class="cst-table table-responsive" style="overflow: auto;" ng-if="rdm.requestList.length > 0">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <colgroup width="10%">
+                        <colgroup width="25%">
+                            <colgroup width="30%">
+                                <colgroup width="20%">
+                                    <colgroup width="15%">
+                                    <thead class="cst-thead">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Location Name</th>
+                                    <th>Requested By</th>
+                                    <th>Requested On</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                            <tbody class="cst-tbody">
+                        <tr ng-repeat="request in rdm.requestList">
+                            <td>{{$index+1}}</td>
+                            <td>{{::request.location}}</td>
+                            <td>{{::request.createdBy}}</td>
+                            <td>{{::request.created_on | date : 'dd/MM/yyyy'}}</td>
+                            <td>{{request.state == 'EXECUTED' ? request.state + '(' + request.executed_on  +')' : request.state}}
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+            <div ng-if="rdm.requestList.length == 0" class="no-data-placeholder">
+                <h5>Sorry No System Sync Request!</h5>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div">
+        <span class="filter-toggle" ng-click="rdm.toggleFilter()">Select Location</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Select Location</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12">
+                    <ng-form name="rdm.locationForm">
+                        <location-directive ng-model="rdm.locationId" selected-location="rdm.selectedLocation"
+                            required-upto-level="rdm.requiredLevel" template-type="'inline'"
+                            fetch-according-to-user-aoi="true"> </location-directive>
+                        <br>
+                    </ng-form>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter" ng-click="rdm.toggleFilter()">Close</button>
+                        <button class="btn btn-primary search-filter" ng-click="rdm.submit()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

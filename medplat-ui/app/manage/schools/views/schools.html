@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="section-title">
+                <button class="btn btn-primary float-right" ng-click="schoolCtrl.navigateToAdd()"> Add </button>
+            </div>
+        </div>
+        <div class="col-12 mb-15">
+            <div class="cst-table table-responsive table-set-height" id="label-scroll">
+                <table aria-describedby="table" class="table table-sm table-striped table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th id="th">School Name</th>
+                            <th id="th">School Code</th>
+                            <th id="th">School Type</th>
+                            <th id="th">Grant Type</th>
+                            <th id="th">Contact Person Name</th>
+                            <th id="th">Contact Number</th>
+                            <th id="th">Location Hierarchy</th>
+                            <th id="th">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody" infinite-scroll-distance="0" infinite-scroll='schoolCtrl.searchData()'
+                        infinite-scroll-disabled='schoolCtrl.pagingService.pagingRetrivalOn'
+                        infinite-scroll-container='"#label-scroll"'>
+                        <tr ng-repeat="school in schoolCtrl.schools" ng-if="schoolCtrl.schools.length > 0">
+                            <td ng-bind="school.name"></td>
+                            <td ng-bind="school.code"></td>
+                            <td>
+                                <ul class="default-list">
+                                    <li ng-if="school.isPrePrimarySchool">Pre Primary School</li>
+                                    <li ng-if="school.isPrimarySchool">Primary School</li>
+                                    <li ng-if="school.isHigherSecondarySchool">Higher Secondary School</li>
+                                    <li ng-if="school.isMadresa">Madresa</li>
+                                    <li ng-if="school.isGurukul">Gurukul</li>
+                                    <li ng-if="school.isOther">Other</li>
+                                </ul>
+                            </td>
+                            <td ng-bind="school.grantType"></td>
+                            <td ng-bind="school.contactPersonName"></td>
+                            <td ng-bind="school.contactNumber"></td>
+                            <td ng-bind="school.locationHierarchy"></td>
+                            <td class="action-cell">
+                                <ul class="action-item">
+                                    <li ng-click="schoolCtrl.navigateToEdit(school.id)">
+                                        <a class="action-icon edit-icon"></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr ng-if="(!schoolCtrl.schools || schoolCtrl.schools.length === 0)">
+                            <td colspan="10">No Schools Available</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div">
+        <span class="filter-toggle" ng-click="schoolCtrl.toggleFilter()">Filter</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Search</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12" ng-form="schoolCtrl.searchForm">
+                    <div class="form-group">
+                        <location-directive template-type="'inline'" ng-model="schoolCtrl.searchLocationId"
+                            fetch-according-to-user-aoi="true" fetch-upto-level="7" required-upto-level="4">
+                        </location-directive>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr>
+                <div class="form-group text-right">
+                    <button class="btn btn-secondary close-filter" ng-click="schoolCtrl.close()">Close</button>
+                    <button class="btn btn-primary search-filter"
+                        ng-click="schoolCtrl.searchData(true);">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

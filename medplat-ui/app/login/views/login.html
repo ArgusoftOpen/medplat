@@ -1,0 +1,78 @@
+<div class="login-wrapper">
+    <div class="login-form">
+        <img alt="image" class="login-logo" src="img/medplat.png" style="height: 50px;">
+        <h3 class="login-header">Login</h3>
+        <div class="text-center bottom-spacer-10">
+            <div class="list-group-item-text alert alert-danger" ng-show="login.user.hasAuthError">
+                {{login.user.errorMessage}}
+            </div>
+        </div>
+        <div class=" inline-form">
+            <form class="" ng-show="isLoading !== true" name="login.loginForm" novalidate autocomplete="off">
+                <div class="form-group">
+                    <validate for='username' required-msg="*Username is required">
+                        <input data-test="username" type="text" autocomplete="off" class="form-control cst-form-control"
+                            form-control style="width:calc(100% - 1px)" placeholder="Username" name="username"
+                            id="username" ng-model="login.user.username" required>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for='password' required-msg="*Password is required">
+                        <input data-test="password" type="password" autocomplete="off"
+                            class="form-control cst-form-control" form-control style="width:calc(100% - 1px)"
+                            placeholder="Password" name="password" id="password" ng-model="login.user.password"
+                            required>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group text-center">
+                    <button data-test="login-btn" type="submit" class="btn btn-primary btn-block btn-login"
+                        ng-click="login.doLogin()">Login</button>
+                    <a ui-sref="resetpassword" class="link">Lost your password?</a>
+                    <div ng-if="!login.hideAppLink && login.version != null">
+                        <!-- <a class="link" href="{{login.link}}" download>
+                            <span style="color: red; padding-right: 5px">
+                                (New)
+                            </span>
+                            <em class="fa fa-download" aria-hidden="false"></em>
+                            Download Mobile Application ({{login.version | emptylabel}})
+                        </a> -->
+                        <div ng-if="login.release_date != null">
+                            <!-- <p style="color:#87CEFA ;">Release Date: {{login.release_date | emptylabel}} </p> -->
+                        </div>
+                    </div>
+                    <div ng-if="!login.hideAppLink && login.version == null">
+                        <!-- <a class="link" href="{{login.link}}" download>
+                            <span style="color: red; padding-right: 5px">
+                                (New)
+                            </span>
+                            <em class="fa fa-download" aria-hidden="false"></em>
+                            Download Mobile Application
+                        </a> -->
+                    </div>
+                    <hr class="login-hr">
+                </div>
+                <hr class="login-hr">
+                <ul class="logo-list d-block text-center">
+                    <li ng-repeat="imageData in login.logoImages">
+                        <a href="{{imageData.link}}" target="_blank" border="0">
+                            <img alt="image" src="{{imageData.source}}">
+                        </a>
+                    </li>
+                </ul>
+                <p style="text-align: justify;">
+                    <i>A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators especially in a public health context</i>
+                </p>
+                                <hr class="login-hr">
+                <!-- <a href="http://www.argusoft.com/" target="_blank" border="0"> <img alt="image" src="img/medplat.png"
+                        style="height: 50px;" class="mx-auto d-block">
+                </a> -->
+            </form>
+        </div>
+    </div>
+</div>
+<div class='login-notice' ng-if="login.showSystemNotice" style="text-align: center;">
+    <h5>Please Note:</h5>
+    <span ng-bind-html="login.systemNotice"></span>
+</div>

@@ -1,0 +1,284 @@
+<div class="container-fluid" ng-if="!userInfo.userObj">
+    <h5>Search User</h5>
+</div>
+<div class="container-fluid" ng-if="userInfo.userObj">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div id="card1" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse1" ng-click="toggle1 = !toggle1" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="User Information">User Information</span>
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-minus':!toggle1,'ion-plus':toggle1}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse show" id="collapse1">
+                    <div class="card-body inline-form" ng-if="userInfo.userObj[0]">
+                        <form role="form" name="userInformationForm" id="userInformationForm">
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Name</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <span
+                                                ng-if="userInfo.userObj[0].title != null">{{userInfo.userObj[0].title}}.
+                                            </span>
+                                            {{userInfo.userObj[0].fullname == null ? 'Not Available': userInfo.userObj[0].fullname}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Mobile Number</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{userInfo.userObj[0].mobilenumber == null ? 'Not Available': userInfo.userObj[0].mobilenumber}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Gender</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{userInfo.userObj[0].gender == null ? 'Not Available':userInfo.userObj[0].gender}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Date Of Birth</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{ userInfo.userObj[0].dateofbirth == null ? 'Not Available': userInfo.userObj[0].dateofbirth}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Role Name</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{userInfo.userObj[0].rolename == null ? 'Not Available': userInfo.userObj[0].rolename}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Role State</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{userInfo.userObj[0].rolestate == null ? 'Not Available':userInfo.userObj[0].rolestate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Location Name</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{userInfo.userObj[0].locationname == null ? 'Not Available':userInfo.userObj[0].locationname}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Email Id</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <div ng-if="userInfo.userObj[0].emailid">
+                                                {{userInfo.userObj[0].emailid}}
+                                            </div>
+                                            <span ng-if="!userInfo.userObj[0].emailid">
+                                                Not Available
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Assigned Location Level</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{userInfo.userObj[0].locationlevel == null ? 'Not Available':userInfo.userObj[0].locationlevel}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Techo Phone Number</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <div ng-if="userInfo.userObj[0].techophonenumber">
+                                                {{userInfo.userObj[0].techophonenumber}}
+                                            </div>
+                                            <span ng-if="!userInfo.userObj[0].techophonenumber">
+                                                Not Available
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>User State</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{userInfo.userObj[0].state == null ? 'Not Available':userInfo.userObj[0].state}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card" ng-if="userInfo.userLoginDetail.length > 0">
+                <div id="card2" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse2" ng-click="toggle2 = !toggle2" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="User Login Information">User Login Information</span>
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':toggle2,'ion-minus':!toggle2}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse show" id="collapse2">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="wpd_mother_information-form" id="wpd_mother_information-form">
+                                    <table
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th>ImeI number</th>
+                                                <th>APK Version</th>
+                                                <th>Is Logged In From Web?</th>
+                                                <th>No Of Attempts</th>
+                                                <th>Login Time Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="logininfo in userInfo.userLoginDetail">
+                                                <td>
+                                                    {{logininfo.imeinumber == null ? 'Not Available':logininfo.imeinumber}}
+                                                </td>
+                                                <td>
+                                                    {{logininfo.apkversion == null ? 'Not Available' : logininfo.apkversion}}
+                                                </td>
+                                                <td>
+                                                    {{logininfo.loggingfromweb  == null ? 'Not Available': logininfo.loggingfromweb == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{logininfo.noofattempts == null ? 'Not Available':logininfo.noofattempts}}
+                                                </td>
+                                                <td>
+                                                    {{logininfo.logindet == null ? 'Not Available':logininfo.logindet}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="filter-div">
+    <span class="filter-toggle" style="left:-85px" ng-click="userInfo.toggleFilter()">Search User</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search User</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="user.searchForm" novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <div style="margin-top: 10px">
+                        <input type="text" name="username" form-control ng-model="userInfo.userName"
+                            placeholder="Enter Username" focus-me="focusInput" class="form-control"
+                            ng-keyup="$event.keyCode == 13 ? userInfo.enterSubmit() : null" required autofocus />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter" ng-click="userInfo.toggleFilter()">Close</button>
+                        <button class="btn btn-primary search-filter" ng-click="userInfo.submit()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="imtecho" ng-controller="MainController">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <!-- Title -->
+  <title ng-bind-template="{{appName}} {{currentState.title}}"></title>
+  <link rel="shortcut icon" href="{{'img/' + implementation + 'favicon.ico'}}" type="image/ico" />
+  <!--CSS-->
+
+  <!--Ng-Table CSS-->
+  <!-- <link rel="stylesheet" href="node_modules/ng-table/bundles/ng-table.min.css"> -->
+  <!--Font and Icons-->
+  <!-- Bootstrap v4.0.0-alpha.6 -->
+  <link href="styles/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <!-- Fonts and Icons from Local -->
+  <link href="styles/fonts/font-file.css" rel="stylesheet" type="text/css" />
+  <link href="styles/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href="styles/css/iconmoon.css" rel="stylesheet" type="text/css" />
+  <link href="styles/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+
+  <link href="bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+  <link href="bower_components/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" />
+  <link href="third_party/jquery.loadmask/jquery.loadmask.css?version=v$VERSION$" rel="stylesheet" type="text/css" />
+
+  <!-- Custom CSS -->
+  <link href="styles/css/developer.css" rel="stylesheet" type="text/css" />
+  <!-- text-angular css -->
+  <link rel='stylesheet' href='bower_components/textAngular/dist/textAngular.css'>
+
+  <link href="styles/css/chosen.css" rel="stylesheet" type="text/css" />
+  <link href="styles/css/style.css" rel="stylesheet" type="text/css" />
+  <link href="styles/css/developer.css" rel="stylesheet" type="text/css" />
+
+  <link href="styles/css/scroll.css" rel="stylesheet" type="text/css" />
+  <!--Responsive CSS-->
+  <link href="styles/css/responsive.css" rel="stylesheet" type="text/css" />
+  <link href="bower_components/AngularJS-Toaster/toaster.min.css" rel="stylesheet" type="text/css" />
+  <!--SCRIPTS-->
+
+</head>
+
+<body mask isdefault="true">
+  <toaster-container toaster-options="$root.toastOptions"></toaster-container>
+  <ui-view> </ui-view>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-all-ordinal/app/package/js/ordinal.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.min.js" type="text/javascript"></script>
+  <script src="bower_components/angular-animate/angular-animate.js" type="text/javascript"></script>
+  <script src="bower_components/angular-messages/angular-messages.min.js?version=v$VERSION$"
+    type="text/javascript"></script>
+  <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+  <script src="bower_components/underscore/underscore-min.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+  <script src="bower_components/AngularJS-Toaster/toaster.min.js?version=v$VERSION$" type="text/javascript"></script>
+  <script src="bower_components/angularjs-datepicker/src/js/angular-datepicker.js"></script>
+  <script src="third_party/popper.min.js?version=v$VERSION$"></script>
+  <script src="third_party/bootstrap.min.js?version=v$VERSION$"></script>
+  <script src="third_party/leaflet.js?version=v$VERSION$"></script>
+  <!-- text angular  -->
+  <script src='bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
+  <script src='bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
+  <script src='bower_components/textAngular/dist/textAngular.min.js'></script>
+
+  <script src="node_modules/chart.js/dist/Chart.min.js"></script>
+  <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+  <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHN_7TF0fKHr2jHmQYQ6ePbqCvrqVUwOo&libraries=visualization,places"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.js"></script>
+  <script src="https://d3js.org/topojson.v1.min.js"></script>
+
+  <!-- <script src="node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script> -->
+  <script src="app/_init.js"></script>
+  <script src="app/common/services/util/navigation.service.js"></script>
+  <script src="app/common/services/util/uuid-generator.js"></script>
+  <script src="app/app.js" type="text/javascript"></script>
+  <script src="app/common/constants/app.constants.js" type="text/javascript"></script>
+  <script src="app/config.js" type="text/javascript"></script>
+  <script src="app/config.lazyload.js"></script>
+  <script src="app/config.router.js"></script>
+  <script src="third_party/ckeditor/ckeditor.js?version=v$VERSION$"></script>
+  <script src="third_party/ckeditor/config.js?version=v$VERSION$"></script>
+  <script src="constants.js" type="text/javascript"></script>
+  <script src="app/common/httpinterceptors/http.interceptor.js?version=v$ERSION$"></script>
+  <script src="app/common/httpinterceptors/duplicate-request.interceptor.js"></script>
+  <script src="app/common/controllers/main.controller.js?version=v$VERSION$"></script>
+  <script src="app/common/services/authentication.service.js?version=v$VERSION$" type="text/javascript"></script>
+  <script src="third_party/jquery.loadmask/jquery.loadmask.js?version=v$VERSION$" type="text/javascript"></script>
+  <script src="app/common/directives/mask.directive.js?version=v$VERSION$"></script>
+  <script src="bower_components/ngstorage/ngStorage.min.js"></script>
+  <script src="third_party/xlsx.core.min.js"></script>
+  <script src="bower_components/angular-ui-mask/dist/mask.js" type="text/javascript"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>
+
+  <!-- Date Range Picker -->
+  <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" href="third_party/leaflet.css" />
+
+
+</body>
+
+</html>

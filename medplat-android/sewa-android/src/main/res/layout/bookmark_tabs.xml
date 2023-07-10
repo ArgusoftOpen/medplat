@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/bookmark_button"
+            android:layout_width="0dp"
+            android:layout_height="40sp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.50"
+            android:background="@color/white"
+            android:src="@drawable/star_selector" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/interaction_button"
+            android:layout_width="0dp"
+            android:layout_height="40sp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.50"
+            android:background="@color/white"
+            android:src="@drawable/tree_selector" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
+</LinearLayout>

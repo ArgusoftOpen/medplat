@@ -1,0 +1,143 @@
+<div class="modal-header">
+    <h4 class="text" style="line-height: 1.5;">
+        Manage Config of Card
+    </h4>
+    <button type="button" class="close" ng-click="ctrl.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body" style="overflow: inherit; overflow-y: auto;">
+    <form role="form" class="inline-form" name="ctrl.manageConfigForm" id="manageConfigForm" novalidate>
+        <div class="form-group">
+            <validate for='title' required-msg="Enter Card Title">
+                <label for='title' control-label uib-tooltip="Card Title">
+                    Card Title
+                </label>
+                <input type="text" class="form-control cst-form-control" form-control name="title" id="title"
+                    ng-model="ctrl.config.title">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <hr>
+        <div class="form-group">
+            <validate for='cssStyles' required-msg="Enter CSS Styles">
+                <label for='cssStyles' control-label uib-tooltip="CSS Styles">
+                    CSS Styles
+                </label>
+                <input type="text" class="form-control cst-form-control" form-control name="cssStyles" id="cssStyles"
+                    ng-model="ctrl.config.cssStyles">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group">
+            <validate for='cssClasses' required-msg="Enter CSS Classes">
+                <label for='cssClasses' control-label uib-tooltip="CSS Classes">
+                    CSS Classes
+                </label>
+                <input type="text" class="form-control cst-form-control" form-control name="cssClasses" id="cssClasses"
+                    ng-model="ctrl.config.cssClasses">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <hr>
+        <div class="form-group">
+            <validate for='isRepeatable'>
+                <label for="isRepeatable" uib-tooltip="Is Repeatable?" class="control-label" control-label>
+                    Is Repeatable?
+                </label>
+                <label class="control control-radio mt-10">Yes
+                    <input ng-value="true" name="isRepeatable" form-control type="radio"
+                        ng-model="ctrl.config.isRepeatable">
+                    <div class="control_indicator"></div>
+                </label>
+                <label class="control control-radio mt-10">No
+                    <input ng-value="false" name="isRepeatable" form-control type="radio"
+                        ng-model="ctrl.config.isRepeatable">
+                    <div class="control_indicator"></div>
+                </label>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group" ng-if="ctrl.config.isRepeatable">
+            <validate for='showAddRemoveButton'>
+                <label for="showAddRemoveButton" uib-tooltip="Show Add/Remove Button?" class="control-label"
+                    control-label>
+                    Show Add/Remove Button?
+                </label>
+                <label class="control control-radio mt-10">Yes
+                    <input ng-value="true" name="showAddRemoveButton" form-control type="radio"
+                        ng-model="ctrl.config.showAddRemoveButton" ng-required="true">
+                    <div class="control_indicator"></div>
+                </label>
+                <label class="control control-radio mt-10">No
+                    <input ng-value="false" name="showAddRemoveButton" form-control type="radio"
+                        ng-model="ctrl.config.showAddRemoveButton" ng-required="true">
+                    <div class="control_indicator"></div>
+                </label>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group" ng-if="ctrl.config.isRepeatable">
+            <validate for='ngModel' required-msg="Enter ngModel Object">
+                <label for='ngModel' control-label uib-tooltip="ngModel Object">
+                    ngModel Object
+                </label>
+                <input type="text" class="form-control cst-form-control" form-control name="ngModel" id="ngModel"
+                    ng-model="ctrl.config.ngModel" ng-pattern="/$/" ng-required="true">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <hr>
+        <div class="form-group">
+            <validate for='isConditional'>
+                <label for="isConditional" uib-tooltip="Is Conditional?" class="control-label" control-label>
+                    Is Conditional?
+                </label>
+                <label class="control control-radio mt-10">Yes
+                    <input ng-value="true" name="isConditional" form-control type="radio"
+                        ng-model="ctrl.config.isConditional">
+                    <div class="control_indicator"></div>
+                </label>
+                <label class="control control-radio mt-10">No
+                    <input ng-value="false" name="isConditional" form-control type="radio"
+                        ng-model="ctrl.config.isConditional">
+                    <div class="control_indicator"></div>
+                </label>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group" ng-if="ctrl.config.isConditional">
+            <validate for='ngIfCondition' required-msg="Enter ngIf Condition">
+                <label for='ngIfCondition' control-label uib-tooltip="ngIf Condition">
+                    ngIf Condition
+                </label>
+                <input type="text" class="form-control cst-form-control" form-control name="ngIfCondition"
+                    id="ngIfCondition" ng-model="ctrl.config.ngIf" ng-pattern="/$/" ng-required="true">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <hr>
+        <div class="form-group">
+            <validate for='isCollapsible'>
+                <label for="isCollapsible" uib-tooltip="Is Collapsible?" class="control-label" control-label>
+                    Is Collapsible?
+                </label>
+                <label class="control control-radio mt-10">Yes
+                    <input ng-value="true" name="isCollapsible" form-control type="radio"
+                        ng-model="ctrl.config.isCollapsible">
+                    <div class="control_indicator"></div>
+                </label>
+                <label class="control control-radio mt-10">No
+                    <input ng-value="false" name="isCollapsible" form-control type="radio"
+                        ng-model="ctrl.config.isCollapsible">
+                    <div class="control_indicator"></div>
+                </label>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ctrl.ok()">Ok</button>
+    <button class="btn btn-secondary" ng-click="ctrl.cancel()">Cancel</button>
+</div>

@@ -1,0 +1,267 @@
+<style>
+    .display {
+        width: auto !important;
+    }
+
+    .break-word {
+        word-break: break-word;
+    }
+</style>
+<div class="modal-header">
+    <h4 class="text" style="line-height: 1.5;">
+        Treatment History
+    </h4>
+</div>
+<div class="modal-body" style="overflow: inherit; overflow-y: auto;">
+    <div>
+        <div ng-if="ctrl.treatmentHistory.length === 0">
+            <div class="no-data-placeholder">
+                <h5>No Record Found!</h5>
+            </div>
+        </div>
+        <div class="cst-table table-responsive" style="overflow: auto;" ng-if="ctrl.treatmentHistory.length > 0">
+            <table aria-describedby="table"
+                class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                style="table-layout: auto">
+                <thead class="cst-thead">
+                    <tr>
+                        <th class="white-space-unset" id="srno">#</th>
+                        <th class="white-space-unset" id="id">Service Date</th>
+                        <th class="white-space-unset" id="id">Health Infrastructure</th>
+                        <th class="white-space-unset" id="id">Advised Lab Tests</th>
+                        <th class="white-space-unset" id="id">Provisional Diagnosis</th>
+                        <th class="white-space-unset" id="id">Medicines Given On</th>
+                        <th class="white-space-unset" id="id">Treatment Done By</th>
+                        <th class="white-space-unset" id="id" style="width: 5%;">More Detail</th>
+                    </tr>
+                </thead>
+                <tbody class="cst-tbody">
+                    <tr ng-repeat-start="treatment in ctrl.treatmentHistory" ng-init="treatment.showDetials = false"
+                        class='{{$index}}'>
+                        <td>{{$index + 1}}</td>
+                        <td>{{treatment.serviceDate | date:'dd/MM/yyyy'}}</td>
+                        <td>{{treatment.healthInfraName | emptylabel}}</td>
+                        <td>{{treatment.labTests | emptylabel}}</td>
+                        <td>{{treatment.provisionalDiagnosis | emptylabel}}</td>
+                        <td>{{treatment.medicinesGivenOn | date:'dd/MM/yyyy'}}</td>
+                        <td>{{treatment.treatmentDoneBy | emptylabel}}</td>
+                        <td class="break-word" style="text-align: center; cursor: pointer;">
+                            <em data-toggle="collapse" data-target="#{{$index}}"
+                                ng-class="{'fa fa-minus-circle font-size-20 text-danger' : treatment.showDetials, 'fa fa-plus-circle font-size-20 text-success' : !treatment.showDetials}"
+                                uib-tooltip="{{!treatment.showDetials ? 'Show More Detail' : 'Show Less Detail'}}"
+                                ng-click="treatment.showDetials = !treatment.showDetials">
+                            </em>
+                        </td>
+                    </tr>
+                    <tr class="extra-detail-table" ng-show="treatment.showDetials" ng-repeat-end>
+                        <td colspan="8">
+                            <div class="card cst-card">
+                                <div id="cardOne-{{$index}}" role="tab" class="card-title collapse-link d-block"
+                                    data-toggle="collapse" href="#collapseOne-{{$index}}"
+                                    ng-click="toggleOne = !toggleOne" style="cursor: pointer">
+                                    <h4 class="text">
+                                        <span data-toggle="tooltip" title="Treatment Provided">
+                                            Treatment Provided
+                                        </span>
+                                        <ul class="control-list">
+                                            <li>
+                                                <span>
+                                                    <em ng-class="{'ion-minus':toggleOne,'ion-plus':!toggleOne}"></em>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </h4>
+                                </div>
+
+                                <div class="collapse" id="collapseOne-{{$index}}" role="tabpanel">
+                                    <div class="card-body">
+                                        <div ng-if="treatment.parsedOpdEdlDetails.length === 0">
+                                            <div class="no-data-placeholder" style="padding: 25px 0px;">
+                                                <h5>No Record Found!</h5>
+                                            </div>
+                                        </div>
+                                        <div class="cst-table table-responsive" style="overflow: auto;"
+                                            ng-if="treatment.parsedOpdEdlDetails.length > 0">
+                                            <table aria-describedby="table"
+                                                class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                                style="table-layout: auto">
+                                                <thead class="cst-thead">
+                                                    <tr>
+                                                        <th class="white-space-unset" id="id"></th>
+                                                        <th class="white-space-unset" id="id"></th>
+                                                        <th class="white-space-unset" id="id"></th>
+                                                        <th class="white-space-unset" id="id"></th>
+                                                        <th class="white-space-unset" id="id" colspan="2"
+                                                            style="text-align: center;">
+                                                            No of Tablets (or ML in case of Syrups)
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="white-space-unset" id="srno">#</th>
+                                                        <th class="white-space-unset" id="id">Essential Drug Name</th>
+                                                        <th class="white-space-unset" id="id">Frequency</th>
+                                                        <th class="white-space-unset" id="id">Number of Days</th>
+                                                        <th class="white-space-unset" id="id">Before Food</th>
+                                                        <th class="white-space-unset" id="id">After Food</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="cst-tbody">
+                                                    <tr ng-repeat="edlDetail in treatment.parsedOpdEdlDetails">
+                                                        <td>{{$index + 1}}</td>
+                                                        <td>{{edlDetail.edlName | emptylabel}}</td>
+                                                        <td>{{edlDetail.frequency | emptylabel}}</td>
+                                                        <td>{{edlDetail.numberOfDays | emptylabel}}</td>
+                                                        <td>{{edlDetail.quantityBeforeFood | emptylabel}}</td>
+                                                        <td>{{edlDetail.quantityAfterFood | emptylabel}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card cst-card">
+                                <div id="cardTwo-{{$index}}" role="tab" class="card-title collapse-link d-block"
+                                    data-toggle="collapse" href="#collapseTwo-{{$index}}"
+                                    ng-click="toggleTwo = !toggleTwo" style="cursor: pointer">
+                                    <h4 class="text">
+                                        <span data-toggle="tooltip" title="Lab Tests">
+                                            Lab Tests
+                                        </span>
+                                        <ul class="control-list">
+                                            <li>
+                                                <span>
+                                                    <em ng-class="{'ion-minus':toggleTwo,'ion-plus':!toggleTwo}"></em>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </h4>
+                                </div>
+
+                                <div class="collapse" id="collapseTwo-{{$index}}" role="tabpanel">
+                                    <div class="card-body">
+                                        <div ng-if="treatment.parsedLabTestResults.length === 0">
+                                            <div class="no-data-placeholder" style="padding: 25px 0px;">
+                                                <h5>No Record Found!</h5>
+                                            </div>
+                                        </div>
+                                        <div class="cst-table table-responsive" style="overflow: auto;"
+                                            ng-if="treatment.parsedLabTestResults.length > 0">
+                                            <table aria-describedby="table"
+                                                class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                                style="table-layout: auto">
+                                                <thead class="cst-thead">
+                                                    <tr>
+                                                        <th class="white-space-unset" id="srno">#</th>
+                                                        <th class="white-space-unset" id="id">Lab Test Name</th>
+                                                        <th class="white-space-unset" id="id">Lab Test Category</th>
+                                                        <th class="white-space-unset" id="id">Requested On</th>
+                                                        <th class="white-space-unset" id="id" style="width: 5%;">
+                                                            Test Result
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="cst-tbody">
+                                                    <tr ng-repeat-start="labTest in treatment.parsedLabTestResults">
+                                                        <td>{{$index + 1}}</td>
+                                                        <td>{{labTest.name | emptylabel}}</td>
+                                                        <td>{{labTest.category | emptylabel}}</td>
+                                                        <td>{{labTest.requestedOn | date:'dd/MM/yyyy'}}</td>
+                                                        <td ng-if="!labTest.result" style="text-align: center;"">Pending</td>
+                                                        <td class=" break-word" ng-if="labTest.result"
+                                                            style="text-align: center; cursor: pointer;">
+                                                            <em data-toggle="collapse"
+                                                                data-target="#labTestResult{{$index}}"
+                                                                ng-class="{'fa fa-minus-circle font-size-20 text-danger' : labTest.showDetials, 'fa fa-plus-circle font-size-20 text-success' : !labTest.showDetials}"
+                                                                uib-tooltip="{{!labTest.showDetials ? 'Show More Detail' : 'Show Less Detail'}}"
+                                                                ng-click="labTest.showDetials = !labTest.showDetials">
+                                                            </em>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="extra-detail-table" ng-show="labTest.showDetials"
+                                                        ng-repeat-end>
+                                                        <td colspan="8">
+                                                            <div class="card cst-card">
+                                                                <div id="cardOne-{{$index}}" role="tab"
+                                                                    class="card-title collapse-link d-block"
+                                                                    data-toggle="collapse"
+                                                                    href="#collapseTwoOne-{{$index}}"
+                                                                    ng-click="toggleTwoOne = !toggleTwoOne"
+                                                                    style="cursor: pointer">
+                                                                    <h4 class="text">
+                                                                        <span data-toggle="tooltip"
+                                                                            title="Lab Test Result">
+                                                                            Lab Test Result
+                                                                        </span>
+                                                                        <ul class="control-list">
+                                                                            <li>
+                                                                                <span>
+                                                                                    <em
+                                                                                        ng-class="{'ion-minus':!toggleTwoOne,'ion-plus':toggleTwoOne}"></em>
+                                                                                </span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </h4>
+                                                                </div>
+
+                                                                <div class="collapse show"
+                                                                    id="collapseTwoOne-{{$index}}" role="tabpanel">
+                                                                    <div class="card-body">
+                                                                        <div
+                                                                            ng-if="labTest.preparedResult.length === 0">
+                                                                            <div class="no-data-placeholder"
+                                                                                style="padding: 25px 0px;">
+                                                                                <h5>No Data Found!</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="cst-table table-responsive"
+                                                                            style="overflow: auto;"
+                                                                            ng-if="labTest.preparedResult.length > 0">
+                                                                            <table aria-describedby="table"
+                                                                                class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                                                                style="table-layout: auto">
+                                                                                <thead class="cst-thead">
+                                                                                    <tr>
+                                                                                        <th class="white-space-unset"
+                                                                                            id="srno">#</th>
+                                                                                        <th class="white-space-unset"
+                                                                                            id="id">Question</th>
+                                                                                        <th class="white-space-unset"
+                                                                                            id="id">Answer</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody class="cst-tbody">
+                                                                                    <tr
+                                                                                        ng-repeat="result in labTest.preparedResult">
+                                                                                        <td>{{$index + 1}}</td>
+                                                                                        <td>{{result.question | emptylabel}}
+                                                                                        </td>
+                                                                                        <td>{{result.answer | emptylabel}}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="ctrl.ok()">Ok</button>
+    <button type="button" class="btn btn-secondary" ng-click="ctrl.cancel()">Cancel</button>
+</div>

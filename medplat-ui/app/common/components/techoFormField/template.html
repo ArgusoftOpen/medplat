@@ -1,0 +1,539 @@
+<style>
+    .auto-width {
+        width: auto !important;
+    }
+
+    a:hover {
+        text-decoration: none;
+        font-weight: bold;
+    }
+</style>
+
+<div ng-switch="configJson.fieldType">
+    <div ng-switch-when="SHORT_TEXT">
+        <div class="form-group" ng-if="!isHidden && $eval(visible)">
+            <validate for="{{configJson.fieldKey}}{{uuid}}" required-msg="{{configJson.requiredMessage}}"
+                pattern-msg="{{configJson.patternMessage}}">
+                <label for="{{configJson.fieldKey}}{{uuid}}" control-label uib-tooltip="{{configJson.tooltip}}"
+                    style="{{getLabelDynamicStyles()}}" class="{{config.labelCssClasses}}">{{configJson.label}}</label>
+                <input type="text" style="{{getInputDynamicStyles()}}"
+                    class="form-control cst-form-control {{config.inputCssClasses}}" form-control
+                    name="{{configJson.fieldKey}}{{uuid}}" id="{{configJson.fieldKey}}{{uuid}}"
+                    ng-model="ngModelObject[configJson.fieldKey]" ng-required="isRequired || $eval(required)"
+                    ng-disabled="isDisabled || $eval(disabled)"
+                    ng-pattern="configJson.hasPattern === 'true' ? configJson.pattern : defaultTextPattern"
+                    minlength="{{configJson.minLength}}" maxlength="{{configJson.maxLength}}"
+                    ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                    ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                    ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                    ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </div>
+    <div ng-switch-when="LONG_TEXT">
+        <div class="form-group" ng-if="!isHidden && $eval(visible)">
+            <validate for="{{configJson.fieldKey}}{{uuid}}" required-msg="{{configJson.requiredMessage}}"
+                pattern-msg="{{configJson.patternMessage}}">
+                <label for="{{configJson.fieldKey}}{{uuid}}" control-label uib-tooltip="{{configJson.tooltip}}"
+                    style="{{getLabelDynamicStyles()}}" class="{{config.labelCssClasses}}">{{configJson.label}}</label>
+                <textarea rows="{{configJson.rows}}" cols="{{configJson.cols}}" type="text"
+                    style="{{getInputDynamicStyles()}}" class="form-control cst-form-control {{config.inputCssClasses}}"
+                    form-control name="{{configJson.fieldKey}}{{uuid}}" id="{{configJson.fieldKey}}{{uuid}}"
+                    ng-model="ngModelObject[configJson.fieldKey]" ng-required="isRequired || $eval(required)"
+                    ng-disabled="isDisabled || $eval(disabled)"
+                    ng-pattern="configJson.hasPattern === 'true' ? configJson.pattern : defaultTextPattern"
+                    minlength="{{configJson.minLength}}" maxlength="{{configJson.maxLength}}"
+                    ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                    ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                    ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                    ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)">
+                </textarea>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </div>
+    <div ng-switch-when="DROPDOWN">
+        <div ng-if="!isHidden && $eval(visible) && optionsArray.data.length">
+            <div class="form-group" ng-if="configJson.isMultiple">
+                <validate for="{{configJson.fieldKey}}{{uuid}}" required-msg="{{configJson.requiredMessage}}">
+                    <label for="{{configJson.fieldKey}}{{uuid}}" control-label uib-tooltip="{{configJson.tooltip}}"
+                        style="{{getLabelDynamicStyles()}}"
+                        class="{{config.labelCssClasses}}">{{configJson.label}}</label>
+                    <select name="{{configJson.fieldKey}}{{uuid}}" id="{{configJson.fieldKey}}{{uuid}}" form-control
+                        chosen-directive="optionsArray.data" multiple data-placeholder="{{configJson.placeholder}}"
+                        style="{{getInputDynamicStyles()}}"
+                        class="form-control cst-form-control {{config.inputCssClasses}}"
+                        ng-model="ngModelObject[configJson.fieldKey]" ng-required="isRequired || $eval(required)"
+                        ng-disabled="isDisabled || $eval(disabled)"
+                        ng-options="option.key as option.value for option in optionsArray.data"
+                        ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                        ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                        ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                        ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                        ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                        ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                        ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                        ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                        ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)">
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-if="!configJson.isMultiple">
+                <validate for="{{configJson.fieldKey}}{{uuid}}" required-msg="{{configJson.requiredMessage}}">
+                    <label for="{{configJson.fieldKey}}{{uuid}}" control-label uib-tooltip="{{configJson.tooltip}}"
+                        style="{{getLabelDynamicStyles()}}"
+                        class="{{config.labelCssClasses}}">{{configJson.label}}</label>
+                    <select name="{{configJson.fieldKey}}{{uuid}}" id="{{configJson.fieldKey}}{{uuid}}" form-control
+                        chosen-directive="optionsArray.data" data-placeholder="{{configJson.placeholder}}"
+                        style="{{getInputDynamicStyles()}}"
+                        class="form-control cst-form-control {{config.inputCssClasses}}"
+                        ng-model="ngModelObject[configJson.fieldKey]" ng-required="isRequired || $eval(required)"
+                        ng-disabled="isDisabled || $eval(disabled)"
+                        ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                        ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                        ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                        ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                        ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                        ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                        ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                        ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                        ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)"
+                        ng-options="option.key as option.value for option in optionsArray.data">
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="CHECKBOX">
+        <div class="form-group" ng-if="!isHidden && $eval(visible) && optionsArray.length">
+            <validate for="{{configJson.fieldKey}}{{uuid}}" required-msg="{{configJson.requiredMessage}}">
+                <label for="{{configJson.fieldKey}}{{uuid}}" control-label uib-tooltip="{{configJson.tooltip}}"
+                    class="form-group {{config.labelCssClasses}}" ng-repeat="option in optionsArray"
+                    style="{{getLabelDynamicStyles()}}">{{configJson.label}}</label>
+                <label ng-repeat="option in optionsArray" class="control control-checkbox" style="margin-top: 1%;">
+                    <input type="checkbox" name="{{configJson.fieldKey}}{{uuid}}"
+                        ng-model="ngModelObject[configJson.fieldKey]" form-control
+                        ng-required="isRequired || $eval(required)" ng-disabled="isDisabled || $eval(disabled)"
+                        ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                        ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                        ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                        ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                        ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                        ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                        ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                        ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                        ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                        ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)" style="{{getInputDynamicStyles()}}"
+                        class="{{config.inputCssClasses}}">
+                    <div class="control_indicator"></div>
+                </label>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </div>
+    <div ng-switch-when="RADIO">
+        <div ng-if="!isHidden && $eval(visible) && optionsArray.length">
+            <div class="form-group" ng-if="configJson.isBoolean">
+                <validate for="{{configJson.fieldKey}}{{uuid}}" required-msg="{{configJson.requiredMessage}}">
+                    <!-- Added static styling for Examined under PMSMA and Blood Transfusion Done labels in form -->
+                    <label for="{{configJson.fieldKey}}{{uuid}}" class="control-label {{config.labelCssClasses}}"
+                        uib-tooltip="{{configJson.tooltip}}" control-label required
+                        style="{{getLabelDynamicStyles()}}"
+                        ng-class="{
+                            'asterisk-visible': (configJson.label === 'Examined under PMSMA'),
+                            'ast-vis-blood-transfusion': (configJson.label === 'Blood Transfusion Done')
+                          }"
+                          
+                       >{{configJson.label}}</label>
+                        
+                    <label style="margin-top: 1%; {{getInputDynamicStyles()}}"
+                        class="control control-radio {{config.inputCssClasses}}"
+                        ng-repeat="option in optionsArray">
+                        {{option.value}}
+                        <input ng-value="{{option.key}}" name="{{configJson.fieldKey}}{{uuid}}" type="radio"
+                            ng-model="ngModelObject[configJson.fieldKey]" form-control
+                            ng-required="isRequired || $eval(required)" ng-disabled="isDisabled || $eval(disabled)"
+                            ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                            ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                            ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                            ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                            ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                            ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                            ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                            ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                            ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                            ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                            ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                            ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                            ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)">
+                        <div class="control_indicator"></div>
+                    </label>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group" ng-if="!configJson.isBoolean">
+                <validate for="{{configJson.fieldKey}}{{uuid}}" required-msg="{{configJson.requiredMessage}}">
+                    <label for="{{configJson.fieldKey}}{{uuid}}" class="control-label {{config.labelCssClasses}}"
+                        uib-tooltip="{{configJson.tooltip}}" control-label
+                        style="{{getLabelDynamicStyles()}}">{{configJson.label}}</label>
+                    <label style="margin-top: 1%; {{getInputDynamicStyles()}}"
+                        class="control control-radio {{config.inputCssClasses}}"
+                        ng-repeat="option in optionsArray">{{option.value}}
+                        <input value="{{option.key}}" name="{{configJson.fieldKey}}{{uuid}}" type="radio"
+                            ng-model="ngModelObject[configJson.fieldKey]" form-control
+                            ng-required="isRequired || $eval(required)" ng-disabled="isDisabled || $eval(disabled)"
+                            ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                            ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                            ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                            ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                            ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                            ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                            ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                            ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                            ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                            ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                            ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                            ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                            ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)">
+                        <div class="control_indicator"></div>
+                    </label>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="DATE">
+        <div class="form-group" ng-if="!isHidden && $eval(visible)">
+            <validate for="{{configJson.fieldKey}}{{uuid}}" required-msg="{{configJson.requiredMessage}}">
+                <label for="{{configJson.fieldKey}}{{uuid}}" control-label uib-tooltip="{{configJson.tooltip}}"
+                    style="{{getLabelDynamicStyles()}}" class="{{config.labelCssClasses}}">{{configJson.label}}</label>
+                <input type="text" style="float: inherit; {{getInputDynamicStyles()}}" datepicker
+                    name="{{configJson.fieldKey}}{{uuid}}" id="{{configJson.fieldKey}}{{uuid}}" form-control
+                    ng-model="ngModelObject[configJson.fieldKey]" min-date="minDateObject[minDateProperty]"
+                    max-date="maxDateObject[maxDateProperty]" ng-required="isRequired || $eval(required)"
+                    ng-disabled="isDisabled || $eval(disabled)"
+                    ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                    ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                    ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                    ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)" class="{{config.inputCssClasses}}">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </div>
+    <div ng-switch-when="TIME">
+        <div class="form-group" ng-if="!isHidden && $eval(visible)">
+            <validate for='{{configJson.fieldKey}}{{uuid}}' required-msg="{{configJson.requiredMessage}}"
+                time-msg="Please enter valid time">
+                <label for="{{configJson.fieldKey}}{{uuid}}" control-label uib-tooltip="{{configJson.tooltip}}"
+                    style="{{getLabelDynamicStyles()}}" class="{{config.labelCssClasses}}">{{configJson.label}}</label>
+                <input style="{{getInputDynamicStyles()}}"
+                    class="form-control cst-form-control {{config.inputCssClasses}}" type="time" form-control
+                    id="{{configJson.fieldKey}}{{uuid}}" name="{{configJson.fieldKey}}{{uuid}}"
+                    ng-model="ngModelObject[configJson.fieldKey]" ng-required="isRequired || $eval(required)"
+                    ng-disabled="isDisabled || $eval(disabled)"
+                    ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                    ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                    ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                    ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </div>
+    <div ng-switch-when="NUMBER">
+        <div class="form-group" ng-if="!isHidden && $eval(visible)">
+            <validate for="{{configJson.fieldKey}}{{uuid}}" required-msg="{{configJson.requiredMessage}}"
+                pattern-msg="{{configJson.patternMessage}}">
+                <label for="{{configJson.fieldKey}}{{uuid}}" control-label uib-tooltip="{{configJson.tooltip}}"
+                    style="{{getLabelDynamicStyles()}}" class="{{config.labelCssClasses}}">{{configJson.label}}</label>
+                <input type="number" style="{{getInputDynamicStyles()}}"
+                    class="form-control cst-form-control {{config.inputCssClasses}}" form-control
+                    name="{{configJson.fieldKey}}{{uuid}}" id="{{configJson.fieldKey}}{{uuid}}"
+                    ng-model="ngModelObject[configJson.fieldKey]" ng-required="isRequired || $eval(required)"
+                    ng-disabled="isDisabled || $eval(disabled)"
+                    ng-pattern="configJson.hasPattern === 'true' ? configJson.pattern : null"
+                    ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                    ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                    ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                    ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)" max="{{configJson.max}}"
+                    min="{{configJson.min}}">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </div>
+    <div ng-switch-when="PASSWORD">
+        <div class="form-group" ng-if="!isHidden && $eval(visible)">
+            <validate for="{{configJson.fieldKey}}{{uuid}}" required-msg="{{configJson.requiredMessage}}"
+                pattern-msg="{{configJson.patternMessage}}">
+                <label for="{{configJson.fieldKey}}{{uuid}}" control-label uib-tooltip="{{configJson.tooltip}}"
+                    style="{{getLabelDynamicStyles()}}" class="{{config.labelCssClasses}}">{{configJson.label}}</label>
+                <input type="password" style="{{getInputDynamicStyles()}}"
+                    class="form-control cst-form-control {{config.inputCssClasses}}" form-control
+                    name="{{configJson.fieldKey}}{{uuid}}" id="{{configJson.fieldKey}}{{uuid}}"
+                    ng-model="ngModelObject[configJson.fieldKey]" autocomplete="new-password"
+                    ng-required="isRequired || $eval(required)" ng-disabled="isDisabled || $eval(disabled)"
+                    ng-pattern="configJson.hasPattern === 'true' ? configJson.pattern : null"
+                    minlength="{{configJson.minLength}}" maxlength="{{configJson.maxLength}}"
+                    ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                    ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                    ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                    ng-keydown="ngKeyDown(iteratorIndicesMap,componentIdentifier)"
+                    ng-keyup="ngKeyUp(iteratorIndicesMap,componentIdentifier)"
+                    ng-keypress="ngKeyPress(iteratorIndicesMap,componentIdentifier)"
+                    ng-change="ngChange(iteratorIndicesMap,componentIdentifier)"
+                    ng-blur="ngBlur(iteratorIndicesMap,componentIdentifier)">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </div>
+    <div ng-switch-when="LOCATION_DIRECTIVE">
+        <location-directive ng-if="!isHidden && $eval(visible)" template-type="configJson.templateType"
+            ng-model="ngModelObject[configJson.fieldKey]" selected-location="ctrl.selectedLocation"
+            disabled="isDisabled || $eval(disabled)" required-upto-level="configJson.requiredUptoLevel"
+            fetch-upto-level="configJson.fetchUptoLevel"
+            fetch-according-to-user-aoi="configJson.fetchAccordingToUserAoi">
+        </location-directive>
+    </div>
+    <div ng-switch-when="ADDED_LOCATIONS">
+        <div class="form-group" ng-if="!isHidden && $eval(visible)">
+            <label for="{{configJson.fieldKey}}{{uuid}}">{{configJson.label}}
+                <span ng-if="isRequired || $eval(required)" style="color: #a94442;">*
+                </span>
+            </label>
+            <div class="form-control cst-form-control min-height-65" style="height: auto;">
+                <div ng-repeat="location in ngModelObject[configJson.fieldKey]">{{location.locationFullName}} &nbsp;
+                    <em class="fa fa-times pointer-cursor red" ng-class="isDisabled || $eval(disabled) ? 'disabled':''"
+                        ng-click="ngClick($index)">
+                    </em>
+                </div>
+            </div>
+            <span ng-if="ctrl.noLocationSelected" class="text-danger ml-160">
+                Please add location.
+            </span>
+            <span ng-if="!ctrl.noLocationSelected && ctrl.errorMsg && ctrl.errorCode == 2" class="text-danger ml-160">
+                {{ctrl.errorMsg}}
+            </span>
+        </div>
+    </div>
+    <div ng-switch-when="INFORMATION_DISPLAY" ng-if="$eval(visible)">
+        <div class="form-group">
+            <label style="{{getLabelDynamicStyles()}}" class="{{config.labelCssClasses}}">
+                <strong>{{configJson.displayValue}} : </strong>
+            </label>
+            <label style="{{getInputDynamicStyles()}}" class="auto-width {{config.inputCssClasses}}"
+                ng-if="configJson.displayType==='text'"
+                ng-bind-html="ngModelObject[configJson.fieldKey]|emptylabel"></label>
+            <label style="{{getInputDynamicStyles()}}" class="auto-width {{config.inputCssClasses}}"
+                ng-if="configJson.displayType==='boolean'"
+                ng-bind-html="ngModelObject[configJson.fieldKey]|yesOrNo|emptylabel"></label>
+            <label style="{{getInputDynamicStyles()}}" class="auto-width {{config.inputCssClasses}}"
+                ng-if="configJson.displayType==='date'"
+                ng-bind-html="ngModelObject[configJson.fieldKey]|date:'dd/MM/yyyy'|emptylabel"></label>
+            <label style="{{getInputDynamicStyles()}}" class="auto-width {{config.inputCssClasses}}"
+                ng-if="configJson.displayType==='dateAndTime'"
+                ng-bind-html="ngModelObject[configJson.fieldKey]|date:'dd/MM/yyyy HH:mm:ss'|emptylabel"></label>
+            <label style="{{getInputDynamicStyles()}}" class="auto-width {{config.inputCssClasses}}"
+                ng-if="configJson.displayType==='gender'"
+                ng-bind-html="ngModelObject[configJson.fieldKey]|gender|emptylabel"></label>
+            <label style="{{getInputDynamicStyles()}}" class="auto-width {{config.inputCssClasses}}"
+                ng-if="configJson.displayType==='familyPlanning'"
+                ng-bind-html="ngModelObject[configJson.fieldKey]|familyplanning|emptylabel"></label>
+            <label style="{{getInputDynamicStyles()}}" class="auto-width {{config.inputCssClasses}}"
+                ng-if="configJson.displayType==='sdScore'"
+                ng-bind-html="ngModelObject[configJson.fieldKey]|sdscore|emptylabel"></label>
+        </div>
+    </div>
+    <div ng-switch-when="INFORMATION_TEXT">
+        <div class="form-group" ng-if="$eval(visible)">
+            <h6 ng-if="!isClickable" id="{{configJson.fieldKey}}{{uuid}}" style="{{getLabelDynamicStyles()}}"
+                class="{{config.labelCssClasses}}" ng-bind-html="ngModelObject[configJson.fieldKey]">
+            </h6>
+            <a ng-if="isClickable" href="#" id="{{configJson.fieldKey}}{{uuid}}" style="{{getLabelDynamicStyles()}}"
+                class="{{config.labelCssClasses}}" ng-disabled="isDisabled || $eval(disabled)"
+                ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+                ng-dbl-click="ngDoubleClick(iteratorIndicesMap,componentIdentifier)"
+                ng-mousedown="ngMouseDown(iteratorIndicesMap,componentIdentifier)"
+                ng-mouseup="ngMouseUp(iteratorIndicesMap,componentIdentifier)"
+                ng-mouseenter="ngMouseEnter(iteratorIndicesMap,componentIdentifier)"
+                ng-mouseleave="ngMouseLeave(iteratorIndicesMap,componentIdentifier)"
+                ng-mousemove="ngMouseMove(iteratorIndicesMap,componentIdentifier)"
+                ng-mouseover="ngMouseOver(iteratorIndicesMap,componentIdentifier)"
+                ng-bind-html="ngModelObject[configJson.fieldKey]"></a>
+        </div>
+    </div>
+    <div ng-switch-when="TABLE">
+        <div class="cst-table-responsive">
+            <table aria-describedby="table"
+                class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                <thead class="cst-thead">
+                    <tr>
+                        <th class="white-space-unset" id="{{config.label}}" ng-repeat="config in tableConfig"
+                            ng-bind-html="config.label"></th>
+                    </tr>
+                </thead>
+                <tbody class="cst-tbody">
+                    <tr ng-repeat="ob in tableObject">
+                        <td ng-repeat="config in tableConfig track by $index">
+                            <span ng-if="config.type==='text'" ng-bind-html="ob[config.key]|emptylabel"></span>
+                            <span ng-if="config.type==='boolean'"
+                                ng-bind-html="ob[config.key]|yesOrNo|emptylabel"></span>
+                            <span ng-if="config.type==='date'"
+                                ng-bind-html="ob[config.key]|date:'dd/MM/yyyy'|emptylabel">
+                            </span>
+                            <span ng-if="config.type==='dateAndTime'"
+                                ng-bind-html="ob[config.key]|date:'dd/MM/yyyy HH:mm:ss'|emptylabel">
+                            </span>
+                            <span ng-if="config.type==='gender'" ng-bind-html="ob[config.key]|gender|emptylabel">
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div ng-switch-when="FILE_UPLOAD">
+        <div class="form-group" style="{{getLabelDynamicStyles()}}" class="{{config.labelCssClasses}}"
+            ng-if="!ngModelObject[configJson.fieldKey].mediaName && !isHidden && $eval(visible)"
+            flow-init="ctrl.uploadFile"
+            flow-file-added="ctrl.upload($file,$event,$flow,ngModelObject[configJson.fieldKey],configJson.fieldKey,configJson.allowedExtensions,configJson.fileUploadType)"
+            flow-files-submitted="ctrl.uploadFn($files,$event,$flow,ngModelObject[configJson.fieldKey],configJson.fileUploadType)"
+            flow-file-success="ctrl.getUploadResponse($file,$message,$flow,ngModelObject[configJson.fieldKey],configJson.fileUploadType)"
+            flow-file-error="ctrl.fileError($file,$message,ngModelObject[configJson.fieldKey],configJson.fileUploadType)">
+            <button flow-btn type="button" class="btn btn-success" flow-attrs="{accept:'image/*'}"
+                ng-if="configJson.fileUploadType==='IMAGE' && !ngModelObject[configJson.fieldKey].flow.files.length > 0"
+                ng-disabled="isDisabled || $eval(disabled)">
+                <em class="fa fa-upload"></em> {{configJson.label}}
+            </button>
+            <button flow-btn type="button" class="btn btn-success" flow-attrs="{accept:'video/*'}"
+                ng-if="configJson.fileUploadType==='VIDEO' && !ngModelObject[configJson.fieldKey].flow.files.length > 0"
+                ng-disabled="isDisabled || $eval(disabled)">
+                <em class="fa fa-upload"></em> {{configJson.label}}
+            </button>
+            <button flow-btn type="button" class="btn btn-success" flow-attrs="{accept:'audio/*'}"
+                ng-if="configJson.fileUploadType==='AUDIO' && !ngModelObject[configJson.fieldKey].flow.files.length > 0"
+                ng-disabled="isDisabled || $eval(disabled)">
+                <em class="fa fa-upload"></em> {{configJson.label}}
+            </button>
+            <button flow-btn type="button" class="btn btn-success"
+                ng-if="configJson.fileUploadType==='OTHER' && !ngModelObject[configJson.fieldKey].flow.files.length > 0"
+                ng-disabled="isDisabled || $eval(disabled)">
+                <em class="fa fa-upload"></em> {{configJson.label}}
+            </button>
+            <div ng-repeat="file in ngModelObject[configJson.fieldKey].flow.files">
+                <div class="progress" ng-class="{active: file.isUploading()}" ng-if="file.progress() !== 1">
+                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                        ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                    </div>
+                </div>
+                <div ng-if="file.progress() !== 1" class="mt-2 alert alert-success ">
+                    <span class="text-center">{{file.name}} Uploading...
+                        <i aria-hidden="true" class="fa fa-cog fa-spin fa-1x"></i>
+                    </span>
+                </div>
+                <div ng-if="file.progress() === 1" class="mt-2 alert alert-success" style="float:left">
+                    <span class="text-center"> {{file.name}}
+                        <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                    </span>
+                </div>
+                <button class="btn btn-danger mt-2" style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                    ng-disabled="isDisabled || $eval(disabled)"
+                    ng-click="ctrl.removeFile(ngModelObject[configJson.fieldKey],configJson.fieldKey)">
+                    <i aria-hidden="true" ng-if="!!ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                    <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mb-15" style="{{getLabelDynamicStyles()}}" class="{{config.labelCssClasses}}"
+            ng-if="!!ngModelObject[configJson.fieldKey].mediaName && !isHidden && $eval(visible)">
+            <div class="mt-2 alert alert-success" style="float:left">
+                <a class="text-center">
+                    {{ngModelObject[configJson.fieldKey].originalMediaName}}
+                    <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                </a>
+            </div>
+            <button type="button" class="btn btn-danger mt-2"
+                style="cursor: pointer; min-width: 30px; margin-left: 5px;" ng-disabled="isDisabled || $eval(disabled)"
+                ng-click="ctrl.removeFile(ngModelObject[configJson.fieldKey],configJson.fieldKey)">
+                <i aria-hidden="true" ng-if="!!ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+            </button>
+        </div>
+    </div>
+    <div ng-switch-when="CUSTOM_HTML" id="customHTML{{uuid}}">
+    </div>
+    <div ng-switch-when="CUSTOM_COMPONENT">
+        <div ng-include="configJson.relativeFilePath"></div>
+    </div>
+    <div ng-switch-when="BUTTON">
+        <button ng-if="!isHidden && $eval(visible)" type="{{configJson.buttonType}}" class="{{configJson.cssClass}}"
+            style="{{getDynamicStyles()}}" ng-click="ngClick(iteratorIndicesMap,componentIdentifier)"
+            uib-tooltip="{{['textAndIcon', 'text'].includes(configJson.buttonLabelType) ? configJson.tooltip : ''}}">
+            <em class="{{configJson.icon}}" ng-if="['textAndIcon', 'icon'].includes(configJson.buttonLabelType)"></em>
+            <span ng-if="['textAndIcon', 'text'].includes(configJson.buttonLabelType)">{{configJson.label}}</span>
+        </button>
+    </div>
+</div>

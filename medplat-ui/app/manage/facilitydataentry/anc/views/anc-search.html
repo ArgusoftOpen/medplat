@@ -1,0 +1,133 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="cst-tab">
+                <uib-tabset active='queform.selectedTab'>
+                    <uib-tab index="'anc-search-list'" heading="ANC Search List">
+                        <div class="tab-pane fade show" id="anc-search-list" role="tabpanel"
+                            aria-labelledby="anc-search-list" aria-expanded="true">
+                            <div class="no-data-placeholder"
+                                ng-if="!queform.memberDetails || queform.memberDetails.length == 0">
+                                <h5>No Record Found!</h5>
+                            </div>
+                            <div class="cst-table table-responsive table-set-height" id="member-scroll"
+                                ng-if="queform.memberDetails.length > 0">
+                                <table aria-describedby="table"
+                                    class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed">
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th style="width: 50px;" id="srno">#</th>
+                                            <th class="large-col" id="memberId">Member ID</th>
+                                            <th class="medium-col" id="memberName">Member Name</th>
+                                            <th class="extralarge-col" id="location">Location</th>
+                                            <th class="medium-col" id="contactDetails">Contact Details</th>
+                                            <th class="medium-col" id="bpl">BPL</th>
+                                            <th class="medium-col" id="caste">Caste</th>
+                                            <th class="large-col" id="benefitSchemes">Benefit Schemes</th>
+                                            <th class="medium-col" id="edd">EDD</th>
+                                            <th class="medium-col" id="lmp">LMP</th>
+                                            <th class="medium-col" id="bankAc">Bank A/c</th>
+                                            <th class="medium-col" id="ifsc">IFSC</th>
+                                            <th class="medium-col" id="action">Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                        infinite-scroll-disabled="queform.pagingService.allRetrieved"
+                                        infinite-scroll='queform.retrieveFilteredMembers(false)'
+                                        infinite-scroll-container='"#member-scroll"'
+                                        infinite-scroll-immediate-check="false">
+                                        <tr ng-repeat="member in queform.memberDetails">
+                                            <td>
+                                                {{$index + 1}}
+                                            </td>
+                                            <td>{{member.uniqueHealthId}}
+                                                ({{member.familyId}})
+                                            </td>
+                                            <td>
+                                                <span
+                                                    ng-bind="member.firstName + ' ' + member.middleName + ' ' + member.lastName"></span>
+                                            </td>
+                                            <td ng-bind="member.locationHierarchy"></td>
+                                            <td ng-bind="member.mobileNumber ? member.mobileNumber : 'Not available'">
+                                            </td>
+                                            <td ng-bind="member.bplFlag"></td>
+                                            <td ng-bind="member.caste"></td>
+                                            <td ng-bind="member.benefits"></td>
+                                            <td ng-bind="member.edd ? member.edd : 'Not available'"></td>
+                                            <td ng-bind="member.lmpDate ? member.lmpDate : 'Not available'"></td>
+                                            <td ng-bind="member.accountNumber ? member.accountNumber : 'Not available'">
+                                            </td>
+                                            <td ng-bind="member.ifsc ? member.ifsc : 'Not available'"></td>
+                                            <td class="action-cell"
+                                                ng-if="queform.rights && queform.rights.isShowHealthIdModal">
+                                                <ul class="action-item">
+                                                    <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <a href="#" class="action-icon more-icon"></a>
+                                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                            aria-labelledby="moreDropdown">
+                                                            <li ng-if="member.wpdState !== 'DELIVERY_DONE'">
+                                                                <a href="javascript:void(0)"
+                                                                    ng-click="queform.onClickFillForm(member.id)"
+                                                                    data-test="Inactive-Btn">
+                                                                    Fill Form
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0)"
+                                                                    ng-click="queform.onClickHealthIdForm(member)"
+                                                                    data-test="Inactive-Btn">
+                                                                    Create/Print ABHA Number
+                                                                </a>
+                                                            </li>
+                                                            <li ng-if="!!member.healthIdNumber">
+                                                                <a href="javascript:void(0)"
+                                                                    ng-click="queform.onClickLinkPreviousRecord(member)"
+                                                                    data-test="Inactive-Btn">
+                                                                    Link Previous Record To ABHA Number
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td
+                                                ng-if="member.wpdState !== 'DELIVERY_DONE' && !(queform.rights && queform.rights.isShowHealthIdModal)">
+                                                <!-- <button class="btn btn-primary" ui-sref="techo.manage.ancformquestions({id:member.id})">Fill form
+                                                                                                                                        </button> -->
+                                                <button class="btn btn-primary"
+                                                    ui-sref="techo.manage.ancformquestionsdynamic({id:member.id})">Fill
+                                                    form
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="'nha-consent-list'" heading="Consent List" ng-if="queform.rights && queform.rights.isShowConsentList">
+                        <div class="tab-pane fade show" id="nha-consent-list" role="tabpanel"
+                            aria-labelledby="nha-consent-list" aria-expanded="true">
+                            <consent-list-directive></consent-list-directive>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="medium-div filter-div" ng-if="queform.selectedTab == 'anc-search-list'">
+    <span style="left:-66px" class="filter-toggle" ng-click="queform.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <search terms="queform.terms" search-fn="queform.retrieveFilteredMembers(reset)" search="queform.search" 
+            search-form="queform.searchForm" selected-location="queform.selectedLocation" selected-location-id="queform.selectedLocationId"
+            close-fn="queform.toggleFilter()"></search>
+    </div>
+</div>

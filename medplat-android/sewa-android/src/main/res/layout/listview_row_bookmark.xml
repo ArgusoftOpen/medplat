@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/lms_listview_bookmark_selector"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/bookmark_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.85"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/listview_text_color_selector"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/roboto_bold" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/bookmark_duration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="5dp"
+            android:textColor="@color/listview_text_color_selector"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/bookmark_note"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="30dp"
+            android:layout_weight="0.70"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center_vertical"
+            android:lines="2"
+            android:textAppearance="@style/ListTextView"
+            android:textColor="@color/listview_text_color_selector"
+            android:textSize="12sp" />
+
+        <ImageButton
+            android:id="@+id/bookmark_play"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.10"
+            android:adjustViewBounds="true"
+            android:background="@color/transparent"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:src="@drawable/ic_play"
+            android:tint="@color/lms_bookmark_edit_button_selector" />
+
+        <ImageButton
+            android:id="@+id/edit_bookmark"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.10"
+            android:adjustViewBounds="true"
+            android:background="@color/transparent"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:src="@drawable/ic_edit"
+            android:tint="@color/lms_bookmark_edit_button_selector" />
+
+        <ImageButton
+            android:id="@+id/delete_bookmark"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.10"
+            android:adjustViewBounds="true"
+            android:background="@color/transparent"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:src="@drawable/ic_delete"
+            android:tint="@color/lms_bookmark_edit_button_selector" />
+    </LinearLayout>
+
+</LinearLayout>

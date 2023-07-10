@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp"
+    android:background="@drawable/custom_alert_option_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvOptionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:textSize="16sp"
+        android:layout_marginVertical="4dp"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivOptionImage"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_marginVertical="4dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvOptionFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:textSize="16sp"
+        android:layout_marginVertical="8dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginVertical="4dp"
+        android:text="@string/ok"/>
+</LinearLayout>

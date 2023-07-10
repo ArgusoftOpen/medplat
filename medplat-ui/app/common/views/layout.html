@@ -1,0 +1,243 @@
+<nav aria-labelledby="nav" class="navbar navbar-expand-sm fixed-top cst-navbar">
+    <a class="navbar-brand" href="javascript:void(0)" ui-sref="techo.dashboard.webtasks">
+        <img alt="image" class="argus-logo" src="img/medplat.png" style="height: 35px;">
+    </a>
+    <ul class="breadcrumbs">
+        <li class="current">
+            {{currentState.title}}
+        </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto custom-navbar">
+        <li ng-if="!!layout.showSearch" class="menu-search user dropdown" ng-mouseleave="layout.showMenus = false;">
+            <div id="demo-2" class="search-icon">
+                <input type="text" placeholder="Search Menu" ng-model="layout.search"
+                    ng-focus="layout.showMenus = true;layout.search='';" ng-keydown="layout.showMenus = true;">
+            </div>
+            <div id="search-data" class="user-data dropdown-menu dropdown-menu-right user-profile-dropdown"
+                ng-if="layout.allMenu.length > 0 && layout.showMenus">
+                <ul>
+                    <li ng-repeat="menu in layout.allMenu| filter : {name : layout.search} :false | orderBy : name ">
+                        <a href="javascript:void(0)" ui-sref="{{menu.navigationState}}"
+                            ui-sref-opts="{clearSessionStorage:true}">
+                            {{menu.name}}
+                            <small ng-if="menu.groupName">
+                                ( {{menu.groupName + (menu.subGroupName ? ' > ' : '') + menu.subGroupName}} )
+                            </small>
+                        </a>
+                    </li>
+                    <li ng-if="layout.search && (layout.allMenu| filter : {name : layout.search} :false).length === 0 ">
+                        No data found
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="user  dropdown" uib-dropdown dropdown-append-to-body uib-dropdown-toggle>
+            <a type="" data-test="user-dropdown">
+                <span class="user-image"><img alt="image" src="img/default.jpg" class="img-fluid"></span>
+                <span class="user-name">{{layout.userDetail.name ? layout.userDetail.name :
+                    layout.userDetail.principalId}}
+                </span>
+            </a>
+            <div class="user-data dropdown-menu dropdown-menu-right user-profile-dropdown" uib-dropdown-menu>
+                <img alt="image" src="img/default.jpg" class="user-img">
+                <label class="user-name">
+                    {{layout.userDetail.name ? layout.userDetail.name : layout.userDetail.principalId}}
+                </label>
+                <span class="postion">{{layout.userDetail.roleName}}</span>
+                <ul>
+                    <li class="header">Actions</li>
+                    <li ng-click="layout.updateProfile()">
+                        <a href="javascript:void(0)">
+                            <em class="fa fa-edit"></em>
+                            Update Profile
+                        </a>
+                    </li>
+                    <li ng-click="layout.changePassword()">
+                        <a href="javascript:void(0)">
+                            <em class="fa fa-eye"></em>
+                            Change Password
+                        </a>
+                    </li>
+                    <li ng-click="logOut()">
+                        <a href="javascript:void(0)" data-test="logout">
+                            <em class="fa fa-lock"></em>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</nav>
+<nav aria-labelledby="nav" class="sidebar cst-sidebar">
+    <ul class="cst-sidebar-nav">
+        <li ng-if="layout.menuList.fhs.length" class="has-sub " ng-mouseover="layout.parentHover()" ng-mouseleave="">
+            <a href="javascript:void(0)" data-test="menu-fhs">
+                <span class="icon"><img alt="image" src="img/fhs-icon.png"></span>
+                <span class="text">FHS</span>
+            </a>
+            <div class="position-wrapper">
+                <ul ng-if="layout.menuList.fhs.length > 0" class="cst-scrollbar sub-menu">
+                    <li ng-repeat="menu in layout.menuList.fhs" ng-class="{'has-sub':menu.isGroup}">
+                        <a ng-if='menu.isGroup || menu.isSubGroup' data-test="sub-menu-{{menu.name}}">
+                            {{menu.name}}
+                        </a>
+                        <a href="javascript:void(0)" ng-if='!menu.isGroup && !menu.isSubGroup'
+                            ui-sref="{{menu.navigationState}}" data-test="sub-menu-{{menu.name}}"
+                            ui-sref-opts="{clearSessionStorage:true}">
+                            {{menu.name}}
+                        </a>
+                        <div class="position-wrapper child">
+                            <ul ng-if="menu.isGroup" class="cst-scrollbar sub-menu">
+                                <li ng-repeat="group in menu.subGroups">
+                                    <a ng-if='!group.isGroup && !group.isSubGroup' ui-sref="{{group.navigationState}}"
+                                        ui-sref-opts="{clearSessionStorage:true}">
+                                        {{group.name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <!-- <li ng-if="layout.menuList.ncd.length" class="has-sub " ng-mouseover="layout.parentHover()" ng-mouseleave="">
+            <a href="javascript:void(0)" data-test="menu-ncd">
+                <span class="icon"><img alt="image" src="img/ncd_mobile.png"></span>
+                <span class="text">NCD</span>
+            </a>
+            <div class="position-wrapper">
+                <ul ng-if="layout.menuList.ncd.length > 0" class="cst-scrollbar sub-menu">
+                    <li ng-repeat="menu in layout.menuList.ncd" ng-class="{'has-sub':menu.isGroup}">
+                        <a ng-if='menu.isGroup || menu.isSubGroup' data-test="sub-menu-{{menu.name}}">
+                            {{menu.name}}
+                        </a>
+                        <a href="javascript:void(0)" ng-if='!menu.isGroup && !menu.isSubGroup'
+                            ui-sref="{{menu.navigationState}}" ui-sref-opts="{clearSessionStorage:true}">
+                            {{menu.name}}
+                        </a>
+                        <div class="position-wrapper child">
+                            <ul ng-if="menu.isGroup" class="cst-scrollbar sub-menu">
+                                <li ng-repeat="group in menu.subGroups">
+                                    <a ng-if='!group.isGroup && !group.isSubGroup' ui-sref="{{group.navigationState}}"
+                                        ui-sref-opts="{clearSessionStorage:true}">
+                                        {{group.name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li> -->
+        <li ng-if="layout.menuList.training.length" class="has-sub  " ng-mouseover="layout.parentHover()"
+            ng-mouseleave="">
+            <a href="javascript:void(0)" data-test="menu-training">
+                <span class="icon"><img alt="image" src="img/training_icon.png"></span>
+                <span class="text">Training</span>
+            </a>
+            <div class="position-wrapper">
+                <ul ng-if="layout.menuList.training.length > 0" class="cst-scrollbar sub-menu">
+                    <li ng-repeat="menu in layout.menuList.training" ng-class="{'has-sub':menu.isGroup}">
+                        <a ng-if='menu.isGroup || menu.isSubGroup' data-test="sub-menu-{{menu.name}}">
+                            {{menu.name}}
+                        </a>
+                        <a href="javascript:void(0)" ng-if='!menu.isGroup && !menu.isSubGroup'
+                            ui-sref="{{menu.navigationState}}" ui-sref-opts="{clearSessionStorage:true}">
+                            {{menu.name}}
+                        </a>
+                        <div class="position-wrapper child">
+                            <ul ng-if="menu.isGroup" class="cst-scrollbar sub-menu">
+                                <li ng-repeat="group in menu.subGroups">
+                                    <a ng-if='!group.isGroup && !group.isSubGroup' ui-sref="{{group.navigationState}}"
+                                        ui-sref-opts="{clearSessionStorage:true}">
+                                        {{group.name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li ng-if="layout.menuList.manage.length" class="has-sub  " ng-mouseover="layout.parentHover()"
+            ng-mouseleave="">
+            <a href="javascript:void(0)" data-test="menu-manage">
+                <span class="icon"><em class="fa fa-cogs"></em></span>
+                <span class="text">Manage</span>
+            </a>
+            <div class="position-wrapper">
+                <ul ng-if="layout.menuList.manage.length > 0" class="cst-scrollbar sub-menu">
+                    <li ng-repeat="menu in layout.menuList.manage" ng-class="{'has-sub':menu.isGroup}">
+                        <a ng-if='menu.isGroup || menu.isSubGroup' data-test="sub-menu-{{menu.name}}">
+                            {{menu.name}}
+                        </a>
+                        <a href="javascript:void(0)" ng-if='!menu.isGroup && !menu.isSubGroup'
+                            ui-sref="{{menu.navigationState}}" ui-sref-opts="{clearSessionStorage:true}">
+                            {{menu.name}}
+                        </a>
+                        <div class="position-wrapper child">
+                            <ul ng-if="menu.isGroup" class="cst-scrollbar sub-menu">
+                                <li ng-repeat="group in menu.subGroups">
+                                    <a ng-if='!group.isGroup && !group.isSubGroup' ui-sref="{{group.navigationState}}"
+                                        ui-sref-opts="{clearSessionStorage:true}">
+                                        {{group.name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li ng-if="layout.menuList.admin.length" class="has-sub " ng-mouseover="layout.parentHover()" ng-mouseleave="">
+            <a href="javascript:void(0)" data-test="menu-admin">
+                <span class="icon"><img alt="image" src="img/admin-icon.png"></span>
+                <span class="text">Admin</span>
+            </a>
+            <div class="position-wrapper">
+                <ul ng-if="layout.menuList.admin.length > 0" class="cst-scrollbar sub-menu">
+                    <li ng-repeat="menu in layout.menuList.admin" ng-class="{'has-sub':menu.isGroup}">
+                        <a ng-if='menu.isGroup || menu.isSubGroup' data-test="sub-menu-{{menu.name}}">
+                            {{menu.name}}
+                        </a>
+                        <a href="javascript:void(0)" ng-if='!menu.isGroup && !menu.isSubGroup'
+                            ui-sref="{{menu.navigationState}}" ui-sref-opts="{clearSessionStorage:true}"
+                            data-test="sub-menu-{{menu.name}}">
+                            {{menu.name}}
+                        </a>
+                        <div class="position-wrapper child">
+                            <ul ng-if="menu.isGroup" class="cst-scrollbar sub-menu">
+                                <li ng-repeat="group in menu.subGroups">
+                                    <a ng-if='!group.isGroup && !group.isSubGroup' ui-sref="{{group.navigationState}}"
+                                        ui-sref-opts="{clearSessionStorage:true}" data-test="sub-group-{{group.name}}">
+                                        {{group.name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</nav>
+<main class="main" ng-class="{'soh-app-container': layout.currentState.current.name == 'techo.manage.sohApp'}"
+    role="main">
+    <ui-view></ui-view>
+</main>
+<footer class="hr-footer">
+    <ul class="logo-list">
+        <li ng-repeat="imageData in layout.logoImages">
+            <a href="{{imageData.link}}" target="_blank" border="0">
+                <img alt="image" src="{{imageData.source}}">
+            </a>
+        </li>
+    </ul>
+    <p style="text-align: justify;">
+        <i>A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators especially in a public health context</i>
+    </p>
+        <!-- <a href="http://www.argusoft.com/" target="_blank" border="0">
+        <img alt="image" class="argus-logo" src="img/medplat.png" style="height: 50px;">
+    </a> -->
+</footer>

@@ -1,0 +1,201 @@
+<div class="container-fluid">
+    <div class="row" ng-if="sicklecellsearch.memberDetails.length === 0">
+        <div class="col-12">
+            <div class="no-data-placeholder">
+                <h5>No Record Found!</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="sicklecellsearch.memberDetails.length > 0">
+        <div class="col-12">
+            <div class="cst-table table-responsive table-set-height" id="member-scroll">
+                <table aria-describedby="table"
+                    class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                    style="table-layout: auto">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th class="white-space-unset" id="srno">#</th>
+                            <th class="white-space-unset" id="memberId">Member ID</th>
+                            <th class="white-space-unset" id="memberId">Family ID</th>
+                            <th class="white-space-unset" id="memberName">Member Name</th>
+                            <th class="white-space-unset" id="memberId">Location</th>
+                            <th class="white-space-unset" id="memberId">Gender</th>
+                            <th class="white-space-unset" id="memberId">Religion</th>
+                            <th class="white-space-unset" id="memberId">Caste</th>
+                            <th class="white-space-unset" id="memberId">DOB</th>
+                            <th class="white-space-unset" id="memberId">Age</th>
+                            <th class="white-space-unset" id="action">Fill form</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody" infinite-scroll-distance="0"
+                        infinite-scroll='sicklecellsearch.searchData()'
+                        infinite-scroll-disabled='sicklecellsearch.pagingService.pagingRetrivalOn'
+                        infinite-scroll-container='"#member-scroll"'>
+                        <tr ng-repeat="member in sicklecellsearch.memberDetails">
+                            <td>{{$index + 1}}</td>
+                            <td>{{member.uniqueHealthId|emptylabel}}</td>
+                            <td>{{member.familyId|emptylabel}}</td>
+                            <td>{{member.name|emptylabel}}</td>
+                            <td>{{member.locationHierarchy|emptylabel}}</td>
+                            <td>{{member.gender|gender|emptylabel}}</td>
+                            <td>{{member.religion|emptylabel}}</td>
+                            <td>{{member.caste|emptylabel}}</td>
+                            <td>{{member.dob|date:'dd/MM/yyyy'|emptylabel}}</td>
+                            <td>{{member.age.replace("mons","months")|emptylabel}}</td>
+                            <td>
+                                <button class="btn btn-primary"
+                                    ui-sref="techo.manage.sicklecell({id:member.uniqueHealthId})">Fill Form</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary"
+                                    ui-sref="techo.manage.sicklecelldynamic({id:member.uniqueHealthId})">Fill Dynamic
+                                    Form</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="large-div filter-div">
+    <span style="left:-66px" class="filter-toggle" ng-click="sicklecellsearch.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="sicklecellsearch.searchForm" novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>Search By: </label>
+                        <label class="control control-radio"> Member ID
+                            <input type="radio" name="search" icheck ng-model="sicklecellsearch.search.searchBy"
+                                ng-change="sicklecellsearch.resetSearchString()" value="member id" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Family ID
+                            <input type="radio" name="search" icheck ng-model="sicklecellsearch.search.searchBy"
+                                ng-change="sicklecellsearch.resetSearchString()" value="family id" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Mobile Number
+                            <input type="radio" name="search" icheck ng-model="sicklecellsearch.search.searchBy"
+                                ng-change="sicklecellsearch.resetSearchString()" value="mobile number" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <br>
+                        <label style="margin-left: 9%" class="control control-radio"> Organization Unit
+                            <input type="radio" name="search" icheck ng-model="sicklecellsearch.search.searchBy"
+                                ng-change="sicklecellsearch.resetSearchString()" value="organization unit" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Search by village name
+                            <input type="radio" name="search" icheck ng-model="sicklecellsearch.search.searchBy"
+                                ng-change="sicklecellsearch.resetSearchString()" value="village name" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Name
+                            <input type="radio" name="search" icheck ng-model="sicklecellsearch.search.searchBy"
+                                ng-change="sicklecellsearch.resetSearchString()" value="name" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <br>
+                        <label style="margin-left: 9%; margin-top: 10px;" class="control control-radio"> Abha Number
+                            <input type="radio" name="search" icheck ng-model="sicklecellsearch.search.searchBy"
+                                ng-change="sicklecellsearch.resetSearchString()" value="abha number" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Abha Address
+                            <input type="radio" name="search" icheck ng-model="sicklecellsearch.search.searchBy"
+                                ng-change="sicklecellsearch.resetSearchString()" value="abha address" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group" ng-if="sicklecellsearch.search.searchBy === 'name'">
+                            <location-directive template-type="'twoPart'" ng-model="sicklecellsearch.selectedLocationId"
+                                selected-location="sicklecellsearch.selectedLocation" required-upto-level="4"
+                                template-type="'inline'" fetch-according-to-user-aoi="true"> </location-directive>
+                        </div>
+                        <div class="form-group" ng-if="sicklecellsearch.search.searchBy === 'organization unit'">
+                            <location-directive template-type="'twoPart'" ng-model="sicklecellsearch.selectedLocationId"
+                                selected-location="sicklecellsearch.selectedLocation" required-upto-level="4"
+                                template-type="'inline'" fetch-according-to-user-aoi="false"> </location-directive>
+                        </div>
+                        <div class="form-group" ng-if="sicklecellsearch.search.searchBy === 'village name'">
+                            <label>Search village</label>
+                            <selectize class="form-control cst-form-control disabled-input"
+                                ng-model='sicklecellsearch.selectedLocationId'
+                                config='sicklecellsearch.locationSelectizeSicklecell'>
+                                <option value=''>Select</option>
+                            </selectize>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid Number'
+                                ng-if="sicklecellsearch.search.searchBy === 'mobile number'">
+                                <input type="number" name="searchString" form-control
+                                    ng-model="sicklecellsearch.search.searchString" placeholder='Enter contact number'
+                                    class="form-control" maxlength="10" minlength="10" required />
+                            </validate>
+                            <label style="margin-top:2%" class="form-group control control-checkbox"
+                                ng-if="sicklecellsearch.search.searchBy === 'mobile number'">
+                                <input ng-model="sicklecellsearch.search.familyMobileNumber" type="checkbox">
+                                <div class="control_indicator checkbox-success"></div>
+                                Search mobile number in family
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <validate for='searchString' pattern-msg="Select Date"
+                                ng-if="sicklecellsearch.search.searchBy === 'lmp' || sicklecellsearch.search.searchBy === 'edd'">
+                                <input type="text" style="width: 50%; float:left;" datepicker tabindex="8"
+                                    name="searchString" form-control
+                                    min-date="sicklecellsearch.search.searchBy === 'lmp'?sicklecellsearch.minLmpSearchDate:sicklecellsearch.minEddSearchDate"
+                                    ng-model="sicklecellsearch.search.searchString" required>
+                            </validate>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="sicklecellsearch.search.searchBy === 'member id' || sicklecellsearch.search.searchBy === 'woman id' || sicklecellsearch.search.searchBy === 'family id' || sicklecellsearch.search.searchBy === 'aadhar number' || sicklecellsearch.search.searchBy === 'abha number' || sicklecellsearch.search.searchBy === 'abha address'">
+                                <input type="text" name="searchString" form-control
+                                    ng-model="sicklecellsearch.search.searchString"
+                                    placeholder="Enter {{sicklecellsearch.search.searchBy}}" class="form-control"
+                                    required />
+                            </validate>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="sicklecellsearch.search.searchBy === 'name'">
+                                <input style="width:30%;float:left;margin:4px" type="text" name="firstName" form-control
+                                    ng-model="sicklecellsearch.search.firstName" placeholder="Enter first Name"
+                                    class="form-control" required />
+                            </validate>
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="sicklecellsearch.search.searchBy === 'name'">
+                                <input style="width:30%;float:left;margin:4px" type="text" name="middleName"
+                                    form-control ng-model="sicklecellsearch.search.middleName"
+                                    placeholder="Enter middle Name" class="form-control" />
+                            </validate>
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="sicklecellsearch.search.searchBy === 'name'">
+                                <input style="width:30%;float:left;margin:4px" type="text" name="lastName" form-control
+                                    ng-model="sicklecellsearch.search.lastName" placeholder="Enter last Name"
+                                    class="form-control" required />
+                            </validate>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter"
+                            ng-click="sicklecellsearch.toggleFilter()">Close</button>
+                        <button type="submit" class="btn btn-primary search-filter"
+                            ng-click="sicklecellsearch.searchData(true)">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{ manageLocationTypeCtrl.headerText}}</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="manageLocationTypeCtrl.locationTypeForm" id="locationTypeForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <div class="form-group">
+                                        <validate for='type' required-msg="Enter Type"
+                                            duplicate-msg="This type is already in use">
+                                            <label for="type" control-label>Type</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter Type" name="type" id="type"
+                                                ng-model="manageLocationTypeCtrl.locationType.type"
+                                                ng-change="manageLocationTypeCtrl.typeChanged()" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='name' required-msg="Enter Name"
+                                            duplicate-msg="This name is already in use">
+                                            <label for="name" control-label>Name</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter Name" name="name" id="name"
+                                                ng-model="manageLocationTypeCtrl.locationType.name"
+                                                ng-change="manageLocationTypeCtrl.nameChanged()" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='level' required-msg="Enter Level"
+                                            pattern-msg="Please enter only numbers">
+                                            <label for="level" control-label>Level</label>
+                                            <input type="number" class="form-control cst-form-control" form-control
+                                                ng-pattern="/^[0-9]*$/" placeholder="Enter Level" name="level"
+                                                id="level" ng-model="manageLocationTypeCtrl.locationType.level"
+                                                required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sohenable" control-label>Is SOH Enable</label>
+                                        <label control-label class="control control-checkbox">
+                                            <input type="checkbox"
+                                                ng-model="manageLocationTypeCtrl.locationType.isSohEnable">
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-5">
+                            <div class="float-right">
+                                <button ng-if="!manageLocationTypeCtrl.updateMode" class="btn btn-primary"
+                                    ng-click="manageLocationTypeCtrl.save()">
+                                    <i aria-hidden="true" class="fa fa-floppy-o"></i>
+                                    Save & Continue
+                                </button>
+                                <button ng-if="manageLocationTypeCtrl.updateMode" class="btn btn-primary"
+                                    ng-click="manageLocationTypeCtrl.update()">
+                                    <i aria-hidden="true" class="fa fa-floppy-o"></i>
+                                    Update
+                                </button>
+                                <button class="btn btn-secondary"
+                                    ng-click="manageLocationTypeCtrl.cancel()">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

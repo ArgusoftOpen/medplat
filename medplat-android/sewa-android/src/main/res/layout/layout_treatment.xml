@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/notification_due_selector"
+    android:orientation="vertical">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="start"
+        android:text="@string/treatment_details_for"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTouristName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular"
+        tools:text="Utkarsh Paresh Jadav" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="12dp"
+        android:gravity="start"
+        android:text="@string/symptoms"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cgSymptoms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="12dp"
+        android:gravity="start"
+        android:text="@string/other_symptoms"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvOtherSymptoms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="12dp"
+        android:gravity="start"
+        android:text="@string/diagnosis"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cgDiagnosis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="12dp"
+        android:gravity="start"
+        android:text="@string/other_diagnosis"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvOtherDiagnosis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="12dp"
+        android:gravity="start"
+        android:text="@string/medicines_lbl"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cgTreatment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="12dp"
+        android:gravity="start"
+        android:text="@string/other_medicines"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvOtherMedicines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="12dp"
+        android:gravity="start"
+        android:text="@string/course_of_treatment"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvCoT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="12dp"
+        android:gravity="start"
+        android:text="@string/referred_status"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTreatmentStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular" />
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
