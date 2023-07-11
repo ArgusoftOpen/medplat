@@ -25,3 +25,4 @@ replay_pid*
 /medplat-web/target/
 /medplat-ui/nbproject/private/
 /medplat-ui/bower_components/
+/medplat-ui/node_modules/
