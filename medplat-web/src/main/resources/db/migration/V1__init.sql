@@ -9020,7 +9020,7 @@ ALTER SEQUENCE public.facility_performance_master_id_seq OWNED BY public.facilit
 --
 
 CREATE SEQUENCE IF NOT EXISTS public.family_id_seq
-    START WITH 2
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -11654,7 +11654,7 @@ ALTER SEQUENCE public.logged_actions_event_id_seq OWNED BY public.logged_actions
 --
 
 CREATE SEQUENCE IF NOT EXISTS public.member_unique_health_id_seq
-    START WITH 3
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
