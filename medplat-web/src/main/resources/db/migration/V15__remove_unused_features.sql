@@ -1,0 +1,1 @@
+UPDATE public.menu_config set active = false where menu_name in ('Performance Dashboard','Location Wise Expected Target','District Factsheet');
