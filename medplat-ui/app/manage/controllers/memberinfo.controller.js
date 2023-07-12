@@ -73,7 +73,7 @@
             var queryDto1 = {
                 code: 'retrieve_member_info_by_health_id',
                 parameters: {
-                    healthid: ctrl.uniqueHealthId
+                    healthid: "'"+ctrl.uniqueHealthId+"'"
                 },
                 sequence: 1
             };
@@ -82,7 +82,7 @@
             var queryDto2 = {
                 code: 'retrieve_rch_child_service_master_info',
                 parameters: {
-                    healthid: ctrl.uniqueHealthId
+                    healthid: "'"+ctrl.uniqueHealthId+"'"
                 },
                 sequence: 2
             };
@@ -91,7 +91,7 @@
             var queryDto3 = {
                 code: 'retrieve_rch_wpd_mother_master_info',
                 parameters: {
-                    healthid: ctrl.uniqueHealthId
+                    healthid: "'"+ctrl.uniqueHealthId+"'"
                 },
                 sequence: 3
             };
@@ -100,7 +100,7 @@
             var queryDto4 = {
                 code: 'retrieve_rch_wpd_child_master_info',
                 parameters: {
-                    healthid: ctrl.uniqueHealthId
+                    healthid: "'"+ctrl.uniqueHealthId+"'"
                 },
                 sequence: 4
             };
@@ -109,7 +109,7 @@
             var queryDto5 = {
                 code: 'retrieve_rch_pnc_mother_master_info',
                 parameters: {
-                    healthid: ctrl.uniqueHealthId
+                    healthid: "'"+ctrl.uniqueHealthId+"'"
                 },
                 sequence: 5
             };
@@ -118,7 +118,7 @@
             var queryDto6 = {
                 code: 'retrieve_rch_pnc_child_master_info',
                 parameters: {
-                    healthid: ctrl.uniqueHealthId
+                    healthid: "'"+ctrl.uniqueHealthId+"'"
                 },
                 sequence: 6
             };
@@ -127,7 +127,7 @@
             var queryDto7 = {
                 code: 'retrieve_rch_pregnancy_registration_det',
                 parameters: {
-                    healthid: ctrl.uniqueHealthId
+                    healthid: "'"+ctrl.uniqueHealthId+"'"
                 },
                 sequence: 7
             };
@@ -136,7 +136,7 @@
             var queryDto8 = {
                 code: 'retrieve_anc_information',
                 parameters: {
-                    healthid: ctrl.uniqueHealthId
+                    healthid: "'"+ctrl.uniqueHealthId+"'"
                 },
                 sequence: 8
             };

@@ -45,7 +45,7 @@
             var queryDto = {
                 code: 'retrieve_family_and_member_info',
                 parameters: {
-                    familyid: ctrl.familyId
+                    familyid: "'"+ctrl.familyId+"'"
                 }
             }
             QueryDAO.executeQuery(queryDto).then(function (res) {
