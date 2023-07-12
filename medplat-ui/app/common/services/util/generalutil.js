@@ -230,28 +230,14 @@
         GeneralUtil.getLocalLanguage = () => {
             switch (ENV.implementation) {
                 case 'medplat':
-                case 'sewa_rural':
-                    return 'Gujarati';
-                case 'telangana':
-                    return 'Telugu';
-                case 'uttarakhand':
-                    return 'Hindi';
+                    return 'Other Language';
                 default:
                     return 'English';
             }
         }
 
         GeneralUtil.getAppName = () => {
-            switch (ENV.implementation) {
-                case 'uttarakhand':
-                    return 'Chardham';
-                case 'sewa_rural':
-                    return 'Sewa Rural';
-                case 'telangana':
-                    return 'Amma-Kosam';
-                default:
                     return 'MEDplat';
-            }
         }
 
         GeneralUtil.getEnv = () => {

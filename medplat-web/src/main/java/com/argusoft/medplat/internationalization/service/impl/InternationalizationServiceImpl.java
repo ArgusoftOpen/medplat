@@ -46,7 +46,7 @@ public class InternationalizationServiceImpl implements InternationalizationServ
     @PostConstruct
     public void loadAllLanguageLabels() {
 //        cronExecutorService.execute(tenantMaster -> {
-            MultiKeyMap<String, String> labelsMultiKeyMap = new MultiKeyMap<>();
+            labelsMultiKeyMap = new MultiKeyMap<>();
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             labelsMapLastUpdatedAt = df.format(new Date());
 
