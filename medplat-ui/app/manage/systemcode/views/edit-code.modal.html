@@ -1,10 +1,11 @@
 <style>
     .subform {
         border: 1px solid;
-        padding : 2px;
+        padding: 2px;
         background: lightyellow;
         margin-left: 2%;
     }
+
     /* For this specific model showing Options out of Box  */
     .cst-modal .modal-body {
         overflow: inherit;
@@ -12,20 +13,22 @@
 </style>
 
 <div class="modal-header">
-    <h3 class="text">Edit code</h3>
+    <h3 class="text">Edit code for {{listValueDetail.name}}</h3>
 </div>
-<div class="modal-body">
-    <div class="col-12 mb-15 mt-15">
-        <div class="card-body inline-form">
+<div class="modal-body" style="overflow: auto;">
+    <div class="card-body inline-form">
+        <div class="row">
+        <div class="col-12 mb-15 mt-15">
             <form role="form" name="editCodeForm" id="editCodeForm" novalidate>
                 <div class="form-group d-flex">
                     <label control-label style="min-width: 150px;">Code Type</label>
                     <div style="display: flex; flex-direction: row;flex-wrap: wrap;">
-                        <div ng-repeat="codeDetail in listValueDetail.codeTypes">
+                        <div ng-repeat="codeType in listValueDetail.codeTypes">
                             <div class="mb-15">
-                                <label class="control control-radio mt-10">{{codeDetail.codeType}}
-                                    <input ng-value="codeDetail.codeType" ng-attr-name="codeType" form-control
-                                        type="radio" ng-click="onChangeCodeType(codeDetail.codeType)"
+                                <label class="control control-radio mt-10">{{codeType}}
+                                    <input ng-value="codeType" 
+                                           ng-attr-name="codeType"
+                                        type="radio" ng-click="onChangeCodeType(codeType)"
                                         ng-model="code.codeType">
                                     <div class="control_indicator"></div>
                                 </label>
@@ -33,60 +36,58 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="form-group">
                     <validate for='code' required-msg="Enter code">
-                        <div ng-if="!isValidCode && !code.code">
+                        <div ng-if="!isValidCode">
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-10">
-                                    <span style="color: red;margin-left: 7%;">Please Enter valid Code</span>
+                                    <span style="color: red;margin-left: 7%;">
+                                        {{codeErrorMsg}}
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <label for="code" control-label>Code</label>
-                        <input type="text" class="form-control cst-form-control col-md-4" form-control placeholder="Enter Code"
-                            maxlength="200" name="code" id="code" ng-model="code.code" ng-blur="verifyCode()" required>
-                        <a href="" ng-click="isDisplayed()">&nbsp;&nbsp;Need Help?</a>
+                        <input type="text" class="form-control cst-form-control col-md-4" form-control
+                            placeholder="Enter Code" 
+                            name="code" id="code" 
+                            ng-model="code.code"
+                            ng-blur="verifyCode()">&nbsp;&nbsp;
+                        <a href="" ng-click="isDisplayed(code.codeType)">Need Help?</a>
                         <placeholder></placeholder>
                     </validate>
-                    <div ng-if="!isValidCode && code.code">
-                        <div class="row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-10">
-                                <span style="color: red;margin-left: 7%;"><strong>Note: </strong>This code currently not available in system. Still want to update it?</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
                 <div>
                     <div ng-if="code.isDisplayed" class="row subform">
                         <div class="col-md-12">
                             <div class="col-md-4"></div>
                             <div class="col-md-8">
-                                <div class="form-group" >
+                                <div class="form-group">
                                     <div class="form-group">
-                                        <validate for='searchedTextCode' required-msg="Please Enter code you want to search"
+                                        <validate for='searchedTextCode'
+                                            required-msg="Please Enter code you want to search"
                                             minlength-msg="text length should be atleast 3 ">
                                             <label for="searchedTextCode" control-label>Code Suggestions</label>
-                                            <input type="text" class="form-control cst-form-control col-md-4" form-control
-                                                placeholder="Enter Code suggestions" minlength="3" name="searchedTextCode" id="searchedTextCode"
+                                            <input type="text" class="form-control cst-form-control col-md-4"
+                                                form-control placeholder="Enter Code suggestions" minlength="3"
+                                                name="searchedTextCode" id="searchedTextCode"
                                                 ng-model="code.searchedTextCode" required>
                                             &nbsp;&nbsp;<span><a href="" ng-if="code.searchedTextCode.length >= 3"
-                                                    ng-click="getCodeOptions()" style="font-size: 17px;"><b>Go</b></a></span>
+                                                    ng-click="getCodeOptions()"
+                                                    style="font-size: 17px;"><b>Go</b></a></span>
                                             <placeholder></placeholder>
                                         </validate>
                                     </div>
                                 </div>
-
                                 <div class="form-group" ng-if="codeList.length > 0">
                                     <validate for='suggestedCodeList'>
                                         <label for="suggestedCodeList" control-label>Suggested Code List</label>
-                                        <select class="form-control cst-form-control" form-control chosen-directive="codeList"
-                                            ng-model="code.selectedCode" name="selectedCode" ng-change="changeCodeOptions()" id="selectedCode"
-                                            ng-options="codeDetails as codeDetails.name + ' (' + codeDetails.code + ')' for codeDetails in codeList" required>
+                                        <select class="form-control cst-form-control" form-control
+                                            chosen-directive="codeList" ng-model="code.selectedCode" name="selectedCode"
+                                            ng-change="changeCodeOptions()" id="selectedCode"
+                                            ng-options="codeDetails as codeDetails.name + ' (' + codeDetails.code + ')' for codeDetails in codeList"
+                                            required>
                                             <option value="" selected>--Select--</option>
                                         </select>
                                         <placeholder></placeholder>
@@ -100,22 +101,34 @@
                         </div>
                     </div>
                 </div>
-
                 <br>
                 <div class="form-group">
                     <validate for='codeDesc'>
+                        <div ng-if="!isValidCodeDesc">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-10">
+                                    <span style="color: red;margin-left: 7%;">
+                                        {{descErrorMsg}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                         <label for="codeDesc" control-label>Description</label>
-                        <input type="text" class="form-control cst-form-control" form-control
-                            placeholder="Enter Code Description" maxlength="500" name="codeDesc" id="codeDesc"
+                        <input type="text" class="form-control cst-form-control" 
+                            placeholder="Enter Code Description"
+                            name="codeDesc" id="codeDesc"
+                             ng-blur="verifyCodeDesc()"
                             ng-model="code.description">
                         <placeholder></placeholder>
                     </validate>
                 </div>
             </form>
         </div>
+        </div>
     </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-secondary" ng-click="close()">Close</button>
-    <button class="btn btn-primary" ng-click="update()">Update</button>
+    <button class="btn btn-primary" ng-click="update(editCodeForm)">Update</button>
 </div>

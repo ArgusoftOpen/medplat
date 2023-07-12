@@ -36,9 +36,8 @@
                         <validate for="tables" required-msg="Select Table">
                             <label for="tables" class="control-label col-xl-3" control-label>Table:</label>
                             <select name="tables" form-control class="form-control cst-form-control col-xl-9" required
-                                    ng-model="ctrl.table.key"
-                                    ng-options="table.key as table.name for table in ctrl.tables"
-                                    ng-change="ctrl.onChangeTable(ctrl.table)">
+                                ng-model="ctrl.table.key" ng-options="table.key as table.name for table in ctrl.tables"
+                                ng-change="ctrl.onChangeTable(ctrl.table)">
                                 <option value="">Select</option>
                             </select>
                             <placeholder></placeholder>
@@ -50,9 +49,9 @@
                         <validate for="forms" required-msg="Select Form">
                             <label for="forms" class="control-label col-xl-3" control-label>Form:</label>
                             <select name="forms" form-control class="form-control cst-form-control col-xl-9" required
-                                    ng-model="ctrl.newValue.formId"
-                                    ng-options="form.key as form.name for form in ctrl.forms"
-                                    ng-change="ctrl.retrieveFieldsForForm(ctrl.newValue.formId)">
+                                ng-model="ctrl.newValue.formId"
+                                ng-options="form.key as form.name for form in ctrl.forms"
+                                ng-change="ctrl.retrieveFieldsForForm(ctrl.newValue.formId)">
                                 <option value="">Select</option>
                             </select>
                             <placeholder></placeholder>
@@ -63,39 +62,37 @@
                     <div class="form-group">
                         <validate for="reportname" required-msg="Select Field">
                             <label for="reportname" class="control-label col-xl-3" control-label>Field</label>
-                            <select id="reportname" name="reportname" class="form-control cst-form-control col-xl-9" form-control
-                                    ng-options="field as field.field for field in ctrl.fieldsForForm track by field.field_key"
-                                    ng-model="ctrl.newValue.field" required
-                                    ng-change="ctrl.retrieveActiveListValueDetails(ctrl.newValue.field.field)">
+                            <select id="reportname" name="reportname" class="form-control cst-form-control col-xl-9"
+                                form-control
+                                ng-options="field as field.field for field in ctrl.fieldsForForm track by field.field_key"
+                                ng-model="ctrl.newValue.field" required
+                                ng-change="ctrl.retrieveActiveListValueDetails(ctrl.newValue.field.field)">
                                 <option value="">Select</option>
                             </select>
                             <placeholder></placeholder>
                         </validate>
                     </div>
                 </div>
-
-
-
-
-                <div class="col-md-12 col-xl-2 ml-auto" ng-if="ctrl.activeListValueDetails.length > 0">
+                <div class="col-md-12 col-xl-3 ml-auto" ng-if="ctrl.activeListValueDetails.length > 0">
                     <div class="form-group">
                         <input type="text" ng-model="ctrl.search" class="form-control cst-form-control" id="search"
-                               placeholder="Search text" style="width:100%">
+                            placeholder="Search text" style="width:100%">
                     </div>
                 </div>
-                <!-- <div> -->
+                <!--<div>-->
                     <!-- For ICD Manage -->
-                    <!-- <button class="btn btn-primary" style="float: right" ng-click="ctrl.manageIcd()">Load ICD/SNOMED Codes</button> -->
-                <!-- </div> -->
+<!--                    <button class="btn btn-primary" style="float: right" ng-click="ctrl.manageIcd()">Load ICD/SNOMED
+                        Codes</button>
+                </div>-->
 
             </div>
         </div>
-        <div class="col-12 mb-15" ng-if="ctrl.table.key == 'LIST_VALUE' && (!ctrl.activeListValueDetails || ctrl.activeListValueDetails.length == 0)">
+        <div class="col-12 mb-15"
+            ng-if="ctrl.table.key == 'LIST_VALUE' && (!ctrl.activeListValueDetails || ctrl.activeListValueDetails.length == 0)">
             <div class="no-data-placeholder">
                 <h5>Sorry No System Code configured!</h5>
             </div>
         </div>
-
         <div class="col-12 mb-15" ng-if="ctrl.activeListValueDetails.length > 0">
             <div class="cst-table table-responsive table-set-height">
                 <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
@@ -131,12 +128,24 @@
                                     popover-trigger="'mouseenter'" class="fa fa-question-circle-o pull-right">
                                 </em>
                             </td>
-                            <td>
+                            <td class="action-cell">
                                 <ul class="action-item">
                                     <li>
                                         <a class="action-icon edit-icon" ng-click="ctrl.editCode(listValueDetail)">
                                         </a>
                                     </li>
+<!--                                    <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"
+                                        ng-if="ctrl.showFlywayQueryOption(listValueDetail.SYSTEM_CODE)">
+                                        <a class="action-icon more-icon"></a>
+                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                            aria-labelledby="moreDropdown" x-placement="bottom-end">
+                                            <li ng-click="ctrl.showFlywayQuery(listValueDetail)"
+                                                style="cursor: pointer;">
+                                                <a>Show Flyway Query</a>
+                                            </li>
+                                        </ul>
+                                    </li>-->
                                 </ul>
                             </td>
                         </tr>
