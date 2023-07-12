@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -191,7 +192,7 @@ public class CFHCActivity extends MenuActivity implements View.OnClickListener, 
                         FamilyDataBean familyDataBean = familyDataBeans.get(selectedFamilyIndex);
                         selectedFamily = fhsService.retrieveFamilyDataBeanByFamilyId(familyDataBean.getFamilyId());
                         addSelectedFamilyDetails(selectedFamily);
-                        addOptionForFamily();
+                        //addOptionForFamily();
                         screen = OPTION_SELECTION_SCREEN;
                     } else {
                         SewaUtil.generateToast(this, LabelConstants.SELECT_A_FAMILY_FOR_VERIFICATION);
@@ -330,7 +331,9 @@ public class CFHCActivity extends MenuActivity implements View.OnClickListener, 
             pagingHeaderView = MyStaticComponents.getListTitleView(this, LabelConstants.SELECT_FAMILY);
             bodyLayoutContainer.addView(pagingHeaderView);
             List<ListItemDataBean> list = getFamilyList(familyDataBeans);
-            AdapterView.OnItemClickListener onItemClickListener = (parent, view, position, id) -> selectedFamilyIndex = position;
+            AdapterView.OnItemClickListener onItemClickListener = (parent, view, position, id) -> {
+                selectedFamilyIndex = position;
+            };
 
             if (isSearch) {
                 paginatedListView = MyStaticComponents.getPaginatedListViewWithItem(context, list, R.layout.listview_row_with_two_item, onItemClickListener, null);
@@ -463,7 +466,16 @@ public class CFHCActivity extends MenuActivity implements View.OnClickListener, 
             });
             alertDialogCustom.show();
         });
+        dismissKeyboard();
+        nextButton.setText(GlobalTypes.EVENT_OKAY);
+    }
 
+    private void dismissKeyboard() {
+        View view = getWindow().getCurrentFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
+        if (view != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void startFamilyHealthSurvey(FamilyDataBean familyDataBean) {
@@ -516,7 +528,7 @@ public class CFHCActivity extends MenuActivity implements View.OnClickListener, 
             } else {
                 bodyLayoutContainer.removeAllViews();
                 addSelectedFamilyDetails(selectedFamily);
-                addOptionForFamily();
+                //addOptionForFamily();
                 screen = OPTION_SELECTION_SCREEN;
             }
         } else if (requestCode == ActivityConstants.FAMILY_MIGRATION_OUT_ACTIVITY_REQUEST_CODE) {
@@ -528,7 +540,7 @@ public class CFHCActivity extends MenuActivity implements View.OnClickListener, 
             } else if (resultCode == RESULT_CANCELED) {
                 bodyLayoutContainer.removeAllViews();
                 addSelectedFamilyDetails(selectedFamily);
-                addOptionForFamily();
+                //addOptionForFamily();
                 screen = OPTION_SELECTION_SCREEN;
             }
         } else if (requestCode == ActivityConstants.LOCATION_SELECTION_ACTIVITY_REQUEST_CODE) {
