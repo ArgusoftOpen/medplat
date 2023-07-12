@@ -1,0 +1,26 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: argusadmin
+      POSTGRES_DB: medplat
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - medplat_net
+  web:
+    image: imtecho-image-backend:latest
+    #restart: always
+    ports:
+      - "8181:8181"
+      - "8080:8080"
+    networks:
+      - medplat_net
+
+networks:
+  medplat_net:
