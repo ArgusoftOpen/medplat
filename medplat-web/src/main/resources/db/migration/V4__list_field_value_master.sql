@@ -2355,3 +2355,29 @@ INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_mo
 	 (2662,true,false,'-1','2023-06-29 20:56:56.506373','Oxygen Cylinders','health_infra_facilities',0,NULL,'OXYGEN_CYLINDERS'),
 	 (2663,true,false,'bchikhly','2023-06-29 21:01:34.894511','Diabetes foot','diseaseHistoryList',0,NULL,NULL),
 	 (2664,true,false,'bchikhly','2023-06-29 21:01:34.894511','Diabetes retinopathy','diseaseHistoryList',0,NULL,NULL);
+
+SELECT setval('public."listvalue_field_value_detail_id_seq"',
+  (SELECT MAX(id) FROM public.listvalue_field_value_detail)
+);
+
+DELETE FROM
+  listvalue_field_value_detail
+where
+  field_key = 'system_codes_supported_types'
+  AND (value = 'ICD_11' OR value = 'LOINC');
+insert into listvalue_field_value_detail(
+  is_active, is_archive, last_modified_by,
+  last_modified_on, value, field_key,
+  file_size
+)
+values
+  (
+    true, false, 'superadmin', now(), 'ICD_11',
+    'system_codes_supported_types',
+    0
+  ),
+  (
+    true, false, 'superadmin', now(), 'LOINC',
+    'system_codes_supported_types',
+    0
+  );
