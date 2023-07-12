@@ -132,10 +132,11 @@
             translatorLabel.toggleIsEditable(labelDetails);
             if (!labelDetails.isEditable) {
                 const newQueryConfigs = [];
-                const enValueUpdated = document.getElementById(labelDetails.key + '-enValue').innerText;
-                const guValueUpdated = document.getElementById(labelDetails.key + '-guValue').innerText;
-                let selectedAppName = document.getElementById(labelDetails.key + '-appName');
-                const appName = selectedAppName.options[selectedAppName.selectedIndex].value;
+                const enValueUpdated = angular.element('#'+labelDetails.key + '-enValue')[0].innerText;
+                const guValueUpdated = angular.element('#'+labelDetails.key + '-guValue')[0].innerText;
+                let selectedAppName = angular.element('#'+labelDetails.key + '-appName');
+                console.log(selectedAppName[0])
+                const appName = selectedAppName[0].value;
                 if (enValueUpdated != labelDetails.enValue || appName != labelDetails.appName) {
                     if (!enValueUpdated || enValueUpdated.trim() == "") {
                         toaster.pop('error', 'Label is empty');
@@ -163,6 +164,7 @@
                     newQueryConfigs.push(newQueryConfig);
                 }
                 if (newQueryConfigs.length > 0) {
+                    console.log(newQueryConfigs)
                     saveLabelsOnServer(newQueryConfigs);
                 }
             }

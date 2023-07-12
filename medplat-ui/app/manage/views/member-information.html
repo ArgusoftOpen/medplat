@@ -1,11 +1,11 @@
 <div class="container-fluid" ng-if="memberInfo.memberObj.familyId == null">
     <h5>Search Member</h5>
 </div>
-<div class="container-fluid" ng-if="memberInfo.paramDataFlag">
+<!-- <div class="container-fluid" ng-if="memberInfo.paramDataFlag"> -->
     <!-- <a class="ion-arrow-left-c" style="cursor: pointer; font-size: 25px;color: black"
         ui-sref="techo.manage.searchfeature({familyId: memberInfo.memberObj.familyId})" /> -->
-    <a class="ion-arrow-left-c" style="cursor: pointer; font-size: 25px;color: black" />
-</div>
+    <!-- <a class="ion-arrow-left-c" style="cursor: pointer; font-size: 25px;color: black" /> -->
+<!-- </div> -->
 <div class="container-fluid" ng-if="memberInfo.memberObj.familyId">
     <div class="row">
         <div class="col-12 col-md-12">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="collapse show" id="collapse1">
                     <div class="card-body inline-form" ng-if="memberInfo.memberObj.memberId">
-                        <form role="form" name="searchInformationForm" id="searchInformationForm">
+                        <form role="form" name="searchInformationForm" id="searchInformationForm" style="font-size: 16px;">
                             <div class="col-12 row">
                                 <div class="form-group col-6">
                                     <div class="row">

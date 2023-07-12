@@ -46,7 +46,7 @@ INSERT INTO menu_config(id,feature_json,group_id,active,is_dynamic_report,menu_n
 
 ,(76,NULL,NULL,'True',NULL,'Manage PNC visit','techo.manage.pnc',NULL,'manage',NULL,NULL,'51b7ce1a-7d0e-4743-bcd6-a3ef88d05f79','893383bd-66bf-43f7-b24e-293c58c1a526','44994612-db9a-453e-a7a8-ce7991282926',NULL)
 
-,(332,NULL,3,'True',NULL,'District Factsheet','techo.manage.districtperformancedashboard',NULL,'manage',NULL,NULL,NULL,NULL,NULL,NULL)
+,(332,NULL,3,'False',NULL,'District Factsheet','techo.manage.districtperformancedashboard',NULL,'manage',NULL,NULL,NULL,NULL,NULL,NULL)
 
 ,(6,'{}',NULL,'True',NULL,'Role','techo.manage.role',NULL,'admin',NULL,NULL,'ffdb68c0-c312-483c-8599-e7d56a45659b','98209cc6-d484-42f9-9c9b-374813d5bb40','997fd1a8-5b7b-40d5-9479-cd29da6be54b',NULL)
 
@@ -70,7 +70,7 @@ INSERT INTO menu_config(id,feature_json,group_id,active,is_dynamic_report,menu_n
 
 ,(71,'{"canSearchByLocation":false,"canSearchByFamilyId":true,"canSearchByMemberHealthId":true,"canSearchArchived":false,
 
-"canMarkUnverified":false}',NULL,'True',NULL,'Family Moving','techo.manage.familymoving',NULL,'manage',NULL,NULL,'71909bf2-8f9f-4296-b4a3-f9d4b2d6d4eb','3b560419-664b-4c28-89b2-0498974b371f','382c96d6-0915-4b3c-b93a-53daab2773ac',NULL)
+"canMarkUnverified":false}',NULL,'False',NULL,'Family Moving','techo.manage.familymoving',NULL,'manage',NULL,NULL,'71909bf2-8f9f-4296-b4a3-f9d4b2d6d4eb','3b560419-664b-4c28-89b2-0498974b371f','382c96d6-0915-4b3c-b93a-53daab2773ac',NULL)
 
 ,(67,'{}',NULL,'True',NULL,'Manage Translations','techo.manage.translator-label',NULL,'admin',NULL,NULL,'cca450b9-4cb4-43ce-8d83-d3c68c98c3c0','e58c59d3-4caa-49e5-a739-faf339e9b08b','f8aca781-8f23-4fab-b4ca-4d2e77a91517',NULL)
 
@@ -92,7 +92,7 @@ INSERT INTO menu_config(id,feature_json,group_id,active,is_dynamic_report,menu_n
 
 ,(166,NULL,24,'True',NULL,'Widgets management','techo.manage.manage-widgets',NULL,'admin',NULL,NULL,'ce1a0005-4fa2-48ce-985b-437296992d45','084f8a03-74ab-428e-8ebe-7f32b8814125','32f82a8b-a095-4f17-8193-978e7acebd60',NULL)
 
-,(176,'{"canLock":false,"canUnlock":false}',7,'True',NULL,'Location Wise Expected Target','techo.manage.expectedTarget',NULL,'manage',NULL,NULL,'6d384f39-2112-41f9-8e95-b2708b741d8e','ea4d2b7f-c52f-496d-923e-3e2b9330468e','04a87cca-4418-42f7-9b32-9f0d60ebddf1',NULL)
+,(176,'{"canLock":false,"canUnlock":false}',7,'False',NULL,'Location Wise Expected Target','techo.manage.expectedTarget',NULL,'manage',NULL,NULL,'6d384f39-2112-41f9-8e95-b2708b741d8e','ea4d2b7f-c52f-496d-923e-3e2b9330468e','04a87cca-4418-42f7-9b32-9f0d60ebddf1',NULL)
 
 ,(257,NULL,NULL,'True',NULL,'Manage Schools','techo.manage.schools',NULL,'manage','False',NULL,'b46d41b7-b629-436e-a48d-6cdac0e62d7e','ecddfd27-8090-4e65-be36-80ef4bd786bc','c6cf7b12-3093-4d2f-b4b4-81d4fe02ce49',NULL)
 
@@ -102,7 +102,7 @@ INSERT INTO menu_config(id,feature_json,group_id,active,is_dynamic_report,menu_n
 
 ,(18,'{}',24,'True',NULL,'Events Configured','techo.notification.all',NULL,'admin','True',NULL,'56afdb6d-64e0-48dc-a1df-42ceb920bc41','09544ee0-e9fd-4d04-9dd4-f3a215f0748e','af91f9f5-f27c-4dce-a1b7-909e142a443b',NULL)
 
-,(339,'{}',NULL,'True',NULL,'Performance Dashboard','techo.manage.performancedashboard',NULL,'manage',NULL,NULL,NULL,NULL,NULL,NULL)
+,(339,'{}',NULL,'False',NULL,'Performance Dashboard','techo.manage.performancedashboard',NULL,'manage',NULL,NULL,NULL,NULL,NULL,NULL)
 
 ,(340,'{}',NULL,'True',NULL,'Location Type','techo.manage.locationtype',NULL,'manage',NULL,NULL,NULL,NULL,NULL,NULL)
 
