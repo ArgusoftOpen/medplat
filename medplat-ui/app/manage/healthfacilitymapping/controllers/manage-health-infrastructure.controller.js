@@ -1,5 +1,5 @@
 (function () {
-    function ManageHealthInfrastructure($state, QueryDAO, $q, Mask, toaster, GeneralUtil, AuthenticateService, LocationService, HprCreateDAO, $uibModal) {
+    function ManageHealthInfrastructure($state, QueryDAO, $q, Mask, toaster, GeneralUtil, AuthenticateService, LocationService, $uibModal) {
         var hi = this;
         hi.env = GeneralUtil.getEnv();
         hi.listState = 'techo.manage.healthinfrastructures';
@@ -482,18 +482,18 @@
                 }
             }).then(function (res) {
                 hi.categoryList = res.result;
-                hi.getLabTestDetails()
+                // hi.getLabTestDetails()
             }, GeneralUtil.showMessageOnApiCallFailure);
         }
 
-        hi.getLabTestDetails = function () {
-            QueryDAO.execute({
-                code: 'get_lab_test'
-            }).then(function (res) {
-                hi.labTests = res.result
-                hi.setLabTestDetails()
-            }, GeneralUtil.showMessageOnApiCallFailure);
-        }
+        // hi.getLabTestDetails = function () {
+        //     QueryDAO.execute({
+        //         code: 'get_lab_test'
+        //     }).then(function (res) {
+        //         hi.labTests = res.result
+        //         hi.setLabTestDetails()
+        //     }, GeneralUtil.showMessageOnApiCallFailure);
+        // }
 
         hi.setLabTestDetails = function (type) {
             QueryDAO.execute({
