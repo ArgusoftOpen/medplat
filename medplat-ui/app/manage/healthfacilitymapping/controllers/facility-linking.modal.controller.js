@@ -1,5 +1,5 @@
 (function () {
-    function FacilityLinkingController($uibModalInstance, types, response, menu, manageState, Mask, GeneralUtil, toaster, HfrSearchDAO, HprCreateDAO, $state, HprCreateDAO, HealthInfraService, HprProfileDAO, QueryDAO) {
+    function FacilityLinkingController($uibModalInstance, types, response, menu, manageState, Mask, GeneralUtil, toaster, $state, HealthInfraService, QueryDAO) {
         let ctrl = this;
         ctrl.response = response;
         ctrl.types = types;
@@ -38,13 +38,13 @@
                 page: 1,
                 resultsPerPage: 1
             }
-            Mask.show();
-            HfrSearchDAO.searchForFacility(account)
-                .then((res) => {
-                    ctrl.matchFacilityRecord(res.facilities[0]);
-                }).catch((error) => {
-                    GeneralUtil.showMessageOnApiCallFailure(error);
-                }).finally(Mask.hide);
+            // Mask.show();
+            // HfrSearchDAO.searchForFacility(account)
+            //     .then((res) => {
+            //         ctrl.matchFacilityRecord(res.facilities[0]);
+            //     }).catch((error) => {
+            //         GeneralUtil.showMessageOnApiCallFailure(error);
+            //     }).finally(Mask.hide);
         }
 
         ctrl.matchFacilityRecord = function (res) {
