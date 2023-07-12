@@ -6,7 +6,7 @@ RUN apt-get update -y \
     && apt-get install -y wget curl git unzip
 
 # Create directory for Java and navigate to it
-RUN mkdir -p /usr/ui/imtecho-ui
+RUN mkdir -p /usr/ui/medplat-ui
 RUN mkdir -p /usr/web
 RUN mkdir -p /usr/android
 RUN mkdir -p /usr/Repository 
@@ -41,7 +41,7 @@ ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 
 # Copy application code to the working directory
 COPY ../medplat-web /usr/web
-COPY ../medplat-ui/ /usr/ui/imtecho-ui
+COPY ../medplat-ui/ /usr/ui/medplat-ui
 #COPY ../medplat-android/ /usr/android 
 
 # Install Node.js and npm
@@ -72,7 +72,7 @@ RUN npm install -g bower grunt -y
 
 
 # Navigate to the application UI directory
-WORKDIR /usr/ui/imtecho-ui
+WORKDIR /usr/ui/medplat-ui
 
 # Run grunt task
 RUN npm install
