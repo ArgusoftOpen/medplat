@@ -295,7 +295,7 @@
                 managepnccontroller.childDangerSigns = response[4].result;
                 managepnccontroller.institutionTypes = response[5].result;
             }).catch((error) => {
-                GeneralUtil.showMessageOnApiCallFailure(error);
+                // GeneralUtil.showMessageOnApiCallFailure(error);
                 $state.go('techo.manage.pncSearch');
             }).finally(() => {
                 Mask.hide();
