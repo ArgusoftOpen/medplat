@@ -292,7 +292,7 @@
                                                 ng-if="hi.allowedFacilities.includes('COVID_HOSPITAL')">
                                                 <label class="form-group control control-checkbox">
                                                     <input ng-model="hi.infrastructure.facilities.isCovidHospital"
-                                                        ng-change="hi.onChangeIsCovidHospital()" type="checkbox"
+                                                        type="checkbox"
                                                         ng-disabled="!hi.user.canEditCovid19Hospital">
                                                     <div class="control_indicator checkbox-success"></div>
                                                     Covid Hospital

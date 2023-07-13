@@ -28,7 +28,7 @@
                     var excelObj = {
                         "#": (i + 1),
                         "Person": memberDetails.personName,
-                        "Imported From eMamta": memberDetails.importedFromEmamta,
+                        // "Imported From eMamta": memberDetails.importedFromEmamta,
                         "To be processed": memberDetails.unverifiedFHS,
                         "In Reverification": memberDetails.inReverification,
                         "Verified": memberDetails.verifiedFHS,

@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h4 class="text">{{viewImageModalCtrl.title}}</h4>
+    <button type="button" class="close" ng-click="viewImageModalCtrl.ok()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body" style="text-align: center;">
+    <img style="max-width: 100%;" ng-src="{{viewImageModalCtrl.attachmentImage}}" alt="{{viewImageModalCtrl.title}}" />
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="viewImageModalCtrl.ok()">Ok</button>
+</div>

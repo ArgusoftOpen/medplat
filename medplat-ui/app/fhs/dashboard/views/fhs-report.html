@@ -33,8 +33,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Person</th>
-                                <th data-toggle="tooltip" title="ઈમમતામાંથી આવેલા કુટુંબોની સંખ્યા">Imported From eMamta
-                                </th>
+                                <!-- <th data-toggle="tooltip" title="ઈમમતામાંથી આવેલા કુટુંબોની સંખ્યા">Imported From eMamta
+                                </th> -->
                                 <th data-toggle="tooltip" title="ટેકોમાં ચકાસણી કરવાના બાકી રહેલા કુટુંબોની સંખ્યા">To
                                     be processed</th>
                                 <th data-toggle="tooltip" title="ટેકોમાં ચકાસણી થયેલા કુટુંબની સંખ્યા">Verified</th>
@@ -52,12 +52,12 @@
                             <tr ng-repeat="asha in fhsreport.ashaLists">
                                 <td class="text-center">{{$index + 1}}</td>
                                 <td class="text-center">{{asha.personName| uppercase}}</td>
-                                <td class="text-center">
+                                <!-- <td class="text-center">
                                     <a ng-class="{disabled : asha.importedFromEmamta == 0}"
                                         ui-sref="techo.report.view({id:'fhs_imported_emamta',type:'code',queryParams:({location_id:fhsreport.locationId,user_id:asha.id} | json)})">
                                         {{asha.importedFromEmamta}}
                                     </a>
-                                </td>
+                                </td> -->
                                 <td class="text-center">
                                     <a ng-class="{disabled : asha.unverifiedFHS == 0}"
                                         ui-sref="techo.report.view({id:'fhs_to_be_processed',type:'code',queryParams:({location_id:fhsreport.locationId,user_id:asha.id} | json)})">{{asha.unverifiedFHS}}</a>

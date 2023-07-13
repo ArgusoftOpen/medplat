@@ -77,10 +77,10 @@
                                                         Location</th>
                                                     <th ng-if="!fhsdashboard.isDistrict" data-toggle="tooltip">
                                                         Sub Location</th>
-                                                    <th data-toggle="tooltip">
-                                                        Imported From eMamta</th>
-                                                    <th data-toggle="tooltip">
-                                                        Imported eMamta Member</th>
+                                                    <!-- <th data-toggle="tooltip">
+                                                        Imported From eMamta</th> -->
+                                                    <!-- <th data-toggle="tooltip">
+                                                        Imported eMamta Member</th> -->
                                                     <th data-toggle="tooltip">
                                                         To be
                                                         processed</th>
@@ -106,9 +106,9 @@
                                                     <th data-toggle="tooltip">
                                                         Total
                                                         Children Under 5 Years</th>
-                                                    <th data-toggle="tooltip"
+                                                    <!-- <th data-toggle="tooltip"
                                                         title="Percetage Completion = ((Verified + Archived) * 100) / Imported from emamta ">
-                                                        Percentage Completion</th>
+                                                        Percentage Completion</th> -->
                                                     <th data-toggle="tooltip">No. of
                                                         Field Workers</th>
                                                 </tr>
@@ -126,15 +126,15 @@
                                                     </td>
                                                 <tr ng-repeat="child in memberDetails.childs">
                                                     <td>{{child.value}}</td>
-                                                    <td
+                                                    <!-- <td
                                                         ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
                                                                 'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
-                                                        {{child.importedFromEmamta}}</td>
-                                                    <td
+                                                        {{child.importedFromEmamta}}</td> -->
+                                                    <!-- <td
                                                         ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
                                                                 'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
                                                         {{!child.importedFromEmamtaMember ? 0 : child.importedFromEmamtaMember}}
-                                                    </td>
+                                                    </td> -->
                                                     <td
                                                         ng-class="{'fhs-black': child.percentage < 25,'fhs-red': child.percentage >= 25 && child.percentage < 35,
                                                                 'fhs-yellow':child.percentage >= 35 && child.percentage < 50,'fhs-green':child.percentage >= 50}">
@@ -185,9 +185,9 @@
                                                 </tr>
                                                 <tr ng-repeat-end>
                                                     <th>Total</th>
-                                                    <td>{{memberDetails.importedFromEmamta}}</td>
+                                                    <!-- <td>{{memberDetails.importedFromEmamta}}</td>
                                                     <td>{{!memberDetails.importedFromEmamtaMember ? 0 : memberDetails.importedFromEmamtaMember}}
-                                                    </td>
+                                                    </td> -->
                                                     <td>{{memberDetails.unverifiedFHS}}</td>
                                                     <td>{{memberDetails.inReverification}}</td>
                                                     <td>{{memberDetails.verifiedFHS}}</td>
@@ -233,15 +233,15 @@
                                                         <span
                                                             ng-if="memberDetails.id == null">{{memberDetails.value}}</span>
                                                     </td>
-                                                    <td
+                                                    <!-- <td
                                                         ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
                                                         'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
-                                                        {{memberDetails.importedFromEmamta}}</td>
-                                                    <td
+                                                        {{memberDetails.importedFromEmamta}}</td> -->
+                                                    <!-- <td
                                                         ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
                                                         'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
                                                         {{!memberDetails.importedFromEmamtaMember ? 0 : memberDetails.importedFromEmamtaMember}}
-                                                    </td>
+                                                    </td> -->
                                                     <td
                                                         ng-class="{'fhs-black': memberDetails.percentage < 25,'fhs-red': memberDetails.percentage >= 25 && memberDetails.percentage < 35,
                                                         'fhs-yellow':memberDetails.percentage >= 35 && memberDetails.percentage < 50,'fhs-green':memberDetails.percentage >= 50}">
