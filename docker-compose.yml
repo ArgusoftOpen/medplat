@@ -13,14 +13,19 @@ services:
       - ./data:/var/lib/postgresql/data
     networks:
       - medplat_net
+
   web:
-    image: imtecho-image-backend:latest
-    #restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8181:8181"
-      - "8080:8080"
+    volumes:
+      - ./medplat-ui:/usr/ui/medplat-ui
+      - ./medplat-web:/usr/medplat-web
     networks:
       - medplat_net
 
 networks:
   medplat_net:
+
