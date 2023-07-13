@@ -82,7 +82,7 @@
                                                 placeholder="Enter Last Name" alphabets-only name="lastName"
                                                 remove-spaces id="lastName" ng-blur="usercontroller.setUserName()"
                                                 maxlength="90" ng-model="usercontroller.userObj.lastName"
-                                                ng-required="usercontroller.isLastNameMandatory">
+                                                required>
                                             <placeholder></placeholder>
                                         </validate>
                                         <span class="alert alert-danger ml-160" ng-if="(usercontroller.userObj.firstName.length +
