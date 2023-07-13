@@ -10,7 +10,11 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data:/var/lib/postgresql/data
+     - type: bind
+       source: /home/nehil/repo/medplat/data
+       target: /var/lib/postgresql/data
+       bind:
+        create_host_path: true
     networks:
       - medplat_net
 
@@ -21,8 +25,16 @@ services:
     ports:
       - "8181:8181"
     volumes:
-      - ./medplat-ui:/usr/ui/medplat-ui
-      - ./medplat-web:/usr/medplat-web
+      - type: bind
+        source: /home/nehil/repo/medplat/medplat-ui
+        target: /usr/ui/medplat-ui
+        bind:
+        create_host_path: true
+      - type: bind
+        source: /home/nehil/repo/medplat/medplat-web
+        target: /usr/medplat-web
+        bind:
+        create_host_path: true
     networks:
       - medplat_net
 
