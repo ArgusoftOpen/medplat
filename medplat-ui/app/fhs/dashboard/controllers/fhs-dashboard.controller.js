@@ -71,7 +71,7 @@
             });
 
             ctrl.showbar = true;
-            ctrl.series = ['Imported From eMamta', 'Verified', 'Archived', 'To be Processed', 'New Families Added'];
+            ctrl.series = ['Verified', 'Archived', 'To be Processed', 'New Families Added'];
             ctrl.chartOptions = {
                 legend: {
                     display: true
@@ -99,9 +99,9 @@
                 }
             };
             ctrl.colors = [
-                {
-                    backgroundColor: '#243A50' // bar chart color for importedFromEmamta -rgba(247,70,74,1)
-                },
+                // {
+                //     backgroundColor: '#243A50' // bar chart color for importedFromEmamta -rgba(247,70,74,1)
+                // },
                 {
                     backgroundColor: '#30BCED'// bar chart color for Verified - #46BFBD
                 },
@@ -259,8 +259,8 @@
                     var memberDetails = ctrl.excelData[i];
                     var excelObj = {
                         "Location": memberDetails.value,
-                        "Imported From eMamta": memberDetails.importedFromEmamta,
-                        "Imported eMamta Member": memberDetails.importedFromEmamtaMember,
+                        // "Imported From eMamta": memberDetails.importedFromEmamta,
+                        // "Imported eMamta Member": memberDetails.importedFromEmamtaMember,
                         "To be processed": memberDetails.unverifiedFHS,
                         "In Reverification": memberDetails.inReverification,
                         "Verified": memberDetails.verifiedFHS,
@@ -296,7 +296,7 @@
                 ctrl.barArchieved = [];
                 ctrl.barNewFamiliesAdded = [];
                 for (let i = 0; i < new_data.length; i++) {
-                    ctrl.barImported.push(new_data[i].importedFromEmamta);
+                    // ctrl.barImported.push(new_data[i].importedFromEmamta);
                     ctrl.barVerified.push(new_data[i].verifiedFHS);
                     ctrl.barUnverified.push(new_data[i].unverifiedFHS);
                     ctrl.barArchieved.push(new_data[i].archivedFHS);

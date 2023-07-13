@@ -98,9 +98,9 @@
             hi.manageWardDetailsForm.$setSubmitted();
             if (isWardDetailsFormValid() && hi.manageHealthInfrastructureForm.$valid) {
                 hi.infrastructure = { ...hi.infrastructure, ...hi.infrastructure.facilities };
-                if (hi.infrastructure.emamtaid == '') {
-                    delete hi.infrastructure.emamtaid;
-                }
+                // if (hi.infrastructure.emamtaid == '') {
+                //     delete hi.infrastructure.emamtaid;
+                // }
                 if (hi.infrastructure.iscpconfirmationcenter) {
                     QueryDAO.execute({
                         code: 'health_infrastructure_cp_confirmation_count',
@@ -549,11 +549,11 @@
 
 
 
-        hi.onChangeIsCovidHospital = function () {
-            if (hi.infrastructure.facilities.isCovidHospital && (!hi.wardDetails || hi.wardDetails.length === 0)) {
-                hi.addWard();
-            }
-        }
+        // hi.onChangeIsCovidHospital = function () {
+        //     if (hi.infrastructure.facilities.isCovidHospital && (!hi.wardDetails || hi.wardDetails.length === 0)) {
+        //         hi.addWard();
+        //     }
+        // }
 
         hi.nutritionChange = () => {
             if (!hi.infrastructure.facilities.iscmtc && !hi.infrastructure.facilities.isnrc) {
