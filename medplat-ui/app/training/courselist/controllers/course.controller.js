@@ -123,7 +123,7 @@
 
         ctrl.viewImageModal = function (dataObj) {
             let modalInstance = $uibModal.open({
-                templateUrl: 'app/training/questionconfiguration/views/view-image.modal.html',
+                templateUrl: 'app/training/courselist/views/view-image.modal.html',
                 controllerAs: 'viewImageModalCtrl',
                 controller: function ($uibModalInstance) {
                     let viewImageModalCtrl = this;
@@ -163,7 +163,7 @@
 
         ctrl.viewDefaultImageModal = function (dataObj) {
             let modalInstance = $uibModal.open({
-                templateUrl: 'app/training/questionconfiguration/views/view-image.modal.html',
+                templateUrl: 'app/training/courselist/views/view-image.modal.html',
                 controllerAs: 'viewImageModalCtrl',
                 controller: function ($uibModalInstance) {
                     let viewImageModalCtrl = this;
