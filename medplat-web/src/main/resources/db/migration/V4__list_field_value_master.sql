@@ -2339,8 +2339,6 @@ INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_mo
 	 (2648,true,false,'-1','2023-06-29 20:56:56.506373','No Reporting Unit','health_infra_facilities',0,NULL,'NO_REPORTING_UNIT');
 INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_modified_by,last_modified_on,value,field_key,file_size,multimedia_type,code) VALUES
 	 (2649,true,false,'-1','2023-06-29 20:56:56.506373','Balsakha-1','health_infra_facilities',0,NULL,'BALSAKHA_1'),
-	 (2650,true,false,'-1','2023-06-29 20:56:56.506373','Covid Hospital','health_infra_facilities',0,NULL,'COVID_HOSPITAL'),
-	 (2651,true,false,'-1','2023-06-29 20:56:56.506373','Covid Lab','health_infra_facilities',0,NULL,'COVID_LAB'),
 	 (2652,true,false,'-1','2023-06-29 20:56:56.506373','Chiranjivi Yojana','health_infra_facilities',0,NULL,'CHIRANJIVI_YOJANA'),
 	 (2653,true,false,'-1','2023-06-29 20:56:56.506373','Balsakha-3','health_infra_facilities',0,NULL,'BALSAKHA_3'),
 	 (2654,true,false,'-1','2023-06-29 20:56:56.506373','USG facility','health_infra_facilities',0,NULL,'USG'),
