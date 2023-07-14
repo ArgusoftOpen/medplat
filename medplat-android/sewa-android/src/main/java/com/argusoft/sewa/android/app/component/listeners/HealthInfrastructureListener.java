@@ -129,7 +129,11 @@ public class HealthInfrastructureListener implements AdapterView.OnItemSelectedL
             if (validationMessage != null) {
                 SewaUtil.generateToast(SharedStructureData.context, validationMessage);
             } else {
-                setSearchTypeView();
+                //setSearchTypeView();
+                addSearchLayoutForInfrastructure();
+                if (searchInfraEditText.getEditText() != null) {
+                    retrieveInfrastructuresBySearchFromDB(searchInfraEditText.getEditText().getText().toString());
+                }
             }
         }
     }
@@ -159,7 +163,7 @@ public class HealthInfrastructureListener implements AdapterView.OnItemSelectedL
             searchTypeRadioGroup.addView(searchByName);
             RadioButton searchByHierarchy = MyStaticComponents.getRadioButton(context, LabelConstants.SEARCH_BY_HIERARCHY,
                     IdConstants.HEALTH_INFRA_SEARCH_BY_HIERARCHY_RADIO_BUTTON_ID);
-            searchTypeRadioGroup.addView(searchByHierarchy);
+            //searchTypeRadioGroup.addView(searchByHierarchy);
 
             searchTypeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
                 queFormBean.setAnswer(null);
