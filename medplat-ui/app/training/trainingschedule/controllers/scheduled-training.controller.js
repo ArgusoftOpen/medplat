@@ -112,11 +112,8 @@
                     default:
                         ctrl.trainingState = null;
                 }
-                // console.log(ctrl.dateRange);
-                // if(!(ctrl.dateRange === undefined)){
-                    ctrl.dateFrom = ctrl.dateRange.from_date_range ? moment(ctrl.dateRange.from_date_range).format('DD/MM/YYYY') : '01/01/1970';
-                    ctrl.dateTo = ctrl.dateRange.to_date_range == '01/01/1970' ? moment(ctrl.todayDate).format('DD/MM/YYYY') : moment(ctrl.dateRange.to_date_range).format('DD/MM/YYYY');
-                // }
+                ctrl.dateFrom = ctrl.dateRange.from_date_range ? moment(ctrl.dateRange.from_date_range).format('MM/DD/YYYY') : '01/01/1970';
+                ctrl.dateTo = ctrl.dateRange.to_date_range == '01/01/1970' ? moment(ctrl.todayDate).format('MM/DD/YYYY') : moment(ctrl.dateRange.to_date_range).format('MM/DD/YYYY');
                 Mask.show();
                 var queryDto = {
                     code: "tr_scheduled_trainings",
@@ -222,7 +219,7 @@
 
         this.initPage = function () {
             ctrl.pagingService = PagingForQueryBuilderService.initialize();
-            // ctrl.getTrainingStatuses();
+            ctrl.getTrainingStatuses();
             // ctrl.getModuleConstants();
         };
 

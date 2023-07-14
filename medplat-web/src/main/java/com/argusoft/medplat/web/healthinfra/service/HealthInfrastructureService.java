@@ -16,6 +16,11 @@ public interface HealthInfrastructureService {
     void updateAllHealthInfrastructureForMobile();
 
     /**
+     * Toggle the state of health infrastructure.
+     */
+    public void toggleActive(Integer courseId,String state);
+
+    /**
      * Retrieves private health infrastructure by name.
      *
      * @param query Name of health infrastructure.

@@ -46,6 +46,14 @@ public class HealthInfrastructureServiceImpl implements HealthInfrastructureServ
     /**
      * {@inheritDoc}
      */
+    @Override
+    public void toggleActive(Integer healthInfraId, String state) {
+        healthInfrastructureDetailsDao.toggleActive(healthInfraId, state);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
 //    @Override
 //    public List<HealthInfrastructureBean> getHealthInfrastructurePrivateHospital(String query) {
 //        return healthInfrastructureDetailsDao.getHealthInfrastructureByType(ConstantUtil.PRIVATE_HOSPITAL_FIELD_ID, query);

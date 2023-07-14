@@ -25,6 +25,19 @@
                 <div class="control_indicator"></div>
             </label>
         </div> -->
+        <label class="control control-checkbox">
+            Show Active
+            <input type="checkbox" ng-click="healthInfrastructure.toShow()"
+                ng-model="healthInfrastructure.showActive">
+            <div class="control_indicator"></div>
+        </label>
+
+        <label class="control control-checkbox">
+            Show Inactive
+            <input type="checkbox" ng-click=" healthInfrastructure.toShow()"
+                ng-model="healthInfrastructure.showInactive">
+            <div class="control_indicator"></div>
+        </label>
 
         <div class="col-12 mb-15">
             <div class="cst-tab">
@@ -45,6 +58,7 @@
                                         <th id="id" style="width: 15%">Address</th>
                                         <th id="id" style="width: 15%">Location Hierachy</th>
                                         <th id="id" style="width: 15%">Facilities Available</th>
+                                        <th id="id" style="width: 10%">State</th>
                                         <th id="id" ng-if="false"
                                             style="width: 10%">HFR Facility Id</th>
                                         <th id="id" ng-if="healthInfrastructure.currentUserRights.canEdit"
@@ -83,8 +97,8 @@
                                                 </li>
                                                 <li ng-if="hi.isconfirmationcenter">CP Confirmation Center
                                                 </li>
-                                                <!-- <li ng-if="hi.forncd">For NCD
-                                                </li> -->
+                                                <li ng-if="hi.forncd">For NCD
+                                                </li>
                                                 <li ng-if="hi.ischiranjeevischeme">Chiranjivi Yojana
                                                 </li>
                                                 <li ng-if="hi.isbalsakha1">Balsakha-1
@@ -127,18 +141,38 @@
                                             </span>
                                         </td>
                                         <td
-                                            ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility && hi.hfrfacilityid">
+                                            ng-if="false">
                                             {{hi.hfrfacilityid}}</td>
-                                        <!-- <td
-                                            ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility && !hi.hfrfacilityid">
+                                            <td>
+                                                {{hi.state}}
+                                            </td>
+                                        <td
+                                            ng-if="false">
                                             <button class="btn btn-primary"
                                                 ng-click="healthInfrastructure.showModal(hi)">Link Facility
                                                 (HFR)</button>
-                                        </td> -->
-                                        <td class="action-cell" ng-if="healthInfrastructure.currentUserRights.canEdit">
-                                            <ul class="action-item">
+                                        </td>
+                                        <td class="action-cell">
+                                            <ul class="action-item"
+                                                ng-if="healthInfrastructure.currentUserRights.canEdit">
                                                 <li ng-click="healthInfrastructure.navigateToEdit(hi.id)"><a
                                                         class="action-icon edit-icon"></a></li>
+
+                                                <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <a href="#" class="action-icon more-icon"></a>
+                                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                        aria-labelledby="moreDropdown">
+                                                        <li>
+                                                            <a href="javascript:void(0)"
+                                                                ng-click="healthInfrastructure.toggleActive(hi)">
+                                                                <strong>Mark as </strong> {{hi.state ==
+                                                                'ACTIVE'
+                                                                ? 'Inactive'
+                                                                : 'Active'}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -167,8 +201,8 @@
                                         <th id="id" style="width: 15%">Address</th>
                                         <th id="id" style="width: 15%">Location Hierachy</th>
                                         <th id="id" style="width: 15%">Facilities Available</th>
-                                        <th id="id" ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility"
-                                            style="width: 10%">HFR Facility Id</th>
+                                        <th id="id" style="width: 10%">State</th>
+                                        <th id="id" ng-if="false" style="width: 10%">HFR Facility Id</th>
                                         <th id="id" ng-if="healthInfrastructure.currentUserRights.canEdit"
                                             style="width: 5%;">
                                             Actions
@@ -250,18 +284,38 @@
                                             </span>
                                         </td>
                                         <td
-                                            ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility && hi.hfrfacilityid">
+                                            ng-if="false">
                                             {{hi.hfrfacilityid}}</td>
+                                            <td>
+                                                {{hi.state}}
+                                            </td>
                                         <td
-                                            ng-if="healthInfrastructure.currentUserRights.canLinkHfrFacility && !hi.hfrfacilityid">
+                                            ng-if="false">
                                             <button class="btn btn-primary"
                                                 ng-click="healthInfrastructure.showModal(hi)">Link Facility
                                                 (HFR)</button>
                                         </td>
-                                        <td class="action-cell" ng-if="healthInfrastructure.currentUserRights.canEdit">
-                                            <ul class="action-item">
+                                        <td class="action-cell">
+                                            <ul class="action-item"
+                                                ng-if="healthInfrastructure.currentUserRights.canEdit">
                                                 <li ng-click="healthInfrastructure.navigateToEdit(hi.id)"><a
                                                         class="action-icon edit-icon"></a></li>
+
+                                                <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <a href="#" class="action-icon more-icon"></a>
+                                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                        aria-labelledby="moreDropdown">
+                                                        <li>
+                                                            <a href="javascript:void(0)"
+                                                                ng-click="healthInfrastructure.toggleActive(hi)">
+                                                                <strong>Mark as </strong> {{hi.state ==
+                                                                'ACTIVE'
+                                                                ? 'Inactive'
+                                                                : 'Active'}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
                                             </ul>
                                         </td>
                                     </tr>

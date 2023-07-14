@@ -130,171 +130,173 @@
                 });
             }).then((response) => {
                 managepnccontroller.institutes = response.result
-                // return AnganwadiService.searchMembers($stateParams.id);
-            }).then((response) => {
-                managepnccontroller.managePncObject.uniqueHealthId = response.uniqueHealthId;
-                managepnccontroller.managePncObject.motherMobileNumber = response.mobileNumber;
-                managepnccontroller.managePncObject.memberId = response.id;
-                managepnccontroller.managePncObject.motherDetails.motherId = response.id;
-                managepnccontroller.managePncObject.motherDetails.familyPlanningMethod = response.lastMethodOfContraception;
-                managepnccontroller.managePncObject.familyId = response.fid;
-                managepnccontroller.managePncObject.familyUniqueId = response.familyId;
-                managepnccontroller.managePncObject.locationId = response.areaId == null ? response.locationId : response.areaId;
-                managepnccontroller.managePncObject.areaId = response.areaId !== null ? response.areaId : null;
-                managepnccontroller.managePncObject.memberStatus = "AVAILABLE";
-                managepnccontroller.managePncObject.isFromWeb = true;
-                managepnccontroller.managePncObject.memberName = response.firstName + " " + response.middleName + " " + response.lastName;
-                managepnccontroller.managePncObject.locationHierarchy = response.locationHierarchy;
-                managepnccontroller.managePncObject.bplFlag = response.bplFlag ? 'Yes' : 'No';
-                managepnccontroller.managePncObject.caste = response.caste;
-                managepnccontroller.managePncObject.benefits = [];
-                managepnccontroller.managePncObject.additionalInfo = JSON.parse(response.additionalInfo);
-                managepnccontroller.managePncObject.motherDetails.dateOfDelivery = response.lastDeliveryDate;
-                managepnccontroller.managePncObject.motherDetails.dateOfDeliveryDisplay = moment(managepnccontroller.managePncObject.motherDetails.dateOfDelivery).format("DD-MM-YYYY");
-                if (managepnccontroller.managePncObject.additionalInfo != null && managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate != null) {
-                    managepnccontroller.minDeathDate = moment(managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate);
-                    if (moment(managepnccontroller.managePncObject.motherDetails.dateOfDelivery).isSame(moment(managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate).format("YYYY-MM-DD"))) {
-                        managepnccontroller.minServiceDate = moment(managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate);
-                    } else {
-                        managepnccontroller.minServiceDate = moment(managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate).add(1, 'days');
-                        if (moment(managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate).isSame(moment(), 'day')) {
-                            return Promise.reject({ data: { message: 'PNC Visit for this member has already been done today.' } });
-                        }
-                    }
-                } else {
-                    managepnccontroller.minServiceDate = managepnccontroller.managePncObject.motherDetails.dateOfDelivery
-                    managepnccontroller.minDeathDate = managepnccontroller.minServiceDate;
-                }
-                if (managepnccontroller.minServiceDate != null && managepnccontroller.minServiceDate < (moment().subtract(15, 'days'))) {
-                    managepnccontroller.minServiceDate = moment().subtract(15, 'days')
-                }
-                if (response.isChiranjeeviYojnaBeneficiary) {
-                    managepnccontroller.managePncObject.benefits.push('Chiranjeevi Yojna');
-                }
-                if (response.isIayBeneficiary) {
-                    managepnccontroller.managePncObject.benefits.push('IAY');
-                }
-                if (response.isJsyBeneficiary) {
-                    managepnccontroller.managePncObject.benefits.push("JSY");
-                }
-                if (response.isKpsyBeneficiary) {
-                    managepnccontroller.managePncObject.benefits.push("KPSY");
-                }
-                if (managepnccontroller.managePncObject.benefits.length === 0) {
-                    managepnccontroller.managePncObject.benefits = "None"
-                } else {
-                    managepnccontroller.managePncObject.benefits = managepnccontroller.managePncObject.benefits.join();
-                }
-                if (managepnccontroller.managePncObject.motherDetails.dateOfDelivery != null) {
-                    var dateDiff = managepnccontroller.dateDiffInDays(new Date(managepnccontroller.managePncObject.motherDetails.dateOfDelivery), new Date());
-                    if (dateDiff <= 6) {
-                        managepnccontroller.managePncObject.pncNo = "1"
-                    } else if (dateDiff >= 7 && dateDiff <= 13) {
-                        managepnccontroller.managePncObject.pncNo = "2"
-                    } else if (dateDiff >= 14 && dateDiff <= 20) {
-                        managepnccontroller.managePncObject.pncNo = "3"
-                    } else if (dateDiff >= 21 && dateDiff <= 27) {
-                        managepnccontroller.managePncObject.pncNo = "4"
-                    } else if (dateDiff >= 28 && dateDiff <= 41) {
-                        managepnccontroller.managePncObject.pncNo = "5"
-                    } else if (dateDiff >= 42 && dateDiff <= 60) {
-                        managepnccontroller.managePncObject.pncNo = "6"
-                    }
-                }
-                let dtoList = [];
-                if (response.locationId != null) {
-                    var fhwDto = {
-                        code: 'retrieve_worker_info_by_location_id',
-                        parameters: {
-                            locationId: response.locationId
-                        },
-                        sequence: 1
-                    };
-                    dtoList.push(fhwDto);
-                }
-                if (response.areaId != null) {
-                    var ashaDto = {
-                        code: 'retrieve_worker_info_by_location_id',
-                        parameters: {
-                            locationId: Number(response.areaId)
-                        },
-                        sequence: 2
-                    };
-                    dtoList.push(ashaDto);
-                }
-                return QueryDAO.executeAll(dtoList);
-            }).then((response) => {
-                if (response[0] != null && response[0].result[0].workerDetails != null) {
-                    var fhwJson = JSON.parse(response[0].result[0].workerDetails);
-                    managepnccontroller.managePncObject.fhwName = fhwJson[0].name
-                    managepnccontroller.managePncObject.fhwNumber = fhwJson[0].mobileNumber;
-                }
-                if (response[1] != null && response[1].result[0].workerDetails != null) {
-                    var ashaJson = JSON.parse(response[1].result[0].workerDetails);
-                    managepnccontroller.managePncObject.ashaName = ashaJson[0].name
-                    managepnccontroller.managePncObject.ashaNumber = ashaJson[0].mobileNumber;
-                }
-                return QueryDAO.execute({
-                    code: 'pnc_retrieve_childs_by_member_id',
-                    parameters: {
-                        memberId: Number($stateParams.id)
-                    }
-                });
-            }).then((response) => {
-                managepnccontroller.managePncObject.childDetails = response.result;
-                managepnccontroller.managePncObject.childDetails.forEach((child) => {
-                    child.immunisationGiven = child.immunisation_given != null ? child.immunisation_given : "";
-                    child.childId = child.id
-                    child.memberStatus = 'AVAILABLE';
-                });
-                managepnccontroller.getDueImmunisation();
-                let retrieveDataDtoList = [];
-                retrieveDataDtoList.push({
-                    code: 'fetch_listvalue_detail_from_field',
-                    parameters: {
-                        field: 'deathReasonsFhwAnc'
-                    },
-                    sequence: 1
-                }, {
-                    code: 'fetch_listvalue_detail_from_field',
-                    parameters: {
-                        field: 'dangerSignsMotherFhwPnc'
-                    },
-                    sequence: 2
-                }, {
-                    code: 'fetch_listvalue_detail_from_field',
-                    parameters: {
-                        field: 'referralPlaceFhwAnc'
-                    },
-                    sequence: 3
-                }, {
-                    code: 'fetch_listvalue_detail_from_field',
-                    parameters: {
-                        field: 'deathReasonsChildFhwPnc'
-                    },
-                    sequence: 4
-                }, {
-                    code: 'fetch_listvalue_detail_from_field',
-                    parameters: {
-                        field: 'dangerSignsChildFhwPnc'
-                    },
-                    sequence: 5
-                }, {
-                    code: 'fetch_listvalue_detail_from_field',
-                    parameters: {
-                        field: 'Health Infrastructure Type'
-                    },
-                    sequence: 5
-                });
-                return QueryDAO.executeAll(retrieveDataDtoList);
-            }).then((response) => {
-                managepnccontroller.motherDeathReasons = response[0].result;
-                managepnccontroller.motherDangerSigns = response[1].result;
-                managepnccontroller.referralPlaces = response[2].result;
-                managepnccontroller.childDeathReasons = response[3].result;
-                managepnccontroller.childDangerSigns = response[4].result;
-                managepnccontroller.institutionTypes = response[5].result;
-            }).catch((error) => {
+                return AnganwadiService.searchMembers($stateParams.id);
+            })
+            // .then((response) => {
+            //     managepnccontroller.managePncObject.uniqueHealthId = response.uniqueHealthId;
+            //     managepnccontroller.managePncObject.motherMobileNumber = response.mobileNumber;
+            //     managepnccontroller.managePncObject.memberId = response.id;
+            //     managepnccontroller.managePncObject.motherDetails.motherId = response.id;
+            //     managepnccontroller.managePncObject.motherDetails.familyPlanningMethod = response.lastMethodOfContraception;
+            //     managepnccontroller.managePncObject.familyId = response.fid;
+            //     managepnccontroller.managePncObject.familyUniqueId = response.familyId;
+            //     managepnccontroller.managePncObject.locationId = response.areaId == null ? response.locationId : response.areaId;
+            //     managepnccontroller.managePncObject.areaId = response.areaId !== null ? response.areaId : null;
+            //     managepnccontroller.managePncObject.memberStatus = "AVAILABLE";
+            //     managepnccontroller.managePncObject.isFromWeb = true;
+            //     managepnccontroller.managePncObject.memberName = response.firstName + " " + response.middleName + " " + response.lastName;
+            //     managepnccontroller.managePncObject.locationHierarchy = response.locationHierarchy;
+            //     managepnccontroller.managePncObject.bplFlag = response.bplFlag ? 'Yes' : 'No';
+            //     managepnccontroller.managePncObject.caste = response.caste;
+            //     managepnccontroller.managePncObject.benefits = [];
+            //     managepnccontroller.managePncObject.additionalInfo = JSON.parse(response.additionalInfo);
+            //     managepnccontroller.managePncObject.motherDetails.dateOfDelivery = response.lastDeliveryDate;
+            //     managepnccontroller.managePncObject.motherDetails.dateOfDeliveryDisplay = moment(managepnccontroller.managePncObject.motherDetails.dateOfDelivery).format("DD-MM-YYYY");
+            //     if (managepnccontroller.managePncObject.additionalInfo != null && managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate != null) {
+            //         managepnccontroller.minDeathDate = moment(managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate);
+            //         if (moment(managepnccontroller.managePncObject.motherDetails.dateOfDelivery).isSame(moment(managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate).format("YYYY-MM-DD"))) {
+            //             managepnccontroller.minServiceDate = moment(managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate);
+            //         } else {
+            //             managepnccontroller.minServiceDate = moment(managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate).add(1, 'days');
+            //             if (moment(managepnccontroller.managePncObject.additionalInfo.lastServiceLongDate).isSame(moment(), 'day')) {
+            //                 return Promise.reject({ data: { message: 'PNC Visit for this member has already been done today.' } });
+            //             }
+            //         }
+            //     } else {
+            //         managepnccontroller.minServiceDate = managepnccontroller.managePncObject.motherDetails.dateOfDelivery
+            //         managepnccontroller.minDeathDate = managepnccontroller.minServiceDate;
+            //     }
+            //     if (managepnccontroller.minServiceDate != null && managepnccontroller.minServiceDate < (moment().subtract(15, 'days'))) {
+            //         managepnccontroller.minServiceDate = moment().subtract(15, 'days')
+            //     }
+            //     if (response.isChiranjeeviYojnaBeneficiary) {
+            //         managepnccontroller.managePncObject.benefits.push('Chiranjeevi Yojna');
+            //     }
+            //     if (response.isIayBeneficiary) {
+            //         managepnccontroller.managePncObject.benefits.push('IAY');
+            //     }
+            //     if (response.isJsyBeneficiary) {
+            //         managepnccontroller.managePncObject.benefits.push("JSY");
+            //     }
+            //     if (response.isKpsyBeneficiary) {
+            //         managepnccontroller.managePncObject.benefits.push("KPSY");
+            //     }
+            //     if (managepnccontroller.managePncObject.benefits.length === 0) {
+            //         managepnccontroller.managePncObject.benefits = "None"
+            //     } else {
+            //         managepnccontroller.managePncObject.benefits = managepnccontroller.managePncObject.benefits.join();
+            //     }
+            //     if (managepnccontroller.managePncObject.motherDetails.dateOfDelivery != null) {
+            //         var dateDiff = managepnccontroller.dateDiffInDays(new Date(managepnccontroller.managePncObject.motherDetails.dateOfDelivery), new Date());
+            //         if (dateDiff <= 6) {
+            //             managepnccontroller.managePncObject.pncNo = "1"
+            //         } else if (dateDiff >= 7 && dateDiff <= 13) {
+            //             managepnccontroller.managePncObject.pncNo = "2"
+            //         } else if (dateDiff >= 14 && dateDiff <= 20) {
+            //             managepnccontroller.managePncObject.pncNo = "3"
+            //         } else if (dateDiff >= 21 && dateDiff <= 27) {
+            //             managepnccontroller.managePncObject.pncNo = "4"
+            //         } else if (dateDiff >= 28 && dateDiff <= 41) {
+            //             managepnccontroller.managePncObject.pncNo = "5"
+            //         } else if (dateDiff >= 42 && dateDiff <= 60) {
+            //             managepnccontroller.managePncObject.pncNo = "6"
+            //         }
+            //     }
+            //     let dtoList = [];
+            //     if (response.locationId != null) {
+            //         var fhwDto = {
+            //             code: 'retrieve_worker_info_by_location_id',
+            //             parameters: {
+            //                 locationId: response.locationId
+            //             },
+            //             sequence: 1
+            //         };
+            //         dtoList.push(fhwDto);
+            //     }
+            //     if (response.areaId != null) {
+            //         var ashaDto = {
+            //             code: 'retrieve_worker_info_by_location_id',
+            //             parameters: {
+            //                 locationId: Number(response.areaId)
+            //             },
+            //             sequence: 2
+            //         };
+            //         dtoList.push(ashaDto);
+            //     }
+            //     return QueryDAO.executeAll(dtoList);
+            // }).then((response) => {
+            //     if (response[0] != null && response[0].result[0].workerDetails != null) {
+            //         var fhwJson = JSON.parse(response[0].result[0].workerDetails);
+            //         managepnccontroller.managePncObject.fhwName = fhwJson[0].name
+            //         managepnccontroller.managePncObject.fhwNumber = fhwJson[0].mobileNumber;
+            //     }
+            //     if (response[1] != null && response[1].result[0].workerDetails != null) {
+            //         var ashaJson = JSON.parse(response[1].result[0].workerDetails);
+            //         managepnccontroller.managePncObject.ashaName = ashaJson[0].name
+            //         managepnccontroller.managePncObject.ashaNumber = ashaJson[0].mobileNumber;
+            //     }
+            //     return QueryDAO.execute({
+            //         code: 'pnc_retrieve_childs_by_member_id',
+            //         parameters: {
+            //             memberId: Number($stateParams.id)
+            //         }
+            //     });
+            // }).then((response) => {
+            //     managepnccontroller.managePncObject.childDetails = response.result;
+            //     managepnccontroller.managePncObject.childDetails.forEach((child) => {
+            //         child.immunisationGiven = child.immunisation_given != null ? child.immunisation_given : "";
+            //         child.childId = child.id
+            //         child.memberStatus = 'AVAILABLE';
+            //     });
+            //     managepnccontroller.getDueImmunisation();
+            //     let retrieveDataDtoList = [];
+            //     retrieveDataDtoList.push({
+            //         code: 'fetch_listvalue_detail_from_field',
+            //         parameters: {
+            //             field: 'deathReasonsFhwAnc'
+            //         },
+            //         sequence: 1
+            //     }, {
+            //         code: 'fetch_listvalue_detail_from_field',
+            //         parameters: {
+            //             field: 'dangerSignsMotherFhwPnc'
+            //         },
+            //         sequence: 2
+            //     }, {
+            //         code: 'fetch_listvalue_detail_from_field',
+            //         parameters: {
+            //             field: 'referralPlaceFhwAnc'
+            //         },
+            //         sequence: 3
+            //     }, {
+            //         code: 'fetch_listvalue_detail_from_field',
+            //         parameters: {
+            //             field: 'deathReasonsChildFhwPnc'
+            //         },
+            //         sequence: 4
+            //     }, {
+            //         code: 'fetch_listvalue_detail_from_field',
+            //         parameters: {
+            //             field: 'dangerSignsChildFhwPnc'
+            //         },
+            //         sequence: 5
+            //     }, {
+            //         code: 'fetch_listvalue_detail_from_field',
+            //         parameters: {
+            //             field: 'Health Infrastructure Type'
+            //         },
+            //         sequence: 5
+            //     });
+            //     return QueryDAO.executeAll(retrieveDataDtoList);
+            // }).then((response) => {
+            //     managepnccontroller.motherDeathReasons = response[0].result;
+            //     managepnccontroller.motherDangerSigns = response[1].result;
+            //     managepnccontroller.referralPlaces = response[2].result;
+            //     managepnccontroller.childDeathReasons = response[3].result;
+            //     managepnccontroller.childDangerSigns = response[4].result;
+            //     managepnccontroller.institutionTypes = response[5].result;
+            // })
+            .catch((error) => {
                 // GeneralUtil.showMessageOnApiCallFailure(error);
                 $state.go('techo.manage.pncSearch');
             }).finally(() => {

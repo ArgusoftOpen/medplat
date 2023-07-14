@@ -142,8 +142,8 @@ INSERT INTO public.location_master(
 
 -- Enter data in um_role_master
 INSERT INTO public.um_role_master
-    (created_by, created_on, name, state, role_type)
-    VALUES (-1, now(),'SUPERADMIN', 'ACTIVE', 'BOTH');
+    (created_by, created_on, name, state, is_last_name_mandatory, role_type)
+    VALUES (-1, now(),'SUPERADMIN', 'ACTIVE', 'True','BOTH');
 
 -- Enter data in um_user
 INSERT INTO public.um_user(
