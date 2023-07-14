@@ -19,9 +19,9 @@
                         </div>
                     </div>
                     <div class="col-12 ">
-                        <div class="cst-table table-responsive">
+                        <div class="cst-table table-responsive" style="overflow: auto;max-height: calc(100vh - 192px);"
+                        id="report-scroll">
                             <table class="table table-sm table-striped table-bordered header-fixed"
-                                infinite-scroll-distance="0" infinite-scroll='report.retrieveAll()'
                                 ng-if="report.reports.length > 0">
                                 <thead>
                                     <tr>
@@ -43,7 +43,9 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                infinite-scroll='report.retrieveAll()'
+                                infinite-scroll-container='"#report-scroll"' infinite-scroll-immediate-check="false">
                                     <tr ng-repeat="reportObject in report.reports">
                                         <td>
                                             <a ng-if="reportObject.reportType === 'DYNAMIC'" href="javascript:void(0)"
