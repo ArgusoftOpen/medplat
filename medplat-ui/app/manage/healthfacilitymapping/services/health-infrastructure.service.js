@@ -12,6 +12,12 @@
                 params: {
                     action: 'deleteHealthInfra'
                 }
+            },
+            toggleActive: {
+                method: 'POST',
+                params: {
+                    action: 'toggleactive'
+                }
             }
         });
         return {
@@ -26,6 +32,9 @@
             },
             deleteHealthInfra: function (id) {
                 return api.deleteHealthInfra(id).$promise;
+            },
+            toggleActive: function (id, state) {
+                return api.toggleActive({id:id,state:state},{}).$promise;
             }
         };
     }

@@ -317,4 +317,14 @@ public class HealthInfrastructureDetailsDaoImpl extends GenericDaoImpl<HealthInf
         return query.uniqueResult();
     }
 
+    @Override
+    public void toggleActive(Integer healthInfraId, String state) {
+        String Newstate = state.equals("ACTIVE")?"INACTIVE":"ACTIVE";
+        String query = "update health_infrastructure_details set state = :state where id = :id ";
+        NativeQuery<Integer> q = getCurrentSession().createNativeQuery(query);
+        q.setParameter("state", Newstate)
+                .setParameter("id", healthInfraId);
+        q.executeUpdate();
+    }
+
 }

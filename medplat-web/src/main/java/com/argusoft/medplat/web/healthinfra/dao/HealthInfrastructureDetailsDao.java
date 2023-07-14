@@ -70,4 +70,6 @@ public interface HealthInfrastructureDetailsDao extends GenericDao<HealthInfrast
 
     HealthInfrastructureDetails getHealthInfraByMemberIdAndType(String type, Integer memberId);
 
+    void toggleActive(Integer healthInfraId, String state);
+
 }
