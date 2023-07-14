@@ -1,6 +1,6 @@
 /* global moment */
 (function () {
-    function ManageWpdController($stateParams,$state, $uibModal, Mask, QueryDAO, ManageWpdDAO, toaster, NdhmHipUtilService, AuthenticateService, GeneralUtil, SelectizeGenerator, IMMUNISATIONS, NdhmHipDAO, $filter) {
+    function ManageWpdController($stateParams,$state, $uibModal, Mask, QueryDAO, ManageWpdDAO, toaster, AuthenticateService, GeneralUtil, SelectizeGenerator, IMMUNISATIONS, $filter) {
         var managewpdcontroller = this;
         managewpdcontroller.immunisations = IMMUNISATIONS;
         managewpdcontroller.motherReferralPlaces = [];
@@ -256,10 +256,10 @@
                             }
                         });
                         modalInstance.result.then(() => {
-                            managewpdcontroller.handleLinkRecordInNdhm(response[0].motherId)
+                            // managewpdcontroller.handleLinkRecordInNdhm(response[0].motherId)
                         });
                     } else {
-                        managewpdcontroller.handleLinkRecordInNdhm(managewpdcontroller.manageWpdObject.memberId);
+                        // managewpdcontroller.handleLinkRecordInNdhm(managewpdcontroller.manageWpdObject.memberId);
                     }
                 }).catch((error) => {
                     GeneralUtil.showMessageOnApiCallFailure(error);
@@ -268,42 +268,42 @@
             }
         };
 
-        managewpdcontroller.handleLinkRecordInNdhm = (memberId) => {
-            if (managewpdcontroller.rights && managewpdcontroller.rights.isShowHIPModal) {
-                Mask.show();
-                managewpdcontroller.showDeathInstitutes = false;
-                QueryDAO.execute({
-                    code: 'get_wpd_id_by_member_id_and_delivery_date',
-                    parameters: {
-                        memberId: memberId
-                    }
-                }).then((res) => {
-                    let memberObj = {
-                        memberId: managewpdcontroller.manageWpdObject.memberId,
-                        mobileNumber: managewpdcontroller.manageWpdObject.mobileNumber,
-                        name: managewpdcontroller.manageWpdObject.name,
-                        preferredHealthId: managewpdcontroller.prefferedHealthId,
-                        healthIdsData: managewpdcontroller.healthIdsData
-                    }
-                    let dataForConsentRequest = {
-                        title: "Link WPD Discharge Summary To PHR Address",
-                        memberObj: memberObj,
-                        consentRecord: "(WPD Discharge Summary " + $filter('date')(managewpdcontroller.manageWpdObject.deliveryDate, "dd-MM-yyyy") + ")",
-                        serviceType: "WPD_DISCHARGE_SUMMARY",
-                        serviceId: res.result[0].id,
-                        isTokenGenerate: true,
-                        careContextName: "WPD Discharge Summary"
-                    }
-                    NdhmHipUtilService.handleLinkRecordInNdhm(dataForConsentRequest, 'techo.manage.wpdSearch');
-                }).catch((error) => {
-                    GeneralUtil.showMessageOnApiCallFailure(error);
-                }).finally(() => {
-                    Mask.hide();
-                });
-            } else {
-                $state.go('techo.manage.wpdSearch');
-            }
-        }
+        // managewpdcontroller.handleLinkRecordInNdhm = (memberId) => {
+        //     if (managewpdcontroller.rights && managewpdcontroller.rights.isShowHIPModal) {
+        //         Mask.show();
+        //         managewpdcontroller.showDeathInstitutes = false;
+        //         QueryDAO.execute({
+        //             code: 'get_wpd_id_by_member_id_and_delivery_date',
+        //             parameters: {
+        //                 memberId: memberId
+        //             }
+        //         }).then((res) => {
+        //             let memberObj = {
+        //                 memberId: managewpdcontroller.manageWpdObject.memberId,
+        //                 mobileNumber: managewpdcontroller.manageWpdObject.mobileNumber,
+        //                 name: managewpdcontroller.manageWpdObject.name,
+        //                 preferredHealthId: managewpdcontroller.prefferedHealthId,
+        //                 healthIdsData: managewpdcontroller.healthIdsData
+        //             }
+        //             let dataForConsentRequest = {
+        //                 title: "Link WPD Discharge Summary To PHR Address",
+        //                 memberObj: memberObj,
+        //                 consentRecord: "(WPD Discharge Summary " + $filter('date')(managewpdcontroller.manageWpdObject.deliveryDate, "dd-MM-yyyy") + ")",
+        //                 serviceType: "WPD_DISCHARGE_SUMMARY",
+        //                 serviceId: res.result[0].id,
+        //                 isTokenGenerate: true,
+        //                 careContextName: "WPD Discharge Summary"
+        //             }
+        //             NdhmHipUtilService.handleLinkRecordInNdhm(dataForConsentRequest, 'techo.manage.wpdSearch');
+        //         }).catch((error) => {
+        //             GeneralUtil.showMessageOnApiCallFailure(error);
+        //         }).finally(() => {
+        //             Mask.hide();
+        //         });
+        //     } else {
+        //         $state.go('techo.manage.wpdSearch');
+        //     }
+        // }
 
         managewpdcontroller.deliveryPlaceChanged = () => {
             managewpdcontroller.manageWpdObject.institute = null;
@@ -356,8 +356,8 @@
             let selectizeObject = SelectizeGenerator.generateUserSelectize();
             managewpdcontroller.selectizeOptions = selectizeObject.config;
             managewpdcontroller.manageWpdObject.startDate = new Date();
-            managewpdcontroller.manageWpdObject.deliveryTime = new Date(2000, 0, 1, 12, 00, 00);
-            managewpdcontroller.manageWpdObject.dischargeTime = new Date(2000, 0, 1, 12, 00, 00);
+            managewpdcontroller.manageWpdObject.deliveryTime = new Date(2000, 0, 1, 12, 0, 00);
+            managewpdcontroller.manageWpdObject.dischargeTime = new Date(2000, 0, 1, 12, 0, 00);
             let search = {
                 byId: false,
                 byMemberId: true,
@@ -535,15 +535,15 @@
                     managewpdcontroller.manageWpdObject.ashaNumber = ashaJson[0].mobileNumber;
                 }
                 managewpdcontroller.institutes = response[11].result;
-                NdhmHipDAO.getAllCareContextMasterDetails(managewpdcontroller.manageWpdObject.memberId).then((res) => {
-                    if (res.length > 0) {
-                        managewpdcontroller.healthIdsData = res;
-                        managewpdcontroller.healthIds = res.filter(notFrefferedData => notFrefferedData.isPreferred === false).map(healthData => healthData.healthId).toString();
-                        let prefferedHealthIdData = res.find(healthData => healthData.isPreferred === true);
-                        managewpdcontroller.prefferedHealthId = prefferedHealthIdData && prefferedHealthIdData.healthId;
-                    }
-                }).catch((error) => {
-                })
+                // NdhmHipDAO.getAllCareContextMasterDetails(managewpdcontroller.manageWpdObject.memberId).then((res) => {
+                //     if (res.length > 0) {
+                //         managewpdcontroller.healthIdsData = res;
+                //         managewpdcontroller.healthIds = res.filter(notFrefferedData => notFrefferedData.isPreferred === false).map(healthData => healthData.healthId).toString();
+                //         let prefferedHealthIdData = res.find(healthData => healthData.isPreferred === true);
+                //         managewpdcontroller.prefferedHealthId = prefferedHealthIdData && prefferedHealthIdData.healthId;
+                //     }
+                // }).catch((error) => {
+                // })
                 AuthenticateService.getAssignedFeature("techo.manage.wpdSearch").then((res) => {
                     managewpdcontroller.rights = res.featureJson;
                     if (!managewpdcontroller.rights) {
