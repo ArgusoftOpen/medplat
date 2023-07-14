@@ -1575,7 +1575,8 @@
                         'query.service',
                         'ngInfiniteScroll',
                         'hospital-type-display-name.filter',
-                        'health-infrastructure-service'
+                        'health-infrastructure-service',
+                        'paging-for-query-builder.service'
                     ])
                 })
                 .state('techo.manage.healthinfrastructure', {
