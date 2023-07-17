@@ -111,12 +111,18 @@ INSERT INTO menu_config(id,feature_json,group_id,active,is_dynamic_report,menu_n
 ,(111,'{"isShowHIPModal": false, "isShowConsentList": false, "isShowHealthIdModal": true}',10,'True',NULL,'Institutional Delivery Reg. Form','techo.manage.wpdSearch',NULL,'manage',NULL,NULL,'417831e3-acb5-402a-bce4-60ce4dcc1087','e17d25bd-7371-4786-90b8-d91b325a4be4','f1444b6c-c6f2-4e50-9b6c-8a643b341edb',NULL)
 
 ,(347,'{}',24,'True',NULL,'Form Configurator','techo.admin.systemConstraints',NULL,'admin','True',NULL,NULL,NULL,NULL,NULL)
-
 ,(17,'{"canAdd":true,"canEdit":true,"canEditLGDCode":false}',NULL,'True',NULL,'Locations','techo.manage.location',NULL,'manage',NULL,NULL,'868bc0f6-a8fb-478a-8c43-e0c3fbcdf00f','ee39856f-faa8-43a2-9b86-5bbf6c167f78','118b1a05-a061-420a-91a6-0dd36a38ae47',NULL)
-
 ,(1,'{"canAdd":true,"canEdit":true,"canEditUserName":false,"canEditPassword":false}',NULL,'True',NULL,'Users','techo.manage.users',NULL,'manage',NULL,NULL,'72cb560b-be3c-4a05-90de-95802a221d78','dcebfd0b-1339-4129-8ae4-eb1222baa904','18ad0f19-096a-46f7-a2af-93a2d0b5b568',NULL)
+,(359,'{"canDrillDown":true}',NULL,'True','True','Mobile Menu Management','techo.manage.mobileMenuManagement',NULL,'admin',NULL,NULL,NULL,NULL,NULL,NULL),
+(86,'{"canDrillDown":true}',4,true,true,'High Risk Mother-Present Pregnancy Complication','techo.report.view({id:62})',NULL,'manage',NULL,NULL,'2ce1918d-5693-4f59-893b-858be10c2541','5bea3533-fc5e-48e3-b6ce-20da51d2fe9f','658dc2db-bb37-4ec0-8901-00e9fcb5fcd8',NULL),
+(93,'{"canDrillDown":true}',4,true,true,'Pregnant Women Report','techo.report.view({id:69})',NULL,'manage',NULL,NULL,'2270b36d-3479-497f-9663-ca3606387a66','ccb518ad-3f8c-4a47-9b05-0fbf49587c1b','1e627b4d-de7c-480e-9375-d5e6f44042fd',NULL),
+(79,'{"canDrillDown":true}',4,true,true,'Delivery monitoring of Registered LMP','techo.report.view({id:55})',NULL,'manage',NULL,NULL,'9630c951-9a3b-466a-9e32-b82795f2d60d','c9206c30-62b8-4671-a726-4fd04502015f','553edc6e-a109-4b6d-905f-3fed2ead32d3',NULL),
+(90,'{"canDrillDown":true}',4,true,true,'Maternal Service Delivery','techo.report.view({id:66})',NULL,'manage',NULL,NULL,'12ddf52c-103c-4ef2-b174-105851e206a9','37389191-ec41-443e-b57e-bb66cb36e3bc',NULL,NULL),
+(175,'{"canDrillDown":true}',4,true,true,'Maternal Health Services Provided During The Year (Monthly)','techo.report.view({id:344})',NULL,'manage',NULL,NULL,'0cbb5fea-fb01-49f1-8e3e-de6876d121f9','d63f14e9-a6e6-4f06-8e07-9c3a7ef7dd2c',NULL,NULL),
+(82,'{"canDrillDown":true}',4,true,true,'Report of Antenatal Corticosteroid (ANC)','techo.report.view({id:58})',NULL,'manage',NULL,NULL,'49417ecf-ce4c-4d84-abea-840f4ff1c856','b33d7ba5-4cf0-4f09-a428-e0f441a96895','a47f4fda-9ed0-4973-817c-2004d9286497',NULL),
+(80,'{"canDrillDown":true}',4,true,true,'High Risk Mother-Previous Pregnancy and Pre Existing Chronic Illness','techo.report.view({id:56})',NULL,'manage',NULL,NULL,'82c79746-a8aa-40fa-8042-2e0dcfd7517a','1abbfafb-342b-4cbc-a651-bb0447a0456f','d536f3c6-d0db-4db8-af1f-a445492860cd',NULL),
+(81,'{"canDrillDown":true}',4,true,true,'LMP Based Pregnant Women Reg. for ANC Services','techo.report.view({id:57})',NULL,'manage',NULL,NULL,'c8e7b31f-44b8-4278-9c1d-de837cf47455','4a65200b-e248-4824-b1a0-782e97b8a104',NULL,NULL);
 
-,(359,'{"canDrillDown":true}',NULL,'True','True','Mobile Menu Management','techo.manage.mobileMenuManagement',NULL,'admin',NULL,NULL,NULL,NULL,NULL,NULL);
 
 
 DELETE FROM public.um_user_location WHERE
