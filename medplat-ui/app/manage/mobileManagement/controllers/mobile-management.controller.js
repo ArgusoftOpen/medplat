@@ -21,9 +21,9 @@
             }, GeneralUtil.showMessageOnApiCallFailure).finally(function () {
                 Mask.hide();
             });
-            if (ctrl.userName == null) {
-                ctrl.toggleFilter();
-            }
+            // if (ctrl.userName == null) {
+            //     ctrl.toggleFilter();
+            // }
             ctrl.getLoggedInUserId();
         };
 
