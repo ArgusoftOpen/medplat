@@ -255,9 +255,9 @@
                                 }
                             }
                         });
-                        // modalInstance.result.then(() => {
+                         modalInstance.result.then(() => {
                         //     managewpdcontroller.handleLinkRecordInNdhm(response[0].motherId)
-                        // });
+                        });
                     } else {
                         // managewpdcontroller.handleLinkRecordInNdhm(managewpdcontroller.manageWpdObject.memberId);
                     }
