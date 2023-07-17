@@ -22,7 +22,7 @@
                 Mask.hide();
             });
             // if (ctrl.userName == null) {
-            //     ctrl.toggleFilter();
+            //    ctrl.toggleFilter();
             // }
             ctrl.getLoggedInUserId();
         };
