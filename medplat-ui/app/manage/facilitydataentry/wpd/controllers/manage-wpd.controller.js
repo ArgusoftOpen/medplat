@@ -255,8 +255,8 @@
                                 }
                             }
                         });
-                         modalInstance.result.then(() => {
-                        //     managewpdcontroller.handleLinkRecordInNdhm(response[0].motherId)
+                        modalInstance.result.then(() => {
+                            // managewpdcontroller.handleLinkRecordInNdhm(response[0].motherId)
                         });
                     } else {
                         // managewpdcontroller.handleLinkRecordInNdhm(managewpdcontroller.manageWpdObject.memberId);
@@ -356,8 +356,8 @@
             let selectizeObject = SelectizeGenerator.generateUserSelectize();
             managewpdcontroller.selectizeOptions = selectizeObject.config;
             managewpdcontroller.manageWpdObject.startDate = new Date();
-            managewpdcontroller.manageWpdObject.deliveryTime = new Date(2000, 0, 1, 12, 00, 00);
-            managewpdcontroller.manageWpdObject.dischargeTime = new Date(2000, 0, 1, 12, 00, 00);
+            managewpdcontroller.manageWpdObject.deliveryTime = new Date(2000, 0, 1, 12, 0, 00);
+            managewpdcontroller.manageWpdObject.dischargeTime = new Date(2000, 0, 1, 12, 0, 00);
             let search = {
                 byId: false,
                 byMemberId: true,
