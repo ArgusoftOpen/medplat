@@ -46139,41 +46139,44 @@ where (#from_date# is not null and created_on >=(case when #from_date# is null t
 and (#to_date# is not null and created_on <(case when #to_date# is null then ''01/01/1970'' else (date (case when #to_date# is null then ''01/01/1970'' else ''#to_date#'' end) + integer ''1'')end)\:\:Date)
 and extract (year from age(date_of_delivery)) between 0 and 1
 group by lhcd.parent_id,parent.name ) res',true,'ACTIVE','6ea2778c-f338-43ea-8df6-3d79922dea45'),
-	 (81,1027,'2018-09-21 17:39:12.491',1,'2021-01-13 20:22:06.427965','limit_offset,loggedInUserId,location_id','with prefered_language as(
-select (case 
-		when report_preferred_language = ''EN'' then true  
-		else false 
-	end) as is_enlish 
+	 (81,1027,'2018-09-21 17:39:12.491',1,'2023-07-17 15:23:34.634','limit_offset,loggedInUserId,location_id','with prefered_language as(
+select (case
+		when report_preferred_language = ''EN'' then true
+		else false
+	end) as is_enlish
 from um_user where id = #loggedInUserId#)
 ,pregnancy_analytics_details as(
-select * 
+select *
 from rch_pregnancy_analytics_details
 where rch_pregnancy_analytics_details.member_basic_state in (''NEW'',''VERIFIED'',''REVERIFICATION'')
 and rch_pregnancy_analytics_details.preg_reg_state in (''PENDING'',''PREGNANT'')
-and rch_pregnancy_analytics_details.member_current_location_id 
+and rch_pregnancy_analytics_details.member_current_location_id
 in (select child_id from location_hierchy_closer_det where parent_id = #location_id#)
-order by rch_pregnancy_analytics_details.lmp_date 
+order by rch_pregnancy_analytics_details.lmp_date
 #limit_offset#
-),member_location_detail as(
+),member_location_detail as (
 select loc.id as loc_id,
-case when ( prefered_language.is_enlish and (lm1.english_name is not null)) then lm1.english_name else lm1.name end as level1,
-case when ( prefered_language.is_enlish and (lm2.english_name is not null)) then lm2.english_name else lm2.name end as level2,
-case when ( prefered_language.is_enlish and (lm3.english_name is not null)) then lm3.english_name else lm3.name end as level3,
- case when ( prefered_language.is_enlish and (lm4.english_name is not null)) then lm4.english_name else lm4.name end  as level4,
- case when ( prefered_language.is_enlish and (lm5.english_name is not null)) then lm5.english_name else lm5.name end as level5
-, case when ( prefered_language.is_enlish and (lm6.english_name is not null)) then lm6.english_name else lm6.name end as level6
-, case when ( prefered_language.is_enlish and (loc.english_name is not null)) then loc.english_name else loc.name end as loc_name
-from location_level_hierarchy_master llhm
-inner join location_master loc on loc.id = llhm.location_id
-left join location_master lm1 on lm1.id = llhm.level1
-left join location_master lm2 on lm2.id = llhm.level3
-left join location_master lm3 on lm3.id = llhm.level4
-left join location_master lm4 on lm4.id = llhm.level5
-left join location_master lm5 on lm5.id = llhm.level6
-left join location_master lm6 on lm6.id = llhm.level6 cross join prefered_language
-where llhm.location_id in (select distinct member_current_location_id from pregnancy_analytics_details)
+STRING_AGG(case when ( prefered_language.is_enlish and (lm1.english_name is not null)) then lm1.english_name else lm1.name end,'''') as level1,
+STRING_AGG(case when ( prefered_language.is_enlish and (lm2.english_name is not null)) then lm2.english_name else lm2.name end,'''') as level2,
+STRING_AGG(case when ( prefered_language.is_enlish and (lm3.english_name is not null)) then lm3.english_name else lm3.name end,'''') as level3,
+STRING_AGG(case when ( prefered_language.is_enlish and (lm4.english_name is not null)) then lm4.english_name else lm4.name end,'''')  as level4,
+STRING_AGG(case when ( prefered_language.is_enlish and (lm5.english_name is not null)) then lm5.english_name else lm5.name end,'''') as level5,
+STRING_AGG(case when ( prefered_language.is_enlish and (lm6.english_name is not null)) then lm6.english_name else lm6.name end,'''') as level6,
+STRING_AGG(case when ( prefered_language.is_enlish and (lm7.english_name is not null)) then lm7.english_name else lm7.name end,'''') as level7,
+case when ( prefered_language.is_enlish and (loc.english_name is not null)) then loc.english_name else loc.name end as loc_name
+from location_hierchy_closer_det lhcd
+inner join location_master loc on loc.id = lhcd.child_id
+left join location_master lm1 on lm1.id = lhcd.parent_id and lhcd.depth = 0
+left join location_master lm2 on lm2.id = lhcd.parent_id and lhcd.depth = 1
+left join location_master lm3 on lm3.id = lhcd.parent_id and lhcd.depth = 2
+left join location_master lm4 on lm4.id = lhcd.parent_id and lhcd.depth = 3
+left join location_master lm5 on lm5.id = lhcd.parent_id and lhcd.depth = 4
+left join location_master lm6 on lm6.id = lhcd.parent_id and lhcd.depth = 5
+left join location_master lm7 on lm7.id = lhcd.parent_id and lhcd.depth = 6 cross join prefered_language
+where lhcd.child_id in (select distinct child_id from location_hierchy_closer_det where parent_id = 3)
+	group by loc_id,loc_name
 ),asha_det as(
-select distinct um_user_location.loc_id,um_user.first_name || '' '' || um_user.last_name as asha_name 
+select distinct um_user_location.loc_id,um_user.first_name || '' '' || um_user.last_name as asha_name
 ,um_user.contact_number
 from um_user_location,um_user
 where um_user_location.loc_id in(select distinct member_current_location_id from pregnancy_analytics_details)
@@ -46199,8 +46202,8 @@ case when anc4 is not null then  to_char(anc4,''DD/MM/YYYY'') else ''NA'' end as
 case when tt1_given is not null then  to_char(tt1_given,''DD/MM/YYYY'') else ''NA'' end as "TT1",
 case when tt2_tt_booster_given is not null then  to_char(tt2_tt_booster_given,''DD/MM/YYYY'') else ''NA'' end as "TT2_TT_Booster",
 case when asha_det.asha_name is not null then asha_det.asha_name else ''NA'' end as "Asha Name",
-case when asha_det.contact_number is not null then asha_det.contact_number else ''NA''  end as "Asha Mobile No" 
-from 
+case when asha_det.contact_number is not null then asha_det.contact_number else ''NA''  end as "Asha Mobile No"
+from
 pregnancy_analytics_details
 inner join imt_member on imt_member.id = pregnancy_analytics_details.member_id
 inner join imt_family on imt_family.family_id = imt_member.family_id
