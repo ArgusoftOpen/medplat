@@ -219,7 +219,7 @@
 
         this.initPage = function () {
             ctrl.pagingService = PagingForQueryBuilderService.initialize();
-            ctrl.getTrainingStatuses();
+            // ctrl.getTrainingStatuses();
             // ctrl.getModuleConstants();
         };
 
