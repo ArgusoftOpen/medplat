@@ -3,13 +3,13 @@ FROM ubuntu:22.04
 
 # Update packages and install necessary tools
 RUN apt-get update -y \
-    && apt-get install -y wget curl git unzip
+    && apt-get install -y wget curl git unzip 
 
 # Create directory for Java and navigate to it
-# RUN mkdir -p /usr/ui/medplat-ui
-# RUN mkdir -p /usr/web
-# RUN mkdir -p /usr/android
-# RUN mkdir -p /usr/Repository 
+RUN mkdir -p /usr/ui/medplat-ui
+RUN mkdir -p /usr/web
+RUN mkdir -p /usr/android
+RUN mkdir -p /usr/Repository 
 
 WORKDIR /usr/web
 
@@ -41,10 +41,11 @@ ENV ANDROID_SDK_VERSION 32
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 
 # Copy application code to the working directory
-#COPY medplat-web /usr/web
-#COPY medplat-ui/ /usr/ui/medplat-ui
-#COPY ../medplat-android/ /usr/android 
-
+COPY medplat-web /usr/web
+COPY medplat-ui/ /usr/ui/medplat-ui
+COPY ../medplat-android/ /usr/android 
+COPY entrypoint.sh /usr/web 
+# COPY */.m2 /root/.m2
 # Install Node.js and npm
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs
@@ -77,26 +78,31 @@ RUN npm install -g bower grunt -y
 
 
 # # Navigate to the application UI directory
-WORKDIR /usr/ui/medplat-ui
+# WORKDIR /usr/ui/medplat-ui
 
 # Run grunt task
-RUN npm install
-RUN bower install
-RUN grunt medplat
-#RUN npx grunt medplat
+# RUN npm install
+# RUN bower install
+# RUN grunt medplat
+# RUN npx grunt medplat
+
+
 
 # Copy Jar from local
-#ADD ./target/imtecho-web-2.0.jar /usr/java/imtecho-web-2.0.jar
+# ADD ./target/imtecho-web-2.0.jar /usr/java/imtecho-web-2.0.jar
 
 # Build the application with Maven
-WORKDIR /usr/web
-RUN mvn clean install -P docker -Dmaven.test.skip=true
+# WORKDIR /usr/web
+# RUN mvn clean install -P docker -Dmaven.test.skip=true
 
 # # Expose port 8181
-# EXPOSE 8181
+EXPOSE 8181
+
+ENTRYPOINT [ "/usr/web/entrypoint.sh" ]
+
 
 # Set the entry point command to run the application
-CMD ["java", "-jar", "/usr/web/target/medplat-web-2.0.jar"]
+# CMD ["java", "-jar", "/usr/web/target/medplat-web-2.0.jar"]
 #CMD tail -f /dev/null
 
 

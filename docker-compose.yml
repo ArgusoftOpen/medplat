@@ -21,7 +21,7 @@ services:
     ports:
       - "8181:8181"
     volumes:
-      - ./medplat-ui:/usr/medplat-ui
+      - ./medplat-ui:/usr/ui/medplat-ui
       - ./medplat-web:/usr/medplat-web
     networks:
       - medplat_net
