@@ -149,7 +149,7 @@
                         <placeholder></placeholder>
                     </validate>
                 </div>
-                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'abha number'">
+                <!-- <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'abha number'">
                     <validate for="abhaNumber"
                         required-msg="Please enter the abha number"
                         healthid-msg="Please enter a valid abha number">
@@ -158,8 +158,8 @@
                             class="form-control" required />
                         <placeholder></placeholder>
                     </validate>
-                </div>
-                <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'abha address'">
+                </div> -->
+                <!-- <div class="form-group" style="margin-top: 10px;" ng-if="search.searchBy === 'abha address'">
                     <validate for="abhaAddress" pattern-msg='Enter Valid details'
                         minlength-msg="Abha Address should be at least {{filteredLabels[selectedIndex].config.minlength}} characters"
                         maxlength-msg="Abha Address should not be more than {{filteredLabels[selectedIndex].config.maxlength}} characters"
@@ -170,7 +170,7 @@
                             class="form-control" required />
                         <placeholder></placeholder>
                     </validate>
-                </div>
+                </div> -->
                 <div ng-if="search.searchBy === 'dob'">
                     <location-directive template-type="'twoPart'"
                         ng-model="selectedLocation['locationId']"
