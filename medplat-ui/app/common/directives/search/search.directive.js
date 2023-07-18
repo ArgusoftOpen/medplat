@@ -31,12 +31,12 @@
                         { name: SEARCH_TERM.name, value: 'name', order: 6, config: {}, searchFor: $scope.memberType },
                         { name: SEARCH_TERM.lmp, value: 'lmp', order: 7, config: {}, searchFor: $scope.memberType },
                         { name: SEARCH_TERM.edd, value: 'edd', order: 8, config: {}, searchFor: $scope.memberType },
-                        { name: SEARCH_TERM.abhaNumber, value: 'abha number', order: 9, config: {}, searchFor: $scope.memberType },
-                        { name: SEARCH_TERM.abhaAddress, value: 'abha address', order: 10, config: {}, searchFor: $scope.memberType },
-                        { name: SEARCH_TERM.maaVatsalya, value: 'maaVatsalya', order: 11, config: {}, searchFor: $scope.memberType },
-                        { name: SEARCH_TERM.dob, value: 'dob', order: 12, config: {}, searchFor: $scope.memberType },
-                        { name: SEARCH_TERM.pmjay, value: 'pmjay', order: 13, config: {}, searchFor: $scope.memberType },
-                        { name: SEARCH_TERM.ration, value: 'ration', order: 14, config: {}, searchFor: $scope.memberType },
+                        // { name: SEARCH_TERM.abhaNumber, value: 'abha number', order: 9, config: {}, searchFor: $scope.memberType },
+                        // { name: SEARCH_TERM.abhaAddress, value: 'abha address', order: 10, config: {}, searchFor: $scope.memberType },
+                        { name: SEARCH_TERM.maaVatsalya, value: 'maaVatsalya', order: 9, config: {}, searchFor: $scope.memberType },
+                        { name: SEARCH_TERM.dob, value: 'dob', order: 10, config: {}, searchFor: $scope.memberType },
+                        { name: SEARCH_TERM.pmjay, value: 'pmjay', order: 11, config: {}, searchFor: $scope.memberType },
+                        { name: SEARCH_TERM.ration, value: 'ration', order: 12, config: {}, searchFor: $scope.memberType },
                     ];
 
                     if (!$scope.terms) {

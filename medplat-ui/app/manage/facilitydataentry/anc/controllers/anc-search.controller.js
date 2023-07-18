@@ -81,8 +81,8 @@
                     search.byLmp = (queform.search.searchBy === 'lmp' && queform.search.searchString !== '') ? true : false;
                     search.byEdd = (queform.search.searchBy === 'edd' && queform.search.searchString !== '') ? true : false;
                     search.byOrganizationUnit = ((queform.search.searchBy === 'organization unit' || queform.search.searchBy === 'village name') && queform.search.searchString !== '') ? true : false;
-                    search.byAbhaNumber = (queform.search.searchBy === 'abha number' && queform.search.searchString !== '') ? true : false;
-                    search.byAbhaAddress = (queform.search.searchBy === 'abha address' && queform.search.searchString !== '') ? true : false;
+                    // search.byAbhaNumber = (queform.search.searchBy === 'abha number' && queform.search.searchString !== '') ? true : false;
+                    // search.byAbhaAddress = (queform.search.searchBy === 'abha address' && queform.search.searchString !== '') ? true : false;
                     search.byFamilyMobileNumber = queform.search.familyMobileNumber;
                     search.locationId = queform.selectedLocationId;
                     search.isAncOnly = true;
