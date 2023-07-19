@@ -41,11 +41,12 @@ ENV ANDROID_SDK_VERSION 32
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 
 # Copy application code to the working directory
-COPY medplat-web /usr/web
-COPY medplat-ui/ /usr/ui/medplat-ui
-COPY ../medplat-android/ /usr/android 
-COPY entrypoint.sh /usr/web 
-# COPY */.m2 /root/.m2
+# COPY medplat-web /usr/web
+# COPY medplat-ui/ /usr/ui/medplat-ui
+# COPY ../medplat-android/ /usr/android 
+COPY entrypoint.sh /usr/
+# COPY /home/argus/.m2 /root/.m2
+
 # Install Node.js and npm
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs
@@ -98,7 +99,7 @@ RUN npm install -g bower grunt -y
 # # Expose port 8181
 EXPOSE 8181
 
-ENTRYPOINT [ "/usr/web/entrypoint.sh" ]
+ENTRYPOINT [ "/usr/entrypoint.sh" ]
 
 
 # Set the entry point command to run the application

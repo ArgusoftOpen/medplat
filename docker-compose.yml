@@ -22,7 +22,7 @@ services:
       - "8181:8181"
     volumes:
       - ./medplat-ui:/usr/ui/medplat-ui
-      - ./medplat-web:/usr/medplat-web
+      - ./medplat-web:/usr/web
     networks:
       - medplat_net
 
