@@ -1,6 +1,6 @@
 /* global moment */
 (function (angular) {
-    function AncFormQuestionsController($q, toaster, QueryDAO, Mask, AncService, $state, GeneralUtil, AuthenticateService, NdhmHipDAO, NdhmHipUtilService, $filter, NdhmHealthIdCreateDAO) {
+    function AncFormQuestionsController($q, toaster, QueryDAO, Mask, AncService, $state, GeneralUtil, AuthenticateService, $filter) {
         var ctrl = this;
         const FEATURE = 'techo.manage.ancSearch';
         const ANC_FORM_CONFIGURATION_KEY = 'RCH_FACILITY_ANC';
@@ -89,15 +89,16 @@
                 });
                 ctrl.previousVaccinations = response[1].result;
                 Mask.show();
-                NdhmHealthIdCreateDAO.getHealthIdCardByMemberId(Number($state.params.id), 'member_id').then(function (res) {
-                    if (res && res.healthIdNumber) {
-                        ctrl.healthIdNumber = res.healthIdNumber;
-                    }
-                }).catch((error) => {
-                    ctrl.healthIdCardImage = null;
-                    GeneralUtil.showMessageOnApiCallFailure(error);
-                }).finally(Mask.hide);
+                // NdhmHealthIdCreateDAO.getHealthIdCardByMemberId(Number($state.params.id), 'member_id').then(function (res) {
+                //     if (res && res.healthIdNumber) {
+                //         ctrl.healthIdNumber = res.healthIdNumber;
+                //     }
+                // }).catch((error) => {
+                //     ctrl.healthIdCardImage = null;
+                //     GeneralUtil.showMessageOnApiCallFailure(error);
+                // }).finally(Mask.hide);
                 ctrl.createAncObj();
+                Mask.hide();
             }).catch((error) => {
                 GeneralUtil.showMessageOnApiCallFailure(error);
                 $state.go(FEATURE);
@@ -212,16 +213,16 @@
         };
 
         ctrl.fetchDefaultHealthId = (memberId, serviceId) => {
-            NdhmHipDAO.getAllCareContextMasterDetails(memberId).then((res) => {
-                if (res.length > 0) {
-                    ctrl.healthIdsData = res;
-                    ctrl.healthIds = res.filter(notFrefferedData => notFrefferedData.isPreferred === false).map(healthData => healthData.healthId).toString();
-                    let prefferedHealthIdData = res.find(healthData => healthData.isPreferred === true);
-                    ctrl.prefferedHealthId = prefferedHealthIdData && prefferedHealthIdData.healthId;
-                }
-                ctrl.handleLinkRecordInNdhm(memberId, serviceId);
-            }).catch((error) => {
-            })
+            // NdhmHipDAO.getAllCareContextMasterDetails(memberId).then((res) => {
+            //     if (res.length > 0) {
+            //         ctrl.healthIdsData = res;
+            //         ctrl.healthIds = res.filter(notFrefferedData => notFrefferedData.isPreferred === false).map(healthData => healthData.healthId).toString();
+            //         let prefferedHealthIdData = res.find(healthData => healthData.isPreferred === true);
+            //         ctrl.prefferedHealthId = prefferedHealthIdData && prefferedHealthIdData.healthId;
+            //     }
+            //     ctrl.handleLinkRecordInNdhm(memberId, serviceId);
+            // }).catch((error) => {
+            // })
         }
 
         ctrl.handleLinkRecordInNdhm = (memberId, serviceId) => {
@@ -241,7 +242,7 @@
                 isTokenGenerate: true,
                 careContextName: "ANC Wellness Record"
             }
-            NdhmHipUtilService.handleLinkRecordInNdhm(dataForConsentRequest, FEATURE);
+            // NdhmHipUtilService.handleLinkRecordInNdhm(dataForConsentRequest, FEATURE);
         }
 
         ctrl.deliveryPlaceChanged = () => {
