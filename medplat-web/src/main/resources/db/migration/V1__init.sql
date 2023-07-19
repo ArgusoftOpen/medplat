@@ -25256,8 +25256,69 @@ ALTER TABLE IF EXISTS ONLY public.tr_training_trainer_role_rel
     ADD CONSTRAINT tr_training_trainer_role_rel_training_id_fkey FOREIGN KEY (training_id) REFERENCES public.tr_training_master(training_id);
 
 
--- Completed on 2023-06-29 19:51:14 IST
+-- Table: public.timer_event_history
 
---
--- PostgreSQL database dump complete
---
+DROP TABLE IF EXISTS public.timer_event_history;
+
+CREATE TABLE IF NOT EXISTS public.timer_event_history
+(
+    id integer NOT NULL,
+    timer_event_id integer,
+    event_id integer,
+    from_state text COLLATE pg_catalog."default",
+    to_state text COLLATE pg_catalog."default",
+    system_trigger_on timestamp without time zone,
+    processed_on timestamp without time zone,
+    completed_on timestamp without time zone,
+    CONSTRAINT timer_event_history_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.timer_event_history
+    OWNER to postgres;
+
+COMMENT ON TABLE public.timer_event_history
+    IS 'This is history table for timer event and its manages start time and end time for each events';
+
+COMMENT ON COLUMN public.timer_event_history.id
+    IS 'Id of related table';
+
+COMMENT ON COLUMN public.timer_event_history.timer_event_id
+    IS 'Id from timer event table of related event';
+
+COMMENT ON COLUMN public.timer_event_history.event_id
+    IS 'Id of related event';
+
+COMMENT ON COLUMN public.timer_event_history.from_state
+    IS 'From Process status of related event like PROCESSED1 , PROCESSED2';
+
+COMMENT ON COLUMN public.timer_event_history.to_state
+    IS 'To Process status of related event like PROCESSED2 , PROCESSED3';
+
+COMMENT ON COLUMN public.timer_event_history.system_trigger_on
+    IS 'Triggered time for related event';
+
+COMMENT ON COLUMN public.timer_event_history.processed_on
+    IS 'Start time for related event';
+
+COMMENT ON COLUMN public.timer_event_history.completed_on
+    IS 'End time for related event';
+
+
+-- public.timer_event_history_id_seq definition
+
+-- DROP SEQUENCE public.timer_event_history_id_seq;
+
+CREATE SEQUENCE IF NOT EXISTS public.timer_event_history_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+ALTER TABLE IF EXISTS public.timer_event_history_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.timer_event_history_id_seq OWNED BY public.timer_event_history.id;
+ALTER TABLE IF EXISTS ONLY public.timer_event_history ALTER COLUMN id SET DEFAULT nextval('public.timer_event_history_id_seq'::regclass);
+
