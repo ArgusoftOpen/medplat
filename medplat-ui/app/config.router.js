@@ -1460,7 +1460,7 @@
                     resolve: load([
                         'manage-pnc-dynamic.controller',
                         'pnc.service',
-                        // 'anganwadi.service'
+                        'anganwadi.service'
                     ])
                 })
                 .state('techo.manage.childservicedynamic', {

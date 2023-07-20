@@ -12,6 +12,12 @@ INSERT INTO public.system_constraint_form_master
 (uuid, form_name, form_code, menu_config_id, web_template_config, web_state, created_by, created_on, modified_by, modified_on, mobile_state)
 VALUES('808a9e11-7f8c-4ef8-b61f-834220a1755b', 'RCH_FACILITY_ANC', 'RCH_FACILITY_ANC', 152, '[{"type":"CARD","config":{"title":"RECORD DETAILS","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null,"isCollapsible":true},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"6","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"uniqueHealthId","fieldName":"uniqueHealthId","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null,"labelCssStyles":"","labelCssClasses":"","inputCssStyles":""},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"accountNumber","fieldName":"accountNumber","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ifsc","fieldName":"ifsc","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"mobileNumber","fieldName":"mobileNumber","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"locationHierarchy","fieldName":"locationHierarchy","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"lmpDate","fieldName":"lmpDate","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"anmInfo","fieldName":"anmInfo","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]},{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"memberName","fieldName":"memberName","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"caste","fieldName":"caste","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"benefits","fieldName":"benefits","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"bpl","fieldName":"bpl","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"edd","fieldName":"edd","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ashaInfo","fieldName":"ashaInfo","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]}]}]},{"type":"CARD","config":{"title":"PREVIOUS ANC INFORMATION","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":true,"isCollapsible":true,"ngIf":"ctrl.previousAncInfo.length"},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"previousAncInformation","fieldName":"previousAncInformation","fieldType":"TABLE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]}]},{"type":"CARD","config":{"title":"PREVIOUS VACCINATIONS GIVEN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":true,"ngIf":"ctrl.previousVaccinations.length","isCollapsible":true},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"previousVaccinationsGiven","fieldName":"previousVaccinationsGiven","fieldType":"TABLE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]}]},{"type":"CARD","config":{"title":"ANC VISIT DETAILS","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null,"isCollapsible":false},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"6","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"6","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"isAlive","fieldName":"isAlive","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"accountNumber","fieldName":"accountNumber","fieldType":"SHORT_TEXT","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ifsc","fieldName":"ifsc","fieldType":"SHORT_TEXT","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"mobileNumber","fieldName":"mobileNumber","fieldType":"SHORT_TEXT","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"serviceDate","fieldName":"serviceDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"deliveryPlace","fieldName":"deliveryPlace","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"hospitalByUser","fieldName":"hospitalByUser","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"institutionType","fieldName":"institutionType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"hospitalByType","fieldName":"hospitalByType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"bloodGroup","fieldName":"bloodGroup","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"jsyBeneficiary","fieldName":"jsyBeneficiary","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"jsyPaymentDone","fieldName":"jsyPaymentDone","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"kpsyBeneficiary","fieldName":"kpsyBeneficiary","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"iayBeneficiary","fieldName":"iayBeneficiary","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"hbsagTest","fieldName":"hbsagTest","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"vdrlTest","fieldName":"vdrlTest","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"hivTest","fieldName":"hivTest","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"sickleCellTest","fieldName":"sickleCellTest","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ifaTabletsGiven","fieldName":"ifaTabletsGiven","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"faTabletsGiven","fieldName":"faTabletsGiven","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"calciumTabletsGiven","fieldName":"calciumTabletsGiven","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"albendazoleGiven","fieldName":"albendazoleGiven","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"tt1Given","fieldName":"tt1Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"tt1date","fieldName":"tt1date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"tt2Given","fieldName":"tt2Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"tt2date","fieldName":"tt2date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ttBoosterGiven","fieldName":"ttBoosterGiven","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ttBoosterDate","fieldName":"ttBoosterDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"bloodTransfusion","fieldName":"bloodTransfusion","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ironDefAnemiaInj","fieldName":"ironDefAnemiaInj","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ironDefAnemiaInjDueDate","fieldName":"ironDefAnemiaInjDueDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"referralDone","fieldName":"referralDone","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"referralInfraType","fieldName":"referralInfraType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"referralHospitalByType","fieldName":"referralHospitalByType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"expectedDeliveryPlace","fieldName":"expectedDeliveryPlace","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"deathDate","fieldName":"deathDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"placeOfDeath","fieldName":"placeOfDeath","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"deathReason","fieldName":"deathReason","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]},{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"memberHeight","fieldName":"memberHeight","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"weight","fieldName":"weight","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"haemoglobinCount","fieldName":"haemoglobinCount","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"systolicBp","fieldName":"systolicBp","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"diastolicBp","fieldName":"diastolicBp","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"foetalMovement","fieldName":"foetalMovement","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"foetalHeight","fieldName":"foetalHeight","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"foetalHeartSound","fieldName":"foetalHeartSound","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"foetalPosition","fieldName":"foetalPosition","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"bloodSugarTest","fieldName":"bloodSugarTest","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"sugarTestBeforeFoodValue","fieldName":"sugarTestBeforeFoodValue","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"sugarTestAfterFoodValue","fieldName":"sugarTestAfterFoodValue","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"urineTestDone","fieldName":"urineTestDone","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"urineAlbumin","fieldName":"urineAlbumin","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"urineSugar","fieldName":"urineSugar","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"lastDeliveryOutcome","fieldName":"lastDeliveryOutcome","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"pregnencyComplication","fieldName":"pregnencyComplication","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"dangerousSignIds","fieldName":"dangerousSignIds","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"otherDangerousSign","fieldName":"otherDangerousSign","fieldType":"SHORT_TEXT","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"examinedByGynecologist","fieldName":"examinedByGynecologist","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"isInjCorticosteroidGiven","fieldName":"isInjCorticosteroidGiven","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]}]}]}]}]', 'ACTIVE', NULL, NULL, 97067, '2021-12-06 18:18:14.639', NULL);
 
+DELETE FROM public.system_constraint_form_master WHERE form_name = 'RCH_FACILITY_PNC' ;
+INSERT INTO public.system_constraint_form_master
+(uuid, form_name, form_code, menu_config_id, web_template_config, web_state, created_by, created_on, modified_by, modified_on, mobile_state)
+VALUES('ddd89e4f-dddb-4b20-bde8-11571779d01d','RCH_FACILITY_PNC','RCH_FACILITY_PNC',149,'[{"type":"CARD","config":{"title":"Record Details","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null,"isCollapsible":false},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"6","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"uniqueHealthId","fieldName":"uniqueHealthId","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"memberName","fieldName":"memberName","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"locationHierarchy","fieldName":"locationHierarchy","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"bpl","fieldName":"bpl","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"caste","fieldName":"caste","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"benefits","fieldName":"benefits","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]},{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"familyUniqueId","fieldName":"familyUniqueId","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"dateOfDelivery","fieldName":"dateOfDelivery","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"pncNo","fieldName":"pncNo","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"anmInfo","fieldName":"anmInfo","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ashaInfo","fieldName":"ashaInfo","fieldType":"INFORMATION_DISPLAY","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]}]}]}]},{"type":"CARD","config":{"title":"PNC Mother Details","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null,"isCollapsible":false},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"6","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"contactNumber","fieldName":"mobileNumber","fieldType":"SHORT_TEXT","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"serviceDate","fieldName":"serviceDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"deliveryPlace","fieldName":"deliveryPlace","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"institutionType","fieldName":"institutionType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"hospitalByType","fieldName":"hospitalByType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"hospitalByUser","fieldName":"hospitalByUser","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"isAlive","fieldName":"isMotherAlive","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"placeOfDeath","fieldName":"placeOfDeath","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"deathInfrastructureType","fieldName":"deathInfrastructureType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"deathHospitalByType","fieldName":"deathHospitalByType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"deathReason","fieldName":"deathReason","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"otherDeathReason","fieldName":"otherDeathReason","fieldType":"SHORT_TEXT","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"isIfaGiven","fieldName":"isIfaGiven","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ifaTabletsGiven","fieldName":"ifaTabletsGiven","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"isCalciumGiven","fieldName":"isCalciumGiven","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"calciumGiven","fieldName":"calciumGiven","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]},{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"motherDangerSigns","fieldName":"motherDangerSigns","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"otherDangerSign","fieldName":"motherOtherDangerSign","fieldType":"SHORT_TEXT","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"motherReferralDone","fieldName":"motherReferralDone","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"motherReferralInfraType","fieldName":"motherReferralInfraType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"motherReferralHospitalByType","fieldName":"motherReferralHospitalByType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"familyPlanningMethod","fieldName":"familyPlanningMethod","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"fpInsertOperateDate","fieldName":"fpInsertOperateDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"bloodTransfusion","fieldName":"bloodTransfusion","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ironDefAnemiaInj","fieldName":"ironDefAnemiaInj","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"ironDefAnemiaInjDueDate","fieldName":"ironDefAnemiaInjDueDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]}]}]}]},{"type":"CARD","config":{"title":"PNC Child Details of {{ctrl.formData.childDetails[iteratorIndicesMap[config.ngModel]].first_name}} ({{ctrl.formData.childDetails[iteratorIndicesMap[config.ngModel]].unique_health_id}})","cssStyles":null,"cssClasses":null,"isRepeatable":true,"showAddRemoveButton":false,"ngModel":"formData.childDetails","isConditional":false,"ngIf":null,"isCollapsible":false},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"6","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"isAlive","fieldName":"isChildAlive","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"deathDate","fieldName":"childDeathDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"placeOfDeath","fieldName":"childPlaceOfDeath","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"deathReason","fieldName":"childDeathReason","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"otherDeathReason","fieldName":"childOtherDeathReason","fieldType":"SHORT_TEXT","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"childDangerSigns","fieldName":"childDangerSigns","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"otherDangerSign","fieldName":"childOtherDangerSign","fieldType":"SHORT_TEXT","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"childReferralDone","fieldName":"childReferralDone","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"childReferralInfraType","fieldName":"childReferralInfraType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"childReferralHospitalByType","fieldName":"childReferralHospitalByType","fieldType":"DROPDOWN","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"childWeight","fieldName":"childWeight","fieldType":"NUMBER","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]},{"type":"ROW","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"hepatitisB0Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"hepatitisB0Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"vitaminKGiven","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"vitaminKDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"bcgGiven","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"bcgDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"opv0Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"opv0Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"opv1Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"opv1Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"opv2Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"opv2Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"opv3Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"opv3Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"opvBoosterGiven","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"opvBoosterDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"penta1Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"penta1Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"penta2Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"penta2Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"penta3Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"penta3Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"dpt1Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"dpt1Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"dpt2Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"dpt2Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"dpt3Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"dpt3Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"dptBoosterGiven","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"dptBoosterDate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"rotaVirus1Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"rotaVirus1Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"rotaVirus2Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"rotaVirus2Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"rotaVirus3Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"rotaVirus3Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"measles1Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"measles1Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"measles2Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"measles2Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"measlesRubella1Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"measlesRubella1Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"measlesRubella2Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"measlesRubella2Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"fIpv101Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"fIpv101Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"fIpv201Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"fIpv201Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"fIpv205Given","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"fIpv205Date","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"given","fieldName":"vitaminAGiven","fieldType":"RADIO","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]},{"type":"COL","config":{"size":"12","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[{"type":"TECHO_FORM_FIELD","config":{"fieldKey":"date","fieldName":"vitaminADate","fieldType":"DATE","cssStyles":null,"cssClasses":null,"isRepeatable":false,"showAddRemoveButton":false,"ngModel":null,"isConditional":false,"ngIf":null},"elements":[]}]}]}]}]}]}]','ACTIVE',NULL,NULL,57698,'2021-09-07 16:59:52.542',NULL);
+
+
 with field_value_master_deletion as (
                         delete from system_constraint_field_value_master
                         where field_master_uuid in (
@@ -3592,3 +3598,4668 @@ insert into system_constraint_field_value_master(uuid,field_master_uuid,value_ty
 
 insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
                          values(cast('523f942e-7daf-4ee9-91af-37dd57920b6e' as uuid),cast('13278010-2b3f-4fc4-8d8c-3df1b4524d1a' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+
+with field_value_master_deletion as (
+                        delete from system_constraint_field_value_master
+                        where field_master_uuid in (
+                            select uuid
+                            from system_constraint_field_master
+                            where form_master_uuid = cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid)
+                        )
+                        returning uuid
+                    )
+                    delete from system_constraint_field_master
+                    where form_master_uuid = cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid);
+
+
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('a271e2cb-7919-4d42-9436-a45774b213e3' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'locationHierarchy','locationHierarchy','INFORMATION_DISPLAY','formData','WEB',null,60512,now(),60512,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('83fa6a82-b52c-4b13-80f6-b513fb59f6a1' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'caste','caste','INFORMATION_DISPLAY','formData','WEB',null,60512,now(),60512,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('27e19a9c-d318-4d81-92e9-d1991cf1e9b0' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'benefits','benefits','INFORMATION_DISPLAY','formData','WEB',null,60512,now(),60512,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('cc2e9991-fd07-401d-bc81-918813f24f27' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'dateOfDelivery','dateOfDelivery','INFORMATION_DISPLAY','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('01dc5324-10b7-4e2e-9929-c05d711a2183' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'pncNo','pncNo','INFORMATION_DISPLAY','formData','WEB',null,60512,now(),60512,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('c5cd8310-0257-4b33-a66e-d21ccd23572e' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'ashaInfo','ashaInfo','INFORMATION_DISPLAY','formData','WEB',null,60512,now(),60512,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('dfacbf8d-cc0f-4a97-aebe-6b09aa824ce5' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'anmInfo','anmInfo','INFORMATION_DISPLAY','formData','WEB',null,60512,now(),60512,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('830c5831-faf6-456c-835f-ed1323cbbe38' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'uniqueHealthId','uniqueHealthId','INFORMATION_DISPLAY','formData','WEB',null,60512,now(),60512,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'placeOfDeath','placeOfDeath','DROPDOWN','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'placeOfDeath_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','placeOfDeath_RCH_FACILITY_PNC','EN','60512',now(),false,'Death Place',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'hospitalByUser','hospitalByUser','DROPDOWN','formData','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'hospitalByUser_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','hospitalByUser_RCH_FACILITY_PNC','EN','60512',now(),false,'Hospital',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('68391f40-d886-467d-946b-45dd46bad2d8' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'memberName','memberName','INFORMATION_DISPLAY','formData','WEB',null,60512,now(),78434,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'serviceDate','serviceDate','DATE','formData','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'serviceDate_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','serviceDate_RCH_FACILITY_PNC','EN','-1',now(),false,'2021-08-12 16:03:34.711305+05:30',false,now(),'TECHO_MOBILE_APP');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','serviceDate_RCH_FACILITY_PNC','EN','-1',now(),false,'Service Date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('f7cb57d4-7484-485f-a821-9bcbb28a0d11' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'familyUniqueId','familyUniqueId','INFORMATION_DISPLAY','formData','WEB',null,60512,now(),60512,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'deathInfrastructureType','deathInfrastructureType','DROPDOWN','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'deathInfrastructureType_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','deathInfrastructureType_RCH_FACILITY_PNC','EN','60512',now(),false,'Institution Type',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'isAlive','isMotherAlive','RADIO','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'isMotherAlive_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','isMotherAlive_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Mother Alive',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'isCalciumGiven','isCalciumGiven','RADIO','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'isCalciumGiven_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','isCalciumGiven_RCH_FACILITY_PNC','EN','60512',now(),false,'Are Calcium Tablets Given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'familyPlanningMethod','familyPlanningMethod','DROPDOWN','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'familyPlanningMethod_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','familyPlanningMethod_RCH_FACILITY_PNC','EN','60512',now(),false,'Family Planning Method Used',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'deliveryPlace','deliveryPlace','DROPDOWN','formData','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'deliveryPlace_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','deliveryPlace_RCH_FACILITY_PNC','EN','60512',now(),false,'Place of Visit',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'hospitalByType','hospitalByType','DROPDOWN','formData','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'hospitalByType_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','hospitalByType_RCH_FACILITY_PNC','EN','60512',now(),false,'Hospital',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'deathHospitalByType','deathHospitalByType','DROPDOWN','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'deathHospitalByType_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','deathHospitalByType_RCH_FACILITY_PNC','EN','60512',now(),false,'Hospital',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'isIfaGiven','isIfaGiven','RADIO','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'isIfaGiven_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','isIfaGiven_RCH_FACILITY_PNC','EN','60512',now(),false,'Is IFA Given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'deathDate','deathDate','DATE','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'deathDate_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','deathDate_RCH_FACILITY_PNC','EN','60512',now(),false,'Death Date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'institutionType','institutionType','DROPDOWN','formData','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'institutionType_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','institutionType_RCH_FACILITY_PNC','EN','60512',now(),false,'Institution Type',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'deathReason','deathReason','DROPDOWN','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'deathReason_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','deathReason_RCH_FACILITY_PNC','EN','60512',now(),false,'Death Reason',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'ifaTabletsGiven','ifaTabletsGiven','NUMBER','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'ifaTabletsGiven_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','ifaTabletsGiven_RCH_FACILITY_PNC','EN','60512',now(),false,'No. of IFA Tablets Given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'contactNumber','mobileNumber','SHORT_TEXT','formData','WEB',
+(
+                                select case when count(1) = 1 then cast('3c504bd8-285b-4936-b00a-c790e837042a' as uuid) else null end
+                                from system_constraint_standard_field_master
+                                where uuid = cast('3c504bd8-285b-4936-b00a-c790e837042a' as uuid)
+                            ),
+60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'mobileNumber_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','mobileNumber_RCH_FACILITY_PNC','EN','-1',now(),false,'Mobile Number',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('fc27d602-4d28-4487-a19e-1b8e92fede2a' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'bpl','bpl','INFORMATION_DISPLAY','formData','WEB',null,60512,now(),57698,now());
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','opv2Date','DATE','formData.childDetails[$index].immunisation.OPV_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'opv2Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','opv2Date_RCH_FACILITY_PNC','EN','60512',now(),false,'OPV 2 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','opv3Date','DATE','formData.childDetails[$index].immunisation.OPV_3','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'opv3Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','opv3Date_RCH_FACILITY_PNC','EN','60512',now(),false,'OPV 3 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'isAlive','isChildAlive','RADIO','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'isChildAlive_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','isChildAlive_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Child Alive',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'fpInsertOperateDate','fpInsertOperateDate','DATE','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'fpInsertOperateDate_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','fpInsertOperateDate_RCH_FACILITY_PNC','EN','60512',now(),false,'Date of insertion/operation',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'bloodTransfusion','bloodTransfusion','RADIO','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'bloodTransfusion_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','bloodTransfusion_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Blood Transfusion Done',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'ironDefAnemiaInjDueDate','ironDefAnemiaInjDueDate','DATE','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'ironDefAnemiaInjDueDate_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','ironDefAnemiaInjDueDate_RCH_FACILITY_PNC','EN','60512',now(),false,'Due date of Iron Deficiency Anemia Injection',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'deathReason','childDeathReason','DROPDOWN','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'childDeathReason_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','childDeathReason_RCH_FACILITY_PNC','EN','60512',now(),false,'Death Reason',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'motherReferralInfraType','motherReferralInfraType','DROPDOWN','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'motherReferralInfraType_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','motherReferralInfraType_RCH_FACILITY_PNC','EN','60512',now(),false,'Institution Type',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'deathDate','childDeathDate','DATE','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'childDeathDate_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','childDeathDate_RCH_FACILITY_PNC','EN','60512',now(),false,'Death Date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'childWeight','childWeight','NUMBER','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'childWeight_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','childWeight_RCH_FACILITY_PNC','EN','60512',now(),false,'Weight of child',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','hepatitisB0Given','RADIO','formData.childDetails[$index].immunisation.HEPATITIS_B_0','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'hepatitisB0Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','hepatitisB0Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Hepatitis B 0 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','bcgGiven','RADIO','formData.childDetails[$index].immunisation.BCG','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'bcgGiven_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','bcgGiven_RCH_FACILITY_PNC','EN','60512',now(),false,'Is BCG given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'ironDefAnemiaInj','ironDefAnemiaInj','DROPDOWN','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'ironDefAnemiaInj_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','ironDefAnemiaInj_RCH_FACILITY_PNC','EN','60512',now(),false,'Iron Deficiency Anemia Injection',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'otherDangerSign','childOtherDangerSign','SHORT_TEXT','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'childOtherDangerSign_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','childOtherDangerSign_RCH_FACILITY_PNC','EN','60512',now(),false,'Other Danger Sign',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'childReferralDone','childReferralDone','RADIO','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'childReferralDone_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','childReferralDone_RCH_FACILITY_PNC','EN','60512',now(),false,'Is child referral done',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'otherDangerSign','motherOtherDangerSign','SHORT_TEXT','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'motherOtherDangerSign_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','motherOtherDangerSign_RCH_FACILITY_PNC','EN','60512',now(),false,'Other Danger Sign',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'motherReferralDone','motherReferralDone','RADIO','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'motherReferralDone_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','motherReferralDone_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Mother Referral Done',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','opvBoosterDate','DATE','formData.childDetails[$index].immunisation.OPV_BOOSTER','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'opvBoosterDate_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','opvBoosterDate_RCH_FACILITY_PNC','EN','60512',now(),false,'OPV Booster given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','penta1Date','DATE','formData.childDetails[$index].immunisation.PENTA_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'penta1Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','penta1Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Penta 1 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','hepatitisB0Date','DATE','formData.childDetails[$index].immunisation.HEPATITIS_B_0','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'hepatitisB0Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','hepatitisB0Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Hepatitis B 0 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','vitaminKDate','DATE','formData.childDetails[$index].immunisation.VITAMIN_K','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'vitaminKDate_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','vitaminKDate_RCH_FACILITY_PNC','EN','60512',now(),false,'Vitamin K given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','bcgDate','DATE','formData.childDetails[$index].immunisation.BCG','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'bcgDate_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','bcgDate_RCH_FACILITY_PNC','EN','60512',now(),false,'BCG given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','opv0Date','DATE','formData.childDetails[$index].immunisation.OPV_0','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'opv0Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','opv0Date_RCH_FACILITY_PNC','EN','60512',now(),false,'OPV 0 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','opv1Date','DATE','formData.childDetails[$index].immunisation.OPV_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'opv1Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','opv1Date_RCH_FACILITY_PNC','EN','60512',now(),false,'OPV 1 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','penta2Date','DATE','formData.childDetails[$index].immunisation.PENTA_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'penta2Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','penta2Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Penta 2 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','penta3Date','DATE','formData.childDetails[$index].immunisation.PENTA_3','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'penta3Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','penta3Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Penta 3 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','dpt1Date','DATE','formData.childDetails[$index].immunisation.DPT_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'dpt1Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','dpt1Date_RCH_FACILITY_PNC','EN','60512',now(),false,'DPT 1 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','dpt2Date','DATE','formData.childDetails[$index].immunisation.DPT_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'dpt2Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','dpt2Date_RCH_FACILITY_PNC','EN','60512',now(),false,'DPT 2 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','vitaminKGiven','RADIO','formData.childDetails[$index].immunisation.VITAMIN_K','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'vitaminKGiven_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','vitaminKGiven_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Vitamin K given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','opv0Given','RADIO','formData.childDetails[$index].immunisation.OPV_0','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'opv0Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','opv0Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is OPV 0 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','opv2Given','RADIO','formData.childDetails[$index].immunisation.OPV_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'opv2Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','opv2Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is OPV 2 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','opv3Given','RADIO','formData.childDetails[$index].immunisation.OPV_3','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'opv3Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','opv3Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is OPV 3 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','opvBoosterGiven','RADIO','formData.childDetails[$index].immunisation.OPV_BOOSTER','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'opvBoosterGiven_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','opvBoosterGiven_RCH_FACILITY_PNC','EN','60512',now(),false,'Is OPV Booster given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','penta1Given','RADIO','formData.childDetails[$index].immunisation.PENTA_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'penta1Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','penta1Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Penta 1 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','penta2Given','RADIO','formData.childDetails[$index].immunisation.PENTA_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'penta2Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','penta2Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Penta 2 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','penta3Given','RADIO','formData.childDetails[$index].immunisation.PENTA_3','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'penta3Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','penta3Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Penta 3 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','dpt1Given','RADIO','formData.childDetails[$index].immunisation.DPT_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'dpt1Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','dpt1Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is DPT 1 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','dpt2Given','RADIO','formData.childDetails[$index].immunisation.DPT_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'dpt2Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','dpt2Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is DPT 2 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'calciumGiven','calciumGiven','NUMBER','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'calciumGiven_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','calciumGiven_RCH_FACILITY_PNC','EN','60512',now(),false,'No. of Calcium Tablets Given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'placeOfDeath','childPlaceOfDeath','DROPDOWN','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'childPlaceOfDeath_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','childPlaceOfDeath_RCH_FACILITY_PNC','EN','60512',now(),false,'Death Place',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'motherDangerSigns','motherDangerSigns','DROPDOWN','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'motherDangerSigns_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','motherDangerSigns_RCH_FACILITY_PNC','EN','60512',now(),false,'Danger Signs for Mother',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'motherReferralHospitalByType','motherReferralHospitalByType','DROPDOWN','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'motherReferralHospitalByType_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','motherReferralHospitalByType_RCH_FACILITY_PNC','EN','60512',now(),false,'Hospital',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'childReferralInfraType','childReferralInfraType','DROPDOWN','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'childReferralInfraType_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','childReferralInfraType_RCH_FACILITY_PNC','EN','60512',now(),false,'Institution Type',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'childReferralHospitalByType','childReferralHospitalByType','DROPDOWN','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'childReferralHospitalByType_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','childReferralHospitalByType_RCH_FACILITY_PNC','EN','60512',now(),false,'Hospital',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'childDangerSigns','childDangerSigns','DROPDOWN','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'childDangerSigns_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','childDangerSigns_RCH_FACILITY_PNC','EN','60512',now(),false,'Danger Signs for Child',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','dpt3Date','DATE','formData.childDetails[$index].immunisation.DPT_3','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'dpt3Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','dpt3Date_RCH_FACILITY_PNC','EN','60512',now(),false,'DPT 3 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','dptBoosterDate','DATE','formData.childDetails[$index].immunisation.DPT_BOOSTER','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'dptBoosterDate_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','dptBoosterDate_RCH_FACILITY_PNC','EN','60512',now(),false,'DPT Booster given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','rotaVirus1Date','DATE','formData.childDetails[$index].immunisation.ROTA_VIRUS_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'rotaVirus1Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','rotaVirus1Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Rota Virus 1 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','rotaVirus2Date','DATE','formData.childDetails[$index].immunisation.ROTA_VIRUS_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'rotaVirus2Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','rotaVirus2Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Rota Virus 2 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','rotaVirus3Date','DATE','formData.childDetails[$index].immunisation.ROTA_VIRUS_3','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'rotaVirus3Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','rotaVirus3Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Rota Virus 3 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','measles1Date','DATE','formData.childDetails[$index].immunisation.MEASLES_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'measles1Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','measles1Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Measles 1 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','measles2Date','DATE','formData.childDetails[$index].immunisation.MEASLES_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'measles2Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','measles2Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Measles 2 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','measlesRubella1Date','DATE','formData.childDetails[$index].immunisation.MEASLES_RUBELLA_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'measlesRubella1Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','measlesRubella1Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Measles Rubella 1 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','measlesRubella2Date','DATE','formData.childDetails[$index].immunisation.MEASLES_RUBELLA_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'measlesRubella2Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','measlesRubella2Date_RCH_FACILITY_PNC','EN','60512',now(),false,'Measles Rubella 2 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','fIpv101Date','DATE','formData.childDetails[$index].immunisation.F_IPV_1_01','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'fIpv101Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','fIpv101Date_RCH_FACILITY_PNC','EN','60512',now(),false,'F IPV 1 01 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','fIpv205Date','DATE','formData.childDetails[$index].immunisation.F_IPV_2_05','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'fIpv205Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','fIpv205Date_RCH_FACILITY_PNC','EN','60512',now(),false,'F IPV 2 05 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','vitaminADate','DATE','formData.childDetails[$index].immunisation.VITAMIN_A','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'vitaminADate_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','vitaminADate_RCH_FACILITY_PNC','EN','60512',now(),false,'Vitamin A given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'date','fIpv201Date','DATE','formData.childDetails[$index].immunisation.F_IPV_2_01','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'fIpv201Date_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','fIpv201Date_RCH_FACILITY_PNC','EN','60512',now(),false,'F IPV 2 01 given date',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','opv1Given','RADIO','formData.childDetails[$index].immunisation.OPV_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'opv1Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','opv1Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is OPV 1 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','dpt3Given','RADIO','formData.childDetails[$index].immunisation.DPT_3','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'dpt3Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','dpt3Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is DPT 3 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','dptBoosterGiven','RADIO','formData.childDetails[$index].immunisation.DPT_BOOSTER','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'dptBoosterGiven_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','dptBoosterGiven_RCH_FACILITY_PNC','EN','60512',now(),false,'Is DPT Booster given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','rotaVirus1Given','RADIO','formData.childDetails[$index].immunisation.ROTA_VIRUS_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'rotaVirus1Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','rotaVirus1Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Rota Virus 1 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','rotaVirus2Given','RADIO','formData.childDetails[$index].immunisation.ROTA_VIRUS_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'rotaVirus2Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','rotaVirus2Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Rota Virus 2 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','rotaVirus3Given','RADIO','formData.childDetails[$index].immunisation.ROTA_VIRUS_3','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'rotaVirus3Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','rotaVirus3Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Rota Virus 3 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','measles1Given','RADIO','formData.childDetails[$index].immunisation.MEASLES_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'measles1Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','measles1Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Measles 1 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','measles2Given','RADIO','formData.childDetails[$index].immunisation.MEASLES_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'measles2Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','measles2Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Measles 2 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','measlesRubella1Given','RADIO','formData.childDetails[$index].immunisation.MEASLES_RUBELLA_1','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'measlesRubella1Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','measlesRubella1Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Measles Rubella 1 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','measlesRubella2Given','RADIO','formData.childDetails[$index].immunisation.MEASLES_RUBELLA_2','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'measlesRubella2Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','measlesRubella2Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Measles Rubella 2 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','fIpv101Given','RADIO','formData.childDetails[$index].immunisation.F_IPV_1_01','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'fIpv101Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','fIpv101Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is F IPV 1 01 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','fIpv201Given','RADIO','formData.childDetails[$index].immunisation.F_IPV_2_01','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'fIpv201Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','fIpv201Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is F IPV 2 01 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','fIpv205Given','RADIO','formData.childDetails[$index].immunisation.F_IPV_2_05','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'fIpv205Given_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','fIpv205Given_RCH_FACILITY_PNC','EN','60512',now(),false,'Is F IPV 2 05 given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'given','vitaminAGiven','RADIO','formData.childDetails[$index].immunisation.VITAMIN_A','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'vitaminAGiven_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','vitaminAGiven_RCH_FACILITY_PNC','EN','60512',now(),false,'Is Vitamin A given',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'otherDeathReason','childOtherDeathReason','SHORT_TEXT','formData.childDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'childOtherDeathReason_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','childOtherDeathReason_RCH_FACILITY_PNC','EN','60512',now(),false,'Other Death Reason',false,now(),'WEB');
+
+insert into system_constraint_field_master(uuid,form_master_uuid,field_key,field_name,field_type,ng_model,app_name,standard_field_master_uuid,created_by,created_on,modified_by,modified_on)
+                         values(cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),cast('ddd89e4f-dddb-4b20-bde8-11571779d01d' as uuid),'otherDeathReason','otherDeathReason','SHORT_TEXT','formData.motherDetails','WEB',null,60512,now(),60512,now());
+
+delete from internationalization_label_master where key = 'otherDeathReason_RCH_FACILITY_PNC' and app_name in ('WEB');
+
+insert into internationalization_label_master(country,key,language,created_by,created_on,custom3b,text,translation_pending,modified_on,app_name)
+                                values('IN','otherDeathReason_RCH_FACILITY_PNC','EN','60512',now(),false,'Other Death Reason',false,now(),'WEB');
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f2117dcf-8613-4b10-9c9e-2d605500e4c4' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('240d7dc0-9eca-4c5c-a642-122a0b6f0e9c' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'TEXT','label',null,'motherReferralHospitalByType_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2e404e78-741e-4239-9100-8305db1e9074' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'TEXT','placeholder',null,'Select Hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2f94603f-ed0d-4014-9c79-d20bf46cc834' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('482f9d5e-2014-4f40-8dc7-e07e9c5aad75' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6c26142e-e796-44e2-bfc2-bb7a508f7700' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'TEXT','requiredMessage',null,'Please select hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6cd9ead9-33f6-4033-8071-844f9b86c6c1' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'TEXT','tooltip',null,'Hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5854c3b5-be01-431b-bbc8-cc2fdd41a8c9' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6756adee-3e06-46e5-9e45-204ca150a125' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f60cb6fa-b9be-45ed-90c2-e1cbecade956' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0cbafeab-e77e-429c-81cb-0ceff19afa62' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('260f6906-af98-48ea-abe1-aaf834cfebec' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'DROPDOWN','optionsType',null,'queryBuilder',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('32dbd763-1f72-4c2f-a314-d8a1158a61fb' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6782fd3e-fd11-4b0c-8baf-7590f4af2245' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'TEXT','queryBuilder',null,'retrieve_hospitals_by_infra_type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9c52d84e-3778-497b-afe3-7db8cae646e9' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3b04a72d-0c1f-4e66-bd7d-dcf6c8c1d06a' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'JSON','staticOptions',null,'[{"key":"-1","value":"Other"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c20f5117-cb20-4244-8e79-17f455471daf' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ccf8c7a4-e6d2-43a1-b8f9-b4ad9f0d6d3b' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('55d77be2-1ddc-4832-ae99-6676e9a4f4af' as uuid),cast('192fdfda-b868-423d-81c7-bda516ead267' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.motherReferralDone","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8574edb8-98ca-4f41-ae0a-744694345379' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8a6ab66a-807d-4aaf-932c-1fc135a9813f' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('53ef909a-eaeb-41c6-b77d-5ce8fba8daf2' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"false","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('523a2276-1828-436d-9b77-0de3b0514ec4' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0274bb79-abd7-4307-b8db-3107ccf796c0' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:3313","type":"Change","value":"childReferralDoneChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('95411ecd-b19d-492e-9c40-02bfc57c4886' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].childDangerSigns.length"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2cc39c48-c5df-4ad1-8802-d74d442531d2' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('54580d55-989c-4ac2-bd53-bd27a726b02b' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('85c83b37-ecc4-41df-9869-984a727e5a99' as uuid),cast('830c5831-faf6-456c-835f-ed1323cbbe38' as uuid),'TEXT','displayValue',null,'Mother ID',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b630999d-e3d5-4d42-aed4-2442e953db0a' as uuid),cast('830c5831-faf6-456c-835f-ed1323cbbe38' as uuid),'DROPDOWN','displayType',null,'text',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7478bd96-620e-40c2-bede-575a89a07b1e' as uuid),cast('830c5831-faf6-456c-835f-ed1323cbbe38' as uuid),'EVENTS','events',null,'[]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('99a533ca-1c2e-47f4-bb0e-f9c4c6f59324' as uuid),cast('830c5831-faf6-456c-835f-ed1323cbbe38' as uuid),'VISIBILITY','visibility',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8635a90e-0ddf-478a-b8c5-294e124579de' as uuid),cast('830c5831-faf6-456c-835f-ed1323cbbe38' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c1cbe961-edfc-45b8-8153-9417e09741aa' as uuid),cast('830c5831-faf6-456c-835f-ed1323cbbe38' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9133566e-5b64-440c-a3cd-955dc79f76f7' as uuid),cast('27e19a9c-d318-4d81-92e9-d1991cf1e9b0' as uuid),'TEXT','displayValue',null,'Benefits',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ca623476-3caa-407d-a764-41b0709ddad6' as uuid),cast('27e19a9c-d318-4d81-92e9-d1991cf1e9b0' as uuid),'DROPDOWN','displayType',null,'text',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bb689b28-7074-4549-855d-5e91913366ae' as uuid),cast('27e19a9c-d318-4d81-92e9-d1991cf1e9b0' as uuid),'EVENTS','events',null,'[]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('957e25a2-4dc3-400f-aaa9-74ecbf456757' as uuid),cast('27e19a9c-d318-4d81-92e9-d1991cf1e9b0' as uuid),'VISIBILITY','visibility',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4158d71d-8402-4ba0-96f9-ce360b2d599a' as uuid),cast('27e19a9c-d318-4d81-92e9-d1991cf1e9b0' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b04bb0bc-595e-411f-89b5-5a730d190c3d' as uuid),cast('27e19a9c-d318-4d81-92e9-d1991cf1e9b0' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a128e023-8793-4392-902e-915c765d7808' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d6d974e6-8ec5-43e4-b3ca-c2711a4c82c8' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e370ad11-e524-4775-939b-05efb76d8da1' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'TEXT','maxDateField',null,'formData.motherDetails.serviceDate',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f730a31f-e3df-4a6a-bbc4-a05bad1b5dd9' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'TEXT','minDateField',null,'minDeathDate',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f7bc6966-0028-434c-9b13-977ddb43cb1c' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'TEXT','tooltip',null,'Death Date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5d43dc47-8ef2-43d3-af83-8b3fda4af246' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'TEXT','placeholder',null,'Death Date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('66745791-9c0c-493e-ac7b-27dbc0c5c5e1' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'TEXT','label',null,'childDeathDate_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8faf9619-95c6-4bc1-8ae7-bcc85051dff0' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'BOOLEAN','hasPattern',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('98da92d4-59c5-4762-81df-b96a994a3b0f' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a09d3d7d-2b87-41dd-9816-6d8b142d9210' as uuid),cast('68391f40-d886-467d-946b-45dd46bad2d8' as uuid),'DISABILITY','disability',null,'null',60512,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b5fb8913-f250-4643-9bae-2f05a2b8b057' as uuid),cast('68391f40-d886-467d-946b-45dd46bad2d8' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bb887d65-40ec-47a0-804b-25047873af02' as uuid),cast('68391f40-d886-467d-946b-45dd46bad2d8' as uuid),'TEXT','displayValue',null,'Mother Name',60512,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0a1bf91a-f5a0-4ae6-98cb-8c1e0d4fb6f6' as uuid),cast('68391f40-d886-467d-946b-45dd46bad2d8' as uuid),'EVENTS','events',null,'null',60512,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3805ce64-6ef4-4662-b4d8-9e4946c59480' as uuid),cast('68391f40-d886-467d-946b-45dd46bad2d8' as uuid),'DROPDOWN','displayType',null,'text',60512,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('611df745-bab8-4e55-8762-7bf68e18dbe7' as uuid),cast('68391f40-d886-467d-946b-45dd46bad2d8' as uuid),'VISIBILITY','visibility',null,'null',60512,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a6b17fe5-bcaa-4427-b1a3-ba1e6841a6f1' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('99bc6d1e-9902-42b2-bcc3-98db1d53d21d' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c018091a-af52-4e70-9545-9b18a29c03ea' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"''-1''","value2":null,"fieldName":"formData.motherDetails.deathReason","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8a37efac-2fec-4975-ae96-40dc208f8717' as uuid),cast('fc27d602-4d28-4487-a19e-1b8e92fede2a' as uuid),'DISABILITY','disability',null,'null',60512,now(),57698,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b7018b1e-ba30-41ee-94a8-cdcfb11c3f48' as uuid),cast('fc27d602-4d28-4487-a19e-1b8e92fede2a' as uuid),'TEXT','displayValue',null,'BPL',60512,now(),57698,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('810178df-97d8-42d0-8b96-72362341ca27' as uuid),cast('a271e2cb-7919-4d42-9436-a45774b213e3' as uuid),'TEXT','displayValue',null,'Location',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e3f1c145-1f2b-4e5b-8650-6d5aa1219f95' as uuid),cast('a271e2cb-7919-4d42-9436-a45774b213e3' as uuid),'DROPDOWN','displayType',null,'text',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e8e590ca-10bf-49d5-bcd5-4ad5303c51f9' as uuid),cast('a271e2cb-7919-4d42-9436-a45774b213e3' as uuid),'EVENTS','events',null,'[]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e5d520e8-4b44-45e1-aa68-18ef0dd47ac9' as uuid),cast('a271e2cb-7919-4d42-9436-a45774b213e3' as uuid),'VISIBILITY','visibility',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ef78b7da-e9e2-4bfc-82b9-9d71fd4a9edc' as uuid),cast('a271e2cb-7919-4d42-9436-a45774b213e3' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('eeb2cbce-c8d2-45c3-b601-647764c6350f' as uuid),cast('a271e2cb-7919-4d42-9436-a45774b213e3' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9e99a0b7-6f66-48db-ba60-c6532e6d903e' as uuid),cast('83fa6a82-b52c-4b13-80f6-b513fb59f6a1' as uuid),'TEXT','displayValue',null,'Caste',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('29b9abdc-9e8b-468b-9f70-9ea235759010' as uuid),cast('83fa6a82-b52c-4b13-80f6-b513fb59f6a1' as uuid),'DROPDOWN','displayType',null,'text',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f9b240b3-2489-4189-bebb-548910b1a254' as uuid),cast('fc27d602-4d28-4487-a19e-1b8e92fede2a' as uuid),'VISIBILITY','visibility',null,'null',60512,now(),57698,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('13926ffc-abc7-468e-af64-78775c069cb8' as uuid),cast('fc27d602-4d28-4487-a19e-1b8e92fede2a' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),57698,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4d8a222e-a1a9-4541-97d7-d9d85960df29' as uuid),cast('fc27d602-4d28-4487-a19e-1b8e92fede2a' as uuid),'EVENTS','events',null,'null',60512,now(),57698,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('52435fad-0bce-4a77-9201-01ee3aee157a' as uuid),cast('fc27d602-4d28-4487-a19e-1b8e92fede2a' as uuid),'DROPDOWN','displayType',null,'boolean',60512,now(),57698,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('71438a91-8662-4ca6-ac32-b0cb59dbe630' as uuid),cast('83fa6a82-b52c-4b13-80f6-b513fb59f6a1' as uuid),'EVENTS','events',null,'[]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0a37f5b7-bf27-45c4-90b2-77392f019214' as uuid),cast('83fa6a82-b52c-4b13-80f6-b513fb59f6a1' as uuid),'VISIBILITY','visibility',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('15944296-b444-4610-ab22-f090e3973f02' as uuid),cast('83fa6a82-b52c-4b13-80f6-b513fb59f6a1' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c79e37ba-a9bc-46ab-933b-9d00832cf857' as uuid),cast('83fa6a82-b52c-4b13-80f6-b513fb59f6a1' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c2bd8b13-b15d-4e4b-a623-bd66343aeba6' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'TEXT','label',null,'childReferralInfraType_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0dc6a297-22ca-44c8-b74f-fba70f467df6' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7193d268-c385-4aa7-b923-68a388d5c37e' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7b6fb8e0-f277-44d5-9916-57fbf9a5081e' as uuid),cast('1e2241f9-f0e2-4319-974b-c1d8f89361b5' as uuid),'TEXT','requiredMessage',null,'Please select death date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('49018dc5-e9a3-449c-baec-fd0ff1533912' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'TEXT','tooltip',null,'Institution Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('85c12280-0af5-405f-b6de-fd532efe69bc' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'JSON','staticOptions',null,'[{"key":"-1","value":"Other"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cf714303-22f8-4c33-a77a-50299b801dbb' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'TEXT','label',null,'childDangerSigns_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e18b5fe1-a10d-484c-9ab2-d8de9f506185' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'TEXT','tooltip',null,'Other Death Reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9461f03d-a0d0-4f28-a864-fcebb4fadc54' as uuid),cast('cc2e9991-fd07-401d-bc81-918813f24f27' as uuid),'TEXT','displayValue',null,'Delivery Date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e7bc90fd-2543-464d-9f8c-25ff2f22a4f8' as uuid),cast('cc2e9991-fd07-401d-bc81-918813f24f27' as uuid),'DROPDOWN','displayType',null,'date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fe0fd1ff-0bef-4d52-9dda-3cd56eb855da' as uuid),cast('cc2e9991-fd07-401d-bc81-918813f24f27' as uuid),'EVENTS','events',null,'[]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8c55618d-7926-4f78-a232-72910ab9ef45' as uuid),cast('cc2e9991-fd07-401d-bc81-918813f24f27' as uuid),'VISIBILITY','visibility',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('533926c7-fef7-43b2-8497-8b78bdd06a58' as uuid),cast('cc2e9991-fd07-401d-bc81-918813f24f27' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('86a81c03-bd6a-464b-91f3-d8c24d6b9bf6' as uuid),cast('cc2e9991-fd07-401d-bc81-918813f24f27' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e5276083-c548-4c82-a977-65b3385bcbd5' as uuid),cast('01dc5324-10b7-4e2e-9929-c05d711a2183' as uuid),'TEXT','displayValue',null,'PNC Visit No.',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('46ae3291-773d-4c16-b665-f0490ccf68ae' as uuid),cast('01dc5324-10b7-4e2e-9929-c05d711a2183' as uuid),'DROPDOWN','displayType',null,'text',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0ab7347f-d7dc-4588-aea1-be519bffb561' as uuid),cast('01dc5324-10b7-4e2e-9929-c05d711a2183' as uuid),'EVENTS','events',null,'[]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ddabc56a-7fe7-4693-9f39-5e7f84e52c2e' as uuid),cast('01dc5324-10b7-4e2e-9929-c05d711a2183' as uuid),'VISIBILITY','visibility',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4f2ef1c8-3ce6-4b0d-8c10-b5e95865e7ed' as uuid),cast('01dc5324-10b7-4e2e-9929-c05d711a2183' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b91a5e62-1ebe-43b1-a567-ed35e51e7645' as uuid),cast('01dc5324-10b7-4e2e-9929-c05d711a2183' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('26475130-f926-4a16-b4c9-7243c8e057c5' as uuid),cast('c5cd8310-0257-4b33-a66e-d21ccd23572e' as uuid),'TEXT','displayValue',null,'ASHA Details',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('88c78677-f254-48c8-8858-68775ff30a79' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'TEXT','label',null,'otherDeathReason_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ae255d87-f52d-4fa1-959a-f2aeecbdf4d6' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c2b6f6fe-277d-458a-8e2c-5d9764c6292d' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('593374f9-f752-47dc-a4aa-9ceba65dc7a0' as uuid),cast('c5cd8310-0257-4b33-a66e-d21ccd23572e' as uuid),'DROPDOWN','displayType',null,'text',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0f19a620-52b8-470c-8a9f-8e1691ad5a41' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5ffebf52-cf9f-4694-be20-f5e86caecb5f' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"false","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f2fa0fd1-99e6-4054-8186-2da70859b376' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('51d009cf-b0c0-49fa-adf6-4c7816d41dfe' as uuid),cast('c5cd8310-0257-4b33-a66e-d21ccd23572e' as uuid),'EVENTS','events',null,'[]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b78096e5-ba5d-4649-99d0-d6784b3c077a' as uuid),cast('c5cd8310-0257-4b33-a66e-d21ccd23572e' as uuid),'VISIBILITY','visibility',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('86f98d00-e072-4b34-94ca-dc1ae844d4f1' as uuid),cast('c5cd8310-0257-4b33-a66e-d21ccd23572e' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('65706d30-8b78-473b-a31b-5315d274e146' as uuid),cast('c5cd8310-0257-4b33-a66e-d21ccd23572e' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d63cb358-b5a3-48e8-a19d-3fdf76a0e962' as uuid),cast('dfacbf8d-cc0f-4a97-aebe-6b09aa824ce5' as uuid),'TEXT','displayValue',null,'FHW Details',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('693ca323-a85f-4def-858e-410e91f3980b' as uuid),cast('dfacbf8d-cc0f-4a97-aebe-6b09aa824ce5' as uuid),'DROPDOWN','displayType',null,'text',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('96c28541-2623-4aaa-9b1c-78596fecd5a4' as uuid),cast('dfacbf8d-cc0f-4a97-aebe-6b09aa824ce5' as uuid),'EVENTS','events',null,'[]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8c37f655-3258-4cf4-bf85-92e56dc80989' as uuid),cast('dfacbf8d-cc0f-4a97-aebe-6b09aa824ce5' as uuid),'VISIBILITY','visibility',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0a2f6645-96d5-427a-b71b-29a735c72d09' as uuid),cast('dfacbf8d-cc0f-4a97-aebe-6b09aa824ce5' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('45c8754b-4d89-4560-9a77-510283c7d48c' as uuid),cast('dfacbf8d-cc0f-4a97-aebe-6b09aa824ce5' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0540095e-91d6-426b-9119-926face87a5d' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'NUMBER','maxLength',null,'30',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0ef0ae2f-d732-4985-a941-583f44689a2f' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('108d36b0-5d68-457c-ac78-2497ec02b63b' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'NUMBER','minLength',null,'3',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4971702a-2173-42ea-bdf6-95ba4f818c44' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'TEXT','placeholder',null,'Other Death Reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('52a10346-c511-40e9-a943-941bee041c12' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('564d5879-1f05-40fc-8086-b5c36ba17637' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'TEXT','requiredMessage',null,'Please enter other death reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5c12c09f-261c-47aa-95e4-310d7de1cbcb' as uuid),cast('7aea2266-cd2d-4eef-a18e-c505fd33cffe' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9df5497c-1462-4742-b573-e68b6bd26c90' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'TEXT','tooltip',null,'Mobile Number',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('869466c0-742e-43e2-8113-b219f1e2649f' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('983a8500-618e-4ab9-a4fd-dfdbcb0c99c5' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'NUMBER','maxLength',null,'30',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9d244d4d-f868-4a03-aad2-dfc589de1b14' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6cf8b14c-eb29-4d3c-8d6d-e60b4ff3ef19' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'TEXT','tooltip',null,'Death Reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('828f044d-7ab4-4c7c-820c-3f8e9bcca24a' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:13969","type":"Change","value":"childDeathReasonChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('915569e6-4f8c-4c15-b02e-6deb43e29507' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e4221611-8208-4ee5-88c2-2bee456b936c' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"false","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ebf370c1-810e-414d-97e0-a1420b24cdc8' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fbbc3254-0304-4686-ac58-5b0d3c9518d4' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'TEXT','listValueField',null,'deathReasonsChildFhwPnc',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('411245ad-a2ed-4823-a1a4-e92cdd8361bc' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'TEXT','tooltip',null,'Danger Signs for Child',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('97dea9ed-e563-4c8f-9572-65979d92de9c' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('99b457f9-0fe8-4784-868d-dcd0f7672d2a' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aac62cc6-caaf-4436-b0cb-b6484f311a9f' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:5837","type":"Change","value":"retrieveDeathHospitalsByInstitutionType"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ac145ab2-98f4-4952-9cc2-9504cc8f1d0c' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"false","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null},{"type":"FIELD","operator":"EQWithType","value1":"''HOSP''","value2":null,"fieldName":"formData.motherDetails.placeOfDeath","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e78753b0-ff47-484b-89c9-1cef0827141e' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f9de9def-d319-42ac-845a-272f1fad403f' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'TEXT','label',null,'deathInfrastructureType_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0ec06d25-6e68-4bbb-9c13-59a9eb7a2566' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'TEXT','placeholder',null,'Institution Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2452e464-e405-431c-8342-2bd914e259a7' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'TEXT','listValueField',null,'Health Infrastructure Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('48f61317-ef71-408e-9c29-845abf36e60f' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4a4c1570-f796-44d5-8947-95fa40a777a3' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6171108f-0658-47a0-bc73-99a3e8b0f47d' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6820c0f9-56f7-4b3b-acb9-733f9f4e2545' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'TEXT','requiredMessage',null,'Please select institution type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('732e1360-8b62-4b93-8e6b-8e0d95d6431b' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'DROPDOWN','optionsType',null,'listValueField',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7a5757e0-da14-4a05-b347-5e995ea819e9' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7d329bc7-b2eb-4826-942f-08079cb6e3a5' as uuid),cast('d24b58bd-afe7-4efb-aeb2-9894b70d703b' as uuid),'TEXT','tooltip',null,'Institution Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('24c61130-d551-41ab-a373-8248696cbccb' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','mobileQuestionNumber',null,'1',78434,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a3afbaa8-d7b5-44ca-ad80-e5072fcd4375' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','mobileTitle',null,'2',78434,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('be4d7f47-eb4b-4e32-9e4f-49dfeed27409' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','mobileSubtitle',null,'2',78434,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6acd094c-bc6a-42bb-8fca-13c1c00b1f9d' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','mobileInstruction',null,'2',78434,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a75b4cac-cd81-4356-8e91-b736c31196f1' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','mobileEvent',null,'2',78434,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('009ea3d0-76fc-4fe5-8e87-f5feb805570d' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','mobileHint',null,'2',78434,now(),78434,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('abe72683-6fc6-4510-98ad-dc83b44584ca' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c8bf0d70-320c-4a3b-93a0-b1e1c6fbd5c1' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"''HOSP''","value2":null,"fieldName":"formData.deliveryPlace","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ccd52298-aee6-49e0-905e-494720bd06da' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('54e64483-d1c5-48cf-9581-bf63ddfdc406' as uuid),cast('f7cb57d4-7484-485f-a821-9bcbb28a0d11' as uuid),'TEXT','displayValue',null,'Family ID',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c7186229-3aa5-419e-8bd2-dc719e4411fa' as uuid),cast('f7cb57d4-7484-485f-a821-9bcbb28a0d11' as uuid),'DROPDOWN','displayType',null,'text',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('781e820c-5236-4093-8ed0-9b7abbc6758d' as uuid),cast('f7cb57d4-7484-485f-a821-9bcbb28a0d11' as uuid),'EVENTS','events',null,'[]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5def721d-9e98-44a8-a0c8-0aefbb05ed21' as uuid),cast('f7cb57d4-7484-485f-a821-9bcbb28a0d11' as uuid),'VISIBILITY','visibility',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4763da8e-33ce-47cd-aef6-5a729e18327c' as uuid),cast('f7cb57d4-7484-485f-a821-9bcbb28a0d11' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ff511d2c-ea48-4657-94eb-e2afb2d708bf' as uuid),cast('f7cb57d4-7484-485f-a821-9bcbb28a0d11' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c50c6b34-d6ba-4f40-89f2-becb1ead4066' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e1f99626-4264-4230-abd3-39873c52b954' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f1021e30-db1f-412f-9e22-0702352cfd58' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0147a14a-334f-4ac2-ba6a-2e9fbe954b9f' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0c45f95e-9026-48c6-9236-5f10d6b92394' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'TEXT','placeholder',null,'Mobile Number',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('17043bcf-1f0d-4e86-9167-ff4026e813aa' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'TEXT','label',null,'mobileNumber_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('88ba62d7-61e1-4d0e-954e-c1cac1300973' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','label',null,'serviceDate_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b66bcfff-463d-496b-b836-05bd8ce63470' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('daf5990c-ae04-495d-b2eb-2ca0b93ca1d0' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'VISIBILITY','visibility',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('db36ebce-e489-4348-9bb2-a745b731a424' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('edd7afe0-3c09-40bc-b37a-33e5501d3b53' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','minDateField',null,'minServiceDate',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fb5c5876-442d-41e8-af57-9c573b808e39' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:1136","type":"Change","value":"serviceDateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fc6e6081-27b6-4849-99a0-45d92493b249' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('06546ee0-dd31-4796-b869-a65b5a70b307' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2189d3c5-2ef1-470a-84bd-aabde7ce3626' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('31fd80d7-04b8-420e-918e-ea09621a87a0' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','tooltip',null,'Service Date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3c93ca27-c079-48ed-a796-d3837f83c00e' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','placeholder',null,'Service Date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('79bdcbbb-abad-4045-acdb-fe739a305a77' as uuid),cast('1a749776-f206-4090-b4cc-3e2b25538952' as uuid),'TEXT','requiredMessage',null,'Please select service date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e8ebc6d3-3b0e-466c-90e1-4828c61abc47' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'TEXT','label',null,'institutionType_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('289130d9-96bb-4f80-980b-02fafcda1227' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2d2aca21-5c5e-4a92-9b80-43e21ebc31c4' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:5303","type":"Change","value":"retrieveHospitalsByInstitutionType"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3b34794b-2651-4ad0-926e-9ef2a68a7f86' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3bde26ad-b56a-44d5-b940-0dd38b2d3824' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('40b67655-b13a-4fd2-b92b-009e9f47812a' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'TEXT','placeholder',null,'Select Institution Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5afa5eed-57ae-4bb2-be74-5e059eb98d19' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6a3d8a70-3365-4821-ae13-4d8876c974ce' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('78fcceb2-9676-499a-8b4b-75b7c62f577c' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'TEXT','tooltip',null,'Other Danger Sign',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('60f0bae6-12a6-4ea4-bf67-7430d8d5cf4c' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'DROPDOWN','optionsType',null,'listValueField',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('837b791c-3ebd-4c8c-bdb1-26c44e37cf42' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'TEXT','listValueField',null,'dangerSignsChildFhwPnc',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('92924905-7932-4dfa-8f8d-c7f8bd6e0064' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:5425","type":"Change","value":"childDangerSignsChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a3c0f646-848a-492e-8398-59d5ab7f42db' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'BOOLEAN','isMultiple',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aa3f6d5a-c60f-4865-aa19-af32c637ad96' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c013b736-3fa0-4763-b064-e61626a733c2' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'TEXT','requiredMessage',null,'Please select danger signs for child',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f5102ff1-7381-4f16-93b9-c89b70c382f4' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'DROPDOWN','optionsType',null,'listValueField',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0235ab91-5482-4957-8575-5c51c852e9fe' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3ee234e2-0be6-4142-aabf-726109da3324' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'BOOLEAN','isRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4e542f52-a93d-4f44-a858-e1c04ed40969' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7ec369c0-72e2-4b1e-86ad-eed36a9e11e8' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'TEXT','placeholder',null,'Select Danger Signs for Child (if any)',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ef1ba06d-ba83-4ca4-8b83-eea9b29353bf' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'TEXT','label',null,'childWeight_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c7768c6e-a884-42db-a364-f0c43e78ec07' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'TEXT','tooltip',null,'Weight of child',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e7df54e9-5546-4be0-9cdf-919f908a6749' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6b8c033b-9804-4f2d-916e-d48178cee7e7' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'TEXT','placeholder',null,'Weight of child',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1d18fcc8-3c70-4b44-bcad-d9cc73508610' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b606e9b0-add1-434f-8b3a-b3f3e2f1e24a' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'TEXT','requiredMessage',null,'Please enter child weight',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('38ccec05-e77e-4bd8-a4dd-6d7facfca0e8' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bd14c06e-ceaf-4d10-91ec-9edd01634990' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'NUMBER','min',null,'0',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2861aa64-4249-457a-9d04-557c8e140fc6' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'NUMBER','max',null,'25',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e6306237-b8b4-4bde-a062-2c439515d93a' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'BOOLEAN','hasPattern',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f94c9db6-ed71-414d-8357-be24c5253570' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'EVENTS','events',null,'[]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a6ec6d45-5797-4e2f-88d2-3a93531f3723' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dff2b72f-983e-4582-9a62-1a54a27cc99f' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('087d88f7-dbac-4f86-a2d7-ee17f9f4b41a' as uuid),cast('6bf1034c-a153-4dae-af92-ea679fd43838' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8f6fb352-67a9-4268-ba67-3fc9bc520f81' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a1eaa89b-3ffb-4895-a5c2-627ee2806591' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ce6904b5-ad55-4856-91db-b6ab6324ee27' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'BOOLEAN','hasPattern',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dbbab55c-1f73-492e-9728-10c1cd7f4267' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'NUMBER','maxLength',null,'30',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e33aa144-813a-4f4a-8f34-c450a07eaf1e' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'NUMBER','minLength',null,'3',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1bc00c53-1394-4c88-993c-7330d89c0709' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'BOOLEAN','isRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4255e847-1e27-4e26-a978-d89a34dc4f75' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3a889f8c-58ba-431e-976f-9ea39df0d464' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('440afcbb-f485-4696-be3a-2affb11ba1d9' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].childDangerSigns.includes(''-1'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('559b3ed4-b95b-4629-be8a-b77a46f5925b' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5bff824c-9aad-454b-b901-894fc8e76324' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'TEXT','placeholder',null,'Other Danger Sign',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('67796884-5e6e-4c15-8980-aa5dbad38c93' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'TEXT','requiredMessage',null,'Please enter other danger sign',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8157c98e-1071-4d0a-b9d0-d59642b64998' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9fa52266-8925-411b-a8a3-da6f3256d658' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'DROPDOWN','optionsType',null,'queryBuilder',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a1ba6b6c-fff4-4a60-b60c-97b17dcd1e3f' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'TEXT','queryBuilder',null,'retrieve_hospitals_by_infra_type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bc7785d1-963d-4e55-99f3-2cbf0a295379' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'TEXT','requiredMessage',null,'Please select hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d0463dd0-7b74-4461-8d7c-4363d290ce56' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'TEXT','label',null,'childReferralHospitalByType_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e01c7fa0-a0fc-4798-86c3-0bafdf8fece6' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('efb42941-ca4c-453e-8027-35be4d65a406' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f45acaee-90c1-42c3-82e2-f8fa4a72dc5c' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'TEXT','placeholder',null,'Select Hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2c332884-f7f7-4c8b-aa3f-1b2611baef40' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'TEXT','tooltip',null,'Hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4d0a2609-f35c-4977-ac5e-afbf4baf9d92' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6586a62b-9356-4128-95b3-88e18325fdc8' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7260beb2-1a94-409b-8121-79d39989c762' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b1e041b3-908a-4b43-b917-4166ce68b817' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bce31f4f-189a-411a-b5e8-45f0fc32ce16' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5707ce27-b821-45a5-af23-b638b31b30de' as uuid),cast('0118b3cc-a65e-4dbd-8f44-7e2ddd13f173' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('01b32130-eb87-4e5c-a68a-63e48b780180' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'TEXT','tooltip',null,'Hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('09c00ea9-bddf-4f38-912a-30bfaa97f1db' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('800b7e45-07e1-48bb-9d5b-59d63e2e8a63' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'TEXT','requiredMessage',null,'Please enter other danger sign',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9969e4fa-f78b-4b40-8704-5246c01f3c30' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'BOOLEAN','isRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aa050060-3b1a-4a55-8d7d-eb98164c7439' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'TEXT','label',null,'motherOtherDangerSign_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0a460154-ec11-40ee-8d66-571987c1d1b1' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0a948be6-8975-482e-bae7-e1dc990c5d6c' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"''HOSP''","value2":null,"fieldName":"formData.deliveryPlace","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1744b792-3e8f-4b49-b220-2d92d4c4b183' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'TEXT','placeholder',null,'Select Hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('99c5d90a-b048-4747-8eb0-d08edcb7bc2c' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ab54972b-b202-4082-a91e-3cc5f9a02713' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'TEXT','pattern',null,'^[0-9]*$',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('acf9ecc2-f5c2-4283-8952-efcf625116c5' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'TEXT','patternMessage',null,'Please enter valid calcium tablets',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6dfec864-0ae5-4860-ae68-e5093d539e78' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null},{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isCalciumGiven","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b894ea8f-e4b6-42f7-aef8-ad14ed229978' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9fb45275-4b2a-496f-a1e3-5d7c6dbd9063' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('adcffd35-4e53-45c2-9ce0-5edc8140b8c0' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ba761be5-8aec-430a-a745-616e93ab42a2' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'TEXT','tooltip',null,'Place of Visit',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c1c6909b-179d-45f5-88d7-d06552a5a451' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:2644","type":"Change","value":"deliveryPlaceChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dce9b5c3-3cbb-4cae-ada2-bb4d0114b783' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'JSON','staticOptions',null,'[{"key":"THISHOSP","value":"This Hospital"},{"key":"HOSP","value":"Another Institution"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ee7c957b-6284-4824-9e54-0adf356dd6a9' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('99e616db-5b8c-4c08-9c8a-9d8c89872af2' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'TEXT','listValueField',null,'dangerSignsMotherFhwPnc',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bb63d8c3-3e77-4c41-824f-b79a6d3ed37a' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:1356","type":"Change","value":"motherDangerSignsChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('626504fb-1323-44ef-ae10-30f169f4765d' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'JSON','staticOptions',null,'[{"key":"-1","value":"Other"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9a279518-55e5-4c44-bab5-b4c3c55e09fc' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a5527d04-0b41-418c-8829-99f4d5f0f0aa' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'TEXT','tooltip',null,'Institution Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8903b949-3d3d-4c4c-80e9-7d605f28ceef' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'DROPDOWN','optionsType',null,'queryBuilder',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d097114b-0ba3-4b5a-ba0e-5ccd192c0d22' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dd96bcb4-7e2f-4626-82c0-193c41546a90' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'TEXT','queryBuilder',null,'retrieve_hospitals_by_infra_type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e03a7e35-3f7d-4f06-a891-33ed7446b4a7' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f3ecf976-5d65-4238-9ecc-76bd2e124d62' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5001678f-8505-4c1d-b45e-09daca231684' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'TEXT','label',null,'hospitalByType_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6596fc31-8c9e-4045-abfb-48632150a8cd' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'TEXT','requiredMessage',null,'Please select hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('660265ad-3128-40d3-888a-2c39cba63ff6' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6d0e99f0-535c-464d-921b-aa58b92452d7' as uuid),cast('20c8df03-781d-414b-8455-3d7f09fd4099' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('800767e2-6a09-45e6-8168-0c7f15d7b88c' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'TEXT','label',null,'deathDate_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8b3c8fde-2b31-4902-afd6-2dda8d9ddc39' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8e428794-731e-47e5-9ed1-ab2bd77dd02f' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('abebac30-9932-4a3c-8e16-06cd01fcbc11' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aec5450c-4c0b-41bd-b356-e70767ce9116' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f2d8d2ee-0c31-4787-8f05-2f136bc2ffe3' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'TEXT','placeholder',null,'Death Date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f380482d-074b-4b2d-a53c-b2e8793efd65' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2335949b-2722-456b-ad9e-f42688ec8a0b' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'TEXT','maxDateField',null,'formData.motherDetails.serviceDate',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('40630da4-cbaa-45c7-bf4c-7a05483a9d9c' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'TEXT','tooltip',null,'Death Date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5bcec6d4-5a07-445a-9365-15eedd3b29c7' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5bf4704e-fbd3-4963-aa45-28bd9f7c9e7e' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'TEXT','minDateField',null,'minDeathDate',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6d2de58e-9279-4375-b1cc-5785502bdb9b' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'TEXT','requiredMessage',null,'Please select death date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6e0cb732-62d8-4c70-b165-3d650fa71ece' as uuid),cast('ad83b3d6-ae8d-4d8d-a2bb-cdf50a85cf6f' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"false","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('84813677-04cc-4889-bb98-9efac13f072f' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'TEXT','pattern',null,'^[0-9]*$',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('84fe093f-ed78-493f-a005-145887206b8d' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'TEXT','patternMessage',null,'Please enter valid ifa tablets',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f72a4588-c530-4a9b-83d9-1de2320f247e' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null},{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isIfaGiven","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2e0963d9-5c44-44cb-a68d-c39ad51dcd40' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'TEXT','tooltip',null,'No. of IFA Tablets Given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4f92c2c2-75d1-4fbc-99e8-085121c6df86' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('549f14a0-3755-418b-a423-50560c362ff6' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5e47de41-2218-471c-957a-103d68e479d6' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'BOOLEAN','hasPattern',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('637974d3-c9c6-472a-ab19-9f26b9af60fd' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'TEXT','requiredMessage',null,'Please enter No. of IFA Tablets Given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('698db551-3adb-4bfc-a5c3-a200e7c18d77' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7eceb5c9-a229-432e-98c8-0f575ddbb51b' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'NUMBER','max',null,'360',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('10528135-d910-4044-ae2c-4744bd83f118' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'DROPDOWN','optionsType',null,'staticOptions',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('157391b6-fcfd-4d3d-9259-866504548905' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('38d5bc99-17c1-4069-a240-c751dd6209e7' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4ab2dc3c-9127-4bd1-83eb-d3a81ff7f19a' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'TEXT','requiredMessage',null,'Please select family planning method',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('81df4a94-4229-47da-96bb-07b2dc2da602' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a1c11e13-0d62-43ad-9765-81182b82ebcc' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'TEXT','queryBuilder',null,'retrieve_health_infra_for_user',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('accbd491-df8b-415e-95a6-ebc0ffaee706' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b2f6bdb6-21b1-4075-8798-5916d24f501f' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('be25bae0-3ae6-4860-97d6-94bb24419cd7' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c0b471f5-fc58-4e23-8076-4c446250f2f0' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"''THISHOSP''","value2":null,"fieldName":"formData.deliveryPlace","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('011aaefc-8578-494f-81b2-a9a90371b660' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'TEXT','requiredMessage',null,'Please select hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('03cc8cfe-957f-4657-b7c6-7bbb8b0778d0' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'TEXT','tooltip',null,'Hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2105e232-5c78-4903-9b85-f126b5d50909' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('551fb515-b6b9-4d4d-af11-1268fc369414' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'TEXT','placeholder',null,'Select Hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5b0d6eb9-e6ce-46dd-8c3e-7e810b251b54' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'TEXT','label',null,'hospitalByUser_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('11af04f8-b9bd-427f-892a-dae64c8f86dc' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9005b36e-4a7f-4b6e-9fe8-ce1124f5c630' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'TEXT','queryBuilder',null,'retrieve_hospitals_by_infra_type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a252d37d-3c8f-4e0d-86d4-5d11ad1a72ab' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'DROPDOWN','optionsType',null,'queryBuilder',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b41a47ab-2742-445e-8ce8-bf111a4a332e' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bb5f318e-ed48-4f23-a874-3aaf92eb540e' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d5797ae8-a2b4-4076-9014-69ebd8365538' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ec221f6f-ffab-4063-9877-94cf81b950b1' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'TEXT','tooltip',null,'Hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ef919b32-1a33-4084-ac4f-956319c9e67e' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('062c7af7-592f-4152-ae16-9c8bf25e8d80' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'TEXT','requiredMessage',null,'Please select hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1abcc583-16fc-4291-bbe7-bf3575e87a51' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'TEXT','placeholder',null,'Hospital',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('217c6ec4-5d96-4bc8-99f2-2d1ea6c7db3f' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'TEXT','label',null,'deathHospitalByType_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('486a1826-7994-4a45-8bd9-1ac0463113c1' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('29edcfef-5f09-457d-9956-24c3426a78cc' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"false","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null},{"type":"FIELD","operator":"EQWithType","value1":"''HOSP''","value2":null,"fieldName":"formData.motherDetails.placeOfDeath","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2d3cc5fd-70bb-4797-944c-43d5cc588ef7' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('374b4300-14c2-4c7d-b464-246f8e40b31f' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3a179570-154d-480d-b859-0f3b9143bfde' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('422371da-4aa9-4f6c-b5d0-eec3a0398b09' as uuid),cast('9e27322d-af80-42fe-ac0f-40e57b52cd95' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('41a95bd2-0cda-46ea-a5b6-fed851d45776' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('51615056-e486-4a0c-990f-556f9581b3b9' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5467629b-cd55-4d66-9a19-85a0761dae85' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'TEXT','requiredMessage',null,'Please select date of insertion/operation',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('89858789-afd7-472a-8c87-2a2e9542ee60' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('92997c06-3677-4aa2-ab50-7d33e401e906' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ec643469-70af-4003-99fd-6627e43a7535' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'TEXT','requiredMessage',null,'Please select a value',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ed3062a8-1e5e-4137-b17a-856d6b8c5791' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('00fb3ef9-e5ba-42a4-8e87-7df03f115fde' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3ca16d69-4f62-4566-9b00-99755b6c4c56' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'TEXT','tooltip',null,'Is IFA Given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('52f98336-1f69-4c43-904f-96998a401ca5' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'TEXT','placeholder',null,'Is IFA Given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5f21f186-8e18-40ac-8384-350ec990006e' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'TEXT','label',null,'isIfaGiven_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7b94c906-bf8d-4d3b-b39e-631e1a53ef07' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8d42fb46-0e63-461f-9269-0a5d2931db56' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"false","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('912fb6f6-0eeb-4eb0-9d2c-e47ab7faac79' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('92fcec8d-b20f-4b2a-8d74-fb7cc80d1872' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'TEXT','listValueField',null,'deathReasonsFhwAnc',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('94dc6ed4-8006-4810-8460-11a408411832' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'TEXT','label',null,'deathReason_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9b71b7a8-eb3d-4f36-a395-3f7cd278df68' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8a52fcab-e7a4-404e-a28d-441f6413ad98' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'DROPDOWN','optionsType',null,'listValueField',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e27ce455-c3ea-429d-868b-c343607c14ac' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8ef30771-836f-4681-b3db-6b2c487369cb' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'TEXT','label',null,'motherDangerSigns_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a3d6e219-d257-4d79-9cde-cb823c7f41ac' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'TEXT','requiredMessage',null,'Please select danger signs',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ad0a3a92-c96f-4e13-aada-97cd60480597' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'BOOLEAN','isRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f9fba93c-92d1-4c0c-a0c3-0f3dc77ea038' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('97dac34b-7afd-435a-800a-67328749affd' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3bce0d43-ff10-478a-bc92-3bc536eba328' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'TEXT','tooltip',null,'Danger Signs for Mother',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('41ea98ee-75b6-453c-8f39-2aa2afd11f48' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('75d0c5eb-e6d7-4ff9-9f06-d3e4c3154baf' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'TEXT','placeholder',null,'Select Danger Signs for Mother (if any)',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5c8d459d-9b9a-4999-95a3-7178b8980841' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a10558f3-245a-4b3c-adf2-98e832d15c2e' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'TEXT','label',null,'ifaTabletsGiven_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e3708ead-a09f-49c9-986b-dbad47e21beb' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'NUMBER','min',null,'1',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('00e03e6c-9a05-43e7-8940-cbf313be8410' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'TEXT','placeholder',null,'No. of IFA Tablets Given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('21715613-92d4-41f7-a2bc-40271cab2f5c' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a2a1d0bb-92eb-4a6d-9b0f-6edaf5524450' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:6938","type":"Change","value":"ifaGivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('50e2676f-9ca7-46ba-951c-10b5c4d422d2' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('639275d8-f045-4cc5-bdf9-478cd00ac7b4' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7832b081-d68b-44a3-bfc9-92a73ff89851' as uuid),cast('d2eb3aad-b406-40c2-9096-3374d5ab4089' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('23ab241e-7c53-4175-afa3-6a94dea9939e' as uuid),cast('7af9eaf3-f1c9-4bdf-9323-8461d150e60b' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('724f66e0-30e8-4014-b993-5a169efb926f' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'TEXT','placeholder',null,'Select Family Planning Method Used',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7ddb24f5-56ae-4a42-8847-e062616bd4fe' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'TEXT','tooltip',null,'Family Planning Method Used',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d5a7a893-a1f7-4d84-a78d-174e1264bdca' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c227a0aa-e4d8-40ae-8b47-03de41f45bc2' as uuid),cast('4bad718d-0380-4f04-9055-e616e5a1435f' as uuid),'TEXT','label',null,'childOtherDangerSign_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('85bb7589-9935-4d87-92ca-502e6ee27f28' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('912e644d-8d66-463a-bdfa-5b570b501fa8' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'BOOLEAN','hasPattern',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0d49daf0-d922-422a-bf6a-a21836f26734' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'TEXT','placeholder',null,'Other Danger Sign',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2735a9fb-f8f4-4c10-822d-3fce3724a3e2' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'NUMBER','maxLength',null,'30',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('92b4d6ae-de43-4d44-a5e5-2c39b15a41bd' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'TEXT','placeholder',null,'Are Calcium Tablets Given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9a81c929-e530-4755-bfae-3a198cb81ff4' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a038fab2-1386-400c-8880-8eeee8feaf93' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:7478","type":"Change","value":"calciumGivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a3ec59cd-6e41-4cb6-96de-eb3d0630c46c' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a85c6532-d28d-4287-8bd4-c3e43d91469b' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aae6584b-eea9-4fd1-9ee4-c44b6add42b0' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bc3485cf-213b-49c3-91e6-269367011bd7' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c3da3b3e-a525-4698-84d5-c3afae58c1f0' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'TEXT','tooltip',null,'Are Calcium Tablets Given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ec64ec34-5b6b-486f-b344-7259a5fb67b5' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('33896250-1870-4554-83e8-cc0913be290b' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3671aa88-1fc0-4c9b-bb54-a5d3bd7c0bad' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'TEXT','tooltip',null,'Other Danger Sign',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('47c1fd3b-3848-499f-ba9f-bb31bd33ef86' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('97bd7121-e9be-4358-85d0-5df3fe1c0808' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'TEXT','minDateField',null,'minServiceDate',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9eb5a208-3712-4d2b-ad1c-4feaadd2e9ad' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a610b967-5880-4179-815f-8bca8f005869' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('afa80516-928a-4d87-a89f-229e17a519e0' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'TEXT','label',null,'fpInsertOperateDate_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d3b6d910-fb47-4d45-8223-0e0b7430933a' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null},{"conditions":{"rule":"OR","options":[{"type":"FIELD","operator":"EQWithType","value1":"''IUCD5''","value2":null,"fieldName":"formData.motherDetails.familyPlanningMethod","queryCode":null,"expression":null},{"type":"FIELD","operator":"EQWithType","value1":"''IUCD10''","value2":null,"fieldName":"formData.motherDetails.familyPlanningMethod","queryCode":null,"expression":null},{"type":"FIELD","operator":"EQWithType","value1":"''CHHAYA''","value2":null,"fieldName":"formData.motherDetails.familyPlanningMethod","queryCode":null,"expression":null},{"type":"FIELD","operator":"EQWithType","value1":"''ANTARA''","value2":null,"fieldName":"formData.motherDetails.familyPlanningMethod","queryCode":null,"expression":null},{"type":"FIELD","operator":"EQWithType","value1":"''PPIUCD''","value2":null,"fieldName":"formData.motherDetails.familyPlanningMethod","queryCode":null,"expression":null},{"type":"FIELD","operator":"EQWithType","value1":"''PAIUCD''","value2":null,"fieldName":"formData.motherDetails.familyPlanningMethod","queryCode":null,"expression":null}]}}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ea5e281f-ced3-4c36-8e8e-08d08af56915' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('00336f87-555f-4d28-9a52-d38fc5843e79' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'TEXT','placeholder',null,'Date of insertion/operation',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('042f23a5-147b-4e5b-b733-c55557e40d87' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'TEXT','tooltip',null,'Date of insertion/operation',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0b13a4ea-4c7c-4f19-adf9-a36253d78367' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('18ae09e0-0b76-4baf-b457-cf2b2847d986' as uuid),cast('786e0b61-6179-47d6-a23b-62c5a5bfcdce' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('83f596cf-f0a8-4c46-b5d5-f25ac84eeb86' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'TEXT','label',null,'bloodTransfusion_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('91841ce8-81e4-4e6d-9abb-04d521e5a90b' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'TEXT','requiredMessage',null,'Please select a value',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('998f2b0c-261e-4ac6-8085-13d954762626' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'TEXT','tooltip',null,'Is Blood Transfusion Done',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c847946f-dff5-441f-a690-efdd23e5e145' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d42502e3-934f-4af1-b45e-d4efc9ded9ae' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0530fe66-15fc-4a3f-b709-a6ad6cc4ce1e' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0d6c6892-c8c0-417e-a8a6-45c6eb672077' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0de180e4-4c66-4eb6-b1cc-6faa7b4bb881' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('440959a2-0960-48f2-b8e7-6ad78f89198c' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4e13361c-ae6c-425d-8d79-9a83933c4d4b' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6feed3d5-b0b3-4698-854c-808bfe457987' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('714afb12-bd2d-46a3-9c41-b216586ba6f9' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'TEXT','placeholder',null,'Is Blood Transfusion Done',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a177a34d-13ea-4d4c-b45a-6f9c4f3bb76d' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ef5a33b3-abc4-4134-9e61-5a86008fabc0' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a3c23d9d-d1be-4a54-b559-d97a8e852329' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a7280a10-755a-4c58-b445-392f5ccb68d1' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'TEXT','requiredMessage',null,'Please enter No. of Calcium Tablets Given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('af567a66-13bf-470f-aea0-0bbdc332b3ea' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('213018fc-f588-4fde-a14b-c01c3e8cab0c' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'TEXT','requiredMessage',null,'Please select a value',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('765bef6f-5f9e-4747-9e46-d76f07baaf57' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7f0dfde7-6d63-4302-ab50-21f6a6c4547d' as uuid),cast('7c12a425-b071-4a29-b3c0-7b97b7432ff2' as uuid),'TEXT','label',null,'isCalciumGiven_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7275469b-3fb9-4c8d-92b0-5640e0a02aa8' as uuid),cast('33666527-903b-4a5f-b6dc-d15cc3cb9a36' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('87db491f-7e26-43ff-85cc-0b2ad0f92239' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'TEXT','maxDateField',null,'maxInjDate',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b001a638-a886-4f4d-b760-2d3322a0ced2' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b547111f-582f-488f-9214-ce6b59c2ffbe' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'TEXT','minDateField',null,'minInjDate',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bf778e97-ded8-4632-a490-19c7e1543229' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'TEXT','placeholder',null,'Due date of Iron Deficiency Anemia Injection',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bffe179d-865c-4aa9-9916-fa867fee4997' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'TEXT','label',null,'ironDefAnemiaInjDueDate_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dc91db91-5226-4645-8aee-0515180bf6bc' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'TEXT','requiredMessage',null,'Please select due date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ea645b09-cc69-4376-9474-7655519543fd' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0c1a2b9f-e8d1-4351-b1ba-7f3c74ac5fc5' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2e2a7a84-ee3c-4e1a-a39a-94c67a367e4b' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('40896e47-eaf8-475f-82c9-143cf4d8e6e5' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('481cbb69-a621-4a6d-8c29-10454db6e6a0' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null},{"type":"FIELD","operator":"EQWithType","value1":"''IRON_SUCROSE''","value2":null,"fieldName":"formData.motherDetails.ironDefAnemiaInj","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f8dfefdf-8426-4029-937b-4f2d12a568a7' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'TEXT','label',null,'motherReferralInfraType_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dd8ce1df-7a32-44f8-b735-a34d6a8eb18e' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e3bf17a6-96a7-4c28-b345-b8982e03282c' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e66a49f1-6784-4b9f-a2d3-221176f33acb' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'NUMBER','max',null,'360',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('09d1bdb7-f731-4c6c-9ce9-dce153c49d6e' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'TEXT','placeholder',null,'No. of Calcium Tablets Given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1244a274-14d8-4375-8450-bcf75ba697e5' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'TEXT','tooltip',null,'No. of Calcium Tablets Given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d9a099ac-fd85-46bf-bd5e-2d6dc4958f4e' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('83b150a3-a83a-4282-a599-31d9db8056ec' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('58cf1db6-0887-42c1-b02f-c64b049fd9c7' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'TEXT','label',null,'calciumGiven_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5ec2474a-02d3-4f5f-a521-7ec2ca9826d4' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'BOOLEAN','hasPattern',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7db8eb3a-038b-48db-9491-3b66a6fd5a1c' as uuid),cast('05108711-3ef1-49e2-bfc9-d7e8c7401e68' as uuid),'NUMBER','min',null,'1',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6aaf12f7-fee9-4614-b841-46d6c217b644' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'TEXT','label',null,'isChildAlive_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d8cd0cda-c93e-467f-a899-826b76214f4c' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'TEXT','tooltip',null,'Is Child Alive',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('de65a533-b05b-4fbd-ba3b-09475669d4b6' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('02e8f2b1-a860-40a3-8fd0-876147e05055' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'TEXT','placeholder',null,'Is Child Alive',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ec028693-67b1-452f-bf87-9448fecb1706' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5c5a0587-a010-489f-ad8d-4f0e553fc4a0' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'TEXT','requiredMessage',null,'Please select a value',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('42416e13-e800-42e8-ae66-55fd38c5102e' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('69ab15c4-b266-451c-8376-316a9ac7d223' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8ab8ecf0-3223-4d05-ac05-31ba534e3eab' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b3cf8f5e-9ac3-4cec-bb78-270163c86ac8' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:1764","type":"Change","value":"isChildAliveChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d87373fe-2aeb-48cc-b8d6-bb06f4262950' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'VISIBILITY','visibility',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('81a2541a-c43d-4160-bb02-15f650e7d07f' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a9880622-1a3e-40fa-86db-95e47cba3fa6' as uuid),cast('a88c1f71-1d50-4536-87d2-9f90684b3b03' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('95d11088-0168-495a-bc81-581c659c5832' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'TEXT','tooltip',null,'Is Mother Alive',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9c5ac348-d22f-4fbd-8d5c-6d344c8fd45e' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'TEXT','requiredMessage',null,'Please select a value',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('abf2fcfd-40e3-4f6e-bde1-65da1d7bb5bc' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:3683","type":"Change","value":"isMotherAliveChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b7ac1d86-6c96-43a3-a588-c823add6f881' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'TEXT','label',null,'isMotherAlive_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f25fc5d6-b4d2-4ad2-bdca-f3cfd4bdca84' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fba925cf-2cf2-4e3e-b800-a05fbb013a81' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0775811f-2292-4ae0-b7d3-224d10e08acb' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'TEXT','placeholder',null,'Is Mother Alive',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('09b919b3-983a-49a5-aefc-dffe59bfa4ff' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0f259742-445e-406d-90c6-b1d6eb8d721c' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('16305b9f-ac94-42c9-b8df-e9ebfb4ce59c' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1a6a1c83-9c00-442c-96d2-0d664e103630' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'VISIBILITY','visibility',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1e90b0d2-1262-4a8b-8dcb-8cb08b4457e1' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('73d3359d-5b13-4d9e-ae9f-4b83721fff61' as uuid),cast('d5c307df-3aca-4a49-aff9-a33dc1ebea75' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7d37a051-5308-4ce5-b0e5-d17f372cb17d' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6b3b71ad-c15d-44c5-ba8d-3e776901db5a' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'TEXT','tooltip',null,'Due date of Iron Deficiency Anemia Injection',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9c4ab545-d129-4f8f-a51f-f3896861ab7e' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'TEXT','tooltip',null,'Is child referral done',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('feb412c6-dc32-4528-8915-9b9c642c2401' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('34d0d08e-de16-488e-8155-0b16067b2d39' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'TEXT','placeholder',null,'Is child referral done',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('70bb04a8-7194-4ff8-8066-9f6f8785c04d' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('72d44285-0c64-48b8-889f-7aa39c8816d2' as uuid),cast('c804b9c1-7950-49f1-9492-b2614545803a' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('58c6a704-b196-40b9-ac30-7dfa8e70312f' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'TEXT','label',null,'childReferralDone_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('300355de-b839-4067-90ce-98a67de852b5' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'TEXT','requiredMessage',null,'Please select child referral done',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e18b7bbb-416e-42d5-96cf-295341a3c012' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dd580dd0-fe0d-4a8d-8834-1062faa3f847' as uuid),cast('3adfc55e-65db-494c-b5ba-a976cd35ce81' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('821c7410-3605-425e-a274-506e88d65c13' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'DROPDOWN','optionsType',null,'listValueField',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('866c308c-0921-48e6-8165-3c5b19657e30' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a722f93c-af3c-4b58-aa47-e99df482597f' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'TEXT','listValueField',null,'Health Infrastructure Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a92956bf-c2a7-4fec-b254-0edafcb47b5a' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('da433511-d747-49d5-aa40-3b13ef157f90' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.motherReferralDone","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f35a7358-fbc8-4fa5-a54c-5fc480457f49' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'TEXT','requiredMessage',null,'Please select institution type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0a4d684d-bd4b-469d-b0c7-bfa52a58ddc1' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('383b9d36-c4a5-4290-83ca-dc687e5aa084' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('38782386-73a3-48aa-baa5-718d31a490d9' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('48398fb0-91ba-4806-bca9-b0368182a222' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4aeeaf77-f3ae-413b-8fea-951ac5436870' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'TEXT','placeholder',null,'Select Institution Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5543a931-7c57-461d-8935-6ce122e19414' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('60562ec8-2166-4ecd-b49f-2207272a69d1' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.motherDetails.motherDangerSigns.includes(''-1'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('721ae227-ea88-410b-8c59-897acb41b9ac' as uuid),cast('315905f9-d5f9-4752-b8b3-b74742c8180c' as uuid),'NUMBER','minLength',null,'3',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('89b39172-1406-4097-9219-5a02d1d8c554' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b8407f50-2ef9-43e8-b0d2-a3c662de9ed2' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'TEXT','requiredMessage',null,'Please select mother referral done',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c5395d5b-492d-4e8d-9761-de579bae7ee6' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'TEXT','label',null,'motherReferralDone_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e7400436-e261-412a-94e5-6291e9e0bd0c' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f7913303-a96f-4b07-bb2b-73a342df15a4' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('07532717-5113-49d7-ba77-37d9717878ba' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'TEXT','tooltip',null,'Is Mother Referral Done',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0dc16e28-7985-4140-bcdf-e58203f1c652' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1f176465-28f4-4944-99eb-39d773d530f2' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('43df5185-10b8-4ad6-8f9d-3124a62c43a6' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.motherDetails.motherDangerSigns.length"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5b36bc9e-dfc3-49f8-9342-1d4a9dfa8d53' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:2156","type":"Change","value":"motherReferralDoneChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5ca7dec7-40df-4fa4-9288-5193423b7ed2' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7704337e-58d4-4058-9808-d6a925ee882d' as uuid),cast('afff363f-9f49-46fd-8b23-bf8c2bda7e91' as uuid),'TEXT','placeholder',null,'Is Mother Referral Done',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('af34a575-3939-43d3-bc35-3d603fc8685f' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c13a6c01-eaa6-4c40-9ddc-52a81ea4827b' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e319e68b-5a52-4388-9269-8a99b8de77f3' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:12941","type":"Change","value":"hepatitisB0DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e424e4d8-ff35-4f9a-bc18-ffa87f81460c' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'TEXT','placeholder',null,'Hepatitis B 0 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fa9e0c35-33a6-4ea2-b1be-ee7e451133e7' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('411bccb0-cc64-4eca-82bc-e012d6bb7173' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'TEXT','requiredMessage',null,'Please select hepatitis b 0 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('486ea7c7-3d39-4dfc-b8d9-bc04501b60fb' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5a57d00f-f1d6-46d3-ba41-100b41a58c66' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('62f329c0-b091-440d-aa25-e05d28651dba' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'TEXT','label',null,'hepatitisB0Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('90c50eae-d611-4315-b9c4-95304c287e62' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'TEXT','placeholder',null,'Is Hepatitis B 0 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9e442fcd-66a6-424d-b318-9352ed4f4edc' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a6c0e959-638b-4c28-ac0c-022b153d1a4a' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'TEXT','requiredMessage',null,'Please select hepatitis b 0 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('be5728c9-2742-4b56-889c-57fe44c8efc4' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bf8166e8-429b-4ce8-9518-2c5c2a50cc40' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:11542","type":"Change","value":"hepatitisB0GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dd3de628-4418-4236-9514-425c59777e9b' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ec9c665a-14ed-406e-b6b3-48d9e3d62009' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f91ff35e-1def-489c-9067-28e0f5154660' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('20865f13-cb12-4973-a737-4109f3d4fed9' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'TEXT','label',null,'hepatitisB0Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3e0a55fb-62d6-43a7-a4fa-19c56ccb37d7' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('47175884-ea22-472a-817f-053536c02045' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('536c9d31-c8fc-4742-b0ca-40f3f8520cd5' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''HEPATITIS_B_0'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('882439e4-c8c2-493d-ba32-24bd0aed71cd' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'TEXT','tooltip',null,'Hepatitis B 0 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f7f31392-020f-4d28-b7dc-3ec27e082438' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'TEXT','label',null,'bcgGiven_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1e2d7b5e-0e78-4b05-9e13-057ef8d4a210' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'TEXT','requiredMessage',null,'Please select bcg given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1f26a48e-b679-43e1-b9ad-841b6afec383' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('946f3651-7bb0-405a-aea4-25e319d882dc' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"''-1''","value2":null,"fieldName":"formData.childDetails.deathReason","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aa57644c-4f45-49f9-bfbc-a489bc9dcf0b' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'NUMBER','minLength',null,'3',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('be6ce050-92cc-4fe6-95c3-b9eb799efb38' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d8d52a45-5390-473c-81c2-40cb45990ea0' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'TEXT','placeholder',null,'Other Death Reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1b644bfd-a4cf-4fbb-a9a6-50dbdaf1ae48' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1c09a3d4-5e00-479d-a188-22a62e821fd5' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'BOOLEAN','hasPattern',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('232c0afd-a30e-4364-9573-c763c8954597' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'TEXT','tooltip',null,'Other Death Reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9783c6ba-0c9b-4151-8d25-3fd8b7958e14' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9aec8fce-2ce2-43f8-9fe7-3f7f44d73ac7' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'TEXT','requiredMessage',null,'Please enter bcg given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9b6964f5-840a-47db-a58b-91260eba5371' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:3067","type":"Change","value":"bcgDateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('38e0f9b5-71f8-4cf7-8808-17923e45f2e8' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:2127","type":"Change","value":"bcgGivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3f421304-68c0-43b9-ab20-7fe4d90fbe83' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''BCG'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4163fba4-3110-4dcb-8198-18d2ac0b3aa1' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'TEXT','tooltip',null,'Is BCG given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4765e72a-8cd6-490a-9cb2-63adc3d26471' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'TEXT','placeholder',null,'Is BCG given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4b9681e2-31a6-4425-a058-f5f653fb1b56' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('56b75ade-b7e4-4b8f-9e1d-c31e65c5ca17' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('663ae442-e014-48a9-bf28-692b7bba4c68' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8322fcbe-4e92-49e8-a121-6ecbb737ab1e' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'TEXT','tooltip',null,'Is OPV 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('242e2d4c-ed76-4889-b6ea-0161787f215a' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'TEXT','label',null,'opv2Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a82ab729-bdeb-4ff5-9fb4-cbf27405d260' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'TEXT','tooltip',null,'Vitamin K given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b9f02590-1f8e-4115-9695-bbdc8a389ee4' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('beb63b28-49c8-44f1-bd4f-1f2f602233ef' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b3a658a5-85b4-4dbf-89f6-1f74f0c9485a' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.BCG.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c73c2043-d624-4e5f-927d-d15ca6359544' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('caebcdde-a458-4d67-abff-040fdbf073b1' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'TEXT','tooltip',null,'BCG given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f9908e78-ec16-4c28-ad2a-4ab2bc3bb9a5' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('019b10be-c778-4f18-90a5-779eaaa220c0' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('03806a37-11fe-4577-a860-2e9cf58b3a46' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('05f5490b-a623-4569-bad7-9f44da087623' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('237382a6-ab93-4699-8c58-4dc5e59d9c8a' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'TEXT','label',null,'bcgDate_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('39dcf90a-5c6e-460e-b26f-9464dea3e1ec' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('70c8da55-dd37-4822-923b-1ef760c109f3' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d416e03a-c5a3-48e4-9ad8-f82c1f27fc0b' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6044d30f-0c47-400e-9b45-26d80e35b8cd' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cb307424-5542-47fd-9779-526ea3b7a34b' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bc81e592-3351-4330-b89e-ac2b6ecba99c' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'TEXT','requiredMessage',null,'Please enter OPV 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8a1e3e52-0ea5-4dfa-b68d-6647511a7332' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('48a9f4a8-eaf3-48b2-97bc-86a8ad571e0b' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('299fb838-692b-47a7-8e32-59ef0652a298' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3b526fe4-9c72-4432-a366-f7ad198a3113' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:6115","type":"Change","value":"opv1DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4869c885-4729-4369-8210-caeb9e477510' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.OPV_1.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cf9e20a2-ca65-4a84-981c-52dab6437d98' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1ff6a32f-090b-423b-9896-eb03de9ca33a' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dcc6b256-f068-48f5-b208-6cd1857141b7' as uuid),cast('bbdc93f7-aa29-453f-b031-f4064657d9b2' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.HEPATITIS_B_0.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c240a77c-0b9a-4661-8931-2c574d1160d7' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.VITAMIN_K.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d516699d-782d-4cd1-ad3e-b7ce45c6d202' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e40a49af-17e9-4fce-bc0d-b1940b6f6e06' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'TEXT','label',null,'vitaminKDate_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fafba777-0c9b-4fd6-a071-c3035c92c5b1' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'TEXT','placeholder',null,'Vitamin K given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0c994622-f785-4e76-a4da-f61507a866af' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:2258","type":"Change","value":"vitaminKDateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('37332c06-07ea-40a1-9658-41d3d01fd140' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'TEXT','requiredMessage',null,'Please select vitamin k given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6138841b-cc80-4e89-b6df-281c2bd153e8' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('63389f76-6848-4134-bcd3-d870f38e9f84' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6c9fa613-de62-428a-ac23-84fbbc44c9f6' as uuid),cast('eb1d1fc4-558a-45a8-b743-91967bc01f10' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7fd4b02a-4690-4b42-b925-42a914f5e94a' as uuid),cast('1059a349-603f-4e13-8d57-25f673f9ffb7' as uuid),'TEXT','placeholder',null,'BCG given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dd8a0d3d-8004-4201-ae72-e6afba6d2407' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'TEXT','label',null,'opv0Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7295bf7f-52f6-4ee1-b671-1501b9405a23' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'TEXT','tooltip',null,'OPV 0 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('938f657d-db9b-49d6-ae1f-de6c908270b8' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ba8c3377-428a-41b5-bc78-e2acac28cc1b' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'TEXT','placeholder',null,'OPV 0 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c07d393a-65e6-4a2e-90c0-8bdc5ee183ee' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4d914227-74f5-46cd-b98c-711d25c8e76e' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'TEXT','requiredMessage',null,'Please select opv 0 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('efed04a3-0c3e-48aa-883e-cc0a61585f8b' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b8748a2d-dcac-440f-bc18-4333ee856cfa' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ca5453ef-ae58-4a57-a36c-03f28354e3fc' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9a7c70b6-50fe-40d8-92bd-1f0123a10187' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:4962","type":"Change","value":"opv0DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f8fa3853-1e47-4cd2-ad59-7f9af6377c2e' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.OPV_0.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b02a0f2f-3ae3-48ed-9139-7b99442961d5' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('adb2534a-0474-4290-af0e-298a8453ec54' as uuid),cast('d8368943-9d03-43bc-a333-503f2659c98c' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('29d31c25-b31e-42c9-858d-73041e39849d' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2ba5ecb5-ec39-464c-8697-eed4c4f1b480' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'TEXT','requiredMessage',null,'Please enter other death reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('320e89ff-90ba-45dd-bcc1-37cdb1ce7d9e' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('87f8187c-bf15-48f1-964b-b2307251b0ec' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'TEXT','label',null,'opv1Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('407d1ae0-e36b-41ed-bfa5-aecfe0f46355' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'TEXT','tooltip',null,'OPV 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a11a4d3a-dc35-4a57-a6a3-1d78b2776c0f' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9d335a41-de6f-4e3e-97a3-9fecf93befb0' as uuid),cast('1c7986c3-4c80-4342-baec-87df2edd1884' as uuid),'TEXT','placeholder',null,'OPV 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8d272256-6334-430b-8b15-2a7af5fa7673' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('956b2518-c11b-48f7-aa96-2681492fa7e2' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9e3634e4-ce74-4742-8b0b-1e82492f2825' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'TEXT','tooltip',null,'Is OPV 0 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b0bc5680-e61a-4b90-913c-f7a78ca1ddc9' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''OPV_0'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bfd53af5-12ac-4f81-9c5b-78a8dca22bd7' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c55b76aa-cb2b-4281-8189-5c2457d05694' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f38d3e7e-ed08-42bb-8732-88b9210b7620' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1a0a60ac-768a-4c9e-ac78-bdc31bb7f899' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'TEXT','placeholder',null,'Is OPV 0 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('23662482-fd21-44d2-b6bf-4887cf4998cb' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'TEXT','label',null,'opv0Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2683cc9f-1b46-491f-8b29-ac67252f4b06' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('828e721f-9987-4b98-b2d2-c05dfb221bfd' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8c00ac35-1a38-4129-b607-c336dcf4456b' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b8ee3519-8697-4e83-808b-de6d42ceb40f' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'TEXT','tooltip',null,'OPV 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cef3a04d-969c-409d-a396-10c600e9ae4c' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d045e02b-efe0-478b-97c3-1cb034b9cb16' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e6759c1a-a369-4bb2-b26d-0b5b8b8ce392' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'TEXT','placeholder',null,'OPV 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0d6b1550-bc3c-4f5a-b75d-9cb06baabfc5' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'TEXT','requiredMessage',null,'Please enter OPV 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1aaede1e-e9bc-4306-8ad6-8db7bd285da3' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.OPV_2.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('296e0813-f18f-4b50-a8f7-43a95b1cf73e' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2c152fe9-0d27-4016-8fc5-d386ee7579ce' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:7006","type":"Change","value":"opv2DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('615443eb-bb27-487b-9ed4-cc372f472911' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'TEXT','label',null,'opv2Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6327444a-d649-45a2-b0c4-ea77ac518c37' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('71ff4703-d478-46fd-9d28-c3859c2d0782' as uuid),cast('7f2ec092-d533-4d42-87d1-3bc394cc47ab' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a5801567-90ea-455b-810c-722cb72f2f9d' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'TEXT','label',null,'opv3Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e572725c-9c7a-4714-8ed9-c8cf637991e9' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'TEXT','tooltip',null,'OPV 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ace8938e-df17-4506-8b72-c7301cd8f31a' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a01f68f3-272c-4fd2-8e3a-b112acf98e29' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'TEXT','placeholder',null,'OPV 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6aeeca9d-e85c-4471-8e76-45f7760378be' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('668e48f3-2fa1-4c21-b26b-8a6b4e663d82' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'TEXT','requiredMessage',null,'Please enter OPV 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('82fac633-6e18-4bc2-b7c0-49d7ff763b0a' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('afddae18-4714-4b1d-8ef3-1adc58972543' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'TEXT','requiredMessage',null,'Please select OPV2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fa73aecc-fc32-4558-bf1f-b46d7d0f2817' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:6550","type":"Change","value":"opv2GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('02a6af9e-c63e-4957-875a-bed7d1df3280' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'TEXT','placeholder',null,'Is OPV 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('201871fa-485d-49a4-91da-9c068171c1bf' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2572b5e3-a030-4e12-abe6-12b0532f1dab' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('29e2baf9-9188-49f5-9d96-df1866388444' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4ca745da-d54c-4301-b1bd-209df62682a3' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('55b57613-8552-4521-9851-8d049519030e' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''OPV_2'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('65837ac7-2797-499d-8fa6-8e4a25729084' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6fd5541d-5b50-46a8-80f4-9c09ca355bcb' as uuid),cast('b5647b0c-01de-4035-bd63-134b4eefbedb' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b21f90f1-e8b7-4eec-94e9-43ac3fbd449c' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'TEXT','label',null,'opv3Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('baf04817-f7e1-4e83-9270-f6e49001629b' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'TEXT','requiredMessage',null,'Please select OPV 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c41af9fb-1411-41f9-8f05-91545277d622' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'TEXT','placeholder',null,'Is OPV 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ff1f1c7a-6829-4ba2-9fe4-ba7a06060e6d' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('126c65d8-5358-4f7a-b592-eea26c392575' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('12fe18f7-8340-4f3f-9b3b-ee820fba9958' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1e2c94b8-a1ee-400c-9d29-742caf6ff345' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''OPV_3'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3a3cacdd-4129-45c9-94c9-349c61bf398c' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('494a00e1-8995-4bb9-bcad-1368cc2b9048' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'TEXT','tooltip',null,'Is OPV 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('23986539-4ca3-4906-ac72-cb3031b6743b' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a2b648f2-35c8-49dd-9c60-f61a498a5e67' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a21e51d6-e391-4889-90d6-269ae59c0946' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fcf84289-9558-406c-a682-d89b1f6105b1' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:8760","type":"Change","value":"opv3DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('73bbb87d-0dd1-4053-b6f6-7885b12c424d' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.OPV_3.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('17c87f5e-e6c2-48ec-8a64-37784de49f56' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('55d57beb-f3ae-4f1f-a4cc-9ceab7881ccc' as uuid),cast('0989d8b9-756c-4b07-86ad-c72bdb4b9ff0' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fa71e807-3595-417b-ae13-39f3b7a90ac7' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'TEXT','label',null,'opvBoosterDate_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('da8ee4e3-f24b-420d-8db2-886a5d68e393' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'TEXT','tooltip',null,'OPV Booster given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6367ed3f-38eb-42fc-99c7-ff124fab0779' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bc8543d9-5369-4c34-bec0-bfc16cebf981' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'TEXT','placeholder',null,'OPV Booster given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('56f242b7-2460-4a73-a594-9aa2f873f4e7' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('85733447-e3f9-44c1-ac34-4aacf6afefd4' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'TEXT','requiredMessage',null,'Please enter OPV Booster given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d16084a2-bee3-46a2-ad89-8724fd1ac8ac' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2f2b3991-cd90-4360-a901-5e09078e8494' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cf234971-4557-4061-ae82-53e22b848f88' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('12817c25-7e28-42d3-b24d-4c3dc7e8e901' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:9261","type":"Change","value":"opvBoosterDateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1830a5be-ace0-48b1-b59b-cf5a74f17fdf' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.OPV_BOOSTER.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fdfff717-44aa-413f-b74b-4ecc7e73938b' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('eb29187e-1247-4198-948d-22600be4f6de' as uuid),cast('1b65740d-853f-4f15-a88c-d2ce55a3e90c' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9a349936-698a-4702-abe3-010226751734' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'TEXT','label',null,'penta1Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('660fe36a-7de4-47ed-b218-000a6003c7f8' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'TEXT','tooltip',null,'Penta 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e8f639da-7a15-404e-994c-abfac9e0a100' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e6bce8dc-5e96-42b7-bb56-5fb8984f9cda' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'TEXT','placeholder',null,'Penta 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3b7f4eee-c98f-4c0f-a012-575d54ec11f0' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('40d42bde-c3d7-49fa-bbf1-b0617baf0a0b' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'TEXT','requiredMessage',null,'Please select Penta 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0f031042-1603-4cea-a814-6674460b56e2' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3f51da3f-2927-4810-a620-ad7e90c422e7' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0201806f-3c23-49fb-b0c3-23f94304bce6' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8db96c79-5677-4ce6-b289-76c22f372b94' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'TEXT','tooltip',null,'Is Penta 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('953d8339-7cc8-43ca-b591-fa18995f6dcf' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('993b5a06-5a73-4c9a-9ea7-d852d97a2190' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'TEXT','requiredMessage',null,'Please select Penta 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('abea5ac5-d171-4ef6-9bb5-17bc902212b2' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''PENTA_1'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b9d63d49-63f8-4415-b4f5-0e9ff339b002' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:9525","type":"Change","value":"penta1GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ca2db67d-7991-44d0-9b3e-a44c24abfb82' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0c95bd6c-d0c2-4fc5-9016-b3e99ab4efa4' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'TEXT','placeholder',null,'Is Penta 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('287148b9-8904-4c6a-ac5d-ea6a03a4bd06' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2ee54c1e-41af-47a9-88cd-cab7b7856fc9' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3224a349-5595-49e3-b37a-485ee5ab93ff' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('757da795-f324-4de6-a02e-3bf7a0c474a7' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:9751","type":"Change","value":"penta1DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0ff679a6-a361-405f-97af-4c3a7b9f00f7' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.PENTA_1.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1ee8dc53-3e1c-4dd2-a159-9e5a5ce8daad' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f81d4ab4-a275-4525-8bad-48f835e4dbc2' as uuid),cast('7ef8bccd-810f-45c3-94d8-bfafcd122178' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('60680585-960e-49ba-8b84-7d0cd5abadc9' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('65cc8443-9b74-4635-8191-c8941d1dcbdd' as uuid),cast('52719f82-23d7-4361-8b70-9cdcf4d12a78' as uuid),'TEXT','label',null,'childOtherDeathReason_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('91cb0f4e-6666-437d-925e-7e32d6a0195f' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'TEXT','label',null,'penta2Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('75d8e27d-959d-4fa0-aace-f3e2b23756b7' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'TEXT','tooltip',null,'Penta 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4f387da6-60a5-490d-a36a-130e904fd3ba' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('29338c3e-2e3f-4afd-a4f5-1b460d000e3d' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'TEXT','placeholder',null,'Penta 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dd633d22-760f-49ab-9079-7e700de8aa25' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('69c07dd3-1147-4abb-bb06-916553b9f744' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'TEXT','requiredMessage',null,'Please enter Penta 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d3d4e48c-5005-4297-8b0b-6868b170861a' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b3ecf1db-de1b-4bb4-adc9-7a38a154ea65' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6e94ec41-0c39-446c-8afb-2c52d7e80974' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6b9fb948-6b13-46c2-9d05-95f8639896e2' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:10246","type":"Change","value":"penta2DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c792ca74-4421-42fc-b262-6042ff73094f' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.PENTA_2.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('64d6a372-1cf0-4c50-a225-8bd2da31c5a0' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1510d0b1-5c2b-44ad-82ad-241a0b3aba13' as uuid),cast('14906ceb-a71b-4c22-b5ee-0cec14645f23' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('49952d16-434d-4e9f-9742-d6fbb75128b2' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'TEXT','label',null,'penta3Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1eaf5e90-d1d2-40e9-8890-498ecc99ca5c' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'TEXT','tooltip',null,'Penta 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6d7c726a-f90b-41e7-aef3-9a0ae9da0e2d' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('86de3a6d-1496-401f-9f4a-cca53dcd05c3' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'TEXT','placeholder',null,'Penta 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('09d6f3d3-64ac-447c-8964-ce11b16103f9' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9f0425d4-b6de-4166-9edb-e6dbf5684eb9' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'TEXT','requiredMessage',null,'Please enter Penta 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0d3beed2-ef37-4942-93c5-482f72a1bc7b' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5c2bc9e2-65d0-486b-9101-777d90a4fa01' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8260e263-7cdd-4fb0-bf21-622f195fc76a' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d283f032-98dd-4df5-9545-eb45bafcf482' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:11378","type":"Change","value":"penta3DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6e407731-9efd-4276-b183-7fb66d0a4cab' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('88e34233-58f2-4cca-ad02-17e0d4c0cb3e' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('922551f7-92d4-414e-8581-3b8cca613453' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'TEXT','tooltip',null,'Is Penta 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aac2ba5a-cdaa-4b63-9493-984474628ba0' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b5997777-b4b1-4b79-bb51-e17a1a378228' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e31e2398-ae9a-40c0-b506-feac06cca01e' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fd30f4db-bf8c-4c17-8d29-e7b0835ff42f' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'TEXT','label',null,'penta3Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0c28afc6-de95-4a7e-aea2-3ec7606a212d' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'TEXT','placeholder',null,'Is Penta 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1dc56abc-3678-44bd-b7df-dc75bd3ec1d6' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('51a6c32c-d7fe-4ffe-8f6c-f10357ea5a4e' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'TEXT','requiredMessage',null,'Please select Penta 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('65046be9-f53b-469e-b6b3-dfce19815be6' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('68d42a56-9dd9-4241-bb44-67b8af5e1674' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:10929","type":"Change","value":"penta3GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6e3e0976-922d-4a65-8273-e7bf64f7dae4' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1d8df56d-cfbb-4788-a640-6bcdac34fc76' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'TEXT','label',null,'dpt3Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('17e22e71-72d2-4637-89df-f715f20929f3' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.PENTA_3.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5fa0ab7c-9da4-4f2a-8f20-993bed819def' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4fe9cac9-0c54-4469-b21b-be23f4c374d3' as uuid),cast('657a1d8b-366f-4dd6-a6c5-986173d82784' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('68a24aa0-eda2-4383-9c91-2a3adecc256a' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'TEXT','label',null,'dpt1Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1c94532d-b92f-4291-98e4-f8b9d17ce679' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'TEXT','tooltip',null,'DPT 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('975c7aca-3b09-4f16-b5e5-73d50295f549' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aafd9da2-ed83-4bdc-a18e-f93bc5c652ba' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'TEXT','placeholder',null,'DPT 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4cf56120-bc41-4478-bc0e-5ab325144bca' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('775bb784-88c5-4789-9619-c1ef16037c71' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'TEXT','requiredMessage',null,'Please enter DPT 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('45aceade-b333-456c-bc88-1cd54329e5ae' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('25e0c1b2-e352-45a9-8741-86bd50d98245' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('38f235d6-8a9a-42bb-89ce-0809e26aa984' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9d6db073-b78f-45a2-a452-a7e38302a68a' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:12430","type":"Change","value":"dpt1DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d2302f05-58ee-4938-a8e4-1ed5f3b8557f' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.DPT_1.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('658289b3-069d-4383-9661-d7000535613f' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ac526bce-6c69-4e2e-9b71-921ad6c78448' as uuid),cast('e5f84d82-f748-4cdc-a617-67ed8a6c627e' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cf3b04c9-d420-48b5-bbac-bba57d4b3136' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'TEXT','label',null,'dpt2Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('89de12f2-5865-407b-8820-ff993797c7f5' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'TEXT','tooltip',null,'DPT 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('536a9e9b-1ed0-4378-8747-1bd52b7ca77b' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1a4a559d-6f43-4c1e-abf0-798b8b069b49' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'TEXT','placeholder',null,'DPT 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7e31e087-d671-4010-a411-ca8cafbc833b' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4f1b946d-de5a-4ce1-a42b-f1c95f85ceea' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'TEXT','requiredMessage',null,'Please enter DPT 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7e19cdb0-568c-445a-af3f-6c9cf9fcf6da' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a294a9d8-eb55-4d26-be28-ec08a8376a4c' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bf18a62a-273b-4bef-9c2d-84df56b63565' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('316550e8-10fa-4a92-af6c-a9f5fbf53df2' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:12942","type":"Change","value":"dpt2DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('847aee5b-649d-4133-b61e-c6c2e5ee1c2d' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.DPT_2.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b9d773b2-3928-45c5-a7b9-e449e861805b' as uuid),cast('a80d65d0-aafa-40e7-8ae8-81a463052c11' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8531a069-3cdc-4f58-bcdb-20390a977d0a' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8db89601-0353-4ce7-afe8-34205ee3ced1' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('923e71f2-6a90-4cd5-be40-a01ac7b3a4d9' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9a193534-feaa-4e8e-a990-8491a066db01' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9f2b7e6b-6e69-41fc-9327-2b5e4343a147' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'TEXT','label',null,'dpt2Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b458c7bb-611e-49ed-92fb-e479d37c5164' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'TEXT','requiredMessage',null,'Please select DPT 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d1071175-ebb1-41c5-a39e-491b0f130c42' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('faad8ed0-ac46-4e96-8718-f36229dd7601' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:12693","type":"Change","value":"dpt2GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0e147ae3-1d5a-4ca7-af9a-cd8061d80b16' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3cd5944e-7e5b-4339-98d0-d0975beaf377' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6a2885cf-f35d-461f-a23f-a8c2631cd21a' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'TEXT','placeholder',null,'Is DPT 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6d94a37e-aff8-4fa8-b14d-85b8043867f3' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'TEXT','tooltip',null,'Is DPT 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a0182742-9800-45c4-8ef5-438e2ec1ddac' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'TEXT','label',null,'dpt3Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d7440b0c-bf7d-4f9e-9e70-40414a71990f' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'TEXT','tooltip',null,'DPT 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5f938554-01c1-43fc-b805-2a4156acca96' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('56679745-30a9-49b3-bab4-9f33162c4669' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'TEXT','placeholder',null,'DPT 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ea9697dd-2fe9-47b7-8acf-8b3727d3f40e' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6f83fef8-3932-4a16-9dc8-1423cd6e6b40' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'TEXT','requiredMessage',null,'Please select DPT 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3f0c447e-6a6f-45a5-a4be-c2325c7cf6cf' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('55c5171e-4cdb-4c4a-9de6-88ef15b00310' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1ceb708b-6d7b-4b7c-9757-eae7361e7cb8' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ca621e27-20f7-4874-9be4-c4e8fd072f1b' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:14597","type":"Change","value":"dpt3DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('235ebc19-b848-4528-b0d9-71df36e22942' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.DPT_3.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d305627f-db70-4fcd-9d6c-2c84e696cfb7' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f45393fa-019f-47b5-92a6-f2bb4a330162' as uuid),cast('3f661e80-7a8c-4956-8358-ed23181ea62d' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('498992e8-0ab2-4845-a727-8401e0883690' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'TEXT','label',null,'dptBoosterDate_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8d5b00ea-6370-440d-b044-ff99d8789191' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'TEXT','tooltip',null,'DPT Booster given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('13c5c6f7-0374-455d-876e-1283ef13bca9' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6f32021b-bf99-4798-9bd5-c3a471dfcfea' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'TEXT','placeholder',null,'DPT Booster given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('27f3a1d1-376a-4755-bf04-28dfaa26a2a9' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('37537096-bbbf-43f3-827f-7d50cbcb7a83' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'TEXT','requiredMessage',null,'Please select DPT Booster given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4068c350-dfe6-45fb-b75a-5154c7fe0fc0' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3cfa3574-9617-40be-b4ad-159373468a8a' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b8e04448-0983-4f0a-8124-7720b742938f' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('45287688-b954-47e1-8d58-dba84662ee02' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:15307","type":"Change","value":"dptBoosterDateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('58066dea-d23c-47c5-b538-1acf32f8c1bb' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.DPT_BOOSTER.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bf750ca3-a563-4876-9966-c006b2866f9b' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aa4ad603-7f32-42e0-b162-6fb99007a055' as uuid),cast('742d7387-9260-4f1e-a81c-39553f7ddf48' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('97b68dfc-c736-4e6d-bb12-f2b2b24f87d8' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aed936c6-a392-493c-98a2-89219baf7013' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c5ee309b-a9ed-4689-9518-7258ee766e68' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'TEXT','label',null,'dptBoosterGiven_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ce9fc348-9875-49b9-9305-8a6f9e352fd0' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e3c29519-011b-4ae7-ad1e-f9aa43faae69' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fcb143b8-07be-4d37-809c-a10e9d52ac64' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''DPT_BOOSTER'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('15e95b93-71fd-4ac5-ab05-9589cef52198' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:15087","type":"Change","value":"dptBoosterGivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('19d83d04-0c80-4a46-a3b4-b7180d84c929' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2915df64-f353-4637-9d57-e2249e5ef597' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f22101e4-812c-491c-82a9-5f1a967ec090' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'TEXT','tooltip',null,'Is Rota Virus 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('18cd486f-f976-4a5d-87d2-622bd3037033' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'TEXT','label',null,'rotaVirus1Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('40212e19-698f-4291-a3bc-7c20079478d8' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('65d7fd52-0e84-4e40-97ee-05648be4a26d' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'TEXT','placeholder',null,'Is Rota Virus 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('81f0ec2e-ef8f-42b2-b70c-1e3c31cb0f1a' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'TEXT','label',null,'rotaVirus1Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2f2f9469-4cba-4e0b-9199-a94188d15bae' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'TEXT','tooltip',null,'Rota Virus 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1c80aca6-a507-46a1-b610-3b20f246717d' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8d50f707-abd0-4592-bcd9-76e6e7d3733f' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'TEXT','placeholder',null,'Rota Virus 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9ce8a80f-21a2-4ce0-8165-91d7b36545d6' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b55379b9-608a-47bd-a6e4-675508c8f1a0' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'TEXT','requiredMessage',null,'Please select Rota Virus 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('56b3ce35-5dad-4899-8ead-bf7cd798c80b' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('95bbfb75-4166-400e-b241-c2e790c21cb5' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6a1960af-6133-4c00-baaf-429bc397bdf7' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a0f0f8bf-5517-4520-ae49-5f1b743b81c0' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:1985","type":"Change","value":"rotaVirus1DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('864c9790-c5f8-4d84-b279-2ee300ddedd1' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.ROTA_VIRUS_1.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e663b1da-77b0-49e5-bb54-80bc43f0cd21' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a3f3eef8-c42e-44dd-9732-10652b907b7c' as uuid),cast('400f017f-b5cd-499f-8b2a-bc52ac3942c5' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a26c2179-adeb-4da6-b697-ffa60bf5b592' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'TEXT','label',null,'rotaVirus2Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('48cb65e9-04c7-4795-a77b-cd1a90e93639' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'TEXT','tooltip',null,'Rota Virus 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7bb862e2-91b4-41f5-b4cf-e5886163f054' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('134d3709-5e6d-4cc1-ab8e-2d6f33746097' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'TEXT','placeholder',null,'Rota Virus 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('648277bd-b38d-425b-acfa-9eeb6c2db594' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dec0517d-f135-459d-b946-b0ff3159e730' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'TEXT','requiredMessage',null,'Please select Rota Virus 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('653f7461-7dfe-46ef-8022-9574644c803b' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3893cc25-d081-46eb-b23f-59d6c89d8fe1' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fb0ab534-bbdd-463f-8277-d89491cf373b' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('02b052ed-64eb-4cc9-9fcf-5f2d3d866dfb' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:2904","type":"Change","value":"rotaVirus2DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('749e2e39-4067-4ea3-b9a4-5f487bb0c28d' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.ROTA_VIRUS_2.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9cd8b192-19dc-47e0-acaf-b1e77f715980' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c7bee0db-1d62-408c-bd11-9d3ee66553fe' as uuid),cast('1df8142e-f6c5-45b4-aeed-a01472461d95' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('85d5c478-e366-4a48-9f00-dd6b613fc6c2' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('93f89b71-ecea-485a-90ef-09184105b011' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bc4fcb72-ffce-492b-b02f-6fd4271c2142' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c8e70a99-a969-4f6e-8b53-dbeae416a5fe' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c8f3a5e9-83d7-4c52-875a-852834f43841' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'TEXT','tooltip',null,'Is Rota Virus 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cb90b428-21fc-4474-a8b4-b89d6f95c24f' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'TEXT','requiredMessage',null,'Please select Rota Virus 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d3a669a0-202f-4c19-988c-a96360361f4e' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fddcc22c-3465-4c49-a427-77cfaad8153f' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('12761dac-0368-4b6d-98e7-aaed44fcdea2' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'TEXT','label',null,'rotaVirus2Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fa5b22a3-b0c0-4bbc-b557-c4036a4e24b7' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('077b3ac7-e807-42eb-9a94-e8cc42d21c14' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'TEXT','tooltip',null,'Is Rota Virus 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0ba313af-7716-4814-b75a-9f3379d5cf0f' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2144a463-2854-432f-9f83-2bf22d376fe9' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3b550150-96f7-48ba-84dc-22011208b34e' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'TEXT','label',null,'rotaVirus3Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('447bd3ee-07b1-4a71-b2ca-55bd81ef3cfc' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'TEXT','placeholder',null,'Is Rota Virus 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5b6d0614-5558-4984-bb4f-8a1d5c88c772' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'TEXT','requiredMessage',null,'Please select Rota Virus 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f10185c5-391f-46e3-9063-a47c5f2118a3' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'TEXT','label',null,'rotaVirus3Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0f4f38b6-f82d-4a51-8297-75272d01a03d' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'TEXT','tooltip',null,'Rota Virus 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a4759247-80ef-4ced-b6bf-90a6f0482147' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f0a9966c-c7ad-417d-8a63-d1088f74bfe2' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'TEXT','placeholder',null,'Please select Rota Virus 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('43ac8333-a0ef-4e55-9e10-bfa2fd953b0d' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8a629d3d-278d-4814-af3d-c7d71f518df4' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'TEXT','requiredMessage',null,'Please select Rota Virus 3 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('838d8eaa-15fe-4451-a0e4-c936a831f45c' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4b234767-cf9c-427c-ba3a-347f591e9c68' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cc72d7c7-f1df-46c4-afb5-9e8864cad8eb' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6d3adf1e-1c20-4808-8bb5-25495ffdfe27' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:3754","type":"Change","value":"rotaVirus3DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5b95eb2f-cd65-4c0b-84b4-e78d8f5d2422' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.ROTA_VIRUS_3.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('77eb0aac-bc39-4cdc-b3ae-af5ab10ccd2c' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d031da5b-537d-4e21-834a-fbdd69a952bd' as uuid),cast('e8253377-913d-46e3-885f-435a7ce34f71' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a353fe0b-0100-48b2-b5da-49c1c469f5e9' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'TEXT','label',null,'measles1Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('de5908fb-3c81-4484-a954-801583c2814b' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'TEXT','tooltip',null,'Measles 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('77713e2a-62e5-414b-b69e-32c2a35dab84' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d3ef0acf-8914-448f-a4e4-cee5ed4656e4' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'TEXT','placeholder',null,'Measles 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('023bf259-dcf8-46b1-861b-749d67c5e2bd' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1b43fec5-68f8-4e22-9c24-de2e57e0edf4' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'TEXT','requiredMessage',null,'Please select Measles 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bec9d555-4ea2-4537-a938-0d32cbcdd568' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0c34ebd3-0ae1-41af-83c9-d17339651778' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b9a1df87-c5bb-4d9e-ad0e-4d033b221068' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ba63b4cf-8462-47cc-bd75-b1a677c2d7ef' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:4413","type":"Change","value":"measles1DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6eb41885-23a8-4e64-9841-2fe0afb16779' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.MEASLES_1.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e6e570f1-fe72-4cb9-a622-0d7e860ded9c' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1ebcef4a-3716-4a54-ba6a-f1b5588afc79' as uuid),cast('d06f91fd-c8f3-4406-af6e-b3bb24604d7b' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('26de4df0-c00a-4736-8fc3-245cbc1a7ab7' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'TEXT','label',null,'measles2Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5a6b762f-ce1b-43dc-acbe-3ef77727beec' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'TEXT','tooltip',null,'Measles 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0575648a-2b08-4584-b69d-e6dce04adaed' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('89837931-26a1-4033-86fd-e2c6ae50741b' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'TEXT','placeholder',null,'Measles 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9c04b9ad-e6cd-4406-9f8a-b6d48543484e' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e39845e6-a2a7-468f-8c4e-490af60a9ce3' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'TEXT','requiredMessage',null,'Please select Measles 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('faccfd03-2a86-4c63-8beb-8868c8609586' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ca647f01-a337-457b-b8b1-4ec32c7b08f3' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('25707dc6-d034-42b0-ac55-0e32a0bc58a6' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('75c35316-e86f-4353-a3fd-b8cb4b96b204' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('90c7bd85-da9c-4f87-80c6-fe1e62be95fa' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9acdb030-9a9a-4940-8150-6edf9acddf42' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'TEXT','label',null,'measles2Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b2130a26-9e23-4431-bd0d-395cbffd6716' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'TEXT','placeholder',null,'Is Measles 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cc218d6f-d342-4925-9deb-139cafd5acd6' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d8785f48-44ca-4710-b245-a03ded00d47a' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f3a1acb9-6419-4429-9841-f26b8a493b6f' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:5122","type":"Change","value":"measles2GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('be75e542-ab2d-430d-a0f0-035ae5bb5769' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'TEXT','requiredMessage',null,'Please select Measles 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('82b3a7b4-3e26-42bb-9e14-bc9c0dd2d75b' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.MEASLES_2.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cbdc0af8-8b8f-47f3-9783-86f8b2b9d3c8' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''MEASLES_1'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ea640b45-abaa-4b82-a58b-8e2d343a88b6' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ed2e6069-ee0b-4226-b4a8-8dbff42d355f' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:4197","type":"Change","value":"measles1GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ed8ddb31-5f5e-4f95-8cf3-6e5445ec8f60' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('08332d35-4fa3-4cac-9e61-fe755c1864e4' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1045ebca-ac59-439b-aaac-215f633d93dc' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('16e72d89-bfd8-4da2-8593-00438a630061' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'TEXT','label',null,'measles1Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2ded7563-f543-4184-a1a8-0dda6f1204f8' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'TEXT','tooltip',null,'Is Measles 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('39c3cd5f-348b-40e2-9123-4f4c33a881d3' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'TEXT','placeholder',null,'Is Measles 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4ee0db62-cb97-4d77-86db-3eb1d5974375' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('62edb0f7-ec10-47f7-94f7-753fb40c908a' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7bef7f9e-2718-46da-b30f-04c4541ed2bb' as uuid),cast('201329e9-cd6d-4d77-868b-2e3f088e7cf3' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4a78d70b-dff1-4a79-a188-4aa1c40ab7e3' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:5354","type":"Change","value":"measles2DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f0aa6936-bd2e-4270-bb1b-1eae44e97255' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c0a1c4cb-ae1e-4182-ae13-ac788d144514' as uuid),cast('ec7eccaa-46c5-4ee9-b2f8-a6beecf2f23e' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d2f0683f-e448-4b73-8b81-d61f93eac894' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'TEXT','label',null,'measlesRubella1Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a156bcd1-b135-4a21-bd17-31bf06e31164' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'TEXT','tooltip',null,'Measles Rubella 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('548951ed-1c5e-47dd-84b7-106ac21994c5' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b9759da3-151a-4479-afef-8e12152f3457' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'TEXT','placeholder',null,'Measles Rubella 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7525df20-b73a-4e8c-b152-76cad173cb77' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6e239952-42e6-4d49-a879-cd1d0ea45504' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'TEXT','requiredMessage',null,'Please select Measles Rubella 1 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('414e3158-8aee-477c-a74d-0d1939a7146a' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ede59d42-fa1c-441c-9863-31948a95fe99' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5387fd61-df05-4f00-a797-8b2436294b80' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('86335bda-d64e-4313-9d80-02a1c0800393' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:6056","type":"Change","value":"measlesRubella1DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3b987291-af5c-4a6a-9f2c-6fbc372d6371' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.MEASLES_RUBELLA_1.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6eae96ef-5f3d-434d-84fd-09f97fc30c45' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('48959c21-a64b-4871-8a6c-f90d3b0f721e' as uuid),cast('dbfda407-649f-4809-96f5-27a808959753' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8ad37019-2ddd-47c0-9760-af23ff26c28a' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'TEXT','label',null,'measlesRubella2Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('857333cf-950c-4e3e-8a5d-5cb50c71c52c' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'TEXT','tooltip',null,'Measles Rubella 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6b689fe9-d977-4707-98a3-d126842a9146' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e333acb9-db25-4345-b235-ff14a967363e' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'TEXT','placeholder',null,'Measles Rubella 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e7971c14-64c6-4f0f-82a4-5a6b0405ae1a' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3462cc25-1fa8-427d-b955-4bc11982822c' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'TEXT','requiredMessage',null,'Please select Measles Rubella 2 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c2a18ee5-b010-4312-bd43-f175269a5378' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('78c07377-29fa-48ad-864a-6c1b7dabbcd5' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1e495531-2b66-4a0c-b1b4-2f2fff9e771f' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bc3693f2-669a-463c-a84b-6a048f7b0729' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:7583","type":"Change","value":"measlesRubella2DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a423d940-59b9-453a-8dff-cf90a0b665a7' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:6542","type":"Change","value":"measlesRubella2GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c251e8ab-4f9d-4ad3-aea3-cd7160f43eea' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d66413c9-9fbe-4be7-9460-afd376c59918' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ebf5cff6-2c5b-485f-8ab8-e5beec76d6b0' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('08437db0-6e21-4ea1-a3b3-3582e7eabacf' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'TEXT','label',null,'measlesRubella2Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0d472e79-50b3-4e3e-886a-0617b8322186' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1035814e-ead7-4996-abce-513dfc941c4d' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('274c34e3-3b3c-4e5d-b3f9-a2fccd33cb86' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'TEXT','tooltip',null,'Is Measles Rubella 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('44f3c6e9-15aa-430d-9608-c820fddc0ef1' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''MEASLES_RUBELLA_2'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('48e0d105-1882-4d94-bf75-cc44a446c4dd' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3297a421-344c-439e-acb3-68d3e9ad27e9' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.MEASLES_RUBELLA_2.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fa1b0878-25bd-436b-90ba-4b6d01bd223a' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('402efc9e-3fda-45cd-9677-0a04a5a05649' as uuid),cast('f24060b8-3094-4e72-93cd-746b929c4f61' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9157913b-f9b5-4d03-8abc-4d5ea3cb3a9e' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b1b638a1-c66c-433a-9d36-3695bb584569' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cc006c59-3be8-4292-b27a-077d3920ff74' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d6f96d4c-ec97-4255-99d0-aa3616aacaf0' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dde443f2-6a6f-47eb-9d1f-7a858ab306f8' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'TEXT','tooltip',null,'Is F IPV 1 01 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e07f5119-122e-4fa0-b5ec-e43d8d0138ed' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ea80c555-4e86-4992-b930-75902bfd0284' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'TEXT','requiredMessage',null,'Please select F IPV 1 01 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f81328f4-be2e-444a-b2b6-916b99f3e3e3' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:8246","type":"Change","value":"fIpv101GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('17c23399-7db2-4a94-b15f-66cead63879d' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''F_IPV_1_01'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('32496134-bcc4-404b-b123-31f33305a98e' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'TEXT','label',null,'fIpv101Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4132490e-ea99-49d4-8885-c28e79d1d161' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('54b02cce-821c-407f-8250-14a0141eddc0' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('74d6f110-2bfb-4bd2-b347-bc7e4ab0c9bb' as uuid),cast('d5047008-7823-4485-9b58-9560be1b5f22' as uuid),'TEXT','placeholder',null,'Is F IPV 1 01 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e464b654-5c4f-4ab2-90f7-3183f5da02e1' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'TEXT','label',null,'fIpv101Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2ee107f0-a7f9-4446-bb34-d67979564618' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'TEXT','tooltip',null,'F IPV 1 01 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('58fa3b10-ede0-4798-a269-7c8562069b3a' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a3e58e96-dc53-4c81-8ee0-46a1f3847eca' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'TEXT','placeholder',null,'F IPV 1 01 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8b31685a-f742-4a9e-9c71-fc13bddcf981' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('204df2fd-8206-4709-a240-f6d6f07e0aca' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'TEXT','requiredMessage',null,'Please select F IPV 1 01 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d0e39bf7-dd79-4af5-9b78-e439050b4060' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('88c4b71b-6d60-4bb0-84ea-760a43a291a6' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('25bbd114-39f7-44b1-8fcc-c98ab314a18f' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('147f9369-cf8a-40f9-bc5a-86dd076ace9c' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:8677","type":"Change","value":"fIpv101DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bfd6323f-9ce0-44f2-8e31-7290504c9aa0' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.F_IPV_1_01.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('757c987c-efbf-497a-b1d3-b9f9f2b1cd0a' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('40d37f7f-d652-4630-8262-3ef5dd9fa86b' as uuid),cast('fa3025b6-1ed0-4b7e-9e49-6b1b2fb827cc' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('511843fb-98ad-42f4-ba62-14f65c414bda' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'TEXT','label',null,'fIpv205Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b97b0186-8531-44bd-8d55-53a6af3a7284' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'TEXT','tooltip',null,'F IPV 2 05 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e1e2e4cf-c9f3-4880-922d-8cbbf6a4305d' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('77834214-a5a8-4ace-89f8-6e0520816157' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'TEXT','placeholder',null,'F IPV 2 05 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('165af4dc-7aca-4945-943a-5188d20bdf7c' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4d8b6f62-8dc1-4c16-b836-f31331d52716' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'TEXT','requiredMessage',null,'Please select F IPV 2 05 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c27b4540-743a-4926-abbd-4f9a5b85acfa' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('87f2b3f0-abe1-4e32-bd0e-4417870b7f7d' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e3ef27bd-a049-4d77-9a33-6284244fa9f9' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c636503d-5fb3-49c9-ba13-3c32401a2eae' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:10814","type":"Change","value":"fIpv205DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b7857330-c7c8-47d6-b638-05f8c827a240' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.F_IPV_2_05.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e99aa529-1862-45ae-8122-9d85627f583a' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fcd47466-81d2-49e6-8821-4252938bf6fd' as uuid),cast('743cdfc2-d145-4d12-89ef-09953478712a' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('84eeff6c-7391-41a4-9afe-16c721184f4b' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'TEXT','label',null,'fIpv201Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('93697e6d-0128-4e20-b260-297bb81c0f0f' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'TEXT','tooltip',null,'Is F IPV 2 01 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9faa4038-f020-4eae-bc09-47ff25d761a1' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a9108c94-f80e-4d76-859e-e070dd3571ad' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c22a9878-39d0-4189-aea5-0a6bc1a38e5f' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:9385","type":"Change","value":"fIpv201GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f87a8ad2-0bb7-440f-a726-e4cf743e3eec' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1286a743-b078-4a2a-841a-4e75fc476511' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('286af7fb-335b-4c1c-8f89-93be5a4adff2' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''F_IPV_2_01'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('485bcec8-543d-4adf-a322-7e0976d7481b' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'TEXT','requiredMessage',null,'Please select F IPV 2 01 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('801e0f80-8cc9-4c23-94a3-15c2af559d4a' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b3efb768-f065-4c12-9def-65f57a4cd172' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'TEXT','requiredMessage',null,'Please select F IPV 2 05 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b4943156-8f99-4a49-aaad-dad073c9833a' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'TEXT','tooltip',null,'Is F IPV 2 05 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b994df99-5e3a-4816-8feb-3c075bb39861' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('00778574-de9c-4e2c-ac6b-d2e20d30337d' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('22b0740b-d738-4c39-a82e-27bec7cea51f' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'TEXT','placeholder',null,'Is F IPV 2 05 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4108c999-8555-4c50-9e75-6ebbdfefd5c6' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('45d49cf5-d984-4552-880d-942b6d11643e' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:10061","type":"Change","value":"fIpv205GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('490e8df0-e3fb-4f87-832f-e8457fbf342f' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('514a2ff5-e348-441b-b2df-eeb695bd8911' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''F_IPV_2_05'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('97c06194-f4bd-4e7f-98ae-c4a5b63150a9' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'TEXT','placeholder',null,'Is Vitamin A given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('99317326-84e2-4cee-a9a0-be827a1fe813' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'TEXT','label',null,'vitaminAGiven_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ca4f434f-a7b5-4c57-9b9f-aa06ac28e665' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'TEXT','tooltip',null,'Is Vitamin A given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f6c3e990-dc18-476a-8c02-e78e687c32d8' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('545fe2c1-53de-47a4-9165-558c5eee0466' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aa7fccf5-8d4a-4563-b92f-c31503879832' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c763267b-0093-4491-9647-17ea0f8b2fc3' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('050074d8-3c29-490c-aaad-28a0d47fe088' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'TEXT','requiredMessage',null,'Please select Vitamin A given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0643ae1c-1dd8-4c61-a75d-d9f93cb28c4a' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''VITAMIN_A'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('09cb2b81-2490-42c8-9f09-f406adaf2606' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:12069","type":"Change","value":"vitaminAGivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('19a75111-f1bf-4c82-98d5-b8024a0afd92' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3a9b2c8f-deaa-407c-97e5-1da4824c3631' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7bf6c725-ac55-4e85-907b-6c3fc7bb83ed' as uuid),cast('8c067de3-012c-4908-801b-7f8c81dec79e' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('63f8480f-2af4-40cd-8d28-c19c4b489f97' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'TEXT','label',null,'vitaminADate_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bf67f613-2d79-4da0-9ff3-61fdad3c6a57' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'TEXT','tooltip',null,'Vitamin A given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c2dfe277-c481-4ec7-b750-e0b95fa5b56e' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2f65f3a5-8d6d-4381-8043-64b79cb8d002' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'TEXT','placeholder',null,'Vitamin A given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d6ab1885-b1d3-418a-9027-47883b27b24c' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('62bbe1ca-14e0-4e04-9384-845aad83378f' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'TEXT','requiredMessage',null,'Please select Vitamin A given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c93b4775-888b-4752-a048-9e9dc3b719d2' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('018a8d7a-a097-4777-92bb-a81411cbbd08' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('945c5583-ccd0-4422-b036-5bfad6b3b450' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('af58d5fe-cf97-41c6-b201-61c9da0c826c' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:12293","type":"Change","value":"vitaminADateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ae7c86a6-0501-417f-accd-e574dd234440' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.VITAMIN_A.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e405bbc2-e161-42bc-a853-be315f193ee6' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'REQUIRABLE','requirable',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fa482498-3db3-4176-86f9-c058db4a720e' as uuid),cast('ddb9e986-2588-4103-b1c9-92aa633cbd6f' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('81c29bbf-ae15-4fde-b4f4-921788430102' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c341af22-18eb-41a0-8648-9e9f3a3bbca7' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:9612","type":"Change","value":"fIpv201DateChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cb66eb42-c69c-4ba3-a027-ea41c5663bf3' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ec1bb287-9c76-4e72-a2e7-281cbfd7165c' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'TEXT','maxDateField',null,'today',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('eeaad03a-3dfe-4496-a413-035e38e43ed6' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'TEXT','minDateField',null,'formData.childDetails[$index].dob',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('07300832-9428-48d8-8204-74e22f4461dd' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'TEXT','label',null,'fIpv201Date_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('40756f4e-d890-42aa-8774-ebbcf913cc2a' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'TEXT','requiredMessage',null,'Please select F IPV 2 01 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4be36222-3331-4b02-9c9f-292cb776fc64' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'TEXT','tooltip',null,'F IPV 2 01 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('520b7064-95fe-4d13-b273-544276f4c916' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6194d131-7848-4870-a407-84fd9160cc09' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'TEXT','placeholder',null,'F IPV 2 01 given date',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6778ac3c-ec8f-4423-8e81-6a899c91e28c' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails[$index].immunisation.F_IPV_2_01.given","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6a986193-8de9-4dec-b4b4-9874747bb3f7' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('71ef886c-49d8-404f-8b61-4e3c54281c90' as uuid),cast('f73ba4b0-9fde-4539-90e5-11113eeb1650' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('66e95733-7194-4e11-b004-df0c07cda8dd' as uuid),cast('01d4a618-4a0a-4377-8e88-eb6cb666de84' as uuid),'TEXT','tooltip',null,'Is Hepatitis B 0 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8b4b7688-71bb-462d-9caa-4259bb74a88d' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'TEXT','label',null,'vitaminKGiven_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('96d23c9c-6b6b-4fb4-9c6e-34a180fbf24c' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'TEXT','placeholder',null,'Is Vitamin K given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d2fb7c1d-e744-40dd-a955-f6ee509c01c2' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d7cbdb88-6187-4e01-8157-cbb81397601e' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:1691","type":"Change","value":"vitaminKGivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e804f090-a2ea-47ff-b5df-1cdca82a2d2a' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2575ce39-16b1-4701-8320-a86478495c70' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('43015b30-e0bf-4cc1-af18-493546f21f21' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4ce70e57-6039-41d8-ae07-9ff6ed31d233' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6696e9f0-7783-43b8-88fe-f700fad44ff6' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('71ace3cc-c4c1-400e-9333-1a46f1dd8fe6' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'TEXT','tooltip',null,'Is Vitamin K given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('720d110f-6b19-464b-8269-f6f1cdb12335' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''VITAMIN_K'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7c491143-26a9-44ee-aa94-0739dbb86a0a' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ad779a2e-3d5c-4f9c-affb-5010bef5cfd0' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7cc6a8a7-4012-4467-8e2d-e14bd1b4ebd7' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7ecfca3c-b608-4896-ac27-83aaefd97ef0' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bd9410b4-c151-4def-b13d-7f586d6fe159' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c4d97a8e-d1f3-4943-99ee-e9b74d6b0338' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''DPT_1'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('da92420e-8d2d-4f54-974a-aba0f76f5cb5' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dbe8bdb8-3fbe-4da0-96d3-6b05dbfb1382' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'TEXT','placeholder',null,'Is DPT 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('073f6bf5-fcd8-440f-bfc0-8a6b437ce28c' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0ea23537-5a55-481c-aa88-61bf58019041' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1e29a161-6736-4939-a29c-7b19e7852faa' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1f5a83a5-9d04-492c-bde0-a08a26339533' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'TEXT','requiredMessage',null,'Please select DPT 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7db5cbe7-84ce-4a1f-a7c0-35dbcbf1c130' as uuid),cast('82fefdf0-ae2d-4195-8ea9-50b37b20d6a5' as uuid),'TEXT','requiredMessage',null,'Please select vitamin k given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6841be77-71e8-43af-a874-064743718fbd' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6d6ad3dc-b846-4c40-b47c-430269b1efc1' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7b0747ff-1c8f-4ec2-b06c-8ab46b45b236' as uuid),cast('6ee9a010-cab6-4ffd-ad29-38b24f5bffc6' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('52c32f79-9b30-4759-a8e6-de510986933f' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('595d9713-6921-4ce6-a421-5219f27f574f' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'TEXT','requiredMessage',null,'Please select opv 0 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7dd2560e-9205-4faf-9248-6ff97c1cc8c8' as uuid),cast('67ca5b8e-df60-43eb-bdfa-72d3207a2827' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:4738","type":"Change","value":"opv0GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8e3cbef1-71a8-48d8-99b0-120bc91eeb44' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:5238","type":"Change","value":"opv1GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c86f1bcb-e671-4429-a5ef-1726c6689287' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fac019c5-7929-4aa7-920a-7f3ce4fd6d86' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('005cb9a4-c811-4923-93d4-e7e75f75a6e4' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('074228cc-4fa1-4b12-95a1-5596f38475a7' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''OPV_1'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0e03e462-7e8a-40ab-9c63-23c44741caa3' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'TEXT','placeholder',null,'Is OPV 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('18e73233-98c8-4289-811e-6abf2df3ca52' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'TEXT','label',null,'opv1Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('282ec2a9-ccbf-4dbc-9897-e55d2172fe85' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2ba15a0f-87ea-42aa-9ecc-9ac3771b2260' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'TEXT','requiredMessage',null,'Please select opv 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('437fb2eb-e5a2-4107-8e3b-e04e61f6f2ba' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('47dc06ae-e10b-4570-8b6f-0f1aa1844ff0' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5f3f5345-290b-4d04-86c7-af8450f5e008' as uuid),cast('d75d09ec-49da-4364-aef7-e9c44c4191db' as uuid),'TEXT','tooltip',null,'Is OPV 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4f768a5c-b349-41fa-8d7c-8b19c9179799' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('632c2b75-fab7-4471-a965-0d6d56799b8b' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:7664","type":"Change","value":"opv3GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('717b4bd8-2ded-46a7-8d14-5964c62207a8' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('77bcceb6-2971-4f81-a757-dfd793bfb556' as uuid),cast('2a8e5c87-c579-4a48-8e67-1af616492879' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('84983ad8-1cde-4f90-8e12-db51dde93c23' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8a76d33c-801d-478f-8c03-e10e535da78e' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''OPV_BOOSTER'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a641351c-07bd-49f5-968d-9ed0beaac83d' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'TEXT','requiredMessage',null,'Please select OPV Booster given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b8dcb0ae-d4ae-4ca9-9dd2-9597ca3c8698' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'TEXT','label',null,'opvBoosterGiven_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bd5f81e8-6b21-4d99-95e6-20f9556fae0f' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0c4cda73-2ef7-416c-96a0-bf63b3f4af4d' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:9039","type":"Change","value":"opvBoosterGivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1c516f52-a5d0-45ce-955a-725a2edf4935' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1efc42b9-b1c3-4bc7-b2be-5ac9bf03d285' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'TEXT','placeholder',null,'Is OPV Booster given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4705ba23-ae5f-4063-83d6-3983e71824e6' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('47fdd912-a8d2-4774-9807-f6331d790c89' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5dd62296-4404-4f99-96d5-0adcd00e424b' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('63365076-86f8-497b-8416-d23078a06849' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'TEXT','tooltip',null,'Is OPV Booster given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('79105368-3846-4699-bbfd-92d1de97d893' as uuid),cast('48dabb80-d723-4e4b-8c04-0d73c1957028' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('36a46e2d-d145-4a1b-a901-4dd6de18c589' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('42854f9a-43b4-4c9d-b7ef-80456b9c03b2' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('61395fdc-c257-47f9-8a9d-afb4352921ab' as uuid),cast('ea99e5a1-fab4-4b09-a896-cf6dec025215' as uuid),'TEXT','label',null,'penta1Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('84901d6f-b0c3-4621-a0ad-468586988d51' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('93198ab5-fa31-4793-8382-1ef87f03969e' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''PENTA_2'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b2dfe5ce-0af7-456b-b402-a6fd410789cc' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bad426c8-8218-4503-94e7-90630c9205a9' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'TEXT','label',null,'penta2Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e3850bcd-f554-492a-bc16-f9a2840a0e3a' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'TEXT','tooltip',null,'Is Penta 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1e636707-3db3-4056-9da4-b962f2c16203' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'TEXT','placeholder',null,'Is Penta 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('22ec29ef-3e91-4f2e-a6ce-03b8dddda66f' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2304d6dc-d244-4e0c-9c5c-ad0c294dbff1' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'TEXT','requiredMessage',null,'Please select Penta 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3bf4ec51-47cd-4cfa-9871-e2e831c3d9a4' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('62b2e3ea-ba22-428c-8e6e-2a1110e31b14' as uuid),cast('5c703360-525b-4ac1-96a5-b2ce1c269d1b' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:10018","type":"Change","value":"penta2GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('69a4bf6a-2665-407a-ac00-a937033a1af7' as uuid),cast('e459ba1f-77be-4765-82cf-a2f8680ce2cb' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''PENTA_3'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('36011634-490f-4f97-beb2-c7e27cb7fb8e' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'TEXT','label',null,'dpt1Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4bee7ed2-bc03-4ef1-a292-7f7fa65d3d13' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:12212","type":"Change","value":"dpt1GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('577f9f63-adff-4181-93a7-bdbd6d3a18cd' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'TEXT','tooltip',null,'Is DPT 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('77535bf9-579c-4f31-91cf-4474b219d9ba' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7e61d39d-76b3-47e9-a2d8-8090f9dd036b' as uuid),cast('d4eaf639-5ac6-4caf-b469-9c58bf7ada59' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('503a8b25-9160-412d-8d8c-ee8a889d189f' as uuid),cast('9a00f116-d840-4220-b520-1ba93027e92c' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''DPT_2'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8b8c15f1-3131-479d-9d72-9113a51f645a' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('976700ea-89ae-4315-8a39-8b025b91379b' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dd37ed04-81aa-414f-8abd-7fe622c36e7c' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f24e3746-a9a1-4545-8c12-29d8a588c03a' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('00e8fe81-f2e2-4450-a5a0-fa7847a5481c' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:13430","type":"Change","value":"dpt3GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2de04079-c231-4ae8-a085-ddaf226e3dc6' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('37363432-ae31-4ae8-a9fe-392bbe58ade3' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'TEXT','placeholder',null,'Is DPT 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4e0cf46f-9e92-4e0c-a5b1-07419df42aff' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''DPT_3'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4f6b9110-0f34-479a-bd58-a01dc4e71afe' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'TEXT','requiredMessage',null,'Please select DPT 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5b53fbb1-8dc9-4022-8ede-23bfc34d12e7' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'TEXT','tooltip',null,'Is DPT 3 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6a17b43e-af80-4ad7-85cd-4b32bfb4fe1b' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7bd2966f-0a2a-4889-8b31-3e6f8d80e912' as uuid),cast('45525f54-9f1d-47ad-bf05-9cbd58683c61' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2a612c0a-628a-4845-a72a-8a08b95586e1' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'TEXT','placeholder',null,'Is DPT Booster given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('358834c5-65a9-4a0a-8f84-99a27f845566' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('50406d18-7edb-4eaf-ae18-4117f95f8480' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'TEXT','tooltip',null,'Is DPT Booster given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('77e9e044-a093-4cc0-a177-50ca106b9306' as uuid),cast('99447c01-91c1-4fc6-90a7-63c1b98c8673' as uuid),'TEXT','requiredMessage',null,'Please select DPT Booster given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('95769ac3-397b-4538-ba9c-927ddcb0e83e' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'TEXT','requiredMessage',null,'Please select Rota Virus 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a22332af-a0af-4c81-b7a3-d95ba0a41d9e' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:1362","type":"Change","value":"rotaVirus1GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aadced66-5fec-42b4-8b3a-516036d6c2a5' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b08523bf-d5c4-4ec3-b44d-f7c1cfc13bfb' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b3a791b9-d744-4804-a4dc-ed3301a90bee' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b94dd0da-6bb8-489b-9a70-6fd3cc2b5bb9' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2917966f-0822-45f9-a162-7650bd941dca' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('33dacfb8-2816-4e5c-a8b5-315593523cae' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('651317af-6cf4-4b78-b306-fde8f125e026' as uuid),cast('268bf58e-df53-4786-bc2b-3549f2a3130e' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''ROTA_VIRUS_1'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d25ec9c7-55c1-49d3-b6ed-fb1458edb76e' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''ROTA_VIRUS_2'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('31331357-2854-47d3-a4e4-29c1dc082a2d' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:2254","type":"Change","value":"rotaVirus2GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3ee1e3ae-2905-4fe3-bb3e-455863a7920d' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'TEXT','placeholder',null,'Is Rota Virus 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4fb18239-98c6-4761-8b33-a80b38208331' as uuid),cast('c1cd9af4-39f2-4bd3-8a08-64bf03304552' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('be322241-9e18-46f1-8159-6cacd58c1461' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:3170","type":"Change","value":"rotaVirus3GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f02b8a1b-279f-4f4f-9ca8-54e4913076e5' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f0d98ef1-202d-4174-ae35-cc58dabd16d3' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''ROTA_VIRUS_3'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5077f9c4-75c7-4507-b2ce-6f27ed158ebe' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('549f40b8-5fcd-4fe1-b59e-8da1adbb3101' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('63a18170-900a-44d2-9ac9-5e0412cedd26' as uuid),cast('8d63fdfa-6522-43ae-9de4-e6fdd98238bd' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('01101ac8-8549-4df9-bfa6-7d5c2b67a536' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('02bd0a6b-5844-4809-a6bf-ad647c694a03' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''MEASLES_2'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2002300a-097b-4de4-8222-2002a740c9b8' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'TEXT','requiredMessage',null,'Please select measles 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4b3f4b4a-de19-4b19-ab2c-6f43b04b3a43' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('50e0a826-6db3-41e1-8b69-d8fa8f6aeda1' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'TEXT','tooltip',null,'Is Measles 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6419ef37-1a4f-4c4f-97fd-60259867fa42' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('695cde48-e992-4c23-be42-322b15d7a2c5' as uuid),cast('c27fd391-2c21-4e42-8f13-90ee9abe958d' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a742aaaa-ac72-4590-86db-481994a63d98' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('aa0938f3-c522-4d26-972b-bd09ac8d1e66' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f7f17234-fd17-4666-ba3f-c149c0fe0783' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:5836","type":"Change","value":"measlesRubella1GivenChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fa76871e-5d8a-474d-8c4e-b3da263758f3' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.isAlive","queryCode":null,"expression":null},{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"formData.childDetails[$index].dueImmunisations.includes(''MEASLES_RUBELLA_1'')"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0137b0b0-0be1-46e6-aa32-59a95fa4d1ff' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('01dd3127-030f-4c26-8a1c-a8f8686fdda5' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0423d513-fe7f-400d-880f-ced95cad0d55' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'TEXT','placeholder',null,'Is Measles Rubella 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1a77ffe6-f297-4adc-8d8a-241fec78d416' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'JSON','staticOptions',null,'[{"key":"true","value":"Yes"},{"key":"false","value":"No"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('29cbd3d2-6ae7-4319-a23d-3829338f4836' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'TEXT','label',null,'measlesRubella1Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3bd64f94-e758-40ca-a863-bc25bf8039af' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'TEXT','requiredMessage',null,'Please select measles rubella 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('71352b25-3c57-4dcd-8883-5fee8b54b73a' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7edba523-bd09-4ba5-992c-5b5dae9f4115' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'TEXT','tooltip',null,'Is Measles Rubella 1 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7ee2f00e-7597-4aee-8e68-895ebe39baa9' as uuid),cast('8cdb0e6d-f397-4de4-826f-5656ebf9daf6' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6aa01043-c396-420f-9863-a571b2180222' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'TEXT','placeholder',null,'Is Measles Rubella 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7e6fe5db-67f6-4da3-a44e-b2782b48e116' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7f3a7b00-32d8-42b4-a077-dece6bc3b803' as uuid),cast('5300409b-d4e5-4575-8919-ba84dbf655ad' as uuid),'TEXT','requiredMessage',null,'Please select Measles Rubella 2 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4963d2d7-3d8b-434d-b2ab-0f312b1016ad' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('542a25cd-93c0-449a-81dc-38d7e18c2b43' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'TEXT','placeholder',null,'Is F IPV 2 01 given',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5f7a2ba6-9064-47ae-8fdf-64d3fde37c40' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('615f7d60-0837-4d59-9650-4ad73fa87dca' as uuid),cast('52558a12-7e90-4277-a9e3-b413ac5ebdc2' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('59d373f3-dd81-4e47-998c-0926a9b9aca5' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('72412cb0-ac55-4173-afd9-c19693c94429' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'BOOLEAN','isBoolean',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7f7d9575-ec98-41cf-be30-efb39ef0a628' as uuid),cast('5daad12d-03a5-4444-9e59-59f42f5d1065' as uuid),'TEXT','label',null,'fIpv205Given_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('23120107-9073-4e09-bd95-393dd52c302c' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'NUMBER','minLength',null,'10',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('23f0d4fe-8674-47a0-b266-877cf0896ad0' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'NUMBER','maxLength',null,'10',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('33bbb8e5-f5b5-4c84-a2fe-c8791c45b668' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('397d9971-9b93-4916-84c6-0c4ba41348f6' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"CUSTOM","operator":null,"value1":null,"value2":null,"fieldName":null,"queryCode":null,"expression":"ctrl.formData.isMobileNumberAvailable===false"}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('45dd217f-99e7-4d3b-b49d-8688796fa71e' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'TEXT','patternMessage',null,'Please enter valid mobile number',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('526d2fc0-b3bb-4114-b782-558af6be8614' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'BOOLEAN','hasPattern',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('60615eb5-b70c-4eb1-bdb9-408de4c791dd' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'BOOLEAN','isRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6829d250-1d36-45a5-9fb8-179a29239fdb' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'TEXT','requiredMessage',null,'Please enter mobile number',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('79fdb793-3682-40ae-bd0e-2dc32042b983' as uuid),cast('e7452589-46b3-4a31-a734-bb31cfceced8' as uuid),'TEXT','pattern',null,'^[0-9]*$',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('eec6b1cb-0b25-44b9-bea4-2931602f0249' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'TEXT','label',null,'familyPlanningMethod_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f2231b7c-5b06-4f5c-adef-d1e5f0c4d54a' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f31be1e0-8615-421d-9939-719b2f5a918f' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'VISIBILITY','visibility',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0c8afd5d-9bdf-46cb-b83d-68b01f3ac8af' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'TEXT','label',null,'deliveryPlace_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('16a9287b-1fbc-4c3c-9344-f942adf205a6' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'TEXT','requiredMessage',null,'Please select place of visit',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1b303ebd-dcfa-4528-a8b8-7026a8c6487f' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('20c82598-fadf-4526-b5f0-d4be11bc853f' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'TEXT','placeholder',null,'Select Place of Visit',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('380c480a-3636-4dfc-9349-ae8903935681' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('560d902e-20db-46dd-96b8-7d44ed32b389' as uuid),cast('4295d3aa-245e-443c-ae85-8066ddc15764' as uuid),'DROPDOWN','optionsType',null,'staticOptions',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b751fff9-5d4b-4524-b902-b5469c91bdc0' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bbfbc0c5-19fe-4ea5-ad0d-cc72a620be12' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e90272d2-95fd-44b1-919c-10ad162e151a' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'JSON','staticOptions',null,'[{"key":"HOME","value":"Home"},{"key":"ON_THE_WAY","value":"On the way"},{"key":"HOSP","value":"Hospital"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e90f9f5d-466b-4082-b9d0-01ebb6d15ae0' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'TEXT','tooltip',null,'Death Place',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ebd21895-d2b1-4354-a678-67941a50a45e' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('08a538ee-50d0-4360-896a-667368449495' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('12976404-5033-4286-a217-dd2750cffc6f' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'TEXT','label',null,'childPlaceOfDeath_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2dc86b76-337e-4069-999c-02ae2058f6c2' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('31c85429-5992-4e89-83a9-36e036597c32' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'TEXT','placeholder',null,'Select Death Place',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('3f8c069d-b304-4008-abac-68288a7089b1' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'TEXT','requiredMessage',null,'Please select death place',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('48d8d7a6-54aa-446e-9e7a-136897c8ca26' as uuid),cast('f7241770-7df5-4d69-a883-f4f1d36eb8f3' as uuid),'DROPDOWN','optionsType',null,'staticOptions',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a152d166-cd95-4075-a27b-809516170efe' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b047c2ae-bf77-4e36-9aa0-69a8079fe55d' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:8814","type":"Change","value":"familyPlanningMethodChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d5cb017a-7eca-4b37-a5bc-e5ca7f81957e' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d6945c89-a373-4a01-8b0d-42c205df5e36' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ed8342c2-7e66-44cb-9c44-35d261b96363' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('47191899-474a-40c2-b9d8-37b8df150a98' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'JSON','staticOptions',null,'[{"key":"FMLSTR","value":"FEMALE STERILIZATION"},{"key":"MLSTR","value":"MALE STERILIZATION"},{"key":"IUCD5","value":"IUCD - 5 YEARS"},{"key":"IUCD10","value":"IUCD - 10 YEARS"},{"key":"CONDOM","value":"CONDOM"},{"key":"ORALPILLS","value":"ORAL PILLS"},{"key":"CHHAYA","value":"CHHAYA"},{"key":"ANTARA","value":"ANTARA"},{"key":"CONTRA","value":"EMERGENCY CONTRACEPTIVE PILLS"},{"key":"PPIUCD","value":"PPIUCD"},{"key":"PAIUCD","value":"PAIUCD"},{"key":"NONE","value":"None"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('596cc102-191b-420f-aabb-f1efb1b91736' as uuid),cast('6fdff7fe-25f1-4b09-a60a-d90e8935abff' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d2708162-69cd-42d1-b107-2f8a114f0364' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'TEXT','listValueField',null,'Health Infrastructure Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e71f8298-15c1-4c33-9d46-8e72455aa172' as uuid),cast('c934b56b-f50b-4786-afc4-0511f6a43ff8' as uuid),'TEXT','requiredMessage',null,'Please select institution type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4c08d687-7616-453c-824b-3397bc3b0cdb' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:1789","type":"Change","value":"retrieveMotherReferralHospitalsByInstitutionType"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('619bdcc5-aea3-4b95-94be-3addb04debc5' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'TEXT','tooltip',null,'Institution Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6a168d9d-4437-40c1-b307-d572c5a59370' as uuid),cast('a164cc38-26c1-4c7d-b0f7-db849a45248b' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('828bbdb6-7593-447e-974f-88fe78daf08b' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9266e995-6764-41ba-9f2a-57e1e73b9e8f' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:4291","type":"Change","value":"retrieveChildReferralHospitalsByInstitutionType"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a9425db7-6991-49a8-9b5e-1d069720e57b' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'TEXT','requiredMessage',null,'Please select institution type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b38c7a6b-6933-4bbf-853d-a7d05433dbe6' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('be91818d-816d-4339-b1ae-3b8671bb850f' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c26e7a3d-0cff-4be1-818e-0bd2b2eff4b4' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.childReferralDone","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e7aaef21-13d4-48dc-a73e-c0592c27fe5b' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'TEXT','placeholder',null,'Select Institution Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fefd5fb1-4281-4632-873c-9714db71bbd1' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'TEXT','listValueField',null,'Health Infrastructure Type',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4aa1589b-206a-4f7c-949b-be7656e69d93' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'DROPDOWN','optionsType',null,'listValueField',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('5993b751-7032-44c7-b587-457673c1a98f' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('619aaf14-68a1-462c-b4fa-ea55e4140a49' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('67b2ea2b-6bf9-41eb-abe4-0b9d152d8afb' as uuid),cast('e99b34b3-b26e-4f71-8d2b-3add47c6265b' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('839c6dbc-dbd7-4c8c-b0c1-43254e83bc27' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'JSON','staticOptions',null,'[{"key":"HOME","value":"Home"},{"key":"ON_THE_WAY","value":"On the way"},{"key":"HOSP","value":"Hospital"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8481976e-9763-47ed-bc47-beee5764fb8e' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'TEXT','placeholder',null,'Select Death Place',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('8d36559d-b896-4863-9003-cf516273b41b' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"false","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9d88f1a2-b92e-4822-bce9-6e5108cd3d88' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'TEXT','tooltip',null,'Death Place',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a83cdf08-3275-4b87-9243-fc558c41fa7f' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('afed1cb3-0aa2-4ed1-be5e-68da446f9433' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('bbc3afb5-4b44-4c95-8615-d17b290d7972' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('cfed24a8-01c2-4e29-a0a1-86548dbcda4e' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d69dd7dc-4548-48ac-b943-4d95b1849e3b' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:6767","type":"Change","value":"placeOfDeathChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dd34a2b9-13ef-4cc0-bb77-99eef33492d5' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'BOOLEAN','isDisabled',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('1ae317ac-5f15-4bf3-acad-018865693e19' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('20589fdc-3cf4-4acc-b6d7-719e782e7bba' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'TEXT','label',null,'placeOfDeath_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('26bcd56f-b0f1-4c3c-88a7-91cac7dc0719' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('575be2f2-034c-49db-9d58-2b54b6b97336' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'TEXT','requiredMessage',null,'Please select death place',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6ccc69f2-baa4-412a-a13f-8629f2f5db81' as uuid),cast('8e9c97d7-6de7-4bc8-bfd6-01c70c22f87b' as uuid),'DROPDOWN','optionsType',null,'staticOptions',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('a18fa1b6-18a2-433d-8988-63bc52a034a9' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c1abe92c-92cc-4555-8d12-1f9d485e5eba' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c1ea3bd6-5704-43af-b6e4-bd34f1ff2b4e' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'TEXT','requiredMessage',null,'Please select death reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c27514a0-eb60-43c6-a47e-e25ebda66eb9' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('dee827bb-487d-4d2a-a5e0-e23674dbd483' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'TEXT','tooltip',null,'Death Reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e338311f-d931-49e7-a60b-9a118745e2af' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'TEXT','placeholder',null,'Select Death Reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('e39ff1ff-df32-4272-87f2-37dd3885dbaf' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'DROPDOWN','optionsType',null,'listValueField',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('13949526-8b11-4350-87ab-9c9774d987c6' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2970345c-f879-486a-a3c6-5df7185c6473' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('74f2798d-dbe5-44d3-97dd-621caf6bf2da' as uuid),cast('a2721045-73e3-4c7e-b9ea-b380a8de361f' as uuid),'BOOLEAN','isHidden',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fd818bcd-3c61-44e5-b31c-525a22d4e784' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('0841c708-572f-4be9-884e-2d6acd391874' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'DROPDOWN','optionsType',null,'listValueField',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('369df9f3-3581-4302-844d-464f48913524' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('42688ac6-e9af-40a6-87f5-c70d39a97e81' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'JSON','staticOptions',null,'[{"key":"-1","value":"Other"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('4b2c7c8f-937f-477c-9b6c-6b2fb7ed28af' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'TEXT','label',null,'childDeathReason_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('754f9f77-c888-4cf0-8162-b9d65dc7d98b' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7a42c135-a4ca-43de-bee4-b852bfee7514' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7adac5b1-9e19-402a-b621-d3ba32ab922b' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'TEXT','placeholder',null,'Select Death Reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7daeab0e-0769-4870-8806-6648072b0aa2' as uuid),cast('2567ef06-2c28-43dc-9741-318e5f0182e8' as uuid),'TEXT','requiredMessage',null,'Please select death reason',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('666369dd-51b0-4cb1-817c-ddccdd797bf1' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('6fa49b9b-d604-4699-9334-e9f324ae5b5a' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7aa6719a-7422-4221-873a-523427015e80' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'DROPDOWN','optionsType',null,'queryBuilder',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('7c7d5cb9-1611-40c2-b136-051f018cbbfa' as uuid),cast('977393d5-4bfd-4c95-8d68-680ea7e4adb0' as uuid),'EVENTS','events',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('d8efe066-608a-47e0-b82f-9de7ac718829' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('224471cf-2c25-4bdd-9f15-04f2d8eb0651' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'REQUIRABLE','requirable',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2de8555b-d2d2-4a44-934e-4c1d4d7c4815' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'BOOLEAN','isMultiple',null,'true',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2e0fb647-abb2-46de-89ba-2727f3cd8649' as uuid),cast('4f59d868-82f4-4085-b257-01e8f0c11acd' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('960d2b82-e303-44e9-a026-aaafa7c28726' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'EVENTS','events',null,'[{"0":{"type":"","value":""},"$$hashKey":"object:10211","type":"Change","value":"ironDefAnemiaInjChanged"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('9a2c3ace-bed3-4dee-adca-7b8bbe4a8b73' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'BOOLEAN','additionalStaticOptionsRequired',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('b5be2ccf-9ca8-49a4-80dc-6b25dec3ad9f' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'JSON','staticOptions',null,'[{"key":"IRON_SUCROSE","value":"Iron Sucrose"},{"key":"FCM","value":"FCM"},{"key":"NONE","value":"None"}]',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('c84d3227-92a2-4e04-bb65-3bd441007c77' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'TEXT','label',null,'ironDefAnemiaInj_RCH_FACILITY_PNC',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('edd5777c-ea61-4b37-8b1c-3203ad269b69' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('f0d9fa36-54c3-45f6-b3c9-02ea63ab6d18' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.motherDetails.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('fc133d65-e9b6-4e54-8a1e-564bc0168dbf' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'TEXT','requiredMessage',null,'Please select Iron Deficiency Anemia Injection',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('ff137943-c2cb-4d55-9f84-95bc9b643b4d' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'DROPDOWN','optionsType',null,'staticOptions',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('10e76ccc-af4d-43bd-8d92-a625b716cdd6' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'BOOLEAN','isMultiple',null,'false',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('2105f703-622b-4d1c-bbe3-44322beff281' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'TEXT','tooltip',null,'Iron Deficiency Anemia Injection',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('48456339-0857-40cc-bcbb-8695a17e13f0' as uuid),cast('6ef81385-af6c-458b-b7fe-ad2da605ecb1' as uuid),'TEXT','placeholder',null,'Select Iron Deficiency Anemia Injection',60512,now(),60512,now());
+
+insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
+                         values(cast('72ec9807-b511-4ac1-966b-52c1e66cefb5' as uuid),cast('8832c718-c92d-4724-90d8-a0e07dcf4840' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.childDetails.childReferralDone","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
