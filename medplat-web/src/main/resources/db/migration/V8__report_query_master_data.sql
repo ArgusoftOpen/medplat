@@ -4711,7 +4711,8 @@ inner join location_hierchy_closer_det lhcd on lhcd.child_id = l1.id
 inner join location_master l2 on l2.id = lhcd.parent_id
 cross join prefered_language
 where l1.id = #location_id#',true,'ACTIVE','31626838-e8ec-4b59-aff3-bfbcf21ee783'),
-	 (1692,74841,'2020-07-22 17:28:27.168',1,'2021-01-13 20:22:06.427965','status','select case when ''#status#'' = ''CONFORMED'' then ''CONFIRMED'' else ''#status#'' end as status',true,'ACTIVE','041530b8-11cd-4429-87c0-934433af5d2c'),
+	(1692,74841,'2020-07-22 17:28:27.168',1,'2023-07-20 16:43:01.739',NULL,'select concat(extract(year from curr), ''-'', extract(year from curr) + 1) as year
+    from generate_series(date ''2019-04-01'', current_date, ''1 year'') as curr order by year desc;',true,'ACTIVE','041530b8-11cd-4429-87c0-934433af5d2c'),
 	 (1739,60512,'2020-09-07 20:35:18.131',1,'2021-01-13 20:22:06.427965','limit_offset,from_date,to_date,location_id','with details as (
 	select child_cmtc_nrc_admission_detail.child_id,
 	child_cmtc_nrc_admission_detail.screening_center,
@@ -4904,17 +4905,66 @@ inner join imt_member on imt_member.id = details.child_id
 inner join imt_family on imt_member.family_id = imt_family.family_id
 left join imt_member m2 on imt_member.mother_id = m2.id
 inner join health_infrastructure_details on details.fsam_admission_screening_center = health_infrastructure_details.id',true,'ACTIVE','93b8416a-554b-4429-b815-ff1d7865c395'),
-	 (1693,74841,'2020-07-23 16:25:17.711',1,'2021-01-13 20:22:06.427965','loggedInUserId,location_id','with prefered_language as(
-select (case 
-when report_preferred_language = ''EN'' then true  
-else false 
-end) as is_enlish 
-from um_user where id = #loggedInUserId#)
-select 
-case when  prefered_language.is_enlish then get_location_hierarchy_language_wise(#location_id#, ''EN'') else 
-get_location_hierarchy(#location_id#) 
-end as location_id
-from  prefered_language',true,'ACTIVE','1a5bed9d-4542-4658-b455-1c908bf30f29'),
+	 (1693,74841,'2020-07-23 16:25:17.711',1,'2023-07-20 16:43:01.739','location_id','with locations as ( select child_id from location_hierchy_closer_det where parent_id = #location_id#)
+,children_count_label as (
+    select ''0'' as children, 0 as child_count
+    union
+    select ''1'' as children, 1 as child_count
+    union
+    select ''2'' as children, 2 as child_count
+    union
+    select ''3'' as children, 3 as child_count
+    union
+    select ''4'' as children, 4 as child_count
+    union
+    select ''5+'' as children, 5 as child_count
+)
+,total_number as (
+	select r.age_group_or_child_cnt, sum(r.eligiblecouple) as eligiblecouple, sum(r.male) as male, sum(r.female) as female,
+	sum(r.coppert) as coppert, sum(r.condom) as condom, sum(r.orelpills) as  orelpills,sum(r.injectable) as injectable, sum(r.none) as none
+	from rch_eligible_couple_location_wise_count_anlytics_detail r
+	inner join locations on locations.child_id = r.location_id
+	where age_group_or_child_cnt in (''0'',''1'',''2'',''3'',''4'',''5+'')
+	group by r.age_group_or_child_cnt
+)
+,eligible_couple_data as (
+select children_count_label.children as age_group_or_child_cnt,
+coalesce(total_number.eligiblecouple,0) as eligiblecouple,
+coalesce(total_number.male,0) as male,
+coalesce(total_number.female,0) as female,
+coalesce(total_number.coppert,0) as coppert,
+coalesce(total_number.condom,0) as condom,
+coalesce(total_number.orelpills,0) as orelpills,
+coalesce(total_number.injectable,0) as injectable,
+coalesce(sum( male + female + coppert + condom + orelpills + injectable),0) as total ,
+coalesce(total_number.none,0) as none
+from children_count_label
+left join total_number on total_number.age_group_or_child_cnt = children_count_label.children
+group by children_count_label.children, total_number.eligiblecouple,total_number.male,
+total_number.female,total_number.coppert,total_number.condom,total_number.orelpills,total_number.injectable,
+total_number.none,children_count_label.child_count
+order by children_count_label.child_count
+)
+select
+age_group_or_child_cnt as hidden_age_group_or_child_count,
+age_group_or_child_cnt as  "Child''s age wise",
+eligiblecouple as "Number of eligible couple",
+male as "Number of male",
+female as "Number of female",
+coppert as "Number of coppert users",
+condom as "Number of condom users",
+orelpills as "Number of oralpills users", injectable ,
+total as "Total",
+none as "No method adopted"
+from eligible_couple_data
+where #location_id# is not null
+union all
+select
+	null,''<b>Total</b>'', sum(eligible_couple_data.eligiblecouple),sum(eligible_couple_data.male),sum(eligible_couple_data.female),
+	sum(eligible_couple_data.coppert),sum(eligible_couple_data.condom),sum(eligible_couple_data.orelpills),sum(eligible_couple_data.injectable),
+	sum(eligible_couple_data.total),sum(eligible_couple_data.none)
+from eligible_couple_data
+where #location_id# is not null',true,'ACTIVE','1a5bed9d-4542-4658-b455-1c908bf30f29'),
 	 (789,58981,'2019-03-06 15:37:15.102',1,'2021-01-13 20:22:06.427965','limit_offset,demographic_location_id,financial_year,loggedInUserId,location_id','--MTP (Maternal Health Services provided to the mother registered during the year)
 with parameters as(
 select CAST(#location_id# AS INTEGER) as location_id,
@@ -31649,7 +31699,7 @@ case when fhw_det.fhw is null then ''No FHW Assigned'' else fhw_det.fhw end as "
 from member_det
 inner join loc_det on member_det.loc_id = loc_det.loc_id 
 left join fhw_det on member_det.loc_id = fhw_det.loc_id;',true,'ACTIVE','b7ee2cd3-6aab-4270-8640-dc602210623b'),
-	 (1048,409,'2019-04-24 17:29:37.367',1,'2021-01-13 20:22:06.427965','location_id','with locations as ( select child_id from location_hierchy_closer_det where parent_id = #location_id#)
+	(1048,409,'2019-04-24 17:29:37.367',1,'2023-07-20 16:39:34.999','location_id','with locations as ( select child_id from location_hierchy_closer_det where parent_id = #location_id#)
 ,age_group as(
 select 1 as srno,''15-19'' as age
 union
@@ -31666,31 +31716,40 @@ union
 select 7 as srno,''45-49'' as age
 )
 ,total_number as (
-	select r.age_group_or_child_cnt, sum(r.eligiblecouple) as eligiblecouple, sum(r.male) as male, sum(r.female) as female, 
+	select r.age_group_or_child_cnt, sum(r.eligiblecouple) as eligiblecouple, sum(r.male) as male, sum(r.female) as female,
 	sum(r.coppert) as coppert, sum(r.condom) as condom, sum(r.orelpills) as  orelpills,sum(r.injectable) as injectable, sum(r.none) as none
 	from rch_eligible_couple_location_wise_count_anlytics_detail r
 	inner join locations on locations.child_id = r.location_id
 	where age_group_or_child_cnt in (''15-19'',''20-24'',''25-29'',''30-34'',''35-39'',''40-44'',''45-49'')
-	group by r.age_group_or_child_cnt order by r.age_group_or_child_cnt 
+	group by r.age_group_or_child_cnt order by r.age_group_or_child_cnt
 )
 ,eligible_couple_data as (
 select total_number.age_group_or_child_cnt,total_number.eligiblecouple,total_number.male,
 total_number.female,total_number.coppert,total_number.condom,total_number.orelpills,total_number.injectable,
 sum ( male + female + coppert + condom + orelpills + injectable) as total ,total_number.none
-from total_number 
+from total_number
 left join age_group on age_group.age = total_number.age_group_or_child_cnt
 group by total_number.age_group_or_child_cnt,total_number.eligiblecouple,total_number.male,
 total_number.female,total_number.coppert,total_number.condom,total_number.orelpills,total_number.injectable,total_number.none,srno
 order by srno
 )
-select 
-age_group_or_child_cnt as hidden_age_group_or_child_count, age_group_or_child_cnt as "પત્નીનું વય્જુથ",eligiblecouple as "લાયક દંપતિની સંખ્યા", male as "પુ.ઓ.", female as "સ્ત્રી.ઓ.", coppert as "આંકડી", 
-condom as "નિરોધ વાપરનારની સંખ્યા", orelpills as "ઓરલ પીલ્સ વાપરનાર", injectable , total as "કુલ", none as "કોઇપણ પધ્ધતિ ન અપનાવેલ" 
-from eligible_couple_data 
+select
+age_group_or_child_cnt as hidden_age_group_or_child_count,
+age_group_or_child_cnt as "Wife''s age group",
+eligiblecouple as "Number of eligible couple",
+male as "Number of male",
+female as "Number of female",
+coppert as "Number of coppert users",
+condom as "Number of condom users",
+orelpills as "Number of orelpills users",
+injectable ,
+total as "Total",
+none as "No method adopted"
+from eligible_couple_data
 where #location_id# is not null
-union all 
-select 
-	null,''<b>કુલ</b>'', sum(eligible_couple_data.eligiblecouple),sum(eligible_couple_data.male),sum(eligible_couple_data.female),
+union all
+select
+	null,''<b>Total</b>'', sum(eligible_couple_data.eligiblecouple),sum(eligible_couple_data.male),sum(eligible_couple_data.female),
 	sum(eligible_couple_data.coppert),sum(eligible_couple_data.condom),sum(eligible_couple_data.orelpills),sum(eligible_couple_data.injectable),
 	sum(eligible_couple_data.total),sum(eligible_couple_data.none) 
 from eligible_couple_data
