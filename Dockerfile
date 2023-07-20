@@ -3,24 +3,25 @@ FROM ubuntu:22.04
 
 # Update packages and install necessary tools
 RUN apt-get update -y \
-    && apt-get install -y wget curl git unzip
+    && apt-get install -y wget curl git unzip 
 
 # Create directory for Java and navigate to it
 RUN mkdir -p /usr/ui/medplat-ui
 RUN mkdir -p /usr/web
 RUN mkdir -p /usr/android
 RUN mkdir -p /usr/Repository 
-WORKDIR /usr/web
+
+# WORKDIR /usr/web
 
 # Download and install OpenJDK 13
 RUN wget https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz \
-   && tar -xzvf openjdk-13.0.2_linux-x64_bin.tar.gz \
-   && rm openjdk-13.0.2_linux-x64_bin.tar.gz
+    && tar -xzvf openjdk-13.0.2_linux-x64_bin.tar.gz \
+    && rm openjdk-13.0.2_linux-x64_bin.tar.gz
 
 # Download and install Apache Maven 3.2.5
 RUN wget https://mirrors.estointernet.in/apache/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz \
-   && tar -xzvf apache-maven-3.2.5-bin.tar.gz \
-   && rm apache-maven-3.2.5-bin.tar.gz
+    && tar -xzvf apache-maven-3.2.5-bin.tar.gz \
+    && rm apache-maven-3.2.5-bin.tar.gz
 
 #RUN useradd -m -s /bin/bash linuxbrew && \
 #    echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
@@ -40,12 +41,18 @@ ENV ANDROID_SDK_VERSION 32
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 
 # Copy application code to the working directory
-#COPY medplat-web /usr/web
-#COPY medplat-ui/ /usr/ui/medplat-ui
-#COPY ../medplat-android/ /usr/android 
+# COPY medplat-web /usr/web
+# COPY medplat-ui/ /usr/ui/medplat-ui
+# COPY ../medplat-android/ /usr/android 
+COPY entrypoint.sh /usr/
+# COPY /home/argus/.m2 /root/.m2
 
 # Install Node.js and npm
-RUN apt-get install -y nodejs npm
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y nodejs
+
+RUN npm install -g npm@8.5.0
+
 
 # Install global dependencies - bower and grunt
 RUN npm install -g bower grunt -y 
@@ -71,28 +78,33 @@ RUN npm install -g bower grunt -y
 #RUN ./gradlew assembleDebug --stacktrace
 
 
-# Navigate to the application UI directory
-WORKDIR /usr/ui/medplat-ui
+# # Navigate to the application UI directory
+# WORKDIR /usr/ui/medplat-ui
 
 # Run grunt task
-RUN npm install
-RUN bower install
-RUN grunt medplat
-#RUN npx grunt medplat
+# RUN npm install
+# RUN bower install
+# RUN grunt medplat
+# RUN npx grunt medplat
+
+
 
 # Copy Jar from local
-#ADD ./target/imtecho-web-2.0.jar /usr/java/imtecho-web-2.0.jar
+# ADD ./target/imtecho-web-2.0.jar /usr/java/imtecho-web-2.0.jar
 
 # Build the application with Maven
-WORKDIR /usr/web
-RUN mvn clean install -P docker -Dmaven.test.skip=true
+# WORKDIR /usr/web
+# RUN mvn clean install -P docker -Dmaven.test.skip=true
 
-# Expose port 8181
+# # Expose port 8181
 EXPOSE 8181
 
+ENTRYPOINT [ "/usr/entrypoint.sh" ]
+
+
 # Set the entry point command to run the application
-CMD ["java", "-jar", "/usr/web/target/medplat-web-2.0.jar"]
-# #CMD tail -f /dev/null
+# CMD ["java", "-jar", "/usr/web/target/medplat-web-2.0.jar"]
+#CMD tail -f /dev/null
 
 
 ## to build this image first got to the ImtechoV2 folder and the run this docker build command. - docker build . -f imtecho-web/Dockerfile -t imtecho-image-backend --progress=plain  ##

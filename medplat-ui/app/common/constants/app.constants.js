@@ -1,7 +1,7 @@
 //Add application level constants here
 (function () {
 
-    var serverPath = "http://" + window.location.hostname;// + ":8181";
+    var serverPath = "http://" + window.location.hostname; // + ":8181";
     // var serverPath = "http://192.1.100.181:448";  //Harshit
     angular.module('imtecho')
         .constant('APP_CONFIG', {
