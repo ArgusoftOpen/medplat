@@ -25308,7 +25308,7 @@ COMMENT ON COLUMN public.timer_event_history.completed_on
 
 -- public.timer_event_history_id_seq definition
 
--- DROP SEQUENCE public.timer_event_history_id_seq;
+DROP SEQUENCE IF EXISTS public.timer_event_history_id_seq;
 
 CREATE SEQUENCE IF NOT EXISTS public.timer_event_history_id_seq
 	INCREMENT BY 1
@@ -25322,3 +25322,279 @@ ALTER TABLE IF EXISTS public.timer_event_history_id_seq OWNER TO postgres;
 ALTER SEQUENCE public.timer_event_history_id_seq OWNED BY public.timer_event_history.id;
 ALTER TABLE IF EXISTS ONLY public.timer_event_history ALTER COLUMN id SET DEFAULT nextval('public.timer_event_history_id_seq'::regclass);
 
+-- Table: analytics.child_with_age_1_to_6_year_analytics
+
+DROP TABLE IF EXISTS analytics.child_with_age_1_to_6_year_analytics;
+
+CREATE TABLE IF NOT EXISTS analytics.child_with_age_1_to_6_year_analytics
+(
+    id bigint NOT NULL,
+    financial_year text COLLATE pg_catalog."default" NOT NULL,
+    location_id integer NOT NULL,
+    total_reg_1_6 integer,
+    weighed_1_6 integer,
+    weighed_less_than_2_5_1_6 integer,
+    vitamin_k_given_1_6 integer,
+    bcg_given_1_6 integer,
+    dpt_1_given_1_6 integer,
+    penta_1_given_1_6 integer,
+    opv_1_given_1_6 integer,
+    fipv_1_given_1_6 integer,
+    dpt_2_given_1_6 integer,
+    penta_2_given_1_6 integer,
+    opv_2_given_1_6 integer,
+    dpt_3_given_1_6 integer,
+    penta_3_given_1_6 integer,
+    opv_3_given_1_6 integer,
+    fipv_2_given_1_6 integer,
+    measles_1_given_1_6 integer,
+    measles_rubella_1_given_1_6 integer,
+    fully_immunized_1_6 integer,
+    CONSTRAINT child_with_age_1_to_6_year_analytics_t_pkey1 PRIMARY KEY (financial_year, location_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS analytics.child_with_age_1_to_6_year_analytics
+    OWNER to postgres;
+
+-- analytics.child_with_age_1_to_6_year_analytics_t_id_seq definition
+
+DROP SEQUENCE IF EXISTS analytics.child_with_age_1_to_6_year_analytics_t_id_seq;
+
+CREATE SEQUENCE IF NOT EXISTS analytics.child_with_age_1_to_6_year_analytics_t_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+ALTER SEQUENCE analytics.child_with_age_1_to_6_year_analytics_t_id_seq OWNED BY analytics.child_with_age_1_to_6_year_analytics.id;
+ALTER TABLE IF EXISTS ONLY analytics.child_with_age_1_to_6_year_analytics ALTER COLUMN id SET DEFAULT nextval('analytics.child_with_age_1_to_6_year_analytics_t_id_seq'::regclass);
+
+
+-- Table: analytics.child_monthly_location_wise_analytics
+
+DROP TABLE IF EXISTS analytics.child_monthly_location_wise_analytics;
+
+CREATE TABLE IF NOT EXISTS analytics.child_monthly_location_wise_analytics
+(
+    month_year date NOT NULL,
+    location_id integer NOT NULL,
+    total_live_births integer,
+    hep_b_given integer,
+    opv_0_given integer,
+    vitamin_k_given integer,
+    bcg_given integer,
+    penta_1_given integer,
+    opv_1_given integer,
+    fipv_1_given integer,
+    penta_2_given integer,
+    opv_2_given integer,
+    penta_3_given integer,
+    opv_3_given integer,
+    fipv_2_given integer,
+    measles_1_given integer,
+    measles_rubella_1_given integer,
+    rota_virus_1_given integer,
+    rota_virus_2_given integer,
+    rota_virus_3_given integer,
+    fully_immunized_before_11_months integer,
+    fully_immunized_after_11_months integer,
+    not_fully_immunized integer,
+    infant_death integer,
+    bcg_given_on_dob integer,
+    bcg_given_within_1_month integer,
+    bcg_given_within_6_months integer,
+    bcg_given_within_12_months integer,
+    bcg_given_after_12_months integer,
+    bcg_not_given integer,
+    penta_3_given_within_4_months integer,
+    penta_3_given_within_12_months integer,
+    penta_3_given_after_12_months integer,
+    penta_3_not_given integer,
+    total_delivery integer,
+    mother_age_less_than_18 integer,
+    mother_age_between_18_30 integer,
+    mother_age_above_30 integer,
+    early_anc_reg_delivery integer,
+    gravida_1st_birth integer,
+    gravida_2nd_birth integer,
+    gravida_3rd_birth integer,
+    gravida_3_plus_birth integer,
+    pre_term_delivery integer,
+    full_term_delivery integer,
+    post_term_delivery integer,
+    outcome_live_birth integer,
+    live_birth_screened integer,
+    outcome_still_birth integer,
+    still_birth_screened integer,
+    neural_tube_defect integer,
+    downs_syndrome_defect integer,
+    cleft_lip_palete_defect integer,
+    talipes integer,
+    mental_dysplasia integer,
+    congenital_cataract integer,
+    congenital_deafness integer,
+    congenital_heart_disease integer,
+    retinopathy_of_prematurity integer,
+    other_defects integer,
+    no_defects_observed integer,
+    new_borns_referred integer,
+    no_of_clubfoot integer,
+    complete_immunization_before_24_month integer,
+    complete_immunization_after_24_month integer,
+    not_complete_immunized integer,
+    opv_booster integer,
+    dpt_booster integer,
+    measles_or_rubella_2 integer,
+    CONSTRAINT child_monthly_location_wise_analytics_t_pkey PRIMARY KEY (month_year, location_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS analytics.child_monthly_location_wise_analytics
+    OWNER to postgres;
+
+-- Table: analytics.child_yearly_location_wise_analytics
+
+DROP TABLE IF EXISTS analytics.child_yearly_location_wise_analytics;
+
+CREATE TABLE IF NOT EXISTS analytics.child_yearly_location_wise_analytics
+(
+    id bigint NOT NULL,
+    financial_year text COLLATE pg_catalog."default" NOT NULL,
+    location_id integer NOT NULL,
+    total_delivery integer,
+    total_live_births integer,
+    total_still_births integer,
+    total_weighed integer,
+    total_weighed_less_than_2_5 integer,
+    total_reg_0_1 integer,
+    weighed_0_1 integer,
+    weighed_less_than_2_5_0_1 integer,
+    vitamin_k_given_0_1 integer,
+    bcg_given_0_1 integer,
+    dpt_1_given_0_1 integer,
+    penta_1_given_0_1 integer,
+    opv_1_given_0_1 integer,
+    fipv_1_given_0_1 integer,
+    dpt_2_given_0_1 integer,
+    penta_2_given_0_1 integer,
+    opv_2_given_0_1 integer,
+    dpt_3_given_0_1 integer,
+    penta_3_given_0_1 integer,
+    opv_3_given_0_1 integer,
+    fipv_2_given_0_1 integer,
+    measles_1_given_0_1 integer,
+    measles_rubella_given_0_1 integer,
+    rota_virus_1_given_0_1 integer,
+    rota_virus_2_given_0_1 integer,
+    rota_virus_3_given_0_1 integer,
+    fully_immunized_0_1 integer,
+    breast_feeding_within_1_hr integer,
+    birth_weight_less_than_1 integer,
+    birth_weight_btw_1_and_1_5 integer,
+    birth_weight_btw_1_6_and_2 integer,
+    birth_weight_btw_2_1_and_2_5 integer,
+    birth_weight_btw_2_6_and_3 integer,
+    birth_weight_btw_3_1_and_3_5 integer,
+    birth_weight_btw_3_6_and_4 integer,
+    birth_weight_above_4 integer,
+    birth_weight_not_reg integer,
+    CONSTRAINT child_yearly_location_wise_analytics_t_pkey1 PRIMARY KEY (financial_year, location_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS analytics.child_yearly_location_wise_analytics
+    OWNER to postgres;
+
+-- analytics.child_yearly_location_wise_analytics_t_id_seq definition
+
+DROP SEQUENCE IF EXISTS analytics.child_yearly_location_wise_analytics_t_id_seq;
+
+CREATE SEQUENCE IF NOT EXISTS analytics.child_yearly_location_wise_analytics_t_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+ALTER SEQUENCE analytics.child_yearly_location_wise_analytics_t_id_seq OWNED BY analytics.child_yearly_location_wise_analytics.id;
+ALTER TABLE IF EXISTS ONLY analytics.child_yearly_location_wise_analytics ALTER COLUMN id SET DEFAULT nextval('analytics.child_yearly_location_wise_analytics_t_id_seq'::regclass);
+
+
+-- Table: analytics.child_services_given_analytics
+
+DROP TABLE IF EXISTS analytics.child_services_given_analytics;
+
+CREATE TABLE IF NOT EXISTS analytics.child_services_given_analytics
+(
+    id bigint NOT NULL,
+    location_id integer NOT NULL,
+    month_year date NOT NULL,
+    financial_year text COLLATE pg_catalog."default",
+    live_births_since_april_1 integer,
+    infant_death integer,
+    weighed integer,
+    weighed_less_than_2_5 integer,
+    hep_b_given integer,
+    opv_0_given integer,
+    vitamin_k_given integer,
+    bcg_given integer,
+    penta_1_given integer,
+    opv_1_given integer,
+    fipv_1_given integer,
+    penta_2_given integer,
+    opv_2_given integer,
+    penta_3_given integer,
+    opv_3_given integer,
+    fipv_2_given integer,
+    measles_1_given integer,
+    measles_rubella_1_given integer,
+    measles_rubella_2_given integer,
+    rota_virus_1_given integer,
+    rota_virus_2_given integer,
+    rota_virus_3_given integer,
+    dpt_booster_given integer,
+    opv_booster_given integer,
+    measles_or_rubella_2_given integer,
+    fully_immunized integer,
+    complete_immunized integer,
+    total_delivery integer,
+    live_birth_delivery integer,
+    still_birth_delivery integer,
+    neonatal_death integer,
+    early_neonatal_death integer,
+    lbw_death integer,
+    asphyxia_death integer,
+    pnuemonia_death integer,
+    diarhoeaa_death integer,
+    measles_death integer,
+    high_fever_death integer,
+    other_death integer,
+    CONSTRAINT child_services_given_analytics_t_pkey PRIMARY KEY (month_year, location_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS analytics.child_services_given_analytics
+    OWNER to postgres;
+
+-- analytics.child_services_given_analytics_t_id_seq1 definition
+
+DROP SEQUENCE IF EXISTS analytics.child_services_given_analytics_t_id_seq1;
+
+CREATE SEQUENCE IF NOT EXISTS analytics.child_services_given_analytics_t_id_seq1
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+ALTER SEQUENCE analytics.child_services_given_analytics_t_id_seq1 OWNED BY analytics.child_services_given_analytics.id;
+ALTER TABLE IF EXISTS ONLY analytics.child_services_given_analytics ALTER COLUMN id SET DEFAULT nextval('analytics.child_services_given_analytics_t_id_seq1'::regclass);
