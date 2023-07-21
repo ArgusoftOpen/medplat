@@ -2,6 +2,7 @@
 package com.argusoft.medplat.web.users.dao.impl;
 
 import com.argusoft.medplat.database.common.impl.GenericDaoImpl;
+import com.argusoft.medplat.mobile.dto.OptionTagDto;
 import com.argusoft.medplat.web.location.model.LocationHierchyCloserDetail;
 import com.argusoft.medplat.web.users.dao.UserDao;
 import com.argusoft.medplat.web.users.dto.UserMasterDto;
@@ -509,5 +510,15 @@ public class UserDaoImpl extends GenericDaoImpl<UserMaster, Integer> implements 
             predicates.add(criteriaBuilder.isNotNull(root.get("longitude")));
             return predicates;
         });
+    }
+
+    public List<OptionTagDto> getListValuesFromFieldKey(String key) {
+        String query = "select cast(id as text) as key, value from listvalue_field_value_detail where field_key = :fieldKey";
+        NativeQuery<OptionTagDto> q = getCurrentSession().createNativeQuery(query);
+        q.setParameter("fieldKey", key);
+        q.addScalar("key", StandardBasicTypes.STRING);
+        q.addScalar("value", StandardBasicTypes.STRING);
+
+        return q.setResultTransformer(Transformers.aliasToBean(OptionTagDto.class)).list();
     }
 }

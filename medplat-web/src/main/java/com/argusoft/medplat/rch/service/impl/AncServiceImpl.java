@@ -21,6 +21,7 @@ import com.argusoft.medplat.fhs.dto.MemberDto;
 import com.argusoft.medplat.fhs.model.FamilyEntity;
 import com.argusoft.medplat.fhs.model.MemberEntity;
 import com.argusoft.medplat.fhs.service.FamilyHealthSurveyService;
+import com.argusoft.medplat.listvalues.service.ListValueFieldValueDetailService;
 import com.argusoft.medplat.mobile.constants.MobileConstantUtil;
 import com.argusoft.medplat.mobile.dto.ParsedRecordBean;
 import com.argusoft.medplat.mobile.service.MobileFhsService;
@@ -82,6 +83,9 @@ public class AncServiceImpl implements AncService {
 
     @Autowired
     private HealthInfrastructureDetailsDao healthInfrastructureDetailsDao;
+
+    @Autowired
+    private ListValueFieldValueDetailService listValueFieldValueDetailService;
 
     /**
      * {@inheritDoc}
@@ -827,6 +831,12 @@ public class AncServiceImpl implements AncService {
                 isUpdate = true;
             }
 
+            String highRiskReasonString = getHighRiskReasonString(ancVisit);
+            if (highRiskReasonString != null) {
+                memberAdditionalInfo.setHighRiskReasons(highRiskReasonString);
+                isUpdate = true;
+            }
+
             if (isUpdate) {
                 memberEntity.setAdditionalInfo(gson.toJson(memberAdditionalInfo));
             }
@@ -926,10 +936,77 @@ public class AncServiceImpl implements AncService {
                 memberAdditionalInfo.setLastServiceLongDate(ancVisit.getServiceDate().getTime());
             }
 
+            String highRiskReasonString = getHighRiskReasonString(ancVisit);
+            if (highRiskReasonString != null) {
+                memberAdditionalInfo.setHighRiskReasons(highRiskReasonString);
+                isUpdate = true;
+            }
+
             if (isUpdate) {
                 memberEntity.setAdditionalInfo(gson.toJson(memberAdditionalInfo));
             }
         }
+    }
+
+    private String getHighRiskReasonString(AncVisit ancVisit) {
+        StringBuilder sb = new StringBuilder();
+        if ((ancVisit.getSystolicBp() != null && ancVisit.getSystolicBp() > 139) || (ancVisit.getDiastolicBp() != null && ancVisit.getDiastolicBp() > 89)) {
+            sb.append("High Blood Pressure");
+        }
+        if (ancVisit.getHaemoglobinCount() != null && ancVisit.getHaemoglobinCount() < 7) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            sb.append("Low Haemoglobin");
+        }
+        if (ancVisit.getMemberHeight() != null && ancVisit.getMemberHeight() < 145) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            sb.append("Low Height");
+        }
+        if (ancVisit.getWeight() != null && ancVisit.getWeight() < 45f) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            sb.append("Very Low Weight");
+        }
+        if (ancVisit.getUrineAlbumin() != null && !ancVisit.getUrineAlbumin().equals("0")) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            sb.append("Urine Albumin");
+        }
+        if (ancVisit.getUrineSugar() != null && !ancVisit.getUrineSugar().equals("0")) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            sb.append("Urine Sugar");
+        }
+        if (ancVisit.getDangerousSignIds() != null) {
+            for (Integer dSign : ancVisit.getDangerousSignIds()) {
+                if (sb.length() > 0) {
+                    sb.append(",");
+                }
+                sb.append(listValueFieldValueDetailService.getListValueNameFormId(dSign));
+            }
+        }
+        if (ancVisit.getOtherDangerousSign() != null) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            sb.append(ancVisit.getOtherDangerousSign());
+        }
+        if (ancVisit.getPreviousPregnancyComplication() != null && !ancVisit.getPreviousPregnancyComplication().isEmpty()) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            sb.append(ancVisit.getPreviousPregnancyComplication());
+        }
+        if (sb.length() > 0) {
+            return sb.toString();
+        }
+        return null;
     }
 
     /**

@@ -13,6 +13,7 @@ import com.argusoft.medplat.fhs.dao.MemberDao;
 import com.argusoft.medplat.fhs.dto.MemberAdditionalInfo;
 import com.argusoft.medplat.fhs.model.FamilyEntity;
 import com.argusoft.medplat.fhs.model.MemberEntity;
+import com.argusoft.medplat.listvalues.service.ListValueFieldValueDetailService;
 import com.argusoft.medplat.mobile.constants.MobileConstantUtil;
 import com.argusoft.medplat.mobile.dto.ParsedRecordBean;
 import com.argusoft.medplat.mobile.service.MobileFhsService;
@@ -98,6 +99,9 @@ public class PncServiceImpl implements PncService {
 
     @Autowired
     private WpdMotherDao wpdMotherDao;
+
+    @Autowired
+    private ListValueFieldValueDetailService listValueFieldValueDetailService;
 
     /**
      * {@inheritDoc}
@@ -828,6 +832,7 @@ public class PncServiceImpl implements PncService {
                 pncChildMaster.setReferralPlace(healthInfrastructureDetails.getType());
             }
             pncChildMasterDao.create(pncChildMaster);
+            updateChildAdditionalInfo(childEntity, pncChildMaster, pncMaster);
 
             if (childDetails.getImmunisationDtos() != null && !childDetails.getImmunisationDtos().isEmpty()) {
                 StringBuilder immunisationGiven = new StringBuilder();
@@ -921,9 +926,61 @@ public class PncServiceImpl implements PncService {
         if (pncMotherMaster.getCalciumTabletsGiven() != null && pncMotherMaster.getCalciumTabletsGiven() > 0) {
             memberAdditionalInfo.setPncCalcium(pncMotherMaster.getCalciumTabletsGiven());
         }
+
         if (pncMaster.getServiceDate() != null) {
             memberAdditionalInfo.setLastServiceLongDate(pncMaster.getServiceDate().getTime());
         }
+
+        StringBuilder sb = new StringBuilder();
+        if (pncMotherMaster.getMotherDangerSigns() != null) {
+            for (Integer dSign : pncMotherMaster.getMotherDangerSigns()) {
+                if (sb.length() > 0) {
+                    sb.append(",");
+                }
+                sb.append(listValueFieldValueDetailService.getListValueNameFormId(dSign));
+            }
+        }
+        if (pncMotherMaster.getOtherDangerSign() != null) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            sb.append(pncMotherMaster.getOtherDangerSign());
+        }
+        if (sb.length() > 0) {
+            memberAdditionalInfo.setHighRiskReasons(sb.toString());
+        }
+
         motherEntity.setAdditionalInfo(gson.toJson(memberAdditionalInfo));
+    }
+
+    private void updateChildAdditionalInfo(MemberEntity childEntity, PncChildMaster pncChildMaster, PncMaster pncMaster) {
+        Gson gson = new Gson();
+        MemberAdditionalInfo memberAdditionalInfo;
+        if (childEntity.getAdditionalInfo() != null && !childEntity.getAdditionalInfo().isEmpty()) {
+            memberAdditionalInfo = gson.fromJson(childEntity.getAdditionalInfo(), MemberAdditionalInfo.class);
+        } else {
+            memberAdditionalInfo = new MemberAdditionalInfo();
+        }
+        StringBuilder reasonSb = new StringBuilder();
+        if (pncChildMaster.getChildWeight() != null && pncChildMaster.getChildWeight() < 2.5f) {
+            reasonSb.append("Very low weight");
+        }
+        if (pncChildMaster.getChildDangerSigns() != null && !pncChildMaster.getChildDangerSigns().isEmpty()) {
+            for (Integer id : pncChildMaster.getChildDangerSigns()) {
+                if (reasonSb.length() > 0) {
+                    reasonSb.append(",");
+                }
+                reasonSb.append(listValueFieldValueDetailService.getListValueNameFormId(id));
+            }
+        }
+        if (reasonSb.length() > 0) {
+            memberAdditionalInfo.setHighRiskReasons(reasonSb.toString());
+        } else {
+            memberAdditionalInfo.setHighRiskReasons(null);
+        }
+        if (pncMaster.getServiceDate() != null) {
+            memberAdditionalInfo.setLastServiceLongDate(pncMaster.getServiceDate().getTime());
+        }
+        childEntity.setAdditionalInfo(gson.toJson(memberAdditionalInfo));
     }
 }

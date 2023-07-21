@@ -12,6 +12,7 @@ import com.argusoft.medplat.fhs.dao.MemberDao;
 import com.argusoft.medplat.fhs.dto.MemberAdditionalInfo;
 import com.argusoft.medplat.fhs.model.FamilyEntity;
 import com.argusoft.medplat.fhs.model.MemberEntity;
+import com.argusoft.medplat.listvalues.service.ListValueFieldValueDetailService;
 import com.argusoft.medplat.mobile.constants.MobileConstantUtil;
 import com.argusoft.medplat.mobile.dao.LocationMobileFeatureDao;
 import com.argusoft.medplat.mobile.dto.ParsedRecordBean;
@@ -89,6 +90,9 @@ public class ChildServiceImpl implements ChildService {
 
     @Autowired
     private HealthInfrastructureDetailsDao healthInfrastructureDetailsDao;
+
+    @Autowired
+    private ListValueFieldValueDetailService listValueFieldValueDetailService;
 
 
     Set<String> negativeQuestions = new HashSet<>();
@@ -818,6 +822,26 @@ public class ChildServiceImpl implements ChildService {
                 additionalInfo.setWeightMap(weightMap);
             }
         }
+
+        StringBuilder sb = new StringBuilder();
+        if (childServiceMaster.getDieseases() != null && !childServiceMaster.getDieseases().isEmpty()) {
+            for (Integer dSign : childServiceMaster.getDieseases()) {
+                if (sb.length() > 0) {
+                    sb.append(",");
+                }
+                sb.append(listValueFieldValueDetailService.getListValueNameFormId(dSign));
+            }
+        }
+        if (childServiceMaster.getOtherDiseases() != null && !childServiceMaster.getOtherDiseases().isEmpty()) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            sb.append(childServiceMaster.getOtherDiseases());
+        }
+        if (sb.length() > 0) {
+            additionalInfo.setHighRiskReasons(sb.toString());
+        }
+
         childEntity.setAdditionalInfo(gson.toJson(additionalInfo));
     }
 }

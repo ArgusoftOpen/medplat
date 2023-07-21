@@ -1,6 +1,7 @@
 package com.argusoft.medplat.web.users.dao;
 
 import com.argusoft.medplat.database.common.GenericDao;
+import com.argusoft.medplat.mobile.dto.OptionTagDto;
 import com.argusoft.medplat.web.users.dto.UserMasterDto;
 import com.argusoft.medplat.web.users.model.UserMaster;
 
@@ -172,4 +173,6 @@ public interface UserDao extends GenericDao<UserMaster, Integer> {
     UserMaster retrieveUserByRoleCodeNLocation(Integer locationId, String roleCode);
 
     List<UserMaster> retrieveEmergencyRespondersForChardhamByRoleAndDiscardedUsers(Integer roleId, List<Integer> discardedUsers);
+
+    List<OptionTagDto> getListValuesFromFieldKey(String key);
 }

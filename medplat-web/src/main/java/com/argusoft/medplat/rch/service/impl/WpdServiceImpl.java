@@ -22,6 +22,7 @@ import com.argusoft.medplat.fhs.mapper.MemberMapper;
 import com.argusoft.medplat.fhs.model.FamilyEntity;
 import com.argusoft.medplat.fhs.model.MemberEntity;
 import com.argusoft.medplat.fhs.service.FamilyHealthSurveyService;
+import com.argusoft.medplat.listvalues.service.ListValueFieldValueDetailService;
 import com.argusoft.medplat.mobile.constants.MobileConstantUtil;
 import com.argusoft.medplat.mobile.dto.ParsedRecordBean;
 import com.argusoft.medplat.mobile.service.MobileFhsService;
@@ -114,6 +115,9 @@ public class WpdServiceImpl implements WpdService {
 
     @Autowired
     private AshaReportedEventDao ashaReportedEventDao;
+
+    @Autowired
+    private ListValueFieldValueDetailService listValueFieldValueDetailService;
 
     /**
      * {@inheritDoc}
@@ -370,6 +374,7 @@ public class WpdServiceImpl implements WpdService {
                 childEntity.setBirthWeight(wpdChildMaster.getBirthWeight());
                 childEntity.setIsHighRiskCase(this.identifyHighRiskForChildRchWpd(wpdChildMaster, wpdMotherMaster));
                 childEntity.setMaritalStatus(ConstantUtil.LIST_VALUE_UNMARRIED);
+                updateChildAdditionalInfo(childEntity, wpdChildMaster);
                 memberDao.createMember(childEntity);
 
                 wpdChildMaster.setMemberId(childEntity.getId());
@@ -1374,6 +1379,43 @@ public class WpdServiceImpl implements WpdService {
                 memberEntity.setAdditionalInfo(gson.toJson(memberAdditionalInfo));
             }
         }
+    }
 
+    private void updateChildAdditionalInfo(MemberEntity memberEntity, WpdChildMaster wpdChildMaster) {
+        Gson gson = new Gson();
+        boolean isUpdate = false;
+        MemberAdditionalInfo memberAdditionalInfo;
+        if (memberEntity.getAdditionalInfo() != null && !memberEntity.getAdditionalInfo().isEmpty()) {
+            memberAdditionalInfo = gson.fromJson(memberEntity.getAdditionalInfo(), MemberAdditionalInfo.class);
+        } else {
+            memberAdditionalInfo = new MemberAdditionalInfo();
+        }
+
+        StringBuilder sb = new StringBuilder();
+        if (!CollectionUtils.isEmpty(wpdChildMaster.getCongentialDeformity())) {
+            for (Integer dSign : wpdChildMaster.getCongentialDeformity()) {
+                if (sb.length() > 0) {
+                    sb.append(",");
+                }
+                sb.append(listValueFieldValueDetailService.getListValueNameFormId(dSign));
+            }
+        }
+        if (!CollectionUtils.isEmpty(wpdChildMaster.getDangerSigns())) {
+            for (Integer dSign : wpdChildMaster.getDangerSigns()) {
+                if (sb.length() > 0) {
+                    sb.append(",");
+                }
+                sb.append(listValueFieldValueDetailService.getListValueNameFormId(dSign));
+            }
+        }
+
+        if (sb.length() > 0) {
+            memberAdditionalInfo.setHighRiskReasons(sb.toString());
+            isUpdate = true;
+        }
+
+        if (isUpdate) {
+            memberEntity.setAdditionalInfo(gson.toJson(memberAdditionalInfo));
+        }
     }
 }
