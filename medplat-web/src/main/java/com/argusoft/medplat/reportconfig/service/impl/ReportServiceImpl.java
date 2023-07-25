@@ -35,6 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.jhonnymertz.wkhtmltopdf.wrapper.Pdf;
 import com.github.jhonnymertz.wkhtmltopdf.wrapper.params.Param;
+import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.styledxmlparser.jsoup.Jsoup;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
@@ -1406,9 +1407,7 @@ public class ReportServiceImpl implements ReportService {
             userName = user.getName();
         }
         String imageDirectoryPath = ConstantUtil.REPOSITORY_PATH + ConstantUtil.IMPLEMENTATION_TYPE + File.separator + "images" + File.separator;
-        String gogImgPath = imageDirectoryPath + "govt_logo.png";
-        String nhmImgPath = imageDirectoryPath + "nhm_logo.png";
-        String techoImgPath = imageDirectoryPath + "web_logo.png";
+        String medplatImgPath = imageDirectoryPath + "medplat.png";
 
         SimpleDateFormat currentTimeFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         currentTimeFormat.setTimeZone(Calendar.getInstance().getTimeZone());
@@ -1419,9 +1418,7 @@ public class ReportServiceImpl implements ReportService {
                 + "<head>\n"
                 + "    <meta http-equiv=Content-Type content=\"text/html; charset=UTF-8\">\n"
                 + "   <h4 style=\"text-align:right;\">\n"
-                + "   <img src=\"file://" + gogImgPath + "\" height=\"42\" width=\"25\">\n"
-                + "   <img src=\"file://" + nhmImgPath + "\" height=\"35\" width=\"42\">\n"
-                + "   <img src=\"file://" + techoImgPath + "\" height=\"30\" width=\"42\">\n"
+                + "   <img src=\"file://" + medplatImgPath + "\" height=\"50\" width=\"80\">\n"
                 + "   </h4>\n"
                 + "    <style>\n"
                 + "        body {\n"
@@ -1460,9 +1457,7 @@ public class ReportServiceImpl implements ReportService {
                 + "<html>\n"
                 + " <head>\n"
                 + "   <h4 style=\"text-align:right;\">\n"
-                + "   <img src=\"file://" + gogImgPath + "\" height=\"42\" width=\"25\">\n"
-                + "   <img src=\"file://" + nhmImgPath + "\" height=\"35\" width=\"42\">\n"
-                + "   <img src=\"file://" + techoImgPath + "\" height=\"30\" width=\"42\">\n"
+                + "   <img src=\"file://" + medplatImgPath + "\" height=\"50\" width=\"80\">\n"
                 + "   </h4>\n"
                 + "  </head>\n"
                 + "</html>";

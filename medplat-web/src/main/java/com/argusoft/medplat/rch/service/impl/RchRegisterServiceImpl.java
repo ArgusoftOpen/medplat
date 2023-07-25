@@ -108,32 +108,21 @@ public class RchRegisterServiceImpl implements RchRegisterService {
         Image nhmImage;
         Image techoImage;
 
+        Image medplatImage;
+
         FooterLogos() {
             String imageDirectoryPath = ConstantUtil.REPOSITORY_PATH + ConstantUtil.IMPLEMENTATION_TYPE + File.separator + "images" + File.separator;
-            String gogImgPath = imageDirectoryPath + "govt_logo.png";
-            String nhmImgPath = imageDirectoryPath + "nhm_logo.png";
-            String techoImgPath = imageDirectoryPath + "web_logo.png";
-            Paragraph gogImgPara = new Paragraph().setFontSize(10);
-            Paragraph nhmImgPara = new Paragraph().setFontSize(10);
-            Paragraph techoImgPara = new Paragraph().setFontSize(10);
+            String medplatImgPath = imageDirectoryPath + "medplat.png";
+            Paragraph medplatImgPara = new Paragraph().setFontSize(10);
+
             try {
-                gogImage = new Image(ImageDataFactory.create(gogImgPath));
-                gogImage.scaleToFit(12, 24);
+                medplatImage = new Image(ImageDataFactory.create(medplatImgPath));
+                medplatImage.scaleToFit(24, 30);
 
-                nhmImage = new Image(ImageDataFactory.create(nhmImgPath));
-                nhmImage.scaleToFit(30, 30);
-
-                techoImage = new Image(ImageDataFactory.create(techoImgPath));
-                techoImage.scaleToFit(24, 30);
-
-                gogImgPara.add(gogImage);
-                nhmImgPara.add(nhmImage);
-                techoImgPara.add(techoImage);
+                medplatImgPara.add(medplatImage);
 
                 logosMap = new HashMap<>();
-                logosMap.put("gog", gogImgPara);
-                logosMap.put("nhm", nhmImgPara);
-                logosMap.put("techo", techoImgPara);
+                logosMap.put("medplat", medplatImgPara);
             } catch (MalformedURLException e) {
                 Logger.getLogger(getClass().getSimpleName()).log(Level.SEVERE, e.getMessage(), e);
             }
@@ -3717,17 +3706,14 @@ public class RchRegisterServiceImpl implements RchRegisterService {
         Files.write(coverPath, coverHtml.getBytes());
 
         String imageDirectoryPath = ConstantUtil.REPOSITORY_PATH + ConstantUtil.IMPLEMENTATION_TYPE + File.separator + "images" + File.separator;
-        String gogImgPath = imageDirectoryPath + "govt_logo.png";
-        String nhmImgPath = imageDirectoryPath + "nhm_logo.png";
-        String techoImgPath = imageDirectoryPath + "web_logo.png";
+
+        String medplatImgPath = imageDirectoryPath + "medplat.png";
 
         String headerHtml = "<!DOCTYPE html>\n"
                 + "<html>\n"
                 + " <head>\n"
                 + "   <h4 style=\"text-align:right;\">\n"
-                + "   <img src=\"file://" + gogImgPath + "\" height=\"42\" width=\"25\">\n"
-                + "   <img src=\"file://" + nhmImgPath + "\" height=\"35\" width=\"42\">\n"
-                + "   <img src=\"file://" + techoImgPath + "\" height=\"30\" width=\"42\">\n"
+                + "   <img src=\"file://" + medplatImgPath + "\" height=\"50\" width=\"80\">\n"
                 + "   </h4>\n"
                 + "  </head>\n"
                 + "</html>";
