@@ -23,11 +23,11 @@ RUN wget https://mirrors.estointernet.in/apache/maven/maven-3/3.2.5/binaries/apa
     && tar -xzvf apache-maven-3.2.5-bin.tar.gz \
     && rm apache-maven-3.2.5-bin.tar.gz
 
-#RUN useradd -m -s /bin/bash linuxbrew && \
-#    echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+RUN useradd -m -s /bin/bash linuxbrew && \
+    echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
 
-#USER linuxbrew
-#RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+USER linuxbrew
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 # Set environment variables for Java and Maven
 #USER root
@@ -57,25 +57,25 @@ RUN npm install -g npm@8.5.0
 # Install global dependencies - bower and grunt
 RUN npm install -g bower grunt -y 
 
-#WORKDIR /usr/android
+WORKDIR /usr/android
 
-#RUN brew install gradle
-#RUN wget --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip && \
-#    unzip -d android-sdk-linux android-sdk.zip
-#RUN mkdir -p /sdk/cmdline-tools/latest
-#RUN mv android-sdk-linux/cmdline-tools/* /sdk/cmdline-tools/latest/
+RUN brew install gradle
+RUN wget --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip && \
+    unzip -d android-sdk-linux android-sdk.zip
+RUN mkdir -p /sdk/cmdline-tools/latest
+RUN mv android-sdk-linux/cmdline-tools/* /sdk/cmdline-tools/latest/
 
-#ENV PATH $ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-#ENV PATH ${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+ENV PATH $ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+ENV PATH ${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-#RUN sdkmanager --update && yes | sdkmanager --licenses
-#RUN sdkmanager "platforms;android-32" "build-tools;34.0.0" "extras;google;m2repository" "extras;android;m2repository"
+RUN sdkmanager --update && yes | sdkmanager --licenses
+RUN sdkmanager "platforms;android-32" "build-tools;34.0.0" "extras;google;m2repository" "extras;android;m2repository"
 
-#RUN echo "sdk.dir=$ANDROID_HOME" > local.properties
-#RUN sed -i 's#https://demo.medplat.org/#http://dpg.argusoft.com/#' gradle.properties
-#RUN chmod +x gradlew
-#RUN gradle wrapper --gradle-version 7.2
-#RUN ./gradlew assembleDebug --stacktrace
+RUN echo "sdk.dir=$ANDROID_HOME" > local.properties
+RUN sed -i 's#https://demo.medplat.org/#http://dpg.argusoft.com/#' gradle.properties
+RUN chmod +x gradlew
+RUN gradle wrapper --gradle-version 7.2
+RUN ./gradlew assembleDebug --stacktrace
 
 
 # # Navigate to the application UI directory
