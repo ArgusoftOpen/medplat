@@ -82,9 +82,13 @@
          * Show assigned new feature modal
          */
         ctrl.showAddFeatureModal = function () {
-            ctrl.assignedFeatureIds = ctrl.loadedConfig.assignedFeaturesList.map(feature => feature.featureId);
-            ctrl.availableFeatures = ctrl.featureList.filter(feature => !ctrl.assignedFeatureIds.includes(feature.id));
             $("#addFeature").modal({ backdrop: 'static', keyboard: false });
+            if (ctrl.loadedConfig.assignedFeaturesList != null) {
+                ctrl.assignedFeatureIds = ctrl.loadedConfig.assignedFeaturesList.map(feature => feature.featureId);
+                ctrl.availableFeatures = ctrl.featureList.filter(feature => !ctrl.assignedFeatureIds.includes(feature.id));
+            } else {
+                ctrl.availableFeatures = ctrl.featureList
+            }
         }
 
         /**
