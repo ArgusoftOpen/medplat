@@ -40,6 +40,14 @@ ENV ANDROID_HOME /sdk
 ENV ANDROID_SDK_VERSION 32
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 
+# Install wkhtmltopdf
+RUN apt-get install -y xfonts-75dpi
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+RUN apt install -f -y ./wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+RUN dpkg -i wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+RUN cd /usr/share/fonts/truetype
+RUN apt-get install -y fonts-indic
+
 # Copy application code to the working directory
 # COPY medplat-web /usr/web
 # COPY medplat-ui/ /usr/ui/medplat-ui

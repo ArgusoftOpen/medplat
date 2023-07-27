@@ -1509,7 +1509,8 @@ public class ReportServiceImpl implements ReportService {
                 + "</html>";
         Path footerPath = Files.createTempFile("report_footer", ".html");
         Files.write(footerPath, footerHtml.getBytes());
-        pdf.addParam(new Param("--orientation", Boolean.TRUE.equals(reportExcelDto.getIsLandscape()) ? "Landscape" : "Portrait"),
+        pdf.addParam( new Param("--enable-local-file-access"),
+                new Param("--orientation", Boolean.TRUE.equals(reportExcelDto.getIsLandscape()) ? "Landscape" : "Portrait"),
                 new Param("--enable-javascript"), new Param("--header-html", headerPath.toString()),
                 new Param("--header-spacing", "3"), new Param("--footer-html", footerPath.toString()),
                 new Param("--footer-spacing", "3"), new Param("cover", coverPath.toString()),
