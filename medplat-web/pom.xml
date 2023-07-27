@@ -308,7 +308,7 @@
                 <server.droptype>P</server.droptype>
                 <server.type>DEV</server.type>
                 <server.implementation.type>medplat</server.implementation.type>
-                <repository.path>/home/utkarsh/Repository/</repository.path>
+                <repository.path>/usr/Repository/</repository.path>
                 <hibernate.showsql>true</hibernate.showsql>
                 <hibernate.formatsql>true</hibernate.formatsql>
                 <spring.resourceslocation>file:/usr/ui/</spring.resourceslocation>
