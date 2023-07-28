@@ -2,7 +2,7 @@ package com.argusoft.sewa.android.app.component.listeners;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import com.argusoft.sewa.android.app.util.Log;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -18,6 +18,7 @@ import com.argusoft.sewa.android.app.util.UtilBean;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -26,10 +27,21 @@ public class DateChangeListener implements DatePickerDialog.OnDateSetListener, V
     private final QueFormBean queFormBean;
     private final Context context;
     private TextView txtDate;
+    private TextView ageDisplay;
 
-    public DateChangeListener(QueFormBean queFormBean, Context context) {
+    private boolean isFutureDate;
+
+    public DateChangeListener(QueFormBean queFormBean, Context context, boolean isFutureDate) {
         this.queFormBean = queFormBean;
         this.context = context;
+        this.isFutureDate = isFutureDate;
+    }
+
+    public DateChangeListener(QueFormBean queFormBean, Context context, TextView ageDisplay, boolean isFutureDate) {
+        this.queFormBean = queFormBean;
+        this.context = context;
+        this.ageDisplay = ageDisplay;
+        this.isFutureDate = isFutureDate;
     }
 
     @Override
@@ -41,63 +53,64 @@ public class DateChangeListener implements DatePickerDialog.OnDateSetListener, V
             txtDate.setText(new SimpleDateFormat(GlobalTypes.DATE_DD_MM_YYYY_FORMAT, Locale.getDefault()).format(calendar.getTime()));
             Log.i(getClass().getSimpleName(), queFormBean.getQuestion() + " is set to : " + txtDate.getText());
         }
+
+        if (ageDisplay != null) {
+            int[] ageYearMonthDayArray = UtilBean.calculateAgeYearMonthDayOnGivenDate(calendar.getTime().getTime(), new Date().getTime());
+            String age = UtilBean.getAgeDisplay(ageYearMonthDayArray[0], ageYearMonthDayArray[1], ageYearMonthDayArray[2]);
+            ageDisplay.setText(UtilBean.getMyLabel(age));
+        }
+
         queFormBean.setAnswer(calendar.getTimeInMillis());
         String answer = null;
         if (queFormBean.getAnswer() != null) {
             answer = queFormBean.getAnswer().toString();
         }
-        if (answer != null && answer.trim().length() > 0 && !answer.trim().equalsIgnoreCase("null")) {
 
-            List<ValidationTagBean> validations = queFormBean.getValidations();
-            int loopCounter = 0;
-            if (!queFormBean.isIgnoreLoop()) {
-                loopCounter = queFormBean.getLoopCounter();
-            }
-
-            String validation = DynamicUtils.checkValidation(answer, loopCounter, validations);
-            String tmpDataObj;
-            if (validation != null) {
-                Calendar calendar1 = Calendar.getInstance();
-                if (loopCounter == 0) {
-                    tmpDataObj = SharedStructureData.relatedPropertyHashTable.get(queFormBean.getRelatedpropertyname());
-                    if (tmpDataObj != null
-                            && !tmpDataObj.equalsIgnoreCase("null")) {
-                        calendar1.setTimeInMillis(Long.parseLong(tmpDataObj));
-                        SewaUtil.generateToast(context, validation);
-                        if (txtDate != null) {
-                            txtDate.setText(new SimpleDateFormat(GlobalTypes.DATE_DD_MM_YYYY_FORMAT, Locale.getDefault()).format(calendar1.getTime()));
-                        }
-                        queFormBean.setAnswer(SharedStructureData.relatedPropertyHashTable.get(queFormBean.getRelatedpropertyname()));
-                    } else {
-                        SewaUtil.generateToast(context, validation);
-                        if (txtDate != null) {
-                            txtDate.setText(UtilBean.getMyLabel(GlobalTypes.SELECT_DATE_TEXT));
-                        }
-                        queFormBean.setAnswer(null);
-                    }
-                } else {
-                    tmpDataObj = SharedStructureData.relatedPropertyHashTable.get(queFormBean.getRelatedpropertyname() + loopCounter);
-                    if (tmpDataObj != null
-                            && !tmpDataObj.equalsIgnoreCase("null")) {
-                        calendar1.setTimeInMillis(Long.parseLong(tmpDataObj));
-                        SewaUtil.generateToast(context, validation);
-                        if (txtDate != null) {
-                            txtDate.setText(new SimpleDateFormat(GlobalTypes.DATE_DD_MM_YYYY_FORMAT, Locale.getDefault()).format(calendar1.getTime()));
-                        }
-                        queFormBean.setAnswer(SharedStructureData.relatedPropertyHashTable.get(queFormBean.getRelatedpropertyname() + loopCounter));
-                    } else {
-                        SewaUtil.generateToast(context, validation);
-                        if (txtDate != null) {
-                            txtDate.setText(UtilBean.getMyLabel(GlobalTypes.SELECT_DATE_TEXT));
-                        }
-                        queFormBean.setAnswer(null);
-                    }
-                }
-                DynamicUtils.applyFormula(queFormBean, false);
-            } else {
-                DynamicUtils.applyFormula(queFormBean, true);
-            }
+        if (answer == null || answer.trim().length() == 0 || answer.trim().equalsIgnoreCase("null")) {
+            return;
         }
+
+        List<ValidationTagBean> validations = queFormBean.getValidations();
+        int loopCounter = 0;
+        if (!queFormBean.isIgnoreLoop()) {
+            loopCounter = queFormBean.getLoopCounter();
+        }
+
+        String validation = DynamicUtils.checkValidation(answer, loopCounter, validations);
+        if (validation == null) {
+            DynamicUtils.applyFormula(queFormBean, true);
+            return;
+        }
+
+        String relatedPropertyName = queFormBean.getRelatedpropertyname();
+        if (loopCounter != 0) {
+            relatedPropertyName = queFormBean.getRelatedpropertyname() + loopCounter;
+        }
+
+        String tmpDataObj = SharedStructureData.relatedPropertyHashTable.get(relatedPropertyName);
+        SewaUtil.generateToast(context, validation);
+        if (tmpDataObj != null && !tmpDataObj.equalsIgnoreCase("null")) {
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.setTimeInMillis(Long.parseLong(tmpDataObj));
+            if (txtDate != null) {
+                txtDate.setText(new SimpleDateFormat(GlobalTypes.DATE_DD_MM_YYYY_FORMAT, Locale.getDefault()).format(calendar1.getTime()));
+            }
+            if (ageDisplay != null) {
+                int[] ageYearMonthDayArray = UtilBean.calculateAgeYearMonthDayOnGivenDate(calendar1.getTime().getTime(), new Date().getTime());
+                String age = UtilBean.getAgeDisplay(ageYearMonthDayArray[0], ageYearMonthDayArray[1], ageYearMonthDayArray[2]);
+                ageDisplay.setText(UtilBean.getMyLabel(age));
+            }
+            queFormBean.setAnswer(SharedStructureData.relatedPropertyHashTable.get(relatedPropertyName));
+        } else {
+            if (txtDate != null) {
+                txtDate.setText(UtilBean.getMyLabel(GlobalTypes.SELECT_DATE_TEXT));
+            }
+            if (ageDisplay != null) {
+                ageDisplay.setText(UtilBean.getMyLabel("Age as per date selected"));
+            }
+            queFormBean.setAnswer(null);
+        }
+        DynamicUtils.applyFormula(queFormBean, false);
     }
 
     @Override
@@ -115,6 +128,9 @@ public class DateChangeListener implements DatePickerDialog.OnDateSetListener, V
         } else {
             Calendar calendar = Calendar.getInstance();
             dp = new DatePickerDialog(context, this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        }
+        if (isFutureDate) {
+            dp.getDatePicker().setMaxDate(new Date().getTime());
         }
         dp.show();
     }

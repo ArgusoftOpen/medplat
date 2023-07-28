@@ -41,6 +41,7 @@ import com.argusoft.sewa.android.app.model.MemberBean;
 import com.argusoft.sewa.android.app.model.NotificationBean;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import com.j256.ormlite.stmt.query.In;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -1602,18 +1603,21 @@ public class HiddenQuestionFormulaUtil {
     public static void identifyHighRiskWpdChild(String[] split, QueFormBean queFormBean) {
         int weightQueId = Integer.parseInt(split[1]);
         int displayMorbidityQueId = Integer.parseInt(split[2]);
+        int congenitalDeformityQueId = Integer.parseInt(split[3]);
 
         if (queFormBean.getLoopCounter() > 0 && !queFormBean.isIgnoreLoop()) {
             weightQueId = getLoopId(weightQueId, queFormBean.getLoopCounter());
+            congenitalDeformityQueId = getLoopId(congenitalDeformityQueId, queFormBean.getLoopCounter());
             displayMorbidityQueId = getLoopId(displayMorbidityQueId, queFormBean.getLoopCounter());
         }
 
         QueFormBean weightQue = SharedStructureData.mapIndexQuestion.get(weightQueId);
         QueFormBean displayMorbidityQue = SharedStructureData.mapIndexQuestion.get(displayMorbidityQueId);
+        QueFormBean congenitalDeformityQue = SharedStructureData.mapIndexQuestion.get(congenitalDeformityQueId);
 
         String identifyHighRiskForChildRchWpd = null;
         if (weightQue != null) {
-            identifyHighRiskForChildRchWpd = SharedStructureData.rchHighRiskService.identifyHighRiskForChildRchWpd(weightQue.getAnswer());
+            identifyHighRiskForChildRchWpd = SharedStructureData.rchHighRiskService.identifyHighRiskForChildRchWpd(weightQue.getAnswer(), congenitalDeformityQue.getAnswer());
         }
 
         if (identifyHighRiskForChildRchWpd == null) {
