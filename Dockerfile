@@ -12,7 +12,6 @@ RUN mkdir -p /usr/android
 RUN mkdir -p /usr/Repository 
 
 # WORKDIR /usr/web
-
 # Download and install OpenJDK 13
 RUN wget https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz \
     && tar -xzvf openjdk-13.0.2_linux-x64_bin.tar.gz \
@@ -23,6 +22,7 @@ RUN wget https://mirrors.estointernet.in/apache/maven/maven-3/3.2.5/binaries/apa
     && tar -xzvf apache-maven-3.2.5-bin.tar.gz \
     && rm apache-maven-3.2.5-bin.tar.gz
 
+
 #RUN useradd -m -s /bin/bash linuxbrew && \
 #    echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
 
@@ -31,9 +31,9 @@ RUN wget https://mirrors.estointernet.in/apache/maven/maven-3/3.2.5/binaries/apa
 
 # Set environment variables for Java and Maven
 #USER root
-ENV JAVA_HOME /usr/web/jdk-13.0.2
+ENV JAVA_HOME /jdk-13.0.2
 ENV PATH $JAVA_HOME/bin:$PATH
-ENV MAVEN_HOME /usr/web/apache-maven-3.2.5
+ENV MAVEN_HOME /apache-maven-3.2.5
 ENV PATH $MAVEN_HOME/bin:$PATH
 ENV PATH /home/linuxbrew/.linuxbrew/bin:$PATH
 ENV ANDROID_HOME /sdk
