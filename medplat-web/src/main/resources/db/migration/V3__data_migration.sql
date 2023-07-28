@@ -1,4 +1,3 @@
-ALTER DATABASE @jdbc.database@ SET search_path TO public,analytics,archive ;
 
 TRUNCATE public.oauth_client_details CASCADE;
 
@@ -44,7 +43,7 @@ INSERT INTO menu_config(id,feature_json,group_id,active,is_dynamic_report,menu_n
 
 (313,'{"canAdd":false}',24,'True',NULL,'Manage System Configurations','techo.manage.systemconfigs',NULL,'admin',NULL,NULL,'a0bacbaa-345b-46a3-91be-350d1e283eba','f2b2cf32-fa6c-4442-93d4-4a2e4c024cc3','be970181-a811-45a6-94e0-4f8a6c66e154',NULL)
 
-,(76,NULL,NULL,'True',NULL,'Manage PNC visit','techo.manage.pnc',NULL,'manage',NULL,NULL,'51b7ce1a-7d0e-4743-bcd6-a3ef88d05f79','893383bd-66bf-43f7-b24e-293c58c1a526','44994612-db9a-453e-a7a8-ce7991282926',NULL)
+,(76,NULL,NULL,'False',NULL,'Manage PNC visit','techo.manage.pnc',NULL,'manage',NULL,NULL,'51b7ce1a-7d0e-4743-bcd6-a3ef88d05f79','893383bd-66bf-43f7-b24e-293c58c1a526','44994612-db9a-453e-a7a8-ce7991282926',NULL)
 
 ,(332,NULL,3,'False',NULL,'District Factsheet','techo.manage.districtperformancedashboard',NULL,'manage',NULL,NULL,NULL,NULL,NULL,NULL)
 
