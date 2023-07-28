@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - $HOME/medplat-temp/data:/var/lib/postgresql/data
       - ./db_init.sh:/docker-entrypoint-initdb.d/db_init.sh
     networks:
       - medplat_net
@@ -23,7 +23,8 @@ services:
       - "8181:8181"
     volumes:
       - ./medplat-ui:/usr/ui/medplat-ui
-      - ./medplat-web:/usr/web
+      - ./medplat-web/:/usr/web
+      - $HOME/medplat-temp/.m2:/root/.m2
     networks:
       - medplat_net
 
