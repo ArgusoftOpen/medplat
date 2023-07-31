@@ -282,6 +282,53 @@ INSERT INTO public.system_configuration (system_key, is_active, key_value) VALUE
 	('MOBILE_FORM_VERSION', true, '52');
 
 
+INSERT INTO public.system_constant_master (constant,value,group_name) VALUES
+	 ('TT1','TT 1','VACCINE'),
+	 ('F_IPV_2_05','F IPV 2 05','VACCINE'),
+	 ('DPT_1','DPT 1','VACCINE'),
+	 ('OPV_2','OPV 2','VACCINE'),
+	 ('MEASLES_2','Measles 2','VACCINE'),
+	 ('MEASLES_1','Measles 1','VACCINE'),
+	 ('ROTA_VIRUS_3','Rota Virus 3','VACCINE'),
+	 ('ROTA_VIRUS_1','Rota Virus 1','VACCINE'),
+	 ('MEASLES_RUBELLA_1','Measles Rubella 1','VACCINE'),
+	 ('PENTA_1','Penta 1','VACCINE'),
+	 ('DPT_3','DPT 3','VACCINE'),
+	 ('HEPATITIS_B_0','Hepatitis B 0','VACCINE'),
+	 ('OPV_BOOSTER','OPV Booster','VACCINE'),
+	 ('ROTA_VIRUS_2','Rota Virus 2','VACCINE'),
+	 ('MEASLES_RUBELLA_2','Measles Rubella 2','VACCINE'),
+	 ('DPT_2','DPT 2','VACCINE'),
+	 ('OPV_0','OPV 0','VACCINE'),
+	 ('OPV_1','OPV 1','VACCINE'),
+	 ('TT_BOOSTER','TT Booster','VACCINE'),
+	 ('BCG','BCG','VACCINE'),
+	 ('F_IPV_1_01','F IPV 1 01','VACCINE'),
+	 ('DPT_BOOSTER','DPT Booster','VACCINE'),
+	 ('PENTA_2','Penta 2','VACCINE'),
+	 ('TT2','TT 2','VACCINE'),
+	 ('VITAMIN_A','Vitamin A','VACCINE'),
+	 ('OPV_3','OPV 3','VACCINE'),
+	 ('F_IPV_2_01','F IPV 2 01','VACCINE'),
+	 ('PENTA_3','Penta 3','VACCINE'),
+	 ('VITAMIN_K','Vitamin K','VACCINE'),
+	 ('MMR','MMR','VACCINE'),
+	 ('HIB_1','HIB 1','VACCINE'),
+	 ('HIB_2','HIB 2','VACCINE'),
+	 ('HIB_3','HIB 3','VACCINE'),
+	 ('CHICKEN_POX','Chicken Pox','VACCINE'),
+	 ('JE','JE','VACCINE'),
+	 ('DPT_BOOSTER_2','DPT Booster 2','VACCINE'),
+	 ('TT_10','TT 10','VACCINE'),
+	 ('TT_16','TT 16','VACCINE'),
+	 ('TYPHOID','Typhoid','VACCINE'),
+	 ('HEPATITIS_B_1','Hepatitis B 1','VACCINE'),
+	 ('HEPATITIS_B_2','Hepatitis B 2','VACCINE'),
+	 ('HEPATITIS_B_3','Hepatitis B 3','VACCINE'),
+	 ('HEPATITIS_A_1','Hepatitis A 1','VACCINE'),
+	 ('HEPATITIS_A_2','Hepatitis A 2','VACCINE');
+
+
 
 
 
