@@ -6,11 +6,14 @@ import com.argusoft.medplat.common.service.OtpService;
 import com.argusoft.medplat.common.service.SystemConfigurationService;
 import com.argusoft.medplat.common.service.UserAttendanceMasterService;
 import com.argusoft.medplat.course.service.LmsMobileEventSubmissionService;
+import com.argusoft.medplat.exception.ImtechoSystemException;
 import com.argusoft.medplat.exception.ImtechoUserException;
 import com.argusoft.medplat.mobile.constants.MobileApiPathConstants;
 import com.argusoft.medplat.mobile.dto.*;
 import com.argusoft.medplat.mobile.model.BlockedDevicesMaster;
 import com.argusoft.medplat.mobile.service.*;
+import com.argusoft.medplat.query.dto.QueryDto;
+import com.argusoft.medplat.query.service.QueryMasterService;
 import com.argusoft.medplat.web.users.service.UserService;
 import com.sun.jersey.api.client.Client;
 import org.slf4j.Logger;
@@ -20,10 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -53,8 +53,8 @@ public class MobileController extends GenericSessionUtilService {
     private FormSubmissionService formSubmissionService;
 //    @Autowired
 //    private MigrationService migrationService;
-//    @Autowired
-//    private QueryMasterService queryMasterService;
+    @Autowired
+    private QueryMasterService queryMasterService;
 //    @Autowired
 //    private PatchService patchService;
 //    @Autowired
@@ -457,17 +457,17 @@ public class MobileController extends GenericSessionUtilService {
 //        LOGGER.info("========== MY TECHO COVID SYMPTOMS CHECKER DUMP FINISHED ==========");
 //    }
 //
-//    @PostMapping(value = "/getdata")
-//    public QueryDto executeQuery(@RequestBody QueryDto queryDto) {
-//        List<QueryDto> queryDtos = new LinkedList<>();
-//        queryDtos.add(queryDto);
-//        List<QueryDto> executeQueryByCode = queryMasterService.executeQuery(queryDtos, true);
-//        if (!executeQueryByCode.isEmpty()) {
-//            return executeQueryByCode.get(0);
-//        } else {
-//            throw new ImtechoSystemException("Get multiple response " + queryDto, 0);
-//        }
-//    }
+    @PostMapping(value = "/getdata")
+    public QueryDto executeQuery(@RequestBody QueryDto queryDto) {
+        List<QueryDto> queryDtos = new LinkedList<>();
+        queryDtos.add(queryDto);
+        List<QueryDto> executeQueryByCode = queryMasterService.executeQuery(queryDtos, true);
+        if (!executeQueryByCode.isEmpty()) {
+            return executeQueryByCode.get(0);
+        } else {
+            throw new ImtechoSystemException("Get multiple response " + queryDto, 0);
+        }
+    }
 //
 //    @PostMapping(value = "/getdata/{code}")
 //    public QueryDto execute(@PathVariable(value = "code") String code

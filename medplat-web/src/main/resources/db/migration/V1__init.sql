@@ -25602,3 +25602,21 @@ CREATE SEQUENCE IF NOT EXISTS analytics.child_services_given_analytics_t_id_seq1
 
 ALTER SEQUENCE analytics.child_services_given_analytics_t_id_seq1 OWNED BY analytics.child_services_given_analytics.id;
 ALTER TABLE IF EXISTS ONLY analytics.child_services_given_analytics ALTER COLUMN id SET DEFAULT nextval('analytics.child_services_given_analytics_t_id_seq1'::regclass);
+
+
+-- Table: public.system_constant_master
+
+DROP TABLE IF EXISTS public.system_constant_master;
+
+CREATE TABLE IF NOT EXISTS public.system_constant_master
+(
+    constant character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    value text COLLATE pg_catalog."default",
+    group_name character varying(30) COLLATE pg_catalog."default",
+    CONSTRAINT system_constant_master_pkey PRIMARY KEY (constant)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.system_constant_master
+    OWNER to postgres;
