@@ -1471,7 +1471,7 @@ public class MyDynamicComponents {
         if (isCombo) {
             Spinner myKilo = MyStaticComponents.getSpinner(context, GlobalTypes.KILO_LIST.toArray(new String[0]), 0, IdConstants.WEIGHT_BOX_SPINNER_KILO_ID);
             myKilo.setOnItemSelectedListener(myListener);
-            linearLayout.addView(myKilo, new LinearLayout.LayoutParams(0, WRAP_CONTENT, 10));
+            linearLayout.addView(myKilo, new LinearLayout.LayoutParams(0, MATCH_PARENT, 5));
         } else {
             TextInputLayout textKilogram = MyStaticComponents.getEditText(context,
                     UtilBean.getMyLabel(LabelConstants.IN_KG),
@@ -1479,21 +1479,23 @@ public class MyDynamicComponents {
                     3,
                     InputType.TYPE_CLASS_NUMBER);
             textKilogram.setOnFocusChangeListener(myListener);
-            linearLayout.addView(textKilogram, new LinearLayout.LayoutParams(0, WRAP_CONTENT, 10));
+            linearLayout.addView(textKilogram, new LinearLayout.LayoutParams(0, MATCH_PARENT, 5));
         }
         // Label for kilo
         MaterialTextView textView = MyStaticComponents.getMaterialTextView(context, LabelConstants.UNIT_OF_MASS_IN_KG, -1, R.style.CustomAnswerView, false);
-        linearLayout.addView(textView, new LinearLayout.LayoutParams(0, WRAP_CONTENT, 2));
+        linearLayout.addView(textView, new LinearLayout.LayoutParams(0, MATCH_PARENT, 5));
+        linearLayout.setGravity(Gravity.BOTTOM);
         inputLayout.addView(linearLayout);
 
         // Gram selection
         linearLayout = getLinearLayout(context, -1, HORIZONTAL, new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
         Spinner myGram = MyStaticComponents.getSpinner(context, GlobalTypes.GRAM_LIST.toArray(new String[0]), 0, IdConstants.WEIGHT_BOX_SPINNER_GRAM_ID);
         myGram.setOnItemSelectedListener(myListener);
-        linearLayout.addView(myGram, new LinearLayout.LayoutParams(0, WRAP_CONTENT, 10));
+        linearLayout.addView(myGram, new LinearLayout.LayoutParams(0, MATCH_PARENT, 5));
         // Label for Gram
         textView = MyStaticComponents.getMaterialTextView(context, LabelConstants.UNIT_OF_MASS_IN_GRAM, -1, R.style.CustomAnswerView, false);
-        linearLayout.addView(textView, new LinearLayout.LayoutParams(0, WRAP_CONTENT, 2));
+        linearLayout.addView(textView, new LinearLayout.LayoutParams(0, MATCH_PARENT, 5));
+        linearLayout.setGravity(Gravity.BOTTOM);
         linearLayout.setPadding(0, 0, 0, 50);
         inputLayout.addView(linearLayout);
 
