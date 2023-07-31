@@ -539,8 +539,8 @@ public class MyDynamicComponents {
     }
 
     public static LinearLayout getCustomDatePicker(QueFormBean queFormBean, Context context) {
-        LinearLayout myLayout = getLinearLayout(context, -1, HORIZONTAL, null);
         String textDate = GlobalTypes.SELECT_DATE_TEXT;
+        String calculatedAge = LabelConstants.DATE_NOT_YET_SELECTED;
         if (queFormBean.getRelatedpropertyname() != null) {
             String relatedPropertyName = queFormBean.getRelatedpropertyname();
             if (queFormBean.getLoopCounter() > 0 && !queFormBean.isIgnoreLoop()) {
@@ -550,14 +550,19 @@ public class MyDynamicComponents {
             if (stringLongDate != null) {
                 long longDate = Long.parseLong(stringLongDate);
                 textDate = new SimpleDateFormat(GlobalTypes.DATE_DD_MM_YYYY_FORMAT, Locale.getDefault()).format(new Date(longDate));
+                int[] ageYearMonthDayArray = UtilBean.calculateAgeYearMonthDayOnGivenDate(longDate, new Date().getTime());
+                calculatedAge = UtilBean.getAgeDisplay(ageYearMonthDayArray[0], ageYearMonthDayArray[1], ageYearMonthDayArray[2]);
                 queFormBean.setAnswer(longDate);
             }
         }
 
+        LinearLayout mainLayout = getLinearLayout(context, -1, VERTICAL, null);
+
+        LinearLayout myLayout = getLinearLayout(context, -1, HORIZONTAL, null);
+
         MaterialTextView txtDate = MyStaticComponents.generateAnswerView(context, textDate);
         txtDate.setId(IdConstants.DATE_PICKER_TEXT_DATE_ID);
         txtDate.setLayoutParams(new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, 200));
-
         myLayout.addView(txtDate);
 
         ImageView imageCalendar = MyStaticComponents.getImageView(context, 2, R.drawable.ic_calender, null);
@@ -570,16 +575,55 @@ public class MyDynamicComponents {
             myLayout.setBackground(context.getDrawable(R.drawable.custom_datepicker));
         }
 
-        myLayout.setOnClickListener(new DateChangeListener(queFormBean, context));
-        if (SharedStructureData.formType != null && SharedStructureData.formType.equals(FormConstants.CFHC)
-                && Boolean.TRUE.equals(SharedStructureData.isDobScannedFromAadhar)) {
+        myLayout.setLayoutParams(new RelativeLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+        mainLayout.addView(myLayout);
+
+        boolean isFutureDate = false;
+        for (ValidationTagBean validation : queFormBean.getValidations()) {
+            if (validation.getMethod().equalsIgnoreCase("isFutureDate")) {
+                isFutureDate = true;
+                break;
+            }
+        }
+        TextView ageText = getLayoutForAgeDisplayForCDB(context, queFormBean, mainLayout, calculatedAge);
+        if (ageText != null) {
+            myLayout.setOnClickListener(new DateChangeListener(queFormBean, context, ageText, isFutureDate));
+        } else {
+            myLayout.setOnClickListener(new DateChangeListener(queFormBean, context, isFutureDate));
+        }
+
+        if (SharedStructureData.formType != null && SharedStructureData.formType.equals(FormConstants.FAMILY_HEALTH_SURVEY)
+                && Boolean.TRUE.equals(SharedStructureData.isDobScannedFromAadhar) && queFormBean.getId() == 17) {
             myLayout.setClickable(false);
         }
 
-        myLayout.setLayoutParams(new RelativeLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) myLayout.getLayoutParams();
-//        lp.setMargins(0, 0, 0, 50);
-        return myLayout;
+        return mainLayout;
+    }
+
+    private static TextView getLayoutForAgeDisplayForCDB(Context context, QueFormBean queFormBean, LinearLayout mainLayout, String calculatedAge) {
+        boolean showAge = false;
+        String ageQue = "Age as per date selected";
+        if (queFormBean.getFormulas() != null && !queFormBean.getFormulas().isEmpty()) {
+            for (FormulaTagBean bean : queFormBean.getFormulas()) {
+                if (bean.getFormulavalue() != null && bean.getFormulavalue().toLowerCase(Locale.ROOT).contains("showage")) {
+                    showAge = true;
+                    String formulaValue = bean.getFormulavalue().trim();
+                    String formulaLC = formulaValue.toLowerCase(Locale.ROOT);
+                    ageQue = formulaValue.substring(formulaLC.toLowerCase(Locale.ROOT).indexOf("showage-") + 8).trim();
+                    break;
+                }
+            }
+        }
+
+        if (showAge) {
+            mainLayout.addView(MyStaticComponents.generateQuestionView(null, null, context, ageQue));
+            MaterialTextView textView = MyStaticComponents.generateAnswerView(context, calculatedAge);
+            textView.setId(IdConstants.DATE_PICKER_AGE_DISPLAY_TEXT_ID);
+            mainLayout.addView(textView);
+            return textView;
+        }
+
+        return null;
     }
 
     public static View getQRScannerView(Context context, QueFormBean queFormBean, int id) {

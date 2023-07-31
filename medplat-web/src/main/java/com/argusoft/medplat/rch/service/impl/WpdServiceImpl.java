@@ -1391,6 +1391,8 @@ public class WpdServiceImpl implements WpdService {
             memberAdditionalInfo = new MemberAdditionalInfo();
         }
 
+
+
         StringBuilder sb = new StringBuilder();
         if (!CollectionUtils.isEmpty(wpdChildMaster.getCongentialDeformity())) {
             for (Integer dSign : wpdChildMaster.getCongentialDeformity()) {
@@ -1408,7 +1410,10 @@ public class WpdServiceImpl implements WpdService {
                 sb.append(listValueFieldValueDetailService.getListValueNameFormId(dSign));
             }
         }
-
+        if (wpdChildMaster.getBirthWeight() != null && wpdChildMaster.getBirthWeight() < 2.5f){
+            sb.append(",");
+            sb.append("Very Low Weight");
+        }
         if (sb.length() > 0) {
             memberAdditionalInfo.setHighRiskReasons(sb.toString());
             isUpdate = true;

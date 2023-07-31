@@ -39,7 +39,7 @@ RUN brew install gradle
 USER root
 ENV JAVA_HOME /usr/web/jdk-13.0.2
 ENV PATH $JAVA_HOME/bin:$PATH
-ENV MAVEN_HOME /usr/web/apache-maven-3.2.5
+ENV MAVEN_HOME /apache-maven-3.2.5
 ENV PATH $MAVEN_HOME/bin:$PATH
 
 ENV ANDROID_HOME /sdk

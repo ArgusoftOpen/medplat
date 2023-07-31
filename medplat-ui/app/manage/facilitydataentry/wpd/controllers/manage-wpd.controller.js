@@ -257,9 +257,11 @@
                         });
                         modalInstance.result.then(() => {
                             // managewpdcontroller.handleLinkRecordInNdhm(response[0].motherId)
+                            $state.go('techo.manage.wpdSearch');
                         });
                     } else {
                         // managewpdcontroller.handleLinkRecordInNdhm(managewpdcontroller.manageWpdObject.memberId);
+                        $state.go('techo.manage.wpdSearch');
                     }
                 }).catch((error) => {
                     GeneralUtil.showMessageOnApiCallFailure(error);

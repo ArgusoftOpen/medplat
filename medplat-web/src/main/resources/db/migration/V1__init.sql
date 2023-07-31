@@ -31,6 +31,10 @@ CREATE SCHEMA IF NOT EXISTS archive;
 
 ALTER SCHEMA archive OWNER TO postgres;
 
+ALTER DATABASE @jdbc.database@ SET search_path TO public,analytics,archive ;
+SET search_path = public,analytics,archive ;
+SET datestyle to 'mdy';
+
 --
 -- TOC entry 4 (class 3079 OID 220009)
 -- Name: dblink; Type: EXTENSION; Schema: -; Owner: -

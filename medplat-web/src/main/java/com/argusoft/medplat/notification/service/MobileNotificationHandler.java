@@ -11,6 +11,8 @@ import com.argusoft.medplat.event.dto.EventConfigTypeDto;
 import com.argusoft.medplat.event.dto.MobileEventConfigDto;
 import com.argusoft.medplat.event.model.MobileNotificationPendingDetail;
 import com.argusoft.medplat.exception.ImtechoSystemException;
+import com.argusoft.medplat.fhs.dao.FamilyDao;
+import com.argusoft.medplat.fhs.model.FamilyEntity;
 import com.argusoft.medplat.notification.dao.TechoNotificationMasterDao;
 import com.argusoft.medplat.notification.model.TechoNotificationMaster;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +42,8 @@ public class MobileNotificationHandler {
     private MobileNotificationPendingDetailDao mobileNotificationPendingDetailDao;
     @Autowired
     private TechoNotificationMasterDao techoNotificationMasterDao;
-//    @Autowired
-//    private FamilyDao familyDao;
+    @Autowired
+    private FamilyDao familyDao;
 
     /**
      * Handle mobile notification.
@@ -171,14 +173,14 @@ public class MobileNotificationHandler {
             TechoNotificationMaster techoNotificationMaster = new TechoNotificationMaster();
             techoNotificationMaster.setNotificationTypeId(notificationConfigTypeDto.getMobileNotificationType());
             techoNotificationMaster.setNotificationCode(mobileNotificationConfig.getNotificationCode());
-//            if (mobileNotificationPendingDetail.getFamilyId() != null || mobileNotificationPendingDetail.getMemberId() != null) {
-//                FamilyEntity familyEntity = familyDao.retrieveById(familyId);
-//                if (familyEntity.getAreaId() != null) {
-//                    techoNotificationMaster.setLocationId(familyEntity.getAreaId());
-//                } else {
-//                    techoNotificationMaster.setLocationId(familyEntity.getLocationId());
-//                }
-//            }
+            if (mobileNotificationPendingDetail.getFamilyId() != null || mobileNotificationPendingDetail.getMemberId() != null) {
+                FamilyEntity familyEntity = familyDao.retrieveById(familyId);
+                if (familyEntity.getAreaId() != null) {
+                    techoNotificationMaster.setLocationId(familyEntity.getAreaId());
+                } else {
+                    techoNotificationMaster.setLocationId(familyEntity.getLocationId());
+                }
+            }
             techoNotificationMaster.setUserId(mobileNotificationPendingDetail.getUserId());
             techoNotificationMaster.setFamilyId(mobileNotificationPendingDetail.getFamilyId());
             techoNotificationMaster.setMemberId(mobileNotificationPendingDetail.getMemberId());

@@ -512,7 +512,11 @@ public class FormSubmissionServiceImpl extends GenericSessionUtilService impleme
 
             case MobileConstantUtil.CFHC:
                 returnMap = cfhcService.storeComprehensiveFamilyHealthCensusForm(parsedRecordBean, user);
-                createdInstanceId = Integer.valueOf(returnMap.get("createdInstanceId"));
+                if (returnMap.get("createdInstanceId") != null) {
+                    createdInstanceId = Integer.valueOf(returnMap.get("createdInstanceId"));
+                } else {
+                    createdInstanceId = 0;
+                }
                 if (returnMap.get("familyId") != null) {
                     parsedRecordBean.setGeneratedId(returnMap.get("familyId"));
                 }
