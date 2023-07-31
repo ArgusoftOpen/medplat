@@ -96,17 +96,22 @@
                                         <label for="exampleFormControlInput1">Gender <span
                                                 class="required-asterisk">*</span></label>
                                         <label class="control control-radio">Male
-                                            <input ng-disabled="usercontroller.userObj.title != 'Dr'" value="M"
+                                            <input value="M"
                                                 name="Male" type="radio" ng-model="usercontroller.userObj.gender"
                                                 required>
                                             <div class="control_indicator"></div>
                                         </label>
                                         <label class="control control-radio">Female
-                                            <input ng-disabled="usercontroller.userObj.title != 'Dr'" value="F"
+                                            <input value="F"
                                                 name="Female" type="radio" ng-model="usercontroller.userObj.gender"
                                                 required>
                                             <div class="control_indicator"></div>
                                         </label>
+                                        <span class="alert alert-danger valid-feedback"
+                                            ng-if="(usercontroller.userForm.Male.$invalid && usercontroller.userForm.Male.$dirty) || (usercontroller.userForm.Male.$invalid && usercontroller.userFormSubmitted
+                                            || usercontroller.userForm.Female.$invalid && usercontroller.userForm.Female.$dirty) || (usercontroller.userForm.Female.$invalid && usercontroller.userFormSubmitted)">
+                                            Select Gender or a Title for the user.
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <validate for='userName' required-msg=" Enter user Name"
