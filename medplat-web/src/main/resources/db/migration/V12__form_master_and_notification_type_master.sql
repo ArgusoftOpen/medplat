@@ -27,19 +27,18 @@ INSERT INTO public.form_master (id,created_by,created_on,code,name,state) VALUES
 
 alter table notification_type_master disable trigger update_form_master_info_on_notification_type_add_or_update;
 
-
 TRUNCATE public.notification_type_master CASCADE;
 INSERT INTO public.notification_type_master (id,created_by,created_on,modified_by,modified_on,code,"name","type",role_id,state,notification_for,action_on_role_id,data_query,action_query,order_no,color_code,data_for,url_based_action,url,modal_based_action,modal_name,is_location_filter_required,fetch_up_to_level,required_up_to_level,is_fetch_according_aoi,uuid) VALUES
-	 (7,-1,'2018-08-07 22:35:01.794212',409,'2018-10-08 16:01:37.331','MO','Migration-Out','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'6c4f95d6-0fcf-43f7-87db-490d57771155'),
-	 (6,-1,'2018-08-07 22:35:01.794212',409,'2018-10-08 16:01:41.098','MI','Migration-In','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'90c3261e-7b9f-48f3-950b-e1175eb95534'),
-	 (5,1,'2018-04-30 19:47:21.717693',409,'2018-10-08 16:01:43.85','FHW_WPD','FHW WPD','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'7d3d809f-e90f-40a2-95a8-f1e5fe3aeb0d'),
-	 (4,1,'2018-04-30 19:47:21.717693',409,'2018-10-08 16:01:47.871','FHW_CS','FHW CHild Service','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'91fb960a-6168-4d07-879f-fc3d9e637b18'),
-	 (3,1,'2018-04-30 19:47:21.717693',409,'2018-10-08 16:01:54.265','FHW_PNC','FHW PNC','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'bfd41946-0837-4ff7-8c16-c90d8b019c06'),
-	 (2,1,'2018-04-30 19:47:21.717693',409,'2018-10-08 16:02:12.11','FHW_ANC','FHW ANC','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'d6eae54f-0650-4985-9628-c6a37a92c4d4'),
-	 (1,1,'2018-04-30 19:47:21.717693',409,'2018-10-08 16:02:25.318','LMPFU','LMP Follow Up','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'704fc0c3-5bfa-4d80-ac29-10f9d9bc816d'),
-	 (8,-1,'2018-10-22 18:44:55.477199',-1,'2018-10-22 18:44:55.477199','DISCHARGE','WPD Discharge Date Entry','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'a3ad4736-bfc4-47f4-bdb3-73552fa975fc'),
-	 (9,-1,'2018-11-02 00:33:48.934152',-1,'2018-11-02 00:33:48.934152','APPETITE','Appetite Test Alert For Child','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'47b7093d-1081-4077-aee3-798485b1c11b'),
-	 (21,1,'2019-02-28 16:11:50.376508',1,'2019-02-28 16:11:50.376508','MR','MIGRATION REVERTED','MO',30,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'e9138cac-ed61-4af6-b433-2c99f732948e'),
+	 (7,-1,'2018-08-07 22:35:01.794212',409,'2018-10-08 16:01:37.331','MO','Migration-Out','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'6c4f95d6-0fcf-43f7-87db-490d57771155'),
+	 (6,-1,'2018-08-07 22:35:01.794212',409,'2018-10-08 16:01:41.098','MI','Migration-In','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'90c3261e-7b9f-48f3-950b-e1175eb95534'),
+	 (5,1,'2018-04-30 19:47:21.717693',409,'2018-10-08 16:01:43.85','FHW_WPD','FHW WPD','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'7d3d809f-e90f-40a2-95a8-f1e5fe3aeb0d'),
+	 (4,1,'2018-04-30 19:47:21.717693',409,'2018-10-08 16:01:47.871','FHW_CS','FHW CHild Service','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'91fb960a-6168-4d07-879f-fc3d9e637b18'),
+	 (3,1,'2018-04-30 19:47:21.717693',409,'2018-10-08 16:01:54.265','FHW_PNC','FHW PNC','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'bfd41946-0837-4ff7-8c16-c90d8b019c06'),
+	 (2,1,'2018-04-30 19:47:21.717693',409,'2018-10-08 16:02:12.11','FHW_ANC','FHW ANC','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'d6eae54f-0650-4985-9628-c6a37a92c4d4'),
+	 (1,1,'2018-04-30 19:47:21.717693',409,'2018-10-08 16:02:25.318','LMPFU','LMP Follow Up','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'704fc0c3-5bfa-4d80-ac29-10f9d9bc816d'),
+	 (8,-1,'2018-10-22 18:44:55.477199',-1,'2018-10-22 18:44:55.477199','DISCHARGE','WPD Discharge Date Entry','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'a3ad4736-bfc4-47f4-bdb3-73552fa975fc'),
+	 (9,-1,'2018-11-02 00:33:48.934152',-1,'2018-11-02 00:33:48.934152','APPETITE','Appetite Test Alert For Child','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'47b7093d-1081-4077-aee3-798485b1c11b'),
+	 (21,1,'2019-02-28 16:11:50.376508',1,'2019-02-28 16:11:50.376508','MR','MIGRATION REVERTED','MO',2,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'e9138cac-ed61-4af6-b433-2c99f732948e'),
 	 (33,66522,'2019-06-24 13:15:28.309',58784,'2019-06-25 12:49:42.388','tho_user_not_logged_in_last_4_days','THO Not Logged in for Last 4 Days','WEB',NULL,'ACTIVE','USER',NULL,'with role_id as (
 select
         id as role_id,
@@ -184,10 +183,10 @@ then  #locationId# else loc_id end from um_user_location where user_id = #logged
                             order by
                                 due_on,
                                 schedule_date;','select id as "actionKey",value as "displayText",true as "isOtherDetailsRequired" from listvalue_field_value_detail  where field_key = ''last_4_days_not_loggin'';',NULL,NULL,'USER',NULL,NULL,NULL,NULL,true,6,1,true,'a79c5f20-fde8-47f7-86f3-b140fb106274'),
-	 (35,-1,'2019-08-01 17:11:25.400013',-1,'2019-08-01 17:11:25.400013','TT2_ALERT','TT2 Alert','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'cb251690-e755-4e6f-aacd-32deccb13b79'),
-	 (36,-1,'2019-08-01 17:11:25.400013',-1,'2019-08-01 17:11:25.400013','IRON_SUCROSE_ALERT','Iron Sucrose Alert','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'99d837e9-3df4-4dc9-aafc-b84660d8b066'),
-	 (38,-1,'2019-08-05 15:55:28.54106',-1,'2019-08-05 15:55:28.54106','SAM_SCREENING','SAM Screening','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'2c699c25-82ad-42d9-8132-94f8eefd48bd'),
-	 (25,1,'2019-03-25 18:34:46.018372',1,'2019-03-25 18:34:46.018372','READ_ONLY','Read Only Notification','MO',30,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'542c9217-bc48-4f1b-b5c8-4617652147ce'),
+	 (35,-1,'2019-08-01 17:11:25.400013',-1,'2019-08-01 17:11:25.400013','TT2_ALERT','TT2 Alert','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'cb251690-e755-4e6f-aacd-32deccb13b79'),
+	 (36,-1,'2019-08-01 17:11:25.400013',-1,'2019-08-01 17:11:25.400013','IRON_SUCROSE_ALERT','Iron Sucrose Alert','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'99d837e9-3df4-4dc9-aafc-b84660d8b066'),
+	 (38,-1,'2019-08-05 15:55:28.54106',-1,'2019-08-05 15:55:28.54106','SAM_SCREENING','SAM Screening','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'2c699c25-82ad-42d9-8132-94f8eefd48bd'),
+	 (25,1,'2019-03-25 18:34:46.018372',1,'2019-03-25 18:34:46.018372','READ_ONLY','Read Only Notification','MO',2,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'542c9217-bc48-4f1b-b5c8-4617652147ce'),
 	 (63,74841,'2020-03-17 15:52:51.551',74841,'2020-04-27 11:28:11.373','cfhc_death_verification_mo','MO death verification from CHFC','WEB',NULL,'ACTIVE','MEMBER',NULL,'with role_id as (
 select
 	id as role_id,code
@@ -529,8 +528,8 @@ left join asha_det on
 order by
 	due_on,
 	schedule_date;','select id as "actionKey",value as "displayText",true as "isOtherDetailsRequired" from listvalue_field_value_detail  where field_key = ''high_risk_notification_mo''',6,'#df0000','MEMBER',false,NULL,false,NULL,true,6,1,true,'657a5c6d-d04c-4f20-8f56-ecea21155c16'),
-	 (55,-1,'2019-10-07 20:38:28.377266',-1,'2019-10-07 20:38:28.377266','FMO','Family Migration Out Notification','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'00a30b42-009b-469c-bdde-9115f57ce396'),
-	 (56,-1,'2019-10-07 20:38:28.377266',-1,'2019-10-07 20:38:28.377266','FMI','Family Migration In Notification','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'be8ea6f3-0233-4a44-80cf-fb1ff10b2928'),
+	 (55,-1,'2019-10-07 20:38:28.377266',-1,'2019-10-07 20:38:28.377266','FMO','Family Migration Out Notification','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'00a30b42-009b-469c-bdde-9115f57ce396'),
+	 (56,-1,'2019-10-07 20:38:28.377266',-1,'2019-10-07 20:38:28.377266','FMI','Family Migration In Notification','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'be8ea6f3-0233-4a44-80cf-fb1ff10b2928'),
 	 (26,409,'2019-04-05 18:59:20.782',97058,'2022-11-11 12:12:46.655','child_high_risk_notification_mo','Child High Risk Notification Mo','WEB',NULL,'ACTIVE','MEMBER',NULL,'----Child High Risk Notification Mo------
 with role_id as (
 select
@@ -826,9 +825,9 @@ then  #locationId# else loc_id end from um_user_location where user_id = #logged
                             order by
                                 due_on,
                                 schedule_date;','select 1;',NULL,NULL,'USER',false,NULL,false,NULL,true,6,1,NULL,'229858fd-b9e1-4e61-b4d7-b616f2fda3df'),
-	 (71,-1,'2020-05-18 20:16:40.339714',-1,'2020-05-18 20:16:40.339714','FHW_SAM_AFTER_CMAM','FHW SAM Screening after CMAM','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'990caa06-a116-4965-9b63-b9630767634c'),
-	 (44,-1,'2019-08-31 14:17:27.696228',-1,'2019-08-31 14:17:27.696228','ASHA_ANC','Asha Anc Service Visit','MO',24,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'36c98c12-2dd1-4593-956b-4d8f9e02419d'),
-	 (45,-1,'2019-09-02 09:15:54.138327',-1,'2019-09-02 09:15:54.138327','ASHA_WPD','ASHA WPD Notification','MO',24,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'43010c8f-1f19-45ea-9f9c-80f0afd12d30'),
+	 (71,-1,'2020-05-18 20:16:40.339714',-1,'2020-05-18 20:16:40.339714','FHW_SAM_AFTER_CMAM','FHW SAM Screening after CMAM','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'990caa06-a116-4965-9b63-b9630767634c'),
+	 (44,-1,'2019-08-31 14:17:27.696228',-1,'2019-08-31 14:17:27.696228','ASHA_ANC','Asha Anc Service Visit','MO',3,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'36c98c12-2dd1-4593-956b-4d8f9e02419d'),
+	 (45,-1,'2019-09-02 09:15:54.138327',-1,'2019-09-02 09:15:54.138327','ASHA_WPD','ASHA WPD Notification','MO',3,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'43010c8f-1f19-45ea-9f9c-80f0afd12d30'),
 	 (39,409,'2019-08-12 09:58:11.094',409,'2020-06-25 16:56:36.183','member_upcoming_edd','Upcoming And Due EDD','WEB',NULL,'ACTIVE','MEMBER',NULL,'with role_id as (
 select
 	id as role_id,
@@ -998,7 +997,7 @@ case
 from notification_detail1 notification
 left join user_det users on users.location_id = notification.location_id
 left join asha_det aa on notification.area_id = aa.area_id','select id as "actionKey",value as "displayText",false as "isOtherDetailsRequired" from listvalue_field_value_detail  where field_key = ''member_edd_due'';',NULL,'#f17073','MEMBER',true,'https://techo.gujarat.gov.in/imtecho-ui/soh/index.html',false,NULL,true,6,1,true,'43f29d49-f0c5-4081-a33b-80ed986ed06c'),
-	 (43,-1,'2019-08-30 16:42:45.034148',-1,'2019-08-30 16:42:45.034148','ASHA_LMPFU','ASHA LMP Follow Up Notification','MO',24,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'87cb77b6-f6fa-4c82-abd6-f6e631960a3c'),
+	 (43,-1,'2019-08-30 16:42:45.034148',-1,'2019-08-30 16:42:45.034148','ASHA_LMPFU','ASHA LMP Follow Up Notification','MO',3,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'87cb77b6-f6fa-4c82-abd6-f6e631960a3c'),
 	 (40,409,'2019-08-13 10:48:49.784',58784,'2020-05-13 15:58:01.804','confirm_high_risk_beneficary','Confirmed High Risk PW','WEB',NULL,'ACTIVE','MEMBER',NULL,'-------High Risk Notification MO---------
 with role_id as (
 select
@@ -1334,8 +1333,8 @@ then  #locationId# else loc_id end from um_user_location where user_id = #logged
                             order by
                                 due_on,
                                 schedule_date;','select id as "actionKey",value as "displayText",true as "isOtherDetailsRequired" from listvalue_field_value_detail  where field_key = ''last_4_days_not_loggin''',1,'#e2a71d','USER',false,NULL,false,NULL,true,6,1,true,'39df56ee-0b7b-49d5-9143-c2603872f9f5'),
-	 (31,-1,'2019-05-20 10:32:59.083443',-1,'2019-05-20 10:32:59.083443','ASHA_PNC','ASHA Post Natal Care Alerts','MO',24,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'93576c97-172b-436f-9c9a-cb3e7226c524'),
-	 (32,-1,'2019-05-20 10:32:59.083443',-1,'2019-05-20 10:32:59.083443','ASHA_CS','ASHA Child Services Alerts','MO',24,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'51095276-de38-4e97-8744-ec1a688764a2'),
+	 (31,-1,'2019-05-20 10:32:59.083443',-1,'2019-05-20 10:32:59.083443','ASHA_PNC','ASHA Post Natal Care Alerts','MO',3,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'93576c97-172b-436f-9c9a-cb3e7226c524'),
+	 (32,-1,'2019-05-20 10:32:59.083443',-1,'2019-05-20 10:32:59.083443','ASHA_CS','ASHA Child Services Alerts','MO',3,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'51095276-de38-4e97-8744-ec1a688764a2'),
 	 (16,409,'2018-11-16 17:07:28.324',74840,'2019-11-26 17:39:46.303','still_birth_verification_mo','Still Birth Verification Mo','WEB',NULL,'ACTIVE','MEMBER',NULL,'-------Still Birth Verification Mo-----
  with role_id as (
 select
@@ -1500,13 +1499,13 @@ left join user_det on
 order by
 	due_on,
 	schedule_date;','select id as "actionKey",value as "displayText",true as "isOtherDetailsRequired" from listvalue_field_value_detail  where field_key = ''still_birth_verification_mo''',NULL,'#467d22','MEMBER',false,NULL,false,NULL,true,6,1,true,'89a8f9a1-9048-4466-ad16-0f306c4c09fb'),
-	 (48,-1,'2019-09-04 15:00:32.219299',-1,'2019-09-04 15:00:32.219299','FHW_PREG_CONF','FHW Pregnancy Confirmation','MO',30,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'99a90346-3bfb-466e-bf5c-ebb35f0bee61'),
-	 (49,-1,'2019-09-25 19:19:09.613114',-1,'2019-09-25 19:19:09.613114','FHW_DEATH_CONF','FHW Death Confirmation','MO',30,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'52937a0b-bd6d-4c08-9b92-2cc59b9de115'),
-	 (50,-1,'2019-09-25 19:19:09.613114',-1,'2019-09-25 19:19:09.613114','FHW_DELIVERY_CONF','FHW Delivery Confirmation','MO',30,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'3f663af0-5b3a-4f1d-b8f3-ee3eb3b0e8fc'),
-	 (51,-1,'2019-09-25 19:19:09.613114',-1,'2019-09-25 19:19:09.613114','FHW_MEMBER_MIGRATION','FHW Member Migration','MO',30,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'7769c40b-a3be-488d-963c-af7269e85066'),
-	 (52,-1,'2019-09-25 19:19:09.613114',-1,'2019-09-25 19:19:09.613114','FHW_FAMILY_MIGRATION','FHW Family Migration','MO',30,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'cf160fb5-abea-4391-8508-a026ed36e1f8'),
-	 (53,-1,'2019-09-25 19:19:09.613114',-1,'2019-09-25 19:19:09.613114','FHW_FAMILY_SPLIT','FHW family Split','MO',30,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'2e7a407c-e08e-44f3-9d15-ce2750049057'),
-	 (54,-1,'2019-09-25 19:19:10.26867',-1,'2019-09-25 19:19:10.26867','ASHA_READ_ONLY','Asha Read Only Notification','MO',24,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'1f1f8c02-5122-41e7-92ac-93f31a1561b6'),
+	 (48,-1,'2019-09-04 15:00:32.219299',-1,'2019-09-04 15:00:32.219299','FHW_PREG_CONF','FHW Pregnancy Confirmation','MO',2,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'99a90346-3bfb-466e-bf5c-ebb35f0bee61'),
+	 (49,-1,'2019-09-25 19:19:09.613114',-1,'2019-09-25 19:19:09.613114','FHW_DEATH_CONF','FHW Death Confirmation','MO',2,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'52937a0b-bd6d-4c08-9b92-2cc59b9de115'),
+	 (50,-1,'2019-09-25 19:19:09.613114',-1,'2019-09-25 19:19:09.613114','FHW_DELIVERY_CONF','FHW Delivery Confirmation','MO',2,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'3f663af0-5b3a-4f1d-b8f3-ee3eb3b0e8fc'),
+	 (51,-1,'2019-09-25 19:19:09.613114',-1,'2019-09-25 19:19:09.613114','FHW_MEMBER_MIGRATION','FHW Member Migration','MO',2,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'7769c40b-a3be-488d-963c-af7269e85066'),
+	 (52,-1,'2019-09-25 19:19:09.613114',-1,'2019-09-25 19:19:09.613114','FHW_FAMILY_MIGRATION','FHW Family Migration','MO',2,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'cf160fb5-abea-4391-8508-a026ed36e1f8'),
+	 (53,-1,'2019-09-25 19:19:09.613114',-1,'2019-09-25 19:19:09.613114','FHW_FAMILY_SPLIT','FHW family Split','MO',2,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'2e7a407c-e08e-44f3-9d15-ce2750049057'),
+	 (54,-1,'2019-09-25 19:19:10.26867',-1,'2019-09-25 19:19:10.26867','ASHA_READ_ONLY','Asha Read Only Notification','MO',3,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'1f1f8c02-5122-41e7-92ac-93f31a1561b6'),
 	 (42,409,'2019-08-20 14:00:15.433',409,'2020-03-03 18:23:35.501','migration_pending_out','Migration OUT Pending','WEB',NULL,'ACTIVE','USER',NULL,'-------High Risk Notification MO---------
 with role_id as (
 select
@@ -1609,7 +1608,7 @@ left join imt_member m on m.id = mm.member_id) as mm on
 select t.location_id,concat(concat_ws('' '',u.first_name,u.last_name),''('',u.contact_number,'')'') as name from (
 select lh.child_id as location_id,max(u.id) as user_id
 from um_user u,benificary_det bd,um_user_location uul,location_hierchy_closer_det lh
-where u.state = ''ACTIVE'' and uul.state = ''ACTIVE'' and u.role_id = 30 and lh.child_id = bd.location_migrated_to
+where u.state = ''ACTIVE'' and uul.state = ''ACTIVE'' and u.role_id = 2 and lh.child_id = bd.location_migrated_to
 and lh.parent_id = uul.loc_id
 group by lh.child_id) as t,um_user u
 where u.id = t.user_id
@@ -3925,7 +3924,7 @@ left join imt_member m on m.id = mm.member_id) as mm on
 select t.location_id,concat(concat_ws('' '',u.first_name,u.last_name),''('',u.contact_number,'')'') as name from (
 select lh.child_id as location_id,max(u.id) as user_id
 from um_user u,benificary_det bd,um_user_location uul,location_hierchy_closer_det lh
-where u.state = ''ACTIVE'' and uul.state = ''ACTIVE'' and u.role_id = 30 and lh.child_id = bd.location_migrated_from
+where u.state = ''ACTIVE'' and uul.state = ''ACTIVE'' and u.role_id = 2 and lh.child_id = bd.location_migrated_from
 and lh.parent_id = uul.loc_id
 group by lh.child_id) as t,um_user u
 where u.id = t.user_id
@@ -4269,7 +4268,7 @@ case
 from notification_detail1 notification
 left join user_det users on users.location_id = notification.location_id
 left join asha_det aa on notification.area_id = aa.area_id','select id as "actionKey",value as "displayText",false as "isOtherDetailsRequired" from listvalue_field_value_detail  where field_key = ''member_edd_due'';',11,'#dc7a7a','MEMBER',false,NULL,false,NULL,true,6,1,true,'466b5535-c366-42e5-87f4-dc9512362aca'),
-	 (64,-1,'2020-03-19 20:41:42.119462',-1,'2020-03-19 20:41:42.119462','TRAVELLERS_SCREENING','Travellers Screening Alert','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'6640e972-08a3-40d2-a894-bfc11d5502a2'),
+	 (64,-1,'2020-03-19 20:41:42.119462',-1,'2020-03-19 20:41:42.119462','TRAVELLERS_SCREENING','Travellers Screening Alert','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'6640e972-08a3-40d2-a894-bfc11d5502a2'),
 	 (57,74840,'2019-11-27 11:59:53.697',409,'2020-06-07 11:25:48.282','CHO-HWC_not_logged_in_for_4_days','CHO-HWC Not Logged In  for 4 days','WEB',NULL,'ACTIVE','USER',NULL,'with role_id as (
 select
         id as role_id,
@@ -4697,9 +4696,9 @@ left join user_det on
 order by
 	due_on,
 	schedule_date;','select id as "actionKey",value as "displayText",true as "isOtherDetailsRequired" from listvalue_field_value_detail  where field_key = ''cfhc_suspected_disease_status''',NULL,'#a9012f','MEMBER',false,NULL,false,NULL,true,8,1,true,'a2ab6a54-334f-40c0-ab95-cbdb7b906f27'),
-	 (65,-1,'2020-03-19 20:41:42.406637',-1,'2020-03-19 20:41:42.406637','GMA','Geriatrics Medication','MO',30,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'a3d99e2a-b68f-40fd-8699-ec0f52840c64'),
-	 (72,-1,'2022-11-21 16:53:44.526364',-1,'2022-11-21 16:53:44.526364','NCD_CLINIC_VISIT','NCD Clinic Visit','MO',30,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,NULL),
-	 (73,-1,'2022-11-21 16:53:44.526364',-1,'2022-11-21 16:53:44.526364','NCD_HOME_VISIT','NCD Home Visit','MO',30,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,NULL);
+	 (65,-1,'2020-03-19 20:41:42.406637',-1,'2020-03-19 20:41:42.406637','GMA','Geriatrics Medication','MO',2,'ACTIVE','MEMBER',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,'a3d99e2a-b68f-40fd-8699-ec0f52840c64'),
+	 (72,-1,'2022-11-21 16:53:44.526364',-1,'2022-11-21 16:53:44.526364','NCD_CLINIC_VISIT','NCD Clinic Visit','MO',2,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,NULL),
+	 (73,-1,'2022-11-21 16:53:44.526364',-1,'2022-11-21 16:53:44.526364','NCD_HOME_VISIT','NCD Home Visit','MO',2,'ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,true,NULL);
 
 
 

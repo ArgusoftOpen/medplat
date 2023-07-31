@@ -10,7 +10,7 @@ public interface RchHighRiskService {
 
     String identifyHighRiskForMotherRchPnc(Object dangerousSignAnswer, Object otherDangerousSignAnswer);
 
-    String identifyHighRiskForChildRchWpd(Object weightAnswer);
+    String identifyHighRiskForChildRchWpd(Object weightAnswer, Object congenitalDeformityAnswer);
 
     String identifyHighRiskForChardhamTourist(Map<String, Object> mapOfAnswers);
 

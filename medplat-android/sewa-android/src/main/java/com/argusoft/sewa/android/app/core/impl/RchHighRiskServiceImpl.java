@@ -218,13 +218,30 @@ public class RchHighRiskServiceImpl implements RchHighRiskService {
     }
 
     @Override
-    public String identifyHighRiskForChildRchWpd(Object weightAnswer) {
+    public String identifyHighRiskForChildRchWpd(Object weightAnswer, Object congenitalDeformityAnswer) {
 
         StringBuilder highRiskFound = new StringBuilder();
 
         if (weightAnswer != null && Float.parseFloat(weightAnswer.toString()) < 2.5f && Float.parseFloat(weightAnswer.toString()) > 0) {
             highRiskFound.append(UtilBean.getMyLabel(RchConstants.HIGH_RISK_VERY_LOW_WEIGHT));
             highRiskFound.append("\n");
+        }
+
+        if (congenitalDeformityAnswer != null) {
+            for (String risk : congenitalDeformityAnswer.toString().split(",")) {
+                if (!risk.contains(RchConstants.OTHER) && !risk.contains(RchConstants.NONE)) {
+                    try {
+                        highRiskFound.append(UtilBean.getMyLabel(
+                                listValueBeanDao.queryBuilder().where().eq(FieldNameConstants.ID_OF_VALUE, risk).queryForFirst().getValue()));
+                        highRiskFound.append("\n");
+                    } catch (SQLException e) {
+                        Log.e(getClass().getSimpleName(), null, e);
+                    }
+                } else if (risk.contains(RchConstants.OTHER)) {
+                    highRiskFound.append(congenitalDeformityAnswer);
+                    highRiskFound.append("\n");
+                }
+            }
         }
 
         if (highRiskFound.length() > 0) {

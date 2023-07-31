@@ -1,7 +1,7 @@
 #!/bin/bash
 
-mv apache-maven-3.2.5 /usr/web
-mv jdk-13.0.2 /usr/web
+#mv apache-maven-3.2.5 /usr/web
+#mv jdk-13.0.2 /usr/web
 
 cd /usr/ui/medplat-ui
 
