@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 
 # Update packages and install necessary tools
 RUN apt-get update -y \
-    && apt-get install -y wget curl git unzip 
+    && apt-get install -y wget curl git unzip build-essential procps file 
 
 # Create directory for Java and navigate to it
 RUN mkdir -p /usr/ui/medplat-ui
@@ -11,7 +11,7 @@ RUN mkdir -p /usr/web
 RUN mkdir -p /usr/android
 RUN mkdir -p /usr/Repository 
 
-# WORKDIR /usr/web
+WORKDIR /usr/web
 
 # Download and install OpenJDK 13
 RUN wget https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz \
@@ -23,27 +23,41 @@ RUN wget https://mirrors.estointernet.in/apache/maven/maven-3/3.2.5/binaries/apa
     && tar -xzvf apache-maven-3.2.5-bin.tar.gz \
     && rm apache-maven-3.2.5-bin.tar.gz
 
+# Set up Linuxbrew user and install Homebrew
 RUN useradd -m -s /bin/bash linuxbrew && \
-    echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+   echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
 
 USER linuxbrew
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
+ENV PATH /home/linuxbrew/.linuxbrew/bin:$PATH
+
+# Install Gradle using Homebrew
+RUN brew install gradle
+
 # Set environment variables for Java and Maven
-#USER root
+USER root
 ENV JAVA_HOME /usr/web/jdk-13.0.2
 ENV PATH $JAVA_HOME/bin:$PATH
 ENV MAVEN_HOME /usr/web/apache-maven-3.2.5
 ENV PATH $MAVEN_HOME/bin:$PATH
-ENV PATH /home/linuxbrew/.linuxbrew/bin:$PATH
+
 ENV ANDROID_HOME /sdk
 ENV ANDROID_SDK_VERSION 32
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 
+# Install wkhtmltopdf
+RUN apt-get install -y xfonts-75dpi
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+RUN apt install -f -y ./wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+RUN dpkg -i wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+RUN cd /usr/share/fonts/truetype
+RUN apt-get install -y fonts-indic
+
 # Copy application code to the working directory
 # COPY medplat-web /usr/web
 # COPY medplat-ui/ /usr/ui/medplat-ui
-# COPY ../medplat-android/ /usr/android 
+COPY ../medplat-android/ /usr/android 
 COPY entrypoint.sh /usr/
 # COPY /home/argus/.m2 /root/.m2
 
@@ -59,9 +73,9 @@ RUN npm install -g bower grunt -y
 
 WORKDIR /usr/android
 
-RUN brew install gradle
+
 RUN wget --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip && \
-    unzip -d android-sdk-linux android-sdk.zip
+   unzip -d android-sdk-linux android-sdk.zip
 RUN mkdir -p /sdk/cmdline-tools/latest
 RUN mv android-sdk-linux/cmdline-tools/* /sdk/cmdline-tools/latest/
 
