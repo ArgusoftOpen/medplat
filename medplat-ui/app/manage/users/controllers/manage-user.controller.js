@@ -92,7 +92,7 @@
                         || usercontroller.userObj.contactNumber === null
                         || usercontroller.userObj.contactNumber === ''
                         || usercontroller.userObj.contactNumber === undefined)
-                    // && ((usercontroller.userObj.aadharNumber != null && usercontroller.userObj.aadharNumber.length === 12)
+                    // && ((usercontroller.userObj.aadharNumber != null && usercontroller.userObj.aadharNumber.length === 12 && !usercontroller.checkAadharNumber)
                     //     || usercontroller.userObj.aadharNumber === null
                     //     || usercontroller.userObj.aadharNumber === ''
                     //     || usercontroller.userObj.aadharNumber === undefined)
@@ -186,6 +186,8 @@
         // method for updating
 
         usercontroller.updateUser = function (form) {
+            console.log(usercontroller.userForm);
+            console.log(usercontroller.userObj);
             usercontroller.userFormSubmitted = true;
             usercontroller.userObj.deletedLocations = usercontroller.deletedLocations;
             var userDto = angular.copy(usercontroller.userObj);
@@ -194,6 +196,9 @@
                 userDto.contactNumber = null;
             }
             // if (usercontroller.userObj.aadharNumber === '') {
+            //     userDto.aadharNumber = null;
+            // }
+            // if (usercontroller.userObj.aadharNumberAvailable && !usercontroller.isUpdateAadhaar) {
             //     userDto.aadharNumber = null;
             // }
             if (usercontroller.isHealthInfraMandatory && (usercontroller.userObj.infrastructureIds.length === 0
@@ -208,7 +213,7 @@
                     || usercontroller.userObj.contactNumber === null
                     || usercontroller.userObj.contactNumber === ''
                     || usercontroller.userObj.contactNumber === undefined)
-                // && ((usercontroller.userObj.aadharNumber != null && usercontroller.userObj.aadharNumber.length === 12)
+                // && ((usercontroller.userObj.aadharNumber != null && usercontroller.userObj.aadharNumber.length === 12 && !usercontroller.checkAadharNumber)
                 //     || usercontroller.userObj.aadharNumber === null
                 //     || usercontroller.userObj.aadharNumber === ''
                 //     || usercontroller.userObj.aadharNumber === undefined)
@@ -265,7 +270,7 @@
         usercontroller.checkphoneNumber = function (phoneNumber, userId) {
             if (phoneNumber) {
                 UserDAO.checkPhone(phoneNumber, userId).then(function (res) {
-                    usercontroller.checkphone = res;
+                    usercontroller.checkaadharorphone = res;
                     if (phoneNumber !== null) {
                         usercontroller.phoneNumberFlag = false;
                     }
@@ -281,7 +286,7 @@
 
         usercontroller.checkPhoneNo = false;
         usercontroller.checkPhoneNolength = false;
-        usercontroller.checkPhoneNumberOnChange = function (phoneNo) {
+        usercontroller.checkPhoneNumberOnChange = function (phoneNo,id) {
             usercontroller.checkPhoneNo = false;
             usercontroller.phoneNumberFlag = false;
             usercontroller.checkPhoneNolength = false;
@@ -305,6 +310,10 @@
                 usercontroller.checkPhoneNo = false;
                 usercontroller.phoneNumberFlag = false;
             }
+            if(phoneNo.length === 10){
+                usercontroller.checkphoneNumber(phoneNo,id);
+            }
+           
         };
         // usercontroller.checkAadharNumber = false;
         // usercontroller.checkAadharNolength = false;
@@ -312,16 +321,16 @@
         //     usercontroller.aadharNumberFlag = false;
         //     usercontroller.checkAadharNumber = false;
         //     usercontroller.checkAadharNolength = false;
-        //     if ((aadharNumber !== undefined && aadharNumber.length < 12) && aadharNumber) {
-        //         usercontroller.checkAadharNumber = true;
-        //         usercontroller.checkAadharNolength = false;
-
-        //     } else if (aadharNumber !== undefined && aadharNumber.length == 12) {
-        //         usercontroller.checkAadharNumber = false;
-        //         usercontroller.checkAadharNolength = false;
-        //     } else if (aadharNumber !== undefined && aadharNumber.length > 12) {
-        //         usercontroller.checkAadharNumber = false;
+        //     if (aadharNumber && aadharNumber.length != 12) {
         //         usercontroller.checkAadharNolength = true;
+        //     } else if (aadharNumber && aadharNumber.length == 12) {
+        //         res = /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/.test(aadharNumber);
+        //         if (res) {
+        //             usercontroller.checkAadharNumber = false;
+        //             usercontroller.checkAadharNolength = false;
+        //         } else {
+        //             usercontroller.checkAadharNumber = true;
+        //         }
         //     } else {
         //         usercontroller.aadharNumberFlag = false;
         //         usercontroller.checkAadharNumber = false;
@@ -341,60 +350,62 @@
         };
 
         usercontroller.selectedArea = function () {
-
             if (usercontroller.userObj.roleId) {
                 delete usercontroller.addedUsers;
                 usercontroller.noRoleSelected = false;
                 usercontroller.locationForm.$setSubmitted();
                 if (usercontroller.selectedLocation.finalSelected !== null) {
-                    var selectedobj;
+                    let selectedobj;
+                    let selectedobjs = [];
                     if (usercontroller.selectedLocation.finalSelected.optionSelected) {
-                        selectedobj = {
-                            locationId: usercontroller.selectedLocation.finalSelected.optionSelected.id,
-                            type: usercontroller.selectedLocation.finalSelected.optionSelected.type,
-                            level: usercontroller.selectedLocation.finalSelected.level,
-                            name: usercontroller.selectedLocation.finalSelected.optionSelected.name
-
-                        };
+                        if (Array.isArray(usercontroller.selectedLocation.finalSelected.optionSelected) && usercontroller.selectedLocation.finalSelected.optionSelected.length > 0) {
+                            for (let option in usercontroller.selectedLocation.finalSelected.optionSelected) {
+                                selectedobjs.push({
+                                    locationId: usercontroller.selectedLocation.finalSelected.optionSelected[option].id,
+                                    type: usercontroller.selectedLocation.finalSelected.optionSelected[option].type,
+                                    level: usercontroller.selectedLocation.finalSelected.level,
+                                    name: usercontroller.selectedLocation.finalSelected.optionSelected[option].name
+                                });
+                            }
+                        }
+                        else if (!Array.isArray(usercontroller.selectedLocation.finalSelected.optionSelected)) {
+                            selectedobj = {
+                                locationId: usercontroller.selectedLocation.finalSelected.optionSelected.id,
+                                type: usercontroller.selectedLocation.finalSelected.optionSelected.type,
+                                level: usercontroller.selectedLocation.finalSelected.level,
+                                name: usercontroller.selectedLocation.finalSelected.optionSelected.name
+                            };
+                        }
                     } else {
                         selectedobj = {
                             locationId: usercontroller.selectedLocation["level" + (usercontroller.selectedLocation.finalSelected.level - 1)].id,
                             type: usercontroller.selectedLocation["level" + (usercontroller.selectedLocation.finalSelected.level - 1)].type,
                             level: usercontroller.selectedLocation.finalSelected.level - 1,
                             name: usercontroller.selectedLocation["level" + (usercontroller.selectedLocation.finalSelected.level - 1)].name
-
                         };
                     }
                     usercontroller.duplicateEntry = false;
-                    for (let i = 0; i < usercontroller.selectedLocationsId.length; i++) {
-                        if (usercontroller.selectedLocationsId[i].locationId === selectedobj.locationId) {
+                    for (const element of usercontroller.selectedLocationsId) {
+                        if (!angular.isUndefined(selectedobj) && selectedobj !== null && element.locationId === selectedobj.locationId) {
                             usercontroller.duplicateEntry = true;
                             usercontroller.isLocationButtonDisabled = false;
                         }
-
+                        else if (!angular.isUndefined(selectedobjs) && selectedobjs.length > 0) {
+                            for (let obj in selectedobjs) {
+                                if (obj !== null && element.locationId === selectedobjs[obj].locationId) {
+                                    usercontroller.duplicateEntry = true;
+                                    usercontroller.isLocationButtonDisabled = false;
+                                }
+                            }
+                        }
                     }
-
-                    if (!usercontroller.duplicateEntry) {
+                    if (!usercontroller.duplicateEntry && !angular.isUndefined(selectedobj)) {
                         usercontroller.isNotAllowedLocation = false;
                         if (!usercontroller.selectedLocationsId) {
                             usercontroller.selectedLocationsId = [];
                         }
                         if ((!usercontroller.allowedLocations || usercontroller.allowedLocations.length === 0) || (usercontroller.allowedLocations.length > 0 && usercontroller.allowedLocations.indexOf(selectedobj.type) >= 0)) {
-                            //                            var itteratingLevel = 1, locationFullName = '';
-                            //                            while (itteratingLevel < usercontroller.selectedLocation.finalSelected.level) {
-                            //                                if (usercontroller.selectedLocation['level' + itteratingLevel]) {
-                            //                                    locationFullName = locationFullName.concat(usercontroller.selectedLocation['level' + itteratingLevel].name + ',');
-                            //                                }
-                            //                                itteratingLevel = itteratingLevel + 1;
-                            //                            }
-                            //                            if (usercontroller.selectedLocation.finalSelected.optionSelected) {
-                            //                                locationFullName = locationFullName.concat(usercontroller.selectedLocation.finalSelected.optionSelected.name);
-                            //                            } else {
-                            //                                locationFullName = locationFullName.substring(0, locationFullName.length - 1);
-                            //                            }
-                            //                            selectedobj.locationFullName = locationFullName;
-
-                            var selectedLocationIds = _.pluck(usercontroller.selectedLocationsId, "locationId");
+                            let selectedLocationIds = _.pluck(usercontroller.selectedLocationsId, "locationId");
                             usercontroller.isLocationButtonDisabled = true;
                             UserDAO.validateaoi(usercontroller.userObj.roleId, selectedLocationIds, selectedobj.locationId, usercontroller.userObj.id).then(function (res) {
                                 if (res.errorcode === 1) {
@@ -417,7 +428,6 @@
                                             usercontroller.selectedLocationsId.push(selectedobj);
                                             let locations = _.pluck(usercontroller.selectedLocationsId, "locationId")
                                             usercontroller.retrieveHealthInfrastructureByRole(usercontroller.userObj.roleId, locations)
-
                                         }, function () {
                                         });
                                     } else {
@@ -425,7 +435,6 @@
                                         usercontroller.selectedLocationsId.push(selectedobj);
                                         let locations = _.pluck(usercontroller.selectedLocationsId, "locationId")
                                         usercontroller.retrieveHealthInfrastructureByRole(usercontroller.userObj.roleId, locations)
-
                                     }
                                 } else if (res.errorcode === 2) {
                                     if (res.data) {
@@ -442,35 +451,94 @@
                                             }
                                         });
                                         modalInstance.result.then(function () {
-
                                         }, function () {
                                         });
-                                        //                                    usercontroller.addedUsers = res.data;
                                     } else {
                                         usercontroller.errorMsg = res.message;
                                         usercontroller.errorCode = res.errorcode;
-
                                     }
                                 }
-
-                            }, GeneralUtil.showMessageOnApiCallFailure)
-                                .finally(function () {
-                                    usercontroller.isLocationButtonDisabled = false;
-                                });
-
-                            //                            usercontroller.selectedLocationsId.push(selectedobj);
-                            //                            usercontroller.selectedLocation = {};
-
+                            }, GeneralUtil.showMessageOnApiCallFailure).finally(function () {
+                                usercontroller.isLocationButtonDisabled = false;
+                            });
                             usercontroller.locationForm.$setPristine();
                         } else {
                             usercontroller.isNotAllowedLocation = true;
-
                         }
-
                     }
-
-
-
+                    else if (!usercontroller.duplicateEntry) {
+                        usercontroller.isNotAllowedLocation = false;
+                        if (!usercontroller.selectedLocationsId) {
+                            usercontroller.selectedLocationsId = [];
+                        }
+                        (async function () {
+                            for (let obj in selectedobjs) {
+                                if ((!usercontroller.allowedLocations || usercontroller.allowedLocations.length === 0) || (usercontroller.allowedLocations.length > 0 && usercontroller.allowedLocations.indexOf(selectedobjs[obj].type) >= 0)) {
+                                    let selectedLocationIds = _.pluck(usercontroller.selectedLocationsId, "locationId");
+                                    usercontroller.isLocationButtonDisabled = true;
+                                    try {
+                                        res = await UserDAO.validateaoi(usercontroller.userObj.roleId, selectedLocationIds, selectedobjs[obj].locationId, usercontroller.userObj.id);
+                                        if (res.errorcode === 1) {
+                                            usercontroller.errorCode = res.errorcode;
+                                            if (res.data) {
+                                                usercontroller.addedUsers = _.pluck(res.data, "userName").join();
+                                                let modalInstance = $uibModal.open({
+                                                    templateUrl: 'app/common/views/confirmation.modal.html',
+                                                    controller: 'ConfirmModalController',
+                                                    windowClass: 'cst-modal',
+                                                    size: 'med',
+                                                    resolve: {
+                                                        message: function () {
+                                                            return "User with user name " + usercontroller.addedUsers + " already added at same area of intervention.Are you sure you want to add?";
+                                                        }
+                                                    }
+                                                });
+                                                modalInstance.result.then(function () {
+                                                    selectedobjs[obj].locationFullName = res.message;
+                                                    usercontroller.selectedLocationsId.push(selectedobjs[obj]);
+                                                    let locations = _.pluck(usercontroller.selectedLocationsId, "locationId")
+                                                    usercontroller.retrieveHealthInfrastructureByRole(usercontroller.userObj.roleId, locations)
+                                                }, function () {
+                                                });
+                                            } else {
+                                                selectedobjs[obj].locationFullName = res.message;
+                                                usercontroller.selectedLocationsId.push(selectedobjs[obj]);
+                                                let locations = _.pluck(usercontroller.selectedLocationsId, "locationId")
+                                                usercontroller.retrieveHealthInfrastructureByRole(usercontroller.userObj.roleId, locations)
+                                            }
+                                        } else if (res.errorcode === 2) {
+                                            if (res.data) {
+                                                usercontroller.addedUsers = _.pluck(res.data, "userName").join();
+                                                let modalInstance = $uibModal.open({
+                                                    templateUrl: 'app/common/views/alert.modal.html',
+                                                    controller: 'alertModalController',
+                                                    windowClass: 'cst-modal',
+                                                    size: 'med',
+                                                    resolve: {
+                                                        message: function () {
+                                                            return "You cannot add this role under this user location as " + res.message + " Users with user name " + usercontroller.addedUsers + " already added at same area of intervention.";
+                                                        }
+                                                    }
+                                                });
+                                                modalInstance.result.then(function () {
+                                                }, function () {
+                                                });
+                                            } else {
+                                                usercontroller.errorMsg = res.message;
+                                                usercontroller.errorCode = res.errorcode;
+                                            }
+                                        }
+                                    }
+                                    finally {
+                                        usercontroller.isLocationButtonDisabled = false;
+                                    }
+                                } else {
+                                    usercontroller.isNotAllowedLocation = true;
+                                }
+                            }
+                            usercontroller.locationForm.$setPristine();
+                        })();
+                    }
                 }
             } else {
                 usercontroller.noRoleSelected = true;
@@ -549,7 +617,7 @@
                     usercontroller.isHealthInfraMandatory = res.roles.isHealthInfraMandatory;
                     usercontroller.isGeolocationMandatory = res.roles.isGeolocationMandatory;
                     usercontroller.locationNames = [];
-                    usercontroller.maxHealthInfra=res.roles.maxHealthInfra;
+                    usercontroller.maxHealthInfra = res.roles.maxHealthInfra;
                     _.each(usercontroller.allowedLocations, function (location) {
                         if (location === 'D') {
                             usercontroller.locationNames.push("District");
@@ -655,19 +723,23 @@
 
         }
 
+        usercontroller.showPopup = function () {
+            usercontroller.count++;
+            if (usercontroller.userObj.infrastructureIds.length >= usercontroller.maxHealthInfra && usercontroller.maxHealthInfra != null && usercontroller.count > 2) {
+                toaster.pop('error', 'Max health infrastructure limit reached')
+            }
+            if (usercontroller.maxHealthInfra === 0) {
+                toaster.pop('error', 'Max health infrastructure limit reached')
+            }
+        }
+
         usercontroller.infrastructureIdsChanged = () => {
-            // angular.element('option:not(:selected)').prop('disabled', false)
-            // if (usercontroller.userObj.infrastructureIds.length >= usercontroller.maxHealthInfra) {
-            //     angular.element('option:not(:selected)').prop('disabled', true)
-            //     toaster.pop('danger', 'Maximum health infrastructure limit reached');
-            // }
-            if (usercontroller.env === 'uttarakhand') {
-                if (Array.isArray(usercontroller.userObj.infrastructureIds) && usercontroller.userObj.infrastructureIds.length) {
-                    usercontroller.defaultHealthInfrastructuresList = usercontroller.infrastructures.filter(h => usercontroller.userObj.infrastructureIds.includes(h.infraid));
-                    usercontroller.userObj.defaultHealthInfrastructure = usercontroller.defaultHealthInfrastructuresList[0].infraid;
-                } else {
-                    usercontroller.defaultHealthInfrastructuresList = [];
-                    usercontroller.userObj.defaultHealthInfrastructure = null;
+            if (usercontroller.maxHealthInfra != null) {
+                usercontroller.isOptionDisabled = function (infra) {
+                    return !usercontroller.userObj.infrastructureIds.includes(infra.infraid)
+                };
+                if (Array.isArray(usercontroller.userObj.infrastructureIds) && usercontroller.userObj.infrastructureIds.length >= usercontroller.maxHealthInfra) {
+                    usercontroller.count = 1;
                 }
             }
         }

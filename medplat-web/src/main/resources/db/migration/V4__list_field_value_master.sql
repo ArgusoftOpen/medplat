@@ -266,11 +266,11 @@ INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_mo
 	 (1177,true,false,'dhirpara','2019-11-05 12:28:00.808521','Health Infrastructure Certificate','drtecho_health_infrastructure_document_types',0,NULL,NULL),
 	 (1061,true,false,'superadmin','2019-01-04 13:35:28.97995','PHC','infra_type',0,NULL,'P'),
 	 (1062,true,false,'superadmin','2019-01-04 13:35:28.97995','SC','infra_type',0,NULL,'SC'),
-	 (1063,true,false,'superadmin','2019-01-04 13:35:28.97995','UPHC','infra_type',0,NULL,'U'),
-	 (1064,true,false,'superadmin','2019-01-04 16:26:24.986443','Grant in Aid','infra_type',0,NULL,'G'),
-	 (1007,true,false,'anthakar','2018-12-27 15:29:30','District Hospital','infra_type',0,'null','D');
+	 (1063,false,false,'superadmin','2019-01-04 13:35:28.97995','UPHC','infra_type',0,NULL,'U'),
+	 (1064,false,false,'superadmin','2019-01-04 16:26:24.986443','Grant in Aid','infra_type',0,NULL,'G'),
+	 (1007,false,false,'anthakar','2018-12-27 15:29:30','District Hospital','infra_type',0,'null','D');
 INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_modified_by,last_modified_on,value,field_key,file_size,multimedia_type,code) VALUES
-	 (1008,true,false,'anthakar','2018-12-27 15:29:54','Sub District Hospital','infra_type',0,'null','B'),
+	 (1008,false,false,'anthakar','2018-12-27 15:29:54','Sub District Hospital','infra_type',0,'null','B'),
 	 (2458,true,false,'stank','2020-12-03 12:42:38.785346','Still/live birth','MARK_AS_WRONG_DELIVERY_REASON',0,'null',NULL),
 	 (2459,true,false,'stank','2020-12-03 12:42:38.785346','Place of delivery','MARK_AS_WRONG_DELIVERY_REASON',0,'null',NULL),
 	 (1071,true,false,'superadmin','2019-01-10 10:37:03.745324','Doctor','role_catg',0,NULL,'DOCTOR'),
@@ -290,15 +290,15 @@ INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_mo
 	 (1023,true,false,'hshah','2018-12-31 03:18:48','Reject','child_death_verification_mo',0,'null',NULL),
 	 (1042,true,false,'hshah','2019-01-03 04:24:01','Accept','still_birth_verification_mo',0,'null',NULL),
 	 (1044,true,false,'hshah','2019-01-03 04:24:24','Reject','still_birth_verification_mo',0,'null',NULL),
-	 (1009,true,false,'anthakar','2018-12-27 15:30:11','Community Health Center','infra_type',0,'null','C');
+	 (1009,false,false,'anthakar','2018-12-27 15:30:11','Community Health Center','infra_type',0,'null','C');
 INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_modified_by,last_modified_on,value,field_key,file_size,multimedia_type,code) VALUES
 	 (1003,true,false,'hshah','2018-12-23 18:04:12','Could not do needful inspite of efforts','last_4_days_not_loggin',0,'null',NULL),
-	 (1010,true,false,'anthakar','2018-12-27 15:30:39','Trust Hospital','infra_type',0,'null','T'),
+	 (1010,false,false,'anthakar','2018-12-27 15:30:39','Trust Hospital','infra_type',0,'null','T'),
 	 (1178,true,false,'stank','2019-11-15 17:18:44.758348','Key Category','card_category',0,'null','1'),
-	 (1012,true,false,'anthakar','2018-12-27 15:31:40','Medical College Hospital','infra_type',0,'null','M'),
+	 (1012,false,false,'anthakar','2018-12-27 15:31:40','Medical College Hospital','infra_type',0,'null','M'),
 	 (1021,true,false,'hshah','2018-12-31 03:18:18','Reject','maternal_death_verification_mo',0,'null',NULL),
 	 (1020,false,true,'hshah','2018-12-31 03:18:03','Accept','maternal_death_verification_mo',0,'null',NULL),
-	 (1013,true,false,'anthakar','2018-12-27 15:31:59','Private Hospital','infra_type',0,'null','PVT'),
+	 (1013,false,false,'anthakar','2018-12-27 15:31:59','Private Hospital','infra_type',0,'null','PVT'),
 	 (1195,true,false,'dhirpara','2020-01-28 20:47:31.737038','Government','school_grant_types',0,NULL,NULL),
 	 (903,false,false,'75398','2020-07-07 13:41:16.597726','a','12',0,'null',NULL),
 	 (76,true,false,'sadmin','2018-09-26 15:34:35.213119','Not Decided','11',11,NULL,NULL);
@@ -765,7 +765,7 @@ INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_mo
 	 (1082,true,false,'hshah','2019-04-10 15:34:48','PHC/CHC DEO','role_catg',0,'null','PHC_CHC_DEO'),
 	 (1083,true,false,'hshah','2019-04-10 15:34:58','SD/MCH DEO','role_catg',0,'null','SD_MCH_DEO');
 INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_modified_by,last_modified_on,value,field_key,file_size,multimedia_type,code) VALUES
-	 (1084,true,false,'hshah','2019-04-17 14:39:07','Urban Community Health Center','infra_type',0,'null',NULL),
+	 (1084,false,false,'hshah','2019-04-17 14:39:07','Urban Community Health Center','infra_type',0,'null',NULL),
 	 (1558,false,false,'superadmin','2020-03-23 15:01:00.168525','Federated States of Micronesia','countries',0,NULL,NULL),
 	 (1559,false,false,'superadmin','2020-03-23 15:01:00.168525','Fiji','countries',0,NULL,NULL),
 	 (1560,false,false,'superadmin','2020-03-23 15:01:00.168525','Finland','countries',0,NULL,NULL),
