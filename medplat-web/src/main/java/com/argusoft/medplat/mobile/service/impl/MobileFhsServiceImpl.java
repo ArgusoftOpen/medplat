@@ -1542,7 +1542,6 @@ public class MobileFhsServiceImpl extends GenericSessionUtilService implements M
             calendar.set(MINUTE, 0);
             calendar.set(HOUR_OF_DAY, 0);
             locations = locationMasterDao.retrieveAllActiveLocationsWithWorkerInfo(calendar.getTime());
-            locations.forEach(locationMasterMobile -> locationMasterMobile.setLevel(LocationConstants.getLocationLevel(locationMasterMobile.getType())));
         }
         return locations;
     }

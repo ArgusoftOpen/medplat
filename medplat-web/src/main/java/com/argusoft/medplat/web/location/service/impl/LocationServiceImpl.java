@@ -246,11 +246,8 @@ public class LocationServiceImpl implements LocationService {
      */
     @Override
     public void updateAllActiveLocationsWithWorkerInfo() {
-        System.out.println("Updating Location Master Beans For Mobile");
+        LOGGER.info("::: Updating Cache Of Location Master Beans For Mobile In All Tenant's Memory :::");
         List<LocationMasterDataBean> locations = locationMasterDao.retrieveAllActiveLocationsWithWorkerInfo(null);
-        locations.forEach((locationMasterMobile) -> {
-            locationMasterMobile.setLevel(LocationConstants.getLocationLevel(locationMasterMobile.getType()));
-        });
         LocationConstants.allLocationMasterDataBeans = locations;
     }
 
