@@ -295,36 +295,40 @@ public class LocarionMasterDaoImpl extends GenericDaoImpl<LocationMaster, Intege
     public List<LocationMasterDataBean> retrieveAllActiveLocationsWithWorkerInfo(Date lastUpdatedOn) {
         String query;
         if (lastUpdatedOn != null) {
-            query = "with changed_loc_det as(\n"
-                    + "select id,name,parent,type,case when modified_on is not null then modified_on else created_on end as \"modifiedOn\" \n"
-                    + "from location_master l where modified_on >= :lastUpdatedOn \n"
-                    + "),loc_user_detail as (\n"
-                    + "select ul.loc_id,CAST(json_agg(json_build_object('name',CONCAT(u.first_name,' ',u.last_name),'mobileNumber',u.contact_number)) as text) \n"
-                    + "as fhw_names \n"
-                    + "from um_user u,um_user_location ul,changed_loc_det c_loc\n"
-                    + "where u.id = ul.user_id and u.role_id in (30,24) and ul.state = 'ACTIVE' and u.state = 'ACTIVE' \n"
-                    + "and ul.loc_id = c_loc.id\n"
-                    + "group by ul.loc_id\n"
-                    + ")\n"
-                    + "select id as \"actualID\", name, parent, type, fhw_names as \"fhwDetailString\",\"modifiedOn\" \n"
-                    + "from changed_loc_det t\n"
-                    + "left join loc_user_detail t1 on t.id = t1.loc_id;";
+            query = "with t as (  \n" +
+                    "select l.id,l.name,l.parent,l.type, lt.\"level\",\n" +
+                    "case when l.modified_on is not null then l.modified_on else l.created_on end as \"modifiedOn\",\n" +
+                    "case when l.state = 'ACTIVE' then true else false end as \"isActive\" \n" +
+                    "from location_master l \n" +
+                    "inner join location_type_master lt on lt.\"type\"  = l.\"type\" \n" +
+                    "where l.modified_on > (CAST(:lastUpdatedOn AS TIMESTAMP) + CAST('1 second' AS INTERVAL))\n" +
+                    ")\n" +
+                    "select id as \"actualID\", name, parent, type, level, null as \"fhwDetailString\", \"modifiedOn\", \"isActive\"\n" +
+                    "from t\n";
         } else {
-            query = "select id as \"actualID\", name, parent, type, fhw_names as \"fhwDetailString\",\"modifiedOn\" from ((select id,name,parent,type, "
-                    + "case when modified_on is not null then modified_on else created_on end as \"modifiedOn\" from location_master l "
-                    + "where l.state = 'ACTIVE') "
-                    + "as t left join \n"
-                    + "(select ul.loc_id,CAST(json_agg(json_build_object('name',CONCAT(u.first_name,' ',u.last_name),'mobileNumber',u.contact_number)) as text) "
-                    + "as fhw_names from um_user u inner join um_user_location ul on u.id = ul.user_id and u.role_id in (30,24) and ul.state = 'ACTIVE' "
-                    + "and u.state = 'ACTIVE' group by ul.loc_id) as t1 on t.id = t1.loc_id);";
+            query = "with t as (\n" +
+                    "\tselect l.id,l.name,l.parent,l.type, lt.\"level\",\n" +
+                    "\tcase when l.modified_on is not null then l.modified_on else l.created_on end as \"modifiedOn\",\n" +
+                    "\tcase when l.state = 'ACTIVE' then true else false end as \"isActive\" \n" +
+                    "\tfrom location_master l \n" +
+                    "\tinner join location_type_master lt on lt.\"type\"  = l.\"type\" \n" +
+                    "\twhere l.state = 'ACTIVE'\n" +
+                    "), t1 as (\n" +
+                    "\tselect ul.loc_id,CAST(json_agg(json_build_object('name',CONCAT(u.first_name,' ',u.last_name),'mobileNumber',u.contact_number)) as text) \n" +
+                    "\tas fhw_names from um_user u inner join um_user_location ul on u.id = ul.user_id and u.role_id in (2,3) and ul.state = 'ACTIVE' \n" +
+                    "\tand u.state = 'ACTIVE' group by ul.loc_id\n" +
+                    ")\n" +
+                    "select id as \"actualID\", name, parent, type, level, fhw_names as \"fhwDetailString\", \"modifiedOn\", \"isActive\"\n" +
+                    "from t left join t1 on t.id = t1.loc_id;";
         }
 
         Session session = sessionFactory.getCurrentSession();
-        NativeQuery<LocationMasterDataBean> q = session.createNativeQuery(query)
-                .addScalar("actualID", StandardBasicTypes.INTEGER)
+        NativeQuery<LocationMasterDataBean> q = session.createNativeQuery(query);
+        q.addScalar("actualID", StandardBasicTypes.INTEGER)
                 .addScalar("name", StandardBasicTypes.STRING)
                 .addScalar("parent", StandardBasicTypes.INTEGER)
                 .addScalar("type", StandardBasicTypes.STRING)
+                .addScalar("level", StandardBasicTypes.INTEGER)
                 .addScalar("modifiedOn", StandardBasicTypes.TIMESTAMP)
                 .addScalar("fhwDetailString", StandardBasicTypes.STRING);
         if (lastUpdatedOn != null) {
