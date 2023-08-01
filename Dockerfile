@@ -82,14 +82,14 @@ RUN mv android-sdk-linux/cmdline-tools/* /sdk/cmdline-tools/latest/
 ENV PATH $ANDROID_HOME/cmdline-tools/latest/bin:$PATH
 ENV PATH ${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-RUN sdkmanager --update && yes | sdkmanager --licenses
-RUN sdkmanager "platforms;android-32" "build-tools;34.0.0" "extras;google;m2repository" "extras;android;m2repository"
+#RUN sdkmanager --update && yes | sdkmanager --licenses
+#RUN sdkmanager "platforms;android-32" "build-tools;34.0.0" "extras;google;m2repository" "extras;android;m2repository"
 
-RUN echo "sdk.dir=$ANDROID_HOME" > local.properties
-RUN sed -i 's#https://demo.medplat.org/#http://dpg.argusoft.com/#' gradle.properties
-RUN chmod +x gradlew
-RUN gradle wrapper --gradle-version 7.2
-RUN ./gradlew assembleDebug --stacktrace
+#RUN echo "sdk.dir=$ANDROID_HOME" > local.properties
+#RUN sed -i 's#https://demo.medplat.org/#http://dpg.argusoft.com/#' gradle.properties
+#RUN chmod +x gradlew
+#RUN gradle wrapper --gradle-version 7.2
+#RUN ./gradlew assembleDebug --stacktrace
 
 
 # # Navigate to the application UI directory
