@@ -21,8 +21,6 @@ RUN wget https://mirrors.estointernet.in/apache/maven/maven-3/3.2.5/binaries/apa
     && tar -xzvf apache-maven-3.2.5-bin.tar.gz \
     && rm apache-maven-3.2.5-bin.tar.gz
 
-# WORKDIR /usr/web
-
 # Set environment variables for Java and Maven
 USER root
 ENV JAVA_HOME /jdk-13.0.2
