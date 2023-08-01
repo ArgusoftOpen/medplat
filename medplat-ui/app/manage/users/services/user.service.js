@@ -153,7 +153,7 @@
                 return api.changePasswordOldtoNew({ action: 'selfchangepassword' }, { oldPassword: oldPassword, newPassword: newPassword }).$promise;
             },
             checkPhone: function (phoneNumber, userId) {
-                return api.checkPhone({ action: 'checkphone', phone: phoneNumber, userId: userId }, {}).$promise;
+                return api.checkPhone({ action: 'checkaadharorphone', phone: phoneNumber, userId: userId }, {}).$promise;
             },
             validateaoi: function (roleId, locationIds, toBeAdded, userId) {
                 return api.get({ action: 'validateaoi', userId: userId, roleId: roleId, locationIds: locationIds, toBeAdded: toBeAdded }).$promise;

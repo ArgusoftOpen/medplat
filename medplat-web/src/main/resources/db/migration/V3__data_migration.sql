@@ -193,10 +193,10 @@ TRUNCATE public.system_configuration CASCADE;
 INSERT INTO public.system_configuration (system_key,is_active,key_value) VALUES
     ('SYSTEM_CONSTRAINT_ACTIVE_STANDARD_ID',true,'2437'),
     ('member_comorbidites_last_update_schedule_date',true,'07-17-2020'),
-    ('rch_pregnancy_analytics_last_schedule_date',true,'2023-07-21 01:59:55.371122+05:30'),
-    ('rch_pregnancy_analytics_last_schedule_date_for_child_analytics',true,'2023-07-21 01:59:55.371122+05:30'),
+    ('rch_pregnancy_analytics_last_schedule_date',true,'07-21-2023'),
+    ('rch_pregnancy_analytics_last_schedule_date_for_child_analytics',true,'07-21-2023'),
     ('rch_child_analytics_run_for_all_child',true,'false'),
-    ('LAST_UPDATE_DATE_OF_ELIGIBLE_COUPLE_ANALYTICS',true,'2023-07-20 18:26:47.018739+05:30');
+    ('LAST_UPDATE_DATE_OF_ELIGIBLE_COUPLE_ANALYTICS',true,'07-20-2023');
 
 DELETE FROM field_constant_master WHERE field_name = 'COURSE_MODULE_NAME' ;
 INSERT INTO field_constant_master (field_name, created_on, created_by)
