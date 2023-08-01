@@ -51,4 +51,6 @@ RUN npm install -g bower grunt -y
 
 EXPOSE 8181
 
+RUN chmod +x /usr/entrypoint.sh
+
 ENTRYPOINT [ "/usr/entrypoint.sh" ]
