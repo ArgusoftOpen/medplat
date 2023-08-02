@@ -14,28 +14,37 @@ RUN wget https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d8
     && rm openjdk-13.0.2_linux-x64_bin.tar.gz
 
 # Set up Linuxbrew user and install Homebrew
-RUN useradd -m -s /bin/bash linuxbrew && \
-   echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+# RUN useradd -m -s /bin/bash linuxbrew && \
+#    echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
 
-USER linuxbrew
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-ENV PATH /home/linuxbrew/.linuxbrew/bin:$PATH
-RUN brew install gradle
+# USER linuxbrew
+# RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+# ENV PATH /home/linuxbrew/.linuxbrew/bin:$PATH
+# RUN brew install gradle
 
-# Set environment variables for Java and Maven
+
+#install Gradle
+RUN wget https://services.gradle.org/distributions/gradle-7.2-bin.zip \
+    && unzip -d gradle-7.2 gradle-7.2-bin.zip && rm gradle-7.2-bin.zip
+
+
+# Set Gradle in the environment variables
+# Set environment variables for Java, Android and Gradle
 USER root
 ENV JAVA_HOME /jdk-13.0.2
 ENV PATH $JAVA_HOME/bin:$PATH
 ENV ANDROID_HOME /sdk
 ENV ANDROID_SDK_VERSION 32
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
+ENV GRADLE_HOME /gradle-7.2/gradle-7.2
+ENV PATH $GRADLE_HOME/bin:$PATH
 
 COPY ../medplat-android/ /usr/android 
 
 WORKDIR /usr/android
 
 RUN wget --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip && \
-   unzip -d android-sdk-linux android-sdk.zip
+   unzip -d android-sdk-linux android-sdk.zip && rm android-sdk.zip
 RUN mkdir -p /sdk/cmdline-tools/latest
 RUN mv android-sdk-linux/cmdline-tools/* /sdk/cmdline-tools/latest/
 
@@ -46,9 +55,10 @@ RUN sdkmanager --update && yes | sdkmanager --licenses
 RUN sdkmanager "platforms;android-32" "build-tools;34.0.0" "extras;google;m2repository" "extras;android;m2repository"
 
 RUN echo "sdk.dir=$ANDROID_HOME" > local.properties
-RUN sed -i 's#https://demo.medplat.org/#http://dpg.argusoft.com/#' gradle.properties
+RUN sed -i 's#http://dpg.argusoft.com/#http://dpg.argusoft.com/#' gradle.properties
 RUN chmod +x gradlew
 RUN gradle wrapper --gradle-version 7.2
+RUN ./gradlew clean
 RUN ./gradlew assembleDebug --stacktrace
 
 ENTRYPOINT cp /usr/android/sewa-android/build/outputs/apk/medplat/debug/*.apk /apk_package && exit
