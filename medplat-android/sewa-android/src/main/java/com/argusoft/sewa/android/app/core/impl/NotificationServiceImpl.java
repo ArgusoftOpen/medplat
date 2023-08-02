@@ -1,6 +1,6 @@
 package com.argusoft.sewa.android.app.core.impl;
 
-import com.argusoft.sewa.android.app.util.Log;
+import android.util.Log;
 
 import com.argusoft.sewa.android.app.constants.FhsConstants;
 import com.argusoft.sewa.android.app.constants.FieldNameConstants;
@@ -241,14 +241,26 @@ public class NotificationServiceImpl implements NotificationService {
                 .orderBy(FieldNameConstants.BENEFICIARY_NAME, true)
                 .where();
         if (locationIds.isEmpty()) {
-            notificationWhere.eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode)
-                    .and().le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date()))
-                    .and().in(FieldNameConstants.STATE, pendingStates).query();
+            notificationWhere.and(
+                    notificationWhere.eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode),
+                    notificationWhere.in(FieldNameConstants.STATE, pendingStates),
+                    notificationWhere.le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date())),
+                    notificationWhere.or(
+                            notificationWhere.gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date())),
+                            notificationWhere.isNull(FieldNameConstants.EXPIRY_DATE)
+                    )
+            );
         } else {
-            notificationWhere.in(FieldNameConstants.LOCATION_ID, locationIds)
-                    .and().eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode)
-                    .and().le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date()))
-                    .and().in(FieldNameConstants.STATE, pendingStates).query();
+            notificationWhere.and(
+                    notificationWhere.in(FieldNameConstants.LOCATION_ID, locationIds),
+                    notificationWhere.eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode),
+                    notificationWhere.in(FieldNameConstants.STATE, pendingStates),
+                    notificationWhere.le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date())),
+                    notificationWhere.or(
+                            notificationWhere.gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date())),
+                            notificationWhere.isNull(FieldNameConstants.EXPIRY_DATE)
+                    )
+            );
         }
 
         return notificationQB.query();
@@ -299,16 +311,26 @@ public class NotificationServiceImpl implements NotificationService {
                 .orderBy(FieldNameConstants.BENEFICIARY_NAME, true)
                 .where();
         if (locationIds.isEmpty()) {
-            notificationWhere.eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode)
-                    .and().le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date()))
-                    .and().gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date()))
-                    .and().in(FieldNameConstants.STATE, pendingStates).query();
+            notificationWhere.and(
+                    notificationWhere.eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode),
+                    notificationWhere.in(FieldNameConstants.STATE, pendingStates),
+                    notificationWhere.le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date())),
+                    notificationWhere.or(
+                            notificationWhere.gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date())),
+                            notificationWhere.isNull(FieldNameConstants.EXPIRY_DATE)
+                    )
+            );
         } else {
-            notificationWhere.in(FieldNameConstants.LOCATION_ID, locationIds)
-                    .and().eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode)
-                    .and().le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date()))
-                    .and().gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date()))
-                    .and().in(FieldNameConstants.STATE, pendingStates).query();
+            notificationWhere.and(
+                    notificationWhere.in(FieldNameConstants.LOCATION_ID, locationIds),
+                    notificationWhere.eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode),
+                    notificationWhere.in(FieldNameConstants.STATE, pendingStates),
+                    notificationWhere.le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date())),
+                    notificationWhere.or(
+                            notificationWhere.gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date())),
+                            notificationWhere.isNull(FieldNameConstants.EXPIRY_DATE)
+                    )
+            );
         }
 
         return notificationQB.query();
@@ -365,15 +387,23 @@ public class NotificationServiceImpl implements NotificationService {
         if (locationIds.isEmpty()) {
             notificationWhere.and(
                     notificationWhere.eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode),
+                    notificationWhere.in(FieldNameConstants.STATE, pendingStates),
                     notificationWhere.le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date())),
-                    notificationWhere.in(FieldNameConstants.STATE, pendingStates)
+                    notificationWhere.or(
+                            notificationWhere.gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date())),
+                            notificationWhere.isNull(FieldNameConstants.EXPIRY_DATE)
+                    )
             );
         } else {
             notificationWhere.and(
                     notificationWhere.in(FieldNameConstants.LOCATION_ID, locationIds),
                     notificationWhere.eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode),
+                    notificationWhere.in(FieldNameConstants.STATE, pendingStates),
                     notificationWhere.le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date())),
-                    notificationWhere.in(FieldNameConstants.STATE, pendingStates)
+                    notificationWhere.or(
+                            notificationWhere.gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date())),
+                            notificationWhere.isNull(FieldNameConstants.EXPIRY_DATE)
+                    )
             );
         }
 
@@ -431,15 +461,23 @@ public class NotificationServiceImpl implements NotificationService {
         if (locationIds.isEmpty()) {
             notificationWhere.and(
                     notificationWhere.eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode),
+                    notificationWhere.in(FieldNameConstants.STATE, pendingStates),
                     notificationWhere.le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date())),
-                    notificationWhere.in(FieldNameConstants.STATE, pendingStates)
+                    notificationWhere.or(
+                            notificationWhere.gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date())),
+                            notificationWhere.isNull(FieldNameConstants.EXPIRY_DATE)
+                    )
             );
         } else {
             notificationWhere.and(
                     notificationWhere.in(FieldNameConstants.LOCATION_ID, locationIds),
                     notificationWhere.eq(FieldNameConstants.NOTIFICATION_CODE, notificationCode),
+                    notificationWhere.in(FieldNameConstants.STATE, pendingStates),
                     notificationWhere.le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date())),
-                    notificationWhere.in(FieldNameConstants.STATE, pendingStates)
+                    notificationWhere.or(
+                            notificationWhere.gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date())),
+                            notificationWhere.isNull(FieldNameConstants.EXPIRY_DATE)
+                    )
             );
         }
 
@@ -585,18 +623,30 @@ public class NotificationServiceImpl implements NotificationService {
             }
 
             List<NotificationBean> notificationBeans;
+            QueryBuilder<NotificationBean, Integer> notificationQB = notificationBeanDao.queryBuilder();
+            Where<NotificationBean, Integer> where = notificationQB.selectColumns(FieldNameConstants.NOTIFICATION_CODE, FieldNameConstants.MEMBER_ID)
+                    .where();
             if (finalLocationIds.isEmpty()) {
-                notificationBeans = notificationBeanDao.queryBuilder().selectColumns(FieldNameConstants.NOTIFICATION_CODE, FieldNameConstants.MEMBER_ID)
-                        .where().in(FieldNameConstants.STATE, pendingStates)
-                        .and().le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date()))
-                        .query();
+                where.and(
+                        where.in(FieldNameConstants.STATE, pendingStates),
+                        where.le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date())),
+                        where.or(
+                                where.gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date())),
+                                where.isNull(FieldNameConstants.EXPIRY_DATE)
+                        )
+                );
             } else {
-                notificationBeans = notificationBeanDao.queryBuilder().selectColumns(FieldNameConstants.NOTIFICATION_CODE, FieldNameConstants.MEMBER_ID)
-                        .where().in(FieldNameConstants.LOCATION_ID, finalLocationIds)
-                        .and().in(FieldNameConstants.STATE, pendingStates)
-                        .and().le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date()))
-                        .query();
+                where.and(
+                        where.in(FieldNameConstants.LOCATION_ID, finalLocationIds),
+                        where.in(FieldNameConstants.STATE, pendingStates),
+                        where.le(FieldNameConstants.SCHEDULED_DATE, UtilBean.endOfDay(new Date())),
+                        where.or(
+                                where.gt(FieldNameConstants.EXPIRY_DATE, UtilBean.endOfDay(new Date())),
+                                where.isNull(FieldNameConstants.EXPIRY_DATE)
+                        )
+                );
             }
+            notificationBeans = notificationQB.query();
 
             Integer lmpfuCount = 0;
             Integer ancCount = 0;
@@ -614,6 +664,7 @@ public class NotificationServiceImpl implements NotificationService {
             Integer ashaPNCCount = 0;
             Integer ashaCSCount = 0;
             Integer ashaAncCount = 0;
+            Integer ashaLbwCount = 0;
             Integer ashaReadOnlyCount = 0;
             Integer awwCsCount = 0;
             Integer ashaSamScreeningCount = 0;
@@ -622,8 +673,6 @@ public class NotificationServiceImpl implements NotificationService {
             Integer ashaCmamCount = 0;
             Integer gmaCount = 0;
             Integer tsaCount = 0;
-            Integer clinicVisitCount = 0;
-            Integer homeVisitCount = 0;
 
             for (NotificationBean bean : notificationBeans) {
                 if (bean.getNotificationCode().equals(NotificationConstants.FHW_NOTIFICATION_MIGRATION_IN)) {
@@ -778,41 +827,6 @@ public class NotificationServiceImpl implements NotificationService {
                 }
             }
 
-            // For NCD Weekly Visits
-            List<String> notificationCode = new ArrayList<>();
-            notificationCode.add(NotificationConstants.NOTIFICATION_NCD_CLINIC_VISIT);
-            notificationCode.add(NotificationConstants.NOTIFICATION_NCD_HOME_VISIT);
-            List<NotificationBean> ncdNotificationBeans;
-            if (finalLocationIds.isEmpty()) {
-                ncdNotificationBeans = notificationBeanDao.queryBuilder().selectColumns(FieldNameConstants.NOTIFICATION_CODE, FieldNameConstants.MEMBER_ID, FieldNameConstants.SCHEDULED_DATE)
-                        .where().in(FieldNameConstants.STATE, pendingStates)
-                        .and().in(FieldNameConstants.NOTIFICATION_CODE, notificationCode)
-                        .query();
-            } else {
-                ncdNotificationBeans = notificationBeanDao.queryBuilder().selectColumns(FieldNameConstants.NOTIFICATION_CODE, FieldNameConstants.MEMBER_ID, FieldNameConstants.SCHEDULED_DATE)
-                        .where().in(FieldNameConstants.LOCATION_ID, finalLocationIds)
-                        .and().in(FieldNameConstants.STATE, pendingStates)
-                        .and().in(FieldNameConstants.NOTIFICATION_CODE, notificationCode)
-                        .query();
-            }
-            for (NotificationBean notificationBean : ncdNotificationBeans) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(notificationBean.getScheduledDate());
-                calendar.add(Calendar.DATE, -7);
-                Date before7Days = calendar.getTime();
-                if (new Date().after(before7Days)) {
-                    if (notificationBean.getNotificationCode().equals(NotificationConstants.NOTIFICATION_NCD_CLINIC_VISIT)) {
-                        clinicVisitCount++;
-                        continue;
-                    }
-
-                    if (notificationBean.getNotificationCode().equals(NotificationConstants.NOTIFICATION_NCD_HOME_VISIT)) {
-                        homeVisitCount++;
-                        continue;
-                    }
-                }
-            }
-
             Map<String, Integer> hashMap = new HashMap<>();
             hashMap.put(NotificationConstants.FHW_NOTIFICATION_LMP_FOLLOW_UP, lmpfuCount);
             hashMap.put(NotificationConstants.FHW_NOTIFICATION_ANC, ancCount);
@@ -826,8 +840,8 @@ public class NotificationServiceImpl implements NotificationService {
             hashMap.put(FormConstants.FHW_MONTHLY_SAM_SCREENING, cmamCompletionSamScreeningCount);
             hashMap.put(FormConstants.CMAM_FOLLOWUP, ashaCmamCount);
 //            hashMap.put(NotificationConstants.FHW_NOTIFICATION_MIGRATION_IN, miCount);
-//            hashMap.put(NotificationConstants.FHW_NOTIFICATION_MIGRATION_OUT, moCount);
-//            hashMap.put(NotificationConstants.FHW_NOTIFICATION_FAMILY_MIGRATION_IN, familyMigrationInCount);
+            hashMap.put(NotificationConstants.FHW_NOTIFICATION_MIGRATION_OUT, moCount);
+            hashMap.put(NotificationConstants.FHW_NOTIFICATION_FAMILY_MIGRATION_IN, familyMigrationInCount);
             hashMap.put(FormConstants.ASHA_SAM_SCREENING, ashaSamScreeningCount);
             hashMap.put(FormConstants.ASHA_PNC, ashaPNCCount);
             hashMap.put(FormConstants.ASHA_CS, ashaCSCount);
@@ -838,12 +852,10 @@ public class NotificationServiceImpl implements NotificationService {
             hashMap.put(FormConstants.TECHO_AWW_CS, awwCsCount);
             hashMap.put(NotificationConstants.FHW_NOTIFICATION_GERIATRICS_MEDICATION, gmaCount);
             hashMap.put(NotificationConstants.FHW_NOTIFICATION_TRAVELLERS_SCREENING, tsaCount);
-            hashMap.put(NotificationConstants.NOTIFICATION_NCD_CLINIC_VISIT, clinicVisitCount);
-            hashMap.put(NotificationConstants.NOTIFICATION_NCD_HOME_VISIT, homeVisitCount);
 
             return hashMap;
         } catch (SQLException e) {
-            Log.e(getClass().getSimpleName(), null, e);
+            android.util.Log.e(getClass().getSimpleName(), null, e);
         }
         return new HashMap<>();
     }
@@ -978,7 +990,7 @@ public class NotificationServiceImpl implements NotificationService {
 
             return hashMap;
         } catch (SQLException e) {
-            Log.e(TAG, null, e);
+            android.util.Log.e(TAG, null, e);
         }
         return new HashMap<>();
     }
@@ -1038,9 +1050,6 @@ public class NotificationServiceImpl implements NotificationService {
 
                 MemberBean memberBean = memberBeanDao.queryBuilder().selectColumns(FieldNameConstants.IS_PREGNANT_FLAG, FieldNameConstants.FAMILY_ID, FieldNameConstants.STATE, FieldNameConstants.DOB)
                         .where().eq(FieldNameConstants.ACTUAL_ID, bean.getMemberId()).queryForFirst();
-                if (memberBean == null || FhsConstants.FHS_INACTIVE_CRITERIA_MEMBER_STATES.contains(memberBean.getState())) {
-                    continue;
-                }
 
                 FamilyBean familyBean = familyBeanDao.queryBuilder().selectColumns(FieldNameConstants.STATE)
                         .where().eq(FieldNameConstants.FAMILY_ID, memberBean.getFamilyId()).queryForFirst();
@@ -1065,7 +1074,7 @@ public class NotificationServiceImpl implements NotificationService {
 
             return hashMap;
         } catch (SQLException e) {
-            Log.e(TAG, null, e);
+            android.util.Log.e(TAG, null, e);
         }
         return new HashMap<>();
     }
