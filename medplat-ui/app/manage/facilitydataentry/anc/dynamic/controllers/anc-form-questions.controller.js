@@ -389,7 +389,7 @@
         ctrl.dangerSignsChanged = () => {
             Object.assign(ctrl.formData, {
                 ...ctrl.formData,
-                showOtherDangerSign: ctrl.formData.dangerousSignIds.some(dangerSign => dangerSign == -1),
+                showOtherDangerSign: ctrl.formData.dangerousSignIds.some(dangerSign => dangerSign == 770),
                 otherDangerousSign: null
             })
         }

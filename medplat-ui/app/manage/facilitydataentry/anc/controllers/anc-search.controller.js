@@ -3,6 +3,7 @@
         var queform = this;
         queform.selectedTab = 'anc-search-list';
         queform.minLmpSearchDate = moment().subtract('days', 308);
+        queform.maxLmpSearchDate = moment();
         queform.minEddSearchDate = moment().subtract('days', 30);
         queform.selectedLocation = {}
         queform.selectedLocationId = null;
@@ -13,7 +14,7 @@
             { name: SEARCH_TERM.orgUnit, order: 4, config: {requiredUptoLevel: 3, isFetchAoi: false} },
             { name: SEARCH_TERM.villageName, order: 5 },
             { name: SEARCH_TERM.name, order: 6, config: {requiredUptoLevel: 3, isFetchAoi: true } },
-            { name: SEARCH_TERM.lmp, order: 7, config: {minDate: queform.minLmpSearchDate, requiredUptoLevel: 1, isFetchAoi: true } },
+            { name: SEARCH_TERM.lmp, order: 7, config: {minDate: queform.minLmpSearchDate, maxDate: queform.maxLmpSearchDate,requiredUptoLevel: 1, isFetchAoi: true } },
             { name: SEARCH_TERM.edd, order: 8, config: {minDate: queform.minEddSearchDate, requiredUptoLevel: 1, isFetchAoi: true } },
             { name: SEARCH_TERM.abhaNumber, order: 9 },
             { name: SEARCH_TERM.abhaAddress, order: 10 }
