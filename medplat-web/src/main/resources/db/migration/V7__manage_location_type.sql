@@ -3135,7 +3135,7 @@ insert into system_constraint_field_value_master(uuid,field_master_uuid,value_ty
                          values(cast('30ca111f-6bc9-4d6d-ad56-ca422695a7e3' as uuid),cast('94d9a82e-17b0-4cae-b36a-bd8a09af3244' as uuid),'BOOLEAN','isRequired',null,'true',60512,now(),60512,now());
 
 insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
-                         values(cast('4355d798-c71d-4135-897a-fa420317e3e5' as uuid),cast('94d9a82e-17b0-4cae-b36a-bd8a09af3244' as uuid),'VISIBILITY','visibility',null,'null',60512,now(),60512,now());
+                         values(cast('4355d798-c71d-4135-897a-fa420317e3e5' as uuid),cast('94d9a82e-17b0-4cae-b36a-bd8a09af3244' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
 
 insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
                          values(cast('483de8d1-cd37-4188-bbdd-8849e12fb9d0' as uuid),cast('94d9a82e-17b0-4cae-b36a-bd8a09af3244' as uuid),'DISABILITY','disability',null,'null',60512,now(),60512,now());

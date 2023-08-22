@@ -1563,7 +1563,7 @@ INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_mo
 	 (749,true,false,'imtechopm','2020-03-21 19:47:24.962824','1520508527965.mp3','2006',369466,NULL,NULL),
 	 (772,true,false,'superadmin','2020-03-21 19:47:24.962824','Primary Healthcare Center','2017',14,NULL,NULL),
 	 (640,true,false,'mvithlani','2020-03-21 19:47:24.962824','OTHERS','1000',5,'null',NULL),
-	 (771,false,false,'superadmin','2020-03-21 19:47:24.962824','None','2016',8,NULL,NULL),
+	 (771,true,false,'superadmin','2020-03-21 19:47:24.962824','None','2016',8,NULL,NULL),
 	 (774,true,false,'superadmin','2020-03-21 19:47:24.962824','General Hospital','2017',14,NULL,NULL),
 	 (775,true,false,'superadmin','2020-03-21 19:47:24.962824','Urban health center','2017',20,NULL,NULL),
 	 (623,true,false,'mvithlani','2020-03-21 19:47:24.962824','CHRISTIAN','1000',9,'null',NULL);
@@ -1574,7 +1574,7 @@ INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_mo
 	 (739,true,false,'superadmin','2020-03-21 19:47:24.962824','1518430598136.wma','2001',453979,NULL,NULL),
 	 (904,false,false,'istiyak_trainer','2020-03-21 19:47:24.962824','Home','2032',0,'null',NULL),
 	 (822,true,false,'superadmin','2020-03-21 19:47:24.962824','Infection of the Uterine Stump','2025',21,NULL,NULL),
-	 (770,false,false,'superadmin','2020-03-21 19:47:24.962824','Other risky signs','2016',17,NULL,NULL),
+	 (770,true,false,'superadmin','2020-03-21 19:47:24.962824','Other','2016',17,NULL,NULL),
 	 (621,true,false,'queryloader','2020-03-21 19:47:24.962824','HINDU','1000',5,NULL,NULL),
 	 (622,true,false,'queryloader','2020-03-21 19:47:24.962824','MUSLIM','1000',6,NULL,NULL),
 	 (625,true,false,'queryloader','2020-03-21 19:47:24.962824','ST','1001',2,NULL,NULL);
@@ -1775,7 +1775,7 @@ INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_mo
 	 (746,true,false,'imtechopm','2020-03-21 19:47:24.962824','1520508438143.mp3','2013',137197,NULL,NULL),
 	 (887,true,false,'superadmin','2020-03-21 19:47:24.962824','Tetanus others','2028',14,NULL,NULL),
 	 (888,true,false,'superadmin','2020-03-21 19:47:24.962824','Malaria','2028',7,NULL,NULL),
-	 (846,false,false,'superadmin','2020-03-21 19:47:24.962824','Other ','2024',5,NULL,NULL);
+	 (846,false,false,'superadmin','2020-03-21 19:47:24.962824','Other','2024',5,NULL,NULL);
 INSERT INTO public.listvalue_field_value_detail (id,is_active,is_archive,last_modified_by,last_modified_on,value,field_key,file_size,multimedia_type,code) VALUES
 	 (886,false,false,'superadmin','2020-03-21 19:47:24.962824','Others','2028',6,NULL,NULL),
 	 (866,true,false,'superadmin','2020-03-21 19:47:24.962824','ANTRA','2027',6,NULL,NULL),
