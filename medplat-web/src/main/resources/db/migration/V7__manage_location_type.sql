@@ -9717,7 +9717,7 @@ insert into system_constraint_field_value_master(uuid,field_master_uuid,value_ty
                          values(cast('df23384c-baff-4cc0-ac6e-93e0eea57b41' as uuid),cast('59cd3a23-9a53-41d5-a588-615d3e7060c1' as uuid),'DISABILITY','disability',null,'{}',60512,now(),60512,now());
 
 insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
-                         values(cast('80e9cdd4-c9a4-49fd-99b2-a74c8717a404' as uuid),cast('4031a326-646c-47e6-b016-872de0db7027' as uuid),'VISIBILITY','visibility',null,'{"conditions":{"rule":"AND","options":[{"type":"FIELD","operator":"EQWithType","value1":"true","value2":null,"fieldName":"formData.isAlive","queryCode":null,"expression":null}]}}',60512,now(),60512,now());
+                         values(cast('80e9cdd4-c9a4-49fd-99b2-a74c8717a404' as uuid),cast('4031a326-646c-47e6-b016-872de0db7027' as uuid),'VISIBILITY','visibility',null,'null',60512,now(),60512,now());
 
 insert into system_constraint_field_value_master(uuid,field_master_uuid,value_type,key,value,default_value,created_by,created_on,modified_by,modified_on)
                          values(cast('8c3c013f-1440-4f8e-8cfd-3f59bdce593d' as uuid),cast('4031a326-646c-47e6-b016-872de0db7027' as uuid),'TEXT','tooltip',null,'Place of Visit',60512,now(),60512,now());
