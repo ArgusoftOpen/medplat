@@ -62,11 +62,15 @@
                 });
             }
             
-            AuthenticateService.logOut().then(function (data) {
-                Mask.hide();
-                toaster.clear("*");
-                $state.go("login");
-            });
+            if (data_to_be_stored.pageTitle !== 'techo.manage.utdashboard' || data_to_be_stored.userId!=-1){
+                AuthenticateService.logOut().then(function (data) {
+                    Mask.hide();
+                    toaster.clear("*");
+                    $state.go("login");
+                });}
+                else {
+                    Mask.hide();
+                }
         };
 
         window.addEventListener('focus', function () {
@@ -156,11 +160,13 @@
 
         $rootScope.$on('$stateChangeSuccess', async function (event, to, from, fromParams) {
             current_page_Id = UUIDgenerator.generateUUID();
-            if (!$rootScope.loggedInUserId) {
-                await AuthenticateService.getLoggedInUser().then(user => {
-                    userIdFromCache = user.data.id;
+            if(to.name !== 'resetpassword' && to.name !== 'logindownload' && to.name !== 'info') {
+                if (!$rootScope.loggedInUserId) {
+                    await AuthenticateService.getLoggedInUser().then(user => {
+                        userIdFromCache = user.data.id;
+                    }
+                    )
                 }
-                )
             }
             function insertToDb(prevId, currId, nextId, stateTime) {
                 data_to_be_stored = {

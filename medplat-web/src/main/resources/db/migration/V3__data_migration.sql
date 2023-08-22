@@ -201,3 +201,460 @@ INSERT INTO public.system_configuration (system_key,is_active,key_value) VALUES
 DELETE FROM field_constant_master WHERE field_name = 'COURSE_MODULE_NAME' ;
 INSERT INTO field_constant_master (field_name, created_on, created_by)
 VALUES ('COURSE_MODULE_NAME', now(), '-1') ;
+
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(45, 1.70, 1.90, 2.00, 2.20, 2.40, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(46, 1.80, 2.00, 2.20, 2.40, 2.60, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(47, 2.00, 2.10, 2.30, 2.50, 2.80, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(48, 2.10, 2.30, 2.50, 2.70, 2.90, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(49, 2.20, 2.40, 2.60, 2.90, 3.10, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(50, 2.40, 2.60, 2.80, 3.00, 3.30, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(51, 2.50, 2.70, 3.00, 3.20, 3.50, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(52, 2.70, 2.90, 3.20, 3.50, 3.80, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(53, 2.90, 3.10, 3.40, 3.70, 4.00, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(54, 3.10, 3.30, 3.60, 3.90, 4.30, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(55, 3.30, 3.60, 3.80, 4.20, 4.50, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(56, 3.50, 3.80, 4.10, 4.40, 4.80, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(57, 3.70, 4.00, 4.30, 4.70, 5.10, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(58, 3.90, 4.30, 4.60, 5.00, 5.40, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(59, 4.10, 4.50, 4.80, 5.30, 5.70, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(60, 4.30, 4.70, 5.10, 5.50, 6.00, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(61, 4.50, 4.90, 5.30, 5.80, 6.30, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(62, 4.70, 5.10, 5.60, 6.00, 6.50, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(63, 4.90, 5.30, 5.80, 6.20, 6.80, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(64, 5.10, 5.50, 6.00, 6.50, 7.00, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(65, 5.30, 5.70, 6.20, 6.70, 7.30, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(66, 5.50, 5.90, 6.40, 6.90, 7.50, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(67, 5.60, 6.10, 6.60, 7.10, 7.70, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(68, 5.80, 6.30, 6.80, 7.30, 8.00, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(69, 6.00, 6.50, 7.00, 7.60, 8.20, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(70, 6.10, 6.60, 7.20, 7.80, 8.40, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(71, 6.30, 6.80, 7.40, 8.00, 8.60, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(72, 6.40, 7.00, 7.60, 8.20, 8.90, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(73, 6.60, 7.20, 7.70, 8.40, 9.10, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(74, 6.70, 7.30, 7.90, 8.60, 9.30, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(75, 6.90, 7.50, 8.10, 8.80, 9.50, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(76, 7.00, 7.60, 8.30, 8.90, 9.70, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(77, 7.20, 7.80, 8.40, 9.10, 9.90, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(78, 7.30, 7.90, 8.60, 9.30, 10.10, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(79, 7.40, 8.10, 8.70, 9.50, 10.30, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(80, 7.60, 8.20, 8.90, 9.60, 10.40, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(81, 7.70, 8.40, 9.10, 9.80, 10.60, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(82, 7.90, 8.50, 9.20, 10.00, 10.80, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(83, 8.00, 8.70, 9.40, 10.20, 11.00, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(84, 8.20, 8.90, 9.60, 10.40, 11.30, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(85, 8.40, 9.10, 9.80, 10.60, 11.50, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(86, 8.60, 9.30, 10.00, 10.80, 11.70, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(87, 8.90, 9.60, 10.40, 11.20, 12.20, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(88, 9.10, 9.80, 10.60, 11.50, 12.40, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(89, 9.30, 10.00, 10.80, 11.70, 12.60, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(90, 9.40, 10.20, 11.00, 11.90, 12.90, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(91, 9.60, 10.40, 11.20, 12.10, 13.10, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(92, 9.80, 10.60, 11.40, 12.30, 13.40, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(93, 9.90, 10.80, 11.60, 12.60, 13.60, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(94, 10.10, 11.00, 11.80, 12.80, 13.80, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(95, 10.30, 11.10, 12.00, 13.00, 14.10, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(96, 10.40, 11.30, 12.20, 13.20, 14.30, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(97, 10.60, 11.50, 12.40, 13.40, 14.60, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(98, 10.80, 11.70, 12.60, 13.70, 14.80, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(99, 11.00, 11.90, 12.90, 13.90, 15.10, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(100, 11.20, 12.10, 13.10, 14.20, 15.40, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(101, 11.30, 12.30, 13.30, 14.40, 15.60, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(102, 11.50, 12.50, 13.60, 14.70, 15.90, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(103, 11.70, 12.80, 13.80, 14.90, 16.20, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(104, 11.90, 13.00, 14.00, 15.20, 16.50, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(105, 12.10, 13.20, 14.30, 15.50, 16.80, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(106, 12.30, 13.40, 14.50, 15.80, 17.20, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(107, 12.50, 13.70, 14.80, 16.10, 17.50, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(108, 12.70, 13.90, 15.10, 16.40, 17.80, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(109, 12.90, 14.10, 15.30, 16.70, 18.20, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(110, 13.20, 14.40, 15.60, 17.00, 18.50, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(111, 13.40, 14.60, 15.90, 17.30, 18.90, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(112, 13.60, 14.90, 16.20, 17.60, 19.20, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(113, 13.80, 15.20, 16.50, 18.00, 19.60, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(114, 14.10, 15.40, 16.80, 18.30, 20.00, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(115, 14.30, 15.70, 17.10, 18.60, 20.40, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(116, 14.60, 16.00, 17.40, 19.00, 20.80, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(117, 14.80, 16.20, 17.70, 19.30, 21.20, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(118, 15.00, 16.50, 18.00, 19.70, 21.60, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(119, 15.30, 16.80, 18.30, 20.00, 22.00, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(120, 15.50, 17.10, 18.60, 20.40, 22.40, 'M');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(45, 1.70, 1.90, 2.10, 2.30, 2.50, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(46, 1.90, 2.00, 2.20, 2.40, 2.60, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(47, 2.00, 2.20, 2.40, 2.60, 2.80, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(48, 2.10, 2.30, 2.50, 2.70, 3.00, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(49, 2.20, 2.40, 2.60, 2.90, 3.20, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(50, 2.40, 2.60, 2.80, 3.10, 3.40, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(51, 2.50, 2.80, 3.00, 3.30, 3.60, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(52, 2.70, 2.90, 3.20, 3.50, 3.80, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(53, 2.80, 3.10, 3.40, 3.70, 4.00, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(54, 3.00, 3.30, 3.60, 3.90, 4.30, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(55, 3.20, 3.50, 3.80, 4.20, 4.50, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(56, 3.40, 3.70, 4.00, 4.40, 4.80, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(57, 3.60, 3.90, 4.30, 4.60, 5.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(58, 3.80, 4.10, 4.50, 4.90, 5.40, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(59, 3.90, 4.30, 4.70, 5.10, 5.60, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(60, 4.10, 4.50, 4.90, 5.40, 5.90, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(61, 4.30, 4.70, 5.10, 5.60, 6.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(62, 4.50, 4.90, 5.30, 5.80, 6.40, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(63, 4.70, 5.10, 5.50, 6.00, 6.60, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(64, 4.80, 5.30, 5.70, 6.30, 6.90, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(65, 5.00, 5.50, 5.90, 6.50, 7.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(66, 5.10, 5.60, 6.10, 6.70, 7.30, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(67, 5.30, 5.80, 6.30, 6.90, 7.50, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(68, 5.50, 6.00, 6.50, 7.10, 7.70, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(69, 5.60, 6.10, 6.70, 7.30, 8.00, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(70, 5.80, 6.30, 6.90, 7.50, 8.20, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(71, 5.90, 6.50, 7.00, 7.70, 8.40, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(72, 6.00, 6.60, 7.20, 7.80, 8.60, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(73, 6.20, 6.80, 7.40, 8.00, 8.80, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(74, 6.30, 6.90, 7.50, 8.20, 9.00, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(75, 6.50, 7.10, 7.70, 8.40, 9.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(76, 6.60, 7.20, 7.80, 8.50, 9.30, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(77, 6.70, 7.40, 8.00, 8.70, 9.50, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(78, 6.90, 7.50, 8.20, 8.90, 9.70, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(79, 7.00, 7.70, 8.30, 9.10, 9.90, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(80, 7.10, 7.80, 8.50, 9.20, 10.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(81, 7.30, 8.00, 8.70, 9.40, 10.30, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(82, 7.50, 8.10, 8.80, 9.60, 10.50, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(83, 7.60, 8.30, 9.00, 9.80, 10.70, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(84, 7.80, 8.50, 9.20, 10.10, 11.00, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(85, 8.00, 8.70, 9.40, 10.30, 11.20, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(86, 8.10, 8.90, 9.70, 10.50, 11.50, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(87, 8.40, 9.20, 10.00, 10.90, 11.90, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(88, 8.60, 9.40, 10.20, 11.10, 12.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(89, 8.80, 9.60, 10.40, 11.40, 12.40, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(90, 9.00, 9.80, 10.60, 11.60, 12.60, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(91, 9.10, 10.00, 10.90, 11.80, 12.90, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(92, 9.30, 10.20, 11.10, 12.00, 13.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(93, 9.50, 10.40, 11.30, 12.30, 13.40, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(94, 9.70, 10.60, 11.50, 12.50, 13.60, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(95, 9.80, 10.80, 11.70, 12.70, 13.90, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(96, 10.00, 10.90, 11.90, 12.90, 14.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(97, 10.20, 11.10, 12.10, 13.20, 14.40, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(98, 10.40, 11.30, 12.30, 13.40, 14.70, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(99, 10.50, 11.50, 12.50, 13.70, 14.90, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(100, 10.70, 11.70, 12.80, 13.90, 15.20, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(101, 10.90, 12.00, 13.00, 14.20, 15.50, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(102, 11.10, 12.20, 13.30, 14.50, 15.80, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(103, 11.30, 12.40, 13.50, 14.70, 16.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(104, 11.50, 12.60, 13.80, 15.00, 16.40, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(105, 11.80, 12.90, 14.00, 15.30, 16.80, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(106, 12.00, 13.10, 14.30, 15.60, 17.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(107, 12.20, 13.40, 14.60, 15.90, 17.50, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(108, 12.40, 13.70, 14.90, 16.30, 17.80, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(109, 12.70, 13.90, 15.20, 16.60, 18.20, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(110, 12.90, 14.20, 15.50, 17.00, 18.60, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(111, 13.20, 14.50, 15.80, 17.30, 19.00, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(112, 13.50, 14.80, 16.20, 17.70, 19.40, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(113, 13.70, 15.10, 16.50, 18.00, 19.80, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(114, 14.00, 15.40, 16.80, 18.40, 20.20, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(115, 14.30, 15.70, 17.20, 18.80, 20.70, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(116, 14.50, 16.00, 17.50, 19.20, 21.10, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(117, 14.80, 16.30, 17.80, 19.60, 21.50, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(118, 15.10, 16.60, 18.20, 19.90, 22.00, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(119, 15.40, 16.90, 18.50, 20.30, 22.40, 'F');
+INSERT INTO public.sd_score_master
+(height, minus4, minus3, minus2, minus1, median, gender)
+VALUES(120, 15.60, 17.30, 18.90, 20.70, 22.80, 'F');
