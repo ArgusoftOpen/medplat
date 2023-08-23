@@ -661,17 +661,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changePasswordOldtoNew(String oldPassword, String newPassword) {
         Integer userId = imtechoSecurityUser.getId();
-        UserMasterDto userDto = this.retrieveById(userId);
-        String oldPasswordFromDatabase = userDto.getPassword();
+        UserMaster userMaster = userDao.retrieveById(userId);
+        String oldPasswordFromDatabase = userMaster.getPassword();
 
         if (basicPasswordEncryptor.checkPassword(oldPassword, oldPasswordFromDatabase)) {
             if (newPassword.equals(oldPassword)) {
                 throw new ImtechoUserException("New password should not be same as old password", 0);
             }
             validatePassword(newPassword);
-            userDto.setPassword(basicPasswordEncryptor.encryptPassword(newPassword));
-            UserMaster userMaster = UserMapper.convertUserDtoToMaster(userDto);
-            userDao.merge(userMaster);
+            userMaster.setPassword(basicPasswordEncryptor.encryptPassword(newPassword));
+            userMaster.setFirstTimePasswordChanged(true);
+            userDao.update(userMaster);
         } else {
             throw new ImtechoUserException("Please enter valid old password", 0);
         }
