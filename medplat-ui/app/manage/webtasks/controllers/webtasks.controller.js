@@ -207,9 +207,6 @@
         }
 
         webtasks.init = function () {
-            if (webtasks.env === 'uttarakhand') {
-                $state.go('techo.admin.analyticsdashboard')
-            }
             webtasks.getLoggedInUser();
         }
 
