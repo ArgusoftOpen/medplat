@@ -405,9 +405,6 @@ public class HomeScreenMenuActivity extends AppCompatActivity {
             });
 
             try {
-                if (BuildConfig.FLAVOR.equals(GlobalTypes.UTTARAKHAND_FLAVOR)) {
-                    SharedStructureData.sewaService.addFireBaseToken();
-                }
                 SharedStructureData.sewaService.revalidateUserTokenForUser();
                 SharedStructureData.sewaService.doAfterSuccessfulLogin(false);
             } catch (Exception e) {

@@ -57,21 +57,6 @@
 
         <service android:name=".service.GPSTracker" />
 
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_baseline_notifications_24" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorPrimary" />
-
-        <service
-            android:name=".fcm.MyFirebaseMessagingService_"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
         <provider
             android:name=".util.GenericFileProvider"
             android:authorities="${applicationId}.provider"
@@ -82,9 +67,9 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+<!--        <meta-data-->
+<!--            android:name="com.google.android.gms.version"-->
+<!--            android:value="@integer/google_play_services_version" />-->
 
 <!--        <meta-data-->
 <!--            android:name="com.google.android.geo.API_KEY"-->
@@ -281,9 +266,6 @@
             android:name=".activity.PregnancyStatusActivity_"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.HomeScreenActivityRBSK_"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.HeadToToeScreeningActivity_"
             android:screenOrientation="portrait" />
         <activity
@@ -375,9 +357,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.QRCodeActivity_"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".activity.MapsMarkerActivity_"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.FingerPrintScannerActivity_"
             android:screenOrientation="portrait" />
