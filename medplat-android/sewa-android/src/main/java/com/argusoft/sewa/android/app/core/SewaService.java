@@ -89,5 +89,5 @@ public interface SewaService {
 
     LoginBean getCurrentLoggedInUser();
 
-    void addFireBaseToken();
+    //void addFireBaseToken();
 }

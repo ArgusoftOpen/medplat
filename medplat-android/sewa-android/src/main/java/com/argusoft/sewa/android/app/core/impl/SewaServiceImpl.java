@@ -65,9 +65,6 @@ import com.argusoft.sewa.android.app.util.SewaConstants;
 import com.argusoft.sewa.android.app.util.SewaUtil;
 import com.argusoft.sewa.android.app.util.UtilBean;
 import com.argusoft.sewa.android.app.util.WSConstants;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
@@ -234,13 +231,7 @@ public class SewaServiceImpl implements SewaService {
         if (isOnline()) {
             try {
                 //  Network Available
-                if (BuildConfig.FLAVOR.equals(GlobalTypes.UTTARAKHAND_FLAVOR)) {
-                    Task<String> task = FirebaseMessaging.getInstance().getToken();
-                    String token = Tasks.await(task);
-                    userInfoDataBean = sewaServiceRestClient.getUser(username, password, token, Boolean.TRUE);
-                } else {
-                    userInfoDataBean = sewaServiceRestClient.getUser(username, password, null, Boolean.TRUE);
-                }
+                userInfoDataBean = sewaServiceRestClient.getUser(username, password, null, Boolean.TRUE);
             } catch (Exception ex) {
                 SharedStructureData.NETWORK_MESSAGE = SewaConstants.EXCEPTION_USER_DOWNLOAD;
             }
@@ -1127,18 +1118,18 @@ public class SewaServiceImpl implements SewaService {
         }
     }
 
-    @Override
-    public void addFireBaseToken() {
-        try {
-            MobileRequestParamDto mobileRequestParamDto = new MobileRequestParamDto();
-            mobileRequestParamDto.setToken(SewaTransformer.loginBean.getUserToken());
-            mobileRequestParamDto.setUserId(SewaTransformer.loginBean.getUserID());
-            Task<String> task = FirebaseMessaging.getInstance().getToken();
-            String token = Tasks.await(task);
-            mobileRequestParamDto.setFirebaseToken(token);
-            sewaServiceRestClient.addFireBaseToken(mobileRequestParamDto);
-        } catch (Exception e) {
-            Log.e(getClass().getSimpleName(), null, e);
-        }
-    }
+//    @Override
+//    public void addFireBaseToken() {
+//        try {
+//            MobileRequestParamDto mobileRequestParamDto = new MobileRequestParamDto();
+//            mobileRequestParamDto.setToken(SewaTransformer.loginBean.getUserToken());
+//            mobileRequestParamDto.setUserId(SewaTransformer.loginBean.getUserID());
+//            Task<String> task = FirebaseMessaging.getInstance().getToken();
+//            String token = Tasks.await(task);
+//            mobileRequestParamDto.setFirebaseToken(token);
+//            sewaServiceRestClient.addFireBaseToken(mobileRequestParamDto);
+//        } catch (Exception e) {
+//            Log.e(getClass().getSimpleName(), null, e);
+//        }
+//    }
 }
