@@ -138,10 +138,7 @@ public class TechoPushNotificationHandlerImpl extends Thread implements TechoPus
     @Async("smsTaskExecutor")
     private void handleQueue(TechoPushNotificationDto techoPushNotificationDto) {
         try {
-            String response = firebaseMessagingService.sendNotification(techoPushNotificationDto.getType(), techoPushNotificationDto.getHeading(),
-                    techoPushNotificationDto.getMessage(),
-                    null, techoPushNotificationDto.getToken(), techoPushNotificationDto.getMediaId(), techoPushNotificationDto.getEventId(), techoPushNotificationDto.getMessageEvent(),
-                    techoPushNotificationDto.getHeadingEvent());
+            String response = "";
             techoPushNotificationDao.markAsSentAndSetResponse(techoPushNotificationDto.getId()
                     , response, null, true);
         } catch (Exception e) {
