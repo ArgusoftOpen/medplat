@@ -5,7 +5,6 @@ import com.argusoft.medplat.event.util.EventFunctionUtil;
 import com.argusoft.medplat.exception.ImtechoSystemException;
 import com.argusoft.medplat.fcm.dao.*;
 import com.argusoft.medplat.fcm.model.*;
-import com.argusoft.medplat.fcm.service.FirebaseMessagingService;
 import com.argusoft.medplat.fcm.service.TechoPushNotificationService;
 import com.argusoft.medplat.query.dto.QueryDto;
 import com.argusoft.medplat.query.dto.QueryMasterDto;
@@ -24,6 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.argusoft.medplat.fcm.service.MedplatMessagingService;
 
 /**
  * @author nihar
@@ -58,7 +58,7 @@ public class TechoPushNotificationServiceImpl implements TechoPushNotificationSe
     private QueryMasterService queryMasterService;
 
     @Autowired
-    private FirebaseMessagingService firebaseMessagingService;
+    private MedplatMessagingService firebaseMessagingService;
 
     @Autowired
     private FirebaseTokenDao FirebaseTokenDao;

@@ -3,7 +3,6 @@ package com.argusoft.medplat.fcm.service.impl;
 import com.argusoft.medplat.fcm.dao.TechoPushNotificationDao;
 import com.argusoft.medplat.fcm.dao.TechoPushNotificationTypeDao;
 import com.argusoft.medplat.fcm.dto.TechoPushNotificationDto;
-import com.argusoft.medplat.fcm.service.FirebaseMessagingService;
 import com.argusoft.medplat.fcm.service.TechoPushNotificationHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +15,7 @@ import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import com.argusoft.medplat.fcm.service.MedplatMessagingService;
 
 /**
  * @author nihar
@@ -37,7 +37,7 @@ public class TechoPushNotificationHandlerImpl extends Thread implements TechoPus
     private TechoPushNotificationTypeDao techoPushNotificationTypeDao;
 
     @Autowired
-    private FirebaseMessagingService firebaseMessagingService;
+    private MedplatMessagingService messagingService;
 
     @Autowired
     @Qualifier("smsTaskExecutor")

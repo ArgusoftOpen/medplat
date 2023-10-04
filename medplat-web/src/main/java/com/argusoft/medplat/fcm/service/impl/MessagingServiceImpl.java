@@ -1,25 +1,17 @@
 package com.argusoft.medplat.fcm.service.impl;
 
 import com.argusoft.medplat.common.dao.SystemConfigurationDao;
-import com.argusoft.medplat.common.model.SystemConfiguration;
 import com.argusoft.medplat.event.dao.EventConfigurationTypeDao;
-import com.argusoft.medplat.fcm.service.FirebaseMessagingService;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingException;
-import com.google.firebase.messaging.Message;
-import com.google.firebase.messaging.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
+import com.argusoft.medplat.fcm.service.MedplatMessagingService;
+import javax.naming.OperationNotSupportedException;
 
 @Service
 @Transactional
-public class FirebaseMessagingServiceImpl implements FirebaseMessagingService {
-
-    @Autowired(required = false)
-    FirebaseMessaging firebaseMessaging;
+public class MessagingServiceImpl implements MedplatMessagingService {
 
     @Autowired
     private SystemConfigurationDao systemConfigurationDao;
@@ -27,8 +19,8 @@ public class FirebaseMessagingServiceImpl implements FirebaseMessagingService {
     @Autowired
     private EventConfigurationTypeDao eventConfigurationTypeDao;
 
-//    @Override
-//    public String sendNotification(String type, String title, String message, String body, String token, Integer image, String eventId, String messageEvent, String headingEvent) throws FirebaseMessagingException {
+    @Override
+    public String sendNotification(String type, String title, String message, String body, String token, Integer image, String eventId, String messageEvent, String headingEvent) throws OperationNotSupportedException {
 //        Notification notification = null;
 //        HashMap<String, String> data = new HashMap<>();
 //        //check if it is through event config
@@ -64,6 +56,7 @@ public class FirebaseMessagingServiceImpl implements FirebaseMessagingService {
 //                .build();
 //
 //        return firebaseMessaging.send(mess);
-//    }
+        throw new OperationNotSupportedException();
+    }
 
 }
