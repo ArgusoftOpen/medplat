@@ -4,10 +4,6 @@ package com.argusoft.medplat.config;
 import com.argusoft.medplat.common.util.ConstantUtil;
 import com.argusoft.medplat.config.jackson.CustomSQLDateTimeSerializer;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.messaging.FirebaseMessaging;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.AbstractHttp11Protocol;
@@ -26,7 +22,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.annotation.Order;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -37,8 +32,6 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.io.InputStream;
 
 @SpringBootApplication
 @EnableTransactionManagement
@@ -174,20 +167,20 @@ public class Application extends SpringBootServletInitializer {
         return new JdbcTokenStore(dataSource);
     }
 
-    @Bean
-    FirebaseMessaging firebaseMessaging() throws IOException {
-        InputStream inputStream;
-        if (ConstantUtil.IMPLEMENTATION_TYPE.equals(ConstantUtil.UTTARAKHAND_IMPLEMENTATION)) {
-            inputStream = new ClassPathResource("uttarakhand-firebase-service-account.json").getInputStream();
-            GoogleCredentials googleCredentials = GoogleCredentials
-                    .fromStream(inputStream);
-            FirebaseOptions firebaseOptions = FirebaseOptions
-                    .builder()
-                    .setCredentials(googleCredentials)
-                    .build();
-            FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions, "my-app");
-            return FirebaseMessaging.getInstance(app);
-        }
-        return null;
-    }
+//    @Bean
+//    FirebaseMessaging firebaseMessaging() throws IOException {
+//        InputStream inputStream;
+//        if (ConstantUtil.IMPLEMENTATION_TYPE.equals(ConstantUtil.UTTARAKHAND_IMPLEMENTATION)) {
+//            inputStream = new ClassPathResource("uttarakhand-firebase-service-account.json").getInputStream();
+//            GoogleCredentials googleCredentials = GoogleCredentials
+//                    .fromStream(inputStream);
+//            FirebaseOptions firebaseOptions = FirebaseOptions
+//                    .builder()
+//                    .setCredentials(googleCredentials)
+//                    .build();
+//            FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions, "my-app");
+//            return FirebaseMessaging.getInstance(app);
+//        }
+//        return null;
+//    }
 }

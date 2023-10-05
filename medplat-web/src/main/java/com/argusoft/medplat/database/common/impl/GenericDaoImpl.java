@@ -19,7 +19,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Nullable;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.*;
@@ -297,7 +296,7 @@ public abstract class GenericDaoImpl<EntityType, IDType extends Serializable>
      * @return list of entity object
      */
     @Override
-    public List<EntityType> findByCriteriaList(PredicateBuilder<EntityType> predicateBuilder, @Nullable Pageable pageable) {
+    public List<EntityType> findByCriteriaList(PredicateBuilder<EntityType> predicateBuilder, Pageable pageable) {
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<EntityType> criteriaQuery = criteriaBuilder.createQuery(persistentClass);

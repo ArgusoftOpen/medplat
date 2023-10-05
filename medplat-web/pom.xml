@@ -171,11 +171,6 @@
             <artifactId>poi-ooxml</artifactId>
             <version>3.9</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.firebase</groupId>
-            <artifactId>firebase-admin</artifactId>
-            <version>6.10.0</version>
-        </dependency>
         <!-- Required to Downgrade version to support Digital sign  -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
