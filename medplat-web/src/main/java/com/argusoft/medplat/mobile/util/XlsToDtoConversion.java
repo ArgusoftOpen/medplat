@@ -54,6 +54,9 @@ public class XlsToDtoConversion {
         xStream.useAttributeFor("helpVideoField", String.class);
         xStream.useAttributeFor("listValueFieldValue", String.class);
 
+        xStream.allowTypes(new Class[]{SewaTagDto.class, FormTagDto.class, ComponentTagDto.class,
+                OptionTagDto.class, ValidationTagDto.class, FormulaTagDto.class});
+
         SewaTagDto element = null;
         try {
             xStream.setClassLoader(SewaTagDto.class.getClassLoader());
