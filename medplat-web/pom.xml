@@ -94,7 +94,7 @@
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
-            <version>1.4.1</version>
+            <version>1.9.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -163,13 +163,13 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.8</version>
+            <version>4.1.1</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.9</version>
+            <version>4.1.1</version>
         </dependency>
         <!-- Required to Downgrade version to support Digital sign  -->
         <dependency>
@@ -200,12 +200,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.6</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jcraft</groupId>
-            <artifactId>jsch</artifactId>
-            <version>0.1.53</version>
+            <version>2.7</version>
         </dependency>
         <!-- Runtime -->
         <dependency>

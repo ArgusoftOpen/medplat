@@ -258,7 +258,7 @@ public class TimerEventHandlerServiceImpl implements TimerEventHadlerService {
                 }
 
             }
-            this.markAsExcetion(timerEventDto.getId(), org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
+            this.markAsExcetion(timerEventDto.getId(), org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(e));
             e.printStackTrace();
         }
     }

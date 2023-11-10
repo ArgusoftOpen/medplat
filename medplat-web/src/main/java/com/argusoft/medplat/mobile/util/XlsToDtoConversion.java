@@ -7,6 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -21,7 +22,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_BLANK;
 
 /**
  * @author vaishali
@@ -250,7 +250,7 @@ public class XlsToDtoConversion {
     private boolean checkRow(HSSFRow row) {
         for (int cellNo = 0; cellNo < row.getLastCellNum(); cellNo++) {
             HSSFCell cell = row.getCell(cellNo);
-            if (cell != null && cell.getCellType() != CELL_TYPE_BLANK) {
+            if (cell != null && cell.getCellType() != CellType.BLANK) {
                 return true;
             }
         }
@@ -260,7 +260,7 @@ public class XlsToDtoConversion {
     private String createFormulasTag(int rowNo, int cellNo, HSSFRow row, HSSFSheet spreadSheet) {
         StringBuilder formulasTag = new StringBuilder("\n");
         HSSFCell cell = row.getCell(cellNo);
-        if (cell != null && cell.getCellType() != CELL_TYPE_BLANK) {
+        if (cell != null && cell.getCellType() != CellType.BLANK) {
             String cellContent = row.getCell(cellNo).getStringCellValue();
             String separator = ",";
             String[] contents = checkSeparator(cellContent, separator);
@@ -284,7 +284,7 @@ public class XlsToDtoConversion {
     private String createValidationsTag(int cellNo, HSSFRow row) {
         StringBuilder validationsTag = new StringBuilder("\n");
         HSSFCell cell = row.getCell(cellNo);
-        if (cell != null && cell.getCellType() != CELL_TYPE_BLANK) {
+        if (cell != null && cell.getCellType() != CellType.BLANK) {
             String cellContent = row.getCell(cellNo).getStringCellValue();
             String separator = ",";
             String[] contents = checkSeparator(cellContent, separator);

@@ -41,6 +41,7 @@ import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.styledxmlparser.node.IElementNode;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -4105,9 +4106,9 @@ public class RchRegisterServiceImpl implements RchRegisterService {
         XSSFSheet sheet = workbook.createSheet("Sheet1");
 
         CellStyle style = workbook.createCellStyle();
-        style.setAlignment(CellStyle.ALIGN_CENTER);
+        style.setAlignment(HorizontalAlignment.CENTER);
         org.apache.poi.ss.usermodel.Font font = workbook.createFont();
-        font.setBoldweight(org.apache.poi.ss.usermodel.Font.BOLDWEIGHT_BOLD);
+        font.setBold(true);
         style.setFont(font);
 
         metadata.index = 1;
