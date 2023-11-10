@@ -949,7 +949,7 @@ public class CFHCServiceImpl implements CFHCService {
                 if (memberCount != null) {
                     if (memberKeyAndAnswerMap.get("95" + "." + memberCount).equals("1")) {
                         Map<String, String> aadharValuesMap = new HashMap<>();
-                        String keyValueString = org.apache.commons.lang.StringUtils.substringBetween(answer, "{", "}");
+                        String keyValueString = org.apache.commons.lang3.StringUtils.substringBetween(answer, "{", "}");
                         String[] keyValueSplit = keyValueString.split(",");
                         for (String keyValuePair : keyValueSplit) {
                             String[] split = keyValuePair.split(":");
@@ -964,7 +964,7 @@ public class CFHCServiceImpl implements CFHCService {
                     }
                 } else if (memberKeyAndAnswerMap.get("95").equals("1")) {
                     Map<String, String> aadharValuesMap = new HashMap<>();
-                    String keyValueString = org.apache.commons.lang.StringUtils.substringBetween(answer, "{", "}");
+                    String keyValueString = org.apache.commons.lang3.StringUtils.substringBetween(answer, "{", "}");
                     String[] keyValueSplit = keyValueString.split(",");
                     for (String keyValuePair : keyValueSplit) {
                         String[] split = keyValuePair.split(":");

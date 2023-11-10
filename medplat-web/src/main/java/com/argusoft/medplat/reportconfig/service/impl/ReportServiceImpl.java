@@ -1566,7 +1566,7 @@ public class ReportServiceImpl implements ReportService {
 
         CellStyle style = workbook.createCellStyle();
         Font font = workbook.createFont();
-        font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        font.setBold(true);
         style.setFont(font);
 
         int rownum = 0;

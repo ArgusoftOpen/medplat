@@ -17,7 +17,7 @@ import com.argusoft.medplat.fhs.dto.PregnancyRegistrationDetailDto;
 import com.argusoft.medplat.fhs.model.FamilyEntity;
 import com.argusoft.medplat.fhs.model.MemberEntity;
 import io.swagger.models.auth.In;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.transform.Transformers;
