@@ -42,7 +42,7 @@ async function afterEach() {
         this.silents = [40];
     }
 
-    _.remove(browserLogs, (browserLog) => {
+    _.remove(browserLogs, browserLog => {
         let match = false;
         this.silents.forEach((code) => {
             if (browserLog.message && browserLog.message.indexOf(`the server responded with a status of ${code}`) > -1) {
