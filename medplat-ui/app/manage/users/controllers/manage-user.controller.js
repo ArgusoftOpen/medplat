@@ -186,8 +186,6 @@
         // method for updating
 
         usercontroller.updateUser = function (form) {
-            console.log(usercontroller.userForm);
-            console.log(usercontroller.userObj);
             usercontroller.userFormSubmitted = true;
             usercontroller.userObj.deletedLocations = usercontroller.deletedLocations;
             var userDto = angular.copy(usercontroller.userObj);

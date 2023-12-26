@@ -4,6 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="
+  img-src 'self' data:;
+  font-src 'self';
+  object-src 'none';
+  media-src 'none';
+  frame-src 'none';
+  worker-src 'self';
+  manifest-src 'self';
+">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Permissions-Policy"
+    content="geolocation=(), midi=(), camera=(), usb=(), magnetometer=(), accelerometer=(), vr=(), xr=(), sync-xhr=(), microphone=(), payment=(), fullscreen=(), unsized-media=(), autoplay=(), speaker=(), ambient-light-sensor=(), encrypted-media=(), usb=()">
+
   <!-- Title -->
   <title ng-bind-template="{{appName}} {{currentState.title}}"></title>
   <link rel="shortcut icon" href="{{'img/' + implementation + 'favicon.ico'}}" type="image/ico" />

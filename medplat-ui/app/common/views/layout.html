@@ -44,6 +44,8 @@
                     {{layout.userDetail.name ? layout.userDetail.name : layout.userDetail.principalId}}
                 </label>
                 <span class="postion">{{layout.userDetail.roleName}}</span>
+                <span class="postion mt-1" ng-if="layout.userDetail.userLastLogin">( Last Login :
+                    {{layout.userDetail.userLastLogin | date:'dd/MM/yyyy h:mm a'}} )</span>
                 <ul>
                     <li class="header">Actions</li>
                     <li ng-click="layout.updateProfile()">
