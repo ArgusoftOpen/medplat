@@ -4,7 +4,7 @@
         <h3 class="login-header">Login</h3>
         <div class="text-center bottom-spacer-10">
             <div class="list-group-item-text alert alert-danger" ng-show="login.user.hasAuthError">
-                {{login.user.errorMessage}}
+                No such username or password
             </div>
         </div>
         <div class=" inline-form">
@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <validate for='password' required-msg="*Password is required">
-                        <input data-test="password" type="password" autocomplete="off"
+                        <input data-test="password" type="password" autocomplete="new-password"
                             class="form-control cst-form-control" form-control style="width:calc(100% - 1px)"
                             placeholder="Password" name="password" id="password" ng-model="login.user.password"
                             required>
