@@ -1,6 +1,8 @@
 
 package com.argusoft.medplat.web.users.service.impl;
 
+import com.argusoft.medplat.common.controller.AnnouncementController;
+import com.argusoft.medplat.common.dao.AnnouncementDao;
 import com.argusoft.medplat.common.dao.ForgotPasswordOtpDao;
 import com.argusoft.medplat.common.dao.SequenceDao;
 import com.argusoft.medplat.common.databean.OtpDataBean;
@@ -10,6 +12,7 @@ import com.argusoft.medplat.common.service.OtpService;
 import com.argusoft.medplat.common.service.SmsService;
 import com.argusoft.medplat.common.service.SystemConfigurationService;
 import com.argusoft.medplat.common.util.ConstantUtil;
+import com.argusoft.medplat.common.util.LoginAESEncryptionUtil;
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
 import com.argusoft.medplat.exception.ImtechoMobileException;
 import com.argusoft.medplat.exception.ImtechoResponseEntity;
@@ -43,6 +46,7 @@ import com.argusoft.medplat.web.users.mapper.UserLocationMappper;
 import com.argusoft.medplat.web.users.mapper.UserMapper;
 import com.argusoft.medplat.web.users.model.*;
 import com.argusoft.medplat.web.users.service.RoleManagementService;
+import com.argusoft.medplat.web.users.dao.RoleDao;
 import com.argusoft.medplat.web.users.service.UserService;
 import com.argusoft.medplat.web.users.service.UserTokenService;
 import com.argusoft.medplat.training.model.Certificate;
@@ -72,6 +76,8 @@ import java.util.stream.Collectors;
 @Transactional
 public class UserServiceImpl implements UserService {
 
+    @Autowired
+    private RoleDao roleDao;
     @Autowired
     private UserDao userDao;
     @Autowired
@@ -126,7 +132,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, Integer> createOrUpdate(UserMasterDto userDto) {
         Map<String, Integer> ids = new LinkedHashMap<>();
-        UserMaster user = UserMapper.convertUserDtoToMaster(userDto);
+        String roleName = roleDao.retrieveById(userDto.getRoleId()).getName();
+        UserMaster user = UserMapper.convertUserDtoToMaster(userDto,roleName);
         UserMaster userRetrieved = userDao.retrieveByUserName(userDto.getUserName());
         handleException(userRetrieved, user);
 
@@ -648,8 +655,11 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
-    public void changePassword(String newPassword, Integer userId) {
-        validatePassword(newPassword);
+    public void changePassword(String newEncryptedPassword, Integer userId) {
+        String newPassword = LoginAESEncryptionUtil.decrypt(newEncryptedPassword,true);
+        if (Objects.isNull(newPassword)) {
+            throw new ImtechoUserException("Something went wrong, Please try again", 0);
+        }
         UserMaster user = userDao.retrieveById(userId);
         user.setPassword(basicPasswordEncryptor.encryptPassword(newPassword));
         userDao.merge(user);
@@ -659,24 +669,32 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
-    public void changePasswordOldtoNew(String oldPassword, String newPassword) {
+    public void changePasswordOldtoNew(String oldEncryptedPassword, String newEncryptedPassword) {
         Integer userId = imtechoSecurityUser.getId();
-        UserMaster userMaster = userDao.retrieveById(userId);
-        String oldPasswordFromDatabase = userMaster.getPassword();
+        UserMasterDto userDto = this.retrieveById(userId);
+        String oldPasswordFromDatabase = userDto.getPassword();
+        String oldPassword = LoginAESEncryptionUtil.decrypt(oldEncryptedPassword, true);
+        String newPassword = LoginAESEncryptionUtil.decrypt(newEncryptedPassword, true);
+        if (Objects.isNull(oldPassword) || Objects.isNull(newPassword)) {
+            throw new ImtechoUserException("Something went wrong, Please try again", 0);
+        }
 
         if (basicPasswordEncryptor.checkPassword(oldPassword, oldPasswordFromDatabase)) {
             if (newPassword.equals(oldPassword)) {
                 throw new ImtechoUserException("New password should not be same as old password", 0);
             }
             validatePassword(newPassword);
-            userMaster.setPassword(basicPasswordEncryptor.encryptPassword(newPassword));
-            userMaster.setFirstTimePasswordChanged(true);
-            userDao.update(userMaster);
+            userDto.setPassword(basicPasswordEncryptor.encryptPassword(newPassword));
+            String roleName = roleDao.retrieveById(userDto.getRoleId()).getName();
+            UserMaster userMaster = UserMapper.convertUserDtoToMaster(userDto, roleName);
+            userMaster.setFirstTimePasswordChanged(Boolean.TRUE);
+            userDao.merge(userMaster);
         } else {
             throw new ImtechoUserException("Please enter valid old password", 0);
         }
 
     }
+
 
     /**
      * {@inheritDoc}
@@ -709,6 +727,7 @@ public class UserServiceImpl implements UserService {
         forgotPasswordOtp.setUserId(userId);
         forgotPasswordOtp.setOtp(String.valueOf(randInt));
         forgotPasswordOtp.setModifiedOn(new Date());
+        forgotPasswordOtp.setVerified(null);
         forgotPasswordOtpDao.createOrUpdate(forgotPasswordOtp);
 
         String mobileNumber = usermaster.getContactNumber();
@@ -740,6 +759,11 @@ public class UserServiceImpl implements UserService {
         if (!otp.equals(forgotPasswordOtp.getOtp())) {
             throw new ImtechoUserException("Incorrect OTP. After" + LOGIN_ATTEMPTS + " unsuccessful attempts, your user will be inactive.", 0);
         }
+        else {
+            forgotPasswordOtp.setVerified(Boolean.TRUE);
+            forgotPasswordOtpDao.update(forgotPasswordOtp);
+        }
+
     }
 
     /**
@@ -748,6 +772,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void resetPassword(String username, String otp, String password) {
         UserMaster userMaster = userDao.retrieveByUserName(username);
+        if (Objects.isNull(userMaster)) {
+            throw new ImtechoUserException("Invalid Username", 0);
+        }
         if (userMaster.getRoleId() != null && userMaster.getRoleId().equals(ConstantUtil.MYTECHO_USER_ROLE_ID)) {
             OtpDataBean retrievedOtp = sequenceDao.retrieveOtp(userDao.retrieveByUserName(username).getContactNumber());
             if (retrievedOtp != null && retrievedOtp.getState().equals(UserMaster.Fields.ACTIVE) && retrievedOtp.getOtp().equals(otp)) {
@@ -760,14 +787,20 @@ public class UserServiceImpl implements UserService {
         } else {
             Integer userId = userMaster.getId();
             ForgotPasswordOtp forgotPasswordOtp = forgotPasswordOtpDao.retrieveById(userId);
+            if (!Boolean.TRUE.equals(forgotPasswordOtp.getVerified())) {
+                throw new ImtechoUserException("OTP is not verified, Retry", 0);
+            }
 
             if (!otp.equals(forgotPasswordOtp.getOtp())) {
                 throw new ImtechoUserException("OTP Validation Failed, Retry", 0);
             } else if (password != null) {
                 this.changePassword(password, userId);
+                forgotPasswordOtp.setVerified(null);
+                forgotPasswordOtpDao.update(forgotPasswordOtp);
             }
         }
     }
+
 
     /**
      * {@inheritDoc}

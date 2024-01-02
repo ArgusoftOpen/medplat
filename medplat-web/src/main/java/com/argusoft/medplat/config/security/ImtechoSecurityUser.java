@@ -24,10 +24,11 @@ public class ImtechoSecurityUser implements Serializable {
     private String gender;
     private String address;
     private Date dob;
+    private Date userLastLogin;
 
     public ImtechoSecurityUser(Integer id, String name, String username, Integer roleId, String roleName,
-            Integer minLocationId, String minLocationName, String roleCode, Integer rchInstitutionId, String languagePreference, String mobileNumber,
-            String gender, String address, Date dob, Integer minLocationLevel) {
+                               Integer minLocationId, String minLocationName, String roleCode, Integer rchInstitutionId, String languagePreference, String mobileNumber,
+                               String gender, String address, Date dob, Integer minLocationLevel) {
         this.id = id;
         this.name = name;
         this.userName = username;
@@ -163,5 +164,13 @@ public class ImtechoSecurityUser implements Serializable {
 
     public void setMinLocationLevel(Integer minLocationLevel) {
         this.minLocationLevel = minLocationLevel;
+    }
+
+    public Date getUserLastLogin() {
+        return userLastLogin;
+    }
+
+    public void setUserLastLogin(Date userLastLogin) {
+        this.userLastLogin = userLastLogin;
     }
 }

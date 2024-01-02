@@ -1,7 +1,7 @@
 (function (angular) {
     angular.module('imtecho.service').provider('AuthenticateService', function () {
         var clientId, clientSecret;
-        var AuthenticateService = function ($rootScope, $http, $location, $timeout, APP_CONFIG, $q, $state, $sessionStorage) {
+        var AuthenticateService = function ($rootScope, $http, $location, $timeout, APP_CONFIG, $q, $state, $sessionStorage, AESEncryptionService) {
             if (!clientId) {
                 throw "Client Id is not configured kindly set it in configuration phase useing AuthenticateServiceProvider";
             }
@@ -113,7 +113,7 @@
                 // };
                 $http({
                         method: 'POST',
-                        url: APP_CONFIG.serverPath + "/oauth/token?grant_type=password&username="+userName+"&password="+password+"&loginas=&client_id="+clientId,
+                        url: APP_CONFIG.serverPath + "/oauth/token?grant_type=password&username="+AESEncryptionService.encrypt(userName)+"&password="+AESEncryptionService.encrypt(password)+"&loginas=&client_id="+clientId,
                         headers: {
                             "Authorization": "Basic " + encodedClienSecret,
                             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -135,6 +135,16 @@
                     }
                 });
             };
+
+            service.getKeyAndIV = () => {
+                return $http.get(APP_CONFIG.apiPath + "/login/get-key-and-iv").then(response => {
+                    $rootScope.loginEncryptionKey = response.data.key;
+                    $rootScope.loginInitVector = response.data.initVector;
+                    return Promise.resolve();
+                }).catch(error => {
+                    return Promise.reject(error);
+                })
+            }
 
             service.getSystemNotice = () => {
                 return $http.get(APP_CONFIG.apiPath + "/mobile/systemNotice");
@@ -159,7 +169,7 @@
             service.getAssignedFeature = function (state) {
                 var assignedFeatureDeffer = $q.defer();
                 menuDefer.promise.then(function () {
-                    if (linearMenuItems[state]!=null && !linearMenuItems[state].systemConstraintConfigs) {
+                    if (linearMenuItems[state] != null && !linearMenuItems[state].systemConstraintConfigs) {
                         let promises = [];
                         promises.push($http.get(`${APP_CONFIG.apiPath}/systemConstraint/configs/${linearMenuItems[state].id}`));
                         promises.push($http.get(`${APP_CONFIG.apiPath}/systemConstraint/webTemplateConfigs/${linearMenuItems[state].id}`));

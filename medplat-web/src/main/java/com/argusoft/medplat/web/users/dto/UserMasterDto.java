@@ -86,6 +86,7 @@ public class UserMasterDto {
     private String actionBy;
     private String otp;
     private Integer defaultHealthInfrastructure;
+    private Date userLastLogin;
 
     public Integer getId() {
         return id;
@@ -591,6 +592,14 @@ public class UserMasterDto {
         this.defaultHealthInfrastructure = defaultHealthInfrastructure;
     }
 
+    public Date getUserLastLogin() {
+        return userLastLogin;
+    }
+
+    public void setUserLastLogin(Date userLastLogin) {
+        this.userLastLogin = userLastLogin;
+    }
+
     @Override
     public String toString() {
         return "UserMasterDto{" +
@@ -616,6 +625,7 @@ public class UserMasterDto {
                 ", roleName='" + roleName + '\'' +
                 ", roleCode='" + roleCode + '\'' +
                 ", minLocationId=" + minLocationId +
+                ", minLocationLevel=" + minLocationLevel +
                 ", minLocationName='" + minLocationName + '\'' +
                 ", addedLocations=" + addedLocations +
                 ", deletedLocations=" + deletedLocations +
@@ -646,6 +656,7 @@ public class UserMasterDto {
                 ", healthFacilityName='" + healthFacilityName + '\'' +
                 ", healthFacilityPincode='" + healthFacilityPincode + '\'' +
                 ", healthFacilityRegNo='" + healthFacilityRegNo + '\'' +
+                ", healthFacilityAddress='" + healthFacilityAddress + '\'' +
                 ", healthInfrastructureDetails=" + healthInfrastructureDetails +
                 ", pin='" + pin + '\'' +
                 ", documentTypes='" + documentTypes + '\'' +
@@ -653,6 +664,8 @@ public class UserMasterDto {
                 ", remarks='" + remarks + '\'' +
                 ", actionOn=" + actionOn +
                 ", actionBy='" + actionBy + '\'' +
+                ", otp='" + otp + '\'' +
+                ", defaultHealthInfrastructure=" + defaultHealthInfrastructure +
                 '}';
     }
 

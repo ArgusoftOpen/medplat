@@ -1,11 +1,13 @@
 package com.argusoft.medplat.web.login.controller;
 
+import com.argusoft.medplat.common.dto.EncryptionKeyAndIVDto;
 import com.argusoft.medplat.common.dto.MenuConfigDto;
 import com.argusoft.medplat.common.mapper.MenuConfigMapper;
 import com.argusoft.medplat.common.model.MenuConfig;
 import com.argusoft.medplat.common.service.MenuConfigService;
 import com.argusoft.medplat.common.util.ConstantUtil;
 import com.argusoft.medplat.common.util.EmailUtil;
+import com.argusoft.medplat.common.util.LoginAESEncryptionKeyManager;
 import com.argusoft.medplat.config.requestResponseFilter.service.RequestResponseDetailsService;
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
 import com.argusoft.medplat.fcm.service.TechoPushNotificationHandler;
@@ -109,6 +111,11 @@ public class LoginController {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+    @GetMapping(value = "/get-key-and-iv")
+    public EncryptionKeyAndIVDto getKeyAndIV() {
+        return new EncryptionKeyAndIVDto(LoginAESEncryptionKeyManager.getKey(), LoginAESEncryptionKeyManager.getInitVector());
+    }
+
     /**
      * Returns instance of LoginDto
      *
@@ -209,6 +216,8 @@ public class LoginController {
         requestResponseDetailsService.setPageTitleMapping();
         requestResponseDetailsService.setUrlMapping();
         requestResponseDetailsService.setApiToBeIgnoredForReqResFilter();
+        LoginAESEncryptionKeyManager.generateAndSetKey();
+
 //        requestResponseDetailsService.initCacheVariables();
 //            try {
 //                ndhmCommonUtilService.loadNdhmDevURL();
