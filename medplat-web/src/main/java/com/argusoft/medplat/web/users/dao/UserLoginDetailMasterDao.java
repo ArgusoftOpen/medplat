@@ -11,5 +11,8 @@ import com.argusoft.medplat.web.users.model.UserLoginDetailMaster;
  * @since 31/08/2020 10:30
  */
 public interface UserLoginDetailMasterDao extends GenericDao<UserLoginDetailMaster, Integer> {
-    
+
+    UserLoginDetailMaster getLastLoginDetailByUserId(Integer userId);
+
 }
+

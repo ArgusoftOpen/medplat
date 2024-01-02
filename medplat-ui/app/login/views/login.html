@@ -4,7 +4,7 @@
         <h3 class="login-header">Login</h3>
         <div class="text-center bottom-spacer-10">
             <div class="list-group-item-text alert alert-danger" ng-show="login.user.hasAuthError">
-                No such username or password
+                {{login.user.errorMessage}} 
             </div>
         </div>
         <div class=" inline-form">

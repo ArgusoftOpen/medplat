@@ -28,6 +28,7 @@ public class LoginDto {
     private String gender;
     private String address;
     private Date dob;
+    private Date userLastLogin;
 
     public Integer getId() {
         return id;
@@ -139,5 +140,13 @@ public class LoginDto {
 
     public Integer getMinLocationLevel() {
         return minLocationLevel;
+    }
+
+    public Date getUserLastLogin() {
+        return userLastLogin;
+    }
+
+    public void setUserLastLogin(Date userLastLogin) {
+        this.userLastLogin = userLastLogin;
     }
 }

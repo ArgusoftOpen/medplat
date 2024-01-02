@@ -10,6 +10,7 @@ import com.argusoft.medplat.web.users.model.UserMaster;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *<p>
@@ -29,7 +30,7 @@ public class UserMapper {
      * @param userDto An instance of UserMasterDto
      * @return An instance of UserMaster
      */
-    public static UserMaster convertUserDtoToMaster(UserMasterDto userDto) {
+    public static UserMaster convertUserDtoToMaster(UserMasterDto userDto, String roleName) {
 
         UserMaster userMaster = new UserMaster();
         userMaster.setAadharNumber(userDto.getAadharNumber());
@@ -58,8 +59,10 @@ public class UserMapper {
         if (userDto.getDisplayState() != null) {
             userMaster.setState(userDto.getState());
         }
-        String search = userDto.getTitle() + " " + userDto.getFirstName() + " " + userDto.getLastName() + " " + userDto.getUserName() + " "
-                + userDto.getRoleName();
+        String search = userDto.getTitle() + " " + userDto.getFirstName() + " " + userDto.getLastName() + " " + userDto.getUserName() + " " + roleName;
+        if (Objects.nonNull(userDto.getMiddleName()) && !userDto.getMiddleName().isEmpty()) {
+            search += " " + userDto.getMiddleName();
+        }
         if (userDto.getAadharNumber() != null) {
             search += " " + userDto.getAadharNumber();
         }

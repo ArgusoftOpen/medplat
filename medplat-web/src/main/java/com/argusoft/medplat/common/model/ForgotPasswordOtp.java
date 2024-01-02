@@ -10,6 +10,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.data.annotation.LastModifiedDate;
 
 /**
  *<p>Defines fields related to user</p>
@@ -31,6 +38,8 @@ public class ForgotPasswordOtp implements Serializable {
     @Column(name = "modified_on")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedOn;
+    @Column(name = "is_verified")
+    private Boolean isVerified;
 
     public Integer getUserId() {
         return userId;
@@ -56,13 +65,21 @@ public class ForgotPasswordOtp implements Serializable {
         this.modifiedOn = modifiedOn;
     }
 
+    public Boolean getVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(Boolean verified) {
+        isVerified = verified;
+    }
+
     /**
      * An util class defines string constant
      */
     public static class Fields {
 
         private Fields() {
-            
+
         }
 
         public static final String USER_ID = "userId";
