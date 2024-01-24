@@ -1879,3 +1879,9 @@ INSERT INTO public.mobile_feature_master (mobile_constant,feature_name,mobile_di
 	 ('NCD_MO_CONFIRMED','NCD MO Confirmed','NCD MO Confirmed','ACTIVE','2023-08-23 10:21:50.25971',-1,'2023-08-23 10:21:50.25971',-1),
 	 ('FHW_NCD_WEEKLY_VISIT','FHW NCD Weekly Visit','NCD Confirmed Cases','ACTIVE','2022-11-21 16:53:44.526364',-1,'2023-10-04 09:47:02.361819',-1),
 	 ('FHW_NCD_CVC_DETAIL','FHW NCD CVC Detail','NCD CVC Detail','ACTIVE','2023-10-04 09:47:02.361819',-1,'2023-10-04 09:47:02.361819',-1);
+
+
+--adding role for asha worker
+
+INSERT INTO um_role_master (Id,created_by,created_on,modified_by,modified_on,code,description,"name",state,max_position,is_email_mandatory,is_contact_num_mandatory,is_aadhar_num_mandatory,is_convox_id_mandatory,short_name,is_last_name_mandatory,role_type,is_health_infra_mandatory,is_geolocation_mandatory) VALUES
+	 (24,1,now(),97067,now(),'ASHA',NULL,'ASHA','ACTIVE',2,false,false,false,false,'ASHA',null,'MOBILE',null,null);
