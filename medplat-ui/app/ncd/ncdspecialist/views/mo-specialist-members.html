@@ -1,0 +1,275 @@
+<style>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .info label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: flex;
+    }
+
+    .info label span.info_type {
+        /*width: 200px;*/
+        font-weight: bold;
+    }
+
+    .info label span.data {
+        font-weight: normal;
+        margin-left: 2px;
+    }
+
+    .nopadding {
+        padding: 0px;
+        margin: 2px;
+    }
+
+    .modal-xl {
+        width: 95%;
+        height: 95%
+    }
+
+    .info ul {
+        list-style-type: none;
+    }
+
+    .div-disabled {
+        pointer-events: none;
+        opacity: 50%;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="form-group col-6" ng-if="ctrl.ecgData.length > 0">
+            <label style="float: left;" for="ecgDate" control-label>Select ECG date
+            </label>
+            <select form-control class="form-control cst-form-control" id="ecgDate" ng-model="ctrl.ecgDate"
+                ng-options="data.graph_detail_id as data.service_date|date:'dd/MM/yyyy' for data in ctrl.ecgData">
+                <option value="" selected>--Select--</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <button ng-disabled="ctrl.ecgDate == null" class="btn btn-primary pull-right" ng-click="ctrl.showGraph()">
+                Show ECG graph
+            </button>
+        </div>
+    </div>
+    <div class="row" ng-if="ctrl.showOptions"
+        style="background-color: white;margin: 10px;border: 1px solid #dfdfdf;border-radius: 2px;">
+        <div style="padding: 5px;" class="box-body col-4 br-1">
+            <div class="info">
+                <label>
+                    <ul class="nopadding">
+                        <li><span class="info_type">Patient's Name:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.memberDetails.member_name}}
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+        <div style="padding: 5px;" class="box-body col-4 br-1">
+            <div class="info">
+                <label>
+                    <ul class="nopadding">
+                        <li><span class="info_type">Unique health id:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.memberDetails.unique_health_id}}
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+        <div style="padding: 5px;" class="box-body col-4 br-1">
+            <div class="info">
+                <label>
+                    <ul class="nopadding">
+                        <li><span class="info_type">Age/Sex:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.memberDetails.age}}/{{ctrl.memberDetails.gender}}
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="ctrl.showOptions"
+        style="background-color: white;margin: 10px;border: 1px solid #dfdfdf;border-radius: 2px;">
+        <div style="padding: 5px;" class="box-body col-4 br-1">
+            <div class="info">
+                <label>
+                    <ul class="nopadding" style="width: 100%;">
+                        <li><span class="info_type">Heart Rate:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.ecgGraphData.heart_rate}} bpm
+                            </span>
+                            <span class="data" style="float: right;">
+                                (Standard Range: 60bpm - 100bpm)
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+            <div class="info">
+                <label>
+                    <ul class="nopadding" style="width: 100%;">
+                        <li><span class="info_type">PR Interval:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.ecgGraphData.pr}} ms
+                            </span>
+                            <span class="data" style="float: right;">
+                                (Standard Range: 100ms - 200ms)
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+            <div class="info">
+                <label>
+                    <ul class="nopadding" style="width: 100%;">
+                        <li><span class="info_type">QRS Complex:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.ecgGraphData.qrs}} ms
+                            </span>
+                            <span class="data" style="float: right;">
+                                (Standard Range: 60ms - 120ms)
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+        <div style="padding: 5px;" class="box-body col-4 br-1">
+            <div class="info">
+                <label>
+                    <ul class="nopadding"  style="width: 100%;">
+                        <li><span class="info_type">QT Interval:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.ecgGraphData.qt}} ms
+                            </span>
+                            <span class="data" style="float: right;">
+                                (Standard Range: 300ms - 450ms)
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+            <div class="info">
+                <label>
+                    <ul class="nopadding"  style="width: 100%;">
+                        <li><span class="info_type">QTc Interval:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.ecgGraphData.qtc}} ms
+                            </span>
+                            <span class="data" style="float: right;">
+                                (Standard Range: 300ms - 450ms)
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+            <div class="info">
+                <label>
+                    <ul class="nopadding">
+                        <li><span class="info_type">Risk:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.ecgGraphData.risk | titlecase}}
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+        <div style="padding: 5px;" class="box-body col-4 br-1">
+            <div class="info">
+                <label>
+                    <ul class="nopadding">
+                        <li><span class="info_type">Detection:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.ecgGraphData.detection}}
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+            <div class="info">
+                <label>
+                    <ul class="nopadding">
+                        <li><span class="info_type">ECG Type:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.ecgGraphData.ecg_type}}
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+            <div class="info">
+                <label>
+                    <ul class="nopadding">
+                        <li><span class="info_type">Recommendation:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.ecgGraphData.recommendation}}
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-primary pull-right" ng-disabled="!ctrl.showOptions" ng-click="ctrl.resetGraph()">
+                Reset zoom
+            </button>
+            <span ng-if="ctrl.showOptions">
+                <em class="fa fa-print" style="cursor: pointer;" uib-tooltip="Print pdf"
+                    ng-click="ctrl.printPdf()"></em>
+            </span>
+        </div>
+    </div>
+    <br />
+    <div class="row" id="ecg-graph">
+        <div class="col-12">
+            <div class="card-body" style="padding: 0;">
+                <div class="" id="graph3">
+                    <div class="">
+                        <canvas style="max-height: 150px" id="ecg"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card-body" style="padding: 0;">
+                <div class="" id="graph3">
+                    <div class="">
+                        <canvas style="max-height: 150px" id="ecg1"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card-body" style="padding: 0;">
+                <div class="" id="graph3">
+                    <div class="">
+                        <canvas style="max-height: 150px" id="ecg2"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

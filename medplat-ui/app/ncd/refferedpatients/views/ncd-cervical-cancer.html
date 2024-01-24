@@ -1,0 +1,461 @@
+<div class="row mt-0">
+    <div class="col-xl-12">
+        <div class="tabbable cst-tab">
+            <div class="tab-content bxb-0">
+                <div class="tab-pane fade active in" id="examination-5">
+                    <div class="container-fluid py-3">
+                        <form role="form" name="ctrl.form" id="ctrl.form" novalidate>
+                            <div class="row inline-form-control mb-4" ng-init="ctrl.cervicalForm.viaTest='negative';ctrl.cervicalForm.externalGenitaliaHealthy=true;
+                                ctrl.cervicalForm.polyp=false; ctrl.cervicalForm.ectopy=false; ctrl.cervicalForm.hypertrophy=false;
+                                ctrl.cervicalForm.excessiveDischarge=false; ctrl.cervicalForm.prolapseUterus=false; ctrl.cervicalForm.bleedsOnTouch=false;
+                                ctrl.cervicalForm.unhealthyCervix=false; ctrl.cervicalForm.suspiciousLookingCervix=false; ctrl.cervicalForm.frankMalignancy=false;
+                                ctrl.cervicalForm.otherFinding=false; ctrl.cervicalForm.doesSuffering=false">
+                                <div class="col-12">
+                                    <dateinfra obj="ncdmd.dateinfra" user-health-infras="ncdmd.userHealthInfras"
+                                        on-change="ctrl.retrieveCervicalDetailsByMemberAndDate()"
+                                        on-health-infra-change="ncdmd.retrieveMedicinesByHealthInfra(ncdmd.dateinfra.healthInfraId)">
+                                    </dateinfra>
+                                    <div class="form-group" style="float: right;">
+                                        <button type="button" ng-click="ncdmd.showTreatmentHistory('C')"
+                                            class="btn btn-primary">Treatment
+                                            History</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12  input-box">
+                                    <div class="input-box--inner row">
+                                        <div class="col-xl-4 form-group">
+                                            <validate for='viaTest' required-msg="Please select a value">
+                                                <label for="viaTest" control-label class="d-block">VIA
+                                                    Test</label>
+                                                <label class="control control-radio">Positive
+                                                    <input name="viaTest" type="radio" id="viaTest" form-control
+                                                        ng-model="ctrl.cervicalForm.viaTest" value="positive" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">Negative
+                                                    <input checked="checked" name="viaTest" type="radio" id="viaTest"
+                                                        form-control ng-model="ctrl.cervicalForm.viaTest"
+                                                        value="negative" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">Suspected
+                                                    <input name="viaTest" type="radio" id="viaTest" form-control
+                                                        ng-model="ctrl.cervicalForm.viaTest" value="suspected" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                        </div>
+                                        <div class="col-xl-4 form-group">
+                                            <validate for='externalGenitaliaHealthy'
+                                                required-msg="Please select a value">
+                                                <label for="externalGenitaliaHealthy" control-label class="d-block">
+                                                    External Genitalia Healthy
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input name="externalGenitaliaHealthy" type="radio"
+                                                        id="externalGenitaliaHealthy" form-control
+                                                        ng-model="ctrl.cervicalForm.externalGenitaliaHealthy"
+                                                        ng-value="true" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input checked="checked" name="externalGenitaliaHealthy"
+                                                        type="radio" id="externalGenitaliaHealthy" form-control
+                                                        ng-model="ctrl.cervicalForm.externalGenitaliaHealthy"
+                                                        ng-value="false" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                        </div>
+                                        <div class="col-xl-4" style="padding-left: 0px;">
+                                            <div class="form-group">
+                                                <validate for='status' required-msg="Please select a value">
+                                                    <label for="status" control-label>Status</label>
+                                                    <select class="form-control cst-form-control" form-control
+                                                        ng-model="ctrl.cervicalForm.status" name="status" id="status"
+                                                        required>
+                                                        <option value="" selected>--Select--
+                                                        </option>
+                                                        <option value="SUSPECTED">
+                                                            Screened
+                                                        </option>
+                                                        <option value="CONFIRMATION_PENDING">
+                                                            Confirmation Pending
+                                                        </option>
+                                                        <option value="CONFIRMED">
+                                                            Confirmed
+                                                        </option>
+                                                        <option value="NO_ABNORMALITY">
+                                                            No
+                                                            Abnormality Detected
+                                                        </option>
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12" ng-if="ctrl.cervicalForm.viaTest !== 'negative'">
+                                            <div class="cervical-image">
+                                                <img alt="image" src="img/cervical_img.jpg" class="img-fluid">
+                                                <ul class="cervical-point-list">
+                                                    <li class="cervical-location-item cervical-point-1"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints['viaExamPoints'][1]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints['viaExamPoints'][1]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-2"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints['viaExamPoints'][2]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints['viaExamPoints'][2]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-3"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints['viaExamPoints'][3]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints['viaExamPoints'][3]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-4"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints[viaExamPoints][4]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints[viaExamPoints][4]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-5"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints[viaExamPoints][5]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints[viaExamPoints][5]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-6"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints['viaExamPoints'][6]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints['viaExamPoints'][6]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-7"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints['viaExamPoints'][7]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints['viaExamPoints'][7]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-8"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints['viaExamPoints'][8]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints['viaExamPoints'][8]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-9"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints['viaExamPoints'][9]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints['viaExamPoints'][9]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-10"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints['viaExamPoints'][10]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints['viaExamPoints'][10]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-11"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints['viaExamPoints'][11]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints['viaExamPoints'][11]">
+                                                    </li>
+                                                    <li class="cervical-location-item cervical-point-12"
+                                                        ng-class="{'selected':ctrl.cervicalForm.examPoints['viaExamPoints'][12]}">
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.cervicalForm.examPoints['viaExamPoints'][12]">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12  input-box">
+                                    <h6>Per speculum examination</h6>
+                                    <div class="input-box--inner row">
+                                        <div class="form-group col-xl-4">
+                                            <validate for='polyp' required-msg="Please select a value">
+                                                <label style="display: block;" for="polyp"
+                                                    uib-tooltip="Presence of polyp" class="control-label" control-label>
+                                                    Polyp
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="polyp" id="polyp" type="radio"
+                                                        ng-model="ctrl.cervicalForm.polyp" form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="polyp" id="polyp" type="radio"
+                                                        ng-model="ctrl.cervicalForm.polyp" form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='ectopy' required-msg="Please select a value">
+                                                <label style="display: block;" for="ectopy"
+                                                    uib-tooltip="Presence of ectopy" class="control-label"
+                                                    control-label>
+                                                    Ectopy (Erosion)
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="ectopy" id="ectopy" type="radio"
+                                                        ng-model="ctrl.cervicalForm.ectopy" form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="ectopy" id="ectopy" type="radio"
+                                                        ng-model="ctrl.cervicalForm.ectopy" form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='hypertrophy' required-msg="Please select a value">
+                                                <label style="display: block;" for="hypertrophy"
+                                                    uib-tooltip="Presence of hypertrophy" class="control-label"
+                                                    control-label>
+                                                    Hypertrophy
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="hypertrophy" id="hypertrophy"
+                                                        type="radio" ng-model="ctrl.cervicalForm.hypertrophy"
+                                                        form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="hypertrophy" id="hypertrophy"
+                                                        type="radio" ng-model="ctrl.cervicalForm.hypertrophy"
+                                                        form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="col-xl-4 form-group">
+                                            <validate for='excessiveDischarge' required-msg="Please select a value">
+                                                <label style="display: block;" for="excessiveDischarge" control-label
+                                                    class="control-label">Excessive
+                                                    Discharge
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input name="excessiveDischarge" type="radio"
+                                                        id="excessiveDischarge" form-control
+                                                        ng-model="ctrl.cervicalForm.excessiveDischarge" ng-value="true"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input name="excessiveDischarge" type="radio"
+                                                        id="excessiveDischarge" form-control
+                                                        ng-model="ctrl.cervicalForm.excessiveDischarge" ng-value="false"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                        </div>
+                                        <div class="col-xl-4 form-group">
+                                            <validate for='prolapseUterus' required-msg="Please select a value">
+                                                <label style="display: block;" for="prolapseUterus" control-label
+                                                    class="control-label">Prolapse
+                                                    Uterus
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input name="prolapseUterus" type="radio" id="prolapseUterus"
+                                                        form-control ng-model="ctrl.cervicalForm.prolapseUterus"
+                                                        ng-value="true" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input name="prolapseUterus" type="radio" id="prolapseUterus"
+                                                        form-control ng-model="ctrl.cervicalForm.prolapseUterus"
+                                                        ng-value="false" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                        </div>
+                                        <div class="col-xl-4 form-group">
+                                            <validate for='bleedsOnTouch' required-msg="Please select a value">
+                                                <label style="display: block;" for="bleedsOnTouch" control-label
+                                                    class="control-label">Bleeds on
+                                                    Touch
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input name="bleedsOnTouch" type="radio" id="bleedsOnTouch"
+                                                        form-control ng-model="ctrl.cervicalForm.bleedsOnTouch"
+                                                        ng-value="true" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input name="bleedsOnTouch" type="radio" id="bleedsOnTouch"
+                                                        form-control ng-model="ctrl.cervicalForm.bleedsOnTouch"
+                                                        ng-value="false" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                        </div>
+                                        <div class="col-xl-4 form-group">
+                                            <validate for='unhealthyCervix' required-msg="Please select a value">
+                                                <label style="display: block;" for="unhealthyCervix" control-label
+                                                    class="control-label">Unhealthy
+                                                    Cervix
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input name="unhealthyCervix" type="radio" id="unhealthyCervix"
+                                                        form-control ng-model="ctrl.cervicalForm.unhealthyCervix"
+                                                        ng-value="true" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input name="unhealthyCervix" type="radio" id="unhealthyCervix"
+                                                        form-control ng-model="ctrl.cervicalForm.unhealthyCervix"
+                                                        ng-value="false" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                        </div>
+                                        <div class="col-xl-4 form-group">
+                                            <validate for='suspiciousLookingCervix'
+                                                required-msg="Please select a value">
+                                                <label style="display: block;" for="suspiciousLookingCervix"
+                                                    control-label class="control-label">Suspicious looking Cervix
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input name="suspiciousLookingCervix" type="radio"
+                                                        id="suspiciousLookingCervix" form-control
+                                                        ng-model="ctrl.cervicalForm.suspiciousLookingCervix"
+                                                        ng-value="true" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input name="suspiciousLookingCervix" type="radio"
+                                                        id="suspiciousLookingCervix" form-control
+                                                        ng-model="ctrl.cervicalForm.suspiciousLookingCervix"
+                                                        ng-value="false" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                        </div>
+                                        <div class="col-xl-4 form-group">
+                                            <validate for='frankMalignancy' required-msg="Please select a value">
+                                                <label style="display: block;" for="frankMalignancy" control-label
+                                                    class="control-label">Frank
+                                                    Malignancy or Growth on
+                                                    the Cervix
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input name="frankMalignancy" type="radio" id="frankMalignancy"
+                                                        form-control ng-model="ctrl.cervicalForm.frankMalignancy"
+                                                        ng-value="true" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input name="frankMalignancy" type="radio" id="frankMalignancy"
+                                                        form-control ng-model="ctrl.cervicalForm.frankMalignancy"
+                                                        ng-value="false" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                        </div>
+                                        <div class="col-xl-4 form-group">
+                                            <validate for='otherFinding' required-msg="Please select a value">
+                                                <label style="display: block;" for="otherFinding" control-label
+                                                    class="control-label">Other Findings
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input name="otherFinding" type="radio" id="otherFinding" required
+                                                        form-control ng-model="ctrl.cervicalForm.otherFinding"
+                                                        ng-value="true" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input name="otherFinding" type="radio" id="otherFinding" required
+                                                        form-control ng-model="ctrl.cervicalForm.otherFinding"
+                                                        ng-value="false" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <div ng-show="ctrl.cervicalForm.otherFinding === true"
+                                                    class="form-group">
+                                                    <validate for='otherFindingDescription'
+                                                        required-msg="Please select a value">
+                                                        <input type="text" class="form-control cst-form-control"
+                                                            form-control
+                                                            ng-model="ctrl.cervicalForm.otherFindingDescription"
+                                                            id="otherFindingDescription" name="otherFindingDescription">
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                        </div>
+                                        <div class="col-xl-4 form-group">
+                                            <validate for='bimanualExamination' required-msg="Please select a value">
+                                                <label for="bimanualExamination" control-label>Bimanual
+                                                    Examination</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="ctrl.cervicalForm.bimanualExamination"
+                                                    name="bimanualExamination" id="bimanualExamination" required>
+                                                    <option value="" selected>
+                                                        --Select--
+                                                    </option>
+                                                    <option value="Normal">
+                                                        Normal
+                                                    </option>
+                                                    <option value=" Abnormal">
+                                                        Abnormal
+                                                    </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 input-box" ng-if="ctrl.isAlreadyDiagnosedCervical !== true">
+                                    <h6>Diagnosis</h6>
+                                    <div class="form-group col-xl-12"
+                                            ng-if="ctrl.isAlreadyDiagnosedCervical !== true">
+                                            <validate for='doesSuffering' required-msg="Please select a value">
+                                                <label style="display: block;" for="doesSuffering"
+                                                    uib-tooltip="Presence of doesSuffering" class="control-label"
+                                                    control-label>
+                                                    <b>Does this patient suffering from Cervical
+                                                        cancer?</b>
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="doesSuffering" id="doesSuffering"
+                                                        type="radio" ng-model="ctrl.cervicalForm.doesSuffering"
+                                                        form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="doesSuffering" id="doesSuffering"
+                                                        type="radio" ng-model="ctrl.cervicalForm.doesSuffering"
+                                                        form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3 px-15">
+                                <treatment obj="ctrl.medicineDetail" medicine-data="ncdmd.medicineData"
+                                    prescribed-medicine="ctrl.prescribedMedicine" take-medicine="ctrl.takeMedicine"></treatment>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="button-footer" style="border: 0px;" ng-if="!ctrl.cervicalFormAlreadyFilled">
+                                        <button class="btn btn-primary" ng-click="ctrl.saveCervical() ">Save &
+                                            Continue</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='MO'"
+                                            ui-sref="techo.ncd.members">Cancel</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='CONSULTANT'"
+                                            ui-sref="techo.ncd.followupscreenlisting">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

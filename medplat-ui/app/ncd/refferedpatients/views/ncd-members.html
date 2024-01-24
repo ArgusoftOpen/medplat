@@ -1,0 +1,293 @@
+<style>
+    .outer-tabset>.nav.nav-tabs {
+        background: #ffffff;
+        border: 1px solid #dfdfdf;
+        padding-bottom: 1px;
+    }
+
+    .table-heading {
+        background-color: rgb(241, 241, 241);
+        position: relative;
+        top: -1px;
+    }
+</style>
+<script>
+    $(".header-fixed").tableHeadFixer();
+</script>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12 mb-15">
+            <button class="btn btn-primary pull-right" ng-click="mlisting.downloadExcel()">Download Excel</button>
+            <div class="cst-tab">
+                <uib-tabset active='mlisting.selectedTab'>
+                    <uib-tab heading="Patient List" index=0 ng-click="mlisting.retrieveMemberList('patientList',true)">
+                        <div ng-include="'app/ncd/refferedpatients/views/ncd-main-view-tab.html'"></div>
+                    </uib-tab>
+                    <uib-tab heading="Follow Up List" index=1
+                        ng-click="mlisting.retrieveMemberList('followupTreatement',true); mlisting.selectedFollowupTab = 0">
+                        <uib-tabset active='mlisting.selectedFollowupTab'>
+                            <uib-tab heading="On Treatment" index=0
+                                ng-click="mlisting.retrieveMemberList('followupTreatement',true)">
+                                <div ng-include="'app/ncd/refferedpatients/views/ncd-main-view-tab.html'"></div>
+                            </uib-tab>
+                            <uib-tab heading="Follow Up Case" index=1
+                                ng-click="mlisting.retrieveMemberList('followup',true)">
+                                <div ng-include="'app/ncd/refferedpatients/views/ncd-main-view-tab.html'"></div>
+                            </uib-tab>
+                            <uib-tab heading="Due Referal List" index=2
+                                ng-click="mlisting.retrieveMemberList('referDue',true)">
+                                <div ng-include="'app/ncd/refferedpatients/views/ncd-main-view-tab.html'"></div>
+                            </uib-tab>
+                        </uib-tabset>
+                    </uib-tab>
+                    <uib-tab heading="CVC member's List" index=2 ng-click="mlisting.retrieveMemberList('CVCList',true)">
+                        <div ng-include="'app/ncd/refferedpatients/views/ncd-main-view-tab.html'"></div>
+                    </uib-tab>
+                    <uib-tab heading="MO alert list" index=3 ng-click="mlisting.retrieveMemberList('MOAlertList',true)">
+                        <div ng-include="'app/ncd/refferedpatients/views/ncd-main-view-tab.html'"></div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="large-div filter-div " ng-if="mlisting.selectedTab===0">
+    <span style="left:-66px" class="filter-toggle" ng-click="mlisting.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="mlisting.searchForm" novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>Search By: </label>
+                        <br>
+                        <label class="control control-radio"> Unique Health ID
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
+                                value="uniqueHealthId" ng-change="mlisting.search.searchString = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Family ID
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
+                                value="familyId" ng-change="mlisting.search.searchString = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Mobile No.
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
+                                value="mobileNo" ng-change="mlisting.search.searchString = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Organization Unit
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy" value="orgUnit"
+                                ng-change="mlisting.search.searchString = null; mlisting.selectedLocation = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio" style="min-width: auto;"> Name
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy" value="name"
+                                ng-change="mlisting.search.searchString = null; mlisting.selectedLocation = null; mlisting.search.locationToSearchByName = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Disease
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy" value="disease"
+                                ng-change="mlisting.search.searchString = 'All';" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Sub Center Name
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
+                                value="subCenterName"
+                                ng-change="mlisting.search.searchString = null; mlisting.retrieveSC()" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Status
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy" value="status"
+                                ng-change="mlisting.search.searchString = 'All';" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <br><br>
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'status'">
+                            <label for="status" control-label>
+                                Select Status
+                            </label>
+                            <select class="form-control cst-form-control" form-control chosen-directive multiple
+                                ng-model="mlisting.search.searchString" name="status" id="status">
+                                <option value="SUSPECTED">Suspected</option>
+                                <option value="UNDERTREATMENT">Undertreatment</option>
+                                <option value="UNDERTREATMENT_CONTROLLED">Undertreatment controlled</option>
+                                <option value="UNDERTREATMENT_UNCONTROLLED">Undertreatment uncontrolled</option>
+                                <option value="CONFIRMED">Confirmed</option>
+                                <option value="FOLLOWUP">Followup</option>
+                                <option value="NORMAL">Normal</option>
+                                <option value="REFERRED_MO">Referred MO</option>
+                                <option value="REFERRED_CONSULTANT">Referred Consultant</option>
+                                <option value="REFERRED_BACK_MO">Referred Back MO</option>
+                                <option value="REFERRED_BACK_CONSULTANT">Referred Back CONSULTANT</option>
+                                <option value="REFERRED_HIGHER_CENTER">Referred Higher Center</option>
+                                <!-- <option value="MEDICINE_CHANGE">Patients with changes in Medicine</option>
+                                <option value="MEDICINE_NO_CHANGE">Patients with no changes in Medicine</option> -->
+                                <!-- <option value="MEDICINE_CHANGE">Patients with changes in Medicine</option>
+                                <option value="MEDICINE_NO_CHANGE">Patients with no changes in Medicine</option> -->
+                            </select>
+                        </div>
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'disease'">
+                            <label for="disease" control-label>
+                                Select Disease
+                            </label>
+                            <select class="form-control cst-form-control" form-control chosen-directive
+                                ng-model="mlisting.search.searchString" name="disease" id="disease">
+                                <option value="HT">Hypertension</option>
+                                <option value="D">Diabetes</option>
+                                <option value="O">Oral</option>
+                                <option value="B">Breast</option>
+                                <option value="C">Cervical</option>
+                                <option value="MH">Mental health</option>
+                            </select>
+                        </div>
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'name'">
+                            <location-directive template-type="'twoPart'"
+                                ng-model="mlisting.search.locationToSearchByName" fetch-upto-level="7"
+                                selected-location="mlisting.selectedLocation" required-upto-level="3"
+                                template-type="'inline'" fetch-according-to-user-aoi="true">
+                            </location-directive>
+                        </div>
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'orgUnit'">
+                            <location-directive template-type="'twoPart'" ng-model="mlisting.search.searchString"
+                                selected-location="mlisting.selectedLocation" required-upto-level="3"
+                                fetch-upto-level="7" template-type="'inline'" fetch-according-to-user-aoi="true">
+                            </location-directive>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6" ng-if="mlisting.search.searchBy === 'orgUnit'">
+                                <label for="disease" control-label>
+                                    Select Disease
+                                </label>
+                                <select class="form-control cst-form-control" form-control
+                                    ng-model="mlisting.search.orgUnitDisease" name="disease" id="disease">
+                                    <option value="" selected>--Select--
+                                    </option>
+                                    <option value="HT">Hypertension</option>
+                                    <option value="D">Diabetes</option>
+                                    <option value="O">Oral</option>
+                                    <option value="B">Breast</option>
+                                    <option value="C">Cervical</option>
+                                    <option value="MH">Mental health</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-6" ng-if="mlisting.search.searchBy === 'orgUnit'">
+                                <label for="status" control-label>
+                                    Select Status
+                                </label>
+                                <select class="form-control cst-form-control" form-control chosen-directive multiple
+                                    ng-model="mlisting.search.orgUnitStatus" name="status" id="status">
+                                    <option value="SUSPECTED">Suspected</option>
+                                    <option value="UNDERTREATMENT">Undertreatment</option>
+                                    <option value="UNDERTREATMENT_CONTROLLED">Undertreatment controlled</option>
+                                    <option value="UNDERTREATMENT_UNCONTROLLED">Undertreatment uncontrolled</option>
+                                    <option value="CONFIRMED">Confirmed</option>
+                                    <option value="FOLLOWUP">Followup</option>
+                                    <option value="NORMAL">Normal</option>
+                                    <option value="REFERRED_MO">Referred MO</option>
+                                    <option value="REFERRED_CONSULTANT">Referred Consultant</option>
+                                    <option value="REFERRED_BACK_MO">Referred Back MO</option>
+                                    <option value="REFERRED_BACK_CONSULTANT">Referred Back CONSULTANT</option>
+                                    <option value="REFERRED_HIGHER_CENTER">Referred Higher Center</option>
+                                    <!-- <option value="MEDICINE_CHANGE">Patients with changes in Medicine</option>
+                                    <option value="MEDICINE_NO_CHANGE">Patients with no changes in Medicine</option> -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'subCenterName'">
+                            <label for="subCenterName" control-label>
+                                Select Sub-center
+                            </label>
+                            <select class="form-control cst-form-control" form-control
+                                ng-model="mlisting.search.searchString" name="subCenterName" id="subCenterName"
+                                ng-options="subCenter.id as subCenter.name for subCenter in mlisting.subCenters">
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'familyId'">
+                            <validate for="familyId" required-msg='Enter {{mlisting.search.searchBy}}'>
+                                <input type="text" name="familyId" form-control ng-model="mlisting.search.searchString"
+                                    placeholder="Enter {{mlisting.search.searchBy}}" class="form-control" required />
+                                <placeholder></placeholder>
+                            </validate>
+                            <button class="btn btn-primary float-right mt-2" ng-click="mlisting.webcam()">Scan</button>
+                        </div>
+                        <div class="form-group"
+                            ng-if="mlisting.search.searchBy === 'uniqueHealthId' || mlisting.search.searchBy === 'abha number' || mlisting.search.searchBy === 'abha address'">
+                            <validate for="uniqueHealthId" required-msg='Enter {{mlisting.search.searchBy}}'>
+                                <input type="text" name="uniqueHealthId" form-control
+                                    ng-model="mlisting.search.searchString"
+                                    placeholder="Enter {{mlisting.search.searchBy}}" class="form-control" required />
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'mobileNo'">
+                            <validate for="mobileNo" required-msg='Enter {{mlisting.search.searchBy}}'
+                                maxlength-msg="Invalid mobile number. Enter 10 digits"
+                                minlength-msg="Invalid mobile number. Enter 10 digits">
+                                <input type="text" numbers-only name="mobileNo" form-control
+                                    ng-model="mlisting.search.searchString" max-length="10" min-length="10"
+                                    placeholder="Enter {{mlisting.search.searchBy}}" class="form-control" required />
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div style="padding-bottom: 5px;" ng-if="mlisting.search.searchBy === 'name'">
+                            <div class="row">
+                                <div class="col-4">
+                                    <validate for="firstName" required-msg='Enter first name'>
+                                        <input type="text" name="firstName" form-control
+                                            ng-model="mlisting.search.firstName" placeholder="Enter first Name"
+                                            class="form-control" required />
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="col-4">
+                                    <validate for="middleName" required-msg='Enter middle name'>
+                                        <input type="text" name="middleName" form-control
+                                            ng-model="mlisting.search.middleName" placeholder="Enter middle Name"
+                                            class="form-control" />
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="col-4">
+                                    <validate for="lastName" required-msg='Enter last name'>
+                                        <input type="text" name="lastName" form-control
+                                            ng-model="mlisting.search.lastName" placeholder="Enter last Name"
+                                            class="form-control" required />
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <label class="control control-checkbox"> Is Member Flagged
+                                <input type="checkbox" name="flag" icheck ng-model="mlisting.search.flag" value="flag">
+                                <div class="control_indicator"></div>
+                            </label>
+                            <label class="control control-checkbox"> Is Member Marked Review
+                                <input type="checkbox" name="review" icheck ng-model="mlisting.search.review"
+                                    value="review">
+                                <div class="control_indicator"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter" ng-click="mlisting.toggleFilter()">Close</button>
+                        <button class="btn btn-secondary close-filter" ng-click="mlisting.resetFilter()">Reset</button>
+                        <button type="submit" class="btn btn-primary search-filter"
+                            ng-click="mlisting.searchMembers(true)">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

@@ -1,0 +1,472 @@
+<style>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .info label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: flex;
+    }
+
+    .info label span.info_type {
+        /*width: 200px;*/
+        font-weight: bold;
+    }
+
+    .info label span.data {
+        font-weight: normal;
+        margin-left: 2px;
+    }
+
+    .nopadding {
+        padding: 0px;
+        margin: 2px;
+    }
+
+    .modal-xl {
+        width: 95%;
+        height: 95%
+    }
+
+    .info ul {
+        list-style-type: none;
+    }
+
+    .div-disabled {
+        pointer-events: none;
+        opacity: 50%;
+    }
+</style>
+<div class="container-fluid" ng-init="ctrl.selectedTab = 'ecg'">
+    <div class="box cst-tab mb-15">
+        <div class="tab-content">
+            <div class="container-fluid  py-3">
+                <div class="box-header d-flex justify-content-between">
+                    <h4 class="sub-title">Patient's Detail</h4>
+                    <div class="text-center">
+                        <!-- <a href="javascript:void(0)" ng-click="ctrl.printPatientSummary()" class="btn btn-primary mt-1">
+                            Patient Summary
+                        </a> -->
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="box-body col-2 br-1">
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Patient's Name:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.member_name}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Unique health id:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.unique_health_id}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="box-body col-2 br-1">
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Age/Sex:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.age}}/{{ctrl.memberDetails.gender}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">BMI:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberAdditionalDetails.bmi | number : 2 | emptylabel}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="box-body col-2 br-1">
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Area name:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.village}}
+                                        </span>
+                                    </li>
+                                    <li><span class="info_type">Health worker name:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.village_health_worker}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Treatment status:</span></li>
+                                    <li>
+                                        <span class="data" ng-if="ctrl.memberDetails.diabetes_treatment_status">
+                                            Diabetes : {{ctrl.memberDetails.diabetes_treatment_status?'Yes':'No'}}
+                                        </span>
+                                        <span class="data" ng-if="ctrl.memberDetails.hypertension_treatment_status">
+                                            Hypertension :
+                                            {{ctrl.memberDetails.hypertension_treatment_status?'Yes':'No'}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="box-body col-2 br-1">
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Hypertension(Duration):</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.duration_of_hypertension ? 'Yes (' +
+                                            ctrl.memberDetails.duration_of_hypertension +' years)' : 'No'}}
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="data">
+                                            BP : {{ctrl.memberAdditionalDetails.systolicBp}} /
+                                            {{ctrl.memberAdditionalDetails.diastolicBp}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Diabetes(Duration):</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.duration_of_diabetes ? 'Yes (' +
+                                            ctrl.memberDetails.duration_of_diabetes +' years)' : 'No'}}
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="data">
+                                            BS : {{ctrl.memberAdditionalDetails.bloodSugar}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="box-body col-2 br-1">
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Tobaco addiction:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.tobacco_addiction | emptylabel}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Smoking addiction:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.smoking_addiction | emptylabel}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="box-body col-2 br-1">
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Stroke present:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.stroke | emptylabel}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Symptoms:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.memberDetails.stroke_symptoms | titlecase}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="box-body col-4">
+            <div class="info">
+                <div class="row">
+                    <div class="col-12">
+                        <form name="ecgform" role="form">
+                            <div class="form-group">
+                                <validate for="screeningDate" required-msg="Please select screening date">
+                                    <label for="screeningDate" class="control control-label bold pl-0" control-label>
+                                        Select Date :
+                                    </label>
+
+                                    <input name="screeningDate" type="text" datepicker ng-model="ctrl.screeningDate"
+                                        ng-change="ctrl.screeningDateChange()" form-control max-date="ctrl.today"
+                                        class="mb-2 mobile-width" required />
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="cst-tab">
+            <uib-tabset>
+                <uib-tab heading="Retinopathy" index=0>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xl-12 input-box">
+                                <h6>Patient History</h6>
+                                <div class="input-box--inner row">
+                                    <div class="col-6" style="padding: 0;">
+                                        <div class="form-group">
+                                            <label class="control bold" control-label> Remidio Id : </label>
+                                            <label class="control-label" form-control>
+                                                {{ctrl.researcherRoleInput.remidio_id}}
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control bold" control-label> Vision problem : </label>
+                                            <label class="control-label" form-control>
+                                                {{ctrl.researcherRoleInput.vision_problem_flag?'Yes':'No'}}
+                                                {{ctrl.researcherRoleInput.vision_problem_flag?'('+ctrl.researcherRoleInput.vision_problem_duration+'
+                                                years)'+' '+ctrl.researcherRoleInput.vision_problem:''}}
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control bold" control-label> Past eye operation : </label>
+                                            <label class="control-label" form-control>
+                                                {{ctrl.researcherRoleInput.past_eye_operation?'Yes
+                                                ('+ctrl.researcherRoleInput.eye_operation_type +')':'No'}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6" style="padding: 0;">
+                                        <div class="form-group" ng-if="ctrl.researcherRoleInput.absent_eyeball != null">
+                                            <label class="control bold" control-label> Any eyeball missing?</label>
+                                            <label class="control-label" form-control>
+                                                {{ctrl.researcherRoleInput.absent_eyeball}}
+                                            </label>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="ctrl.researcherRoleInput.absent_eyeball !== 'LEFT_EYEBALL' || ctrl.researcherRoleInput.absent_eyeball !== 'BOTH'">
+                                            <label class="control bold" control-label> Left eye retinopathy detected as
+                                                per AI : </label>
+                                            <label class="control-label" form-control>
+                                                {{ctrl.researcherRoleInput.left_eye_retinopathy_detected?'Yes':'No'}}
+                                            </label>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="ctrl.researcherRoleInput.absent_eyeball !== 'RIGHT_EYEBALL' || ctrl.researcherRoleInput.absent_eyeball !== 'BOTH'">
+                                            <label class="control bold" control-label> Right eye retinopathy detected as
+                                                per AI : </label>
+                                            <label class="control-label" form-control>
+                                                {{ctrl.researcherRoleInput.right_eye_retinopathy_detected?'Yes':'No'}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 input-box">
+                                <h6>Examination form</h6>
+                                <div class="input-box--inner inline-form row">
+                                    <form name="ctrl.ophthalmologistForm" role="form" style="width: -webkit-fill-available;"
+                                        novalidate>
+                                        <div class="form-group"
+                                            ng-if="ctrl.researcherRoleInput.absent_eyeball !== 'LEFT_EYEBALL' || ctrl.researcherRoleInput.absent_eyeball !== 'BOTH'">
+                                            <validate for="leftEyeFeedback"
+                                                required-msg="Please select from the following options">
+                                                <label for="leftEyeFeedback" class="control control-label bold"
+                                                    control-label>
+                                                    Select appropriate option (LEFT eye)
+                                                </label>
+                                                <label class="control control-radio"> Normal
+                                                    <input type="radio" name="leftEyeFeedback"
+                                                        ng-model="ctrl.formData.leftEyeFeedback" value="normal"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> NPDR Mild
+                                                    <input type="radio" name="leftEyeFeedback"
+                                                        ng-model="ctrl.formData.leftEyeFeedback" value="NPDR_Mild"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> NPDR moderate
+                                                    <input type="radio" name="leftEyeFeedback"
+                                                        ng-model="ctrl.formData.leftEyeFeedback" value="NPDR_moderate"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> NPDR severe
+                                                    <input type="radio" name="leftEyeFeedback"
+                                                        ng-model="ctrl.formData.leftEyeFeedback" value="NPDR_severe"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> PDR
+                                                    <input type="radio" name="leftEyeFeedback"
+                                                        ng-model="ctrl.formData.leftEyeFeedback" value="PDR"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> Image quality not satisfactory
+                                                    <input type="radio" name="leftEyeFeedback"
+                                                        ng-model="ctrl.formData.leftEyeFeedback" value="unsatisfactory"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> Other
+                                                    <input type="radio" name="leftEyeFeedback"
+                                                        ng-model="ctrl.formData.leftEyeFeedback" value="Other"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group" ng-if="ctrl.formData.leftEyeFeedback === 'Other'">
+                                            <validate for="leftEyeOtherType" required-msg="Please enter the value">
+                                                <label for="leftEyeOtherType" class="control control-label bold"
+                                                    control-label>
+                                                    Other (For Left eye)
+                                                </label>
+                                                <input type="text" name="leftEyeOtherType"
+                                                    ng-model="ctrl.formData.leftEyeOtherType" style="margin-left: 15px;"
+                                                    class="form-control cst-form-control" placeholder="Enter other"
+                                                    ng-disabled="ctrl.isFormSubmitted" limit-to="200" form-control
+                                                    required />
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="ctrl.researcherRoleInput.absent_eyeball !== 'RIGHT_EYEBALL' || ctrl.researcherRoleInput.absent_eyeball !== 'BOTH'">
+                                            <validate for="rightEyeFeedback"
+                                                required-msg="Please select from the following options">
+                                                <label for="rightEyeFeedback" class="control control-label bold"
+                                                    control-label>
+                                                    Select appropriate option (RIGHT eye)
+                                                </label>
+                                                <label class="control control-radio"> Normal
+                                                    <input type="radio" name="rightEyeFeedback"
+                                                        ng-model="ctrl.formData.rightEyeFeedback" value="normal"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> NPDR Mild
+                                                    <input type="radio" name="rightEyeFeedback"
+                                                        ng-model="ctrl.formData.rightEyeFeedback" value="NPDR_Mild"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> NPDR moderate
+                                                    <input type="radio" name="rightEyeFeedback"
+                                                        ng-model="ctrl.formData.rightEyeFeedback" value="NPDR_moderate"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> NPDR severe
+                                                    <input type="radio" name="rightEyeFeedback"
+                                                        ng-model="ctrl.formData.rightEyeFeedback" value="NPDR_severe"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> PDR
+                                                    <input type="radio" name="rightEyeFeedback"
+                                                        ng-model="ctrl.formData.rightEyeFeedback" value="PDR"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> Image quality not satisfactory
+                                                    <input type="radio" name="rightEyeFeedback"
+                                                        ng-model="ctrl.formData.rightEyeFeedback" value="unsatisfactory"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio"> Other
+                                                    <input type="radio" name="rightEyeFeedback"
+                                                        ng-model="ctrl.formData.rightEyeFeedback" value="Other"
+                                                        ng-disabled="ctrl.isFormSubmitted" form-control required />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group" ng-if="ctrl.formData.rightEyeFeedback === 'Other'">
+                                            <validate for="rightEyeOtherType" required-msg="Please enter the value">
+                                                <label for="rightEyeOtherType" class="control control-label bold"
+                                                    control-label>
+                                                    Other (For Right eye)
+                                                </label>
+                                                <input type="text" name="rightEyeOtherType"
+                                                    ng-model="ctrl.formData.rightEyeOtherType"
+                                                    style="margin-left: 15px;" class="form-control cst-form-control"
+                                                    placeholder="Enter other" ng-disabled="ctrl.isFormSubmitted"
+                                                    limit-to="200" form-control required />
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="button-footer" style="border: 0px;" ng-if="!ctrl.isFormSubmitted">
+                                            <button type="submit" class="btn btn-primary"
+                                                ng-click="ctrl.save()">Save</button>
+                                            <button class="btn btn-secondary"
+                                                ui-sref="techo.ncd.cardiologistList">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+</div>

@@ -49,7 +49,7 @@
                 });
             }
             menuconfig.selectizeOptions = selectizeObject.config;
-            menuconfig.types = ["fhs", "training", "manage", "admin"];
+            menuconfig.types = ["fhs", "training", "manage", "admin","ncd"];
             menuconfig.type = menuconfig.types[0];
             menuconfig.selectedTab = menuconfig.types[0];
             menuconfig.pageSet = true;

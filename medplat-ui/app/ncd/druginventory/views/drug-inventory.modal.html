@@ -1,0 +1,562 @@
+<div class="no-print container-fluid">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="tabbable boxed parentTabs cst-tab cst-tab-white-style">
+                <uib-tabset active="ncddi.selectedTab">
+                    <uib-tab index="'durgReceived'" heading="Drug Received" select="ncddi.onTabChange(true)">
+                        <div class="tab-pane fade show active in" id="durgReceived" role="tabpanel"
+                            aria-labelledby="durgReceived" aria-expanded="true">
+                            <!-- drug Received form -->
+                            <div class="row mt-0 ">
+                                <div class="col-xl-12 ">
+                                    <div class="tabbable cst-tab ">
+                                        <div class="tab-content bxb-0 ">
+                                            <div class="tab-pane fade active in " id="examinations">
+                                                <div class="container-fluid py-3">
+                                                    <form role="form" name="ncddi.drugReceivedForm"
+                                                        id="drugReceivedForm">
+                                                        <div class="row px-15">
+                                                            <div class="form-group col-xl-3">
+                                                                <validate for='hospital' required-msg="Select a value">
+                                                                    <label
+                                                                        style="vertical-align: middle;white-space: initial"
+                                                                        control-label><span
+                                                                            class="info_type">Facility</span></label>
+                                                                    <select class="form-control cst-form-control"
+                                                                        form-control
+                                                                        chosen-directive="ncddi.userHealthInfras"
+                                                                        name="hospital"
+                                                                        ng-model="ncddi.DrugReceivedDto.parentHealthId"
+                                                                        ng-change="ncddi.onParentHealthInfraChange()"
+                                                                        ng-options="infra.id as infra.name for infra in ncddi.userHealthInfras"
+                                                                        required>
+                                                                    </select>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row px-15">
+                                                            <div class="col-12  input-box ">
+                                                                <h6>Drug Received</h6>
+                                                                <div class="input-box--inner row ">
+                                                                    <div class="cst-table w-100 px-3"
+                                                                        id="member-scroll">
+                                                                        <table
+                                                                            class="table table-sm vertical-middle w-100"
+                                                                            style="border: 1px solid #dfdfdf !important;">
+                                                                            <thead class="cst-thead">
+                                                                                <tr>
+                                                                                    <th style="width: 35%;"
+                                                                                        id="medicineName"
+                                                                                        class="table-heading">
+                                                                                        Medicine Name</th>
+                                                                                    <th style="width: 25%;"
+                                                                                        id="quantityIssued"
+                                                                                        class="table-heading">
+                                                                                        Quantity Received
+                                                                                    </th>
+                                                                                    <th style="width: 25%;" id="date"
+                                                                                        class="table-heading">Date
+                                                                                    </th>
+                                                                                    <th style="width: 15%;" id="actions"
+                                                                                        class="table-heading">
+                                                                                        Actions</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div
+                                                                                            class="form-group col-xl-12">
+                                                                                            <validate for="medicineId"
+                                                                                                required-msg="Please select Medicine">
+                                                                                                <select
+                                                                                                    class="form-control cst-form-control"
+                                                                                                    form-control
+                                                                                                    chosen-directive="ncddi.drugList"
+                                                                                                    ng-model="ncddi.DrugReceivedDto.medicineId"
+                                                                                                    ng-options="drug.id as drug.medicineName for drug in ncddi.drugList"
+                                                                                                    name="medicineId"
+                                                                                                    id="medicineId"
+                                                                                                    required> </select>
+                                                                                                <placeholder>
+                                                                                                </placeholder>
+                                                                                            </validate>
+                                                                                        </div>
+
+                                                                                    </td>
+                                                                                    <td>
+
+                                                                                        <div
+                                                                                            class="form-group col-xl-12">
+                                                                                            <validate
+                                                                                                for="quantityReceived"
+                                                                                                required-msg="Please Enter Value">
+                                                                                                <input type="text"
+                                                                                                    form-control
+                                                                                                    class="form-control cst-form-control"
+                                                                                                    id="quantityReceived"
+                                                                                                    name="quantityReceived"
+                                                                                                    ng-model="ncddi.DrugReceivedDto.quantityReceived"
+                                                                                                    numbers-only
+                                                                                                    decimalallowed="false"
+                                                                                                    negativeallowed="false"
+                                                                                                    required>
+                                                                                                <placeholder>
+                                                                                                </placeholder>
+                                                                                            </validate>
+                                                                                        </div>
+
+                                                                                    </td>
+                                                                                    <td>
+
+                                                                                        <div class="form-group border-right-1"
+                                                                                            style="padding-left: 0px;">
+                                                                                            <validate for='issuedDate'
+                                                                                                required-msg="Please select date">
+                                                                                                <!-- <label for="issuedDate"
+                                                                                            class="control-label"
+                                                                                            control-label
+                                                                                            title="Date"></label> -->
+                                                                                                <input datepicker
+                                                                                                    type="text"
+                                                                                                    form-control
+                                                                                                    id="issuedDate"
+                                                                                                    name="issuedDate"
+                                                                                                    min-date="ncddi.minDate"
+                                                                                                    max-date="ncddi.today"
+                                                                                                    ng-model="ncddi.DrugReceivedDto.issuedDate"
+                                                                                                    required>
+                                                                                                <placeholder>
+                                                                                                </placeholder>
+                                                                                            </validate>
+                                                                                        </div>
+
+                                                                                    </td>
+                                                                                    <td class="action-cell">
+                                                                                        <button
+                                                                                            ng-click="ncddi.saveDrugReceived()"
+                                                                                            class="btn btn-primary">Add</button>
+                                                                                        <!-- <ul class="action-item">
+                                                                                    <li class="dropdown-toggle"
+                                                                                        id="moreDropdown"
+                                                                                        data-toggle="dropdown"
+                                                                                        aria-haspopup="true"
+                                                                                        aria-expanded="false">
+                                                                                        <a
+                                                                                            class="action-icon more-icon"></a>
+                                                                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                                                            aria-labelledby="moreDropdown"
+                                                                                            x-placement="bottom-end">
+                                                                                            <li
+                                                                                                ng-click="ncddi.saveDrugReceived()">
+                                                                                                <a>Add</a>
+                                                                                            </li>
+                                                                                            <li
+                                                                                                ng-click="ncddi.saveDrugReceived();ncddi.ShowButton('N')">
+                                                                                                <a>Return</a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                </ul> -->
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <div class="row px-15 mt-2">
+                                                        <div class="col-12  input-box ">
+                                                            <h6>Drug Received Details</h6>
+                                                            <div class="input-box--inner row ">
+                                                                <div class="form-group  col-xl-3">
+                                                                    <!-- <validate> -->
+                                                                    <label for="duration" control-label
+                                                                        uib-tooltip="Please select Facility">
+                                                                        Durations
+                                                                    </label>
+                                                                    <select class="form-control cst-form-control"
+                                                                        form-control
+                                                                        ng-model="ncddi.DrugReceivedDto.duration" chosen-directive
+                                                                        ng-change="ncddi.retriveAllDrugInventory(ncddi.DrugReceivedDto.parentHealthId,ncddi.DrugReceivedDto.duration)"
+                                                                        name="duration" id="duration" required>
+                                                                        <option value="CFY">
+                                                                            Current FY(till date)
+                                                                        </option>
+                                                                        <option value="TM">
+                                                                            This Month
+                                                                        </option>
+                                                                    </select>
+                                                                    <!-- <placeholder></placeholder>
+                                                                </validate> -->
+                                                                </div>
+                                                                <div class="cst-table table-responsive table-set-height mx-3"
+                                                                    id="member-scroll">
+                                                                    <table aria-describedby="member list"
+                                                                        class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
+                                                                        <thead class="cst-thead">
+                                                                            <tr>
+                                                                                <th style="width: 41%;" id="drugName"
+                                                                                    class="table-heading">
+                                                                                    Drug Name & Strength</th>
+                                                                                <th style="width: 15%;"
+                                                                                    id="quantityReceived"
+                                                                                    class="table-heading">Quantity
+                                                                                    Received
+                                                                                </th>
+                                                                                <th style="width: 15%;"
+                                                                                    id="quantityIssued"
+                                                                                    class="table-heading">Quantity
+                                                                                    Issued
+                                                                                </th>
+                                                                                <th style="width: 15%;"
+                                                                                    id="monthlyConsumption"
+                                                                                    class="table-heading">
+                                                                                    Approximate
+                                                                                    Monthly
+                                                                                    Consumption
+                                                                                </th>
+                                                                                <th style="width: 15%;"
+                                                                                    id="balanceInHand"
+                                                                                    class="table-heading">Balance in
+                                                                                    Hand
+                                                                                </th>
+
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr
+                                                                                ng-repeat="drug in ncddi.drugAllDrugInventory">
+                                                                                <td
+                                                                                    ng-bind="drug.medicineName | emptylabel">
+                                                                                </td>
+                                                                                <td
+                                                                                    ng-bind="drug.quantityReceived | emptylabel">
+                                                                                </td>
+                                                                                <td
+                                                                                    ng-bind="drug.quantityIssued | emptylabel">
+                                                                                </td>
+                                                                                <td
+                                                                                    ng-bind="drug.appMonthly | emptylabel">
+                                                                                </td>
+                                                                                <td ng-if="drug.balanceInHand < 30"
+                                                                                    uib-tooltip="Stock is low"
+                                                                                    ng-class="{'text-danger':drug.balanceInHand < 30}">
+                                                                                    {{drug.balanceInHand}}
+                                                                                </td>
+                                                                                <td ng-if="drug.balanceInHand >= 30"
+                                                                                    ng-class="{'text-danger':drug.balanceInHand < 30}">
+                                                                                    {{drug.balanceInHand}}
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr
+                                                                                ng-if="ncddi.drugAllDrugInventory.length==0">
+                                                                                <td colspan="8">Drugs are not
+                                                                                    Available</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="'drugIssued'" heading="Drug Issued" select="ncddi.onTabChange(false)">
+                        <div class="tab-pane show fade" id="drugIssued" role="tabpanel" aria-labelledby="drugIssued"
+                            aria-expanded="true">
+                            <!-- drugIssued form -->
+                            <div class="row mt-0 ">
+                                <div class="col-xl-12 ">
+                                    <div class="tabbable cst-tab ">
+                                        <div class="tab-content bxb-0 ">
+                                            <div class="tab-pane fade active in " id="examination-4">
+                                                <div class="container-fluid py-3">
+                                                    <form role="form" name="ncddi.drugIssuedForm" id="drugIssuedForm">
+                                                        <div class="row px-15">
+                                                            <div class="form-group col-xl-3"
+                                                                ng-if="ncddi.isUserHealthFetch">
+                                                                <validate for='hospital1' required-msg="Select a value">
+                                                                    <label
+                                                                        style="vertical-align: middle;white-space: initial"
+                                                                        control-label><span
+                                                                            class="info_type">Facility</span></label>
+                                                                    <select class="form-control cst-form-control"
+                                                                        required form-control
+                                                                        chosen-directive="ncddi.childInfras"
+                                                                        ng-change="ncddi.onChildInfraChange()"
+                                                                        name="hospital1"
+                                                                        ng-model="ncddi.DrugIssuedDto.child">
+                                                                        <option selected
+                                                                            ng-repeat="infra in ncddi.childInfras"
+                                                                            value="{{infra.id}}">{{infra.name}}
+                                                                        </option>
+                                                                    </select>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row px-15">
+                                                            <div class="col-12  input-box ">
+                                                                <h6>Drug Issued</h6>
+                                                                <div class="input-box--inner row ">
+                                                                    <div class="cst-table w-100 px-3"
+                                                                        id="member-scroll">
+                                                                        <table
+                                                                            class="table table-sm vertical-middle w-100"
+                                                                            style="border: 1px solid #dfdfdf !important;">
+                                                                            <thead class="cst-thead">
+                                                                                <tr>
+                                                                                    <th style="width: 35%;"
+                                                                                        id="medicineName"
+                                                                                        class="table-heading">
+                                                                                        Medicine Name</th>
+                                                                                    <th style="width: 25%;"
+                                                                                        id="quantityIssued"
+                                                                                        class="table-heading">
+                                                                                        Quantity
+                                                                                        Issued /
+                                                                                        Return
+                                                                                    </th>
+                                                                                    <th style="width: 25%;" id="date"
+                                                                                        class="table-heading">Date
+                                                                                    </th>
+                                                                                    <th style="width: 15%;" id="actions"
+                                                                                        class="table-heading">
+                                                                                        Actions</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>
+
+                                                                                        <div
+                                                                                            class="form-group col-xl-12">
+                                                                                            <!-- <validate for="medicineName"
+                                                                                        required-msg="Please select Medicine Name"> -->
+                                                                                            <select required-msg="Please Enter Value"
+                                                                                                class="form-control cst-form-control"
+                                                                                                form-control
+                                                                                                chosen-directive="ncddi.drugAllMedicines"
+                                                                                                ng-model="ncddi.DrugIssuedDto.medicineId"
+                                                                                                name="medicineId"
+                                                                                                id="medicineId"
+                                                                                                ng-options="drug.id as drug.medicineName for drug in ncddi.drugAllMedicines"
+                                                                                                required>
+                                                                                            </select>
+                                                                                            <!-- <placeholder></placeholder>
+                                                                                    </validate> -->
+                                                                                        </div>
+
+                                                                                    </td>
+                                                                                    <td>
+
+                                                                                        <div
+                                                                                            class="form-group col-xl-12">
+                                                                                            <validate
+                                                                                                for="quantityIssued"
+                                                                                                required-msg="Please Enter Value">
+                                                                                                <input type="text"
+                                                                                                    form-control
+                                                                                                    class="form-control cst-form-control"
+                                                                                                    id="quantityIssued"
+                                                                                                    name="quantityIssued"
+                                                                                                    ng-model="ncddi.DrugIssuedDto.quantityReceived"
+                                                                                                    numbers-only
+                                                                                                    decimalallowed="false"
+                                                                                                    negativeallowed="false"
+                                                                                                    required>
+                                                                                                <placeholder>
+                                                                                                </placeholder>
+                                                                                            </validate>
+                                                                                        </div>
+
+                                                                                    </td>
+                                                                                    <td>
+
+                                                                                        <div
+                                                                                            class="form-group border-right-1">
+                                                                                            <validate for="issuedDate"
+                                                                                                required-msg="Please select date">
+                                                                                                <input datepicker
+                                                                                                    type="text"
+                                                                                                    id="issuedDate"
+                                                                                                    name="issuedDate"
+                                                                                                    min-date="ncddi.minDate"
+                                                                                                    max-date="ncddi.today"
+                                                                                                    form-control
+                                                                                                    required
+                                                                                                    ng-model="ncddi.DrugIssuedDto.issuedDate">
+                                                                                                <placeholder>
+                                                                                                </placeholder>
+                                                                                            </validate>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td class="action-cell">
+                                                                                        <button
+                                                                                            ng-click="ncddi.saveDrugIssued(false)"
+                                                                                            class="btn btn-primary">Add</button>
+                                                                                        <button
+                                                                                            ng-click="ncddi.saveDrugIssued(true)"
+                                                                                            class="btn btn-primary">Return</button>
+                                                                                        <!-- <ul class="action-item">
+                                                                                        <li class="dropdown-toggle"
+                                                                                            id="moreDropdown"
+                                                                                            data-toggle="dropdown"
+                                                                                            aria-haspopup="true"
+                                                                                            aria-expanded="false">
+                                                                                            <a
+                                                                                                class="action-icon more-icon"></a>
+                                                                                            <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                                                                aria-labelledby="moreDropdown"
+                                                                                                x-placement="bottom-end">
+                                                                                                <li
+                                                                                                    ng-click="ncddi.saveDrugIssued()">
+                                                                                                    <a>Add</a>
+                                                                                                </li>
+                                                                                                <li
+                                                                                                    ng-click="ncddi.saveDrugIssued();ncddi.ShowButton('N')">
+                                                                                                    <a>Return</a>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                    </ul> -->
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <div class="row px-15 mt-2">
+                                                        <div class="col-12  input-box ">
+                                                            <h6>Drug Received Details</h6>
+                                                            <div class="input-box--inner row ">
+                                                                <div class="form-group  col-xl-3">
+
+                                                                    <!-- <validate> -->
+                                                                    <label for="durations" control-label
+                                                                        uib-tooltip="Please select Facility">
+                                                                        Durations
+                                                                    </label>
+
+                                                                    <select class="form-control cst-form-control"
+                                                                        form-control chosen-directive
+                                                                        ng-model="ncddi.DrugIssuedDto.durations"
+                                                                        ng-change="ncddi.retriveAllDrugInventory(ncddi.DrugIssuedDto.child,ncddi.DrugIssuedDto.durations)"
+                                                                        name="durations" id="durations" required>
+                                                                        <option value="CFY">
+                                                                            Current FY(till date)
+                                                                        </option>
+                                                                        <option value="TM">
+                                                                            This Month
+                                                                        </option>
+                                                                    </select>
+                                                                    <!-- <placeholder></placeholder>
+                                                    </validate> -->
+                                                                </div>
+                                                                <div class="cst-table table-responsive table-set-height mx-3"
+                                                                    id="member-scroll">
+                                                                    <table aria-describedby="member list"
+                                                                        class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
+                                                                        <thead class="cst-thead">
+                                                                            <tr>
+                                                                                <th style="width: 41%;"
+                                                                                    id="medicineName"
+                                                                                    class="table-heading">
+                                                                                    Drug Name & Strength</th>
+                                                                                <th style="width: 15%;"
+                                                                                    id="quantityReceived"
+                                                                                    class="table-heading">Quantity
+                                                                                    Received
+                                                                                </th>
+                                                                                <th style="width: 15%;"
+                                                                                    id="quantityIssued"
+                                                                                    class="table-heading">Quantity
+                                                                                    Issued
+                                                                                </th>
+                                                                                <th style="width: 15%;"
+                                                                                    id="monthlyConsumption"
+                                                                                    class="table-heading">
+                                                                                    Approximate
+                                                                                    Monthly
+                                                                                    Consumption
+                                                                                </th>
+                                                                                <th style="width: 15%;"
+                                                                                    id="balanceInHand"
+                                                                                    class="table-heading">Balance in
+                                                                                    Hand
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr
+                                                                                ng-repeat="drug in ncddi.drugAllDrugInventory">
+                                                                                <td
+                                                                                    ng-bind="drug.medicineName | emptylabel">
+                                                                                </td>
+                                                                                <td
+                                                                                    ng-bind="drug.quantityReceived | emptylabel">
+                                                                                </td>
+                                                                                <td
+                                                                                    ng-bind="drug.quantityIssued | emptylabel">
+                                                                                </td>
+                                                                                <td
+                                                                                    ng-bind="drug.appMonthly | emptylabel">
+                                                                                </td>
+                                                                                <td ng-if="drug.balanceInHand < 30"
+                                                                                    uib-tooltip="Stock is low"
+                                                                                    ng-class="{'text-danger':drug.balanceInHand < 30}">
+                                                                                    {{drug.balanceInHand}}
+                                                                                </td>
+                                                                                <td ng-if="drug.balanceInHand >= 30"
+                                                                                    ng-class="{'text-danger':drug.balanceInHand < 30}">
+                                                                                    {{drug.balanceInHand}}
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr
+                                                                                ng-if="ncddi.drugAllDrugInventory.length==0">
+                                                                                <td colspan="8">Drugs are not
+                                                                                    Available</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+                <div class="pull-right">
+                    <a href="javascript:void(0)" ng-click="ncddi.printDISummary()" class="btn btn-primary mt-1">
+                        <em class="ion-printer mr-2"></em>
+                        Drug Inventory PDF
+                    </a>
+                </div>
+                <div class="display-none" id="printableDi">
+                    <ng-include src="'app/ncd/druginventory/views/drug-inventory-pdf.modal.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

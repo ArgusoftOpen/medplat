@@ -1,0 +1,337 @@
+<div class="row mt-0">
+    <div class="col-xl-12">
+        <div class="tabbable cst-tab">
+            <div class="tab-content bxb-0">
+                <div class="tab-pane fade active in" id="examination-5">
+                    <div class="container-fluid py-3">
+                        <form role="form" name="ctrl.form" id="ctrl.form" novalidate>
+                            <div class="row inline-form-control mb-2"
+                                ng-init="ctrl.hypertensionForm.isRegularRythm=true; ctrl.hypertensionForm.murmur=false; ctrl.isMedicine=false;
+                                ctrl.hypertensionForm.bilateralClear=true; ctrl.hypertensionForm.bilateralBasalCrepitation=false; ctrl.hypertensionForm.rhonchi=false;
+                                ctrl.hypertensionForm.pedalOedema=false">
+                                <div class="col-12">
+                                    <dateinfra obj="ncdmd.dateinfra" user-health-infras="ncdmd.userHealthInfras"
+                                        on-change="ctrl.retrieveHypertensionDetailsByMemberAndDate()"
+                                        on-health-infra-change="ncdmd.retrieveMedicinesByHealthInfra(ncdmd.dateinfra.healthInfraId)">
+                                    </dateinfra>
+                                    <div class="form-group" style="float: right;">
+                                        <button type="button" ng-click="ncdmd.showTreatmentHistory('HT')"
+                                            class="btn btn-primary">Treatment
+                                            History</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12  input-box" ng-if="ctrl.hypertensionRecords.length > 0">
+                                    <h6>Previous Blood pressure detail</h6>
+                                    <div class="input-box--inner row">
+                                        <table style="margin-left: 15px; margin-right: 15px;"
+                                            class="table table-sm table-striped table-bordered header-fixed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>
+                                                        Readings
+                                                    </th>
+                                                    <th>
+                                                        Status
+                                                    </th>
+                                                    <th>
+                                                        Suffering from Hypertension
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="config in ctrl.hypertensionRecords | limitTo:3">
+                                                    <td>
+                                                        {{config.screeningDate | date:'dd/MM/yyyy'}}
+                                                    </td>
+                                                    <td>
+                                                        {{config.systolicBloodPressure}} /
+                                                        {{config.diastolicBloodPressure}}
+                                                    </td>
+                                                    <td>
+                                                        {{config.status}}
+                                                    </td>
+                                                    <td>
+                                                        {{config.doesSuffering ? "Yes" : "No"}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12 input-box">
+                                    <h6>Hypertension Examination</h6>
+                                    <div class="input-box--inner row">
+                                        <div class="form-group col-xl-3">
+                                            <validate for='systolicBloodPressure' required-msg="Please enter a value">
+                                                <label for="systolicBloodPressure" control-label>Systolic BP
+                                                    (mmHg)</label>
+                                                <input type="number" form-control class="form-control cst-form-control"
+                                                    id="systolicBloodPressure" name="systolicBloodPressure"
+                                                    ng-model="ctrl.hypertensionForm.systolicBloodPressure"
+                                                    ng-change="ctrl.hypertensionExaminedValuesChanged()"
+                                                    min="60" max="260"
+                                                    required decimalallowed="false" negativeallowed="false"
+                                                    maxlength="3">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-3">
+                                            <validate for='diastolicBloodPressure' required-msg="Please enter a value">
+                                                <label for="diastolicBloodPressure" control-label>Diastolic BP
+                                                    (mmHg)</label>
+                                                <input type="number" form-control class="form-control cst-form-control"
+                                                    id="diastolicBloodPressure" name="diastolicBloodPressure"
+                                                    ng-model="ctrl.hypertensionForm.diastolicBloodPressure"
+                                                    ng-change="ctrl.hypertensionExaminedValuesChanged()"
+                                                    min="40" max="160"
+                                                    required decimalallowed="false" negativeallowed="false"
+                                                    maxlength="3">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-3">
+                                            <validate for='heartRate' required-msg="Please enter a value">
+                                                <label for="heartRate" control-label>Heart Rate
+                                                    (BPM)</label>
+                                                <input type="text" form-control class="form-control cst-form-control"
+                                                    id="heartRate" name="heartRate"
+                                                    ng-model="ctrl.hypertensionForm.heartRate" numbers-only required
+                                                    decimalallowed="false" negativeallowed="false" maxlength="3">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-3">
+                                            <validate for='status' required-msg="Please select a value">
+                                                <label for="status" control-label>Status</label>
+                                                <select class="form-control cst-form-control" form-control disabled
+                                                    ng-model="ctrl.hypertensionForm.status" name="status" id="status"
+                                                    required>
+                                                    <option value="" selected>--Select--
+                                                    </option>
+                                                    <option value="CONTROLLED">
+                                                        Control
+                                                    </option>
+                                                    <option value="UNCONTROLLED">
+                                                        Uncontrol
+                                                    </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12 input-box">
+                                    <h6>Brief Examination</h6>
+                                    <div class="input-box--inner row ">
+                                        <div class="col-xl-12">
+                                            <h6>Auscultate Heart</h6>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='isRegularRythm' required-msg="Please select a value">
+                                                <label style="display: block;" for="isRegularRythm"
+                                                    uib-tooltip="Presence of isRegularRythm" class="control-label"
+                                                    control-label>
+                                                    Regular Rhythm
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="isRegularRythm" id="isRegularRythm"
+                                                        type="radio" ng-model="ctrl.hypertensionForm.isRegularRythm"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="isRegularRythm" id="isRegularRythm"
+                                                        type="radio" ng-model="ctrl.hypertensionForm.isRegularRythm"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+
+                                        <div class="form-group col-xl-4">
+                                            <validate for='murmur' required-msg="Please select a value">
+                                                <label style="display: block;" for="murmur"
+                                                    uib-tooltip="Presence of murmur" class="control-label"
+                                                    control-label>
+                                                    Murmur
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="murmur" id="murmur" type="radio"
+                                                        ng-model="ctrl.hypertensionForm.murmur" form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="murmur" id="murmur" type="radio"
+                                                        ng-model="ctrl.hypertensionForm.murmur" form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+
+                                        <div class="col-xl-12">
+                                            <h6>Auscultate Lungs</h6>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='bilateralClear' required-msg="Please select a value">
+                                                <label style="display: block;" for="bilateralClear"
+                                                    uib-tooltip="Presence of bilateralClear" class="control-label"
+                                                    control-label>
+                                                    Bilateral Clear
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="bilateralClear" id="bilateralClear"
+                                                        type="radio" ng-model="ctrl.hypertensionForm.bilateralClear"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="bilateralClear" id="bilateralClear"
+                                                        type="radio" ng-model="ctrl.hypertensionForm.bilateralClear"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+
+                                        <div class="col-xl-12">
+                                            <h6>Other</h6>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='pedalOedema' required-msg="Please select a value">
+                                                <label style="display: block;" for="pedalOedema"
+                                                    uib-tooltip="Presence of Pedal Oedema" class="control-label"
+                                                    control-label>
+                                                    Pedal Oedema
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="pedalOedema" id="pedalOedema"
+                                                        type="radio" ng-model="ctrl.hypertensionForm.pedalOedema"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="pedalOedema" id="pedalOedema"
+                                                        type="radio" ng-model="ctrl.hypertensionForm.pedalOedema"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+
+                                        <div ng-show="ctrl.hypertensionForm.bilateralClear === false"
+                                            class="form-group col-xl-4">
+                                            <validate for='bilateralBasalCrepitation'
+                                                required-msg="Please select a value">
+                                                <label style="display: block;" for="bilateralBasalCrepitation"
+                                                    uib-tooltip="Presence of bilateralBasalCrepitation"
+                                                    clarss="control-label" control-label>
+                                                    Bilateral Basal Crepitation
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="bilateralBasalCrepitation"
+                                                        id="bilateralBasalCrepitation" type="radio"
+                                                        ng-model="ctrl.hypertensionForm.bilateralBasalCrepitation"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="bilateralBasalCrepitation"
+                                                        id="bilateralBasalCrepitation" type="radio"
+                                                        ng-model="ctrl.hypertensionForm.bilateralBasalCrepitation"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+
+                                        <div ng-show="ctrl.hypertensionForm.bilateralClear === false"
+                                            class="form-group col-xl-4">
+                                            <validate for='rhonchi' required-msg="Please select a value">
+                                                <label style="display: block;" for="rhonchi"
+                                                    uib-tooltip="Presence of rhonchi" class="control-label"
+                                                    control-label>
+                                                    Rhonchi
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="rhonchi" id="rhonchi" type="radio"
+                                                        ng-model="ctrl.hypertensionForm.rhonchi" form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="rhonchi" id="rhonchi" type="radio"
+                                                        ng-model="ctrl.hypertensionForm.rhonchi" form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12 input-box">
+                                    <h6>Diagnosis</h6>
+                                    <div class="form-group col-xl-12">
+                                            <validate for='doesSuffering' required-msg="Please select a value">
+                                                <label style="display: block;" for="doesSuffering"
+                                                    uib-tooltip="Presence of doesSuffering" class="control-label"
+                                                    control-label>
+                                                    <b>Does this patient suffering from
+                                                        Hypertension</b>
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="doesSuffering" id="doesSuffering"
+                                                        type="radio" ng-model="ctrl.hypertensionForm.doesSuffering"
+                                                        ng-change="ctrl.showConfirmationModalForSuffering()"
+                                                        form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="doesSuffering" id="doesSuffering"
+                                                        type="radio" ng-model="ctrl.hypertensionForm.doesSuffering"
+                                                        ng-change="ctrl.showConfirmationModalForSuffering()"
+                                                        form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3 px-15">
+                                <treatment obj="ctrl.medicineDetail" prescribed-medicine="ctrl.prescribedMedicine" is_submit="ctrl.medicineFormSubmit"
+                                    medicine-data="ncdmd.medicineData" take-medicine="ctrl.takeMedicine"></treatment>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="button-footer" style="border: 0px;" ng-if="!ctrl.hypertensionAlreadyFilled">
+                                        <button type="submit" class="btn btn-primary"
+                                            ng-click="ctrl.saveHyperTension(ctrl.form)">Save
+                                            & Continue
+                                        </button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='MO'"
+                                            ui-sref="techo.ncd.members">Cancel</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='CONSULTANT'"
+                                            ui-sref="techo.ncd.followupscreenlisting">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

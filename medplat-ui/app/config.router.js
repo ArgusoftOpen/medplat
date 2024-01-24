@@ -643,6 +643,18 @@
                         'reverseIterate.filter',
                     ])
                 })
+                .state('techo.ncd.ophthalmologistList', {
+                    url: '/ophthalmologistList',
+                    title: 'ophthalmologist patient list',
+                    templateUrl: 'app/ncd/ncdspecialist/views/ophthalmologist-members-list.html',
+                    controller: 'ophthalmologistMembersList as ctrl',
+                    resolve: load([
+                        'ophthalmologist-members-list.controller',
+                        'query.service',
+                        'paging-for-query-builder.service',
+                        'authentication.service'
+                    ])
+                })
                 .state('techo.manage.drtechoUserApproval', {
                     url: '/drtechouserapproval',
                     title: 'Dr. Techo User Approval',
@@ -661,15 +673,15 @@
                         'reverseIterate.filter',
                     ])
                 })
-                // .state('techo.manage.ncdreport', {
-                //     url: '/ncdreport',
-                //     title: 'NCD Location Wise Report',
-                //     templateUrl: 'app/manage/views/ncd-report.html',
-                //     controller: 'NcdReport as ncdreport',
-                //     resolve: load([
-                //         'ncd-report.controller'
-                //     ])
-                // })
+                .state('techo.manage.ncdreport', {
+                    url: '/ncdreport',
+                    title: 'NCD Location Wise Report',
+                    templateUrl: 'app/manage/views/ncd-report.html',
+                    controller: 'NcdReport as ncdreport',
+                    resolve: load([
+                        'ncd-report.controller'
+                    ])
+                })
                 .state('techo.manage.npcblist', {
                     url: '/npcb',
                     title: 'National Programme For Control of Blindness',
@@ -851,15 +863,15 @@
                         // 'ngmap'
                     ])
                 })
-                // .state('techo.dashboard.ncdscreeningdashboard', {
-                //     url: '/ncdscreening',
-                //     title: 'NCD Screening Dashboard',
-                //     templateUrl: 'app/ncd/dashboard/views/ncd-screening-dashboard.html',
-                //     controller: 'NcdScreeningDashboardController as ncdScreeningDashboard',
-                //     resolve: load([
-                //         'ncd-screening-dashboard.controller',
-                //     ])
-                // })
+                .state('techo.dashboard.ncdscreeningdashboard', {
+                    url: '/ncdscreening',
+                    title: 'NCD Screening Dashboard',
+                    templateUrl: 'app/ncd/dashboard/views/ncd-screening-dashboard.html',
+                    controller: 'NcdScreeningDashboardController as ncdScreeningDashboard',
+                    resolve: load([
+                        'ncd-screening-dashboard.controller',
+                    ])
+                })
                 .state('techo.dashboard.fhsreport', {
                     url: '/fhsreport/:locationId/:userId',
                     title: 'FHS Report',
@@ -1759,291 +1771,315 @@
                 //         'hfr-basic.controller'
                 //     ])
                 // })
-                // .state('techo.ncd', {
-                //     url: '/ncd',
-                //     template: '<ui-view></ui-view>',
-                //     abstract: true
-                // })
-                // .state('techo.ncd.druginventory', {
-                //     url: 'druginventory/:id?type',
-                //     title: 'Drug Inventory',
-                //     templateUrl: 'app/ncd/druginventory/views/drug-inventory.modal.html',
-                //     controller: 'NcdDrugInventoryController as ncddi',
-                //     resolve: load([
-                //         'ncd-drug-inventory.controller',
-                //         'ncd.service',
-                //     ])
-                // })
-                // .state('techo.ncd.moreviewscreen', {
-                //     url: '/moreviewscreen/:id',
-                //     title: 'MBBS MO Review Screen',
-                //     templateUrl: 'app/ncd/MBBSMOReviewScreen/views/ncd-mbbsRS.modal.html',
-                //     controller: 'NcdMOReviewScreenController as ncdrs',
-                //     resolve: load([
-                //         'ncd-moReview-screeen.controller',
-                //         'ncd.service',
-                //         'ngInfiniteScroll',
-                //         'paging.service',
-                //         'alasql',
-                //         'treatment.component',
-                //         'date-infra.component'
-                //     ])
-                // })
-                // .state('techo.ncd.moreview', {
-                //     url: '/moreview',
-                //     title: 'MO Review members',
-                //     templateUrl: 'app/ncd/MOReview/views/ncd-mo-review-screen.html',
-                //     controller: 'NcdMOReviewController as ctrl',
-                //     resolve: load([
-                //         'ncd-mo-review.controller',
-                //         'ncd.service',
-                //         'ngInfiniteScroll',
-                //         'paging.service',
-                //         'alasql'
-                //     ])
-                // })
-                // .state('techo.ncd.moreviewmember', {
-                //     url: '/moreview/:id',
-                //     title: 'MO Review',
-                //     templateUrl: 'app/ncd/MOReview/views/ncd-mo-review-member.html',
-                //     controller: 'NcdMOReviewMemberController as ctrl',
-                //     resolve: load([
-                //         'ncd-mo-review-member.controller',
-                //         'ncd.service',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service',
-                //         'ncd.service',
-                //         'referral.component'
-                //     ])
-                // })
-                // .state('techo.ncd.moreviewfollowup', {
-                //     url: '/moreviewfollowup',
-                //     title: 'MO Review followup',
-                //     templateUrl: 'app/ncd/MOReviewFollowup/views/ncd-mo-review-followup-screen.html',
-                //     controller: 'NcdMOReviewFollowupController as ctrl',
-                //     resolve: load([
-                //         'ncd-mo-review-followup.controller',
-                //         'ncd.service',
-                //         'ngInfiniteScroll',
-                //         'paging.service',
-                //         'alasql'
-                //     ])
-                // })
-                // .state('techo.ncd.moreviewfollowupmember', {
-                //     url: '/moreviewfollowup/:id',
-                //     title: 'MO Review followup',
-                //     templateUrl: 'app/ncd/MOReviewFollowup/views/ncd-mo-review-followup-member.html',
-                //     controller: 'NcdMOReviewFollowupMemberController as ctrl',
-                //     resolve: load([
-                //         'ncd-mo-review-followup-member.controller',
-                //         'ncd.service',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service',
-                //         'ncd.service',
-                //         'referral.component'
-                //     ])
-                // })
-                // .state('techo.ncd.moreviewpatientsummary', {
-                //     url: 'moreviewpatientsummary/:id?type',
-                //     title: 'MBBS MO Review Patient Summary',
-                //     templateUrl: 'app/ncd/MBBSMOReviewScreen/views/ncd-mbbsmor-patientsummary.modal.html',
-                //     controller: 'NcdMOReviewPatientSummaryController as ncdps',
-                //     resolve: load([
-                //         'ncd-moReview-patientsummary.controller',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service',
-                //         'ncd.service',
-                //         'referral.component'
-                //     ])
-                // })
-                // .state('techo.ncd.followupscreen', {
-                //     url: '/followupscreen/:id?type',
-                //     title: 'Consultant Followup Screen',
-                //     templateUrl: 'app/ncd/Consultantfollowupscreen/views/con-followup-screen.modal.html',
-                //     controller: 'NcdConsultantfollowupScreenController as ncdfs',
-                //     resolve: load([
-                //         'ncd-followup-screeen.controller',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service',
-                //         'ncd.service',
-                //         'referral.component'
-                //     ])
-                // })
-                // .state('techo.ncd.followupscreenlisting', {
-                //     url: 'followupscreenlisting/:id?type',
-                //     title: 'Consultant Followup Screen members',
-                //     templateUrl: 'app/ncd/Consultantfollowupscreen/views/ncd-members-fs.modal.html',
-                //     controller: 'NcdCFSListingController as ncdfsl',
-                //     resolve: load([
-                //         'ncd-member-listing-fs.controller',
-                //         'ncd.service',
-                //         'ngInfiniteScroll',
-                //         'paging.service',
-                //         'alasql'
-                //     ])
-                // })
-                // .state('techo.ncd.memberdetails', {
-                //     url: '/member/:id?type',
-                //     title: 'NCD Member Detail',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-main-view.html',
-                //     controller: 'NcdMemberDetailController as ncdmd',
-                //     abstract: true,
-                //     resolve: load([
-                //         'ncd-member-detail.controller',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service',
-                //         'ncd.service',
-                //         'referral.component',
-                //         'ncd.constant',
-                //         'date-infra.component',
-                //         'treatment.component'
-                //     ])
-                // })
-                // .state('techo.ncd.memberdetails.initialassessment', {
-                //     url: '',
-                //     title: 'NCD Member Detail',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-initial-assessment.html',
-                //     controller: 'NcdInitialAssessment as ctrl',
-                //     resolve: load([
-                //         'ncd-initial-assessment.controller',
-                //         'ncd-member-detail.controller',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service',
-                //         'ncd.service',
-                //         'referral.component',
-                //         'ncd.constant',
-                //         'date-infra.component',
-                //         'treatment.component'
-                //     ])
-                // })
-                // .state('techo.ncd.memberdetails.hypertension', {
-                //     url: '',
-                //     title: 'NCD Member Detail',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-hypertension.html',
-                //     controller: 'NcdHypertension as ctrl',
-                //     resolve: load([
-                //         'ncd-hypertension.controller',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service'
-                //     ])
-                // })
-                // .state('techo.ncd.memberdetails.diabetes', {
-                //     url: '',
-                //     title: 'NCD Member Detail',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-diabetes.html',
-                //     controller: 'NcdDiabetes as ctrl',
-                //     resolve: load([
-                //         'ncd-diabetes.controller',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service'
-                //     ])
-                // })
-                // .state('techo.ncd.memberdetails.oralcancer', {
-                //     url: '',
-                //     title: 'NCD Member Detail',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-oral-cancer.html',
-                //     controller: 'NcdOralCancer as ctrl',
-                //     resolve: load([
-                //         'ncd-oral-cancer.controller'
-                //     ])
-                // })
-                // .state('techo.ncd.memberdetails.breastcancer', {
-                //     url: '',
-                //     title: 'NCD Member Detail',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-breast-cancer.html',
-                //     controller: 'NcdBreastCancer as ctrl',
-                //     resolve: load([
-                //         'ncd-breast-cancer.controller'
-                //     ])
-                // })
-                // .state('techo.ncd.memberdetails.cervicalcancer', {
-                //     url: '',
-                //     title: 'NCD Member Detail',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-cervical-cancer.html',
-                //     controller: 'NcdCervicalCancer as ctrl',
-                //     resolve: load([
-                //         'ncd-cervical-cancer.controller'
-                //     ])
-                // })
-                // .state('techo.ncd.memberdetails.mentalhealth', {
-                //     url: '',
-                //     title: 'NCD Member Detail',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-mental-health.html',
-                //     controller: 'NcdMentalHealth as ctrl',
-                //     resolve: load([
-                //         'ncd-mental-health.controller',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service'
-                //     ])
-                // })
-                // .state('techo.ncd.memberdetails.general', {
-                //     url: '',
-                //     title: 'NCD Member Detail',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-general.html',
-                //     controller: 'NcdGeneral as ctrl',
-                //     resolve: load([
-                //         'ncd-general.controller',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service'
-                //     ])
-                // })
-                // .state('techo.ncd.memberdetails.investigation', {
-                //     url: '',
-                //     title: 'NCD Member Detail',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-investigation.html',
-                //     controller: 'NcdInvestigation as ctrl',
-                //     resolve: load([
-                //         'ncd-investigation.controller',
-                //         'ndhm-hip.service',
-                //         'ndhm-hip.constants',
-                //         'ndhm-health-id-capture-service',
-                //         'ndhm-health-id-create-service'
-                //     ])
-                // })
-                // .state('techo.ncd.members', {
-                //     url: '/members?type',
-                //     title: 'Referred Patients',
-                //     templateUrl: 'app/ncd/refferedpatients/views/ncd-members.html',
-                //     controller: 'NcdMembersController as mlisting',
-                //     resolve: load([
-                //         'ncd-members.controller',
-                //         'ncd.service',
-                //         'ngInfiniteScroll',
-                //         'paging.service',
-                //         'alasql',
-                //         'titlecase.filter'
-                //     ])
-                // })
-                // .state('techo.ncd.patientSummary', {
-                //     url: '/patientSummary/:id',
-                //     title: 'Patient Summary',
-                //     templateUrl: 'app/ncd/PatientSummary/views/ncd-patient-summary.html',
-                //     controller: 'NcdPatientSummary as ctrl',
-                //     resolve: load([
-                //         'ncd-patient-summary.controller',
-                //         'ncd.service'
-                //     ])
-                // })
+                .state('techo.ncd', {
+                    url: '/ncd',
+                    template: '<ui-view></ui-view>',
+                    abstract: true
+                })
+                .state('techo.ncd.druginventory', {
+                    url: 'druginventory/:id?type',
+                    title: 'Drug Inventory',
+                    templateUrl: 'app/ncd/druginventory/views/drug-inventory.modal.html',
+                    controller: 'NcdDrugInventoryController as ncddi',
+                    resolve: load([
+                        'ncd-drug-inventory.controller',
+                        'ncd.service',
+                    ])
+                })
+                .state('techo.ncd.moreviewscreen', {
+                    url: '/moreviewscreen/:id',
+                    title: 'MBBS MO Review Screen',
+                    templateUrl: 'app/ncd/MBBSMOReviewScreen/views/ncd-mbbsRS.modal.html',
+                    controller: 'NcdMOReviewScreenController as ncdrs',
+                    resolve: load([
+                        'ncd-moReview-screeen.controller',
+                        'ncd.service',
+                        'ngInfiniteScroll',
+                        'paging.service',
+                        'alasql',
+                        'treatment.component',
+                        'date-infra.component'
+                    ])
+                })
+                .state('techo.ncd.mospecialistList', {
+                    url: '/mospecialistList',
+                    title: 'MO specialist patient list',
+                    templateUrl: 'app/ncd/ncdspecialist/views/mo-specialist-members-list.html',
+                    controller: 'MOSpecialistMembersList as ctrl',
+                    resolve: load([
+                        'mo-specialist-members-list.controller',
+                        'query.service',
+                        'paging-for-query-builder.service',
+                        'authentication.service'
+                    ])
+                })
+                .state('techo.ncd.cardiologistList', {
+                    url: '/cardiologistList',
+                    title: 'Cardiologist patient list',
+                    templateUrl: 'app/ncd/ncdspecialist/views/cardiologist-members-list.html',
+                    controller: 'CardiologistMembersList as ctrl',
+                    resolve: load([
+                        'cardiologist-members-list.controller',
+                        'query.service',
+                        'paging-for-query-builder.service',
+                        'authentication.service'
+                    ])
+                })
+                .state('techo.ncd.moreview', {
+                    url: '/moreview',
+                    title: 'MO Review members',
+                    templateUrl: 'app/ncd/MOReview/views/ncd-mo-review-screen.html',
+                    controller: 'NcdMOReviewController as ctrl',
+                    resolve: load([
+                        'ncd-mo-review.controller',
+                        'ncd.service',
+                        'ngInfiniteScroll',
+                        'paging.service',
+                        'alasql'
+                    ])
+                })
+                .state('techo.ncd.moreviewmember', {
+                    url: '/moreview/:id',
+                    title: 'MO Review',
+                    templateUrl: 'app/ncd/MOReview/views/ncd-mo-review-member.html',
+                    controller: 'NcdMOReviewMemberController as ctrl',
+                    resolve: load([
+                        'ncd-mo-review-member.controller',
+                        'ncd.service',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service',
+                        'ncd.service',
+                        'referral.component'
+                    ])
+                })
+                .state('techo.ncd.moreviewfollowup', {
+                    url: '/moreviewfollowup',
+                    title: 'MO Review followup',
+                    templateUrl: 'app/ncd/MOReviewFollowup/views/ncd-mo-review-followup-screen.html',
+                    controller: 'NcdMOReviewFollowupController as ctrl',
+                    resolve: load([
+                        'ncd-mo-review-followup.controller',
+                        'ncd.service',
+                        'ngInfiniteScroll',
+                        'paging.service',
+                        'alasql'
+                    ])
+                })
+                .state('techo.ncd.moreviewfollowupmember', {
+                    url: '/moreviewfollowup/:id',
+                    title: 'MO Review followup',
+                    templateUrl: 'app/ncd/MOReviewFollowup/views/ncd-mo-review-followup-member.html',
+                    controller: 'NcdMOReviewFollowupMemberController as ctrl',
+                    resolve: load([
+                        'ncd-mo-review-followup-member.controller',
+                        'ncd.service',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service',
+                        'ncd.service',
+                        'referral.component'
+                    ])
+                })
+                .state('techo.ncd.moreviewpatientsummary', {
+                    url: 'moreviewpatientsummary/:id?type',
+                    title: 'MBBS MO Review Patient Summary',
+                    templateUrl: 'app/ncd/MBBSMOReviewScreen/views/ncd-mbbsmor-patientsummary.modal.html',
+                    controller: 'NcdMOReviewPatientSummaryController as ncdps',
+                    resolve: load([
+                        'ncd-moReview-patientsummary.controller',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service',
+                        'ncd.service',
+                        'referral.component'
+                    ])
+                })
+                .state('techo.ncd.followupscreen', {
+                    url: '/followupscreen/:id?type',
+                    title: 'Consultant Followup Screen',
+                    templateUrl: 'app/ncd/Consultantfollowupscreen/views/con-followup-screen.modal.html',
+                    controller: 'NcdConsultantfollowupScreenController as ncdfs',
+                    resolve: load([
+                        'ncd-followup-screeen.controller',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service',
+                        'ncd.service',
+                        'referral.component'
+                    ])
+                })
+                .state('techo.ncd.followupscreenlisting', {
+                    url: 'followupscreenlisting/:id?type',
+                    title: 'Consultant Followup Screen members',
+                    templateUrl: 'app/ncd/Consultantfollowupscreen/views/ncd-members-fs.modal.html',
+                    controller: 'NcdCFSListingController as ncdfsl',
+                    resolve: load([
+                        'ncd-member-listing-fs.controller',
+                        'ncd.service',
+                        'ngInfiniteScroll',
+                        'paging.service',
+                        'alasql'
+                    ])
+                })
+                .state('techo.ncd.memberdetails', {
+                    url: '/member/:id?type',
+                    title: 'NCD Member Detail',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-main-view.html',
+                    controller: 'NcdMemberDetailController as ncdmd',
+                    abstract: true,
+                    resolve: load([
+                        'ncd-member-detail.controller',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service',
+                        'ncd.service',
+                        'referral.component',
+                        'ncd.constant',
+                        'date-infra.component',
+                        'treatment.component'
+                    ])
+                })
+                .state('techo.ncd.memberdetails.initialassessment', {
+                    url: '',
+                    title: 'NCD Member Detail',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-initial-assessment.html',
+                    controller: 'NcdInitialAssessment as ctrl',
+                    resolve: load([
+                        'ncd-initial-assessment.controller',
+                        'ncd-member-detail.controller',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service',
+                        'ncd.service',
+                        'referral.component',
+                        'ncd.constant',
+                        'date-infra.component',
+                        'treatment.component'
+                    ])
+                })
+                .state('techo.ncd.memberdetails.hypertension', {
+                    url: '',
+                    title: 'NCD Member Detail',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-hypertension.html',
+                    controller: 'NcdHypertension as ctrl',
+                    resolve: load([
+                        'ncd-hypertension.controller',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service'
+                    ])
+                })
+                .state('techo.ncd.memberdetails.diabetes', {
+                    url: '',
+                    title: 'NCD Member Detail',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-diabetes.html',
+                    controller: 'NcdDiabetes as ctrl',
+                    resolve: load([
+                        'ncd-diabetes.controller',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service'
+                    ])
+                })
+                .state('techo.ncd.memberdetails.oralcancer', {
+                    url: '',
+                    title: 'NCD Member Detail',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-oral-cancer.html',
+                    controller: 'NcdOralCancer as ctrl',
+                    resolve: load([
+                        'ncd-oral-cancer.controller'
+                    ])
+                })
+                .state('techo.ncd.memberdetails.breastcancer', {
+                    url: '',
+                    title: 'NCD Member Detail',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-breast-cancer.html',
+                    controller: 'NcdBreastCancer as ctrl',
+                    resolve: load([
+                        'ncd-breast-cancer.controller'
+                    ])
+                })
+                .state('techo.ncd.memberdetails.cervicalcancer', {
+                    url: '',
+                    title: 'NCD Member Detail',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-cervical-cancer.html',
+                    controller: 'NcdCervicalCancer as ctrl',
+                    resolve: load([
+                        'ncd-cervical-cancer.controller'
+                    ])
+                })
+                .state('techo.ncd.memberdetails.mentalhealth', {
+                    url: '',
+                    title: 'NCD Member Detail',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-mental-health.html',
+                    controller: 'NcdMentalHealth as ctrl',
+                    resolve: load([
+                        'ncd-mental-health.controller',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service'
+                    ])
+                })
+                .state('techo.ncd.memberdetails.general', {
+                    url: '',
+                    title: 'NCD Member Detail',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-general.html',
+                    controller: 'NcdGeneral as ctrl',
+                    resolve: load([
+                        'ncd-general.controller',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service'
+                    ])
+                })
+                .state('techo.ncd.memberdetails.investigation', {
+                    url: '',
+                    title: 'NCD Member Detail',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-investigation.html',
+                    controller: 'NcdInvestigation as ctrl',
+                    resolve: load([
+                        'ncd-investigation.controller',
+                        'ndhm-hip.service',
+                        'ndhm-hip.constants',
+                        'ndhm-health-id-capture-service',
+                        'ndhm-health-id-create-service'
+                    ])
+                })
+                .state('techo.ncd.members', {
+                    url: '/members?type',
+                    title: 'Referred Patients',
+                    templateUrl: 'app/ncd/refferedpatients/views/ncd-members.html',
+                    controller: 'NcdMembersController as mlisting',
+                    resolve: load([
+                        'ncd-members.controller',
+                        'ncd.service',
+                        'ngInfiniteScroll',
+                        'paging.service',
+                        'alasql',
+                        'titlecase.filter'
+                    ])
+                })
+                .state('techo.ncd.patientSummary', {
+                    url: '/patientSummary/:id',
+                    title: 'Patient Summary',
+                    templateUrl: 'app/ncd/PatientSummary/views/ncd-patient-summary.html',
+                    controller: 'NcdPatientSummary as ctrl',
+                    resolve: load([
+                        'ncd-patient-summary.controller',
+                        'ncd.service'
+                    ])
+                })
                 .state('techo.manage.ancSearch', {
                     url: '/ancsearch',
                     title: 'ANC Service Visit',
@@ -3185,17 +3221,17 @@
                         'paging-for-query-builder.service'
                     ])
                 })
-                // .state('techo.ncd.familyqrcode', {
-                //     url: '/familyqrcode',
-                //     templateUrl: 'app/ncd/FamilyQRCodeGeneration/views/family-qr-code-generation.html',
-                //     title: 'Family QR Code Generation',
-                //     controller: 'FamilyQRCodeGenerationController as ctrl',
-                //     resolve: load([
-                //         'family-qr-code-generation.controller',
-                //         'family-qr-code.service',
-                //         'authentication.service'
-                //     ])
-                // })
+                .state('techo.ncd.familyqrcode', {
+                    url: '/familyqrcode',
+                    templateUrl: 'app/ncd/FamilyQRCodeGeneration/views/family-qr-code-generation.html',
+                    title: 'Family QR Code Generation',
+                    controller: 'FamilyQRCodeGenerationController as ctrl',
+                    resolve: load([
+                        'family-qr-code-generation.controller',
+                        'family-qr-code.service',
+                        'authentication.service'
+                    ])
+                })
                 // .state('techo.manage.lmsdashboardv2', {
                 //     url: '/lmsdashboardv2',
                 //     title: 'LMS Dashboard V2',

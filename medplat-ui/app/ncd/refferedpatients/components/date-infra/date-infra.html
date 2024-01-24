@@ -1,0 +1,20 @@
+<div class="form-group border-right-1" ng-init="ctrl.obj.screeningDate = ctrl.obj.screeningDate? ctrl.obj.screeningDate:ctrl.today;">
+    <validate for='screeningDate' required-msg="Please select date">
+        <label for="screeningDate" title="Date" control-label>Date</label>
+        <input datepicker type="text" name="screeningDate" required id="screeningDate" name="screeningDate" form-control
+            ng-model="ctrl.obj.screeningDate" max-date="ctrl.today" ng-change="ctrl.onChange()">
+        <placeholder></placeholder>
+    </validate>
+</div>
+<div class="form-group">
+    <validate for='hospital' required-msg="Select a value">
+        <label style="vertical-align: middle;white-space: initial" control-label><span class="info_type">Health
+                Infrastructure
+            </span></label>
+        <select class="form-control cst-form-control" form-control chosen-directive="ctrl.HealthInfras" name="hospital"
+            ng-options="institute.id as institute.name for institute in ctrl.HealthInfras"
+            ng-model="ctrl.obj.healthInfraId" required ng-change="ctrl.healthChange()">
+        </select>
+        <placeholder></placeholder>
+    </validate>
+</div>

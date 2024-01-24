@@ -5,156 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25be9f93-8a10-4d33-a0d6-c46e60d29167" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../medplat-android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-android/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../medplat-android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-android/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../medplat-ui/app/admin/menufeature/controllers/menu-feature-config.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/admin/menufeature/controllers/menu-feature-config.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../medplat-ui/app/admin/menufeature/views/menu-feature-config.html" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/admin/menufeature/views/menu-feature-config.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../medplat-ui/app/common/constants/app.constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/common/constants/app.constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../medplat-ui/app/common/views/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/common/views/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/app/login/views/forget-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/login/views/forget-password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/app/manage/users/controllers/manage-user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/manage/users/controllers/manage-user.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/bower.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/build-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/build-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/ckeditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/ckeditor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/contents.css" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/contents.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/lang/en.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/lang/en.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/_translationstatus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/_translationstatus.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/af.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/af.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/bg.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/bg.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/cs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/cs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/cy.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/cy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/da.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/da.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/de-ch.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/de-ch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/de.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/de.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/el.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/el.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/en-gb.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/en-gb.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/en.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/en.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/eo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/eo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/es.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/es.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/et.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/et.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/eu.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/eu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/fa.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/fa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/fi.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/fi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/fo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/fo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/fr-ca.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/fr-ca.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/fr.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/fr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/gl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/gl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/gu.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/gu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/he.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/he.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/hi.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/hi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/hr.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/hr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/hu.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/hu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/id.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/id.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/it.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/it.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ja.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ja.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/km.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/km.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ko.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ko.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ku.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ku.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/lt.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/lt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/lv.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/lv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/mk.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/mk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/mn.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/mn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/nb.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/nb.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/nl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/nl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/no.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/no.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/pl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/pl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/pt-br.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/pt-br.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/pt.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/pt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ro.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ro.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/si.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/si.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sk.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sq.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sq.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sr-latn.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sr-latn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sr.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sv.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/sv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/th.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/th.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/tr.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/tr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/tt.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/tt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ug.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/ug.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/uk.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/uk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/vi.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/vi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/zh-cn.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/zh-cn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/zh.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/a11yhelp/dialogs/lang/zh.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/about/dialogs/about.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/about/dialogs/about.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/about/dialogs/hidpi/logo_ckeditor.png" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/about/dialogs/hidpi/logo_ckeditor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/about/dialogs/logo_ckeditor.png" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/about/dialogs/logo_ckeditor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/clipboard/dialogs/paste.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/clipboard/dialogs/paste.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/dialog/dialogDefinition.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/dialog/dialogDefinition.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/icons.png" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/icons.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/icons_hidpi.png" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/icons_hidpi.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/image/dialogs/image.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/image/dialogs/image.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/link/dialogs/anchor.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/link/dialogs/anchor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/link/dialogs/link.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/link/dialogs/link.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/link/images/anchor.png" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/link/images/anchor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/link/images/hidpi/anchor.png" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/link/images/hidpi/anchor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/pastefromword/filter/default.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/pastefromword/filter/default.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/scayt/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/scayt/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/scayt/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/scayt/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/scayt/dialogs/options.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/scayt/dialogs/options.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/_translationstatus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/_translationstatus.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/af.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/af.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/bg.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/bg.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ca.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ca.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/cs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/cs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/cy.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/cy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/da.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/da.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/de-ch.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/de-ch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/de.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/de.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/el.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/el.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/en-gb.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/en-gb.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/en.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/en.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/eo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/eo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/es.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/es.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/et.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/et.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/eu.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/eu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/fa.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/fa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/fi.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/fi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/fr-ca.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/fr-ca.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/fr.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/fr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/gl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/gl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/he.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/he.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/hr.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/hr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/hu.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/hu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/id.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/id.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/it.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/it.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ja.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ja.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/km.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/km.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ko.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ko.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ku.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ku.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/lt.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/lt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/lv.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/lv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/nb.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/nb.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/nl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/nl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/no.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/no.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/pl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/pl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/pt-br.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/pt-br.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/pt.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/pt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/si.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/si.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/sk.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/sk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/sl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/sl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/sq.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/sq.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/sv.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/sv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/th.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/th.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/tr.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/tr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/tt.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/tt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ug.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/ug.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/uk.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/uk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/vi.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/vi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/zh-cn.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/zh-cn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/zh.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/lang/zh.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/specialchar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/specialchar/dialogs/specialchar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/table/dialogs/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/table/dialogs/table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/tabletools/dialogs/tableCell.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/plugins/tabletools/dialogs/tableCell.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/third_party/ckeditor/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../medplat-ui/app/config.lazyload.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/config.lazyload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../medplat-ui/app/config.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/config.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../medplat-ui/app/manage/healthfacilitymapping/views/manage-health-infrastructure.html" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/manage/healthfacilitymapping/views/manage-health-infrastructure.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../medplat-ui/app/manage/performancedashboard/constants/performance-dashboard.constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/manage/performancedashboard/constants/performance-dashboard.constant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../medplat-ui/app/manage/performancedashboard/views/performance-dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/../medplat-ui/app/manage/performancedashboard/views/performance-dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/argusoft/medplat/config/security/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/argusoft/medplat/config/security/ResourceServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/server.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/argusoft/medplat/cfhc/service/impl/CFHCServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/argusoft/medplat/cfhc/service/impl/CFHCServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/argusoft/medplat/fhs/dao/MemberDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/argusoft/medplat/fhs/dao/MemberDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/argusoft/medplat/fhs/dao/impl/MemberDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/argusoft/medplat/fhs/dao/impl/MemberDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/argusoft/medplat/mobile/constants/MobileConstantUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/argusoft/medplat/mobile/constants/MobileConstantUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V3__data_migration.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V3__data_migration.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,39 +41,78 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="/opt/apache-maven-3.0.5" />
-        <option name="useMavenConfig" value="true" />
+        <option name="mavenHome" value="/usr/share/maven" />
       </MavenGeneralSettings>
     </option>
+    <option name="enabledProfiles">
+      <list>
+        <option value="dev" />
+      </list>
+    </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2PohmOyV0QsDsk76aPPY5InJO9u" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;developer&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/hmorzariya/techo/imtecho/ImtechoV2/imtecho-web&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.21386719&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.FlyWayScriptGenerator.executor": "Run",
+    "Application.com.argusoft.medplat.config.Application.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Maven.medplat-web [clean,install...].executor": "Run",
+    "Maven.medplat-web [clean].executor": "Run",
+    "Maven.medplat-web [compile].executor": "Run",
+    "Maven.medplat-web [install].executor": "Run",
+    "Maven.medplat-web [validate].executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "developer",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/shivansh/Desktop/medplat_dpg/medplat-web",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.21386719",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "MavenSettings"
   }
-}</component>
-  <component name="RunManager" selected="Application.com.argusoft.medplat.config.Application">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.argusoft.medplat.web.location.dao.impl" />
+      <recent name="com.argusoft.medplat.mobile.dao.impl" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Maven.medplat-web [clean,install...]">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.argusoft.imtecho.config.Application" />
       <module name="imtecho-web" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.argusoft.imtecho.config.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FlyWayScriptGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.argusoft.medplat.common.util.FlyWayScriptGenerator" />
+      <module name="medplat-web" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.argusoft.medplat.common.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -233,15 +141,61 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="medplat-web [clean,install...]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+                <option value="-Dmaven.test.skip=true" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Application" />
+      <item itemvalue="Application.com.argusoft.medplat.config.Application" />
+      <item itemvalue="Application.FlyWayScriptGenerator" />
+      <item itemvalue="JUnit.All in imtecho-web" />
+      <item itemvalue="Maven.medplat-web [clean,install...]" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.com.argusoft.medplat.config.Application" />
+        <item itemvalue="Application.FlyWayScriptGenerator" />
         <item itemvalue="Application.Application" />
         <item itemvalue="JUnit.All in imtecho-web" />
         <item itemvalue="Application.Application" />
-        <item itemvalue="JUnit.All in imtecho-web" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-13.0.14-azul-13.0.14-f644763e9732-8a6f1fca" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -253,6 +207,42 @@
       <updated>1684129500918</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" log-message="true" type="java-exception">
+          <dependency master-id="0" />
+          <properties class="org.springframework.context.ApplicationContextException" package="org.springframework.context" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/argusoft/medplat/common/util/ConstantUtil.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/argusoft/medplat/config/security/CustomDaoAuthenticationProvider.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/argusoft/medplat/config/security/CustomDaoAuthenticationProvider.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/argusoft/medplat/config/security/CustomDaoAuthenticationProvider.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="java-exception">
+          <dependency id="0" />
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

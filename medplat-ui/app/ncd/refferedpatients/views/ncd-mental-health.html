@@ -1,0 +1,155 @@
+<div class="row mt-0">
+    <div class="col-xl-12">
+        <div class="tabbable cst-tab">
+            <div class="tab-content bxb-0">
+                <div class="tab-pane fade active in" id="examination-5">
+                    <div class="container-fluid py-3" ng-init="ctrl.mentalHealthDto.doesSuffering=false;">
+                        <form role="form" name="ctrl.mentalHealthForm" id="mentalHealthForm" novalidate>
+                            <div class="row inline-form-control mb-2">
+                                <div class="col-12">
+                                    <dateinfra obj="ncdmd.dateinfra" user-health-infras="ncdmd.userHealthInfras"
+                                        on-change="ctrl.retrieveMentalHealthDetailsByMemberAndDate()"
+                                        on-health-infra-change="ncdmd.retrieveMedicinesByHealthInfra(ncdmd.dateinfra.healthInfraId)">
+                                    </dateinfra>
+                                    <div class="form-group" style="float: right;">
+                                        <button type="button" ng-click="ncdmd.showTreatmentHistory('MH')"
+                                            class="btn btn-primary">Treatment
+                                            History</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12 input-box">
+                                    <h6>Mental Health Examination</h6>
+                                    <div class="input-box--inner row">
+                                        <div class="form-group col-xl-3">
+                                            <validate for='talk' required-msg="Please select a value">
+                                                <label for="talk" control-label>Talk</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="ctrl.mentalHealthDto.talk"
+                                                    ng-change="ctrl.mentalHealthExaminedValuesChanged()"
+                                                    ng-options="option as option for option in ctrl.mentalDropDownOptions"
+                                                    name="talk" id="talk" required>
+                                                    <option value="">
+                                                        --Select--
+                                                    </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-3">
+                                            <validate for='ownDailyWork' required-msg="Please select a value">
+                                                <label for="ownDailyWork" control-label>Own
+                                                    daily work</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="ctrl.mentalHealthDto.ownDailyWork"
+                                                    ng-change="ctrl.mentalHealthExaminedValuesChanged()"
+                                                    ng-options="option as option for option in ctrl.mentalDropDownOptions"
+                                                    name="ownDailyWork" id="ownDailyWork" required>
+                                                    <option value="">
+                                                        --Select--
+                                                    </option>
+                                                    </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-3">
+                                            <validate for='socialWork' required-msg="Please select a value">
+                                                <label for="socialWork" control-label>Social
+                                                    work</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="ctrl.mentalHealthDto.socialWork"
+                                                    ng-change="ctrl.mentalHealthExaminedValuesChanged()"
+                                                    ng-options="option as option for option in ctrl.mentalDropDownOptions"
+                                                    name="socialWork" id="socialWork" required>
+                                                    <option value="" selected>
+                                                        --Select--
+                                                    </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-3">
+                                            <validate for='understanding' required-msg="Please select a value">
+                                                <label for="understanding" control-label>Understanding</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="ctrl.mentalHealthDto.understanding"
+                                                    ng-change="ctrl.mentalHealthExaminedValuesChanged()"
+                                                    ng-options="option as option for option in ctrl.mentalDropDownOptions"
+                                                    name="understanding" id="understanding" required>
+                                                    <option value="">
+                                                        --Select--
+                                                    </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='status' required-msg="Please select a value">
+                                                <label for="status" control-label>Status</label>
+                                                <select class="form-control cst-form-control" form-control disabled
+                                                    ng-model="ctrl.mentalHealthDto.status" name="status" id="status"
+                                                    ng-options="cuurentStatus as cuurentStatus for cuurentStatus in ctrl.mentalHealthStatus"
+                                                    required>
+                                                    <option value="">--Select--
+                                                    </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 input-box">
+                                    <h6>Diagnosis</h6>
+                                    <div class="form-group col-xl-12">
+                                        <validate for='doesSuffering' required-msg="Please select a value">
+                                            <label style="display: block;" for="doesSuffering" class="control-label"
+                                                control-label>
+                                                <b>Does this patient suffering from Mental health disease?</b>
+                                            </label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="doesSuffering" id="doesSuffering"
+                                                    type="radio" ng-model="ctrl.mentalHealthDto.doesSuffering"
+                                                    ng-change="ctrl.showConfirmationModalForSuffering()"
+                                                    form-control required>
+                                                <div class="control_indicator">
+                                                </div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="doesSuffering" id="doesSuffering"
+                                                    type="radio" ng-model="ctrl.mentalHealthDto.doesSuffering"
+                                                    ng-change="ctrl.showConfirmationModalForSuffering()"
+                                                    form-control required>
+                                                <div class="control_indicator">
+                                                </div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3 px-15">
+                                <treatment obj="ctrl.medicineDetail" medicine-data="ncdmd.medicineData" is_submit="ctrl.medicineFormSubmit"
+                                    prescribed-medicine="ctrl.prescribedMedicine" take-medicine="ctrl.takeMedicine"></treatment>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="button-footer" style="border: 0px;" ng-if="!ctrl.mentalHealthAlreadyFilled">
+                                        <button class="btn btn-primary" ng-click="ctrl.saveMentalHealth() ">Save
+                                            & Continue</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='MO'"
+                                            ui-sref="techo.ncd.members">Cancel</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='CONSULTANT'"
+                                            ui-sref="techo.ncd.followupscreenlisting">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

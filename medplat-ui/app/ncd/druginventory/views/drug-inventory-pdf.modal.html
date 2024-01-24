@@ -1,0 +1,46 @@
+<div class="ncd_print print-page">
+    <div class="cst-table table-responsive table-set-height mt-20" id="member-scroll">
+        <table aria-describedby="member list" class="table table-sm vertical-middle">
+            <thead class="cst-thead">
+                <tr>
+                    <th style="width: 41%;" id="drugName" class="table-heading">
+                        Drug Name & Strength</th>
+                    <th style="width: 16%;" id="quantityReceived" class="table-heading">Quantity
+                        Received
+                    </th>
+                    <th style="width: 16%;" id="quantityIssued" class="table-heading">Quantity
+                        Issued
+                    </th>
+                    <th style="width: 11%;" id="appMonthly" class="table-heading">
+                        Approximate
+                        Monthly
+                        Consumption
+                    </th>
+                    <th style="width: 16%;" id="balanceInHand" class="table-heading">Balance in Hand
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="drug in ncddi.drugAllDrugInventory">
+                    <td ng-bind="drug.medicineName | emptylabel"></td>
+                    <td ng-bind="drug.quantityReceived | emptylabel"></td>
+                    <td ng-bind="drug.quantityIssued | emptylabel"></td>
+                    <td ng-bind="drug.appMonthly | emptylabel"></td>
+                    <td ng-if="drug.balanceInHand < 30"
+                        uib-tooltip="Stock is low"
+                        ng-class="{'text-danger':drug.balanceInHand < 30}">
+                        {{drug.balanceInHand}}
+                    </td>
+                    <td ng-if="drug.balanceInHand >= 30"
+                        ng-class="{'text-danger':drug.balanceInHand < 30}">
+                        {{drug.balanceInHand}}
+                    </td>
+                </tr>
+                <tr ng-if="ncddi.drugAllDrugInventory.length==0">
+                    <td colspan="8">Drugs are not Available</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<style>
+    .outer-tabset>.nav.nav-tabs {
+        background: #ffffff;
+        border: 1px solid #dfdfdf;
+        padding-bottom: 1px;
+    }
+
+    .table-heading {
+        background-color: rgb(241, 241, 241);
+        position: relative;
+        top: -1px;
+    }
+
+    .dot {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+</style>
+<script>
+    $(".header-fixed").tableHeadFixer();
+</script>
+<!-- all member listing tabs -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <span class="text-center pull-right" uib-tooltip="Click on this for color code information"
+                style="cursor: pointer;">
+                <i aria-hidden="true" class="fa fa-info-circle fa-1x"></i>
+            </span>
+        </div>
+        <div class="col-12 mb-15">
+            <!-- <button class="btn btn-primary pull-right" ng-click="ctrl.downloadExcel()">Download Excel</button> -->
+            <div class="cst-tab">
+                <uib-tabset active='ctrl.selectedTab'>
+                    <!-- member list tab -->
+                    <uib-tab heading="Patient List" index=0
+                        ng-click="ctrl.isSearch = false;ctrl.retrieveMemberList(true);">
+                        <div class="cst-table table-responsive table-set-height" id="member-scroll">
+                            <table aria-describedby="member list"
+                                class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="patient-name" class="table-heading">Patient Name</th>
+                                        <th id="unique-health-id" class="table-heading">Unique health id</th>
+                                        <th id="age" class="table-heading">Age</th>
+                                        <th id="gender">Gender</th>
+                                        <th id="Village" class="table-heading">Village</th>
+                                        <th id="subCenter" class="table-heading">Sub Center</th>
+                                        <th id="actions" class="table-heading">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody infinite-scroll-distance="0"
+                                    infinite-scroll="ctrl.retrieveMemberList(false)"
+                                    infinite-scroll-container='"#member-scroll"'
+                                    infinite-scroll-immediate-check="false">
+                                    <tr ng-repeat="member in ctrl.membersSearchList"
+                                        ng-style="member.color? {'color' : member.color}:{};">
+                                        <td ng-bind="member.name | emptylabel"></td>
+                                        <td ng-bind="member.unqieHealthId | emptylabel"></td>
+                                        <td ng-bind="member.age | emptylabel"></td>
+                                        <td ng-bind="member.gender | emptylabel"></td>
+                                        <td ng-bind="member.village | emptylabel"></td>
+                                        <td ng-bind="member.subCenter | emptylabel"></td>
+                                        <td class="action-cell">
+                                            <button ng-click="ctrl.fillExamineForm(member.member_id)"
+                                                class="btn btn-primary">Examine</button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="!ctrl.membersSearchList || ctrl.membersSearchList.length==0">
+                                        <td colspan="8">No Members Referred </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- search tab -->
+<div class="large-div filter-div " ng-if="ctrl.selectedTab===0">
+    <span style="left:-66px" class="filter-toggle" ng-click="ctrl.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="ctrl.searchForm" novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>Search By: </label>
+                        <label class="control control-radio"> Organization Unit
+                            <input type="radio" name="search" icheck ng-model="ctrl.search.searchBy" value="orgUnit"
+                                ng-change="ctrl.search.searchString = null; ctrl.selectedLocation = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Unique Health Id
+                            <input type="radio" name="search" icheck ng-model="ctrl.search.searchBy"
+                                value="uniqueHealthId"
+                                ng-change="ctrl.search.locationId = null;ctrl.search.uniqueHealthId =null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <div class="form-group" ng-if="ctrl.search.searchBy === 'orgUnit'">
+                            <location-directive template-type="'twoPart'" ng-model="ctrl.search.locationId"
+                                selected-location="ctrl.selectedLocation" required-upto-level="3" fetch-upto-level="7"
+                                template-type="'inline'" fetch-according-to-user-aoi="true"> </location-directive>
+                        </div>
+                        <div class="form-group" style="margin-top: 10px">
+                            <validate for="searchString" required-msg='Enter Unique Health Id'
+                                ng-if="ctrl.search.searchBy === 'uniqueHealthId'">
+                                <input type="text" name="searchString" form-control
+                                    ng-model="ctrl.search.uniqueHealthId" placeholder="Enter Unique Health Id"
+                                    class="form-control" required />
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter" ng-click="ctrl.toggleFilter()">Close</button>
+                        <button type="submit" class="btn btn-primary search-filter"
+                            ng-click="ctrl.isSearch = true;ctrl.retrieveMemberList(true);">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

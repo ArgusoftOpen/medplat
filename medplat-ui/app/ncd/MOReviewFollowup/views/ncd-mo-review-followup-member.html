@@ -1,0 +1,645 @@
+<style>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .info label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: flex;
+    }
+
+    .info label span.info_type {
+        /*width: 200px;*/
+        font-weight: bold;
+    }
+
+    .info label span.data {
+        font-weight: normal;
+        margin-left: 2px;
+    }
+
+    .nopadding {
+        padding: 0px;
+        margin: 2px;
+    }
+
+    .info ul {
+        list-style-type: none;
+    }
+</style>
+<div class="container-fluid">
+
+    <div class="box cst-tab mb-15">
+        <div class="tab-content">
+            <div class="container-fluid  py-3">
+                <div class="box-header d-flex justify-content-between">
+                    <h4 class="sub-title">Patient's Detail</h4>
+                    <div class="text-center">
+                        <a href="javascript:void(0)" ng-click="ctrl.printPatientSummary()" class="btn btn-primary mt-1">
+                            <!-- <em class="ion-printer mr-2"></em> -->
+                            Patient Summary
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class=" box-body  w-50 br-1">
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Patient's Name:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.member.name}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Age/Sex:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ctrl.member.basicDetails.age}}/{{ctrl.member.basicDetails.gender}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="w-50 ml-3">
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Doctor's Name:</span></li>
+                                    <li><span class="data">{{ctrl.loggedInUser.name}}</span></li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+
+            <div class="tabbable boxed parentTabs cst-tab ">
+                <div class="tab-content">
+
+                    <div class="tab-pane fade active in" id="MbbsMOReview">
+                        <div class="row mt-0 ">
+                            <div class="col-xl-12 ">
+                                <div class="tabbable cst-tab ">
+                                    <div class="tab-content bxb-0 ">
+                                        <div class="tab-pane fade active in " id="examination-4">
+                                            <div class="container-fluid py-3">
+                                                <form role="form" name="ctrl.MbbsMOReviewForm" id="MbbsMOReviewForm"
+                                                    novalidate>
+                                                    <div class="row">
+                                                        <div class="col-12 mb-2 d-flex justify-content-between">
+                                                            <h4>Patient History
+                                                            </h4>
+                                                            <div class="text-center">
+                                                                <a href="javascript:void(0)"
+                                                                    ng-click="ctrl.showFullHistory()"
+                                                                    class="btn btn-primary mt-1">
+                                                                    {{!ctrl.history?'Show Full History':'Show less
+                                                                    details'}}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div style="padding: 4px;">
+                                                                <div ng-if="ctrl.visitData[disease].history.length>0"
+                                                                    class="cst-table table-responsive table-set-height"
+                                                                    ng-repeat="disease in ctrl.diseases">
+                                                                    <h4 class="sub-title mt-2">
+                                                                        {{ctrl.visitData[disease].name}}</h4>
+                                                                    <table
+                                                                        class="table table-sm table-striped table-bordered header-fixed">
+                                                                        <thead class="cst-thead">
+                                                                            <tr>
+                                                                                <th style="width: 20%;" id="diagnosedOn"
+                                                                                    class="table-heading">Diagnosed On
+                                                                                </th>
+                                                                                <th style="width: 25%;" id="diagnosis"
+                                                                                    class="table-heading">Diagnosis</th>
+                                                                                <th style="width: 30%;" id="readings"
+                                                                                    class="table-heading">Readings</th>
+                                                                                <th style="width: 20%;" id="diagnosedBy"
+                                                                                    class="table-heading">Diagnosed By
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr
+                                                                                ng-repeat="th in ctrl.visitData[disease].history | limitTo : ctrl.setLimit ">
+                                                                                <td
+                                                                                    ng-bind="th.visit_date | date: angularDateFormat">
+                                                                                </td>
+                                                                                <td ng-bind="th.status"></td>
+                                                                                <td ng-bind="th.reading | emptylabel">
+                                                                                </td>
+                                                                                <td ng-bind="th.DiagnosedBy"></td>
+                                                                            </tr>
+                                                                            <tr
+                                                                                ng-if="! ctrl.visitData[disease].history ||  ctrl.visitData[disease].history.length==0">
+                                                                                <td colspan="5">No Treatment History
+                                                                                    Found
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mb-2 d-flex justify-content-between"
+                                                            ng-if="ctrl.prescribedMedicine.length > 0">
+                                                            <h4 class="sub-title mt-2">Patient Medicine History
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-12" ng-if="ctrl.prescribedMedicine.length > 0">
+                                                            <div style="padding: 4px;">
+                                                                <div
+                                                                    class="cst-table table-responsive table-set-height">
+                                                                    <table
+                                                                        class="table table-sm table-striped table-bordered header-fixed">
+                                                                        <thead class="cst-thead">
+                                                                            <tr>
+                                                                                <th class="table-heading">
+                                                                                    Medicine Name</th>
+                                                                                <th class="table-heading">
+                                                                                    Prescribed Date</th>
+                                                                                <th class="table-heading">
+                                                                                    Frequency
+                                                                                </th>
+                                                                                <th class="table-heading">
+                                                                                    Duration
+                                                                                </th>
+                                                                                <th class="table-heading">
+                                                                                    Quantity
+                                                                                </th>
+                                                                                <th class="table-heading">
+                                                                                    Special
+                                                                                    Instruction
+                                                                                </th>
+                                                                                <th class="table-heading">Last
+                                                                                    day of Medicine
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr
+                                                                                ng-repeat="item in ctrl.prescribedMedicine | limitTo : ctrl.setLimitForOther ">
+                                                                                <td ng-bind="item.medicineName"></td>
+                                                                                <td
+                                                                                    ng-bind="item.issuedDate | date:'dd/MM/yyyy'">
+                                                                                </td>
+                                                                                <td ng-bind="item.frequency"></td>
+                                                                                <td ng-bind="item.duration"></td>
+                                                                                <td ng-bind="item.quantity"></td>
+                                                                                <td
+                                                                                    ng-bind="item.specialInstruction ? item.specialInstruction : '-'">
+                                                                                </td>
+                                                                                <td
+                                                                                    ng-bind="item.expiryDate | date:'dd/MM/yyyy'">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mb-2 d-flex justify-content-between"
+                                                            ng-if="ctrl.investigationList.length >0">
+                                                            <h4 class="sub-title mt-2">Patient Investigation History
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-12" ng-if="ctrl.investigationList.length >0">
+                                                            <div style="padding: 4px;">
+                                                                <div
+                                                                    class="cst-table table-responsive table-set-height">
+                                                                    <table
+                                                                        class="table table-sm table-striped table-bordered header-fixed">
+                                                                        <thead class="cst-thead">
+                                                                            <tr>
+                                                                                <th class="table-heading">
+                                                                                    Report Name</th>
+                                                                                <th class="table-heading">Type
+                                                                                </th>
+                                                                                <th class="table-heading">
+                                                                                    Screening Date</th>
+
+                                                                                <th class="table-heading">Done By
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr
+                                                                                ng-repeat="item in ctrl.investigationList | limitTo : ctrl.setLimitForOther ">
+                                                                                <td ng-bind="item.report"></td>
+                                                                                <td ng-bind="item.type"></td>
+                                                                                <td
+                                                                                    ng-bind="item.screeningDate | date:'dd/MM/yyyy'">
+                                                                                </td>
+                                                                                <td ng-bind="item.doneBy"></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+
+            <div class="tabbable boxed parentTabs cst-tab ">
+                <div class="tab-content">
+
+                    <div class="tab-pane fade active in" id="MbbsMOReview">
+                        <div class="row mt-0 ">
+                            <div class="col-xl-12 ">
+                                <div class="tabbable cst-tab ">
+                                    <div class="tab-content bxb-0 ">
+                                        <div class="tab-pane fade active in " id="examination-4">
+                                            <div class="container-fluid py-3"
+                                                ng-init="ctrl.MOReviewDto.screeningDate = ctrl.today; ctrl.onChange();ctrl.MOReviewDto.doesRequiredRef = false;">
+                                                <form role="form" name="ctrl.form" id="GeneralForm" novalidate>
+                                                    <h4>Medicine & Referral
+                                                    </h4>
+                                                    <div class="row inline-form-control mb-2">
+                                                        <div class="col-12">
+                                                            <div class="form-group border-right-1">
+                                                                <validate for='screeningDate'
+                                                                    required-msg="Please select date">
+                                                                    <label for="screeningDate" title="Date"
+                                                                        control-label>Date</label>
+                                                                    <input datepicker type="text" name="screeningDate"
+                                                                        required id="screeningDate" name="screeningDate"
+                                                                        form-control
+                                                                        ng-model="ctrl.MOReviewDto.screeningDate"
+                                                                        max-date="ctrl.today"
+                                                                        ng-change="ctrl.onChange()">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <validate for='hospital' required-msg="Select a value">
+                                                                    <label
+                                                                        style="vertical-align: middle;white-space: initial"
+                                                                        control-label><span class="info_type">Health
+                                                                            Infrastructure
+                                                                        </span></label>
+                                                                    <select class="form-control cst-form-control"
+                                                                        form-control
+                                                                        chosen-directive="ctrl.HealthInfras"
+                                                                        name="hospital"
+                                                                        ng-options="institute.id as institute.name for institute in ctrl.HealthInfras"
+                                                                        ng-model="ctrl.MOReviewDto.healthInfraId"
+                                                                        required
+                                                                        ng-change="ctrl.retrieveMedicinesByHealthInfra()">
+                                                                    </select>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row px-15">
+                                                        <treatment obj="ctrl.medicineDetail"
+                                                            medicine-data="ctrl.medicineData"
+                                                            prescribed-medicine="ctrl.prescribedMedicine"
+                                                            take-medicine="ctrl.takeMedicine"
+                                                            is_submit="ctrl.medicineFormSubmit"
+                                                            edit-data="ctrl.editedMedicineDetail"
+                                                            show-edit="true" from-mo-review="true"
+                                                            delete-data="ctrl.deletedMedicineDetails"></treatment>
+                                                    </div>
+                                                    <div class="row mb-3 px-15">
+                                                        <div class="col-xl-12 input-box">
+                                                            <h6>Referral</h6>
+                                                            <div class="input-box--inner row">
+                                                                <div class="form-group col-xl-6">
+                                                                    <validate for='doesRequiredRef'
+                                                                        required-msg="Please select a value">
+                                                                        <label style="display: block;"
+                                                                            for="doesRequiredRef" uib-tooltip=""
+                                                                            class="control-label" control-label>Does
+                                                                            this patient
+                                                                            required reference? </label>
+                                                                        <label class="control control-radio">Yes
+                                                                            <input ng-value="true"
+                                                                                name="doesRequiredRef"
+                                                                                id="doesRequiredRef" type="radio"
+                                                                                ng-model="ctrl.MOReviewDto.doesRequiredRef"
+                                                                                form-control required>
+                                                                            <div class="control_indicator">
+                                                                            </div>
+                                                                        </label>
+                                                                        <label class="control control-radio">No
+                                                                            <input ng-value="false"
+                                                                                name="doesRequiredRef"
+                                                                                id="doesRequiredRef" type="radio"
+                                                                                ng-model="ctrl.MOReviewDto.doesRequiredRef"
+                                                                                form-control required>
+                                                                            <div class="control_indicator">
+                                                                            </div>
+                                                                        </label>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-box--inner row"
+                                                                ng-if="ctrl.MOReviewDto.doesRequiredRef === true">
+                                                                <div class="form-group col-xl-6">
+                                                                    <validate for='refferralReason'
+                                                                        required-msg="Please select a value">
+                                                                        <label for="refferralReason"
+                                                                            class="control-label" control-label>Reason
+                                                                            for
+                                                                            reference
+                                                                        </label>
+                                                                        <select class="form-control cst-form-control"
+                                                                            form-control chosen-directive
+                                                                            ng-model="ctrl.MOReviewDto.refferralReason"
+                                                                            name="refferralReason" id="refferralReason"
+                                                                            required>
+                                                                            <option value="" selected>
+                                                                                --Select--
+                                                                            </option>
+                                                                            <option value="Pitting oedema">
+                                                                                Pitting oedema
+                                                                            </option>
+                                                                            <option value="Cardiac Murmur">
+                                                                                Cardiac Murmur
+                                                                            </option>
+                                                                            <option
+                                                                                value="Basal crepitation sound in lungs">
+                                                                                Basal crepitation sound in lungs
+                                                                            </option>
+                                                                            <option value="Tender">
+                                                                                Tender
+                                                                            </option>
+                                                                            <option value="Enlarged abdomen">
+                                                                                Enlarged abdomen
+                                                                            </option>
+                                                                            <option value="other">
+                                                                                Other
+                                                                            </option>
+                                                                        </select>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                                <div class="form-group col-xl-6"
+                                                                    ng-if="ctrl.MOReviewDto.refferralReason === 'other'">
+                                                                    <validate for='otherReason'
+                                                                        required-msg="Please select a value">
+                                                                        <label for="otherReason" class="control-label"
+                                                                            control-label>
+                                                                            Other Reason
+                                                                        </label>
+                                                                        <input type="text"
+                                                                            class="form-control cst-form-control"
+                                                                            form-control
+                                                                            ng-model="ctrl.MOReviewDto.otherReason"
+                                                                            name="otherReason" id="otherReason"
+                                                                            required>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                                <div class="form-group col-xl-6">
+                                                                    <validate for='refferralPlace'
+                                                                        required-msg="Please select a value">
+                                                                        <label for="refferralPlace"
+                                                                            control-label>Referral
+                                                                            Place</label>
+                                                                        <select class="form-control cst-form-control"
+                                                                            form-control chosen-directive
+                                                                            ng-model="ctrl.MOReviewDto.refferralPlace"
+                                                                            name="refferralPlace" id="refferralPlace"
+                                                                            required>
+                                                                            <option value="" selected>
+                                                                                --Select--
+                                                                            </option>
+                                                                            <option value="Specialist">
+                                                                                Specialist
+                                                                            </option>
+                                                                            <!-- <option value="Other">
+                                                                                Other
+                                                                            </option> -->
+                                                                        </select>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                                <div ng-if="ctrl.MOReviewDto.refferralPlace"
+                                                                    class="form-group col-xl-6">
+                                                                    <validate for='followUpDisease'
+                                                                        required-msg="Please select date">
+                                                                        <label for="followUpDisease"
+                                                                            class="control-label" control-label>
+                                                                            Select disease(s) for follow Up/
+                                                                            Referral</label>
+                                                                        <select id="followUpDisease"
+                                                                            name="followUpDisease" class="form-control"
+                                                                            chosen-directive
+                                                                            data-placeholder='Select disease' multiple
+                                                                            required form-control
+                                                                            ng-model="ctrl.MOReviewDto.followUpDisease">
+                                                                            <option
+                                                                                ng-if="ctrl.member.basicDetails.age>=40"
+                                                                                value='HT'>Hypertension</option>
+                                                                            <option
+                                                                                ng-if="ctrl.member.basicDetails.age>=40"
+                                                                                value='D'>Diabetes</option>
+                                                                            <option
+                                                                                ng-if="ctrl.member.basicDetails.age>=15"
+                                                                                value='MH'>Mental health</option>
+                                                                            <!-- <option
+                                                                                ng-if="ctrl.member.basicDetails.age>=40"
+                                                                                value='O'>Oral cancer</option>
+                                                                            <option
+                                                                                ng-if="ctrl.member.basicDetails.gender=='F' && ctrl.member.basicDetails.age>=40"
+                                                                                value='B'>Breast cancer</option>
+                                                                            <option
+                                                                                ng-if="ctrl.member.basicDetails.gender=='F' && ctrl.member.basicDetails.age>=40"
+                                                                                value='C'>Cervical cancer</option> -->
+                                                                        </select>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-box--inner row"
+                                                                ng-if="ctrl.MOReviewDto.doesRequiredRef !== true">
+                                                                <div class="form-group col-xl-6">
+                                                                    <validate for='followUp'
+                                                                        required-msg="Please select a value">
+                                                                        <label for="followUp" control-label>Follow
+                                                                            Up</label>
+                                                                        <select class="form-control cst-form-control"
+                                                                            form-control chosen-directive
+                                                                            name="followUp" id="followUp"
+                                                                            ng-model="ctrl.MOReviewDto.followupPlace"
+                                                                            required>
+                                                                            <option value="" selected>
+                                                                                --Select--
+                                                                            </option>
+                                                                            <option value="clinic">
+                                                                                Clinic visit
+                                                                            </option>
+                                                                            <option value="home">
+                                                                                Home visit
+                                                                            </option>
+                                                                            <option value="doctor">
+                                                                                Doctor visit
+                                                                            </option>
+                                                                        </select>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                                <div ng-if="ctrl.MOReviewDto.followupPlace"
+                                                                    class="form-group col-xl-6">
+                                                                    <validate for='followUpDisease'
+                                                                        required-msg="Please select date">
+                                                                        <label for="followUpDisease"
+                                                                            class="control-label" control-label>
+                                                                            Select disease(s) for follow Up/
+                                                                            Referral</label>
+                                                                        <select id="followUpDisease"
+                                                                            name="followUpDisease" class="form-control"
+                                                                            chosen-directive
+                                                                            data-placeholder='Select disease' multiple
+                                                                            required form-control
+                                                                            ng-model="ctrl.MOReviewDto.followUpDisease">
+                                                                            <option
+                                                                                ng-if="ctrl.member.basicDetails.age>=40"
+                                                                                value='HT'>Hypertension</option>
+                                                                            <option
+                                                                                ng-if="ctrl.member.basicDetails.age>=40"
+                                                                                value='D'>Diabetes</option>
+                                                                            <option
+                                                                                ng-if="ctrl.member.basicDetails.age>=15"
+                                                                                value='MH'>Mental health</option>
+                                                                            <!-- <option
+                                                                                ng-if="ctrl.member.basicDetails.age>=40"
+                                                                                value='O'>Oral cancer</option>
+                                                                            <option
+                                                                                ng-if="ctrl.member.basicDetails.gender=='F' && ctrl.member.basicDetails.age>=40"
+                                                                                value='B'>Breast cancer</option>
+                                                                            <option
+                                                                                ng-if="ctrl.member.basicDetails.gender=='F' && ctrl.member.basicDetails.age>=40"
+                                                                                value='C'>Cervical cancer</option> -->
+                                                                        </select>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                                <div ng-if="ctrl.MOReviewDto.followupPlace"
+                                                                    class="form-group col-xl-6">
+                                                                    <validate for='followUpDate'
+                                                                        required-msg="Please select date">
+                                                                        <label for="followUpDate" class="control-label"
+                                                                            control-label title="Date">Follow up
+                                                                            Date</label>
+                                                                        <input datepicker type="text" form-control
+                                                                            name="followUpDate" id="followUpDate"
+                                                                            name="followUpDate"
+                                                                            max-date="ctrl.maxGeneralFollowUpDate"
+                                                                            min-date="ctrl.minGeneralFollowUpDate"
+                                                                            ng-model="ctrl.MOReviewDto.followUpDate"
+                                                                            required>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-box--inner row">
+                                                                <div class="form-group col-xl-6">
+                                                                    <validate for='comment'
+                                                                        required-msg="Please select a value">
+                                                                        <label for="comment" class="control-label"
+                                                                            control-label>Comment
+                                                                        </label>
+                                                                        <input type="text"
+                                                                            class="form-control cst-form-control"
+                                                                            form-control
+                                                                            ng-model="ctrl.MOReviewDto.comment"
+                                                                            id="comment" name="comment">
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                                <div class="form-group col-xl-6">
+                                                                    <validate for='isRemove'
+                                                                        required-msg="Please select a value">
+                                                                        <label style="display: block;" for="isRemove"
+                                                                            class="control-label" control-label>
+                                                                            Do you want to remove this case from review
+                                                                            follow up?
+                                                                        </label>
+                                                                        <label class="control control-radio">Yes
+                                                                            <input ng-value="true" name="isRemove"
+                                                                                id="isRemove" type="radio"
+                                                                                ng-model="ctrl.MOReviewDto.isRemove"
+                                                                                form-control required>
+                                                                            <div class="control_indicator"></div>
+                                                                        </label>
+                                                                        <label class="control control-radio">No
+                                                                            <input ng-value="false" name="isRemove"
+                                                                                id="isRemove" type="radio"
+                                                                                ng-model="ctrl.MOReviewDto.isRemove"
+                                                                                form-control required>
+                                                                            <div class="control_indicator"></div>
+                                                                        </label>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 inline-form-control"
+                                                        ng-if="!ctrl.formAlreadyFilled">
+
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="button-footer" style="border: 0px;">
+                                                                    <div class="btn btn-primary btn-md"
+                                                                        ng-click="ctrl.saveMOReviewFollowup()">
+                                                                        Save
+                                                                        & Continue
+                                                                    </div>
+                                                                    <div class="btn btn-secondary btn-md"
+                                                                        ui-sref="techo.ncd.moreviewfollowup">
+                                                                        Cancel
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="display-none" id="printableDiv">
+    <ng-include src="'app/ncd/MBBSMOReviewScreen/views/patient-summary.modal.html'"></ng-include>
+</div>

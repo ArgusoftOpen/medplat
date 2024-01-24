@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="text">Confirm</h4>
+    <button type="button" class="close" ng-click="modalForConfirmation.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+    <span>Are the medicines returned in the inventory?</span>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" ng-click="modalForConfirmation.isReturn=false;modalForConfirmation.ok()" data-test="confimation-modal-no-btn">No</button>
+    <button class="btn btn-primary" ng-click="modalForConfirmation.isReturn=true;modalForConfirmation.ok()" data-test="confimation-modal-yes-btn">Yes</button>
+</div>

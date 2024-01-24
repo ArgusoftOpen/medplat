@@ -54,6 +54,11 @@ public class MobileConstantUtil {
     public static final String NCD_FHW_BREAST = "NCD_FHW_BREAST";
     public static final String NCD_FHW_CERVICAL = "NCD_FHW_CERVICAL";
     public static final String NCD_FHW_MENTAL_HEALTH = "NCD_FHW_MENTAL_HEALTH";
+
+    public static final String NCD_ECG_REPORT = "NCD_ECG_REPORT";
+
+    public static final String NCD_MO_CONFIRMED = "NCD_MO_CONFIRMED";
+
     public static final String NCD_FHW_HEALTH_SCREENING = "NCD_FHW_HEALTH_SCREENING";
     public static final String NCD_PERSONAL_HISTORY = "NCD_PERSONAL_HISTORY";
 

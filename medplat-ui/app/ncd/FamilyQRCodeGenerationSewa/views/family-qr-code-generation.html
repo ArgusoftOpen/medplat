@@ -1,0 +1,145 @@
+<div class="container-fluid fhsr-verification">
+    <div class="col-12 mb-15 float-right" ng-if="ctrl.familyList.length > 1">
+        <button class="btn btn-primary float-right" style="margin-left: 5px;" ng-click="ctrl.printAllFamily('-1')">
+            <i class="fa fa fa-print pdfVerification" aria-hidden="true" title="Print Pdf" style="float: none;"></i>
+        </button>
+    </div>
+    <div class="row" style="width:100%"
+        ng-if="!ctrl.familyList || ctrl.familyList.length === 0">
+        <div class="col-sm-12 col-xl-12">
+            <div class="no-data-placeholder">
+                <h5>Sorry No Data Here!</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="cst-table table-responsive" ng-if="ctrl.familyList !== undefined && ctrl.familyList.length > 0" style="overflow: auto;max-height: calc(100vh - 192px);" id="family-scroll">
+        <table class="table table-sm table-auto table-bordered" aria-describedby="Family List">
+            <colgroup>
+                <col class="" style="width: 4%;">
+                <col class="" style="width: 96%;">
+            </colgroup>
+            <thead class="cst-thead" >
+                <tr>
+                    <th>#</th>
+                    <th>Family List</th>
+                </tr>
+            </thead>
+            <tbody class="cst-tbody" infinite-scroll-distance="0"
+                infinite-scroll='ctrl.getFamilyList(true)'
+                infinite-scroll-container='"#family-scroll"' infinite-scroll-immediate-check="false">
+                <tr ng-repeat="family in ctrl.familyList">
+                    <td>{{$index + 1}}</td>
+                    <td> 
+                        <div id="familyDiv" style="width:100%">
+                            <div class="accordion" id="accordionExample" style="width: 100%">
+                                <div class="card m-0 p-0" style="border-bottom: 1px solid #dadada;">
+                                    <div class="card-title collapse-link d-block m-0 p-1"
+                                        style="background:#f1f1f1; width:100%; text-align: left; border:none;" data-toggle="collapse"
+                                        data-target="#coll{{ $index }}" aria-expanded="false" aria-controls="{{ $index }}"
+                                        ng-init="isCollapsed = false" ng-click=" ctrl.collapse($index, family.familyId) ">
+                                        <h6 class="text" style="line-height: 16px; color: #464646; font-weight: 600;">
+                                            {{::family.familyId}} - {{::family.familyHead ? family.familyHead : 'N/A'}}
+                                            <i class="fa fa fa-print pdfVerification" ng-click="ctrl.printAllFamily(family.familyId)" aria-hidden="true" title="Print Pdf" style="float: none; font-size: 18px; margin-left: 8px;"></i>
+                                            <em style="float:right;font-size: 18px"
+                                                ng-class="{'ion-plus ':$index  != ctrl.selectedIndex,'ion-minus':$index  == ctrl.selectedIndex}"></em>
+                                        </h6>
+                                    </div>
+                    
+                                    <div id="coll{{ $index }}" class="collapse" aria-labelledby="heading{{ $index }}"
+                                        data-parent="#accordionExample">
+                                        <div class="card-body py-0">
+                                            <div class="row">
+                                                <div class="col-md-8 pt-4" style="min-width: 64%;">
+                                                    <div class="row justify-content-start mx-0 mt-2">
+                                                        <span style="padding:10px 0px; font-weight: bold;"> Location: </span> 
+                                                        <span style="font-size: 18px; padding: 5px 2px ">
+                                                            {{::family.location ? family.location : 'N/A'}}</span>
+                                                    </div>
+                                                    <div class="row justify-content-start mx-0">
+                                                        <span style="padding:10px 0px; font-weight: bold;"> Head of the family: </span> 
+                                                        <span style="font-size: 18px; padding: 5px 2px ">
+                                                            {{::family.familyHead ? family.familyHead : 'N/A'}}</span>
+                                                    </div>
+                                                    <div class="row justify-content-start mx-0">
+                                                        <span style="padding:10px 0px; font-weight: bold;"> Contact Number: </span> <span style="font-size: 15px;
+                                                        padding: 10px 2px"> {{::family.contactNumber ? family.contactNumber : 'N/A'}}</span>
+                                                    </div>
+                                                    <div class="row justify-content-start mx-0">
+                                                        <span style="padding:10px 0px; font-weight: bold;"> Address: </span> <span style="font-size: 15px;
+                                                        padding: 10px 2px"> {{::family.address ? family.address : 'N/A'}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group" style="margin: 2px;">
+                                                        <img class="image" ng-src="{{ctrl.qrCodeImage[$index]}}" alt="QR Code" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-if="(!ctrl.familyList || ctrl.familyList.length === 0)">
+                    <td colspan="10">No families available</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="filter-div active">
+        <span class="filter-toggle" ng-click="ctrl.toggleFilter()">Select Location</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Select Location</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12">
+                    <ng-form name="ctrl.locationForm">
+                        <div class="form-group">
+                            <validate for="from_date" required-msg="Enter from date">
+                                <label style="float: left;" for="from_date" control-label>From Date</label>
+                                <input name="from_date" type="text" datepicker class="disabled-input"
+                                    id="from_date" ng-model="ctrl.fromDate" max-date-month="ctrl.today" form-control required>
+                                <placeholder></placeholder>
+                            </validate>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <validate for="to_date" required-msg="Enter to date">
+                                <label style="float: left;" for="to_date" control-label>To Date</label>
+                                <input name="to_date" type="text" datepicker class="disabled-input" id="to_date"
+                                    ng-model="ctrl.toDate" min-date-month="ctrl.fromDate" max-date-month="ctrl.today"
+                                    form-control ng-disabled="!ctrl.fromDate" required>
+                                <placeholder></placeholder>
+                            </validate>
+                            <div class="clearfix"></div>
+                        </div>
+                        <location-directive ng-model="ctrl.selectedLocationId"
+                            selected-location="ctrl.selectedLocation"
+                            required-upto-level="ctrl.requiredLevel" template-type="'inline'"
+                            fetch-according-to-user-aoi="true" fetch-upto-level="8">
+                        </location-directive>
+                        <br/>
+                    </ng-form>
+                </div>
+                <div class="col-12">
+                    <hr/>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter" ng-click="ctrl.toggleFilter()">
+                            Close
+                        </button>
+                        <button class="btn btn-primary search-filter" ng-click="ctrl.submit()">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,482 @@
+<div class="row mt-0">
+    <div class="col-xl-12">
+        <div class="tabbable cst-tab">
+            <div class="tab-content bxb-0">
+                <div class="tab-pane fade active in" id="examination-5">
+                    <div class="container-fluid py-3">
+                        <form role="form" name="ctrl.form" id="ctrl.form" novalidate>
+                            <div class="row inline-form-control mb-2"
+                                ng-init="ctrl.oralForm.threeWeeksMouthUlcer=false;
+                                ctrl.oralForm.whiteRedPatchOralCavity=false; ctrl.oralForm.difficultyInSpicyFood=false;
+                                ctrl.oralForm.voiceChange=false; ctrl.oralForm.difficultyInOpeningMouth=false; ctrl.oralForm.doesSuffering=false">
+                                <div class="col-12">
+                                    <dateinfra obj="ncdmd.dateinfra" user-health-infras="ncdmd.userHealthInfras"
+                                        on-change="ctrl.retrieveOralDetailsByMemberAndDate()"
+                                        on-health-infra-change="ncdmd.retrieveMedicinesByHealthInfra(ncdmd.dateinfra.healthInfraId)">
+                                    </dateinfra>
+                                    <div class="form-group" style="float: right;">
+                                        <button type="button" ng-click="ncdmd.showTreatmentHistory('O')"
+                                            class="btn btn-primary">Treatment
+                                            History</button>
+                                    </div>
+                                    <!-- <div class="form-group" style="float: right;">
+                                        <button type="button" ng-click="ncdmd.showVisualExamHistory('O')"
+                                            class="btn btn-primary">Show Previous Visual
+                                            Examination</button>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12 input-box">
+                                    <h6>Visual Examination</h6>
+                                    <div class="input-box--inner row">
+                                        <div class="col-xl-5">
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.oralForm.oralVisualCategory==='ulcer'}">
+                                                    <input type="radio" value="ulcer" name="oral-list--radio"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.oralForm.oralVisualCategory"><img alt="image"
+                                                        class="oral-list--icon"
+                                                        src="img/icons/white-red-patch.png">Ulcer
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.oralForm.oralVisualCategory==='growthOfRecentOrigins'}">
+                                                    <input type="radio" value="growthOfRecentOrigins"
+                                                        name="oral-list--radio" class="oral-list--radio"
+                                                        ng-model="ctrl.oralForm.oralVisualCategory"><img alt="image"
+                                                        class="oral-list--icon" src="img/icons/ulceration.png">Growth
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.oralForm.oralVisualCategory==='lichenPlanus'}">
+                                                    <input type="radio" value="lichenPlanus" name="oral-list--radio"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.oralForm.oralVisualCategory"><img alt="image"
+                                                        class="oral-list--icon"
+                                                        src="img/icons/white-red-patch.png">Lichen Planus
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.oralForm.oralVisualCategory==='smokersPalate'}">
+                                                    <input type="radio" value="smokersPalate" name="oral-list--radio"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.oralForm.oralVisualCategory"><img alt="image"
+                                                        class="oral-list--icon"
+                                                        src="img/icons/white-red-patch.png">Smokers palate
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.oralForm.oralVisualCategory==='submucousFibrosis'}">
+                                                    <input type="radio" value="submucousFibrosis"
+                                                        name="oral-list--radio" class="oral-list--radio"
+                                                        ng-model="ctrl.oralForm.oralVisualCategory"><img alt="image"
+                                                        class="oral-list--icon" src="img/icons/submuc.png">Submucous
+                                                    fibrosis
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.oralForm.oralVisualCategory==='redPatches'}">
+                                                    <input type="radio" value="redPatches" name="oral-list--radio"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.oralForm.oralVisualCategory"><img alt="image"
+                                                        class="oral-list--icon" src="img/icons/white-red-patch.png">Red
+                                                    Patches (Erythroplakia)
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.oralForm.oralVisualCategory==='whitePatches'}">
+                                                    <input type="radio" value="whitePatches" name="oral-list--radio"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.oralForm.oralVisualCategory"><img alt="image"
+                                                        class="oral-list--icon"
+                                                        src="img/icons/white-red-patch.png">White Patches (Leukoplakia)
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.oralForm.oralVisualCategory==='restrictedMouthOpening'}">
+                                                    <input type="radio" value="restrictedMouthOpening"
+                                                        name="oral-list--radio" class="oral-list--radio"
+                                                        ng-model="ctrl.oralForm.oralVisualCategory"><img alt="image"
+                                                        class="oral-list--icon" src="img/icons/lockedJaw.png">Restricted
+                                                    Mouth Opening (Locked Jaw)
+                                                </label>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="oral-mouth-image">
+                                                <img alt="image" src="img/mouth-diagram.png" class="img-fluid">
+                                                <ul class="oral-point-list" id="white-patches">
+                                                    <li class="oral-location-item  oral-point-1"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][1]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ctrl.oralForm.oralVisualCategory][1]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ctrl.oralForm.oralVisualCategory][1].join();"></span> -->
+
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][1]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-2"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][2]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][2]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][2].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][2]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-3"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][3]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][3]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][3].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][3]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-5"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][5]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][5]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][5].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][5]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-4"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][4]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][4]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][4].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][4]">
+                                                    </li>
+
+                                                    <li class="oral-location-item oral-point-6"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][6]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][6]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][6].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][6]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-7"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][7]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][7]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][7].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][7]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-8"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][8]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][8]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][8].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][8]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-9"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][9]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][9]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][9].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][9]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-10"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][10]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][10]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][10].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][10]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-11"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][11]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][11]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][11].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][11]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-12"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][12]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][12]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][12].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][12]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-13"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][13]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][13]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][13].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][13]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-14"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][14]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][14]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][14].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][14]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-15"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][15]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][15]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][15].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][15]">
+                                                    </li>
+                                                    <li class="oral-location-item oral-point-16"
+                                                        ng-class="{'selected':ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][16]}">
+                                                        <!-- <span class="oral-location-details"
+                                                            ng-if="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][16]"
+                                                            ng-bind="ncdmd.member.memberOralDto.displayList[ncdmd.subMenuSelected][16].join()"></span> -->
+                                                        <input type="checkbox"
+                                                            ng-model="ctrl.oralForm.oralList[ctrl.oralForm.oralVisualCategory][16]">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="form-group" style="padding-left: 0px;">
+                                                <validate for='status' required-msg="Please select a value">
+                                                    <label for="status" control-label>Status</label>
+                                                    <select class="form-control cst-form-control" form-control
+                                                        ng-model="ctrl.oralForm.status" name="status" id="status"
+                                                        required>
+                                                        <option value="" selected>
+                                                            --Select--
+                                                        </option>
+                                                        <option value="SUSPECTED">
+                                                            Screened
+                                                        </option>
+                                                        <option value="CONFIRMATION_PENDING">
+                                                            Confirmation Pending
+                                                        </option>
+                                                        <option value="CONFIRMED">
+                                                            Confirmed
+                                                        </option>
+                                                        <option value="NO_ABNORMALITY">
+                                                            No Abnormality Detected
+                                                        </option>
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12 input-box">
+                                    <h6>Other Examination</h6>
+                                    <div class="input-box--inner row">
+                                        <div class="form-group col-xl-4">
+                                            <validate for='threeWeeksMouthUlcer' required-msg="Please select a value">
+                                                <label style="display: block;" for="threeWeeksMouthUlcer"
+                                                    uib-tooltip="Presence of threeWeeksMouthUlcer" class="control-label"
+                                                    control-label>
+                                                    Ulceration/roughened areas in the
+                                                    oral cavity
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="threeWeeksMouthUlcer"
+                                                        id="threeWeeksMouthUlcer" type="radio"
+                                                        ng-model="ctrl.oralForm.threeWeeksMouthUlcer" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="threeWeeksMouthUlcer"
+                                                        id="threeWeeksMouthUlcer" type="radio"
+                                                        ng-model="ctrl.oralForm.threeWeeksMouthUlcer" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='whiteRedPatchOralCavity'
+                                                required-msg="Please select a value">
+                                                <label style="display: block;" for="whiteRedPatchOralCavity"
+                                                    uib-tooltip="Presence of whiteRedPatchOralCavity"
+                                                    class="control-label" control-label>
+                                                    White or Red Patch in the oral
+                                                    cavity
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="whiteRedPatchOralCavity"
+                                                        id="whiteRedPatchOralCavity" type="radio"
+                                                        ng-model="ctrl.oralForm.whiteRedPatchOralCavity" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="whiteRedPatchOralCavity"
+                                                        id="whiteRedPatchOralCavity" type="radio"
+                                                        ng-model="ctrl.oralForm.whiteRedPatchOralCavity" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='difficultyInSpicyFood' required-msg="Please select a value">
+                                                <label style="display: block;" for="difficultyInSpicyFood"
+                                                    uib-tooltip="Presence of difficultyInSpicyFood"
+                                                    class="control-label" control-label>
+                                                    Difficulty in tolerating spicy foods
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="difficultyInSpicyFood"
+                                                        id="difficultyInSpicyFood" type="radio"
+                                                        ng-model="ctrl.oralForm.difficultyInSpicyFood" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="difficultyInSpicyFood"
+                                                        id="difficultyInSpicyFood" type="radio"
+                                                        ng-model="ctrl.oralForm.difficultyInSpicyFood" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='voiceChange' required-msg="Please select a value">
+                                                <label style="display: block;" for="voiceChange"
+                                                    uib-tooltip="Presence of voiceChange" class="control-label"
+                                                    control-label>
+                                                    Sudden change in voice/hoarseness
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="voiceChange" id="voiceChange"
+                                                        type="radio" ng-model="ctrl.oralForm.voiceChange" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="voiceChange" id="voiceChange"
+                                                        type="radio" ng-model="ctrl.oralForm.voiceChange" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='difficultyInOpeningMouth'
+                                                required-msg="Please select a value">
+                                                <label style="display: block;" for="difficultyInOpeningMouth"
+                                                    uib-tooltip="Presence of difficultyInOpeningMouth"
+                                                    class="control-label" control-label>
+                                                    Difficulty In Opening Mouth
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="difficultyInOpeningMouth"
+                                                        id="difficultyInOpeningMouth" type="radio"
+                                                        ng-model="ctrl.oralForm.difficultyInOpeningMouth" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="difficultyInOpeningMouth"
+                                                        id="difficultyInOpeningMouth" type="radio"
+                                                        ng-model="ctrl.oralForm.difficultyInOpeningMouth" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='otherSymptoms' required-msg="Please select a value">
+                                                <label for="otherSymptoms" class="control-label" control-label>Other
+                                                </label>
+                                                <input type="text" class="form-control cst-form-control" form-control
+                                                    ng-model="ctrl.oralForm.otherSymptoms"
+                                                    ng-disabled="ncdmd.oralAlreadyFilled" id="otherSymptoms"
+                                                    name="otherSymptoms">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 input-box"  ng-if="ctrl.isAlreadyDiagnosedOral !== true">
+                                    <h6>Diagnosis</h6>
+                                    <div class="form-group col-xl-12" ng-if="ctrl.isAlreadyDiagnosedOral !== true">
+                                        <validate for='doesSuffering' required-msg="Please select a value">
+                                            <label style="display: block;" for="doesSuffering"
+                                                uib-tooltip="Is patient suffering from oral cancer?"
+                                                class="control-label" control-label>
+                                                <b>Does this patient suffering from Oral
+                                                    cancer? </b>
+                                            </label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="doesSuffering" id="doesSuffering"
+                                                    type="radio" ng-model="ctrl.oralForm.doesSuffering" form-control
+                                                    required>
+                                                <div class="control_indicator">
+                                                </div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="doesSuffering" id="doesSuffering"
+                                                    type="radio" ng-model="ctrl.oralForm.doesSuffering" form-control
+                                                    required>
+                                                <div class="control_indicator">
+                                                </div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3 px-15">
+                                <treatment obj="ctrl.medicineDetail" medicine-data="ncdmd.medicineData"
+                                    prescribed-medicine="ctrl.prescribedMedicine" take-medicine="ctrl.takeMedicine"></treatment>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="button-footer" style="border: 0px;" ng-if="!ctrl.oralAlreadyFilled">
+                                        <button class="btn btn-primary" ng-click="ctrl.saveOral()">Save &
+                                            Continue</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='MO'"
+                                            ui-sref="techo.ncd.members">Cancel</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='CONSULTANT'"
+                                            ui-sref="techo.ncd.followupscreenlisting">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
