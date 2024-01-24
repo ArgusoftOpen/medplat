@@ -5,11 +5,8 @@
  */
 package com.argusoft.medplat.ncd.mapper;
 
-//import com.argusoft.medplat.common.model.UserMaster;
-import com.argusoft.medplat.mobile.constants.MobileConstantUtil;
-import com.argusoft.medplat.ncd.dao.MemberGeneralDetailDao;
+
 import com.argusoft.medplat.ncd.dto.*;
-import com.argusoft.medplat.ncd.enums.DoneBy;
 import com.argusoft.medplat.ncd.enums.Status;
 import com.argusoft.medplat.ncd.model.*;
 
@@ -115,46 +112,46 @@ public class MemberDetailMapper {
      * @param cervicalDto Details of cervical.
      * @return Returns entity of cervical.
      */
-    public static MemberCervicalDetail dtoToEntityForCervical(MemberCervicalDto cervicalDto) {
-        MemberCervicalDetail memberCervicalDetail = new MemberCervicalDetail();
-        memberCervicalDetail.setExternalGenitaliaHealthy(cervicalDto.getExternalGenitaliaHealthy());
-        memberCervicalDetail.setPolyp(cervicalDto.getPolyp());
-        memberCervicalDetail.setEctopy(cervicalDto.getEctopy());
-        memberCervicalDetail.setHypertrophy(cervicalDto.getHypertrophy());
-        memberCervicalDetail.setExcessiveDischarge(cervicalDto.getExcessiveDischarge());
-        memberCervicalDetail.setProlapseUterus(cervicalDto.getProlapseUterus());
-        memberCervicalDetail.setConsultantFlag(cervicalDto.getConsultantFlag());
-        memberCervicalDetail.setBleedsOnTouch(cervicalDto.getBleedsOnTouch());
-        memberCervicalDetail.setUnhealthyCervix(cervicalDto.getUnhealthyCervix());
-        memberCervicalDetail.setSuspiciousLookingCervix(cervicalDto.getSuspiciousLookingCervix());
-        memberCervicalDetail.setFrankMalignancy(cervicalDto.getFrankMalignancy());
-        memberCervicalDetail.setOtherSymptoms(cervicalDto.getOtherSymptoms());
-        memberCervicalDetail.setViaExamPoints(cervicalDto.getViaExamPoints());
-        memberCervicalDetail.setOtherSymptomsDescription(cervicalDto.getOtherSymptomsDescription());
-        memberCervicalDetail.setOtherDesc(cervicalDto.getOtherDesc());
-        memberCervicalDetail.setViaExam(cervicalDto.getViaExam());
-        if (Objects.nonNull(cervicalDto.getPapsmearTest())) {
-            memberCervicalDetail.setPapsmearTest(cervicalDto.getPapsmearTest());
-        }
-        memberCervicalDetail.setViaTest(cervicalDto.getViaTest());
-        memberCervicalDetail.setScreeningDate(cervicalDto.getScreeningDate());
-        memberCervicalDetail.setMemberId(cervicalDto.getMemberId());
-        memberCervicalDetail.setLocationId(cervicalDto.getLocationId());
-        memberCervicalDetail.setFamilyId(cervicalDto.getFamilyId());
-        memberCervicalDetail.setDoneBy(cervicalDto.getDoneBy());
-        memberCervicalDetail.setMobileStartDate(new Date(-1L));
-        memberCervicalDetail.setMobileEndDate(new Date(-1L));
-        memberCervicalDetail.setDoneOn(new Date());
-        memberCervicalDetail.setBimanualExamination(cervicalDto.getBimanualExamination());
-        memberCervicalDetail.setOtherFinding(cervicalDto.getOtherFinding());
-        memberCervicalDetail.setOtherFindingDescription(cervicalDto.getOtherFindingDescription());
-        memberCervicalDetail.setDoesSuffering(cervicalDto.getDoesSuffering());
-        memberCervicalDetail.setStatus(cervicalDto.getStatus().toString());
-        memberCervicalDetail.setHealthInfraId(cervicalDto.getHealthInfraId());
-        memberCervicalDetail.setTakeMedicine(cervicalDto.getTakeMedicine());
-        return memberCervicalDetail;
-
-    }
+//    public static MemberCervicalDetail dtoToEntityForCervical(MemberCervicalDto cervicalDto) {
+//        MemberCervicalDetail memberCervicalDetail = new MemberCervicalDetail();
+//        memberCervicalDetail.setExternalGenitaliaHealthy(cervicalDto.getExternalGenitaliaHealthy());
+//        memberCervicalDetail.setPolyp(cervicalDto.getPolyp());
+//        memberCervicalDetail.setEctopy(cervicalDto.getEctopy());
+//        memberCervicalDetail.setHypertrophy(cervicalDto.getHypertrophy());
+//        memberCervicalDetail.setExcessiveDischarge(cervicalDto.getExcessiveDischarge());
+//        memberCervicalDetail.setProlapseUterus(cervicalDto.getProlapseUterus());
+//        memberCervicalDetail.setConsultantFlag(cervicalDto.getConsultantFlag());
+//        memberCervicalDetail.setBleedsOnTouch(cervicalDto.getBleedsOnTouch());
+//        memberCervicalDetail.setUnhealthyCervix(cervicalDto.getUnhealthyCervix());
+//        memberCervicalDetail.setSuspiciousLookingCervix(cervicalDto.getSuspiciousLookingCervix());
+//        memberCervicalDetail.setFrankMalignancy(cervicalDto.getFrankMalignancy());
+//        memberCervicalDetail.setOtherSymptoms(cervicalDto.getOtherSymptoms());
+//        memberCervicalDetail.setViaExamPoints(cervicalDto.getViaExamPoints());
+//        memberCervicalDetail.setOtherSymptomsDescription(cervicalDto.getOtherSymptomsDescription());
+//        memberCervicalDetail.setOtherDesc(cervicalDto.getOtherDesc());
+//        memberCervicalDetail.setViaExam(cervicalDto.getViaExam());
+//        if (Objects.nonNull(cervicalDto.getPapsmearTest())) {
+//            memberCervicalDetail.setPapsmearTest(cervicalDto.getPapsmearTest());
+//        }
+//        memberCervicalDetail.setViaTest(cervicalDto.getViaTest());
+//        memberCervicalDetail.setScreeningDate(cervicalDto.getScreeningDate());
+//        memberCervicalDetail.setMemberId(cervicalDto.getMemberId());
+//        memberCervicalDetail.setLocationId(cervicalDto.getLocationId());
+//        memberCervicalDetail.setFamilyId(cervicalDto.getFamilyId());
+//        memberCervicalDetail.setDoneBy(cervicalDto.getDoneBy());
+//        memberCervicalDetail.setMobileStartDate(new Date(-1L));
+//        memberCervicalDetail.setMobileEndDate(new Date(-1L));
+//        memberCervicalDetail.setDoneOn(new Date());
+//        memberCervicalDetail.setBimanualExamination(cervicalDto.getBimanualExamination());
+//        memberCervicalDetail.setOtherFinding(cervicalDto.getOtherFinding());
+//        memberCervicalDetail.setOtherFindingDescription(cervicalDto.getOtherFindingDescription());
+//        memberCervicalDetail.setDoesSuffering(cervicalDto.getDoesSuffering());
+//        memberCervicalDetail.setStatus(cervicalDto.getStatus().toString());
+//        memberCervicalDetail.setHealthInfraId(cervicalDto.getHealthInfraId());
+//        memberCervicalDetail.setTakeMedicine(cervicalDto.getTakeMedicine());
+//        return memberCervicalDetail;
+//
+//    }
 
     /**
      * Convert diabetes entity of member into dto.
@@ -374,43 +371,43 @@ public class MemberDetailMapper {
      * @param breastDto Breast details of member.
      * @return Returns breast entity of member.
      */
-    public static MemberBreastDetail dtoToEntityForBreast(MemberBreastDto breastDto) {
-        MemberBreastDetail memberBreastDetail = new MemberBreastDetail();
-        memberBreastDetail.setSizeChange(breastDto.getSizeChange());
-        memberBreastDetail.setNippleNotOnSameLevel(breastDto.getNippleNotOnSameLevel());
-        memberBreastDetail.setLymphadenopathy(breastDto.getLymphadenopathy());
-        memberBreastDetail.setVisualSkinRetraction(breastDto.getVisualSkinRetraction());
-        memberBreastDetail.setVisualDischargeFromNipple(breastDto.getVisualDischargeFromNipple());
-        memberBreastDetail.setAxillary(breastDto.getAxillary());
-        memberBreastDetail.setConsultantFlag(breastDto.getConsultantFlag());
-        memberBreastDetail.setSuperClavicularArea(breastDto.getSuperClavicularArea());
-        memberBreastDetail.setInfraClavicularArea(breastDto.getInfraClavicularArea());
-        memberBreastDetail.setSkinEdema(breastDto.getSkinEdema());
-        memberBreastDetail.setVisualUlceration(breastDto.getVisualUlceration());
-        memberBreastDetail.setVisualSkinDimplingRetraction(breastDto.getVisualSkinDimplingRetraction());
-        memberBreastDetail.setVisualNippleRetractionDistortion(breastDto.getVisualNippleRetractionDistortion());
-        memberBreastDetail.setVisualLumpInBreast(breastDto.getVisualLumpInBreast());
-        memberBreastDetail.setScreeningDate(breastDto.getScreeningDate());
-        memberBreastDetail.setMemberId(breastDto.getMemberId());
-        memberBreastDetail.setLocationId(breastDto.getLocationId());
-        memberBreastDetail.setFamilyId(breastDto.getFamilyId());
-        memberBreastDetail.setDoneBy(breastDto.getDoneBy());
-        memberBreastDetail.setMobileStartDate(new Date(-1L));
-        memberBreastDetail.setMobileEndDate(new Date(-1L));
-        memberBreastDetail.setDoneOn(new Date());
-        memberBreastDetail.setRetractionOfSkinFlag(breastDto.getVisualSkinRetraction()!=null);
-        memberBreastDetail.setDischargeFromNippleFlag(breastDto.getVisualDischargeFromNipple()!=null);
-        memberBreastDetail.setUlceration(breastDto.getVisualUlceration()!=null);
-        memberBreastDetail.setLumpInBreast(breastDto.getVisualLumpInBreast()!=null);
-        memberBreastDetail.setNippleRetractionDistortionFlag(breastDto.getVisualNippleRetractionDistortion()!=null);
-        memberBreastDetail.setSkinDimplingRetractionFlag(breastDto.getVisualSkinDimplingRetraction()!=null);
-        memberBreastDetail.setStatus(breastDto.getStatus().toString());
-        memberBreastDetail.setDoesSuffering(breastDto.getDoesSuffering());
-        memberBreastDetail.setHealthInfraId(breastDto.getHealthInfraId());
-        memberBreastDetail.setTakeMedicine(breastDto.getTakeMedicine());
-        return memberBreastDetail;
-
-    }
+//    public static MemberBreastDetail dtoToEntityForBreast(MemberBreastDto breastDto) {
+//        MemberBreastDetail memberBreastDetail = new MemberBreastDetail();
+//        memberBreastDetail.setSizeChange(breastDto.getSizeChange());
+//        memberBreastDetail.setNippleNotOnSameLevel(breastDto.getNippleNotOnSameLevel());
+//        memberBreastDetail.setLymphadenopathy(breastDto.getLymphadenopathy());
+//        memberBreastDetail.setVisualSkinRetraction(breastDto.getVisualSkinRetraction());
+//        memberBreastDetail.setVisualDischargeFromNipple(breastDto.getVisualDischargeFromNipple());
+//        memberBreastDetail.setAxillary(breastDto.getAxillary());
+//        memberBreastDetail.setConsultantFlag(breastDto.getConsultantFlag());
+//        memberBreastDetail.setSuperClavicularArea(breastDto.getSuperClavicularArea());
+//        memberBreastDetail.setInfraClavicularArea(breastDto.getInfraClavicularArea());
+//        memberBreastDetail.setSkinEdema(breastDto.getSkinEdema());
+//        memberBreastDetail.setVisualUlceration(breastDto.getVisualUlceration());
+//        memberBreastDetail.setVisualSkinDimplingRetraction(breastDto.getVisualSkinDimplingRetraction());
+//        memberBreastDetail.setVisualNippleRetractionDistortion(breastDto.getVisualNippleRetractionDistortion());
+//        memberBreastDetail.setVisualLumpInBreast(breastDto.getVisualLumpInBreast());
+//        memberBreastDetail.setScreeningDate(breastDto.getScreeningDate());
+//        memberBreastDetail.setMemberId(breastDto.getMemberId());
+//        memberBreastDetail.setLocationId(breastDto.getLocationId());
+//        memberBreastDetail.setFamilyId(breastDto.getFamilyId());
+//        memberBreastDetail.setDoneBy(breastDto.getDoneBy());
+//        memberBreastDetail.setMobileStartDate(new Date(-1L));
+//        memberBreastDetail.setMobileEndDate(new Date(-1L));
+//        memberBreastDetail.setDoneOn(new Date());
+//        memberBreastDetail.setRetractionOfSkinFlag(breastDto.getVisualSkinRetraction()!=null);
+//        memberBreastDetail.setDischargeFromNippleFlag(breastDto.getVisualDischargeFromNipple()!=null);
+//        memberBreastDetail.setUlceration(breastDto.getVisualUlceration()!=null);
+//        memberBreastDetail.setLumpInBreast(breastDto.getVisualLumpInBreast()!=null);
+//        memberBreastDetail.setNippleRetractionDistortionFlag(breastDto.getVisualNippleRetractionDistortion()!=null);
+//        memberBreastDetail.setSkinDimplingRetractionFlag(breastDto.getVisualSkinDimplingRetraction()!=null);
+//        memberBreastDetail.setStatus(breastDto.getStatus().toString());
+//        memberBreastDetail.setDoesSuffering(breastDto.getDoesSuffering());
+//        memberBreastDetail.setHealthInfraId(breastDto.getHealthInfraId());
+//        memberBreastDetail.setTakeMedicine(breastDto.getTakeMedicine());
+//        return memberBreastDetail;
+//
+//    }
 
     /**
      * Convert oral details of member into entity.
@@ -418,39 +415,39 @@ public class MemberDetailMapper {
      * @param oralDto Oral details of member.
      * @return Returns oral entity of member.
      */
-    public static MemberOralDetail dtoToEntityForOral(MemberOralDto oralDto) {
-        MemberOralDetail memberOralDetail = new MemberOralDetail();
-        memberOralDetail.setDifficultyInOpeningMouth(oralDto.getDifficultyInOpeningMouth());
-        memberOralDetail.setDifficultyInSpicyFood(oralDto.getDifficultyInSpicyFood());
-        memberOralDetail.setOtherSymptoms(oralDto.getOtherSymptoms());
-        memberOralDetail.setWhiteRedPatchOralCavity(oralDto.getWhiteRedPatchOralCavity());
-        memberOralDetail.setVoiceChange(oralDto.getVoiceChange());
-        memberOralDetail.setThreeWeeksMouthUlcer(oralDto.getThreeWeeksMouthUlcer());
-        memberOralDetail.setRestrictedMouthOpening(oralDto.getRestrictedMouthOpening());
-        memberOralDetail.setLichenPlanus(oralDto.getLichenPlanus());
-        memberOralDetail.setSmokersPalate(oralDto.getSmokersPalate());
-        memberOralDetail.setSubmucousFibrosis(oralDto.getSubmucousFibrosis());
-        memberOralDetail.setAnyIssuesInMouth(oralDto.getAnyIssuesInMouth());
-        memberOralDetail.setWhitePatches(oralDto.getWhitePatches());
-        memberOralDetail.setFlag(oralDto.getFlag());
-        memberOralDetail.setRedPatches(oralDto.getRedPatches());
-        memberOralDetail.setNonHealingUlcers(oralDto.getNonHealingUlcers());
-        memberOralDetail.setGrowthOfRecentOrigins(oralDto.getGrowthOfRecentOrigins());
-        memberOralDetail.setScreeningDate(oralDto.getScreeningDate());
-        memberOralDetail.setMemberId(oralDto.getMemberId());
-        memberOralDetail.setLocationId(oralDto.getLocationId());
-        memberOralDetail.setFamilyId(oralDto.getFamilyId());
-        memberOralDetail.setDoneBy(oralDto.getDoneBy());
-        memberOralDetail.setMobileStartDate(new Date(-1L));
-        memberOralDetail.setMobileEndDate(new Date(-1L));
-        memberOralDetail.setDoneOn(new Date());
-        memberOralDetail.setDoesSuffering(oralDto.getDoesSuffering());
-        memberOralDetail.setHealthInfraId(oralDto.getHealthInfraId());
-        memberOralDetail.setStatus(oralDto.getStatus().toString());
-        memberOralDetail.setUlcer(oralDto.getUlcer());
-        memberOralDetail.setTakeMedicine(oralDto.getTakeMedicine());
-        return memberOralDetail;
-    }
+//    public static MemberOralDetail dtoToEntityForOral(MemberOralDto oralDto) {
+//        MemberOralDetail memberOralDetail = new MemberOralDetail();
+//        memberOralDetail.setDifficultyInOpeningMouth(oralDto.getDifficultyInOpeningMouth());
+//        memberOralDetail.setDifficultyInSpicyFood(oralDto.getDifficultyInSpicyFood());
+//        memberOralDetail.setOtherSymptoms(oralDto.getOtherSymptoms());
+//        memberOralDetail.setWhiteRedPatchOralCavity(oralDto.getWhiteRedPatchOralCavity());
+//        memberOralDetail.setVoiceChange(oralDto.getVoiceChange());
+//        memberOralDetail.setThreeWeeksMouthUlcer(oralDto.getThreeWeeksMouthUlcer());
+//        memberOralDetail.setRestrictedMouthOpening(oralDto.getRestrictedMouthOpening());
+//        memberOralDetail.setLichenPlanus(oralDto.getLichenPlanus());
+//        memberOralDetail.setSmokersPalate(oralDto.getSmokersPalate());
+//        memberOralDetail.setSubmucousFibrosis(oralDto.getSubmucousFibrosis());
+//        memberOralDetail.setAnyIssuesInMouth(oralDto.getAnyIssuesInMouth());
+//        memberOralDetail.setWhitePatches(oralDto.getWhitePatches());
+//        memberOralDetail.setFlag(oralDto.getFlag());
+//        memberOralDetail.setRedPatches(oralDto.getRedPatches());
+//        memberOralDetail.setNonHealingUlcers(oralDto.getNonHealingUlcers());
+//        memberOralDetail.setGrowthOfRecentOrigins(oralDto.getGrowthOfRecentOrigins());
+//        memberOralDetail.setScreeningDate(oralDto.getScreeningDate());
+//        memberOralDetail.setMemberId(oralDto.getMemberId());
+//        memberOralDetail.setLocationId(oralDto.getLocationId());
+//        memberOralDetail.setFamilyId(oralDto.getFamilyId());
+//        memberOralDetail.setDoneBy(oralDto.getDoneBy());
+//        memberOralDetail.setMobileStartDate(new Date(-1L));
+//        memberOralDetail.setMobileEndDate(new Date(-1L));
+//        memberOralDetail.setDoneOn(new Date());
+//        memberOralDetail.setDoesSuffering(oralDto.getDoesSuffering());
+//        memberOralDetail.setHealthInfraId(oralDto.getHealthInfraId());
+//        memberOralDetail.setStatus(oralDto.getStatus().toString());
+//        memberOralDetail.setUlcer(oralDto.getUlcer());
+//        memberOralDetail.setTakeMedicine(oralDto.getTakeMedicine());
+//        return memberOralDetail;
+//    }
 
 
     /**

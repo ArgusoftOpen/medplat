@@ -2,9 +2,6 @@ package com.argusoft.medplat.ncd.dao;
 
 import com.argusoft.medplat.database.common.GenericDao;
 import com.argusoft.medplat.ncd.enums.DoneBy;
-import com.argusoft.medplat.ncd.model.MemberCervicalDetail;
-import com.argusoft.medplat.ncd.model.MemberGeneralDetail;
-import com.argusoft.medplat.ncd.model.MemberHypertensionDetail;
 import com.argusoft.medplat.ncd.model.MemberMentalHealthDetails;
 
 import java.util.Date;

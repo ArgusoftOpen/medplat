@@ -86,24 +86,6 @@ CREATE TABLE IF NOT EXISTS public.ncd_analytics_detail (
 );
 
 
--- public.ncd_cancer_screening_master definition
-
-CREATE TABLE IF NOT EXISTS public.ncd_cancer_screening_master (
-	id serial4 NOT NULL,
-	member_id int4 NULL,
-	family_id int4 NULL,
-	location_id int4 NULL,
-	service_date timestamp NULL,
-	oral_id int4 NULL,
-	breast_id int4 NULL,
-	cervical_id int4 NULL,
-	created_by int4 NULL,
-	created_on timestamp NULL,
-	modified_by int4 NULL,
-	modified_on timestamp NULL,
-	CONSTRAINT ncd_cancer_screening_master_pkey PRIMARY KEY (id)
-);
-
 -- public.ncd_cardiologist_data definition
 
 CREATE TABLE IF NOT EXISTS public.ncd_cardiologist_data (
@@ -378,94 +360,6 @@ CREATE TABLE IF NOT EXISTS public.ncd_mbbsmo_review_detail (
 	health_infra_id int4 NULL,
 	CONSTRAINT ncd_mbbsmo_review_detail_pkey PRIMARY KEY (id)
 );
-
-
--- public.ncd_member_breast_detail definition
-
-CREATE TABLE IF NOT EXISTS public.ncd_member_breast_detail (
-	id serial4 NOT NULL,
-	member_id int4 NULL,
-	created_by int4 NULL,
-	created_on timestamp NULL,
-	modified_by int4 NULL,
-	modified_on timestamp NULL,
-	latitude varchar(100) NULL,
-	longitude varchar(100) NULL,
-	mobile_start_date timestamp NOT NULL,
-	mobile_end_date timestamp NOT NULL,
-	screening_date timestamp NULL,
-	any_breast_related_symptoms bool NULL,
-	lump_in_breast bool NULL,
-	size_change bool NULL,
-	nipple_shape_and_position_change bool NULL,
-	any_retraction_of_nipple bool NULL,
-	discharge_from_nipple bool NULL,
-	redness_of_skin_over_nipple bool NULL,
-	erosions_of_nipple bool NULL,
-	remarks text NULL,
-	agreed_for_self_breast_exam bool NULL,
-	visual_lump_in_breast text NULL,
-	swelling_in_armpit_flag text NULL,
-	visual_nipple_retraction_distortion text NULL,
-	visual_ulceration text NULL,
-	discharge_from_nipple_flag bool NULL,
-	visual_skin_dimpling_retraction text NULL,
-	visual_remarks text NULL,
-	lymphadenopathy bool NULL,
-	done_by varchar(200) NULL,
-	done_on timestamp NULL,
-	retraction_of_skin text NULL,
-	refferal_done bool NULL,
-	refferal_place text NULL,
-	ulceration bool NULL,
-	nipples_not_on_same_level bool NULL,
-	is_axillary bool NULL,
-	is_super_clavicular_area bool NULL,
-	is_infra_clavicular_area bool NULL,
-	referral_id int4 NULL,
-	location_id int4 NULL,
-	family_id int4 NULL,
-	health_infra_id int4 NULL,
-	hmis_health_infra_type int4 NULL,
-	hmis_health_infra_id int4 NULL,
-	consultant_flag bool NULL,
-	skin_edema bool NULL,
-	visual_skin_retraction varchar NULL,
-	swelling_or_lump bool NULL,
-	puckering_or_dimpling bool NULL,
-	constant_pain_in_breast bool NULL,
-	skin_dimpling_retraction_flag bool NULL,
-	nipple_retraction_distortion_flag bool NULL,
-	lump_in_breast_flag bool NULL,
-	visual_discharge_from_nipple text NULL,
-	visual_swelling_in_armpit text NULL,
-	status varchar(50) NULL,
-	does_suffering bool NULL,
-	retraction_of_skin_flag bool NULL,
-	master_id int4 NULL,
-	is_suspected bool NULL,
-	take_medicine bool NULL,
-	treatment_status text NULL,
-	cancer_screening_master_id int4 NULL,
-	diagnosed_earlier bool NULL,
-	currently_under_treatment bool NULL,
-	current_treatment_place text NULL,
-	govt_facility_id int4 NULL,
-	private_facility text NULL,
-	out_of_territory_facility text NULL,
-	CONSTRAINT ncd_member_breast_detail_t_pkey PRIMARY KEY (id)
-);
-CREATE INDEX ncd_member_breast_detail_modified_on_idx ON public.ncd_member_breast_detail USING btree (modified_on DESC NULLS LAST);
-CREATE INDEX ncd_member_breast_detail_t_created_by_idx ON public.ncd_member_breast_detail USING btree (created_by);
-CREATE INDEX ncd_member_breast_detail_t_member_id_idx ON public.ncd_member_breast_detail USING btree (member_id);
-CREATE INDEX ncd_member_breast_detail_t_refferal_done_refferal_place_idx ON public.ncd_member_breast_detail USING btree (refferal_done, refferal_place);
-
--- Table Triggers
-
-create trigger ncd_breast_hmis_update after
-insert
-    on
-    public.ncd_member_breast_detail for each row execute function ncd_breast_hmis_updation();
 
 
 -- public.ncd_member_cbac_detail definition
@@ -1984,4 +1878,4 @@ INSERT INTO public.mobile_feature_master (mobile_constant,feature_name,mobile_di
 	 ('FHW_NCD_CONFIRMATION','FHW NCD Confirmation','NCD Confirmation','ACTIVE','2022-11-02 22:28:32.465177',-1,'2022-11-02 22:28:32.465177',-1),
 	 ('NCD_MO_CONFIRMED','NCD MO Confirmed','NCD MO Confirmed','ACTIVE','2023-08-23 10:21:50.25971',-1,'2023-08-23 10:21:50.25971',-1),
 	 ('FHW_NCD_WEEKLY_VISIT','FHW NCD Weekly Visit','NCD Confirmed Cases','ACTIVE','2022-11-21 16:53:44.526364',-1,'2023-10-04 09:47:02.361819',-1),
-	 ('FHW_NCD_CVC_DETAIL','FHW NCD CVC Detail','NCD CVC Detail','ACTIVE','2023-10-04 09:47:02.361819',-1,'2023-10-04 09:47:02.361819',-1),
+	 ('FHW_NCD_CVC_DETAIL','FHW NCD CVC Detail','NCD CVC Detail','ACTIVE','2023-10-04 09:47:02.361819',-1,'2023-10-04 09:47:02.361819',-1);

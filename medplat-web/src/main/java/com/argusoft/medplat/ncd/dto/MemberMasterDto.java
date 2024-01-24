@@ -21,9 +21,7 @@ public class MemberMasterDto {
     private MemberHypertensionDetail memberHypertensionDetail;
     private MemberDiabetesDetail memberDiabetesDetail;
     private MemberMentalHealthDetails memberMentalHealthDetails;
-    private MemberOralDetail memberOralDetail;
     private MemberBreastDetail memberBreastDetail;
-    private MemberCervicalDetail memberCervicalDetail;
     private MemberInitialAssessmentDetail memberInitialAssessmentDetail;
     private Boolean bpl;
     private Boolean vulnerable;

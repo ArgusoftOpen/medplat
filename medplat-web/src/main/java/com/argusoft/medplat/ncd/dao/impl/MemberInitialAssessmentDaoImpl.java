@@ -1,13 +1,9 @@
 package com.argusoft.medplat.ncd.dao.impl;
 
-import com.argusoft.medplat.common.model.EntityAuditInfo;
 import com.argusoft.medplat.database.common.impl.GenericDaoImpl;
 import com.argusoft.medplat.ncd.dao.MemberInitialAssessmentDao;
 import com.argusoft.medplat.ncd.enums.DoneBy;
-import com.argusoft.medplat.ncd.model.MemberHypertensionDetail;
 import com.argusoft.medplat.ncd.model.MemberInitialAssessmentDetail;
-import com.argusoft.medplat.ncd.model.MemberOralDetail;
-import com.argusoft.medplat.ncd.model.MemberReferral;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 

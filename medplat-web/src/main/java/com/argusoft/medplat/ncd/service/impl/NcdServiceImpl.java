@@ -127,12 +127,6 @@ public class NcdServiceImpl implements NcdService {
     @Autowired
     private QueryMasterService queryMasterService;
     @Autowired
-    private MemberOralDetailDao memberOralDetailDao;
-    @Autowired
-    private MemberBreastDetailDao memberBreastDetailDao;
-    @Autowired
-    private MemberCervicalDetailDao memberCervicalDetailDao;
-    @Autowired
     private MemberInitialAssessmentDao memberInitialAssessmentDao;
     @Autowired
     private MemberGeneralScreeningDao generalScreeningDao;
@@ -3685,16 +3679,10 @@ public class NcdServiceImpl implements NcdService {
         List<MemberHypertensionDetail> memberHypertensionDetail = hypertensionDetailDao.retrieveLastRecordByMemberId(memberId);
         MemberDiabetesDetail memberDiabetesDetail = diabetesDetailDao.retrieveLastRecordByMemberId(memberId);
         MemberMentalHealthDetails memberMentalHealthDetails = mentalHealthDetailDao.retrieveLastRecordByMemberId(memberId);
-        MemberOralDetail memberOralDetail = memberOralDetailDao.retrieveLastRecordByMemberId(memberId);
-        MemberBreastDetail memberBreastDetail = memberBreastDetailDao.retrieveLastRecordByMemberId(memberId);
-        MemberCervicalDetail memberCervicalDetail = memberCervicalDetailDao.retrieveLastRecordByMemberId(memberId);
         MemberInitialAssessmentDetail memberInitialAssessmentDetail = memberInitialAssessmentDao.retrieveLastRecordByMemberId(memberId);
         memberMasterDto.setMemberHypertensionDetail(memberHypertensionDetail.isEmpty() ? null : memberHypertensionDetail.get(0));
         memberMasterDto.setMemberDiabetesDetail(memberDiabetesDetail);
         memberMasterDto.setMemberMentalHealthDetails(memberMentalHealthDetails);
-        memberMasterDto.setMemberOralDetail(memberOralDetail);
-        memberMasterDto.setMemberBreastDetail(memberBreastDetail);
-        memberMasterDto.setMemberCervicalDetail(memberCervicalDetail);
         memberMasterDto.setMemberInitialAssessmentDetail(memberInitialAssessmentDetail);
         memberMasterDto.setBpl(familyEntity.getBplFlag());
         memberMasterDto.setVulnerable(familyEntity.getVulnerableFlag());
