@@ -47,7 +47,7 @@ public class EventHandler {
     @Autowired
     private EventConfigurationService notificationConfigurationService;
 
-    private final ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
+    private final ScriptEngine engine = new ScriptEngineManager().getEngineByName("graal.js");
 
     /**
      * Handle event.

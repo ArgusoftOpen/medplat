@@ -9,13 +9,23 @@ import com.argusoft.medplat.common.model.SystemConfigSync;
 import com.argusoft.medplat.common.service.SystemConfigSyncService;
 import com.argusoft.medplat.common.util.ConstantUtil;
 import com.argusoft.medplat.common.util.ImtechoUtil;
+import com.argusoft.medplat.event.dao.EventConfigurationDao;
 import com.argusoft.medplat.event.dto.EventConfigurationDto;
+import com.argusoft.medplat.event.mapper.EventConfigurationMapper;
 import com.argusoft.medplat.event.service.EventConfigurationService;
+import com.argusoft.medplat.event.service.impl.EventConfigurationServiceImpl;
 import com.argusoft.medplat.exception.ImtechoUserException;
+import com.argusoft.medplat.notification.dao.NotificationTypeMasterDao;
 import com.argusoft.medplat.notification.dto.NotificationTypeMasterDto;
+import com.argusoft.medplat.notification.mapper.EscalationLevelMasterMapper;
+import com.argusoft.medplat.notification.dao.EscalationLevelMasterDao;
+import com.argusoft.medplat.notification.mapper.NotificationTypeMasterMapper;
+import com.argusoft.medplat.notification.model.EscalationLevelMaster;
+import com.argusoft.medplat.notification.model.NotificationTypeMaster;
 import com.argusoft.medplat.notification.service.NotificationMasterService;
+import com.argusoft.medplat.query.dao.QueryMasterDao;
 import com.argusoft.medplat.query.dto.QueryMasterDto;
-import com.argusoft.medplat.query.service.QueryMasterService;
+import com.argusoft.medplat.query.mapper.QueryMasterMapper;
 import com.argusoft.medplat.reportconfig.dao.ReportMasterDao;
 import com.argusoft.medplat.reportconfig.dto.ReportConfigDto;
 import com.argusoft.medplat.reportconfig.service.ReportService;
@@ -26,8 +36,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Implements methods of SystemConfigSyncService
@@ -40,21 +53,20 @@ public class SystemConfigSyncServiceImpl implements SystemConfigSyncService {
 
     @Autowired
     private SystemConfigSyncDao systemConfigSyncDao;
-
-
     @Autowired
-    private NotificationMasterService notificationMasterService;
+    private EventConfigurationDao eventConfigurationDao;
+    @Autowired
+    private QueryMasterDao queryMasterDao;
+    @Autowired
+    private NotificationTypeMasterDao notificationTypeMasterDao;
 
-    @Autowired
-    private EventConfigurationService eventConfigurationService;
-    
-    @Autowired
-    private QueryMasterService queryMasterService;
     
     @Autowired
     private ReportService reportService;
-    
-   @Autowired
+    @Autowired
+    private EscalationLevelMasterDao escalationLevelMasterDao;
+
+    @Autowired
     private ReportMasterDao reportMasterDao;
     
 
@@ -77,22 +89,32 @@ public class SystemConfigSyncServiceImpl implements SystemConfigSyncService {
         JsonObject json = new JsonObject();
         json.addProperty("count", count);
 
-        List<NotificationTypeMasterDto> allNotification = notificationMasterService.retrieveAll(null);
-
+        List<NotificationTypeMaster> notificationMasters = notificationTypeMasterDao.retrieveAll(null);
+        List<NotificationTypeMasterDto> allNotification = NotificationTypeMasterMapper.getNotificationMasterDtoList(notificationMasters);
+        for (NotificationTypeMasterDto notificationTypeMasterDto : allNotification) {
+            List<EscalationLevelMaster> escalationLevelMasters = escalationLevelMasterDao.retrieveByNotificationId(notificationTypeMasterDto.getId());
+            notificationTypeMasterDto.setEscalationLevels(EscalationLevelMasterMapper.convertEscalationLevelMasterListToEscalationLevelMasterDtoList(escalationLevelMasters));
+        }
         for (NotificationTypeMasterDto dto : allNotification) {
             systemConfigSyncDao.createOrUpdate(SystemConfigSyncMapper.convertNotificationDtoToMaster(dto, ConstantUtil.SYNC_NOTIFICATION));
         }
         json.addProperty("allNotification", allNotification.size());
 
-        List<EventConfigurationDto> allEvents = eventConfigurationService.retrieveAll();
+        List<EventConfigurationDto> allEvents = eventConfigurationDao.retrieveAll(false);
 
         for (EventConfigurationDto dto : allEvents) {
-            EventConfigurationDto eventDto = eventConfigurationService.retrieveById(dto.getId());
+            EventConfigurationDto eventDto;
+            try {
+                eventDto = EventConfigurationMapper.convertMasterToDto(eventConfigurationDao.retrieveById(dto.getId()));
+            } catch (IOException ex) {
+                Logger.getLogger(EventConfigurationServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+                eventDto = null;
+            }
             systemConfigSyncDao.createOrUpdate(SystemConfigSyncMapper.convertEventConfigDtoToMaster(eventDto, ConstantUtil.SYNC_EVENT));
         }
         json.addProperty("allEvents", allEvents.size());
 
-        List<QueryMasterDto> allQuery = queryMasterService.retrieveAll(null);
+        List<QueryMasterDto> allQuery = QueryMasterMapper.convertMasterListToDto(queryMasterDao.retrieveAll(null));
 
         for (QueryMasterDto dto : allQuery) {
             systemConfigSyncDao.createOrUpdate(SystemConfigSyncMapper.convertDtoToMaster(dto, ConstantUtil.SYNC_QUERY_BUILDER));

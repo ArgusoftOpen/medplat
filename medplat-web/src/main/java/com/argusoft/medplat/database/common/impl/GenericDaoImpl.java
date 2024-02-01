@@ -1,8 +1,8 @@
 package com.argusoft.medplat.database.common.impl;
 
+import com.argusoft.medplat.common.model.QueryAnalysisDetails;
 import com.argusoft.medplat.common.util.ConstantUtil;
 import com.argusoft.medplat.common.util.IJoinEnum;
-import com.argusoft.medplat.common.util.QueryAndResponseAnalysisService;
 import com.argusoft.medplat.database.common.GenericDao;
 import com.argusoft.medplat.database.common.PredicateBuilder;
 import org.hibernate.Criteria;
@@ -26,6 +26,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,9 +44,6 @@ public abstract class GenericDaoImpl<EntityType, IDType extends Serializable>
 
     @Autowired
     protected SessionFactory sessionFactory;
-
-    @Autowired
-    QueryAndResponseAnalysisService queryAndResponseAnalysisService;
 
     private final Class<EntityType> persistentClass = (Class<EntityType>) ((ParameterizedType) getClass()
             .getGenericSuperclass()).getActualTypeArguments()[0];
@@ -125,7 +123,7 @@ public abstract class GenericDaoImpl<EntityType, IDType extends Serializable>
         }
         if (!entities.isEmpty() && entities.size() > ConstantUtil.MAXIMUM_AMOUNT_OF_ROWS_FETCH_FROM_DB) {
             logger.info("Entity Name  = {} , Number Of Rows = {}", getPersistentClass().getName(), entities.size());
-            queryAndResponseAnalysisService.insertQueryAnalysisDetails(getPersistentClass().getName(), null, entities.size());
+            insertQueryAnalysisDetails(getPersistentClass().getName(), null, entities.size());
         }
         return entities;
     }
@@ -233,7 +231,7 @@ public abstract class GenericDaoImpl<EntityType, IDType extends Serializable>
         List<EntityType> entityTypes = query.getResultList();
         if (!entityTypes.isEmpty() && entityTypes.size() > ConstantUtil.MAXIMUM_AMOUNT_OF_ROWS_FETCH_FROM_DB) {
             logger.info("Query ======> {}\nEntity Name ======> {}\nNumber Of Rows ======> {}", query.getQueryString(), persistentClass.getName(), entityTypes.size());
-            queryAndResponseAnalysisService.insertQueryAnalysisDetails(query.getQueryString(), persistentClass.getName(), entityTypes.size());
+            insertQueryAnalysisDetails(query.getQueryString(), persistentClass.getName(), entityTypes.size());
         }
         return entityTypes;
     }
@@ -321,7 +319,7 @@ public abstract class GenericDaoImpl<EntityType, IDType extends Serializable>
         List<EntityType> entityTypes = query.getResultList();
         if (!entityTypes.isEmpty() && entityTypes.size() > ConstantUtil.MAXIMUM_AMOUNT_OF_ROWS_FETCH_FROM_DB) {
             logger.info("Query ======> {}\nEntity Name ======> {}\nNumber Of Rows ======> {}", query.getQueryString(), persistentClass.getName(), entityTypes.size());
-            queryAndResponseAnalysisService.insertQueryAnalysisDetails(query.getQueryString(), persistentClass.getName(), entityTypes.size());
+            insertQueryAnalysisDetails(query.getQueryString(), persistentClass.getName(), entityTypes.size());
         }
         return entityTypes;
     }
@@ -627,6 +625,15 @@ public abstract class GenericDaoImpl<EntityType, IDType extends Serializable>
         if (getMaxResults() > 0) {
             criteria.setMaxResults(getMaxResults());
         }
+    }
+
+    private void insertQueryAnalysisDetails(String query, String parameters, Integer totalCount){
+        QueryAnalysisDetails queryAnalysisDetails = new QueryAnalysisDetails();
+        queryAnalysisDetails.setQueryString(query);
+        queryAnalysisDetails.setParameters(parameters);
+        queryAnalysisDetails.setExecutionTime(new Date());
+        queryAnalysisDetails.setTotalRows(totalCount);
+        getCurrentSession().save(queryAnalysisDetails);
     }
 
 }
