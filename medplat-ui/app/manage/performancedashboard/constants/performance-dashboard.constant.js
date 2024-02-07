@@ -28,10 +28,10 @@ angular.module('imtecho').constant("DASHBOARDConst", {
             key: "Feeding Practice, Nutrition & Anemia",
             id: "feedingScale"
         },
-        // {
-        //     key: "NCD",
-        //     id: "ncdScale"
-        // },
+        {
+            key: "NCD",
+            id: "ncdScale"
+        },
 
     ]
 });

@@ -1,0 +1,122 @@
+<div class="no-print container-fluid">
+    <div class="row">
+        <div class="col-xl-10">
+            <div class="tabbable boxed parentTabs cst-tab cst-tab-white-style">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="javascript:void(0)" class="nav-link">CVC Form</a>
+                    </li>
+                </ul>
+                <div class="tab-content cst-scrollbar" style="padding-right: 0; overflow-y: auto; overflow-x: hidden;">
+                    <div class="row mt-0">
+                        <div class="col-xl-12">
+                            <div class="tabbable cst-tab">
+                                <div class="tab-content bxb-0">
+                                    <div class="tab-pane fade active in" id="examination-5">
+                                        <div class="container-fluid py-3">
+                                            <form role="form" name="ctrl.form" id="ctrl.form" novalidate>
+                                                <div class="row inline-form-control mb-2">
+                                                    <div class="col-12">
+                                                        <dateinfra obj="ctrl.dateinfra"
+                                                            medicine-data="ctrl.medicineData"
+                                                            on-change="ctrl.retrieveCVCDetailsByMemberAndDate()"
+                                                            on-health-infra-change="ctrl.retrieveMedicinesByHealthInfra(ctrl.dateinfra.healthInfraId)">
+                                                        </dateinfra>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3 px-15">
+                                                    <treatment obj="ctrl.medicineDetail"
+                                                        medicine-data="ctrl.medicineData"
+                                                        is_submit="ctrl.medicineFormSubmit"
+                                                        prescribed-medicine="ctrl.prescribedMedicine"
+                                                        take-medicine="ctrl.takeMedicine">
+                                                    </treatment>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="button-footer" style="border: 0px;"
+                                                            ng-if="!ctrl.cvcFormAlreadyFilled">
+                                                            <button type="submit" class="btn btn-primary"
+                                                                ng-click="ctrl.saveCVCForm()">Save
+                                                                & Continue
+                                                            </button>
+                                                            <button class=" btn btn-secondary"
+                                                                ui-sref="techo.ncd.members">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 patient-summary cst-scrollbar thin">
+            <div class="row">
+                <div class="col-xl-12">
+                    <img alt="image" src="img/default-avatar.png"
+                        class="patient-img patient-img--big d-block mx-auto" />
+                </div>
+                <div class="col-xl-12 text-center">
+                    <h4>{{ctrl.member.name}}</h4>
+                    <h6 class="text-muted">
+                        {{ctrl.member.basicDetails.age}}/{{ctrl.member.basicDetails.gender}}</h6>
+                    <!-- <a ui-sref="techo.ncd.patientSummary({id:ctrl.memberId})">{{ctrl.memberId}}</a> -->
+                </div>
+                <div class="col-xl-12 text-center">
+                    <a href="javascript:void(0)" ng-click="ctrl.printPatientSummary()"
+                        class="btn btn-primary mt-1 mb-2">
+                        <!-- <em class="ion-printer mr-2"></em> -->
+                        Patient Summary
+                    </a>
+                </div>
+                <div class="col-xl-12 text-center">
+                    <h6 class="text-muted">Is BPL? : {{ctrl.member.bpl == true ? 'Yes' :
+                        ctrl.member.bpl == false ?
+                        'No' : 'N.A'}}</h5>
+                        <h6 class="text-muted">Is Vulnerable? : {{ctrl.member.vulnerable == true ?
+                            'Yes' :
+                            ctrl.member.vulnerable == false ? 'No' : 'N.A'}}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row"
+                ng-if="ctrl.MOComment!=null || ctrl.MBBSComment!=null || ctrl.ConComment!=null || ctrl.MOReviewFollowupComment!=null || ctrl.MOReviewComment!=null">
+                <div class="col-xl-12 text-center">
+                    <h5>Comment(s)</h5>
+                    <h6 ng-if="ctrl.MOComment!=null">MO ({{ctrl.MOCommentBy}}): {{ctrl.MOComment}}
+                    </h6>
+                    <h6 ng-if="ctrl.MBBSComment!=null">MBBS ({{ctrl.MBBSCommentBy}}):
+                        {{ctrl.MBBSComment}}</h6>
+                    <h6 ng-if="ctrl.ConComment!=null">Consultant ({{ctrl.ConCommentBy}}):
+                        {{ctrl.ConComment}}</h6>
+                    <h6 ng-if="ctrl.MOReviewComment!=null">MO Review({{ctrl.MOReviewCommentBy}}):
+                        {{ctrl.MOReviewComment}}</h6>
+                    <h6 ng-if="ctrl.MOReviewFollowupComment!=null">MO Review Followup
+                        ({{ctrl.MOReviewFollowupCommentBy}}): {{ctrl.MOReviewFollowupComment}}</h6>
+                </div>
+            </div>
+            <hr
+                ng-if="ctrl.MOComment!=null || ctrl.MBBSComment!=null || ctrl.ConComment!=null || ctrl.MOReviewFollowupComment!=null || ctrl.MOReviewComment!=null">
+            <div class="row" ng-if="ctrl.historyDisease">
+                <div class="col-xl-12 text-center">
+                    <h5>Complications</h5>
+                    <h6>From mobile : {{ctrl.historyDisease.from_mob| emptylabel}}
+                        <br />
+                        <span ng-if="ctrl.historyDisease.other_disease_mob">Other :
+                            {{ctrl.historyDisease.other_disease_mob}}</span>
+                    </h6>
+                    <h6>From Web : {{ctrl.historyDisease.from_web| emptylabel}}
+                        <br />
+                        <span ng-if="ctrl.historyDisease.other_disease_web">Other :
+                            {{ctrl.historyDisease.other_disease_web}}</span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

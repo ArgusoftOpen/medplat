@@ -1,0 +1,486 @@
+<div class="row mt-0">
+    <div class="col-xl-12">
+        <div class="tabbable cst-tab">
+            <div class="tab-content bxb-0">
+                <div class="tab-pane fade active in" id="examination-5">
+                    <div class="container-fluid py-3">
+                        <form role="form" name="ctrl.form" id="GeneralForm" novalidate>
+                            <div class="row inline-form-control mb-2"
+                                ng-init="ctrl.generalForm.doesRequiredRef = false">
+                                <div class="col-12">
+                                    <dateinfra obj="ncdmd.dateinfra" user-health-infras="ncdmd.userHealthInfras"
+                                        on-change="ctrl.retrieveGeneralDetailsByMemberAndDate()"
+                                        on-health-infra-change="ncdmd.retrieveMedicinesByHealthInfra(ncdmd.dateinfra.healthInfraId)">
+                                    </dateinfra>
+                                </div>
+                            </div>
+                            <hr ng-show="ctrl.comment || ctrl.dbComment || ctrl.mhComment || ctrl.htComment">
+                            <div style="margin-bottom: 10px;">
+                                <div ng-show="ctrl.comment" style="margin-left:5px;">
+                                    <label><strong>Flag Comment: </strong>{{ctrl.comment}}</label>
+                                </div>
+                                <div ng-show="ctrl.htComment" style="margin-left: 5px;">
+                                    <label><strong>Hypertension Flag Comment: </strong>{{ctrl.htComment}}</label>
+                                </div>
+                                <div ng-show="ctrl.dbComment" style="margin-left: 5px;">
+                                    <label><strong>Diabetes Flag Comment: </strong>{{ctrl.dbComment}}</label>
+                                </div>
+                                <div ng-show="ctrl.mhComment" style="margin-left: 5px;">
+                                    <label><strong>Mental Health Flag Comment: </strong>{{ctrl.mhComment}}</label>
+                                </div>
+                                <div class="row px-15">
+                                    <div class="col-xl-12 input-box">
+                                        <h6>General Examination</h6>
+                                        <div class="input-box--inner row ">
+
+                                            <div class="col-xl-12">
+                                                <h6>Category:</h6>
+                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="row">
+                                                    <div class="col-xl-4">
+                                                        <ul class="oral-list">
+                                                            <label class="oral-list--item"
+                                                                ng-class="{'active':ctrl.generalForm.category === 'RCH'}">
+                                                                <input value="RCH" ng-model="ctrl.generalForm.category"
+                                                                    type="radio" name="oral-list--radio"
+                                                                    class="oral-list--radio">
+                                                                RCH
+                                                            </label>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- ng-model="ncdmd.member.memberGeneralDto.rch"
+                                                                ng-value="true" -->
+
+                                                    <div class="col-xl-4">
+                                                        <ul class="oral-list">
+                                                            <label class="oral-list--item"
+                                                                ng-class="{'active':ctrl.generalForm.category === 'COMMUNICABLEDISEASE'}">
+                                                                <input type="radio" value="COMMUNICABLEDISEASE"
+                                                                    ng-model="ctrl.generalForm.category"
+                                                                    name="oral-list--radio" class="oral-list--radio">
+                                                                Communicable disease
+                                                            </label>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-xl-4">
+                                                        <ul class="oral-list">
+                                                            <label class="oral-list--item"
+                                                                ng-class="{'active':ctrl.generalForm.category === 'MINORAILMENTS'}">
+                                                                <input type="radio" value="MINORAILMENTS"
+                                                                    ng-model="ctrl.generalForm.category"
+                                                                    name="oral-list--radio" class="oral-list--radio">
+                                                                Minor ailments
+                                                            </label>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-xl-4">
+                                                        <ul class="oral-list">
+                                                            <label class="oral-list--item"
+                                                                ng-class="{'active':ctrl.generalForm.category === 'OPHTHALMIC'}">
+                                                                <input type="radio" value="OPHTHALMIC"
+                                                                    ng-model="ctrl.generalForm.category"
+                                                                    name="oral-list--radio" class="oral-list--radio">
+                                                                Ophthalmic
+                                                            </label>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-xl-4">
+                                                        <ul class="oral-list">
+                                                            <label class="oral-list--item"
+                                                                ng-class="{'active':ctrl.generalForm.category === 'ENT'}">
+                                                                <input type="radio" value="ENT"
+                                                                    ng-model="ctrl.generalForm.category"
+                                                                    name="oral-list--radio" class="oral-list--radio">
+                                                                ENT
+                                                            </label>
+                                                        </ul>
+                                                    </div>
+
+
+                                                    <div class="col-xl-4">
+                                                        <ul class="oral-list">
+                                                            <label class="oral-list--item"
+                                                                ng-class="{'active':ctrl.generalForm.category === 'ORALCARE'}">
+                                                                <input type="radio" value="ORALCARE"
+                                                                    ng-model="ctrl.generalForm.category"
+                                                                    name="oral-list--radio" class="oral-list--radio">
+                                                                Oral care
+                                                            </label>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-xl-4">
+                                                        <ul class="oral-list">
+                                                            <label class="oral-list--item"
+                                                                ng-class="{'active':ctrl.generalForm.category === 'GERIATRICMEDICINE'}">
+                                                                <input type="radio" value="GERIATRICMEDICINE"
+                                                                    ng-model="ctrl.generalForm.category"
+                                                                    name="oral-list--radio" class="oral-list--radio">
+                                                                Geriatric medicine
+                                                            </label>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-xl-4">
+                                                        <ul class="oral-list">
+                                                            <label class="oral-list--item"
+                                                                ng-class="{'active':ctrl.generalForm.category === 'EMERGENCY_TRAUMA'}">
+                                                                <input type="radio" value="EMERGENCY_TRAUMA"
+                                                                    ng-model="ctrl.generalForm.category"
+                                                                    name="oral-list--radio" class="oral-list--radio">
+                                                                Emergency/trauma
+                                                            </label>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-xl-4">
+                                                        <ul class="oral-list">
+                                                            <label class="oral-list--item"
+                                                                ng-class="{'active':ctrl.generalForm.category === 'MENTALHEALTH'}">
+                                                                <input type="radio" value="MENTALHEALTH"
+                                                                    ng-model="ctrl.generalForm.category"
+                                                                    name="oral-list--radio" class="oral-list--radio">
+                                                                Mental health
+                                                            </label>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-xl-4">
+                                                        <ul class="oral-list">
+                                                            <label class="oral-list--item"
+                                                                ng-class="{'active':ctrl.generalForm.category === 'OTHER'}">
+                                                                <input type="radio" value="OTHER"
+                                                                    ng-model="ctrl.generalForm.category"
+                                                                    name="oral-list--radio" class="oral-list--radio">
+                                                                Other
+                                                            </label>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div ng-if="ctrl.generalForm.category=='OTHER'"
+                                                class="form-group col-xl-10">
+                                                <validate for='otherDetails' required-msg="Please select a value">
+                                                    <label for="otherDetails" class="control-label" control-label>Other
+                                                    </label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control ng-model="ctrl.generalForm.otherDetails"
+                                                        id="otherDetails" name="otherDetails">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+
+                                            <div class="form-group col-xl-10">
+                                                <validate for='symptoms' required-msg="Please select a value">
+                                                    <label for="symptoms" class="control-label" control-label>Symptoms
+                                                    </label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control ng-model="ctrl.generalForm.symptoms" id="symptoms"
+                                                        name="symptoms">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+
+                                            <div class="form-group col-xl-10">
+                                                <validate for='clinicalObservation '
+                                                    required-msg="Please select a value">
+                                                    <label for="clinicalObservation " class="control-label"
+                                                        control-label>Clinical
+                                                        observation
+                                                    </label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control ng-model="ctrl.generalForm.clinicalObservation "
+                                                        id="clinicalObservation " name="clinicalObservation ">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+
+                                            <div class="form-group col-xl-10">
+                                                <validate for='diagnosis' required-msg="Please select a value">
+                                                    <label for="diagnosis" class="control-label" control-label>Diagnosis
+                                                    </label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control ng-model="ctrl.generalForm.diagnosis"
+                                                        id="diagnosis" name="diagnosis">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+
+                                            <div class="form-group col-xl-10">
+                                                <validate for='remarks' required-msg="Please select a value">
+                                                    <label for="remarks" class="control-label" control-label>Remarks
+                                                    </label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control ng-model="ctrl.generalForm.remarks" id="remarks"
+                                                        name="remarks">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row px-15">
+                                    <treatment obj="ctrl.medicineDetail" medicine-data="ncdmd.medicineData"
+                                        prescribed-medicine="ctrl.prescribedMedicine" take-medicine="ctrl.takeMedicine"
+                                        is_submit="ctrl.medicineFormSubmit" edit-data="ctrl.editedMedicineDetail"
+                                        show-edit="ctrl.generalAlreadyFilled == true? false : true"
+                                        delete-data="ctrl.deletedMedicineDetails" from-mo-review="false">
+                                    </treatment>
+                                </div>
+                                <div class="row mb-3 px-15">
+                                    <div class="col-xl-12 input-box">
+                                        <h6>Referral</h6>
+                                        <div class="input-box--inner row" ng-if="ctrl.type === 'MO'">
+                                            <div class="form-group col-xl-6">
+                                                <validate for='doesRequiredRef' required-msg="Please select a value">
+                                                    <label style="display: block;" for="doesRequiredRef" uib-tooltip=""
+                                                        class="control-label" control-label>Does
+                                                        this patient
+                                                        required reference? </label>
+                                                    <label class="control control-radio">Yes
+                                                        <input ng-value="true" name="doesRequiredRef"
+                                                            id="doesRequiredRef" type="radio"
+                                                            ng-model="ctrl.generalForm.doesRequiredRef" form-control
+                                                            required>
+                                                        <div class="control_indicator">
+                                                        </div>
+                                                    </label>
+                                                    <label class="control control-radio">No
+                                                        <input ng-value="false" name="doesRequiredRef"
+                                                            id="doesRequiredRef" type="radio"
+                                                            ng-model="ctrl.generalForm.doesRequiredRef" form-control
+                                                            required>
+                                                        <div class="control_indicator">
+                                                        </div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                        <div class="input-box--inner row"
+                                            ng-if="ctrl.generalForm.doesRequiredRef === true && ctrl.type === 'MO'">
+                                            <div class="form-group col-xl-6">
+                                                <validate for='refferralPlace' required-msg="Please select a value">
+                                                    <label for="refferralPlace" control-label>Referral
+                                                        Place</label>
+                                                    <select class="form-control cst-form-control" form-control
+                                                        chosen-directive ng-model="ctrl.generalForm.refferralPlace"
+                                                        name="refferralPlace" id="refferralPlace" required>
+                                                        <option value="" selected>
+                                                            --Select--
+                                                        </option>
+                                                        <option value="Specialist">
+                                                            Specialist
+                                                        </option>
+                                                        <!-- <option value="Other">
+                                                        Other
+                                                    </option> -->
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group col-xl-6">
+                                                <validate for='refferralReason' required-msg="Please select a value">
+                                                    <label for="refferralReason" class="control-label"
+                                                        control-label>Reason
+                                                        for
+                                                        reference
+                                                    </label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control ng-model="ctrl.generalForm.refferralReason"
+                                                        id="refferralReason" name="refferralReason">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div ng-if="ctrl.generalForm.refferralPlace" class="form-group col-xl-6">
+                                                <validate for='followUpDisease' required-msg="Please select date">
+                                                    <label for="followUpDisease" class="control-label" control-label>
+                                                        Select disease(s) for Referral</label>
+                                                    <select id="followUpDisease" name="followUpDisease"
+                                                        class="form-control" chosen-directive
+                                                        data-placeholder='Select disease' multiple required form-control
+                                                        ng-model="ctrl.generalForm.followUpDisease">
+                                                        <option ng-if="ncdmd.member.basicDetails.age>=40" value='HT'>
+                                                            Hypertension</option>
+                                                        <option ng-if="ncdmd.member.basicDetails.age>=40" value='D'>
+                                                            Diabetes</option>
+                                                        <option ng-if="ncdmd.member.basicDetails.age>=15" value='MH'>
+                                                            Mental health</option>
+                                                        <!-- <option ng-if="ncdmd.member.basicDetails.age>=40" value='O'>Oral cancer</option>
+                                                    <option ng-if="ncdmd.member.basicDetails.gender=='F' && ncdmd.member.basicDetails.age>=40" value='B'>Breast cancer</option>
+                                                    <option ng-if="ncdmd.member.basicDetails.gender=='F' && ncdmd.member.basicDetails.age>=40" value='C'>Cervical cancer</option> -->
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                        <div class="input-box--inner row"
+                                            ng-if="ctrl.generalForm.doesRequiredRef !== true && ctrl.type === 'MO'">
+                                            <div class="form-group col-xl-6">
+                                                <validate for='followUp' required-msg="Please select a value">
+                                                    <label for="followUp" control-label>Follow
+                                                        Up</label>
+                                                    <select class="form-control cst-form-control" form-control
+                                                        chosen-directive name="followUp" id="followUp"
+                                                        ng-model="ctrl.generalForm.followupPlace" required>
+                                                        <option value="" selected>
+                                                            --Select--
+                                                        </option>
+                                                        <option value="clinic">
+                                                            Clinic visit
+                                                        </option>
+                                                        <option value="home">
+                                                            Home visit
+                                                        </option>
+                                                        <option value="doctor">
+                                                            Doctor visit
+                                                        </option>
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div ng-if="ctrl.generalForm.followupPlace" class="form-group col-xl-6">
+                                                <validate for='followUpDisease' required-msg="Please select date">
+                                                    <label for="followUpDisease" class="control-label" control-label>
+                                                        Select disease(s) for follow Up</label>
+                                                    <select id="followUpDisease" name="followUpDisease"
+                                                        class="form-control" chosen-directive
+                                                        data-placeholder='Select disease' multiple required form-control
+                                                        ng-model="ctrl.generalForm.followUpDisease">
+                                                        <option ng-if="ncdmd.member.basicDetails.age>=40" value='HT'>
+                                                            Hypertension</option>
+                                                        <option ng-if="ncdmd.member.basicDetails.age>=40" value='D'>
+                                                            Diabetes</option>
+                                                        <option ng-if="ncdmd.member.basicDetails.age>=15" value='MH'>
+                                                            Mental health</option>
+                                                        <!-- <option ng-if="ncdmd.member.basicDetails.age>=40" value='O'>Oral cancer</option>
+                                                    <option ng-if="ncdmd.member.basicDetails.gender=='F' && ncdmd.member.basicDetails.age>=40" value='B'>Breast cancer</option>
+                                                    <option ng-if="ncdmd.member.basicDetails.gender=='F' && ncdmd.member.basicDetails.age>=40" value='C'>Cervical cancer</option> -->
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div ng-if="ctrl.generalForm.followupPlace" class="form-group col-xl-6">
+                                                <validate for='followUpDate' required-msg="Please select date">
+                                                    <label for="followUpDate" class="control-label" control-label
+                                                        title="Date">Follow up
+                                                        Date</label>
+                                                    <input datepicker type="text" form-control name="followUpDate"
+                                                        id="followUpDate" name="followUpDate"
+                                                        max-date="ctrl.maxGeneralFollowUpDate"
+                                                        min-date="ctrl.minGeneralFollowUpDate"
+                                                        ng-model="ctrl.generalForm.followUpDate" required>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                        <div class="input-box--inner row" ng-if="ctrl.type === 'CONSULTANT'">
+                                            <div class="form-group col-xl-6">
+                                                <validate for='refferralPlace' required-msg="Please select a value">
+                                                    <label for="refferralPlace" control-label>Referral
+                                                        Place</label>
+                                                    <select class="form-control cst-form-control" form-control
+                                                        chosen-directive ng-model="ctrl.generalForm.refferralPlace"
+                                                        name="refferralPlace" id="refferralPlace" required>
+                                                        <option value="" selected>
+                                                            --Select--
+                                                        </option>
+                                                        <option value="Doctor">
+                                                            Doctor
+                                                        </option>
+                                                        <option value="MO">
+                                                            MO
+                                                        </option>
+                                                        <option value="higherCenter">
+                                                            Higher Center
+                                                        </option>
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group col-xl-6">
+                                                <validate for='refferralReason' required-msg="Please select a value">
+                                                    <label for="refferralReason" class="control-label"
+                                                        control-label>Reason
+                                                        for
+                                                        reference
+                                                    </label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control ng-model="ctrl.generalForm.refferralReason"
+                                                        id="refferralReason" name="refferralReason">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div ng-if="ctrl.generalForm.refferralPlace" class="form-group col-xl-6">
+                                                <validate for='followUpDisease' required-msg="Please select date">
+                                                    <label for="followUpDisease" class="control-label" control-label>
+                                                        Select disease(s) for follow Up/ Referral</label>
+                                                    <select id="followUpDisease" name="followUpDisease"
+                                                        class="form-control" chosen-directive
+                                                        data-placeholder='Select disease' multiple required form-control
+                                                        ng-model="ctrl.generalForm.followUpDisease">
+                                                        <option ng-if="ncdmd.member.basicDetails.age>=40" value='HT'>
+                                                            Hypertension</option>
+                                                        <option ng-if="ncdmd.member.basicDetails.age>=40" value='D'>
+                                                            Diabetes</option>
+                                                        <option ng-if="ncdmd.member.basicDetails.age>=15" value='MH'>
+                                                            Mental health</option>
+                                                        <!-- <option ng-if="ncdmd.member.basicDetails.age>=40" value='O'>Oral cancer</option>
+                                                    <option ng-if="ncdmd.member.basicDetails.gender=='F' && ncdmd.member.basicDetails.age>=40" value='B'>Breast cancer</option>
+                                                    <option ng-if="ncdmd.member.basicDetails.gender=='F' && ncdmd.member.basicDetails.age>=40" value='C'>Cervical cancer</option> -->
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                        <div class="input-box--inner row">
+                                            <div class="form-group col-xl-6">
+                                                <validate for='comment' required-msg="Please select a value">
+                                                    <label for="comment" class="control-label" control-label>Comment
+                                                    </label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control ng-model="ctrl.generalForm.comment" id="comment"
+                                                        name="comment">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group col-xl-6" ng-if="ctrl.type==='MO'">
+                                                <label class="control control-checkbox">
+                                                    Mark Review
+                                                    <input type="checkbox" ng-model="ctrl.generalForm.markReview">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="button-footer" style="border: 0px;"
+                                            ng-if="!ctrl.generalAlreadyFilled">
+                                            <button type="submit" class="btn btn-primary"
+                                                ng-click="ctrl.saveGeneral()">Save
+                                                & Continue
+                                            </button>
+                                            <button class=" btn btn-secondary" ng-if="ctrl.type==='MO'"
+                                                ui-sref="techo.ncd.members">Cancel</button>
+                                            <button class=" btn btn-secondary" ng-if="ctrl.type==='CONSULTANT'"
+                                                ui-sref="techo.ncd.followupscreenlisting">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

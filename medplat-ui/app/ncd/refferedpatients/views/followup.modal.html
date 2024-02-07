@@ -1,0 +1,62 @@
+<div class="modal-header">
+    <h4>Follow Up </h4>
+    <button type="button" class="close" ng-click="cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body" style="overflow: visible" ng-form="followupForm">
+    <div class="col-xl-12">
+        <validate for="diseaseCode" required-msg="Please select disease!">
+            <label for="diseaseCode">
+                Disease*
+            </label>
+            <select name="diseaseCode" id="diseaseCode" class="form-control cst-form-control"
+                ng-model="followup.diseaseCode" required form-control>
+                <option value="">Select</option>
+                <option value="D">Diabetes</option>
+                <option value="O">Oral</option>
+                <option value="HT">Hypertension</option>
+                <option value="C" ng-if="followup.isFemale">Cervical</option>
+                <option value="B" ng-if="followup.isFemale">Breast</option>
+            </select>
+            <placeholder></placeholder>
+        </validate>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-xl-12">
+        <validate for="followupDate" required-msg="Please select date!">
+            <label for="followupDate">
+                Date*
+            </label>
+            <input name="followupDate" id="followupDate" type="text" datepicker ng-model="followup.followupDate"
+                required form-control>
+            <placeholder></placeholder>
+        </validate>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-xl-12">
+        <div ng-if="userHealthInfras.length > 1">
+            <label for="healthInfraInput">
+                Health Infrastructre*
+            </label>
+            <validate for="healthInfraInput" required-msg="Please input infrastructre!">
+                <select name="healthInfraInput" chosen-directive="userHealthInfras"
+                    ng-options="h.id as h.name for h in userHealthInfras" ng-model="followup.healthInfraId" required
+                    form-control>
+                </select>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div ng-if="userHealthInfras.length == 1">
+            <label for="healthInfraInput">
+                Health Infrastructre
+            </label>
+            <input name="healthInfraId" type="text" class="form-control cst-form-control"
+                ng-disabled="userHealthInfras.length == 1" ng-model="followup.healthInfraName">
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="ok(followupForm)">Save</button>
+    <button type="button" class="btn btn-secondary" ng-click="cancel(followupForm)">Close</button>
+</div>

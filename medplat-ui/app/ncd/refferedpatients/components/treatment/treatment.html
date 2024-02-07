@@ -1,0 +1,252 @@
+<div class="col-xl-12 input-box" ng-init="ctrl.takeMedicine=true" >
+    <h6>Treatment</h6>
+    <div class="input-box--inner row" style="padding-bottom: 0;">
+        <div class="form-group col-12" ng-if="!ctrl.fromMoReview">
+            <validate for='takeMedicine' required-msg="Please select a value">
+                <label style="display: inline-block;" for="takeMedicine" uib-tooltip="Want to take Medicine from us?"
+                    class="control-label" control-label>
+                    Do you want to take medicine from us?
+                </label>
+                <label class="control control-radio">Yes
+                    <input ng-value="true" name="takeMedicine" id="takeMedicine" type="radio"
+                        ng-model="ctrl.takeMedicine" form-control required>
+                    <div class="control_indicator">
+                    </div>
+                </label>
+                <label class="control control-radio">No
+                    <input ng-value="false" name="takeMedicine" id="takeMedicine" type="radio"
+                        ng-model="ctrl.takeMedicine" ng-click="ctrl.resetFormFields()" form-control required>
+                    <div class="control_indicator">
+                    </div>
+                </label>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </div>
+    <div class="input-box--inner row">
+        <div class="col-xl-12">
+            <table class="table table-striped" style=" border: 1px solid lightgray;">
+                <thead class="cst-thead">
+                    <tr>
+                        <th style="width: 25%;" class="table-heading">
+                            Medicine Name</th>
+                        <th style="width: 25%;" class="table-heading">Start Date</th>
+                        <th style="width: 5%;" class="table-heading">Frequency(per day)
+                        </th>
+                        <th style="width: 5%;" class="table-heading">Duration(number of days)
+                        </th>
+                        <th style="width: 15%;" class="table-heading">Quantity
+                        </th>
+                        <th style="width: 20%;" class="table-heading">Special
+                            Instruction
+                        </th>
+                        <th style="width: 5%;" class="table-heading">
+                            Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <validate for="med" required-msg="Please select Medicine Name">
+                                    <select class="form-control cst-form-control" form-control
+                                        ng-model="ctrl.medicine.med" form="ctrl.medicineform" name="medicine"
+                                        ng-options="generalMedicine as generalMedicine.medicineName for generalMedicine in ctrl.medicineData"
+                                        id="med" ng-disabled="ctrl.takeMedicine!==true"
+                                        ng-change="ctrl.medicine.med!=null?ctrl.isSubmit = false:ctrl.isSubmit = true;">
+                                        <option value="" selected>
+                                            --Select--
+                                        </option>
+                                    </select>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <validate for='startDate' required-msg="Please select start date">
+                                    <!-- <label for="startDate" title="Date" control-label></label> -->
+                                    <input datepicker type="text" name="startDate" id="startDate" name="startDate" ng-disabled="ctrl.takeMedicine!==true"
+                                        form-control ng-model="ctrl.medicine.startDate" min-date="ctrl.today" max-date="ctrl.maxStartDate">
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <validate for="frequency" required-msg="Please Enter Value">
+                                    <input type="text" form-control class="form-control cst-form-control" min="1"
+                                        max="5" id="frequency" name="frequency" ng-model="ctrl.medicine.frequency"
+                                        numbers-only decimalallowed="false" negativeallowed="false" ng-pattern="/[^.]{0,2}/"
+                                        form="ctrl.medicineform" ng-disabled="ctrl.takeMedicine!==true"
+                                        ng-change="ctrl.calculateMedicineQuantity(); ctrl.medicine.frequency!=null?ctrl.isSubmit = false:ctrl.isSubmit = true;">
+                                    <placeholder style="position: relative; max-width: 100%;" >
+                                    </placeholder>
+                                </validate>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <validate for="duration" required-msg="Please Enter Value">
+                                    <input type="text" form-control class="form-control cst-form-control" min="1"
+                                        max="60" id="duration" name="duration" ng-model="ctrl.medicine.duration"
+                                        numbers-only decimalallowed="false" negativeallowed="false" ng-pattern="/[^.]{0,2}/"
+                                        form="ctrl.medicineform" ng-disabled="ctrl.takeMedicine!==true"
+                                        ng-change="ctrl.calculateMedicineQuantity(); ctrl.medicine.duration!=null?ctrl.isSubmit = false:ctrl.isSubmit = true;">
+                                    <placeholder  style="position: relative; max-width: 100%;">
+                                    </placeholder>
+                                </validate>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <validate for="quantity" required-msg="Please Enter Value">
+                                    <input type="text" form-control form="ctrl.medicineform"
+                                        class="form-control cst-form-control" id="quantity" name="quantity"
+                                        ng-model="ctrl.medicine.quantity" decimalallowed="false" negativeallowed="false"
+                                        ng-disabled="true">
+                                    <placeholder>
+                                    </placeholder>
+                                </validate>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" form-control form="ctrl.medicineform"
+                                    class="form-control cst-form-control" id="specialInstruction"
+                                    name="specialInstruction" ng-model="ctrl.medicine.specialInstruction"
+                                    maxlength="200" ng-disabled="ctrl.takeMedicine!==true"
+                                    ng-change="ctrl.medicine.specialInstruction!=null?ctrl.isSubmit = false:ctrl.isSubmit = true;">
+                            </div>
+                        </td>
+                        <td>
+                            <button ng-click="ctrl.addMedicine(ctrl.medicineform)" type="submit" class="btn btn-primary"
+                                form="ctrl.medicineform" ng-disabled="ctrl.takeMedicine!==true">Add</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h6 ng-if="ctrl.obj.length > 0 && ctrl.takeMedicine===true">Newly added Medicines</h6>
+    <div class="input-box--inner row" ng-if="ctrl.obj.length > 0 && ctrl.takeMedicine===true">
+        <div class="col-xl-12 cst-table">
+            <table class="table table-striped" style=" border: 1px solid lightgray;">
+                <thead class="cst-thead">
+                    <tr>
+                        <th style="width: 25%;" class="table-heading">
+                            Medicine Name</th>
+                        <th style="width: 10%;" class="table-heading">Start date</th>
+                        <th style="width: 10%;" class="table-heading">Frequency
+                        </th>
+                        <th style="width: 10%;" class="table-heading">Duration
+                        </th>
+                        <th style="width: 15%;" class="table-heading">Quantity
+                        </th>
+                        <th style="width: 15%;" class="table-heading">Special
+                            Instruction
+                        </th>
+                        <th style="width: 15%;" class="table-heading">Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in ctrl.obj">
+                        <td>{{item.medicineName}}</td>
+                        <td>{{item.startDate | date:'dd/MM/yyyy'}}</td>
+                        <td>{{item.frequency}}</td>
+                        <td>{{item.duration}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td style="max-width: 200px;">{{item.specialInstruction}}</td>
+                        <td class="action-cell">
+                            <ul class="action-item">
+                                <li style="cursor: pointer;"><a class="action-icon delete-icon"
+                                        ng-click='ctrl.deleteMedicine($index,item)'></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h6 ng-if="ctrl.prescribedMedicine.length > 0">Previously Prescribed Medicines</h6>
+    <div class="input-box--inner row" ng-if="ctrl.prescribedMedicine.length > 0">
+        <div class="col-xl-12 cst-table">
+            <table class="table table-striped" style=" border: 1px solid lightgray;">
+                <thead class="cst-thead">
+                    <tr>
+                        <th style="width: 20%;" class="table-heading">
+                            Medicine Name</th>
+                        <th style="width: 10%;" class="table-heading">Start date</th>
+                        <th style="width: 10%;" class="table-heading">Frequency
+                        </th>
+                        <th style="width: 10%;" class="table-heading">Duration
+                        </th>
+                        <th style="width: 15%;" class="table-heading">Quantity
+                        </th>
+                        <th style="width: 15%;" class="table-heading">Special
+                            Instruction
+                        </th>
+                        <th tyle="width: 10%;" class="table-heading">Is medicine returned?</th>
+                        <th style="width: 10%;" class="table-heading">Last day of Medicine
+                        </th>
+                        <th style="width: 15%;" class="table-heading" ng-if="ctrl.takeMedicine===true && ctrl.showEdit">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in ctrl.prescribedMedicine">
+                        <td>{{item.medicineName}}</td>
+                        <td>{{item.startDate | date:'dd/MM/yyyy'}}</td>
+                        <td ng-if="!item.isEdit">{{item.frequency}}</td>
+                        <td ng-if="item.isEdit">
+                            <validate>
+                                <input type="number" form-control form="ctrl.medicineform"
+                                    class="form-control cst-form-control" id="frequency" name="frequency" min="1"
+                                    max="5" ng-model="item.frequencyNew" ng-change="ctrl.editMedicineChange(item)"
+                                    decimalallowed="false" negativeallowed="false">
+                                <placeholder>
+                                </placeholder>
+                            </validate>
+                        </td>
+                        <td ng-if="!item.isEdit">{{item.duration}}</td>
+                        <td ng-if="item.isEdit">
+                            <validate><input type="number" form-control form="ctrl.medicineform"
+                                    class="form-control cst-form-control" id="duration" name="duration"
+                                    ng-model="item.durationNew" ng-change="ctrl.editMedicineChange(item)"
+                                    decimalallowed="false" negativeallowed="false">
+                                <placeholder>
+                                </placeholder>
+                            </validate>
+                        </td>
+                        <td>{{item.quantity}}</td>
+                        <td style="max-width: 200px;">{{item.specialInstruction ? item.specialInstruction : '-'}}</td>
+                        <td ng-if="item.isEdit"><input type="checkbox" form-control form="ctrl.medicineform"
+                                id="isReturn" name="isReturn" ng-model="item.isReturn"
+                                ng-disabled="!item.isEnableReturnButton" required></td>
+                        <td ng-if="!item.isEdit">{{item.isReturn?'Yes':'No'}}</td>
+                        <td>{{item.expiryDate | date:'dd/MM/yyyy'}}</td>
+                        <td class="action-cell" ng-if="ctrl.takeMedicine===true && ctrl.showEdit">
+                            <ul class="action-item"
+                                ng-if="((item.issuedDate | date:'dd/MM/yyyy') === (ctrl.date | date:'dd/MM/yyyy') || ctrl.fromMoReview) && !item.isEdit">
+                                <li style="cursor: pointer;"><a class="action-icon edit-icon"
+                                        ng-click='item.isEdit = !item.isEdit; item.frequencyNew = item.frequency; item.durationNew = item.duration;'></a>
+                                </li>
+                                <li style="cursor: pointer;"><a class="action-icon delete-icon"
+                                        ng-click='ctrl.addMedicineToDelete($index,item)'></a>
+                                </li>
+                            </ul>
+                            <div ng-if="item.isEdit">
+                                <button ng-click="ctrl.addMedicineToEdit($index,item)" type="submit"
+                                    class="btn btn-primary">Save</button>
+                                <button ng-click="item.isEdit = !item.isEdit" class="btn btn-primary">Cancel</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

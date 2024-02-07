@@ -1,0 +1,360 @@
+<div class="row mt-0">
+    <div class="col-xl-12">
+        <div class="tabbable cst-tab">
+            <div class="tab-content bxb-0">
+                <div class="tab-pane fade active in" id="examination-5">
+                    <div class="container-fluid py-3">
+                        <form role="form" name="ctrl.form" id="ctrl.form" novalidate>
+                            <div ng-init="ctrl.diabetesForm.peripheralPulses = true; ctrl.diabetesForm.sensoryLoss = false; ctrl.diabetesForm.regularRythmCardio = true;"
+                                class="row inline-form-control mb-3">
+                                <div class="col-12">
+                                    <dateinfra obj="ncdmd.dateinfra" user-health-infras="ncdmd.userHealthInfras"
+                                        on-change="ctrl.retrieveDiabetesDetailsByMemberAndDate()"
+                                        on-health-infra-change="ncdmd.retrieveMedicinesByHealthInfra(ncdmd.dateinfra.healthInfraId)">
+                                    </dateinfra>
+                                    <div class="form-group" style="float: right;">
+                                        <button type="button" ng-click="ncdmd.showTreatmentHistory('D')"
+                                            class="btn btn-primary">Treatment
+                                            History</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row px-15 ">
+                                <div class="col-xl-12 input-box">
+                                    <h6>Diabetes Examination</h6>
+                                    <div class="input-box--inner row ">
+
+                                        <div class="form-group col-xl-6">
+                                            <validate for='measurementType' required-msg="Please select a value">
+                                                <label for="measurementType" control-label>Type</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="ctrl.diabetesForm.measurementType" name="measurementType"
+                                                    ng-change="ctrl.diabetesExaminedValuesChanged()"
+                                                    id="measurementType" required>
+                                                    <option value="" selected>--Select--
+                                                    </option>
+                                                    <option value="FBS">
+                                                        FBS
+                                                    </option>
+                                                    <option value="PP2BS">
+                                                        PP2BS
+                                                    </option>
+                                                    <option value="RBS">
+                                                        RBS
+                                                    </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+
+                                        <div class="form-group col-xl-6">
+                                            <validate for='bloodSugar' required-msg="Please enter a value">
+                                                <label for="bloodSugar" class="control-label" control-label>Blood
+                                                    sugar (in mg/dl)</label>
+                                                <input type="number" class="form-control cst-form-control" form-control
+                                                    required ng-class="{'text-danger':ctrl.diabetesForm.status == 'UNCONTROLLED'}"
+                                                    ng-model="ctrl.diabetesForm.bloodSugar"
+                                                    ng-change="ctrl.diabetesExaminedValuesChanged()" id="bloodSugar"
+                                                    name="bloodSugar" min="40" max="510">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+
+                                        <div class="form-group col-xl-6">
+                                            <validate for='urineSugar' required-msg="Please select a value">
+                                                <label for="urineSugar" control-label>Urine
+                                                    Sugar</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="ctrl.diabetesForm.urineSugar" name="urineSugar"
+                                                    id="urineSugar">
+                                                    <option value="" selected>
+                                                        --Select--
+                                                    </option>
+                                                    <option value="0">
+                                                        0
+                                                    </option>
+                                                    <option value="1">
+                                                        +1
+                                                    </option>
+                                                    <option value="2">
+                                                        +2
+                                                    </option>
+                                                    <option value="3">
+                                                        +3
+                                                    </option>
+                                                    <option value="4">
+                                                        +4
+                                                    </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+
+                                        <div class="form-group col-xl-6">
+                                            <validate for='status' required-msg="Please select a value">
+                                                <label for="status" control-label>Status</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="ctrl.diabetesForm.status" name="status" id="status"
+                                                    required disabled>
+                                                    <option value="" selected>--Select--
+                                                    </option>
+                                                    <option value="CONTROLLED">
+                                                        Control
+                                                    </option>
+                                                    <option value="UNCONTROLLED">
+                                                        Uncontrol
+                                                    </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label class="long"><span class="info_type"
+                                                    control-label>Status</span></label><br>
+                                            <label class="long"
+                                                ng-if="ncdmd.member.memberDiabetesDto.subType!=null"><strong>{{ncdmd.member.memberDiabetesDto.subType}}</strong></label>
+                                            <label class="long"
+                                                ng-if="ncdmd.member.memberDiabetesDto.subType==null"><strong>--</strong></span></label>
+                                        </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12 input-box">
+                                    <h6>Brief Examination</h6>
+                                    <div class="input-box--inner row ">
+                                        <div class="form-group col-xl-4">
+                                            <validate for='peripheralPulses' required-msg="Please select a value">
+                                                <label style="display: block;" for="peripheralPulses"
+                                                    uib-tooltip="Presence of peripheralPulses" class="control-label"
+                                                    control-label><b>
+                                                        Peripheral pulse
+                                                    </b>
+                                                </label>
+                                                <label class="control control-radio">Present
+                                                    <input ng-value="true" name="peripheralPulses" id="peripheralPulses"
+                                                        type="radio" ng-model="ctrl.diabetesForm.peripheralPulses"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">Absent
+                                                    <input ng-value="false" name="peripheralPulses"
+                                                        id="peripheralPulses" type="radio"
+                                                        ng-model="ctrl.diabetesForm.peripheralPulses" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12">
+                                        <h6>Feet</h6>
+                                        <div class="input-box--inner row ">
+                                            <div class="form-group col-xl-4" style="padding-left: 0px;">
+                                                <label class="control control-checkbox">
+                                                    Calluses
+                                                    <input type="checkbox" ng-model="ctrl.diabetesForm.callusesFeet">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+
+                                            <div class="form-group col-xl-4" style="padding-left: 0px;">
+                                                <label class="control control-checkbox">
+                                                    Gangrene
+                                                    <input type="checkbox" ng-model="ctrl.diabetesForm.gangreneFeet">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+
+                                            <div class="form-group col-xl-4" style="padding-left: 0px;">
+                                                <label class="control control-checkbox">
+                                                    Ulcers
+                                                    <input type="checkbox" ng-model="ctrl.diabetesForm.ulcersFeet">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+
+                                            <div class="form-group col-xl-4" style="padding-left: 0px;">
+                                                <label class="control control-checkbox">
+                                                    Prominent veins
+                                                    <input type="checkbox" ng-model="ctrl.diabetesForm.prominentVeins">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+
+                                            <div class="form-group col-xl-4" style="padding-left: 0px;">
+                                                <label class="control control-checkbox">
+                                                    Significant edema
+                                                    <input type="checkbox" ng-model="ctrl.diabetesForm.edema">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+
+                                            <div class="form-group col-xl-4" style="padding-left: 0px;">
+                                                <label class="control control-checkbox">
+                                                    Any injuries
+                                                    <input type="checkbox" ng-model="ctrl.diabetesForm.anyInjuries">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12" style="padding-left: 0px;">
+                                        <div class="input-box--inner row ">
+                                            <div class="form-group col-xl-4">
+                                                <h6>Cardiovascular system</h6>
+                                                <validate for='regularRythmCardio' required-msg="Please select a value">
+                                                    <label style="display: block;" for="regularRythmCardio"
+                                                        uib-tooltip="Presence of regularRythmCardio"
+                                                        class="control-label" control-label>
+                                                        Regular rythm
+                                                    </label>
+                                                    <label class="control control-radio">Yes
+                                                        <input ng-value="true" name="regularRythmCardio"
+                                                            id="regularRythmCardio" type="radio"
+                                                            ng-model="ctrl.diabetesForm.regularRythmCardio"
+                                                            form-control>
+                                                        <div class="control_indicator">
+                                                        </div>
+                                                    </label>
+                                                    <label class="control control-radio">No
+                                                        <input ng-value="false" name="regularRythmCardio"
+                                                            id="regularRythmCardio" type="radio"
+                                                            ng-model="ctrl.diabetesForm.regularRythmCardio"
+                                                            form-control>
+                                                        <div class="control_indicator">
+                                                        </div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+
+                                            <div class="form-group col-xl-4">
+                                                <h6>Peripheral nervous system</h6>
+                                                <validate for='sensoryLoss' required-msg="Please select a value">
+                                                    <label style="display: block;" for="sensoryLoss"
+                                                        uib-tooltip="Presence of sensoryLoss" class="control-label"
+                                                        control-label>
+                                                        Sensory loss
+                                                    </label>
+                                                    <label class="control control-radio">Yes
+                                                        <input ng-value="true" name="sensoryLoss" id="sensoryLoss"
+                                                            type="radio" ng-model="ctrl.diabetesForm.sensoryLoss"
+                                                            form-control>
+                                                        <div class="control_indicator">
+                                                        </div>
+                                                    </label>
+                                                    <label class="control control-radio">No
+                                                        <input ng-value="false" name="sensoryLoss" id="sensoryLoss"
+                                                            type="radio" ng-model="ctrl.diabetesForm.sensoryLoss"
+                                                            form-control>
+                                                        <div class="control_indicator">
+                                                        </div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+
+                                        </div>
+                                        <div class="input-box--inner row">
+                                            <div class="form-group col-4 mt-2">
+                                                <validate for='height' step-msg="Only whole numbers">
+                                                    <label style="display: table;" for='height' control-label>
+                                                        Height (in CMs)
+                                                    </label>
+                                                    <input style="width: -webkit-fill-available;" type="number"
+                                                        class="form-control cst-form-control" form-control
+                                                        step="1"
+                                                        ng-change="ctrl.calculateBmi()"
+                                                        placeholder="Enter Height (in CMs)" min="15" max="200"
+                                                        name="height" id="height"
+                                                        ng-model="ctrl.diabetesForm.height">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group col-4 mt-2">
+                                                <validate for='weight'>
+                                                    <label style="display: table;" for='weight' control-label>
+                                                        Weight (in KGs)
+                                                    </label>
+                                                    <input name="weight" id="weight" style="width: -webkit-fill-available;" type="number"
+                                                        class="form-control cst-form-control" form-control
+                                                        ng-change="ctrl.calculateBmi()"
+                                                        placeholder="Enter Weight (in KGs)" max="150" min="0.5"
+                                                        ng-model="ctrl.diabetesForm.weight">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group col-4 mt-2">
+                                                <validate for='BMI'>
+                                                    <label style="display: table;" for='BMI' control-label>
+                                                        BMI
+                                                    </label>
+                                                    <input style="width: -webkit-fill-available;" type="text"
+                                                        numbers-only decimalallowed="true"
+                                                        class="form-control cst-form-control" form-control
+                                                        ng-disabled="true" name="BMI" id="BMI"
+                                                        ng-model="ctrl.diabetesForm.bmi">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 input-box">
+                                    <h6>Diagnosis</h6>
+                                    <div class="form-group col-xl-12">
+                                        <validate for='doesSuffering' required-msg="Please select a value">
+                                            <label style="display: block;" for="doesSuffering"
+                                                uib-tooltip="Is suffering from Diabetes?" class="control-label"
+                                                control-label>
+                                                <b>Does this patient suffering from
+                                                    Diabetes?</b>
+                                            </label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="doesSuffering" id="doesSuffering"
+                                                    type="radio" ng-model="ctrl.diabetesForm.doesSuffering" form-control
+                                                    ng-change="ctrl.showConfirmationModalForSuffering()" required>
+                                                <div class="control_indicator">
+                                                </div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="doesSuffering" id="doesSuffering"
+                                                    type="radio" ng-model="ctrl.diabetesForm.doesSuffering" form-control
+                                                    ng-change="ctrl.showConfirmationModalForSuffering()" required>
+                                                <div class="control_indicator">
+                                                </div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3 px-15">
+                                <treatment obj="ctrl.medicineDetail" medicine-data="ncdmd.medicineData"
+                                    is_submit="ctrl.medicineFormSubmit" prescribed-medicine="ctrl.prescribedMedicine"
+                                    take-medicine="ctrl.takeMedicine">
+                                </treatment>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="button-footer" style="border: 0px;" ng-if="!ctrl.diabetesAlreadyFilled">
+                                        <button type="submit" class="btn btn-primary"
+                                            ng-click="ctrl.saveDiabetes()">Save
+                                            & Continue
+                                        </button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='MO'"
+                                            ui-sref="techo.ncd.members">Cancel</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='CONSULTANT'"
+                                            ui-sref="techo.ncd.followupscreenlisting">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

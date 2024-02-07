@@ -1,0 +1,112 @@
+<style>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .info label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: flex;
+    }
+
+    .info label span.info_type {
+        /*width: 200px;*/
+        font-weight: bold;
+    }
+
+    .info label span.data {
+        font-weight: normal;
+        margin-left: 2px;
+    }
+
+    .nopadding {
+        padding: 0px;
+        margin: 2px;
+    }
+
+    .modal-xl {
+        width: 95%;
+        height: 95%
+    }
+
+    .info ul {
+        list-style-type: none;
+    }
+
+    .div-disabled {
+        pointer-events: none;
+        opacity: 50%;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="form-group col-6" ng-if="ctrl.ecgData.length > 0">
+            <label style="float: left;" for="ecgDate" control-label>Select ECG date
+            </label>
+            <select form-control class="form-control cst-form-control" id="ecgDate" ng-model="ctrl.doc"
+                ng-options="data as data.service_date|date:'dd/MM/yyyy' for data in ctrl.ecgData">
+                <option value="" selected>--Select--</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <button ng-disabled="ctrl.doc.doc_id == null" class="btn btn-primary pull-right"
+                ng-click="ctrl.showGraph()">
+                Show ECG graph
+            </button>
+        </div>
+    </div>
+    <div class="row" ng-if="ctrl.showOptions"
+        style="background-color: white;margin: 10px;border: 1px solid #dfdfdf;border-radius: 2px;">
+        <div style="padding: 5px;" class="box-body col-4 br-1">
+            <div class="info">
+                <label>
+                    <ul class="nopadding">
+                        <li><span class="info_type">Patient's Name:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.memberDetails.member_name}}
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+        <div style="padding: 5px;" class="box-body col-4 br-1">
+            <div class="info">
+                <label>
+                    <ul class="nopadding">
+                        <li><span class="info_type">Unique health id:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.memberDetails.unique_health_id}}
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+        <div style="padding: 5px;" class="box-body col-4 br-1">
+            <div class="info">
+                <label>
+                    <ul class="nopadding">
+                        <li><span class="info_type">Age/Sex:</span></li>
+                        <li>
+                            <span class="data">
+                                {{ctrl.memberDetails.age}}/{{ctrl.memberDetails.gender}}
+                            </span>
+                        </li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="ctrl.showOptions">
+        <div class="col-12" style="text-align: center;">
+            <embed ng-if="ctrl.doc.doc_type == 'pdf'" ng-src="{{ctrl.pdfReport ? ctrl.pdfReport  : 'img/pdf.png'}}"
+                type="application/pdf" style="width: 80%; height: 800px;">
+            </embed>
+            <img ng-if="ctrl.doc.doc_type == 'image'" style="max-width: 80%;"
+                ng-src="{{ctrl.overviewImage ? ctrl.overviewImage : 'img/image.jpg'}}" />
+        </div>
+    </div>
+</div>

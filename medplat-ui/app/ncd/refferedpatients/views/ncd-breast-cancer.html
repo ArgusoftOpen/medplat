@@ -1,0 +1,570 @@
+<div class="row mt-0">
+    <div class="col-xl-12">
+        <div class="tabbable cst-tab">
+            <div class="tab-content bxb-0">
+                <div class="tab-pane fade active in" id="examination-5">
+                    <div class="container-fluid py-3">
+                        <form role="form" name="ctrl.form" id="ctrl.form" novalidate>
+                            <div class="row inline-form-control mb-4"
+                                ng-init="ctrl.breastForm.sizeChange=false;ctrl.breastForm.doesSuffering=false;
+                                ctrl.breastForm.nippleNotOnSameLevel=false;ctrl.breastForm.skinEdema=false;ctrl.breastForm.lymphadenopathy=false;
+                                ctrl.breastForm.isAxillary=false;ctrl.breastForm.isSuperClavicularArea=false;ctrl.breastForm.isInfraClavicularArea=false;">
+                                <div class="col-12">
+                                    <dateinfra obj="ncdmd.dateinfra" user-health-infras="ncdmd.userHealthInfras"
+                                        on-change="ctrl.retrieveBreastDetailsByMemberAndDate()"
+                                        on-health-infra-change="ncdmd.retrieveMedicinesByHealthInfra(ncdmd.dateinfra.healthInfraId)">
+                                    </dateinfra>
+                                    <div class="form-group" style="float: right;">
+                                        <button type="button" ng-click="ncdmd.showTreatmentHistory('B')"
+                                            class="btn btn-primary">Treatment
+                                            History</button>
+                                    </div>
+                                    <!-- <div class="form-group" style="float: right;">
+                                        <button type="button" ng-click="ncdmd.showVisualExamHistory('B')"
+                                            class="btn btn-primary">Show Previous Visual
+                                            Examination</button>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12  input-box">
+                                    <h6>Visual Examination</h6>
+                                    <div class="input-box--inner row">
+                                        <div class="col-xl-4" style="margin-top: 30px;">
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.breastForm.breastVisualCategory==='ulcer'}">
+                                                    <input type="radio" value="ulcer" name="oral-list--radio"
+                                                        ng-click="ctrl.selectedForDiagram='visualUlceration'"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.breastForm.breastVisualCategory">Ulcer
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.breastForm.breastVisualCategory==='lumpInBreasts'}">
+                                                    <input type="radio" value="lumpInBreasts" name="oral-list--radio"
+                                                        ng-click="ctrl.selectedForDiagram='visualLumpInBreast'"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.breastForm.breastVisualCategory">Lump in
+                                                    breasts
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.breastForm.breastVisualCategory==='nippleDischarge'}">
+                                                    <input type="radio" value="nippleDischarge" name="oral-list--radio"
+                                                        ng-click="ctrl.selectedForDiagram='visualDischargeFromNipple'"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.breastForm.breastVisualCategory">Nipple
+                                                    Discharge
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.breastForm.breastVisualCategory==='retractionOfSkin'}">
+                                                    <input type="radio" value="retractionOfSkin" name="oral-list--radio"
+                                                        ng-click="ctrl.selectedForDiagram='visualSkinRetraction'"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.breastForm.breastVisualCategory">Retraction
+                                                    of
+                                                    skin
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.breastForm.breastVisualCategory==='retractionOfNipple'}">
+                                                    <input type="radio" value="retractionOfNipple"
+                                                        name="oral-list--radio"
+                                                        ng-click="ctrl.selectedForDiagram='visualNippleRetractionDistortion'"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.breastForm.breastVisualCategory">Retraction
+                                                    of
+                                                    nipple
+                                                </label>
+                                            </ul>
+                                            <ul class="oral-list">
+                                                <label class="oral-list--item"
+                                                    ng-class="{'active':ctrl.breastForm.breastVisualCategory==='skinDimpling'}">
+                                                    <input type="radio" value="skinDimpling" name="oral-list--radio"
+                                                        ng-click="ctrl.selectedForDiagram='visualSkinDimplingRetraction'"
+                                                        class="oral-list--radio"
+                                                        ng-model="ctrl.breastForm.breastVisualCategory">Skin
+                                                    Dimpling/Puckering
+                                                </label>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xl-6" style="padding-left: 0;">
+                                            <div class="breast-image">
+                                                <img alt="image" src="img/breastImage.png" class="img-fluid">
+                                                <ul class="breast-point-list">
+                                                    <!-- Right -->
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-1"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][1]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][1]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-2"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][2]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][2]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-3"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][3]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][3]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-4"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][4]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][4]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-5"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][5]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][5]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-6"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][6]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][6]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-7"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][7]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][7]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-8"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][8]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][8]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-9"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][9]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][9]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-10"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][10]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][10]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-11"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][11]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][11]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-12"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][12]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][12]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-25"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][13]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][13]">
+                                                    </li>
+
+                                                    <!-- Left -->
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-13"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][14]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][14]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-14"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][15]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][15]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-15"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][16]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][16]">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-16 "
+                                                        ng-class="{ 'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][17]} ">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram
+                                                                        || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][17] ">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-17 "
+                                                        ng-class="{ 'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][18]} ">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram
+                                                                        || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][18] ">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-18 "
+                                                        ng-class="{ 'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][19]} ">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram
+                                                                        || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][19] ">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-19 "
+                                                        ng-class="{ 'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][20]} ">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram
+                                                                        || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][20] ">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-20 "
+                                                        ng-class="{ 'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][21]} ">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram
+                                                                        || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][21] ">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-21"
+                                                        ng-class="{ 'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][22]} ">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram
+                                                                        || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][22] ">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-22 "
+                                                        ng-class="{ 'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][23]} ">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram
+                                                                        || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][23] ">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-23 "
+                                                        ng-class="{ 'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][24]} ">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram
+                                                                        || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][24] ">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory!=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory!=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-24 "
+                                                        ng-class="{ 'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][25]} ">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram
+                                                                        || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][25] ">
+                                                    </li>
+                                                    <li ng-if="ctrl.breastForm.breastVisualCategory=='retractionOfNipple' || ctrl.breastForm.breastVisualCategory=='nippleDischarge'"
+                                                        class="breast-location-item breast-point-26"
+                                                        ng-class="{'selected':ctrl.breastForm.breastList[ctrl.selectedForDiagram][26]}">
+                                                        <input type="checkbox"
+                                                            ng-disabled="!ctrl.selectedForDiagram
+                                                                    || ctrl.selectedForDiagram=='' || ctrl.breastAlreadyFilled"
+                                                            ng-model="ctrl.breastForm.breastList[ctrl.selectedForDiagram][26]">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="form-group" style="padding-left: 0px;">
+                                                <validate for='status' required-msg="Please select a value">
+                                                    <label for="status" control-label>Status</label>
+                                                    <select class="form-control cst-form-control" form-control
+                                                        ng-model="ctrl.breastForm.status" name="status" id="status"
+                                                        required>
+                                                        <option value="" selected>
+                                                            --Select--
+                                                        </option>
+                                                        <option value="SUSPECTED">
+                                                            Screened
+                                                        </option>
+                                                        <option value="CONFIRMATION_PENDING">
+                                                            Confirmation Pending
+                                                        </option>
+                                                        <option value="CONFIRMED">
+                                                            Confirmed
+                                                        </option>
+                                                        <option value="NO_ABNORMALITY">
+                                                            No
+                                                            Abnormality Detected
+                                                        </option>
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <!-- <div class="form-group">
+                                        <label class="long"><span class="info_type"
+                                                control-label>Status</span></label><br>
+                                        <label class="long"
+                                            ng-if="ctrl.breastForm.status!=null"><strong>{{ctrl.breastForm.status}}</strong></label>
+                                    </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12  input-box">
+                                    <h6>Inspection</h6>
+                                    <div class="input-box--inner row">
+                                        <div class="form-group col-xl-4">
+                                            <validate for='sizeChange' required-msg="Please select a value">
+                                                <label style="display: block;" for="sizeChange"
+                                                    uib-tooltip="Presence of sizeChange" class="control-label"
+                                                    control-label>
+                                                    Change in size or shape of breast
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="sizeChange" id="sizeChange"
+                                                        type="radio" ng-model="ctrl.breastForm.sizeChange" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="sizeChange" id="sizeChange"
+                                                        type="radio" ng-model="ctrl.breastForm.sizeChange" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='nippleNotOnSameLevel' required-msg="Please select a value">
+                                                <label style="display: block;" for="nippleNotOnSameLevel"
+                                                    uib-tooltip="Presence of nippleNotOnSameLevel" class="control-label"
+                                                    control-label>
+                                                    Both nipples not at same level
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="nippleNotOnSameLevel"
+                                                        id="nippleNotOnSameLevel" type="radio"
+                                                        ng-model="ctrl.breastForm.nippleNotOnSameLevel" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="nippleNotOnSameLevel"
+                                                        id="nippleNotOnSameLevel" type="radio"
+                                                        ng-model="ctrl.breastForm.nippleNotOnSameLevel" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='skinEdema' required-msg="Please select a value">
+                                                <label style="display: block;" for="skinEdema"
+                                                    uib-tooltip="Presence of skinEdema" class="control-label"
+                                                    control-label>
+                                                    Skin Edema
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="skinEdema" id="skinEdema" type="radio"
+                                                        ng-model="ctrl.breastForm.skinEdema" form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="skinEdema" id="skinEdema" type="radio"
+                                                        ng-model="ctrl.breastForm.skinEdema" form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4">
+                                            <validate for='lymphadenopathy' required-msg="Please select a value">
+                                                <label style="display: block;" for="lymphadenopathy"
+                                                    uib-tooltip="Presence of lymphadenopathy" class="control-label"
+                                                    control-label>
+                                                    Lymphadenopathy
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="lymphadenopathy" id="lymphadenopathy"
+                                                        type="radio" ng-model="ctrl.breastForm.lymphadenopathy"
+                                                        form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="lymphadenopathy" id="lymphadenopathy"
+                                                        type="radio" ng-model="ctrl.breastForm.lymphadenopathy"
+                                                        form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4"
+                                            ng-if="ctrl.breastForm.lymphadenopathy === true">
+                                            <validate for='isAxillary' required-msg="Please select a value">
+                                                <label style="display: block;" for="isAxillary"
+                                                    uib-tooltip="Presence of isAxillary" class="control-label"
+                                                    control-label>
+                                                    Axillary
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="isAxillary" id="isAxillary"
+                                                        type="radio" ng-model="ctrl.breastForm.isAxillary" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="isAxillary" id="isAxillary"
+                                                        type="radio" ng-model="ctrl.breastForm.isAxillary" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4"
+                                            ng-if="ctrl.breastForm.lymphadenopathy === true">
+                                            <validate for='isSuperClavicularArea' required-msg="Please select a value">
+                                                <label style="display: block;" for="isSuperClavicularArea"
+                                                    uib-tooltip="Presence of isSuperClavicularArea"
+                                                    class="control-label" control-label>
+                                                    Supraclavicular
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="isSuperClavicularArea"
+                                                        id="isSuperClavicularArea" type="radio"
+                                                        ng-model="ctrl.breastForm.isSuperClavicularArea" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="isSuperClavicularArea"
+                                                        id="isSuperClavicularArea" type="radio"
+                                                        ng-model="ctrl.breastForm.isSuperClavicularArea" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-xl-4"
+                                            ng-if="ctrl.breastForm.lymphadenopathy === true">
+                                            <validate for='isInfraClavicularArea' required-msg="Please select a value">
+                                                <label style="display: block;" for="isInfraClavicularArea"
+                                                    uib-tooltip="Presence of isInfraClavicularArea"
+                                                    class="control-label" control-label>
+                                                    Infraclavicular
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="isInfraClavicularArea"
+                                                        id="isInfraClavicularArea" type="radio"
+                                                        ng-model="ctrl.breastForm.isInfraClavicularArea" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="isInfraClavicularArea"
+                                                        id="isInfraClavicularArea" type="radio"
+                                                        ng-model="ctrl.breastForm.isInfraClavicularArea" form-control
+                                                        required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 input-box" ng-if="ctrl.isAlreadyDiagnosedBreastCancer !== true">
+                                    <h6>Diagnosis</h6>
+                                    <div class="form-group col-xl-12"
+                                            ng-if="ctrl.isAlreadyDiagnosedBreastCancer !== true">
+                                            <validate for='doesSuffering' required-msg="Please select a value">
+                                                <label style="display: block;" for="doesSuffering"
+                                                    uib-tooltip="Presence of doesSuffering" class="control-label"
+                                                    control-label>
+                                                    <b>Does this patient suffering from Breast
+                                                        cancer? </b>
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="doesSuffering" id="doesSuffering"
+                                                        type="radio" ng-model="ctrl.breastForm.doesSuffering"
+                                                        form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="doesSuffering" id="doesSuffering"
+                                                        type="radio" ng-model="ctrl.breastForm.doesSuffering"
+                                                        form-control required>
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3 px-15">
+                                <treatment obj="ctrl.medicineDetail" medicine-data="ncdmd.medicineData"
+                                    prescribed-medicine="ctrl.prescribedMedicine" take-medicine="ctrl.takeMedicine"></treatment>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="button-footer" style="border: 0px;" ng-if="!ctrl.breastFormAlreadyFilled">
+                                        <button class="btn btn-primary" ng-click="ctrl.saveBreast() ">Save &
+                                            Continue</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='MO'"
+                                            ui-sref="techo.ncd.members">Cancel</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='CONSULTANT'"
+                                            ui-sref="techo.ncd.followupscreenlisting">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

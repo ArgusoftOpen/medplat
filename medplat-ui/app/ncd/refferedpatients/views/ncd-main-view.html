@@ -1,0 +1,191 @@
+<div class="no-print container-fluid">
+    <div class="row">
+        <div class="col-xl-10">
+            <div class="tabbable boxed parentTabs cst-tab cst-tab-white-style">
+                <ul class="nav nav-tabs">
+                    <li ng-class="{active : ncdmd.activeClass==='initialassessment'}"
+                        ng-click="ncdmd.activeClass='initialassessment'"><a href="javascript:void(0)"
+                            ui-sref="techo.ncd.memberdetails.initialassessment" class="nav-link">Initial
+                            Assessment</a>
+                    </li>
+                    <li ng-show="ncdmd.member.basicDetails.age>=40"
+                        ng-class="{active : ncdmd.activeClass==='hypertension-main'}"
+                        ng-click="ncdmd.activeClass='hypertension-main'"><a href="javascript:void(0)"
+                            ui-sref="techo.ncd.memberdetails.hypertension" class="nav-link">Hypertension</a>
+                    </li>
+                    <li ng-show="ncdmd.member.basicDetails.age>=40"
+                        ng-class="{active : ncdmd.activeClass==='diabetes-main'}"
+                        ng-click="ncdmd.activeClass='diabetes-main'"><a href="javascript:void(0)"
+                            ui-sref="techo.ncd.memberdetails.diabetes" class="nav-link">Diabetes</a>
+                    </li>
+                    <!-- <li ng-show="ncdmd.member.basicDetails.age>=40" ng-class="{active : ncdmd.activeClass==='oral-main'}" ng-click="ncdmd.activeClass='oral-main'">
+                        <a href="javascript:void(0)" ui-sref="techo.ncd.memberdetails.oralcancer"
+                            class="nav-link">Oral</a>
+                    </li>
+                    <li ng-show="ncdmd.member.basicDetails.gender=='F' && ncdmd.member.basicDetails.age>=40"
+                        ng-class="{active : ncdmd.activeClass==='breast-main'}"
+                        ng-click="ncdmd.activeClass='breast-main'"><a href="javascript:void(0)"
+                            ui-sref="techo.ncd.memberdetails.breastcancer" class="nav-link">Breast</a>
+                    </li>
+                    <li ng-show="ncdmd.member.basicDetails.gender=='F' && ncdmd.member.basicDetails.age>=40"
+                        ng-class="{active : ncdmd.activeClass==='cervical-main'}"
+                        ng-click="ncdmd.activeClass='cervical-main'"><a href="javascript:void(0)"
+                            ui-sref="techo.ncd.memberdetails.cervicalcancer" class="nav-link">Cervical</a>
+                    </li> -->
+                    <li ng-show="ncdmd.member.basicDetails.age>=15"
+                        ng-class="{active : ncdmd.activeClass==='mental-health-main'}"
+                        ng-click="ncdmd.activeClass='mental-health-main'"><a href="javascript:void(0)"
+                            ui-sref="techo.ncd.memberdetails.mentalhealth" class="nav-link">Mental
+                            Health</a>
+                    </li>
+                    <li ng-class="{active : ncdmd.activeClass==='general-main'}"
+                        ng-click="ncdmd.activeClass='general-main'"><a href="javascript:void(0)"
+                            ui-sref="techo.ncd.memberdetails.general" class="nav-link">General</a>
+                    </li>
+                    <li ng-class="{active : ncdmd.activeClass==='investigation'}"
+                        ng-click="ncdmd.activeClass='investigation'"><a href="javascript:void(0)"
+                            ui-sref="techo.ncd.memberdetails.investigation" class="nav-link">Investigation</a>
+                    </li>
+                </ul>
+                <div class="tab-content cst-scrollbar"
+                    style="padding-right: 0; height: calc(100vh - 140px); overflow-y: auto; overflow-x: hidden;">
+                    <ui-view></ui-view>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 patient-summary cst-scrollbar thin">
+            <div class="row">
+                <div class="col-xl-12">
+                    <img alt="image" src="img/default-avatar.png"
+                        class="patient-img patient-img--big d-block mx-auto" />
+                </div>
+                <div class="col-xl-12 text-center">
+                    <h4>{{ncdmd.member.name}}</h4>
+                    <h6 class="text-muted">{{ncdmd.member.basicDetails.age}}/{{ncdmd.member.basicDetails.gender}}</h6>
+                    <!-- <a ui-sref="techo.ncd.patientSummary({id:ncdmd.memberId})">{{ncdmd.memberId}}</a> -->
+                </div>
+                <div class="col-xl-12 text-center">
+                    <a href="javascript:void(0)" ng-click="ncdmd.printPatientSummary()"
+                        class="btn btn-primary mt-1 mb-2">
+                        <!-- <em class="ion-printer mr-2"></em> -->
+                        Patient Summary
+                    </a>
+                </div>
+                <div class="col-xl-12 text-center">
+                    <h6 class="text-muted">Is BPL? : {{ncdmd.member.bpl == true ? 'Yes' : ncdmd.member.bpl == false ?
+                        'No' : 'N.A'}}</h5>
+                        <h6 class="text-muted">Is Vulnerable? : {{ncdmd.member.vulnerable == true ? 'Yes' :
+                            ncdmd.member.vulnerable == false ? 'No' : 'N.A'}}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row"
+                ng-if="ncdmd.MOComment!=null || ncdmd.MBBSComment!=null || ncdmd.ConComment!=null || ncdmd.MOReviewFollowupComment!=null || ncdmd.MOReviewComment!=null">
+                <div class="col-xl-12 text-center">
+                    <h5>Comment(s)</h5>
+                    <h6 ng-if="ncdmd.MOComment!=null">MO ({{ncdmd.MOCommentBy}}): {{ncdmd.MOComment}}</h6>
+                    <h6 ng-if="ncdmd.MBBSComment!=null">MBBS ({{ncdmd.MBBSCommentBy}}): {{ncdmd.MBBSComment}}</h6>
+                    <h6 ng-if="ncdmd.ConComment!=null">Consultant ({{ncdmd.ConCommentBy}}): {{ncdmd.ConComment}}</h6>
+                    <h6 ng-if="ncdmd.MOReviewComment!=null">MO Review({{ncdmd.MOReviewCommentBy}}):
+                        {{ncdmd.MOReviewComment}}</h6>
+                    <h6 ng-if="ncdmd.MOReviewFollowupComment!=null">MO Review Followup
+                        ({{ncdmd.MOReviewFollowupCommentBy}}): {{ncdmd.MOReviewFollowupComment}}</h6>
+                </div>
+            </div>
+            <hr
+                ng-if="ncdmd.MOComment!=null || ncdmd.MBBSComment!=null || ncdmd.ConComment!=null || ncdmd.MOReviewFollowupComment!=null || ncdmd.MOReviewComment!=null">
+            <div class="row"
+                ng-if="ncdmd.member.memberHypertensionDetail!=null && ncdmd.member.memberHypertensionDetail.id!=null">
+                <div class="col-xl-12 text-center">
+                    <h5>Hypertension</h5>
+                    <h6>Status :
+                        {{ncdmd.member.memberHypertensionDetail.status?ncdmd.member.memberHypertensionDetail.status:ncdmd.member.memberHypertensionDetail.suspected?'Suspected':'Normal'
+                        | emptylabel}}</h6>
+                    <h6 ng-if="ncdmd.member.memberHypertensionDetail.treatmentStatus!=null">Treatement Status :
+                        {{ncdmd.member.memberHypertensionDetail.treatmentStatus}}</h6>
+                    <!-- <h6><strong>Systolic BP</strong> -
+                        {{ncdmd.lastRecordOfHypertension.systolicBloodPressure| emptylabel}}</h6>
+                    <h6><strong>Diastolic BP</strong> -
+                        {{ncdmd.lastRecordOfHypertension.diastolicBloodPressure| emptylabel}}</h6>
+                    <h6><strong>Heart Rate</strong> - {{ncdmd.lastRecordOfHypertension.heartRate| emptylabel}}</h6> -->
+                </div>
+            </div>
+            <hr ng-if="ncdmd.member.memberHypertensionDetail!=null && ncdmd.member.memberHypertensionDetail.id!=null">
+            <div class="row"
+                ng-if="ncdmd.member.memberDiabetesDetail!=null && ncdmd.member.memberDiabetesDetail.id!=null">
+                <div class="col-xl-12 text-center">
+                    <h5>Diabetes</h5>
+                    <h6>Status :
+                        {{ncdmd.member.memberDiabetesDetail.status?ncdmd.member.memberDiabetesDetail.status:ncdmd.member.memberDiabetesDetail.suspected?'Suspected':'Normal'
+                        | emptylabel}}</h6>
+                    <h6 ng-if="ncdmd.member.memberDiabetesDetail.treatmentStatus!=null">Treatement Status :
+                        {{ncdmd.member.memberDiabetesDetail.treatmentStatus}}</h6>
+                    <!-- <h6><strong>FBS</strong> - {{ncdmd.lastRecordOfDiabetes.fastingBloodSugar| emptylabel}}</h6>
+                    <h6><strong>RBS</strong> - {{ncdmd.lastRecordOfDiabetes.bloodSugar| emptylabel}}</h6>
+                    <h6><strong>PP2BS</strong> - {{ncdmd.lastRecordOfDiabetes.postPrandialBloodSugar| emptylabel}}</h6>
+                    <h6><strong>Hb1AC</strong> - {{ncdmd.lastRecordOfDiabetes.hba1c| emptylabel}}</h6> -->
+                </div>
+            </div>
+            <hr ng-if="ncdmd.member.memberDiabetesDetail!=null && ncdmd.member.memberDiabetesDetail.id!=null">
+            <div class="row"
+                ng-if="ncdmd.member.memberMentalHealthDetails!=null && ncdmd.member.memberMentalHealthDetails.id!=null">
+                <div class="col-xl-12 text-center">
+                    <h5>Mental Health</h5>
+                    <h6>Status :
+                        {{ncdmd.member.memberMentalHealthDetails.status?ncdmd.member.memberMentalHealthDetails.status:ncdmd.member.memberMentalHealthDetails.isSuffering?'Suspected':'Normal'
+                        | emptylabel}}</h6>
+                    <h6 ng-if="ncdmd.member.memberMentalHealthDetails.treatmentStatus!=null">Treatement Status :
+                        {{ncdmd.member.memberMentalHealthDetails.treatmentStatus}}</h6>
+                    <!-- <h6><strong>FBS</strong> - {{ncdmd.lastRecordOfDiabetes.fastingBloodSugar| emptylabel}}</h6>
+                    <h6><strong>RBS</strong> - {{ncdmd.lastRecordOfDiabetes.bloodSugar| emptylabel}}</h6>
+                    <h6><strong>PP2BS</strong> - {{ncdmd.lastRecordOfDiabetes.postPrandialBloodSugar| emptylabel}}</h6>
+                    <h6><strong>Hb1AC</strong> - {{ncdmd.lastRecordOfDiabetes.hba1c| emptylabel}}</h6> -->
+                </div>
+            </div>
+            <hr
+                ng-if="ncdmd.member.memberMentalHealthDetails!=null && ncdmd.member.memberMentalHealthDetails.id!=null && ncdmd.historyDisease">
+            <div class="row" ng-if="ncdmd.historyDisease">
+                <div class="col-xl-12 text-center">
+                    <h5>Complications</h5>
+                    <h6>From mobile : {{ncdmd.historyDisease.from_mob| emptylabel}}
+                        <br />
+                        <span ng-if="ncdmd.historyDisease.other_disease_mob">Other :
+                            {{ncdmd.historyDisease.other_disease_mob}}</span>
+                    </h6>
+                    <h6>From Web : {{ncdmd.historyDisease.from_web| emptylabel}}
+                        <br />
+                        <span ng-if="ncdmd.historyDisease.other_disease_web">Other :
+                            {{ncdmd.historyDisease.other_disease_web}}</span>
+                    </h6>
+                    <!-- <h6><strong>FBS</strong> - {{ncdmd.lastRecordOfDiabetes.fastingBloodSugar| emptylabel}}</h6>
+                    <h6><strong>RBS</strong> - {{ncdmd.lastRecordOfDiabetes.bloodSugar| emptylabel}}</h6>
+                    <h6><strong>PP2BS</strong> - {{ncdmd.lastRecordOfDiabetes.postPrandialBloodSugar| emptylabel}}</h6>
+                    <h6><strong>Hb1AC</strong> - {{ncdmd.lastRecordOfDiabetes.hba1c| emptylabel}}</h6> -->
+                </div>
+            </div>
+            <!-- <div class="row" ng-if="ncdmd.lastRecordOfOral!=null && ncdmd.lastRecordOfOral.id!=null">
+                <div class="col-xl-12 text-center">
+                    <h5>Oral</h5>
+                    <h6>{{ncdmd.oralHistoryDisplay| emptylabel}}</h6>
+                </div>
+            </div>
+            <hr ng-if="ncdmd.lastRecordOfOral!=null && ncdmd.lastRecordOfOral.id!=null">
+            <div class="row" ng-if="ncdmd.lastRecordOfBreast!=null && ncdmd.lastRecordOfBreast.id!=null">
+                <div class="col-xl-12 text-center">
+                    <h5>Breast</h5>
+                    <h6>{{ncdmd.breastHistoryDisplay| emptylabel}}</h6>
+                </div>
+            </div>
+            <hr ng-if="ncdmd.lastRecordOfBreast!=null && ncdmd.lastRecordOfBreast.id!=null">
+            <div class="row" ng-if="ncdmd.lastRecordOfCervical!=null && ncdmd.lastRecordOfCervical.id!=null">
+                <div class="col-xl-12 text-center">
+                    <h5>Cervical</h5>
+                    <h6>{{ncdmd.cervicalHistoryDisplay| emptylabel}}</h6>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="display-none" id="printableDiv">
+    <ng-include src="'app/ncd/refferedpatients/views/patient-summary.modal.html'"></ng-include>
+</div>

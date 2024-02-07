@@ -1,0 +1,78 @@
+<div class="cst-table table-responsive table-set-height" id="member-scroll" ng-if="!mlisting.isSearch">
+    <table aria-describedby="member list"
+        class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
+        <thead class="cst-thead">
+            <tr>
+                <th id="patient-name" class="table-heading">Patient Name</th>
+                <th id="age" class="table-heading">Age</th>
+                <th id="gender">Gender</th>
+                <th id="Village" class="table-heading">Village</th>
+                <th id="subCenter" class="table-heading">Sub Center</th>
+                <th id="status" ng-if="mlisting.listType != 'CVCList' && mlisting.listType != 'MOAlertList'">Status</th>
+                <th id="diseaseSummary" ng-if="mlisting.listType != 'CVCList' && mlisting.listType != 'MOAlertList'">
+                    Disease(s)</th>
+                <th id="actions" ng-if="mlisting.rights.canExamine" class="table-heading">
+                    Actions</th>
+            </tr>
+        </thead>
+        <tbody infinite-scroll-distance="0" infinite-scroll='mlisting.retrieveMemberList(null,false)'
+            infinite-scroll-container='"#member-scroll"' infinite-scroll-immediate-check="false">
+            <tr ng-repeat="member in mlisting.membersList">
+                <td ng-bind="member.name | emptylabel"></td>
+                <td ng-bind="member.age | emptylabel"></td>
+                <td ng-bind="member.gender | emptylabel"></td>
+                <td ng-bind="member.village | emptylabel"></td>
+                <td ng-bind="member.subCenter | emptylabel"></td>
+                <td ng-bind-html="member.status| titlecase |emptylabel"
+                    ng-if="mlisting.listType != 'CVCList' && mlisting.listType != 'MOAlertList'"></td>
+                <td ng-bind-html="member.diseaseSummary| titlecase |emptylabel"
+                    ng-if="mlisting.listType != 'CVCList' && mlisting.listType != 'MOAlertList'"></td>
+                <td class="action-cell" ng-if="mlisting.rights.canExamine && mlisting.listType != 'CVCList'">
+                    <button ng-click="mlisting.fillExamineForm(member.id,'MO')" class="btn btn-primary">Examine</button>
+                </td>
+                <td class="action-cell" ng-if="mlisting.rights.canExamine && mlisting.listType == 'CVCList'">
+                    <button ng-click="mlisting.fillCVCForm(member.id,'MO')" class="btn btn-primary">Examine</button>
+                </td>
+            </tr>
+            <tr ng-if="!mlisting.membersList || mlisting.membersList.length==0">
+                <td colspan="8">No Members Referred </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="cst-table table-responsive table-set-height" id="member-scroll2" ng-if="mlisting.isSearch">
+    <table aria-describedby="member list" 
+        class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
+        <thead class="cst-thead">
+            <tr>
+                <th id="patient-name" class="table-heading">Patient Name</th>
+                <th id="age" class="table-heading">Age</th>
+                <th id="gender">Gender</th>
+                <th id="Village" class="table-heading">Village</th>
+                <th id="subCenter" class="table-heading">Sub Center</th>
+                <th id="status">Status</th>
+                <th id="diseaseSummary">Disease(s)</th>
+                <th id="actions" ng-if="mlisting.rights.canExamine" class="table-heading">
+                    Actions</th>
+            </tr>
+        </thead>
+        <tbody infinite-scroll-distance="0" infinite-scroll='mlisting.searchMembers(false)'
+            infinite-scroll-container='"#member-scroll2"' infinite-scroll-immediate-check="false">
+            <tr ng-repeat="member in mlisting.membersSearchList">
+                <td ng-bind="member.name | emptylabel"></td>
+                <td ng-bind="member.age | emptylabel"></td>
+                <td ng-bind="member.gender | emptylabel"></td>
+                <td ng-bind="member.village | emptylabel"></td>
+                <td ng-bind="member.subCenter | emptylabel"></td>
+                <td ng-bind-html="member.status| titlecase |emptylabel"></td>
+                <td ng-bind-html="member.diseaseSummary| titlecase |emptylabel"></td>
+                <td class="action-cell" ng-if="mlisting.rights.canExamine">
+                    <button ng-click="mlisting.fillExamineForm(member.id,'MO')" class="btn btn-primary">Examine</button>
+                </td>
+            </tr>
+            <tr ng-if="!mlisting.membersSearchList || mlisting.membersSearchList.length==0">
+                <td colspan="8">No Members Referred </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

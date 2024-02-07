@@ -1,0 +1,465 @@
+<div class="row mt-0">
+    <div class="col-xl-12">
+        <div class="tabbable cst-tab">
+            <div class="tab-content bxb-0">
+                <div class="tab-pane fade active in" id="examination-5">
+                    <div class="container-fluid py-3">
+                        <form role="form" name="ctrl.form" id="ctrl.form" novalidate>
+                            <div class="row inline-form-control mb-2"
+                                ng-init="ctrl.initialAssessmentForm.excessUrination=false;
+                                    ctrl.initialAssessmentForm.excessThirst=false; ctrl.initialAssessmentForm.excessHunger=false;
+                                    ctrl.initialAssessmentForm.changeInDietaryHabits=false; ctrl.initialAssessmentForm.suddenVisualDisturbances=false;
+                                    ctrl.initialAssessmentForm.significantEdema=false; ctrl.initialAssessmentForm.breathlessness=false;
+                                    ctrl.initialAssessmentForm.angina=false; ctrl.initialAssessmentForm.intermittentClaudication=false;
+                                    ctrl.initialAssessmentForm.limpness=false; ctrl.initialAssessmentForm.formType='OPD';
+                                    ctrl.initialAssessmentForm.recurrentSkinGUI=false; ctrl.initialAssessmentForm.delayedHealingOfWounds=false">
+                                <div class="col-12">
+                                    <dateinfra obj="ncdmd.dateinfra" user-health-infras="ncdmd.userHealthInfras"
+                                        on-change="ctrl.retrieveInitialAssessmentDetailsByMemberAndDate()">
+                                    </dateinfra>
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12 input-box">
+                                    <h6>Initial Assessment</h6>
+                                    <div class="input-box--inner row">
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='formType'>
+                                                <label style="display: table;" for="formType" class="control-label"
+                                                    control-label>
+                                                    Form type
+                                                </label>
+                                                <label class="control control-radio">OPD
+                                                    <input value="OPD" name="formType" form-control type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.formType" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">On call reference
+                                                    <input value="OCR" name="formType" form-control type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.formType" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='excessThirst'>
+                                                <label style="display: table;" for="excessThirst"
+                                                    uib-tooltip="Is excessThirst?" class="control-label" control-label>
+                                                    Excess Thirst (Polydipsia)
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="excessThirst" form-control type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.excessThirst" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="excessThirst" form-control
+                                                        type="radio" ng-model="ctrl.initialAssessmentForm.excessThirst"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='excessUrination'>
+                                                <label style="display: table;" for="excessUrination"
+                                                    uib-tooltip="Is excessUrination?" class="control-label"
+                                                    control-label>
+                                                    Excess Urination (Polyuria)
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="excessUrination" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.excessUrination" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="excessUrination" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.excessUrination" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='excessHunger'>
+                                                <label style="display: table;" for="excessHunger"
+                                                    uib-tooltip="Is excessHunger?" class="control-label" control-label>
+                                                    Excess Hunger
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="excessHunger" form-control type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.excessHunger" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="excessHunger" form-control
+                                                        type="radio" ng-model="ctrl.initialAssessmentForm.excessHunger"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='recurrentSkinGUI'>
+                                                <label style="display: table;" for="recurrentSkinGUI"
+                                                    uib-tooltip="Is Recurrent skin/Genito-urinary infection?"
+                                                    class="control-label" control-label>
+                                                    Recurrent skin/Genito-urinary infection
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="recurrentSkinGUI" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.recurrentSkinGUI" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="recurrentSkinGUI" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.recurrentSkinGUI" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='delayedHealingOfWounds'>
+                                                <label style="display: table;" for="delayedHealingOfWounds"
+                                                    uib-tooltip="Is Delayed healing of wounds?" class="control-label"
+                                                    control-label>
+                                                    Delayed healing of wounds
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="delayedHealingOfWounds" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.delayedHealingOfWounds"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="delayedHealingOfWounds" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.delayedHealingOfWounds"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='changeInDietaryHabits'>
+                                                <label style="display: table;" for="changeInDietaryHabits"
+                                                    uib-tooltip="Is Change in dietary habits?" class="control-label"
+                                                    control-label>
+                                                    Change in dietary habits
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="changeInDietaryHabits" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.changeInDietaryHabits"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="changeInDietaryHabits" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.changeInDietaryHabits"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='suddenVisualDisturbances'>
+                                                <label style="display: table;" for="suddenVisualDisturbances"
+                                                    uib-tooltip="Is Sudden Visual Disturbances history or present?"
+                                                    class="control-label" control-label>
+                                                    Sudden Visual Disturbances history or present
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="suddenVisualDisturbances" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.suddenVisualDisturbances"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="suddenVisualDisturbances" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.suddenVisualDisturbances"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='significantEdema'>
+                                                <label style="display: table;" for="significantEdema"
+                                                    uib-tooltip="Is Significant Edema?" class="control-label"
+                                                    control-label>
+                                                    Significant Edema
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="significantEdema" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.significantEdema" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="significantEdema" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.significantEdema" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='breathlessness'>
+                                                <label style="display: table;" for="breathlessness"
+                                                    uib-tooltip="Is Breathlessness?" class="control-label"
+                                                    control-label>
+                                                    Breathlessness
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="breathlessness" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.breathlessness" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="breathlessness" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.breathlessness" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='angina'>
+                                                <label style="display: table;" for="angina"
+                                                    uib-tooltip="Is Angina (Chest Pain)?" class="control-label"
+                                                    control-label>
+                                                    Angina (Chest Pain)
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="angina" form-control type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.angina" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="angina" form-control type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.angina" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='intermittentClaudication'>
+                                                <label style="display: table;" for="intermittentClaudication"
+                                                    uib-tooltip="Is Intermittent Claudication?" class="control-label"
+                                                    control-label>
+                                                    Intermittent Claudication
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="intermittentClaudication" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.intermittentClaudication"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="intermittentClaudication" form-control
+                                                        type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.intermittentClaudication"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='limpness'>
+                                                <label style="display: table;" for="limpness"
+                                                    uib-tooltip="Is Limpness or lack of strength on one side of limbs?"
+                                                    class="control-label" control-label>
+                                                    Limpness or lack of strength on one side of limbs
+                                                </label>
+                                                <label class="control control-radio mt-10">Yes
+                                                    <input ng-value="true" name="limpness" form-control type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.limpness" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio mt-10">No
+                                                    <input ng-value="false" name="limpness" form-control type="radio"
+                                                        ng-model="ctrl.initialAssessmentForm.limpness" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-12 mt-2">
+                                            <validate for='historyDisease' required-msg="Select atleast one option">
+                                                <label style="display: table;" for="historyDisease"
+                                                    class="control-label" control-label>
+                                                    Does patient have known history of following disease?
+                                                </label>
+                                                <div class="input-box--inner row">
+                                                    <!-- <label class="col-4">
+                                                        <input type="checkbox" ng-model="ctrl.Stroke"
+                                                            name="historyDisease" form-control
+                                                            ng-click="ctrl.toggleSelection('Stroke')"
+                                                            ng-required="ctrl.selectedHistoryDisease.length == 0">
+                                                        Stroke
+                                                    </label>
+                                                    <label class="col-4">
+                                                        <input type="checkbox" ng-model="ctrl.vcd" name="historyDisease"
+                                                            form-control ng-click="ctrl.toggleSelection('vcd')"
+                                                            ng-required="ctrl.selectedHistoryDisease.length == 0">
+                                                        Cardio Vascular Disease
+                                                    </label>
+                                                    <label class="col-4">
+                                                        <input type="checkbox" ng-model="ctrl.kd" name="historyDisease"
+                                                            form-control ng-click="ctrl.toggleSelection('kd')"
+                                                            ng-required="ctrl.selectedHistoryDisease.length == 0">
+                                                        Kidney Disease
+                                                    </label>
+                                                    <label class="col-4">
+                                                        <input type="checkbox" ng-model="ctrl.Diabetes"
+                                                            name="historyDisease" form-control
+                                                            ng-click="ctrl.toggleSelection('Diabetes')"
+                                                            ng-required="ctrl.selectedHistoryDisease.length == 0">
+                                                        Diabetes
+                                                    </label>
+                                                    <label class="col-4">
+                                                        <input type="checkbox" ng-model="ctrl.diabeticRetinopathy"
+                                                            name="historyDisease" form-control
+                                                            ng-click="ctrl.toggleSelection('Diabetic-Retinopathy')"
+                                                            ng-required="ctrl.selectedHistoryDisease.length == 0">
+                                                            Diabetic retinopathy
+                                                    </label>
+                                                    <label class="col-4">
+                                                        <input type="checkbox" ng-model="ctrl.diabetesFoot"
+                                                            name="historyDisease" form-control
+                                                            ng-click="ctrl.toggleSelection('Diabetes-Foot')"
+                                                            ng-required="ctrl.selectedHistoryDisease.length == 0">
+                                                        Diabetes Foot
+                                                    </label> -->
+                                                    <label class="col-4" ng-repeat="disease in ctrl.diseaseHistoryList">
+                                                        <input type="checkbox" ng-model="disease.selected"
+                                                            name="historyDisease" form-control
+                                                            ng-click="ctrl.toggleSelection(disease.id+'')"
+                                                            ng-required="ctrl.selectedHistoryDisease.length == 0">
+                                                            {{disease.value}}
+                                                    </label>
+                                                    <label class="col-4">
+                                                        <input type="checkbox" ng-model="ctrl.None"
+                                                            name="historyDisease" form-control
+                                                            ng-click="ctrl.toggleSelection('NONE')"
+                                                            ng-required="ctrl.selectedHistoryDisease.length == 0">
+                                                        None
+                                                    </label>
+                                                    <label class="col-4">
+                                                        <input type="checkbox" ng-model="ctrl.Other"
+                                                            name="historyDisease" form-control
+                                                            ng-click="ctrl.toggleSelection('OTHER')"
+                                                            ng-required="ctrl.selectedHistoryDisease.length == 0">
+                                                        Other
+                                                    </label>
+                                                </div>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2"  ng-if="ctrl.Other">
+                                            <validate for='Other' required-msg="Please provide other history Disease">
+                                                <input type="text"
+                                                    class="form-control cst-form-control col-12" form-control
+                                                    placeholder="Other" name="Other" id="Other"
+                                                    ng-required="ctrl.Other == true"
+                                                    ng-model="ctrl.initialAssessmentForm.otherDisease">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                    <div class="input-box--inner row">
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='height'  step-msg="Only whole numbers">
+                                                <label style="display: table;" for='height' control-label>
+                                                    Height (in CMs)
+                                                </label>
+                                                <input style="width: -webkit-fill-available;" type="number"
+                                                class="form-control cst-form-control" form-control
+                                                step="1"
+                                                ng-change="ctrl.calculateBmi()"
+                                                placeholder="Enter Height (in CMs)" min="15" max="200"
+                                                name="height" id="height"
+                                                ng-model="ctrl.initialAssessmentForm.height">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='wight'>
+                                                <label style="display: table;" for='wight' control-label>
+                                                    Weight (in KGs)
+                                                </label>
+                                                <input style="width: -webkit-fill-available;" type="text" numbers-only
+                                                    decimalallowed="true" class="form-control cst-form-control"
+                                                    form-control ng-change="ctrl.calculateBmi()"
+                                                    placeholder="Enter Weight (in KGs)" min="0.5" max="150" name="wight"
+                                                    id="wight" ng-model="ctrl.initialAssessmentForm.weight">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='BMI'>
+                                                <label style="display: table;" for='BMI' control-label>
+                                                    BMI
+                                                </label>
+                                                <input style="width: -webkit-fill-available;" type="text" numbers-only
+                                                    decimalallowed="true" class="form-control cst-form-control"
+                                                    form-control ng-disabled="true" name="BMI" id="BMI"
+                                                    ng-model="ctrl.initialAssessmentForm.bmi | number : 2">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-4 mt-2">
+                                            <validate for='waist'>
+                                                <label style="display: table;" for='waist' control-label>
+                                                    Waist circumference (in CMs)
+                                                </label>
+                                                <input style="width: -webkit-fill-available;" type="text" numbers-only
+                                                    decimalallowed="false" class="form-control cst-form-control"
+                                                    form-control min="20" max="200"
+                                                    placeholder="Enter Waist circumference (in CMs)" name="waist"
+                                                    id="waist" ng-model="ctrl.initialAssessmentForm.waistCircumference">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="col-12 mt-5 mb-2 text-right"
+                                            ng-if="!ctrl.initialAssessmentAlreadyFilled">
+                                            <button class=" btn btn-primary"
+                                                ng-click="ctrl.saveInitialAssessment()">Save &
+                                                continue</button>
+                                            <button class=" btn btn-secondary" ng-if="ctrl.type==='MO'"
+                                                ui-sref="techo.ncd.members">Cancel</button>
+                                            <button class=" btn btn-secondary" ng-if="ctrl.type==='CONSULTANT'"
+                                                ui-sref="techo.ncd.followupscreenlisting">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

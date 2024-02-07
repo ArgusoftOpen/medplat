@@ -5,10 +5,12 @@
  */
 package com.argusoft.medplat.fhs.dao.impl;
 
+//import com.argusoft.medplat.aadhaarvault.model.common.TempAadhaarMemberDetailsDto;
 import com.argusoft.medplat.common.util.AESEncryption;
 import com.argusoft.medplat.dashboard.fhs.constants.FamilyHealthSurveyServiceConstants;
 import com.argusoft.medplat.database.common.PredicateBuilder;
 import com.argusoft.medplat.database.common.impl.GenericDaoImpl;
+//import com.argusoft.medplat.duplicateaadhaarverification.dto.AadhaarDuplicateMemberDto;
 import com.argusoft.medplat.fhs.dao.MemberDao;
 import com.argusoft.medplat.fhs.dto.ElasticSearchMemberDto;
 import com.argusoft.medplat.fhs.dto.MemberDto;
@@ -16,11 +18,18 @@ import com.argusoft.medplat.fhs.dto.MemberInformationDto;
 import com.argusoft.medplat.fhs.dto.PregnancyRegistrationDetailDto;
 import com.argusoft.medplat.fhs.model.FamilyEntity;
 import com.argusoft.medplat.fhs.model.MemberEntity;
-import io.swagger.models.auth.In;
-import org.apache.commons.lang3.time.DateUtils;
+import com.argusoft.medplat.mobile.dto.MemberDataBean;
+import com.argusoft.medplat.ncd.dto.MemberDetailDto;
+import com.argusoft.medplat.ncd.dto.MemberMoConfirmedDetailDataBean;
+import com.argusoft.medplat.ncd.model.MemberGeneralDetail;
+//import com.argusoft.medplat.ndhm.healthid.model.common.AbhaConsentCheckboxModel;
+//import com.argusoft.medplat.verification.gvk.dto.FHSRVerificationDto;
+//import org.apache.commons.lang.time.DateUtils;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.transform.Transformers;
+import org.hibernate.type.LongType;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +42,7 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -49,6 +59,7 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
     public static final String ID_PROPERTY = "id";
     public static final String MEMBER_ID_PROPERTY = "memberId";
     public static final String FAMILY_ID_PROPERTY = "familyId";
+    public static final String FAMILY_ID_STR_PROPERTY = "famId";
     public static final String UNIQUE_HEALTH_ID_PROPERTY = "uniqueHealthId";
     public static final String MOTHER_ID_PROPERTY = "motherId";
     public static final String STATE_PROPERTY = "state";
@@ -73,7 +84,43 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
     public static final String FOLLOW_UP_DATE = "followUpDate";
     public static final String OFFSET = "offset";
     public static final String LIMIT = "limit";
+    public static final String HOF_MOBILE_NUMBER_PROPERTY = "hofMobileNumber";
 
+    /**
+     * {@inheritDoc}
+     */
+//    @Override
+//    public List<FHSRVerificationDto> getMembersByStates(List<Integer> locationIds,
+//                                                        List<String> states,
+//                                                        Integer limit,
+//                                                        Integer offset) {
+//        if (limit == -1) {
+//            limit = null;
+//        }
+//
+//        String query = "select c.mobile_number || '(' || c.first_name || ' ' || c.middle_name || ' ' || c.grandfather_name || ' ' || c.last_name || ')' as contactno, "
+//                + "cast(a.id as varchar) as memberid,a.first_name || ' ' || a.middle_name || ' ' || a.last_name as membername,a.state,b.state as \"familyState\",b.family_id as familyid from "
+//                + "(select * from imt_member mem) a "
+//                + "inner join "
+//                + "(select * from imt_family fam) b "
+//                + "on a.family_id = b.family_id "
+//                + "left join "
+//                + "(select * from imt_member mem) c "
+//                + "on b.contact_person_id = c.id "
+//                + "where a.state in (:states) and "
+//                + "b.location_id in (select child_id from location_hierchy_closer_det where parent_id in (:locationIds)) ";
+//
+//        if (limit != null && offset != null) {
+//            query += "LIMIT" + " " + limit + " "
+//                    + "OFFSET" + " " + offset;
+//        }
+//
+//        Session session = sessionFactory.getCurrentSession();
+//        NativeQuery<FHSRVerificationDto> q = session.createNativeQuery(query);
+//        q.setParameterList("locationIds", locationIds);
+//        q.setParameterList("states", states);
+//        return q.setResultTransformer(Transformers.aliasToBean(FHSRVerificationDto.class)).list();
+//    }
 
     /**
      * {@inheritDoc}
@@ -129,7 +176,12 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
                 Root<FamilyEntity> from = subquery.from(FamilyEntity.class);
 
                 subquery.select(from.get(FAMILY_ID_PROPERTY));
-                subquery.where(builder.or(from.get(FamilyEntity.Fields.LOCATION_ID).in(locationIds), from.get(FamilyEntity.Fields.AREA_ID).in(locationIds)));
+                subquery.where(
+                        builder.or(
+                                from.get(FamilyEntity.Fields.LOCATION_ID).in(locationIds),
+                                from.get(FamilyEntity.Fields.AREA_ID).in(locationIds)
+                        )
+                );
 
                 predicates.add(root.get(FAMILY_ID_PROPERTY).in(subquery));
             }
@@ -161,7 +213,8 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
             if (areaIds != null && !areaIds.isEmpty()) {
                 String q = "select family_id as \"id\" from imt_family where area_id in :areaIds";
                 NativeQuery<String> nativeQuery = getCurrentSession().createNativeQuery(q);
-                nativeQuery.setParameter("areaIds", areaIds).addScalar("id", StandardBasicTypes.STRING);
+                nativeQuery.setParameter("areaIds", areaIds)
+                        .addScalar("id", StandardBasicTypes.STRING);
                 List<String> familyIds = nativeQuery.getResultList();
                 predicates.add(builder.in(root.get(FAMILY_ID_PROPERTY)).value(familyIds));
             }
@@ -202,7 +255,8 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
      */
     @Override
     public List<Integer> retrieveMemberIdsByFamilyId(String familyId) {
-        String query = "select id from imt_member where family_id = :familyId " + "and (basic_state in ('NEW','VERIFIED','REVERIFICATION') or state = 'IDSP_TEMP')";
+        String query = "select id from imt_member where family_id = :familyId " +
+                "and (basic_state in ('NEW','VERIFIED','REVERIFICATION') or state = 'IDSP_TEMP')";
         Session session = sessionFactory.getCurrentSession();
         NativeQuery<Integer> q = session.createNativeQuery(query);
         q.setParameter(FAMILY_ID_PROPERTY, familyId);
@@ -217,7 +271,10 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
     public List<MemberEntity> searchMembers(String searchString) {
         PredicateBuilder<MemberEntity> predicateBuilder = (root, builder, query) -> {
             List<Predicate> predicates = new ArrayList<>();
-            predicates.add(builder.like(builder.lower(root.get(UNIQUE_HEALTH_ID_PROPERTY)), builder.lower(builder.literal(searchString))));
+            predicates.add(builder.like(
+                    builder.lower(root.get(UNIQUE_HEALTH_ID_PROPERTY)),
+                    builder.lower(builder.literal(searchString))
+            ));
             return predicates;
         };
         return new ArrayList<>(super.findByCriteriaList(predicateBuilder));
@@ -258,7 +315,10 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
      */
     @Override
     public void deleteDiseaseRelationsOfMember(Integer memberId) {
-        String query = "DELETE FROM imt_member_chronic_disease_rel  where member_id = :memberId ; " + " DELETE FROM imt_member_current_disease_rel  where member_id = :memberId ; " + " DELETE FROM imt_member_eye_issue_rel  where member_id = :memberId ; " + " DELETE FROM imt_member_congenital_anomaly_rel where member_id = :memberId ; ";
+        String query = "DELETE FROM imt_member_chronic_disease_rel  where member_id = :memberId ; "
+                + " DELETE FROM imt_member_current_disease_rel  where member_id = :memberId ; "
+                + " DELETE FROM imt_member_eye_issue_rel  where member_id = :memberId ; "
+                + " DELETE FROM imt_member_congenital_anomaly_rel where member_id = :memberId ; ";
         Session session = sessionFactory.getCurrentSession();
         NativeQuery<Integer> q = session.createNativeQuery(query);
         q.setParameter(MEMBER_ID_PROPERTY, memberId);
@@ -359,10 +419,103 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
      */
     @Override
     public MemberDto retrieveDetailsByMemberId(Integer memberId) {
-        final String query = "\tselect imt_member.id as id,\n" + "\timt_member.unique_health_id as uniqueHealthId,\n" + "\timt_member.health_id as healthId,\n" + "\timt_member.health_id_number as healthIdNumber,\n" + "\timt_member.dob as dob,\n" + "\timt_member.family_id as familyId,\n" + "\timt_member.first_name as firstName,\n" + "\timt_member.middle_name as middleName,\n" + "\timt_member.last_name as lastName,\n" + "\timt_member.gender as gender,\n" + "\timt_member.mobile_number as mobileNumber,\n" + "\timt_member.account_number as accountNumber,\n" + "\timt_member.ifsc as ifsc,\n" + "\timt_member.jsy_beneficiary as isJsyBeneficiary,\n" + "\timt_member.kpsy_beneficiary as isKpsyBeneficiary,\n" + "\timt_member.iay_beneficiary as isIayBeneficiary,\n" + "\timt_member.chiranjeevi_yojna_beneficiary as isChiranjeeviYojnaBeneficiary,\n" + "\timt_member.cur_preg_reg_det_id as curPregRegDetId,\n" + "\timt_member.cur_preg_reg_date as curPregRegDate,\n" + "\timt_member.early_registration as isEarlyRegistration,\n" + "\timt_member.is_high_risk_case as isHighRiskCase,\n" + "\timt_member.blood_group as bloodGroup,\n" + "\timt_member.weight as weight,\n" + "\timt_member.haemoglobin as haemoglobin,\n" + "\timt_member.is_pregnant as isPregnantFlag,\n" + "\timt_member.current_gravida as currentGravida,\n" + "\timt_member.family_planning_method as familyPlanningMethod,\n" + "\timt_member.last_method_of_contraception as lastMethodOfContraception,\n" + "\timt_member.immunisation_given as immunisationGiven,\n" + "\timt_member.mother_id as motherId,\n" + "\tcast(imt_member.last_delivery_date as date) as lastDeliveryDate,\n" + "\timt_member.additional_info as additionalInfo,\n" + "\trch_pregnancy_registration_det.state as wpdState,\n" + "\trch_pregnancy_registration_det.edd as edd,\n" + "\trch_pregnancy_registration_det.lmp_date as lmpDate,\n" + "\tget_location_hierarchy(rch_pregnancy_registration_det.current_location_id) as locationHierarchy,\n" + "\timt_family.area_id as areaId,\n" + "\timt_family.location_id as locationId,\n" + "\timt_family.id as fid,\n" + "\timt_family.bpl_flag as bplFlag,\n" + "\tlistvalue_field_value_detail.value as caste,\n" + "\thof.mobile_number as hofMobileNumber\n" + "\tfrom imt_member\n" + "\tleft join rch_pregnancy_registration_det on imt_member.cur_preg_reg_det_id = rch_pregnancy_registration_det.id\n" + "\tand rch_pregnancy_registration_det.member_id = imt_member.id\n" + "\tinner join imt_family on imt_member.family_id = imt_family.family_id\n" + "\tleft join imt_member hof on imt_family.hof_id = hof.id\n" + "\tleft join listvalue_field_value_detail on imt_family.caste = cast(listvalue_field_value_detail.id as text)\n" + "\twhere imt_member.basic_state in ('NEW','VERIFIED','REVERIFICATION','TEMPORARY')\n" + "and imt_member.id = :memberId";
+        final String query = "\tselect imt_member.id as id,\n" +
+                "\timt_member.unique_health_id as uniqueHealthId,\n" +
+                "\timt_member.health_id as healthId,\n" +
+                "\timt_member.health_id_number as healthIdNumber,\n" +
+                "\timt_member.dob as dob,\n" +
+                "\timt_member.family_id as familyId,\n" +
+                "\timt_member.first_name as firstName,\n" +
+                "\timt_member.middle_name as middleName,\n" +
+                "\timt_member.last_name as lastName,\n" +
+                "\timt_member.gender as gender,\n" +
+                "\timt_member.mobile_number as mobileNumber,\n" +
+                "\timt_member.account_number as accountNumber,\n" +
+                "\timt_member.ifsc as ifsc,\n" +
+                "\timt_member.jsy_beneficiary as isJsyBeneficiary,\n" +
+                "\timt_member.kpsy_beneficiary as isKpsyBeneficiary,\n" +
+                "\timt_member.iay_beneficiary as isIayBeneficiary,\n" +
+                "\timt_member.chiranjeevi_yojna_beneficiary as isChiranjeeviYojnaBeneficiary,\n" +
+                "\timt_member.cur_preg_reg_det_id as curPregRegDetId,\n" +
+                "\timt_member.cur_preg_reg_date as curPregRegDate,\n" +
+                "\timt_member.early_registration as isEarlyRegistration,\n" +
+                "\timt_member.is_high_risk_case as isHighRiskCase,\n" +
+                "\timt_member.blood_group as bloodGroup,\n" +
+                "\timt_member.weight as weight,\n" +
+                "\timt_member.haemoglobin as haemoglobin,\n" +
+                "\timt_member.is_pregnant as isPregnantFlag,\n" +
+                "\timt_member.current_gravida as currentGravida,\n" +
+                "\timt_member.family_planning_method as familyPlanningMethod,\n" +
+                "\timt_member.last_method_of_contraception as lastMethodOfContraception,\n" +
+                "\timt_member.immunisation_given as immunisationGiven,\n" +
+                "\timt_member.mother_id as motherId,\n" +
+                "\tcast(imt_member.last_delivery_date as date) as lastDeliveryDate,\n" +
+                "\timt_member.additional_info as additionalInfo,\n" +
+                "\trch_pregnancy_registration_det.state as wpdState,\n" +
+                "\trch_pregnancy_registration_det.edd as edd,\n" +
+                "\trch_pregnancy_registration_det.lmp_date as lmpDate,\n" +
+                "\tget_location_hierarchy(rch_pregnancy_registration_det.current_location_id) as locationHierarchy,\n" +
+                "\timt_family.area_id as areaId,\n" +
+                "\timt_family.location_id as locationId,\n" +
+                "\timt_family.id as fid,\n" +
+                "\timt_family.bpl_flag as bplFlag,\n" +
+                "\tlistvalue_field_value_detail.value as caste,\n" +
+                "\thof.mobile_number as hofMobileNumber\n" +
+                "\tfrom imt_member\n" +
+                "\tleft join rch_pregnancy_registration_det on imt_member.cur_preg_reg_det_id = rch_pregnancy_registration_det.id\n" +
+                "\tand rch_pregnancy_registration_det.member_id = imt_member.id\n" +
+                "\tinner join imt_family on imt_member.family_id = imt_family.family_id\n" +
+                "\tleft join imt_member hof on imt_family.hof_id = hof.id\n" +
+                "\tleft join listvalue_field_value_detail on imt_family.caste = cast(listvalue_field_value_detail.id as text)\n" +
+                "\twhere imt_member.basic_state in ('NEW','VERIFIED','REVERIFICATION','TEMPORARY')\n" +
+                "and imt_member.id = :memberId";
         Session session = sessionFactory.getCurrentSession();
         NativeQuery<MemberDto> q = session.createNativeQuery(query);
-        return q.setParameter(MEMBER_ID_PROPERTY, memberId).addScalar("id", StandardBasicTypes.INTEGER).addScalar("fid", StandardBasicTypes.INTEGER).addScalar("additionalInfo", StandardBasicTypes.STRING).addScalar("lastDeliveryDate", StandardBasicTypes.DATE).addScalar(FAMILY_ID_PROPERTY, StandardBasicTypes.STRING).addScalar(LOCATION_ID_PROPERTY, StandardBasicTypes.INTEGER).addScalar(AREA_ID_PROPERTY, StandardBasicTypes.STRING).addScalar("firstName", StandardBasicTypes.STRING).addScalar("middleName", StandardBasicTypes.STRING).addScalar("lastName", StandardBasicTypes.STRING).addScalar(MOTHER_ID_PROPERTY, StandardBasicTypes.INTEGER).addScalar(UNIQUE_HEALTH_ID_PROPERTY, StandardBasicTypes.STRING).addScalar("healthId", StandardBasicTypes.STRING).addScalar("healthIdNumber", StandardBasicTypes.STRING).addScalar("dob", StandardBasicTypes.DATE).addScalar("immunisationGiven", StandardBasicTypes.STRING).addScalar("wpdState", StandardBasicTypes.STRING).addScalar("edd", StandardBasicTypes.DATE).addScalar("lmpDate", StandardBasicTypes.DATE).addScalar(MOBILE_NUMBER_PROPERTY, StandardBasicTypes.STRING).addScalar(ACCOUNT_NUMBER_PROPERTY, StandardBasicTypes.STRING).addScalar("ifsc", StandardBasicTypes.STRING).addScalar("isJsyBeneficiary", StandardBasicTypes.BOOLEAN).addScalar("isKpsyBeneficiary", StandardBasicTypes.BOOLEAN).addScalar("isIayBeneficiary", StandardBasicTypes.BOOLEAN).addScalar("isChiranjeeviYojnaBeneficiary", StandardBasicTypes.BOOLEAN).addScalar("bplFlag", StandardBasicTypes.BOOLEAN).addScalar("caste", StandardBasicTypes.STRING).addScalar(LOCATION_HIERARCHY_PROPERTY, StandardBasicTypes.STRING).addScalar("isPregnantFlag", StandardBasicTypes.BOOLEAN).addScalar("gender", StandardBasicTypes.STRING).addScalar("currentGravida", StandardBasicTypes.SHORT).addScalar("familyPlanningMethod", StandardBasicTypes.STRING).addScalar("lastMethodOfContraception", StandardBasicTypes.STRING).addScalar("hofMobileNumber", StandardBasicTypes.STRING).addScalar("curPregRegDetId", StandardBasicTypes.INTEGER).addScalar("curPregRegDate", StandardBasicTypes.DATE).addScalar("isEarlyRegistration", StandardBasicTypes.BOOLEAN).addScalar("isHighRiskCase", StandardBasicTypes.BOOLEAN).addScalar("bloodGroup", StandardBasicTypes.STRING).addScalar("haemoglobin", StandardBasicTypes.FLOAT).addScalar("weight", StandardBasicTypes.FLOAT).setResultTransformer(Transformers.aliasToBean(MemberDto.class)).uniqueResult();
+        return q
+                .setParameter(MEMBER_ID_PROPERTY, memberId)
+                .addScalar("id", StandardBasicTypes.INTEGER)
+                .addScalar("fid", StandardBasicTypes.INTEGER)
+                .addScalar("additionalInfo", StandardBasicTypes.STRING)
+                .addScalar("lastDeliveryDate", StandardBasicTypes.DATE)
+                .addScalar(FAMILY_ID_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(LOCATION_ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar(AREA_ID_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar("firstName", StandardBasicTypes.STRING)
+                .addScalar("middleName", StandardBasicTypes.STRING)
+                .addScalar("lastName", StandardBasicTypes.STRING)
+                .addScalar(MOTHER_ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar(UNIQUE_HEALTH_ID_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar("healthId", StandardBasicTypes.STRING)
+                .addScalar("healthIdNumber", StandardBasicTypes.STRING)
+                .addScalar("dob", StandardBasicTypes.DATE)
+                .addScalar("immunisationGiven", StandardBasicTypes.STRING)
+                .addScalar("wpdState", StandardBasicTypes.STRING)
+                .addScalar("edd", StandardBasicTypes.DATE)
+                .addScalar("lmpDate", StandardBasicTypes.DATE)
+                .addScalar(MOBILE_NUMBER_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(ACCOUNT_NUMBER_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar("ifsc", StandardBasicTypes.STRING)
+                .addScalar("isJsyBeneficiary", StandardBasicTypes.BOOLEAN)
+                .addScalar("isKpsyBeneficiary", StandardBasicTypes.BOOLEAN)
+                .addScalar("isIayBeneficiary", StandardBasicTypes.BOOLEAN)
+                .addScalar("isChiranjeeviYojnaBeneficiary", StandardBasicTypes.BOOLEAN)
+                .addScalar("bplFlag", StandardBasicTypes.BOOLEAN)
+                .addScalar("caste", StandardBasicTypes.STRING)
+                .addScalar(LOCATION_HIERARCHY_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar("isPregnantFlag", StandardBasicTypes.BOOLEAN)
+                .addScalar("gender", StandardBasicTypes.STRING)
+                .addScalar("currentGravida", StandardBasicTypes.SHORT)
+                .addScalar("familyPlanningMethod", StandardBasicTypes.STRING)
+                .addScalar("lastMethodOfContraception", StandardBasicTypes.STRING)
+                .addScalar("hofMobileNumber", StandardBasicTypes.STRING)
+                .addScalar("curPregRegDetId", StandardBasicTypes.INTEGER)
+                .addScalar("curPregRegDate", StandardBasicTypes.DATE)
+                .addScalar("isEarlyRegistration", StandardBasicTypes.BOOLEAN)
+                .addScalar("isHighRiskCase", StandardBasicTypes.BOOLEAN)
+                .addScalar("bloodGroup", StandardBasicTypes.STRING)
+                .addScalar("haemoglobin", StandardBasicTypes.FLOAT)
+                .addScalar("weight", StandardBasicTypes.FLOAT)
+                .setResultTransformer(Transformers.aliasToBean(MemberDto.class)).uniqueResult();
     }
 
     /**
@@ -397,12 +550,45 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
      */
     @Override
     public List<String> retrieveAshaPhoneNumberByMemberId(Integer memberId) {
-        String query = "select contact_number from um_user \n" + "inner join um_role_master on\n" + "um_user.role_id = um_role_master.id\n" + "where um_user.id in\n" + "(select user_id from um_user_location where loc_id in\n" + "(select area_id from imt_family where family_id in\n" + "(select family_id from imt_member where id=" + memberId + ")))\n" + "and um_role_master.code='ASHA'";
+        String query = "select contact_number from um_user \n"
+                + "inner join um_role_master on\n"
+                + "um_user.role_id = um_role_master.id\n"
+                + "where um_user.id in\n"
+                + "(select user_id from um_user_location where loc_id in\n"
+                + "(select area_id from imt_family where family_id in\n"
+                + "(select family_id from imt_member where id=" + memberId + ")))\n"
+                + "and um_role_master.code='ASHA'";
         Session session = sessionFactory.getCurrentSession();
         NativeQuery<String> sQLQuery = session.createNativeQuery(query);
         return sQLQuery.list();
     }
 
+    @Override
+    public List<MemberGeneralDetail> retrieveGeneralMembers(Integer memberId) {
+        String query = "SELECT * FROM ncd_member_general_detail where refferal_place In ('Specialist','Other') and member_id="+memberId;
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery<MemberGeneralDetail> sQLQuery = session.createNativeQuery(query);
+        return sQLQuery.list();
+    }
+
+    @Override
+    public List<String> retrieveMembersOnStatus(Integer memberId) {
+        String query = "select distinct status from ncd_member_diseases_diagnosis where member_id ="+memberId;
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery<String> sQLQuery = session.createNativeQuery(query);
+        return sQLQuery.list();
+    }
+
+    @Override
+    public List<String> retrieveMembersSC(Integer locId) {
+        String query = "select name from location_master lm\n" +
+                "    left join location_hierchy_closer_det lhcd on lhcd.parent_id=lm.id\n" +
+                "    where child_id="+locId+" and parent_loc_type='SC'";
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery<String> sQLQuery = session.createNativeQuery(query);
+        return sQLQuery.list();
+    }
+    ;
     /**
      * {@inheritDoc}
      */
@@ -509,14 +695,268 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<String> retrieveMembersOnStatus(Integer memberId) {
-        String query = "select distinct status from ncd_member_diseases_diagnosis where member_id =" + memberId;
+    public List<MemberDetailDto> retrieveNcdMembers(Integer userId, Integer limit, Integer offset
+            , String healthInfrastructureType, String searchBy, String searchString) {
+        String query = "";
+        if (searchString != null) {
+            searchString = searchString.replace("',", "''");
+        }
+        if (searchBy == null) {
+            searchBy = "";
+        }
+        if (searchString == null || searchString.isEmpty()) {
+            searchBy = "";
+        }
+
+        String defaultPartialQuery = "with \n"
+                + "max_member_ids as \n"
+                + "( \n"
+                + "select max(id) as id from ncd_member_referral \n"
+                + "group by member_id, disease_code \n"
+                + "), \n"
+                + "referred_members as \n"
+                + "( \n"
+                + "select member_id, string_agg(disease_code,',') disease_code, max(referred_on) as ref_date from ncd_member_referral r \n"
+                + "where disease_code in ('O','HT','C','B','D') \n"
+                + "and referred_from IN ('FHW', 'MPHW', 'CHO') \n"
+                + "and \n"
+                + "r.id in (select id from max_member_ids) \n"
+                + "and \n"
+                + "referred_from_health_infrastructure_id in ( \n"
+                + "(select h.id from health_infrastructure_details h, \n"
+                + "user_health_infrastructure u \n"
+                + "where u.health_infrastrucutre_id = h.id and user_id = " + userId + " and u.state = 'ACTIVE') \n"
+                + ") \n"
+                + "group by member_id \n";
+
+        switch (searchBy) {
+            case MEMBER_ID_PROPERTY:
+                query = "with referred_members as (select m.id as member_id, string_agg(r.disease_code,',') as disease_code, now() as ref_date from imt_member m\n"
+                        + "left join ncd_member_referral r on r.member_id = m.id \n"
+                        + "where "
+                        + "date_part('year',age(dob)) > 30\n"
+                        + "and m.unique_health_id='" + searchString + "'\n"
+                        + "and ((m.basic_state in ('NEW','VERIFIED','REVERIFICATION')) or (m.state = 'com.argusoft.imtecho.member.state.temporary'))\n"
+                        + "group by m.id \n";
+
+                query += "limit :limit offset :offset)\n";
+                break;
+
+            case FAMILY_ID_PROPERTY:
+                query = "with referred_members as (select m.id as member_id, string_agg(r.disease_code,',') as disease_code, now() as ref_date from imt_member m\n"
+                        + "left join ncd_member_referral r on r.member_id = m.id \n"
+                        + "where date_part('year',age(dob)) > 30\n"
+                        + "and ((m.basic_state in ('NEW','VERIFIED','REVERIFICATION')) or (m.state = 'com.argusoft.imtecho.member.state.temporary'))\n"
+                        + "and m.family_id='" + searchString + "' \n"
+                        + "group by m.id \n";
+
+                query += "limit :limit offset :offset)\n";
+                break;
+
+            case FAMILY_MOBILE_NUMBER_PROPERTY:
+                query = "with referred_members as (select m.id as member_id, string_agg(r.disease_code,',') as disease_code, now() as ref_date from imt_member m\n"
+                        + "left join ncd_member_referral r on r.member_id = m.id \n"
+                        + "inner join imt_family f on f.family_id=m.family_id\n"
+                        + "where date_part('year',age(dob)) > 30\n"
+                        + "and ((m.basic_state in ('NEW','VERIFIED','REVERIFICATION')) or (m.state = 'com.argusoft.imtecho.member.state.temporary'))\n"
+                        + "and f.family_id in (select family_id from imt_member where mobile_number='" + searchString + "') \n"
+                        + "group by m.id \n";
+
+                query += "limit :limit offset :offset)\n";
+                break;
+
+            case MOBILE_NUMBER_PROPERTY:
+                query = "with referred_members as (select m.id as member_id, string_agg(r.disease_code,',') as disease_code, now() as ref_date from imt_member m\n"
+                        + "left join ncd_member_referral r on r.member_id = m.id \n"
+                        + "where date_part('year',age(dob)) > 30\n"
+                        + "and ((m.basic_state in ('NEW','VERIFIED','REVERIFICATION')) or (m.state = 'com.argusoft.imtecho.member.state.temporary'))\n"
+                        + "and m.mobile_number='" + searchString + "'\n"
+                        + "group by m.id \n";
+
+                query += "limit :limit offset :offset)\n";
+                break;
+
+            case NAME_PROPERTY:
+                String[] nameSearchStrings = null;
+                if (searchString != null) {
+                    nameSearchStrings = searchString.split("#");
+                }
+                if (nameSearchStrings != null) {
+                    query = "with referred_members as (select m.id as member_id, string_agg(r.disease_code,',') as disease_code, now() as ref_date from imt_member m\n"
+                            + "left join ncd_member_referral r on r.member_id = m.id \n"
+                            + "inner join imt_family f on f.family_id=m.family_id\n"
+                            + "inner join location_hierchy_closer_det on (case when f.area_id is not null then f.area_id else f.location_id end) = location_hierchy_closer_det.child_id\n"
+                            + "where date_part('year',age(dob)) > 30\n"
+                            + "and ((m.basic_state in ('NEW','VERIFIED','REVERIFICATION')) or (m.state = 'com.argusoft.imtecho.member.state.temporary'))\n"
+                            + "and similarity('" + nameSearchStrings[1] + "',m.first_name) >= 0.50\n"
+                            + "and similarity('" + nameSearchStrings[2] + "',m.last_name) >= 0.60\n"
+                            + "and location_hierchy_closer_det.parent_id = " + nameSearchStrings[0] + "\n";
+                    if (nameSearchStrings.length >= 4) {
+                        query += "and similarity('" + nameSearchStrings[3] + "',m.middle_name) >= 0.50\n";
+                    }
+                    query += "group by m.id \n";
+                    query += "limit :limit offset :offset)\n";
+                }
+                break;
+
+            case ORG_UNIT_PROPERTY:
+            case VILLAGE_NAME_PROPERTY:
+                query = "with referred_members as (select m.id as member_id, string_agg(r.disease_code,',') as disease_code, now() as ref_date from imt_member m\n"
+                        + "left join ncd_member_referral r on r.member_id = m.id \n"
+                        + "inner join imt_family f on f.family_id=m.family_id\n"
+                        + "inner join location_hierchy_closer_det on (case when f.area_id is not null then f.area_id else f.location_id end) = location_hierchy_closer_det.child_id\n"
+                        + "where date_part('year',age(dob)) > 30\n"
+                        + "and ((m.basic_state in ('NEW','VERIFIED','REVERIFICATION')) or (m.state = 'com.argusoft.imtecho.member.state.temporary'))\n"
+                        + "and location_hierchy_closer_det.parent_id = " + searchString + "\n"
+                        + "group by m.id \n";
+
+                query += "limit :limit offset :offset)\n";
+                break;
+
+            case AADHAR_PROPERTY:
+                String aadharEncrypted = AESEncryption.getInstance().encrypt(searchString);
+                aadharEncrypted = aadharEncrypted.replace("'", "''");
+                query = "with referred_members as (select m.id as member_id, string_agg(r.disease_code,',') as disease_code, now() as ref_date from imt_member m\n"
+                        + "left join ncd_member_referral r on r.member_id = m.id \n"
+                        + "where date_part('year',age(dob)) > 30\n"
+                        + "and m.aadhar_number_encrypted='" + aadharEncrypted + "'\n"
+                        + "and ((m.basic_state in ('NEW','VERIFIED','REVERIFICATION')) or (m.state = 'com.argusoft.imtecho.member.state.temporary'))\n"
+                        + "group by m.id \n";
+
+                query += "limit :limit offset :offset)\n";
+                break;
+
+            case DISEASE_PROPERTY:
+                query = defaultPartialQuery;
+
+                String[] diseaseCodes = {"O", "HT", "C", "B", "D"};
+                if (Arrays.asList(diseaseCodes).contains(searchString)) {
+                    query += "having '" + searchString + "' = ANY(string_to_array(string_agg(disease_code, ','),','))\n";
+                }
+
+                query += "limit :limit offset :offset)\n";
+                break;
+
+            default:
+                query = defaultPartialQuery + "limit :limit offset :offset)\n";
+                break;
+
+        }
+
+        query += "select distinct m.id, r.ref_date,\n"
+                + "m.unique_health_id as uniqueHealthId,\n"
+                + "get_location_hierarchy(if.location_id) as locationHierarchy,\n"
+                + "lm.name as locationName,\n"
+                + "lm.id as locationId, \n"
+                + "m.dob as dob,\n"
+                + "m.gender as gender,\n"
+                + "m.mobile_number as mobileNumber,\n"
+                + "concat(m.first_name,' ',m.middle_name,' ',m.last_name) as \"name\",\n"
+                + "(case when 'HT' = ANY(string_to_array(r.disease_code,',')) then CONCAT('Hypertension - ', case when hyp.systolic_bp is not null then cast(hyp.systolic_bp as text) else 'N.A' end, '/', case when hyp.diastolic_bp is not null then cast(hyp.diastolic_bp as text) else 'N.A' end) else null end) as referredForHypertension,\n"
+                + "(case when 'D' = ANY(string_to_array(r.disease_code,',')) then CONCAT('Diabetes - ', case when diab.blood_sugar is not null then cast(diab.blood_sugar as text) else 'N.A' end) else null end) as referredForDiabetes,\n"
+                + "(case when 'B' = ANY(string_to_array(r.disease_code,',')) then true else false end) as referredForBreast,\n"
+                + "(case when 'O' = ANY(string_to_array(r.disease_code,',')) then true else false end) as referredForOral,\n"
+                + "(case when 'C' = ANY(string_to_array(r.disease_code,',')) then true else false end) as referredForCervical\n"
+                + "from referred_members r \n"
+                + "inner join imt_member m on r.member_id = m.id \n"
+                + "inner join imt_family if on m.family_id = if.family_id \n"
+                + "left join location_master lm on lm.id = if.location_id \n"
+                + "left join ncd_member_hypertension_detail hyp on  m.id = hyp.member_id and hyp.modified_on = (select max(modified_on) from ncd_member_hypertension_detail where member_id = m.id) \n"
+                + "left join ncd_member_diabetes_detail diab on m.id = diab.member_id and diab.modified_on = (select max(modified_on) from ncd_member_diabetes_detail where member_id = m.id) \n"
+                + "where m.dob <= current_date -interval '40 years' order by r.ref_date desc";
+
         Session session = sessionFactory.getCurrentSession();
-        NativeQuery<String> sQLQuery = session.createNativeQuery(query);
-        return sQLQuery.list();
+        NativeQuery<MemberDetailDto> sqlQuery = session.createNativeQuery(query);
+        sqlQuery.addScalar("gender",StandardBasicTypes.STRING)
+                .addScalar("dob",StandardBasicTypes.DATE)
+                .addScalar("locationId",StandardBasicTypes.INTEGER)
+                .addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar(UNIQUE_HEALTH_ID_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(LOCATION_HIERARCHY_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(LOCATION_NAME_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(MOBILE_NUMBER_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(NAME_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_HYPERTENSION, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_DIABETES, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_BREAST, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_ORAL, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_CERVICAL, StandardBasicTypes.STRING);
+        if (limit != null) {
+            sqlQuery.setParameter(LIMIT, limit)
+                    .setParameter(OFFSET, offset);
+        } else {
+            sqlQuery.setParameter(LIMIT, limit, LongType.INSTANCE)
+                    .setParameter(OFFSET, offset, LongType.INSTANCE);
+        }
+        return sqlQuery.setResultTransformer(Transformers.aliasToBean(MemberDetailDto.class)).list();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<MemberDetailDto> retrieveNcdMembersForFollowup(Integer userId, Integer limit, Integer offset, String healthInfrastructureType, String[] status) {
+        String fromColumn = status != null && "REFERRED".equals(status[0]) ? "nmr.health_infrastructure_id" : "nmr.referred_from_health_infrastructure_id";
+        String orWhereClause = "";
+        if (("REFERRED").equals(status[0])) {
+            orWhereClause = " OR ((status = 'SUSPECTED' OR status = 'CONFIRMATION_PENDING') AND health_infrastructure_id IS NOT NULL) ";
+        } else if (("CONFIRMED").equals(status[0])) {
+            orWhereClause = " OR ((status = 'SUSPECTED' OR status = 'CONFIRMATION_PENDING') AND health_infrastructure_id IS NULL) ";
+        }
+        String query = "with referred_members as (select nmr.member_id,nmr.follow_up_date, string_agg(nmr.disease_code,',') disease_code from ncd_member_referral nmr\n"
+                + "where nmr.disease_code in ('O','HT','C','B','D') AND nmr.state = 'PENDING' AND \n"
+                + "(nmr.status IN ('" + String.join("', '", status) + "') " + orWhereClause + ")\n"
+                + "AND follow_up_date < current_date + interval '1 day' - interval '00:00:01'\n"
+                + "and " + fromColumn + " in (\n"
+                + "(select hid.id from health_infrastructure_details hid, user_health_infrastructure uhi\n"
+                + "where uhi.health_infrastrucutre_id = hid.id and uhi.user_id = " + userId + " and uhi.state = 'ACTIVE')\n"
+                + ") group by nmr.member_id,nmr.follow_up_date\n"
+                + "limit :limit "
+                + "offset :offset\n"
+                + ")\n"
+                + "select distinct m.id, m.family_id as \"famId\", r.disease_code,to_char(r.follow_up_date,'MM/DD/YYYY') as \"followUpDate\",r.follow_up_date ,hyp.id,\n"
+                + "m.unique_health_id as uniqueHealthId,\n"
+                + "get_location_hierarchy(if.location_id) as locationHierarchy,\n"
+                + "lm.name as locationName,\n"
+                + "m.mobile_number as mobileNumber,\n"
+                + "concat(m.first_name,' ',m.middle_name,' ',m.last_name) as \"name\",\n"
+                + "(case when 'HT' = ANY(string_to_array(r.disease_code,',')) then CONCAT('Hypertension - ', case when hyp.systolic_bp is not null then cast(hyp.systolic_bp as text) else 'N.A' end, '/', case when hyp.diastolic_bp is not null then cast(hyp.diastolic_bp as text) else 'N.A' end) else null end) as referredForHypertension,\n"
+                + "(case when 'D' = ANY(string_to_array(r.disease_code,',')) then CONCAT('Diabetes - ', case when diab.blood_sugar is not null then cast(diab.blood_sugar as text) else 'N.A' end) else null end) as referredForDiabetes,\n"
+                + "(case when 'B' = ANY(string_to_array(r.disease_code,',')) then true else false end) as referredForBreast,\n"
+                + "(case when 'O' = ANY(string_to_array(r.disease_code,',')) then true else false end) as referredForOral,\n"
+                + "(case when 'C' = ANY(string_to_array(r.disease_code,',')) then true else false end) as referredForCervical\n"
+                + "from referred_members r \n"
+                + "inner join imt_member m on m.id = r.member_id\n"
+                + "inner join imt_family if on m.family_id = if.family_id \n"
+                + "left join location_master lm on lm.id = if.location_id \n"
+                + "left join ncd_member_hypertension_detail hyp on m.id = hyp.member_id and hyp.modified_on = (select max(modified_on) from ncd_member_hypertension_detail where member_id = m.id)\n"
+                + "left join ncd_member_diabetes_detail diab on m.id = diab.member_id and diab.modified_on = (select max(modified_on) from ncd_member_diabetes_detail where member_id = m.id) \n"
+                + "order by r.follow_up_date desc";
+
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery<MemberDetailDto> sqlQuery = session.createNativeQuery(query);
+        return sqlQuery
+                .addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar(FAMILY_ID_STR_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(UNIQUE_HEALTH_ID_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(NAME_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(LOCATION_HIERARCHY_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(LOCATION_NAME_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(MOBILE_NUMBER_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(FOLLOW_UP_DATE, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_HYPERTENSION, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_DIABETES, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_BREAST, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_ORAL, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_CERVICAL, StandardBasicTypes.STRING)
+                .setParameter(LIMIT, limit)
+                .setParameter(OFFSET, offset)
+                .setResultTransformer(Transformers.aliasToBean(MemberDetailDto.class)).list();
+    }
 
     /**
      * {@inheritDoc}
@@ -548,10 +988,10 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
 
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.YEAR, -5);
-            Calendar truncate = DateUtils.truncate(calendar, Calendar.DATE);
+//            Calendar truncate = DateUtils.truncate(calendar, Calendar.DATE);
 
             predicates.add(builder.equal(root.get(MemberEntity.Fields.MOTHER_ID), motherId));
-            predicates.add(builder.lessThanOrEqualTo(root.get(MemberEntity.Fields.DOB), truncate.getTime()));
+//            predicates.add(builder.lessThanOrEqualTo(root.get(MemberEntity.Fields.DOB), truncate.getTime()));
 
             return predicates;
         };
@@ -569,33 +1009,129 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
         String query = "";
         switch (searchBy) {
             case MEMBER_ID_PROPERTY:
-                query += "with  members as(\n" + "select m.id , m.first_name  ,m.last_name  ,\n" + "m.family_id, \n" + "m.mobile_number ,  \n" + " m.account_number, \n" + " f.location_id , \n" + " m.middle_name , \n" + " f.area_id  \n" + "\n" + "from imt_member m \n" + "inner join imt_family f on f.family_id = m.family_id\n" + "where unique_health_id ='" + searchString + "' \n" + "limit :limit " + "offset :offset\n" + ")";
+                query += "with  members as(\n"
+                        + "select m.id , m.first_name  ,m.last_name  ,\n"
+                        + "m.family_id, \n"
+                        + "m.mobile_number ,  \n"
+                        + " m.account_number, \n"
+                        + " f.location_id , \n"
+                        + " m.middle_name , \n"
+                        + " f.area_id  \n"
+                        + "\n"
+                        + "from imt_member m \n"
+                        + "inner join imt_family f on f.family_id = m.family_id\n"
+                        + "where unique_health_id ='" + searchString + "' \n"
+                        + "limit :limit "
+                        + "offset :offset\n"
+                        + ")";
 
                 break;
             case FAMILY_ID_PROPERTY:
-                query += "with  members as(\n" + "select m.id , m.first_name  ,m.last_name  ,\n" + "m.family_id, \n" + "m.mobile_number ,  \n" + " m.account_number, \n" + " f.location_id , \n" + " m.middle_name , \n" + " f.area_id  \n" + "\n" + "from imt_member m \n" + "inner join imt_family f on f.family_id = m.family_id\n" + "where m.family_id ='" + searchString + "' \n" + "limit :limit offset :offset\n" + ")";
+                query += "with  members as(\n"
+                        + "select m.id , m.first_name  ,m.last_name  ,\n"
+                        + "m.family_id, \n"
+                        + "m.mobile_number ,  \n"
+                        + " m.account_number, \n"
+                        + " f.location_id , \n"
+                        + " m.middle_name , \n"
+                        + " f.area_id  \n"
+                        + "\n"
+                        + "from imt_member m \n"
+                        + "inner join imt_family f on f.family_id = m.family_id\n"
+                        + "where m.family_id ='" + searchString + "' \n"
+                        + "limit :limit offset :offset\n"
+                        + ")";
 
                 break;
             case FAMILY_MOBILE_NUMBER_PROPERTY:
 
-                query += "with  members as(\n" + "select m.id , m.first_name  ,m.last_name  ,\n" + "m.family_id, \n" + "m.mobile_number ,  \n" + " m.account_number, \n" + " f.location_id , \n" + " m.middle_name , \n" + " f.area_id  \n" + "\n" + "from imt_member m \n" + "inner join imt_family f on f.family_id = m.family_id\n" + "where f.family_id in (select family_id from imt_member where mobile_number='" + searchString + "')" + "limit :limit offset :offset\n" + ")";
+                query += "with  members as(\n"
+                        + "select m.id , m.first_name  ,m.last_name  ,\n"
+                        + "m.family_id, \n"
+                        + "m.mobile_number ,  \n"
+                        + " m.account_number, \n"
+                        + " f.location_id , \n"
+                        + " m.middle_name , \n"
+                        + " f.area_id  \n"
+                        + "\n"
+                        + "from imt_member m \n"
+                        + "inner join imt_family f on f.family_id = m.family_id\n"
+                        + "where f.family_id in (select family_id from imt_member where mobile_number='" + searchString + "')"
+                        + "limit :limit offset :offset\n"
+                        + ")";
 
                 break;
 
             case MOBILE_NUMBER_PROPERTY:
-                query += "with  members as(\n" + "select m.id , m.first_name  ,m.last_name  ,\n" + "m.family_id, \n" + "m.mobile_number ,  \n" + " m.account_number, \n" + " f.location_id , \n" + " m.middle_name , \n" + " f.area_id  \n" + "\n" + "from imt_member m \n" + "inner join imt_family f on f.family_id = m.family_id\n" + "\n" + "where m.mobile_number ='" + searchString + "' \n" + "limit :limit offset :offset\n" + ")" + "";
+                query += "with  members as(\n"
+                        + "select m.id , m.first_name  ,m.last_name  ,\n"
+                        + "m.family_id, \n"
+                        + "m.mobile_number ,  \n"
+                        + " m.account_number, \n"
+                        + " f.location_id , \n"
+                        + " m.middle_name , \n"
+                        + " f.area_id  \n"
+                        + "\n"
+                        + "from imt_member m \n"
+                        + "inner join imt_family f on f.family_id = m.family_id\n"
+                        + "\n"
+                        + "where m.mobile_number ='" + searchString + "' \n"
+                        + "limit :limit offset :offset\n"
+                        + ")"
+                        + "";
 
                 break;
             case ORG_UNIT_PROPERTY:
-                query = "with  members as(\n" + "select m.id , m.first_name  ,m.last_name  ,\n" + "m.family_id, \n" + "m.mobile_number ,  \n" + " m.account_number, \n" + " f.location_id , \n" + " m.middle_name , \n" + " f.area_id  \n" + "\n" + "from imt_member m \n" + "inner join imt_family f on f.family_id = m.family_id\n" + "\n" + "where f.location_id in ( select child_id from location_hierchy_closer_det   where parent_id = " + searchString + ")\n" + "limit :limit offset :offset\n" + ")";
+                query = "with  members as(\n"
+                        + "select m.id , m.first_name  ,m.last_name  ,\n"
+                        + "m.family_id, \n"
+                        + "m.mobile_number ,  \n"
+                        + " m.account_number, \n"
+                        + " f.location_id , \n"
+                        + " m.middle_name , \n"
+                        + " f.area_id  \n"
+                        + "\n"
+                        + "from imt_member m \n"
+                        + "inner join imt_family f on f.family_id = m.family_id\n"
+                        + "\n"
+                        + "where f.location_id in ( select child_id from location_hierchy_closer_det   where parent_id = " + searchString + ")\n"
+                        + "limit :limit offset :offset\n"
+                        + ")";
                 break;
             default:
 
         }
-        query += " select m.id as \"id\", m.first_name as firstName ,m.last_name  as \"lastName\", \n" + "m.family_id as \"familyId\", \n" + "m.mobile_number as \"mobileNumber\",  \n" + " m.account_number as \"accountNumber\", \n" + " f.location_id as \"locationId\", \n" + " m.middle_name as \"middleName\", \n" + " cast(f.area_id as text) as \"areaId\", \n" + "string_agg(lm.name,'> ' order by lhcd.depth desc) as \"locationHierarchy\"\n" + "from members m \n" + "inner join imt_family f on f.family_id = m.family_id\n" + "left join location_hierchy_closer_det lhcd on (case when f.area_id is null then f.location_id else cast(f.area_id as bigint) end) = lhcd.child_id\n" + "left join location_master lm on lm.id = lhcd.parent_id\n" + "left join location_type_master loc_name on lm.type = loc_name.type\n" + " group by m.id, f.location_id,f.area_id ,m.first_name,m.last_name,m.family_id,m.mobile_number,m.account_number ,m.middle_name ";
+        query += " select m.id as \"id\", m.first_name as firstName ,m.last_name  as \"lastName\", \n"
+                + "m.family_id as \"familyId\", \n"
+                + "m.mobile_number as \"mobileNumber\",  \n"
+                + " m.account_number as \"accountNumber\", \n"
+                + " f.location_id as \"locationId\", \n"
+                + " m.middle_name as \"middleName\", \n"
+                + " cast(f.area_id as text) as \"areaId\", \n"
+                + "string_agg(lm.name,'> ' order by lhcd.depth desc) as \"locationHierarchy\"\n"
+                + "from members m \n"
+                + "inner join imt_family f on f.family_id = m.family_id\n"
+                + "left join location_hierchy_closer_det lhcd on (case when f.area_id is null then f.location_id else cast(f.area_id as bigint) end) = lhcd.child_id\n"
+                + "left join location_master lm on lm.id = lhcd.parent_id\n"
+                + "left join location_type_master loc_name on lm.type = loc_name.type\n"
+                + " group by m.id, f.location_id,f.area_id ,m.first_name,m.last_name,m.family_id,m.mobile_number,m.account_number ,m.middle_name ";
         Session currentSession = sessionFactory.getCurrentSession();
         NativeQuery<MemberDto> nativeQuery = currentSession.createNativeQuery(query);
-        return nativeQuery.addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER).addScalar(LOCATION_ID_PROPERTY, StandardBasicTypes.INTEGER).addScalar("firstName", StandardBasicTypes.STRING).addScalar("middleName", StandardBasicTypes.STRING).addScalar("lastName", StandardBasicTypes.STRING).addScalar(AREA_ID_PROPERTY, StandardBasicTypes.STRING).addScalar(MOBILE_NUMBER_PROPERTY, StandardBasicTypes.STRING).addScalar(ACCOUNT_NUMBER_PROPERTY, StandardBasicTypes.STRING).addScalar(FAMILY_ID_PROPERTY, StandardBasicTypes.STRING).addScalar(LOCATION_HIERARCHY_PROPERTY, StandardBasicTypes.STRING).setParameter(LIMIT, limit).setParameter(OFFSET, offset).setResultTransformer(Transformers.aliasToBean(MemberDto.class)).list();
+        return nativeQuery
+                .addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar(LOCATION_ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar("firstName", StandardBasicTypes.STRING)
+                .addScalar("middleName", StandardBasicTypes.STRING)
+                .addScalar("lastName", StandardBasicTypes.STRING)
+                .addScalar(AREA_ID_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(MOBILE_NUMBER_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(ACCOUNT_NUMBER_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(FAMILY_ID_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(LOCATION_HIERARCHY_PROPERTY, StandardBasicTypes.STRING)
+                .setParameter(LIMIT, limit)
+                .setParameter(OFFSET, offset)
+                .setResultTransformer(Transformers.aliasToBean(MemberDto.class))
+                .list();
     }
 
     /**
@@ -611,6 +1147,38 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
         q.executeUpdate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<MemberDataBean> getNameBasedOnAadharForAllMembersByLocation(Integer userId, Boolean isAsha) {
+        String query = "select id, name_as_per_aadhar as \"nameBasedOnAadhar\" from imt_member "
+                + "where name_as_per_aadhar is not null "
+                + "and family_id in ("
+                + "select family_id from imt_family where location_id in ("
+                + "select loc_id from um_user_location where state = 'ACTIVE'"
+                + "and user_id = :userId "
+                + ")"
+                + ")";
+
+        if (Boolean.TRUE.equals(isAsha)) {
+            query = "select id, name_as_per_aadhar as \"nameBasedOnAadhar\" from imt_member "
+                    + "where name_as_per_aadhar is not null "
+                    + "and family_id in ("
+                    + "select family_id from imt_family where area_id in ("
+                    + "select loc_id from um_user_location where state = 'ACTIVE'"
+                    + "and user_id = :userId "
+                    + ")"
+                    + ")";
+        }
+
+        return getCurrentSession().createNativeQuery(query)
+                .addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar("nameBasedOnAadhar", StandardBasicTypes.STRING)
+                .setParameter("userId", userId)
+                .setResultTransformer(Transformers.aliasToBean(MemberDataBean.class))
+                .list();
+    }
 
     /**
      * {@inheritDoc}
@@ -656,8 +1224,13 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
      */
     @Override
     public Boolean checkIfDOBIsUnique(String familyId, String mobileNumber) {
-        String query = "select CASE WHEN count(distinct dob)= count(dob)\n" + "THEN true ELSE false END \n" + " FROM imt_member  where family_id=:familyId and mobile_number =:mobileNumber and basic_state in ('VERIFIED','NEW')";
-        return (Boolean) getCurrentSession().createNativeQuery(query).setParameter(FAMILY_ID_PROPERTY, familyId).setParameter(MOBILE_NUMBER_PROPERTY, mobileNumber).uniqueResult();
+        String query = "select CASE WHEN count(distinct dob)= count(dob)\n"
+                + "THEN true ELSE false END \n"
+                + " FROM imt_member  where family_id=:familyId and mobile_number =:mobileNumber and basic_state in ('VERIFIED','NEW')";
+        return (Boolean) getCurrentSession().createNativeQuery(query)
+                .setParameter(FAMILY_ID_PROPERTY, familyId)
+                .setParameter(MOBILE_NUMBER_PROPERTY, mobileNumber)
+                .uniqueResult();
     }
 
     /**
@@ -718,10 +1291,19 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
      */
     @Override
     public List<ElasticSearchMemberDto> retrieveMembersByIds(List<Integer> ids) {
-        String query = "SELECT id,unique_health_id as \"uniquehealthid\"," + "first_name as \"firstname\" ,last_name as \"lastname\" ," + "middle_name as \"middlename\"  from imt_member where id in ( :ids ) ";
+        String query = "SELECT id,unique_health_id as \"uniquehealthid\","
+                + "first_name as \"firstname\" ,last_name as \"lastname\" ,"
+                + "middle_name as \"middlename\"  from imt_member where id in ( :ids ) ";
 
         NativeQuery<ElasticSearchMemberDto> sQLQuery = getCurrentSession().createNativeQuery(query);
-        List<ElasticSearchMemberDto> elasticSearchMemberDtos = sQLQuery.addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER).addScalar(UNIQUE_HEALTH_ID_PROPERTY, StandardBasicTypes.STRING).addScalar("firstname", StandardBasicTypes.STRING).addScalar("lastname", StandardBasicTypes.STRING).addScalar("middlename", StandardBasicTypes.STRING).setParameterList("ids", ids).setResultTransformer(Transformers.aliasToBean(ElasticSearchMemberDto.class)).list();
+        List<ElasticSearchMemberDto> elasticSearchMemberDtos = sQLQuery
+                .addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar(UNIQUE_HEALTH_ID_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar("firstname", StandardBasicTypes.STRING)
+                .addScalar("lastname", StandardBasicTypes.STRING)
+                .addScalar("middlename", StandardBasicTypes.STRING)
+                .setParameterList("ids", ids)
+                .setResultTransformer(Transformers.aliasToBean(ElasticSearchMemberDto.class)).list();
 
         if (CollectionUtils.isEmpty(elasticSearchMemberDtos)) {
             return Collections.emptyList();
@@ -734,10 +1316,18 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
      */
     @Override
     public List<ElasticSearchMemberDto> retrieveMembersByQuery(String quries) {
-        String query = "SELECT id,unique_health_id as \"uniquehealthid\"," + "first_name as \"firstname\" ,last_name as \"lastname\" ," + "middle_name as \"middlename\"  from imt_member where first_name ilike '%" + quries + "%' limit 10;";
+        String query = "SELECT id,unique_health_id as \"uniquehealthid\","
+                + "first_name as \"firstname\" ,last_name as \"lastname\" ,"
+                + "middle_name as \"middlename\"  from imt_member where first_name ilike '%" + quries + "%' limit 10;";
 
         NativeQuery<ElasticSearchMemberDto> sQLQuery = getCurrentSession().createNativeQuery(query);
-        List<ElasticSearchMemberDto> elasticSearchMemberDtos = sQLQuery.addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER).addScalar("uniquehealthid", StandardBasicTypes.STRING).addScalar("firstname", StandardBasicTypes.STRING).addScalar("lastname", StandardBasicTypes.STRING).addScalar("middlename", StandardBasicTypes.STRING).setResultTransformer(Transformers.aliasToBean(ElasticSearchMemberDto.class)).list();
+        List<ElasticSearchMemberDto> elasticSearchMemberDtos = sQLQuery
+                .addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar("uniquehealthid", StandardBasicTypes.STRING)
+                .addScalar("firstname", StandardBasicTypes.STRING)
+                .addScalar("lastname", StandardBasicTypes.STRING)
+                .addScalar("middlename", StandardBasicTypes.STRING)
+                .setResultTransformer(Transformers.aliasToBean(ElasticSearchMemberDto.class)).list();
 
         if (CollectionUtils.isEmpty(elasticSearchMemberDtos)) {
             return Collections.emptyList();
@@ -807,30 +1397,306 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
         return sqlQuery.uniqueResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void createPregnancyRegistrationDetEntry(Integer memberId, Integer familyId, Date lmpDate, Date edd, Date regDate,
-                                                    Integer locationId, Integer userId) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-
-        String query = "with rows as (\n" +
-                "INSERT INTO rch_pregnancy_registration_det(\n" +
-                "            member_id, family_id, lmp_date, edd, reg_date, state,location_id,current_location_id, created_on, \n" +
-                "            created_by, modified_on, modified_by)\n" +
-                "    VALUES ("+memberId+", "+familyId+", '"+sdf.format(lmpDate)+"', '"+sdf.format(edd)+"', '"+sdf.format(regDate)+"', 'PENDING', "+locationId+", "+locationId+" ,now(), \n" +
-                "            "+userId+", now(), "+userId+") RETURNING id\n" +
-                ")\n" +
-                "\n" +
-                "    update imt_member set is_pregnant = true, edd =  '"+sdf.format(edd)+"', \n" +
-                "    early_registration = (cast('"+sdf.format(lmpDate)+"' as date) + INTERVAL '84 days') >= '"+sdf.format(regDate)+"' , \n" +
-                "    cur_preg_reg_det_id = (select id from rows),\n" +
-                "    cur_preg_reg_date= '"+sdf.format(regDate)+"',\n" +
-                "    anc_visit_dates = null,\n" +
-                "    immunisation_given = null,\n" +
-                "    modified_by = "+userId+", \n" +
-                "    modified_on = now()\n" +
-                "    where id= "+memberId;
-
-        NativeQuery<Integer> sqlQuery = getCurrentSession().createNativeQuery(query);
-        sqlQuery.executeUpdate();
+    public MemberEntity searchMemberForNDHM(String mobileNumber, String name, String gender, Integer yearsOfBirth) {
+        String query = "select im.id as id, im.first_name as firstName, im.middle_name as middleName, " +
+                " im.last_name as lastName" +
+                " from imt_member im\n " +
+                " where im.mobile_number = :mobileNumber and concat(im.first_name,' ',im.middle_name,' ', im.last_name) ilike '% "+ name + "%' and " +
+                " im.gender = :gender and date_part('year', im.dob) between :uYearsOfBirth and :dYearsOfBirth ;";
+        Integer uYearsOfBirth = yearsOfBirth + 2;
+        Integer dYearsOfBirth = yearsOfBirth - 2;
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery<MemberEntity> nativeQuery = session.createNativeQuery(query);
+        nativeQuery.setParameter("mobileNumber", mobileNumber);
+        nativeQuery.setParameter("gender", gender);
+        nativeQuery.setParameter("uYearsOfBirth", uYearsOfBirth);
+        nativeQuery.setParameter("dYearsOfBirth", dYearsOfBirth);
+        nativeQuery.addScalar("firstName", StandardBasicTypes.STRING);
+        nativeQuery.addScalar("middleName", StandardBasicTypes.STRING);
+        nativeQuery.addScalar("lastName", StandardBasicTypes.STRING);
+        nativeQuery.addScalar("id", StandardBasicTypes.INTEGER);
+        nativeQuery.setResultTransformer(Transformers.aliasToBean(MemberEntity.class));
+        List<MemberEntity> memberEntities = nativeQuery.list();
+        if(Objects.nonNull(memberEntities) && memberEntities.size() > 0) {
+            return memberEntities.get(0);
+        }
+        return null;
     }
+
+    @Override
+    public List<MemberMoConfirmedDetailDataBean> retrieveMoConfirmedMembers(Integer userId) {
+        String query = "select max(nmdd.id) is not null as \"confirmedForDiabetes\", max(nmhd.id) is not null as \"confirmedForHypertension\",\n" +
+                "max(nmmhd.id) is not null as \"confirmedForMentalHealth\",\n" +
+                "max(tnm.id) is not null as \"referenceDue\",\n" +
+                "im.id as \"memberId\",\n" +
+                "(select ifm.id from imt_family ifm where ifm.family_id = im.family_id) as \"familyId\",\n" +
+                "(select ifm.area_id from imt_family ifm where ifm.family_id = im.family_id) as \"locationId\"\n" +
+                "from um_user_location uul\n" +
+                "inner join location_hierchy_closer_det lhcd on lhcd.parent_id = uul.loc_id\n" +
+                "inner join imt_family fam on lhcd.child_id = fam.area_id and fam.basic_state in ('VERIFIED', 'NEW')\n" +
+                "inner join imt_member im on im.family_id = fam.family_id and im.basic_state in ('VERIFIED', 'NEW')\n" +
+                "left join ncd_member_diabetes_detail nmdd on nmdd.member_id = im.id and nmdd.done_by = 'MO'\n" +
+                "left join ncd_member_hypertension_detail nmhd on nmhd.member_id = im.id and nmhd.done_by = 'MO'\n" +
+                "left join ncd_member_mental_health_detail nmmhd on nmmhd.member_id = im.id and nmmhd.done_by = 'MO'\n" +
+                "left join techo_notification_master tnm on tnm.member_id = im.id and tnm.notification_type_id in (select id from notification_type_master where code in ( \n" +
+                "'NCD_HOME_VISIT','NCD_CLINIC_VISIT')) and tnm.state = 'PENDING' and tnm.expiry_date <  current_date\n" +
+                "where uul.user_id = :userId and (nmdd.done_by is not null or nmmhd.done_by is not null or nmhd.done_by is not null)\n" +
+                "group by im.id";
+        NativeQuery<MemberMoConfirmedDetailDataBean> sQLQuery = getCurrentSession().createNativeQuery(query);
+        List<MemberMoConfirmedDetailDataBean> moConfirmedMembers = sQLQuery
+                .setParameter("userId", userId)
+                .addScalar("confirmedForDiabetes", StandardBasicTypes.BOOLEAN)
+                .addScalar("confirmedForHypertension", StandardBasicTypes.BOOLEAN)
+                .addScalar("confirmedForMentalHealth", StandardBasicTypes.BOOLEAN)
+                .addScalar("referenceDue", StandardBasicTypes.BOOLEAN)
+                .addScalar("memberId", StandardBasicTypes.INTEGER)
+                .addScalar("familyId", StandardBasicTypes.INTEGER)
+                .addScalar("locationId", StandardBasicTypes.INTEGER)
+                .setResultTransformer(Transformers.aliasToBean(MemberMoConfirmedDetailDataBean.class)).list();
+
+        if (CollectionUtils.isEmpty(moConfirmedMembers)) {
+            return Collections.emptyList();
+        }
+        return moConfirmedMembers;
+    }
+
+    @Override
+    public List<MemberEntity> retrievePendingAbhaMember(Integer limit) {
+        return null;
+    }
+
+//    @Override
+//    public void saveMemberAbhaConsent(AbhaConsentCheckboxModel abhaConsentCheckboxModel) {
+//
+//    }
+
+    /**
+     * {@inheritDoc}
+     */
+//    @Override
+//    public List<MemberEntity> retrievePendingAbhaMember(Integer limit) {
+//        String query = "select im.id as id, \n" +
+//                "im.name_as_per_aadhar as nameAsPerAadhar, im.aadhaar_reference_key as aadhaarReferenceKey, \n"+
+//                "im.dob as dob, im.gender as gender, im.mobile_number as mobileNumber, im.family_id as familyId\n" +
+//                "from imt_member im \n"+
+//                "where im.aadhaar_reference_key is not null and im.name_as_per_aadhar is not null \n" +
+//                "and im.dob is not null and im.gender is not null and im.health_id_number is null \n" +
+//                "and im.is_abha_failed is not true \n" +
+//                "order by id limit :limit";
+//
+//        NativeQuery<MemberEntity> sQLQuery = getCurrentSession().createNativeQuery(query);
+//        List<MemberEntity> memberEntities = sQLQuery
+//                .addScalar(MemberEntity.Fields.ID, StandardBasicTypes.INTEGER)
+//                .addScalar(MemberEntity.Fields.NAME_AS_PER_AADHAR, StandardBasicTypes.STRING)
+//                .addScalar(MemberEntity.Fields.FAMILY_ID, StandardBasicTypes.STRING)
+//                .addScalar(MemberEntity.Fields.AADHAAR_REFERENCE_KEY, StandardBasicTypes.STRING)
+//                .addScalar(MemberEntity.Fields.DOB, StandardBasicTypes.DATE)
+//                .addScalar(MemberEntity.Fields.GENDER, StandardBasicTypes.STRING)
+//                .addScalar(MemberEntity.Fields.MOBILE_NUMBER, StandardBasicTypes.STRING)
+//                .setParameter("limit", limit)
+//                .setResultTransformer(Transformers.aliasToBean(MemberEntity.class)).list();
+//
+//        if (CollectionUtils.isEmpty(memberEntities)) {
+//            return Collections.emptyList();
+//        }
+//        return memberEntities;
+//    }
+
+    /**
+     * {@inheritDoc}
+     */
+//    @Override
+//    public void saveMemberAbhaConsent(AbhaConsentCheckboxModel abhaConsentCheckboxModel) {
+//        String query = "INSERT INTO public.member_abha_consent_details \n" +
+//                "(member_id, is_aadhaar_sharing_consent_given, is_doc_other_than_aadhaar_consent_given, is_abha_usage_consent_given, is_sharing_health_records_consent_given, is_anonymization_consent_given, is_health_worker_consent_given, is_beneficiary_consent_given)\n" +
+//                "VALUES (:memberId, :aadhaarSharingConsent, :docOtherThanAadhaarConsent, :abhaUsageConsent, :sharingHealthRecord, :anonymizationConsent, :healthWorkerConsent, :beneficiaryConsent) \n";
+//
+//        SQLQuery q = getCurrentSession().createSQLQuery(query);
+//        q.setParameter("memberId", abhaConsentCheckboxModel.getMemberId());
+//        q.setParameter("aadhaarSharingConsent", abhaConsentCheckboxModel.getIsAadhaarSharingConsentGiven());
+//        q.setParameter("docOtherThanAadhaarConsent", abhaConsentCheckboxModel.getIsDocOtherThanAadhaarConsentGiven());
+//        q.setParameter("abhaUsageConsent", abhaConsentCheckboxModel.getIsAbhaUsageConsentGiven());
+//        q.setParameter("sharingHealthRecord", abhaConsentCheckboxModel.getIsSharingHealthRecordsConsentGiven());
+//        q.setParameter("anonymizationConsent", abhaConsentCheckboxModel.getIsAnonymizationConsentGiven());
+//        q.setParameter("healthWorkerConsent", abhaConsentCheckboxModel.getIsHealthWorkerConsentGiven());
+//        q.setParameter("beneficiaryConsent", abhaConsentCheckboxModel.getIsBeneficiaryConsentGiven());
+//        q.executeUpdate();
+//    }
+
+    /**
+     * {@inheritDoc}
+     */
+//    @Override
+//    public void updateMemberAbhaConsent(AbhaConsentCheckboxModel abhaConsentCheckboxModel) {
+//        String query = "UPDATE member_abha_consent_details \n" +
+//                "SET is_aadhaar_sharing_consent_given =:aadhaarSharingConsent, is_doc_other_than_aadhaar_consent_given =:docOtherThanAadhaarConsent, \n" +
+//                "is_abha_usage_consent_given =:abhaUsageConsent, is_sharing_health_records_consent_given =:sharingHealthRecord, \n" +
+//                "is_anonymization_consent_given =:anonymizationConsent, is_health_worker_consent_given =:healthWorkerConsent, is_beneficiary_consent_given =:beneficiaryConsent \n" +
+//                "where member_id =:memberId";
+//
+//        SQLQuery q = getCurrentSession().createSQLQuery(query);
+//        q.setParameter("memberId", abhaConsentCheckboxModel.getMemberId());
+//        q.setParameter("aadhaarSharingConsent", abhaConsentCheckboxModel.getIsAadhaarSharingConsentGiven());
+//        q.setParameter("docOtherThanAadhaarConsent", abhaConsentCheckboxModel.getIsDocOtherThanAadhaarConsentGiven());
+//        q.setParameter("abhaUsageConsent", abhaConsentCheckboxModel.getIsAbhaUsageConsentGiven());
+//        q.setParameter("sharingHealthRecord", abhaConsentCheckboxModel.getIsSharingHealthRecordsConsentGiven());
+//        q.setParameter("anonymizationConsent", abhaConsentCheckboxModel.getIsAnonymizationConsentGiven());
+//        q.setParameter("healthWorkerConsent", abhaConsentCheckboxModel.getIsHealthWorkerConsentGiven());
+//        q.setParameter("beneficiaryConsent", abhaConsentCheckboxModel.getIsBeneficiaryConsentGiven());
+//        q.executeUpdate();
+//    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean isAbhaConsentAvailableByMemberId(Integer memberId) {
+        String query = "Select count(*) from member_abha_consent_details where member_id = :memberId";
+        SQLQuery q = getCurrentSession().createSQLQuery(query);
+        q.setParameter("memberId", memberId);
+        BigInteger countResult = (BigInteger) q.uniqueResult();
+        return countResult.intValue() > 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+//    @Override
+//    public AbhaConsentCheckboxModel retrieveMemberAbhaConsentById(Integer memberId) {
+//        String query = "select member_id as memberId, is_aadhaar_sharing_consent_given as isAadhaarSharingConsentGiven, \n" +
+//                "is_doc_other_than_aadhaar_consent_given as isDocOtherThanAadhaarConsentGiven, is_abha_usage_consent_given as isAbhaUsageConsentGiven, \n" +
+//                "is_sharing_health_records_consent_given as isSharingHealthRecordsConsentGiven, is_anonymization_consent_given as isAnonymizationConsentGiven, \n"  +
+//                "is_health_worker_consent_given as isHealthWorkerConsentGiven, is_beneficiary_consent_given as isBeneficiaryConsentGiven\n" +
+//                "from member_abha_consent_details where member_id = :memberId";
+//
+//        SQLQuery q = getCurrentSession().createSQLQuery(query);
+//        q.addScalar("memberId", StandardBasicTypes.INTEGER);
+//        q.addScalar("isAadhaarSharingConsentGiven", StandardBasicTypes.BOOLEAN);
+//        q.addScalar("isDocOtherThanAadhaarConsentGiven", StandardBasicTypes.BOOLEAN);
+//        q.addScalar("isAbhaUsageConsentGiven", StandardBasicTypes.BOOLEAN);
+//        q.addScalar("isSharingHealthRecordsConsentGiven", StandardBasicTypes.BOOLEAN);
+//        q.addScalar("isAnonymizationConsentGiven", StandardBasicTypes.BOOLEAN);
+//        q.addScalar("isHealthWorkerConsentGiven", StandardBasicTypes.BOOLEAN);
+//        q.addScalar("isBeneficiaryConsentGiven", StandardBasicTypes.BOOLEAN);
+//        q.setParameter("memberId", memberId);
+//        return (AbhaConsentCheckboxModel) q.setResultTransformer(Transformers.aliasToBean(AbhaConsentCheckboxModel.class)).uniqueResult();
+//    }
+
+    /**
+     * {@inheritDoc}
+     */
+//    @Override
+//    public List<TempAadhaarMemberDetailsDto> retrieveTempAadhaarDetails(Integer limit) {
+//        String query = "select unique_health_id as uniqueHealthId, aadhaar_number as aadhaarNumber, \n" +
+//                "is_aadhaar_updated as isAadhaarUpdated, error as error \n" +
+//                "from temp_aadhaar_member_details \n" +
+//                "where is_aadhaar_updated is not true and error is null \n" +
+//                "limit :limit";
+//        SQLQuery q = getCurrentSession().createSQLQuery(query);
+//        q.addScalar("uniqueHealthId", StandardBasicTypes.STRING);
+//        q.addScalar("aadhaarNumber", StandardBasicTypes.STRING);
+//        q.addScalar("isAadhaarUpdated", StandardBasicTypes.BOOLEAN);
+//        q.addScalar("error", StandardBasicTypes.STRING);
+//        q.setParameter("limit", limit);
+//        return q.setResultTransformer(Transformers.aliasToBean(TempAadhaarMemberDetailsDto.class)).list();
+//    }
+
+    /**
+     * {@inheritDoc}
+     */
+//    public void updateTempAadhaarDetails(TempAadhaarMemberDetailsDto tempAadhaarMemberDetailsDto) {
+//        String query = "update temp_aadhaar_member_details \n" +
+//                "set is_aadhaar_updated = :isAadhaarUpdated, error =:error \n" +
+//                "where unique_health_id =:uniqueHealthId ";
+//
+//        SQLQuery q = getCurrentSession().createSQLQuery(query);
+//        q.setParameter("isAadhaarUpdated", tempAadhaarMemberDetailsDto.getIsAadhaarUpdated(), StandardBasicTypes.BOOLEAN);
+//        q.setParameter("error", tempAadhaarMemberDetailsDto.getError());
+//        q.setParameter("uniqueHealthId", tempAadhaarMemberDetailsDto.getUniqueHealthId());
+//        q.executeUpdate();
+//    }
+
+    @Override
+    public String getFamilyIdByPhoneNumber(String hofMobileNumber, String mobileNumber) {
+        String query = "select imt_member.family_id as \"familyId\", imt_family.state as \"familyState\" from imt_member\n" +
+                "inner join imt_family on imt_member.family_id = imt_family.family_id\n" +
+                "where (imt_member.mobile_number = :hofMobileNumber or imt_member.mobile_number = :mobileNumber) and imt_member.basic_state in ('VERIFIED','REVERIFICATION','NEW','TEMPORARY') ;";
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery<MemberInformationDto> q = session.createNativeQuery(query);
+        q.setParameter(HOF_MOBILE_NUMBER_PROPERTY, hofMobileNumber);
+        q.setParameter(MOBILE_NUMBER_PROPERTY, mobileNumber);
+        List<MemberInformationDto> memberInformationDtos = q.setResultTransformer(Transformers.aliasToBean(MemberInformationDto.class)).list();
+        if (!CollectionUtils.isEmpty(memberInformationDtos)) {
+            if (memberInformationDtos.size() > 1) {
+                List<MemberInformationDto> filteredList = memberInformationDtos.stream()
+                        .filter(member -> member.getFamilyState().equals("CFHC_FN"))
+                        .collect(Collectors.toList());
+                if (!filteredList.isEmpty()) {
+                    return filteredList.get(0).getFamilyId();
+                }
+            }
+            return memberInformationDtos.get(0).getFamilyId();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean checkSameNrcExists(String nrcNumber) {
+        String query = "select count(*) from imt_member im  where nrc_number = '"+nrcNumber+"'";
+        NativeQuery<BigInteger> sqlQuery = getCurrentSession().createNativeQuery(query);
+        BigInteger count = sqlQuery.uniqueResult();
+        return count.intValue() != 0;
+    }
+
+    @Override
+    public boolean checkSamePassportExists(String passNumber) {
+        String query = "select count(*) from imt_member im  where passport_number = '"+passNumber+"'";
+        NativeQuery<BigInteger> sqlQuery = getCurrentSession().createNativeQuery(query);
+        BigInteger count = sqlQuery.uniqueResult();
+        return count.intValue() != 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+//    @Override
+//    public List<AadhaarDuplicateMemberDto> getDuplicateAadhaarMemberDetails(Integer locationId, Integer limit, Integer offset) {
+//        String query = "with loc_details as (\n" +
+//                "           select child_id from location_hierchy_closer_det lhcd \n" +
+//                "           where parent_id = :locationId" +
+//                ") \n" +
+//                "SELECT dup.aadhaar_reference_key AS aadhaarReferenceKey, \n" +
+//                "       json_agg(json_build_object('id', im.id, 'firstName', im.first_name , 'locationHierarchy', get_location_hierarchy(if2.location_id), \n" +
+//                "        'locationId',if2.location_id, 'uniqueHealthId', im.unique_health_id, 'familyId', im.family_id, 'gender', im.gender, 'dob', im.dob, \n" +
+//                "         'mobileNumber', im.mobile_number, 'firstName', im.first_name, 'middleName', im.middle_name, 'lastName', im.last_name)) AS membersStringDetails \n" +
+//                "FROM ( \n" +
+//                "   SELECT aadhaar_reference_key, id \n" +
+//                "   FROM imt_member  \n" +
+//                "   WHERE aadhaar_reference_key IN ( \n" +
+//                "       SELECT aadhaar_reference_key \n" +
+//                "       FROM imt_member im \n" +
+//                "       inner join imt_family if2 on if2.family_id = im.family_id \n" +
+//                "       where im.aadhaar_reference_key is not null \n" +
+//                "       and if2.location_id in (select * from loc_details) \n" +
+//                "       GROUP BY aadhaar_reference_key HAVING COUNT(im.id) > 1 \n" +
+//                "       offset :offset limit :limit )\n" +
+//                "   GROUP BY aadhaar_reference_key, id \n" +
+//                ") AS dup \n" +
+//                "JOIN imt_member im ON dup.id = im.id \n" +
+//                "inner join imt_family if2 on if2.family_id  = im.family_id \n" +
+//                "GROUP BY dup.aadhaar_reference_key; ";
+//
+//        SQLQuery q = getCurrentSession().createSQLQuery(query);
+//        q.setParameter("offset", offset);
+//        q.setParameter("limit", limit);
+//        q.setParameter("locationId", locationId);
+//        q.addScalar("aadhaarReferenceKey", StandardBasicTypes.STRING);
+//        q.addScalar("membersStringDetails", StandardBasicTypes.STRING);
+//        return q.setResultTransformer(Transformers.aliasToBean(AadhaarDuplicateMemberDto.class)).list();
+//    }
 }

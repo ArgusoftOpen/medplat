@@ -374,14 +374,6 @@ public class CFHCServiceImpl implements CFHCService {
         familyDao.flush();
         memberDao.flush();
 
-        for (MemberEntity memberEntity : membersToBeAdded) {
-            if (memberEntity.isMarkedPregnant()){
-                memberDao.createPregnancyRegistrationDetEntry(memberEntity.getId(), familyEntity.getId(), memberEntity.getLmpDate(),
-                        ImtechoUtil.addDaysInDate(memberEntity.getLmpDate(), 281), new Date(),
-                        familyEntity.getAreaId() != null ? familyEntity.getAreaId() : familyEntity.getLocationId(),
-                        user.getId());
-            }
-        }
 
         returnMap.put("createdInstanceId", familyEntity.getId().toString());
 

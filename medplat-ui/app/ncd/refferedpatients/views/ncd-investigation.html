@@ -1,0 +1,149 @@
+<div class="row mt-0">
+    <div class="col-xl-12">
+        <div class="tabbable cst-tab">
+            <div class="tab-content bxb-0">
+                <div class="tab-pane fade active in" id="examination-5">
+                    <div class="container-fluid py-3">
+                        <form role="form" name="ctrl.form" id="ctrl.form" novalidate>
+                            <div class="row inline-form-control mb-2">
+                                <div class="col-12">
+                                    <dateinfra obj="ncdmd.dateinfra" user-health-infras="ncdmd.userHealthInfras">
+                                    </dateinfra>
+                                </div>
+                            </div>
+                            <div class="row px-15">
+                                <div class="col-xl-12 input-box">
+                                    <h6>Clinical pathology</h6>
+                                    <div class="input-box--inner row">
+                                        <label class="col-4" ng-repeat="reportName in ctrl.clinicalReports">
+                                            <input type="checkbox" value="{{reportName}}"
+                                                ng-model="ctrl.report[reportName]"
+                                                ng-checked="selection.indexOf(reportName) > -1"
+                                                ng-click="ctrl.toggleSelection(reportName,'Clinical pathology')">
+                                            {{reportName}}
+                                        </label>
+                                    </div>
+                                    <h6>Bio Chemistry</h6>
+                                    <div class="input-box--inner row">
+                                        <label class="col-4" ng-repeat="reportName in ctrl.bioChemistry">
+                                            <input type="checkbox" value="{{reportName}}"
+                                                ng-model="ctrl.report[reportName]"
+                                                ng-checked="selection.indexOf(reportName) > -1"
+                                                ng-click="ctrl.toggleSelection(reportName,'Bio Chemistry')">
+                                            {{reportName}}
+                                        </label>
+                                    </div>
+                                    <h6>Serology</h6>
+                                    <div class="input-box--inner row">
+                                        <label class="col-4" ng-repeat="reportName in ctrl.serology">
+                                            <input type="checkbox" value="{{reportName}}"
+                                                ng-model="ctrl.report[reportName]"
+                                                ng-checked="selection.indexOf(reportName) > -1"
+                                                ng-click="ctrl.toggleSelection(reportName,'Serology')">
+                                            {{reportName}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 input-box">
+                                    <h6>Radiology</h6>
+                                    <div class="input-box--inner row">
+                                        <label class="col-12" ng-repeat="reportName in ctrl.radiology">
+                                            <input type="checkbox" value="{{reportName}}"
+                                                ng-model="ctrl.report[reportName]"
+                                                ng-checked="selection.indexOf(reportName) > -1"
+                                                ng-click="ctrl.toggleSelection(reportName,'Radiology')">
+                                            {{reportName}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 input-box">
+                                    <h6>Stool Analysis</h6>
+                                    <div class="input-box--inner row">
+                                        <label class="col-12" ng-repeat="reportName in ctrl.stoolAnalysis">
+                                            <input type="checkbox" value="{{reportName}}"
+                                                ng-model="ctrl.report[reportName]"
+                                                ng-checked="selection.indexOf(reportName) > -1"
+                                                ng-click="ctrl.toggleSelection(reportName,'Stool Analysis')">
+                                            {{reportName}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 input-box">
+                                    <h6>Cardiology</h6>
+                                    <div class="input-box--inner row">
+                                        <label class="col-12" ng-repeat="reportName in ctrl.cardiology">
+                                            <input type="checkbox" value="{{reportName}}"
+                                                ng-model="ctrl.report[reportName]"
+                                                ng-checked="selection.indexOf(reportName) > -1"
+                                                ng-click="ctrl.toggleSelection(reportName,'Cardiology')">
+                                            {{reportName}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 input-box">
+                                    <h6>Urine Analysis</h6>
+                                    <div class="input-box--inner row">
+                                        <label class="col-4" ng-repeat="reportName in ctrl.urineAnalysis">
+                                            <input type="checkbox" value="{{reportName}}"
+                                                ng-model="ctrl.report[reportName]"
+                                                ng-checked="selection.indexOf(reportName) > -1"
+                                                ng-click="ctrl.toggleSelection(reportName,'Urine Analysis')">
+                                            {{reportName}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3 px-15" ng-if="ctrl.investigationList.length>0">
+                                <div class="col-xl-12 input-box">
+                                    <h6>Prescribed Reports</h6>
+                                    <div class="input-box--inner row">
+                                        <div class="col-xl-12">
+                                            <table class="table table-striped" style=" border: 1px solid lightgray;">
+                                                <thead class="cst-thead">
+                                                    <tr>
+                                                        <th style="width: 15%;" class="table-heading">
+                                                            Report Name</th>
+                                                        <th style="width: 10%;" class="table-heading">Type
+                                                        </th>
+                                                        <th style="width: 15%;" class="table-heading">
+                                                            Screening Date</th>
+
+                                                        <th style="width: 10%;" class="table-heading">DoneBy
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="item in ctrl.investigationList | limitTo : 10 ">
+                                                        <td>{{item.report}}</td>
+                                                        <td>{{item.type}}</td>
+                                                        <td>{{item.screeningDate | date:'dd/MM/yyyy'}}</td>
+                                                        <td>{{item.doneBy}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="button-footer" style="border: 0px;">
+                                        <button type="submit" class="btn btn-primary"
+                                            ng-click="ctrl.saveInvestigation()">Save
+                                            & Continue
+                                        </button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='MO'"
+                                            ui-sref="techo.ncd.members">Cancel</button>
+                                        <button class=" btn btn-secondary" ng-if="ctrl.type==='CONSULTANT'"
+                                            ui-sref="techo.ncd.followupscreenlisting">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

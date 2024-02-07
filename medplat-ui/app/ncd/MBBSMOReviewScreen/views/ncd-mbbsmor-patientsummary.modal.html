@@ -1,0 +1,408 @@
+<style>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .info label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: flex;
+    }
+
+    .info label span.info_type {
+        /*width: 200px;*/
+        font-weight: bold;
+    }
+
+    .info label span.data {
+        font-weight: normal;
+        margin-left: 2px;
+    }
+
+    .nopadding {
+        padding: 0px;
+        margin: 2px;
+    }
+
+    .info ul {
+        list-style-type: none;
+    }
+</style>
+<div class="container-fluid">
+
+    <div class="box cst-tab mb-15">
+        <div class="tab-content">
+            <div class="container-fluid  py-3">
+                <div class="box-header d-flex justify-content-between">
+                    <h4 class="sub-title">Patient's & Doctor's Information</h4>
+                    <div class="text-center">
+                        <a href="javascript:void(0)" ng-click="ncdps.printPatientSummary()"
+                            class="btn btn-primary mt-1">
+                            <!-- <em class="ion-printer mr-2"></em> -->
+                            Patient Summary
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class=" box-body  w-50 br-1">
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Patient's Name:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ncdps.member.name}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Age/Sex:</span></li>
+                                    <li>
+                                        <span class="data">
+                                            {{ncdps.member.basicDetails.age}}/{{ncdps.member.basicDetails.gender}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="w-50 ml-3">
+                        <div class="info">
+                            <label>
+                                <ul class="nopadding">
+                                    <li><span class="info_type">Doctor's Name:</span></li>
+                                    <li><span class="data">{{ncdps.loggedInUser.name}}</span></li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+
+            <div class="tabbable boxed parentTabs cst-tab ">
+                <div class="tab-content">
+
+                    <div class="tab-pane fade active in" id="MbbsMOReview">
+                        <div class="row mt-0 ">
+                            <div class="col-xl-12 ">
+                                <div class="tabbable cst-tab ">
+                                    <div class="tab-content bxb-0 ">
+                                        <div class="tab-pane fade active in " id="examination-4">
+                                            <div class="container-fluid py-3">
+                                                <form role="form" name="ncdps.MbbsMOReviewForm" id="MbbsMOReviewForm"
+                                                    novalidate>
+                                                    <div class="row">
+                                                        <div class="col-12 mb-2 d-flex justify-content-between">
+                                                            <h4>Patient History
+                                                            </h4>
+                                                            <div class="text-center">
+                                                                <a href="javascript:void(0)"
+                                                                    ng-click="ncdps.showFullHistory()"
+                                                                    class="btn btn-primary mt-1">
+                                                                    Show Full History
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="col-12">
+                                                            <div style="padding: 4px;">
+                                                                <div ng-if="ncdps.diseaseData[disease].history.length>0"
+                                                                    class="cst-table table-responsive table-set-height"
+                                                                    ng-repeat="disease in ncdps.diseases">
+                                                                    <h4 class="sub-title mt-2">
+                                                                        {{ncdps.diseaseData[disease].name}}</h4>
+                                                                    <table
+                                                                        class="table table-sm table-striped table-bordered header-fixed">
+                                                                        <thead class="cst-thead">
+                                                                            <tr>
+                                                                                <th style="width: 20%;" id="diagnosedOn"
+                                                                                    class="table-heading">Diagnosed On
+                                                                                </th>
+                                                                                <th style="width: 25%;" id="diagnosis"
+                                                                                    class="table-heading">Diagnosis</th>
+                                                                                <th style="width: 30%;" id="readings"
+                                                                                    class="table-heading">Readings</th>
+                                                                                <th style="width: 20%;" id="diagnosedBy"
+                                                                                    class="table-heading">Diagnosed By
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr
+                                                                                ng-repeat="th in ncdps.diseaseData[disease].history">
+                                                                                <td
+                                                                                    ng-bind="th.diagnosedOn | date: angularDateFormat">
+                                                                                </td>
+                                                                                <td ng-bind="th.diagnosis"></td>
+                                                                                <td ng-bind="th.readings | emptylabel">
+                                                                                </td>
+                                                                                <td ng-bind="th.diagnosedBy"></td>
+                                                                            </tr>
+                                                                            <tr
+                                                                                ng-if="! ncdps.diseaseData[disease].history ||  ncdps.diseaseData[disease].history.length==0">
+                                                                                <td colspan="5">No Treatment History
+                                                                                    Found
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="col-12">
+                                                            <div style="padding: 4px;">
+                                                                <div ng-if="ncdps.visitData[disease].history.length>0"
+                                                                    class="cst-table table-responsive table-set-height"
+                                                                    ng-repeat="disease in ncdps.diseases">
+                                                                    <h4 class="sub-title mt-2">
+                                                                        {{ncdps.visitData[disease].name}}</h4>
+                                                                    <table
+                                                                        class="table table-sm table-striped table-bordered header-fixed">
+                                                                        <thead class="cst-thead">
+                                                                            <tr>
+                                                                                <th style="width: 20%;" id="diagnosedOn"
+                                                                                    class="table-heading">Diagnosed On
+                                                                                </th>
+                                                                                <th style="width: 25%;" id="diagnosis"
+                                                                                    class="table-heading">Diagnosis</th>
+                                                                                <th style="width: 30%;" id="readings"
+                                                                                    class="table-heading">Readings</th>
+                                                                                <th style="width: 20%;" id="diagnosedBy"
+                                                                                    class="table-heading">Diagnosed By
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr
+                                                                                ng-repeat="th in ncdps.visitData[disease].history | limitTo : ncdps.setLimit ">
+                                                                                <td
+                                                                                    ng-bind="th.visit_date | date: angularDateFormat">
+                                                                                </td>
+                                                                                <td ng-bind="th.status"></td>
+                                                                                <td ng-bind="th.reading | emptylabel">
+                                                                                </td>
+                                                                                <td ng-bind="th.DiagnosedBy"></td>
+                                                                            </tr>
+                                                                            <tr
+                                                                                ng-if="! ncdps.visitData[disease].history ||  ncdps.visitData[disease].history.length==0">
+                                                                                <td colspan="5">No Treatment History
+                                                                                    Found
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mb-2 d-flex justify-content-between" ng-if="ncdps.prescribedMedicine.length > 0">
+                                                            <h4 class="sub-title mt-2">Patient Medicine History
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-12" ng-if="ncdps.prescribedMedicine.length > 0">
+                                                            <div style="padding: 4px;">
+                                                                <div
+                                                                    class="cst-table table-responsive table-set-height">
+                                                                    <table
+                                                                        class="table table-sm table-striped table-bordered header-fixed">
+                                                                        <thead class="cst-thead">
+                                                                            <tr>
+                                                                                <th class="table-heading">
+                                                                                    Medicine Name</th>
+                                                                                <th class="table-heading">
+                                                                                    Prescribed Date</th>
+                                                                                <th class="table-heading">
+                                                                                    Frequency
+                                                                                </th>
+                                                                                <th class="table-heading">
+                                                                                    Duration
+                                                                                </th>
+                                                                                <th class="table-heading">
+                                                                                    Quantity
+                                                                                </th>
+                                                                                <th class="table-heading">
+                                                                                    Special
+                                                                                    Instruction
+                                                                                </th>
+                                                                                <th class="table-heading">Last
+                                                                                    day of Medicine
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr
+                                                                                ng-repeat="item in ncdps.prescribedMedicine | limitTo : ncdps.setLimitForOther ">
+                                                                                <td ng-bind="item.medicineName"></td>
+                                                                                <td ng-bind="item.issuedDate | date:'dd/MM/yyyy'"></td>
+                                                                                <td ng-bind="item.frequency"></td>
+                                                                                <td ng-bind="item.duration"></td>
+                                                                                <td ng-bind="item.quantity"></td>
+                                                                                <td
+                                                                                    ng-bind="item.specialInstruction ? item.specialInstruction : '-'">
+                                                                                </td>
+                                                                                <td
+                                                                                    ng-bind="item.expiryDate | date:'dd/MM/yyyy'">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mb-2 d-flex justify-content-between" ng-if="ncdps.investigationList.length >0">
+                                                            <h4 class="sub-title mt-2">Patient Investigation History
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-12" ng-if="ncdps.investigationList.length >0">
+                                                            <div style="padding: 4px;">
+                                                                <div
+                                                                    class="cst-table table-responsive table-set-height">
+                                                                    <table
+                                                                        class="table table-sm table-striped table-bordered header-fixed">
+                                                                        <thead class="cst-thead">
+                                                                            <tr>
+                                                                                <th class="table-heading">
+                                                                                    Report Name</th>
+                                                                                <th class="table-heading">Type
+                                                                                </th>
+                                                                                <th class="table-heading">
+                                                                                    Screening Date</th>
+
+                                                                                <th class="table-heading">Done By
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr
+                                                                                ng-repeat="item in ncdps.investigationList | limitTo : ncdps.setLimitForOther ">
+                                                                                <td ng-bind="item.report"></td>
+                                                                                <td ng-bind="item.type"></td>
+                                                                                <td
+                                                                                    ng-bind="item.screeningDate | date:'dd/MM/yyyy'">
+                                                                                </td>
+                                                                                <td ng-bind="item.doneBy"></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12" ng-if="ncdps.MbbsMoReviewRecord !=null">
+                                                            <div style="padding: 4px;">
+                                                                <div
+                                                                    class="cst-table table-responsive table-set-height">
+                                                                    <h4 class="sub-title mt-2">
+                                                                        Last MO Comment</h4>
+                                                                    <table
+                                                                        class="table table-sm table-striped table-bordered header-fixed">
+                                                                        <thead class="cst-thead">
+                                                                            <tr>
+                                                                                <th style="width: 20%;" id="diagnosedOn"
+                                                                                    class="table-heading">Approved
+                                                                                </th>
+                                                                                <th style="width: 25%;" id="diagnosis"
+                                                                                    class="table-heading">Comment</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td
+                                                                                    ng-bind="ncdps.MbbsMoReviewRecord.approved? 'Yes':'No'">
+                                                                                </td>
+                                                                                <td
+                                                                                    ng-bind="ncdps.MbbsMoReviewRecord.comment">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 inline-form-control">
+                                                            <div class="row mt-20 px-15">
+
+                                                                <div class="form-group col-xl-6 mt-2"
+                                                                    style="padding-left: 15px;">
+                                                                    <validate for='approved'
+                                                                        required-msg="Please select a value">
+                                                                        <label style="display:block;" for="approved"
+                                                                            uib-tooltip="" class="control-label"
+                                                                            control-label>Approved</label>
+                                                                        <label class="control control-radio">Yes
+                                                                            <input ng-value="true" name="approved"
+                                                                                id="approved" type="radio"
+                                                                                ng-model="ncdps.MbbsMOReviewDto.approved"
+                                                                                form-control>
+                                                                            <div class="control_indicator">
+                                                                            </div>
+                                                                        </label>
+                                                                        <label class="control control-radio">No
+                                                                            <input ng-value="false" name="approved"
+                                                                                id="approved" type="radio"
+                                                                                ng-model="ncdps.MbbsMOReviewDto.approved"
+                                                                                form-control>
+                                                                            <div class="control_indicator">
+                                                                            </div>
+                                                                        </label>
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+
+                                                                <div class="form-group col-xl-6 mt-2">
+                                                                    <validate for='comment'
+                                                                        required-msg="Please enter a value">
+                                                                        <label for="comment"
+                                                                            control-label>Comment</label>
+                                                                        <input type="text" form-control
+                                                                            class="form-control cst-form-control"
+                                                                            id="comment" name="comment"
+                                                                            ng-model="ncdps.MbbsMOReviewDto.comment">
+                                                                        <placeholder></placeholder>
+                                                                    </validate>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="button-footer" style="border: 0px;">
+                                                                        <div class="btn btn-primary btn-md"
+                                                                            ng-click="ncdps.saveMbbsMOReview()">
+                                                                            Save
+                                                                            & Continue
+                                                                        </div>
+                                                                        <div class="btn btn-secondary btn-md"
+                                                                            ui-sref="techo.ncd.moreviewscreen">
+                                                                            Cancel
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="display-none" id="printableDiv">
+    <ng-include src="'app/ncd/MBBSMOReviewScreen/views/patient-summary.modal.html'"></ng-include>
+</div>

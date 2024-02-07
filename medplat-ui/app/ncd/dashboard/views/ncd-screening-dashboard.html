@@ -1,0 +1,103 @@
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <!-- Small boxes on home page (Stat box) -->
+        <div class="row top-spacer-50" style="margin-right: 0px">
+            <div class="col-md-12 no-padding">
+                <div style="float:left" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon info-box-value"
+                            style="color:white;background-color:{{ncdScreeningDashboard.baskets[2].colorCode}}">
+                            <div style="font-size: 16px"
+                                ng-class="{'basket_morethan999task-fontsize':ncdScreeningDashboard.baskets[6].count > 999}"
+                                ng-bind="ncdScreeningDashboard.baskets[6].count"></div><span class="basket_label">
+                                Total
+                            </span>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Count</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:left" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon info-box-value"
+                            style="color:white;background-color:{{ncdScreeningDashboard.baskets[0].colorCode}}">
+                            <div ng-class="{'basket_morethan999task-fontsize':ncdScreeningDashboard.baskets[0].count > 999}"
+                                ng-bind="ncdScreeningDashboard.baskets[0].count"></div><span
+                                class="basket_label">Total</span>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Suspected For Hypertension</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:left" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon info-box-value"
+                            style="color:white;background-color:{{ncdScreeningDashboard.baskets[1].colorCode}}">
+                            <div ng-class="{'basket_morethan999task-fontsize':ncdScreeningDashboard.baskets[1].count > 999}"
+                                ng-bind="ncdScreeningDashboard.baskets[1].count"></div><span
+                                class="basket_label">Total</span>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Suspected For Diabetes</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:left" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon info-box-value"
+                            style="color:white;background-color:{{ncdScreeningDashboard.baskets[2].colorCode}}">
+                            <div ng-class="{'basket_morethan999task-fontsize':ncdScreeningDashboard.baskets[2].count > 999}"
+                                ng-bind="ncdScreeningDashboard.baskets[2].count"></div><span
+                                class="basket_label">Total</span>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Suspected For Mental Health</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:left" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon info-box-value"
+                            style="color:white;background-color:{{ncdScreeningDashboard.baskets[3].colorCode}}">
+                            <div ng-class="{'basket_morethan999task-fontsize':ncdScreeningDashboard.baskets[3].count > 999}"
+                                ng-bind="ncdScreeningDashboard.baskets[3].count"></div><span
+                                class="basket_label">Total</span>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Suspected For Oral Cancer</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:left" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon info-box-value"
+                            style="color:white;background-color:{{ncdScreeningDashboard.baskets[4].colorCode}}">
+                            <div ng-class="{'basket_morethan999task-fontsize':ncdScreeningDashboard.baskets[4].count > 999}"
+                                ng-bind="ncdScreeningDashboard.baskets[4].count"></div><span
+                                class="basket_label">Total</span>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Suspected For Cervical Cancer</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:left" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon info-box-value"
+                            style="color:white;background-color:{{ncdScreeningDashboard.baskets[5].colorCode}}">
+                            <div ng-class="{'basket_morethan999task-fontsize':ncdScreeningDashboard.baskets[5].count > 999}"
+                                ng-bind="ncdScreeningDashboard.baskets[5].count"></div><span
+                                class="basket_label">Total</span>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Suspected For Breast Cancer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,164 @@
+<style>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .info label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: flex;
+    }
+
+    .info label span.info_type {
+        /*width: 200px;*/
+        font-weight: bold;
+    }
+
+    .info label span.data {
+        font-weight: normal;
+        margin-left: 2px;
+    }
+
+    .nopadding {
+        padding: 0px;
+        margin: 2px;
+    }
+
+    .info ul {
+        list-style-type: none;
+    }
+</style>
+<div class="ncd_print print-page">
+    <div class="box mb-15">
+        <div class="box-header">
+            <h2 class="sub-title">Patient's Information</h2>
+        </div>
+        <div class="box-body">
+            <div class="w-50 br-1">
+                <div class="info">
+                    <label>
+                        <ul class="nopadding">
+                            <li><span class="info_type">Patient's Name:</span></li>
+                            <li>
+                                <span class="data">
+                                    {{ncdmd.member.basicDetails.firstName + ' ' + ncdmd.member.basicDetails.lastName}}
+                                </span>
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+            </div>
+            <div class="w-50">
+                <div class="info">
+                    <label>
+                        <ul class="nopadding">
+                            <li><span class="info_type">Age/Sex:</span></li>
+                            <li>
+                                <span class="data">
+                                    {{ncdmd.member.basicDetails.age}}/{{ncdmd.member.basicDetails.gender}}
+                                </span>
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="ncdmd.visitData[disease].history.length>0" class="cst-table table-responsive table-set-height"
+        ng-repeat="disease in ncdmd.diseases">
+        <h4 class="sub-title mt-2">
+            {{ncdmd.visitData[disease].name}}</h4>
+        <table class="table table-sm table-striped table-bordered header-fixed">
+            <thead class="cst-thead">
+                <tr>
+                    <th style="width: 20%;" id="diagnosedOn" class="table-heading">Diagnosed On
+                    </th>
+                    <th style="width: 25%;" id="diagnosis" class="table-heading">Diagnosis</th>
+                    <th style="width: 30%;" id="readings" class="table-heading">Readings</th>
+                    <th style="width: 20%;" id="diagnosedBy" class="table-heading">Diagnosed By
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="th in ncdmd.visitData[disease].history">
+                    <td ng-bind="th.visit_date | date: angularDateFormat">
+                    </td>
+                    <td ng-bind="th.status"></td>
+                    <td ng-bind="th.reading | emptylabel">
+                    </td>
+                    <td ng-bind="th.DiagnosedBy"></td>
+                </tr>
+                <tr ng-if="! ncdmd.visitData[disease].history ||  ncdmd.visitData[disease].history.length==0">
+                    <td colspan="5">No Treatment History
+                        Found
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<h4 class="sub-title mt-2">
+    Medicine details</h4>
+<table class="table table-sm table-striped table-bordered header-fixed">
+    <thead class="cst-thead">
+        <tr>
+            <th class="table-heading">
+                Medicine Name</th>
+            <th class="table-heading">
+                Frequency
+            </th>
+            <th class="table-heading">
+                Duration
+            </th>
+            <th class="table-heading">
+                Quantity
+            </th>
+            <th class="table-heading">
+                Special
+                Instruction
+            </th>
+            <th class="table-heading">Last
+                day of Medicine
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in ncdmd.prescribedMedicine">
+            <td ng-bind="item.medicineName"></td>
+            <td ng-bind="item.frequency"></td>
+            <td ng-bind="item.duration"></td>
+            <td ng-bind="item.quantity"></td>
+            <td ng-bind="item.specialInstruction | emptylabel">
+            </td>
+            <td ng-bind="item.expiryDate | date:'dd/MM/yyyy'">
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h4>Patient Investigation History
+</h4>
+<table class="table table-sm table-striped table-bordered header-fixed">
+    <thead class="cst-thead">
+        <tr>
+            <th class="table-heading">
+                Report Name</th>
+            <th class="table-heading">Type
+            </th>
+            <th class="table-heading">
+                Screening Date</th>
+
+            <th class="table-heading">DoneBy
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in ncdmd.investigationList">
+            <td ng-bind="item.report"></td>
+            <td ng-bind="item.type"></td>
+            <td ng-bind="item.screeningDate | date:'dd/MM/yyyy'">
+            </td>
+            <td ng-bind="item.doneBy"></td>
+        </tr>
+    </tbody>
+</table>
+</div>
