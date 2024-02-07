@@ -3,6 +3,10 @@
 UPDATE public.um_user
     SET password = '2JpZ8jdGmQ0uln1aaUpZGTN8x3Ixqg8C'
     WHERE user_name = 'admin';
+    
+--asha user added
+INSERT INTO public.um_user (created_by,created_on,modified_by,modified_on,aadhar_number,address,code,contact_number,date_of_birth,email_id,first_name,gender,last_name,middle_name,"password",prefered_language,role_id,state,user_name,server_type,search_text,title,imei_number,techo_phone_number,aadhar_number_encrypted,no_of_attempts,rch_institution_master_id,infrastructure_id,sdk_version,free_space_mb,latitude,longitude,report_preferred_language,login_code,convox_id,activation_date,member_master_id,location_id,pincode,pin,first_time_password_changed) VALUES
+         (1,'2024-01-24 18:54:36.53',-1,'2024-01-31 11:34:12.106',NULL,NULL,NULL,NULL,NULL,NULL,'asha','F','test',NULL,'onfoP0JuT+ShfKQ+5xsjzhHYSRjwGa0o','EN',24,'ACTIVE','asha_test',NULL,'Mrs asha test asha_test SUPERADMIN','Mr',NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-01-24 18:54:36.462413',NULL,NULL,NULL,NULL,true);
 
 -- public.ncd_amputation_member_detail definition
 CREATE TABLE IF NOT EXISTS public.ncd_amputation_member_detail (
