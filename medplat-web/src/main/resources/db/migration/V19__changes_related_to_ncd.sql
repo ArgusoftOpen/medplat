@@ -1845,7 +1845,7 @@ CREATE TABLE IF NOT EXISTS public.ncd_visit_history (
 );
 
 --deleting user_menu_relation_to_mitigate_foreign_key_contraint
-delete from user_menu_item where menu_config_id in (361,362,363,364,365,366,367,368,369,370,371,372,373,374,375);
+delete from user_menu_item where menu_config_id in (361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376);
 
 delete from report_master where report_name in ('HMIS Report','CBAC Form Fillup Count User Wise','NCD Progress tracking report','NCD Screening Status','NCD Form Fillup (Location wise)');
 
