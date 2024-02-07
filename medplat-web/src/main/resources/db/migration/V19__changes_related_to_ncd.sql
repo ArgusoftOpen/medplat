@@ -1844,6 +1844,9 @@ CREATE TABLE IF NOT EXISTS public.ncd_visit_history (
 	CONSTRAINT ncd_visit_history_pkey PRIMARY KEY (id)
 );
 
+--deleting user_menu_relation_to_mitigate_foreign_key_contraint
+delete from user_menu_item where menu_config_id in (361,362,363,364,365,366,367,368,369,370,371,372,373,374,375);
+
 --Reports related to ncd
 delete from menu_config where menu_name in ('NCD Form Fillup (Location wise)','HMIS Report','CBAC Form Fillup Count User Wise',
 'NCD Screening Status','NCD Progress tracking report','Drug Inventory','Consultant Followup Screen members','MBBS MO Review Screen','MO specialist patient list',
@@ -1904,8 +1907,6 @@ INSERT INTO public.mobile_menu_master (config_json,menu_name,created_on,created_
 	 ('[{"mobile_constant":"FHW_CFHC","order":1},{"mobile_constant":"FHW_DATA_QUALITY","order":2},{"mobile_constant":"FHW_SURVEILLANCE","order":3},{"mobile_constant":"FHW_ASSIGN_FAMILY","order":4},{"mobile_constant":"FHW_MY_PEOPLE","order":5},{"mobile_constant":"FHW_MOBILE_VERIFICATION","order":6},{"mobile_constant":"LMS_PROGRESS_REPORT","order":7},{"mobile_constant":"LEARNING_MANAGEMENT_SYSTEM","order":8},{"mobile_constant":"FHW_NOTIFICATION","order":9},{"mobile_constant":"FHW_HIGH_RISK_WOMEN_AND_CHILD","order":10},{"mobile_constant":"FHW_NCD_SCREENING","order":11},{"mobile_constant":"FHW_NCD_CONFIRMATION","order":12},{"mobile_constant":"FHW_NCD_WEEKLY_VISIT","order":13},{"mobile_constant":"FHW_NCD_REGISTER","order":14},{"mobile_constant":"FHW_WORK_REGISTER","order":15},{"mobile_constant":"FHW_WORK_STATUS","order":16}]','FHW Menu','2023-01-23 17:13:55.855955',74724,'2023-01-23 17:13:55.855955',74724),
 	 ('[{"mobile_constant":"ASHA_FHS","order":1},{"mobile_constant":"ANNOUNCEMENTS","order":2},{"mobile_constant":"WORK_LOG","order":3},{"mobile_constant":"ASHA_WORK_REGISTER","order":4},{"mobile_constant":"ASHA_MY_PEOPLE","order":5},{"mobile_constant":"FHW_SURVEILLANCE","order":6},{"mobile_constant":"ASHA_NOTIFICATION","order":7},{"mobile_constant":"ASHA_HIGH_RISK_BENEFICIARIES","order":8},{"mobile_constant":"ASHA_CBAC_ENTRY","order":9},{"mobile_constant":"ASHA_NCD_REGISTER","order":10},{"mobile_constant":"ASHA_NPCB_SCREENING","order":11},{"mobile_constant":"LIBRARY","order":12},{"mobile_constant":"FHW_WORK_STATUS","order":13}]','ASHA Menu','2023-02-27 14:56:16.675291',69851,'2023-02-27 14:56:16.675291',69851),
 	 ('[{"mobile_constant":"FHW_CFHC","order":1},{"mobile_constant":"FHW_HIGH_RISK_WOMEN_AND_CHILD","order":2},{"mobile_constant":"FHW_NCD_SCREENING","order":3},{"mobile_constant":"FHW_NCD_CONFIRMATION","order":4},{"mobile_constant":"FHW_NCD_WEEKLY_VISIT","order":5},{"mobile_constant":"FHW_NCD_REGISTER","order":6},{"mobile_constant":"FHW_WORK_REGISTER","order":7},{"mobile_constant":"FHW_WORK_STATUS","order":8},{"mobile_constant":"FHW_DATA_QUALITY","order":9},{"mobile_constant":"FHW_SURVEILLANCE","order":10},{"mobile_constant":"FHW_ASSIGN_FAMILY","order":11},{"mobile_constant":"FHW_MY_PEOPLE","order":12},{"mobile_constant":"FHW_MOBILE_VERIFICATION","order":13},{"mobile_constant":"LMS_PROGRESS_REPORT","order":14},{"mobile_constant":"LEARNING_MANAGEMENT_SYSTEM","order":15},{"mobile_constant":"FHW_NOTIFICATION","order":16},{"mobile_constant":"ABHA_NUMBER","order":17}]','FHW Menu','2023-04-18 10:27:49.749238',97058,'2023-04-18 10:27:49.749238',97058);
-
---adding role for asha worker
 
 --insert into mobile_feature_master
 delete from mobile_feature_master where mobile_display_name in ('NCD Screening','NCD Register','ASHA NCD REGISTER','NCD Confirmation','NCD MO Confirmed'
