@@ -79,32 +79,14 @@ public class LoginController {
     @Autowired
     private HealthInfrastructureService healthInfrastructureService;
 
-//    @Autowired
-//    private PushNotificationService pushNotificationService;
-
     @Autowired
     private RequestResponseDetailsService requestResponseDetailsService;
 
     @Autowired
     private DefaultListableBeanFactory context;
 
-//    @Autowired
-//    private CronExecutorService cronExecutorService;
-
     @Autowired
     private ReportQueueService reportQueueService;
-
-//    @Autowired
-//    private HealthIdCommonUtilService healthIdCommonUtilService;
-//
-//    @Autowired
-//    private HPRCommonUtilService hprCommonUtilService;
-//
-//    @Autowired
-//    private HFRCommonUtilService hfrCommonUtilService;
-//
-//    @Autowired
-//    private NDHMCommonUtilService ndhmCommonUtilService;
 
     @Autowired
     private TechoPushNotificationHandler techoPushNotificationHandler;

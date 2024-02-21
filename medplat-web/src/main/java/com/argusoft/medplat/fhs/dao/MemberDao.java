@@ -11,6 +11,7 @@ import com.argusoft.medplat.fhs.dto.MemberDto;
 import com.argusoft.medplat.fhs.dto.MemberInformationDto;
 import com.argusoft.medplat.fhs.dto.PregnancyRegistrationDetailDto;
 import com.argusoft.medplat.fhs.model.MemberEntity;
+import com.argusoft.medplat.ncddnhdd.dto.MemberDetailDto;
 
 import java.util.Date;
 import java.util.List;
@@ -242,6 +243,8 @@ public interface MemberDao extends GenericDao<MemberEntity, Integer> {
      * @return Returns list of members based on define params.
      */
     List<MemberDto> searchMembers(String searchString, String searchBy, Integer limit, Integer offset);
+    List<MemberDetailDto> retrieveNcdMembersForFollowup(Integer id, Integer limit, Integer offset, String healthInfrastructureType, String[] status);
+    String getFamilyIdByPhoneNumber(String hofMobileNumber, String mobileNumber);
 
     /**
      * Update mother id of children by children ids.

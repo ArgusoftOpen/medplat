@@ -254,7 +254,7 @@ public class FamilyHealthSurveyServiceImpl implements FamilyHealthSurveyService 
 
             if (memberEntity.getAgreedToShareAadhar() != null && !memberEntity.getAgreedToShareAadhar()) {
                 memberEntity.setAadharNumber(null);
-                memberEntity.setAadharNumberAvailable(null);
+//                memberEntity.setAadharNumberAvailable(null);
             }
 
 //            if (memberEntity.getAadharNumber() != null) {
@@ -423,7 +423,7 @@ public class FamilyHealthSurveyServiceImpl implements FamilyHealthSurveyService 
 
             if (memberEntity.getAgreedToShareAadhar() != null && !memberEntity.getAgreedToShareAadhar()) {
                 memberEntity.setAadharNumber(null);
-                memberEntity.setAadharNumberAvailable(null);
+//                memberEntity.setAadharNumberAvailable(null);
             }
 
             switch (memberEntity.getState()) {
@@ -1234,9 +1234,9 @@ public class FamilyHealthSurveyServiceImpl implements FamilyHealthSurveyService 
             case "14":
                 if (!answer.equals("T")) {
                     memberEntity.setAadharNumber(answer.replace("F/", ""));
-                    memberEntity.setAadharNumberAvailable(Boolean.TRUE);
+//                    memberEntity.setAadharNumberAvailable(Boolean.TRUE);
                 } else {
-                    memberEntity.setAadharNumberAvailable(Boolean.FALSE);
+//                    memberEntity.setAadharNumberAvailable(Boolean.FALSE);
                 }
                 break;
             case "15":

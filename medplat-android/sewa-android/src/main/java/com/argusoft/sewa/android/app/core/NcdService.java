@@ -20,7 +20,10 @@ public interface NcdService {
     List<FamilyDataBean> retrieveFamiliesForCbacEntry(String searchString, Integer areaId, long limit, long offset,LinkedHashMap<String, String> qrData);
 
     List<MemberDataBean> retrieveMembersListForCbacEntry(String familyId);
+    List<MemberDataBean> retrieveMembersListForDnhddCbacAndNutritionEntry(String familyId);
 
+    List<FamilyDataBean> retrieveFamiliesForDnhddNcdScreening(String searchString, List<Integer> areaId, long limit, long offset,LinkedHashMap<String, String> qrData);
+    List<FamilyDataBean> retrieveFamiliesForDnhddCbacAndNutritionEntry(String searchString, Integer areaId, long limit, long offset,LinkedHashMap<String, String> qrData);
     List<FamilyDataBean> retrieveFamiliesForNcdScreening(String searchString, List<Integer> areaId, long limit, long offset,LinkedHashMap<String, String> qrData);
 
     List<MemberDataBean> retrieveMembersListForNcdScreening(String familyId);

@@ -6,10 +6,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
 /**
  * <p>
- *     Defines fields for child nutrition sam Screening
+ * Defines fields for child nutrition sam Screening
  * </p>
+ *
  * @author kunjan
  * @since 09/09/2020 5:30
  */
@@ -90,6 +92,15 @@ public class ChildNutritionSamScreening extends EntityAuditInfo implements Seria
 
     @Column(name = "done_by")
     private Integer doneBy;
+
+    @Column(name = "cbac_and_nutrition_master_id")
+    private Integer cbacAndNutritionMasterId;
+
+    @Column(name = "has_initial_treatment_started")
+    private Boolean hasInitialTreatmentStarted;
+
+    @Column(name = "child_state")
+    private String childState;
 
     public Integer getId() {
         return id;
@@ -274,5 +285,29 @@ public class ChildNutritionSamScreening extends EntityAuditInfo implements Seria
 
     public void setDoneBy(Integer doneBy) {
         this.doneBy = doneBy;
+    }
+
+    public Integer getCbacAndNutritionMasterId() {
+        return cbacAndNutritionMasterId;
+    }
+
+    public void setCbacAndNutritionMasterId(Integer cbacAndNutritionMasterId) {
+        this.cbacAndNutritionMasterId = cbacAndNutritionMasterId;
+    }
+
+    public Boolean getHasInitialTreatmentStarted() {
+        return hasInitialTreatmentStarted;
+    }
+
+    public void setHasInitialTreatmentStarted(Boolean hasInitialTreatmentStarted) {
+        this.hasInitialTreatmentStarted = hasInitialTreatmentStarted;
+    }
+
+    public String getChildState() {
+        return childState;
+    }
+
+    public void setChildState(String childState) {
+        this.childState = childState;
     }
 }

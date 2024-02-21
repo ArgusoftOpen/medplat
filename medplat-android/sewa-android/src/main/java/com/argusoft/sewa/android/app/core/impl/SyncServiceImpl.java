@@ -1342,33 +1342,34 @@ public class SyncServiceImpl implements SyncService {
     }
 
     private boolean downloadFileFromServer(String fileNameToDownLoad) {
-        try {
-            if (fileNameToDownLoad != null) {
-                String token = SewaTransformer.loginBean.getUserToken();
-                try {
-                    token = URLEncoder.encode(token, "UTF-8");
-                    fileNameToDownLoad = URLEncoder.encode(fileNameToDownLoad, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                long startTime = System.currentTimeMillis();
-                String url = WSConstants.REST_TECHO_SERVICE_URL + "getFile?token=" + token + "&fileName=" + fileNameToDownLoad;
-                ResponseBody responseBody = apiManager.execute(apiManager.getInstance().getFile(url));
-                if (responseBody == null)
-                    return false;
-                String filePath = SewaConstants.getDirectoryPath(context, SewaConstants.DIR_DOWNLOADED) + fileNameToDownLoad;
-                try (FileOutputStream fos = new FileOutputStream(filePath)) {
-                    fos.write(responseBody.bytes());
-                }
-                long secOfDownload = ((System.currentTimeMillis() - startTime) / 1000);
-                Log.i(TAG, "Downloaded file : " + filePath + "\n in " + secOfDownload + "sec");
-                return true;
-            }
-            return false;
-        } catch (Exception ex) {
-            Log.e(TAG, null, ex);
-            return false;
-        }
+        return true;
+//        try {
+//            if (fileNameToDownLoad != null) {
+//                String token = SewaTransformer.loginBean.getUserToken();
+//                try {
+//                    token = URLEncoder.encode(token, "UTF-8");
+//                    fileNameToDownLoad = URLEncoder.encode(fileNameToDownLoad, "UTF-8");
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+//                long startTime = System.currentTimeMillis();
+//                String url = WSConstants.REST_TECHO_SERVICE_URL + "getFile?token=" + token + "&fileName=" + fileNameToDownLoad;
+//                 ResponseBody responseBody = apiManager.execute(apiManager.getInstance().getFile(url));
+//                if (responseBody == null)
+//                    return false;
+//                String filePath = SewaConstants.getDirectoryPath(context, SewaConstants.DIR_DOWNLOADED) + fileNameToDownLoad;
+//                try (FileOutputStream fos = new FileOutputStream(filePath)) {
+//                    fos.write(responseBody.bytes());
+//                }
+//                long secOfDownload = ((System.currentTimeMillis() - startTime) / 1000);
+//                Log.i(TAG, "Downloaded file : " + filePath + "\n in " + secOfDownload + "sec");
+//                return true;
+//            }
+//            return false;
+//        } catch (Exception ex) {
+//            Log.e(TAG, null, ex);
+//            return false;
+//        }
     }
 
     private void storeAllAnnouncement(List<AnnouncementMobDataBean> announcementMobDataBeans) {

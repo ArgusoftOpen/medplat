@@ -193,6 +193,11 @@
             <version>4.4</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.jhonnymertz</groupId>
             <artifactId>java-wkhtmltopdf-wrapper</artifactId>
             <version>1.1.11-RELEASE</version>

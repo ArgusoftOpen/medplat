@@ -406,6 +406,9 @@ public class DynamicUtils {
                             //for surveyor sheet(set related property for first 2 hidden question)
                             HiddenQuestionFormulaUtil.setAnswer(queFormBean);
                             break;
+                        case FormulaConstants.FORMULA_CHECK_IF_YES_IN_ANY:
+                            HiddenQuestionFormulaUtil.checkIfYesInAny(split, queFormBean, isFirstCall);
+                            break;
                         case FormulaConstants.FORMULA_CONTAINS:
                             //split-0 contains (for surveyor sheet)
                             HiddenQuestionFormulaUtil.contains(split, queFormBean);
@@ -721,15 +724,18 @@ public class DynamicUtils {
                             case FormulaConstants.FORMULA_SET_HINT:
                                 FormulaUtil.setHint(split, queFormBean);
                                 break;
-
+                            case FormulaConstants.FORMULA_SET_DNHDD_DIABETES_STATUS:
+                                FormulaUtil.setDnhddDiabetesStatus(split, queFormBean);
+                                break;
                             case FormulaConstants.FORMULA_SET_VALUE_AS_PROPERTY:
                                 FormulaUtil.setValueAsProperty(queFormBean);
                                 break;
-
                             case FormulaConstants.FORMULA_SET_PROPERTY:
                                 FormulaUtil.setProperty(split, queFormBean);
                                 break;
-
+                            case FormulaConstants.FORMULA_SET_DNHDD_HYPERTENSION_STATUS:
+                                FormulaUtil.setDnhddHypertensionStatus(split, queFormBean);
+                                break;
                             case FormulaConstants.FORMULA_SET_DEFAULT_PROPERTY:
                                 FormulaUtil.setDefaultProperty(split, queFormBean);
                                 break;

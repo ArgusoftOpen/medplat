@@ -30,6 +30,8 @@ public interface SewaFhsService {
 
     List<FamilyDataBean> retrieveFamilyDataBeansForCFHCByVillage(String locationId, boolean isReverification, long limit, long offset);
 
+    List<MemberDataBean> retrieveMemberDataBeansForDnhddNcdByFamily(String familyId);
+
     List<FamilyDataBean> searchFamilyDataBeansForCFHCByVillage(String search, String locationId, boolean isReverification, LinkedHashMap<String, String> qrData);
 
     List<FamilyDataBean> retrieveFamilyDataBeansForMergeFamily(String locationId, String search, long limit, long offset);

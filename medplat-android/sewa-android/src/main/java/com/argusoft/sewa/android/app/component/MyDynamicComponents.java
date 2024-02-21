@@ -149,7 +149,7 @@ public class MyDynamicComponents {
             if (formulas != null && !formulas.isEmpty()) {
                 String formulaValue = formulas.get(0).getFormulavalue();
                 String[] split = UtilBean.split(formulaValue, GlobalTypes.KEY_VALUE_SEPARATOR);
-                if (Arrays.toString(split).toLowerCase().contains(FormulaConstants.FORMULA_SET_DEFAULT_PROPERTY)) {
+                if (Arrays.toString(split).toLowerCase().contains(FormulaConstants. FORMULA_SET_DEFAULT_PROPERTY)) {
                     if (relatedPropertyName == null || relatedPropertyName.trim().length() == 0 || relatedPropertyName.equalsIgnoreCase("null")) {
                         relatedPropertyName = split[1];
                     }

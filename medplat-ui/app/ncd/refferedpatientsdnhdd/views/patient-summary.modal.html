@@ -1,0 +1,306 @@
+<div class="ncd_print print-page">
+    <div class="box mb-15">
+        <div class="box-header">
+            <h2 class="sub-title">Patient's & Doctor's Information</h2>
+        </div>
+        <div class="box-body">
+            <div class="w-50 br-1">
+                <div class="info">
+                    <label>
+                        <ul class="nopadding">
+                            <li><span class="info_type">Patient's Name:</span></li>
+                            <li>
+                                <span class="data">
+                                    {{ncdmd.member.basicDetails.firstName + ' ' + ncdmd.member.basicDetails.lastName}}
+                                </span>
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+                <div class="info">
+                    <label>
+                        <ul class="nopadding">
+                            <li><span class="info_type">Age/Sex:</span></li>
+                            <li>
+                                <span class="data">
+                                    {{ncdmd.member.age}}/{{ncdmd.member.basicDetails.gender}}
+                                </span>
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+            </div>
+            <div class="w-50">
+                <div class="info">
+                    <label>
+                        <ul class="nopadding">
+                            <li><span class="info_type">Doctor's Name:</span></li>
+                            <li><span class="data">{{ncdmd.loggedInUser.name}}</span></li>
+                        </ul>
+                    </label>
+                </div>
+            </div>
+            <div class="w-100">
+                <div class="info"
+                    ng-if="ncdmd.member.symptoms.general && ncdmd.keyFn(ncdmd.member.symptoms.general).length>0">
+                    <label>
+                        <ul class="nopadding">
+                            <li><span class="info_type">General Signs and Symptoms:</span></li>
+                            <li>
+                                <span class="data">
+                                    <span ng-repeat="(key,value) in ncdmd.member.symptoms.general" ng-if="value"
+                                        ng-bind="value">
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+                <div class="info"
+                    ng-if="ncdmd.member.symptoms.cervical && ncdmd.keyFn(ncdmd.member.symptoms.cervical).length>0 && ncdmd.member.basicDetails.gender=='F'">
+                    <label>
+                        <ul class="nopadding">
+                            <li><span class="info_type">Cervical Signs and Symptoms:</span></li>
+                            <li>
+                                <span class="data">
+                                    <span ng-repeat="(key,value) in ncdmd.member.symptoms.cervical" ng-if="value"
+                                        ng-bind="value">
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+                <div class="info"
+                    ng-if="ncdmd.member.symptoms.oral && ncdmd.keyFn(ncdmd.member.symptoms.oral).length>0">
+                    <label>
+                        <ul class="nopadding">
+                            <li><span class="info_type">Oral Signs and Symptoms:</span></li>
+                            <li>
+                                <span class="data">
+                                    <span ng-repeat="(key,value) in ncdmd.member.symptoms.oral" ng-if="value"
+                                        ng-bind="value">
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+                <div class="info"
+                    ng-if="ncdmd.member.symptoms.breast && ncdmd.keyFn(ncdmd.member.symptoms.breast).length>0 && ncdmd.member.basicDetails.gender=='F'">
+                    <label>
+                        <ul class="nopadding">
+                            <li><span class="info_type">Breast Signs and Symptoms:</span></li>
+                            <li>
+                                <span class="data">
+                                    <span ng-repeat="(key,value) in ncdmd.member.symptoms.breast" ng-if="value"
+                                        ng-bind="value">
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+                <div class="info" ng-if="ncdmd.member.symptoms.cbac && ncdmd.keyFn(ncdmd.member.symptoms.cbac).length>0">
+                    <label>
+                        <ul class="nopadding">
+                            <li><span class="info_type">CBAC Data:</span></li>
+                            <li class="data">
+                                <span ng-repeat="data in ncdmd.member.symptoms.cbac">
+                                    <span class="d-inline-block" style="margin-right: 10px;">
+                                        <strong>{{ data.key }}:</strong> {{ data.value }}
+                                    </span>
+                                </span>                              
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="sub-title mb-15">Hypertension</h2>
+    <table aria-describedby="Hypertension Summary" class="print-tbale mb-15">
+        <thead>
+            <tr>
+                <th id="diagnosedOn">Diagnosed On</th>
+                <th id="diagnosis">Diagnosis</th>
+                <th id="readings">Readings</th>
+                <th id="medicinesPrescribed">Medicines Prescribed</th>
+                <th id="diagnosedBy">Diagnosed By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="th in ncdmd.member.memberHypertensionDto.treatmentHistory">
+                <td ng-bind="th.diagnosedOn | date: angularDateFormat">
+                </td>
+                <td ng-bind="th.diagnosis">
+                </td>
+                <td ng-bind="th.readings">
+                </td>
+                <td ng-bind="th.medicine">
+                </td>
+                <td ng-bind="th.diagnosedBy">
+                </td>
+            </tr>
+            <tr
+                ng-if="!ncdmd.member.memberHypertensionDto.treatmentHistory || ncdmd.member.memberHypertensionDto.treatmentHistory.length==0">
+                <td colspan="4">No Treatment History Found</td>
+            </tr>
+        </tbody>
+        <tfoot ng-if="ncdmd.member.nextFollowup.HT">
+            <tr>
+                <th id="nextFollowupDate">Next followup date</th>
+                <td colspan="4">{{ncdmd.member.nextFollowup.HT| date: angularDateFormat}}</td>
+            </tr>
+        </tfoot>
+    </table>
+    <h2 class="sub-title mb-15">Diabetes</h2>
+    <table aria-describedby="Diabetes Summary" class="print-tbale mb-15">
+        <thead>
+            <tr>
+                <th id="diagnosedOn">Diagnosed On</th>
+                <th id="diagnosis">Diagnosis</th>
+                <th id="readings">Readings</th>
+                <th id="medicinesPrescribed">Medicines Prescribed</th>
+                <th id="diagnosedBy">Diagnosed By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="th in ncdmd.member.memberDiabetesDto.treatmentHistory">
+                <td ng-bind="th.diagnosedOn | date: angularDateFormat">
+                </td>
+                <td ng-bind="th.diagnosis">
+                </td>
+                <td ng-bind="ncdmd.getInitialLetterAndValue(th.readings)">
+                </td>
+                <td ng-bind="th.medicine">
+                </td>
+                <td ng-bind="th.diagnosedBy">
+                </td>
+
+            </tr>
+            <tr
+                ng-if="!ncdmd.member.memberDiabetesDto.treatmentHistory || ncdmd.member.memberDiabetesDto.treatmentHistory.length==0">
+                <td colspan="5">No Treatment History Found</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr ng-if="ncdmd.member.nextFollowup.D">
+                <th id="nextFollowupDate">Next followup date</th>
+                <td colspan="4">{{ncdmd.member.nextFollowup.D| date: angularDateFormat}}</td>
+            </tr>
+        </tfoot>
+    </table>
+    <h2 class="sub-title mb-15">Oral</h2>
+    <table aria-describedby="Oral Summary" class="print-tbale mb-15">
+        <thead>
+            <tr>
+                <th id="diagnosedOn">Diagnosed On</th>
+                <th id="diagnosis">Diagnosis</th>
+                <th id="diagnosedBy">Diagnosed By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="th in ncdmd.member.memberOralDto.treatmentHistory">
+                <td ng-bind="th.diagnosedOn | date: angularDateFormat">
+                </td>
+                <td ng-bind="th.diagnosis">
+                </td>
+                <td ng-bind="th.diagnosedBy">
+                </td>
+            </tr>
+            <tr
+                ng-if="!ncdmd.member.memberOralDto.treatmentHistory || ncdmd.member.memberOralDto.treatmentHistory.length==0">
+                <td colspan="4">No Treatment History Found</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr ng-if="ncdmd.member.nextFollowup.O">
+                <th id="nextFollowupDate">Next followup date</th>
+                <td colspan="4">{{ncdmd.member.nextFollowup.O| date: angularDateFormat}}</td>
+            </tr>
+        </tfoot>
+    </table>
+    <h2 class="sub-title mb-15" ng-if="ncdmd.member.basicDetails.gender=='F'">Breast</h2>
+    <table aria-describedby="Breast Summary" class="print-tbale mb-15" ng-if="ncdmd.member.basicDetails.gender=='F'">
+        <thead>
+            <tr>
+                <th id="diagnosedOn">Diagnosed On</th>
+                <th id="diagnosis">Diagnosis</th>
+                <th id="diagnosedBy">Diagnosed By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="th in ncdmd.member.memberBreastDto.treatmentHistory">
+                <td ng-bind="th.diagnosedOn | date: angularDateFormat">
+                </td>
+                <td ng-bind="th.diagnosis">
+                </td>
+                <td ng-bind="th.diagnosedBy">
+                </td>
+            </tr>
+            <tr
+                ng-if="!ncdmd.member.memberBreastDto.treatmentHistory || ncdmd.member.memberBreastDto.treatmentHistory.length==0">
+                <td colspan="4">No Treatment History Found</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr ng-if="ncdmd.member.nextFollowup.B">
+                <th id="nextFollowupDate">Next followup date</th>
+                <td colspan="4">{{ncdmd.member.nextFollowup.B| date: angularDateFormat}}</td>
+            </tr>
+        </tfoot>
+    </table>
+    <h2 class="sub-title mb-15" ng-if="ncdmd.member.basicDetails.gender=='F'">Cervical</h2>
+    <table aria-describedby="Cervical Summary" class="print-tbale mb-15" ng-if="ncdmd.member.basicDetails.gender=='F'">
+        <thead>
+            <tr>
+                <th id="diagnosedOn">Diagnosed On</th>
+                <th id="diagnosis">Diagnosis</th>
+                <th id="diagnosedBy">Diagnosed By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="th in ncdmd.member.memberCervicalDto.treatmentHistory">
+                <td ng-bind="th.diagnosedOn | date: angularDateFormat">
+                </td>
+                <td ng-bind="th.diagnosis">
+                </td>
+                <td ng-bind="th.diagnosedBy">
+                </td>
+            </tr>
+            <tr
+                ng-if="!ncdmd.member.memberCervicalDto.treatmentHistory || ncdmd.member.memberCervicalDto.treatmentHistory.length==0">
+                <td colspan="4">No Treatment History Found</td>
+            </tr>
+        </tbody>
+        <tfoot ng-if="ncdmd.member.memberCervicalDto.treatmentHistory">
+            <tr ng-if="ncdmd.member.nextFollowup.C">
+                <th id="nextFollowupDate">Next followup date</th>
+                <td colspan="4">{{ncdmd.member.nextFollowup.C| date: angularDateFormat}}</td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="" ng-if="ncdmd.member.reffForToday.length>0">
+        <h2 class="sub-title mb-15">Referred To (TODAY)</h2>
+        <table aria-describedby="Referred To" class="print-tbale mb-15">
+            <thead>
+                <tr>
+                    <th id="referredFor">Referred For</th>
+                    <th id="referredTo">Referred To</th>
+                    <th id="reason">Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="reff in ncdmd.member.reffForToday">
+                    <td ng-bind="reff.diseaseName"></td>
+                    <td ng-bind="reff.healthInfraName"></td>
+                    <td ng-bind="reff.reason"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div style="float: right;margin-top: 20px" class="display-none">
+    {{ncdmd.footer}}
+</div>

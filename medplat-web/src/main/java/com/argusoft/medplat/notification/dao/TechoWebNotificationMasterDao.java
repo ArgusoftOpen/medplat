@@ -28,5 +28,8 @@ public interface TechoWebNotificationMasterDao extends GenericDao<TechoWebNotifi
      * @return Returns list of web tasks master details.
      */
     List<WebTaskMasterDto> getWebTaskCount(Integer userId);
+    void markNotificationAsCompleted(Integer notificationId, Integer userId);
+
+    boolean checkIfMemberNotificationExists(Integer notificationId, Integer memberId);
 
 }

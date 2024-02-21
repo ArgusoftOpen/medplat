@@ -54,6 +54,10 @@ public class MenuConstants {
     //Lab Technician Role Menus
     public static final String OPD_FACILITY = "OPD_FACILITY";
 
+    //for DNHDD Ncd screening
+    public static final String DNHDD_NCD_CBAC_AND_NUTRITION = "DNHDD_NCD_CBAC_AND_NUTRITION";
+    public static final String DNHDD_NCD_SCREENING = "DNHDD_NCD_SCREENING";
+
     //RBSK Role Menus
     public static final String HEAD_TO_TOE_SCREENING = "HEAD_TO_TOE_SCREENING";
 
@@ -96,6 +100,9 @@ public class MenuConstants {
             menuIcons.put(LMS_PROGRESS_REPORT, R.drawable.menu_lms_report);
             menuIcons.put(FHW_NCD_CONFIRMATION, R.drawable.ncd_screening);
             menuIcons.put(FHW_NCD_WEEKLY_VISIT, R.drawable.ncd_screening);
+            menuIcons.put(DNHDD_NCD_SCREENING, R.drawable.ncd_screening);
+            menuIcons.put(DNHDD_NCD_CBAC_AND_NUTRITION, R.drawable.ncd_screening);
+
             //ASHA Role
             menuIcons.put(ASHA_FHS, R.drawable.fhs);
             menuIcons.put(ASHA_MY_PEOPLE, R.drawable.my_people);

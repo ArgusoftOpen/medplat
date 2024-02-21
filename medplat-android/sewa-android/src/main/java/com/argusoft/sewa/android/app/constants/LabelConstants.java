@@ -550,6 +550,8 @@ public class LabelConstants {
     public static final String QUALITY_OF_FHS_VERIFICATION = "Quality Of Your FHS Verification";
     public static final String INFORMATION_ABOUT_EXISTING_BENEFICIARIES = "Information About Existing Beneficiaries";
     public static final String NCD_SCREENING = "NCD Screening";
+    public static final String SEARCH_FAMILY_BY_NAME_AND_ADDRESS = "Search Family by Family Id/Member Name/Mobile Number/Unique Health Id";
+
 
     // Announcement
     public static final String NO_ANNOUNCEMENT_AVAILABLE = "No announcement available";
@@ -621,6 +623,7 @@ public class LabelConstants {
     public static final String VILLAGE_PROFILE_TITLE = "Village Profile";
     //Title for NCD Activities
     public static final String CBAC_ENTRY_TITLE = "CBAC Entry";
+    public static final String CBAC_AND_NUTRITION_CREENING_ACTIVITY_TITLE = "CBAC and Nutrition Screening";
     public static final String NCD_SCREENING_ACTIVITY_TITLE = "NCD Screening";
     public static final String CBAC_SCREENING_ACTIVITY_TITLE = "CBAC Screening";
     public static final String NCD_REGISTER_TITLE = "NCD Register";
@@ -902,6 +905,9 @@ public class LabelConstants {
     public static final String NO_MEMBER_IN_YOUR_AREA = "There are no members in your area";
 
     // NCD Screening Asha
+    public static final String SUSPECTED_NUTRITION_ENTRY = "Nutrition Entry for selected member is already done and member is suspected as SAM/MAM";
+    public static final String NUTRITION_ENTRY_FOR_SELECTED_MEMBER_IS_ALREADY_DONE = "Nutrition Entry for selected member is already done.";
+
     public static final String ON_NCD_SCREENING_CLOSE_ALERT = "Are you sure want to close NCD Screening?";
     public static final String CBAC_ENTRY_FOR_SELECTED_MEMBER_IS_ALREADY_DONE = "CBAC Entry for selected member is already done.";
     public static final String MEMBER_SELECTION_REQUIRED_FROM_FAMILY_ALERT = "Please select a member of the family.";
@@ -1215,6 +1221,8 @@ public class LabelConstants {
 
     //ABHA RELATED LABELS
     public static final String PHR_ADDRESS = "ABHA address";
+    public static final String SEARCH_VALIDATION = "Please enter text more than 2 characters";
+
 
     public static final String INFORMED_BENEFICIARY_ABOUT_ABDM
             = "I am voluntarily sharing my Aadhaar Number / Virtual ID issued by the Unique Identification Authority of India (“UIDAI”), and my demographic information for the purpose of " +

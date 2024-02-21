@@ -847,6 +847,9 @@ public class UtilBean {
             entityFullFormNames.put(FormConstants.IDSP_MEMBER_2, "Member Surveillance");
             entityFullFormNames.put(FormConstants.IDSP_FAMILY_2, "Family Surveillance");
             entityFullFormNames.put(FormConstants.IDSP_NEW_FAMILY, "Surveillance New Family");
+            entityFullFormNames.put(FormConstants.DNHDD_NCD_CBAC_AND_NUTRITION, "CBAC Screening and Nutrition");
+            entityFullFormNames.put(FormConstants.DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH, "Hypertension,Diabetes and Mental Health");
+            entityFullFormNames.put(FormConstants.CANCER_SCREENING, "Cancer Screening");
             entityFullFormNames.put(FormConstants.OFFLINE_ABHA_NUMBER_CREATIONS, "Offline ABHA Number Creation");
             entityFullFormNames.put(NotificationConstants.NOTIFICATION_NCD_HOME_VISIT, "NCD Home Visit");
             entityFullFormNames.put(NotificationConstants.NOTIFICATION_NCD_CLINIC_VISIT, "NCD Clinic Visit");

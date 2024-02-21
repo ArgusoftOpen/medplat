@@ -177,6 +177,27 @@ public class SewaFhsServiceImpl implements SewaFhsService {
         }
         return familyDataBeans;
     }
+    @Override
+    public List<MemberDataBean> retrieveMemberDataBeansForDnhddNcdByFamily(String familyId) {
+        List<MemberDataBean> memberDataBeans = new ArrayList<>();
+        Calendar instance = Calendar.getInstance();
+        instance.add(Calendar.YEAR, -30);
+        Date dateBefore30Years = instance.getTime();
+
+        try {
+            List<MemberBean> memberBeans = new ArrayList<>(memberBeanDao.queryBuilder()
+                    .orderBy(FieldNameConstants.FAMILY_HEAD_FLAG, Boolean.FALSE)
+                    .where().eq(FieldNameConstants.FAMILY_ID, familyId)
+                    .and().notIn(FieldNameConstants.STATE, FhsConstants.FHS_INACTIVE_CRITERIA_MEMBER_STATES)
+                    .and().le(FieldNameConstants.DOB, dateBefore30Years).query());
+            for (MemberBean bean : memberBeans) {
+                memberDataBeans.add(new MemberDataBean(bean));
+            }
+        } catch (SQLException ex) {
+            Log.e(TAG, null, ex);
+        }
+        return memberDataBeans;
+    }
 
     @Override
     public List<FamilyDataBean> searchFamilyDataBeansForCFHCByVillage(String search, String locationId, boolean isReverification,

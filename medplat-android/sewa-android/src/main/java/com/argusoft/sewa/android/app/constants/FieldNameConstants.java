@@ -107,6 +107,7 @@ public class FieldNameConstants {
     public static final String TOKEN = "token";
 
     //Bookmark Bean
+    public static final String IS_QR_SCAN = "isQrCodeScan";
     public static final String VIDEO_ID = "videoId";
     public static final String MEDIA_ID = "mediaId";
     public static final String TOPIC_ID = "topicId";

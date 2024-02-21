@@ -8,7 +8,6 @@ package com.argusoft.medplat.notification.dao;
 import com.argusoft.medplat.database.common.GenericDao;
 import com.argusoft.medplat.mobile.dto.TechoNotificationDataBean;
 import com.argusoft.medplat.notification.model.TechoNotificationMaster;
-
 import java.util.Date;
 import java.util.List;
 
@@ -66,4 +65,15 @@ public interface TechoNotificationMasterDao extends GenericDao<TechoNotification
     List<TechoNotificationMaster> retrieveNotificationForMigration(Integer memberId, Integer migrationId, Integer notificationTypeId, Enum state);
 
     List<TechoNotificationMaster> retrieveNotificationByTypeAndMemberIdAndState(Integer memberId, List<Integer> notificationTypeIds, TechoNotificationMaster.State state);
-    }
+
+    void markOlderNotificationAsMissed(Integer memberId, Integer notificationTypeId);
+
+    String getNotificationTypeCodeFromTypeId(Integer notificationTypeId);
+
+    void markOlderNotificationStateAsAdmitted(Integer memberId, Integer userId);
+
+    void markNotificationStateAsDischarged(Integer memberId, Integer userId);
+
+    void markNotificationAsCompletedByType(Integer memberId, Integer notificationTypeId);
+
+}

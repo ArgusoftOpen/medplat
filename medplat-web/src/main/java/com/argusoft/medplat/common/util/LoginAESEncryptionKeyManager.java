@@ -16,7 +16,7 @@ public class LoginAESEncryptionKeyManager {
     }
 
     private static String generateRandomString(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         SecureRandom secureRandom = new SecureRandom();
         StringBuilder randomStringBuilder = new StringBuilder(length);
 

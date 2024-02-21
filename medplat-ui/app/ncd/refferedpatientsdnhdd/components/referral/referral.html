@@ -1,0 +1,74 @@
+<div class="form-group">
+    <validate for='isReferred' required-msg="Please select a value">
+        <label for="isReferred" class="control-label" control-label>
+            Would you like to refer the patient?
+        </label>
+        <label class="control control-radio">Yes
+            <input ng-value="true" name="isReferred" id="isReferred" type="radio"
+                ng-model="referral.referralDto.isReferred" form-control required ng-disabled="!referral.institutionType">
+            <div class="control_indicator"></div>
+        </label>
+        <label class="control control-radio">No
+            <input ng-value="false" name="isReferred" id="isReferred" type="radio"
+                ng-model="referral.referralDto.isReferred" form-control required ng-disabled="!referral.institutionType">
+            <div class="control_indicator"></div>
+        </label>
+        <placeholder></placeholder>
+        <small class="text-danger" ng-if="!referral.institutionType">*Please select health infrastructure</small>
+    </validate>
+</div>
+<div ng-if="referral.referralDto.isReferred">
+    <div class="row">
+        <div class="form-group" ng-class="referral.singleComponentForm ? 'col-xl-12':'col-xl-6'">
+            <validate for='referredToId' required-msg="Please select a value">
+                <label for="referredToId" class="control-label" control-label>Referred
+                    To</label>
+                <select class="form-control cst-form-control" form-control required name='referredToId'
+                    id='referredToId' ng-change="referral.retrieveHealthInfras(referral.referralDto.referredToId,null)"
+                    ng-options="type.id as type.value for type in referral.types"
+                    ng-model="referral.referralDto.referredToId">
+                    <option value="">Select</option>
+                </select>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group col-xl-6" ng-if="referral.showLocation">
+            <location-directive template-type="'twoPart'" ng-model="referral.selectedLocationId"
+                selected-location="referral.selectedLocation" required-upto-level="1" fetch-upto-level="referral.fetchLevel"
+                fetch-according-to-user-aoi="false"> </location-directive>
+        </div>
+        <div class="form-group col-xl-6" ng-if="!referral.showLocation && referral.referralDto.referredToId">
+            <validate for='pvtHealthInfraName'
+                required-msg="Please enter infrastructure name">
+                <label for="pvtHealthInfraName" class="control-label"
+                    control-label>Health Infrastructure Name</label>
+                <input class="form-control cst-form-control"
+                    form-control type="text"
+                    ng-model="referral.referralDto.pvtHealthInfraName"
+                    id="pvtHealthInfraName" name="pvtHealthInfraName" required>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group" ng-class="referral.singleComponentForm ? 'col-xl-12':'col-xl-6'">
+            <validate for='reason' required-msg="Please select a value">
+                <label for="reason" class="control-label" control-label>Reason for
+                    Referral</label>
+                <textarea class="form-control cst-form-control" ng-model="referral.referralDto.reason" rows="4"
+                    name='reason' id='reason' form-control maxlength="99" required></textarea>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group" ng-class="referral.singleComponentForm ? 'col-xl-12':'col-xl-6'"
+            ng-if="referral.showHealthInfrastructures">
+            <validate for='healthInfraId' required-msg="Please select a value">
+                <label for="healthInfraId" class="control-label" control-label>Health Infrastructure</label>
+                <select class="form-control cst-form-control" form-control chosen-directive="referral.healthInfras"
+                    ng-options="infra.id as infra.name for infra in referral.healthInfras" name="healthInfraId"
+                    id="healthInfraId" ng-model="referral.referralDto.healthInfraId" required>
+                    <option value="">Select</option>
+                </select>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </div>
+</div>

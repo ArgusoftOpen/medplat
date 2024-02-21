@@ -143,6 +143,24 @@ public class HiddenQuestionFormulaUtil {
             }
         }
     }
+    public static void checkIfYesInAny(String[] split, QueFormBean queFormBean, Boolean isFirstCall) {
+//        if (Boolean.TRUE.equals(isFirstCall))
+//            return;
+
+        if (split.length > 1) {
+            queFormBean.setNext(queFormBean.getOptions().get(1).getNext()); // set default false
+            queFormBean.setAnswer(queFormBean.getOptions().get(1).getKey());
+            for (int i = 1; i < split.length; i++) {
+                if (SharedStructureData.relatedPropertyHashTable.containsKey(split[i])
+                        && ("T".equalsIgnoreCase(SharedStructureData.relatedPropertyHashTable.get(split[i]))
+                        || "1".equalsIgnoreCase(SharedStructureData.relatedPropertyHashTable.get(split[i])))) {
+                    queFormBean.setNext(queFormBean.getOptions().get(0).getNext());
+                    queFormBean.setAnswer(queFormBean.getOptions().get(0).getKey());
+                    break;
+                }
+            }
+        }
+    }
 
     public static void lessThan(String[] split, QueFormBean queFormBean) {
         if (queFormBean.getLoopCounter() > 0 && !queFormBean.isIgnoreLoop()) {

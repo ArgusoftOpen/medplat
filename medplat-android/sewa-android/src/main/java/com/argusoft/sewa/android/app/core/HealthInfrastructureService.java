@@ -19,7 +19,7 @@ public interface HealthInfrastructureService {
     List<HealthInfrastructureBean> retrieveHealthInfrastructures(Long typeId, String attribute);
 
     HealthInfrastructureBean retrieveHealthInfrastructureAssignedToUser(Long userId);
-
+    List<HealthInfrastructureBean> retrieveHealthInfraListByLocationList(List<Integer> locationIds);
     UserHealthInfraBean retrieveUserHealthInfraBean();
 
 }

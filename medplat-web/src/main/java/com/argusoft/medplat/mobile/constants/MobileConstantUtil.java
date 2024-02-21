@@ -33,9 +33,12 @@ public class MobileConstantUtil {
     public static final String CHILD_BENEFICIARY = "C";
     public static final String NEW_BORN_CHILD_BENEFICIARY = "N";
     public static final String MOTHER_BENEFICIARY = "M";
-    public static final String FAMILY_FOLDER_MEMBER_UPDATE = "FAMILY_FOLDER_MEMBER_UPDATE";
+
     public static final String FAMILY_HEALTH_SURVEY = "FHS";
     public static final String FAMILY_FOLDER = "FAMILY_FOLDER";
+    public static final String HOUSE_HOLD_LINE_LIST = "HOUSE_HOLD_LINE_LIST";
+    public static final String FAMILY_FOLDER_MEMBER_UPDATE = "FAMILY_FOLDER_MEMBER_UPDATE";
+    public static final String LOCKED_FAMILY = "LOCKED_FAMILY";
     public static final String CFHC = "CFHC";
     public static final String LMP_FOLLOW_UP_VISIT = "LMPFU";
     public static final String ANC_VISIT = "FHW_ANC";
@@ -43,11 +46,15 @@ public class MobileConstantUtil {
     public static final String PNC_VISIT = "FHW_PNC";
     public static final String CHILD_SERVICES_VISIT = "FHW_CS";
     public static final String REPRODUCTIVE_INFO_MODIFICATION_VISIT = "FHW_RIM";
+    public static final String FP_FOLLOW_UP = "CHIP_FP_FOLLOW_UP";
     public static final String VACCINE_ADVERSE_EFFECT_VISIT = "FHW_VAE";
     public static final String FHS_MEMBER_UPDATE = "MEMBER_UPDATE";
     public static final String WPD_DISCHARGE_VISIT = "DISCHARGE";
     public static final String APPETITE_TEST_ALERT = "APPETITE";
     public static final String NCD_ASHA_CBAC = "NCD_ASHA_CBAC";
+    public static final String DNHDD_NCD_CBAC_AND_NUTRITION = "CBAC_AND_NUT";
+    public static final String DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH = "DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH";
+    public static final String CANCER_SCREENING = "CANCER_SCREENING";
     public static final String NCD_FHW_HYPERTENSION = "NCD_FHW_HYPERTENSION";
     public static final String NCD_FHW_DIABETES = "NCD_FHW_DIABETES";
     public static final String NCD_FHW_ORAL = "NCD_FHW_ORAL";
@@ -62,6 +69,16 @@ public class MobileConstantUtil {
     public static final String NCD_FHW_WEEKLY_HOME = "NCD_FHW_WEEKLY_HOME";
     public static final String NOTIFICATION_NCD_CLINIC_VISIT = "NCD_CLINIC_VISIT";
     public static final String NOTIFICATION_NCD_HOME_VISIT = "NCD_HOME_VISIT";
+    public static final String NCD_MO_CONFIRMED = "NCD_MO_CONFIRMED";
+    public static final String NCD_URINE_TEST = "NCD_URINE_TEST";
+    public static final String NCD_ECG_REPORT = "NCD_ECG_REPORT";
+    public static final String NCD_ECG_TOKEN = "NCD_ECG_TOKEN";
+    public static final String NCD_CVC_CLINIC = "NCD_CVC_CLINIC";
+    public static final String NCD_CVC_HOME = "NCD_CVC_HOME";
+    public static final String NCD_CVC_CLINIC_VISIT = "NCD_CVC_CLINIC_VISIT";
+    public static final String NCD_CVC_HOME_VISIT = "NCD_CVC_HOME_VISIT";
+    public static final String NCD_RETINOPATHY_TEST = "NCD_RETINOPATHY_TEST";
+    public static final String NCD_ECG_TEST = "NCD_ECG_TEST";
 
     public static final String OFFLINE_ABHA_NUMBER_CREATIONS = "OFFLINE_ABHA_NUMBER_CREATIONS";
 
@@ -142,17 +159,25 @@ public class MobileConstantUtil {
     public static final String CHARDHAM_EMERGENCY_NEW_REQUEST = "CHARDHAM_EMERGENCY_NEW_REQUEST";
     public static final String CHARDHAM_EMERGENCY_NEW_RESPONSE = "CHARDHAM_EMERGENCY_NEW_RESPONSE";
     public static final String CHARDHAM_EMERGENCY_REQUEST_COMPLETED = "CHARDHAM_EMERGENCY_REQUEST_COMPLETED";
+    public static final String DNHDD_FHW_SAM_SCREENING = "DNHDD_FHW_SAM_SCREENING";
+    public static final String DNHDD_CMAM_FOLLOWUP = "DNHDD_CMAM_FOLLOWUP";
+    public static final String SICKLE_CELL_SURVEY = "SICKLE_CELL_SURVEY";
+
+    public static final String BCG_VACCINATION_SURVEY = "BCG_VACCINATION_SURVEY";
+    public static final String BCG_ELIGIBLE = "BCG_ELIGIBLE";
 
 
     public static class Roles {
-        private Roles() {
 
+        private Roles() {
         }
 
         public static final String ASHA = "Asha";
         public static final String AWW = "AWW";
         public static final String FHW = "FHW";
+        public static final String ANM = "ANM"; // role is same as FHW
         public static final String CHO_HWC = "CHO-HWC";
+        public static final String CHO = "CHO";
         public static final String MPHW = "MPHW";
         public static final String CC = "Care coordinator";
         public static final String KIOSK = "KIOSK";
@@ -160,17 +185,6 @@ public class MobileConstantUtil {
         public static final String FEMALE_HEALTH_SUPERVISOR = "Female Health Supervisor";
         public static final String RBSK_MO = "RBSK MO";
         public static final String USER_ROLE_SUPERVISOR_STAFF_NURSE_CORP = "Supervisor Staff Nurse Corporation";
-        public static final String PROGRAM_MANAGER = "Program Manager";
-        public static final String LOGISTICS_MANAGER = "Logistics Manager";
-        public static final String ERT = "ERT";
-        public static final String SETU = "Setu";
-        public static final String SUPER_ADMIN = "Super Admin";
-        public static final String ASHA_FACILITATOR = "Asha Facilitator";
-        public static final String CLERK_ACCOUNTANT = "Clerk";
-        public static final String MEDICAL_OFFICER = "Medical Officer";
-        public static final String DATA_COLLECTOR = "Data Collector";
-        public static final String PNC_DATA_COLLECTOR = "PNC Data Collector";
-        public static final String CHILD_DATA_COLLECTOR = "Child Data Collector";
     }
 
     //Constant used in mobile methods and webservices
@@ -248,6 +262,11 @@ public class MobileConstantUtil {
     public static final String VERIFICATION_PENDING = "VP";
     public static final String VERIFICATION_PENDING_FOR_STILL_BIRTH = "SBVP";
     public static final String SUBMIT_PENDING = "SP";
+    public static final String TB_FOLLOW_UP_VISIT = "TB_FOLLOW_UP_VISIT";
+    public static final String ACTIVE_MALARIA_FOLLOW_UP_VISIT = "ACTIVE_MALARIA_FOLLOW_UP_VISIT";
+    public static final String FP_FOLLOW_UP_VISIT = "FP_FOLLOW_UP_VISIT";
+    public static final String NOTIFICATION_HIV_NEGATIVE_FOLLOWUP_VISIT = "NOTIFICATION_HIV_NEGATIVE_FOLLOWUP_VISIT";
+
 
     public static final JsonSerializer<Date> jsonDateSerializer = (src, typeOfSrc, context) -> src == null ? null : new JsonPrimitive(src.getTime());
 

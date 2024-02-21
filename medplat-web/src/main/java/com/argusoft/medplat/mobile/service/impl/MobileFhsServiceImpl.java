@@ -521,43 +521,43 @@ public class MobileFhsServiceImpl extends GenericSessionUtilService implements M
         return fhwServiceStatusDtos;
     }
 
-    @Override
-    public Integer saveAadharUpdateDetails(AadharUpdationBean aadharUpdationBean) {
-        boolean toBeUpdated = false;
-        MemberEntity memberByUniqueHealthIdAndFamilyId = memberDao.getMemberByUniqueHealthIdAndFamilyId(aadharUpdationBean.getMemberId(), null);
-
-        if (memberByUniqueHealthIdAndFamilyId == null) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE,
-                    "Member Not Found For Member ID:" + aadharUpdationBean.getMemberId() + " and FamilyID:" + aadharUpdationBean.getFamilyId());
-            return null;
-        }
-
-        if (aadharUpdationBean.getAadharNumber() != null) {
-            if (memberByUniqueHealthIdAndFamilyId.getNameAsPerAadhar() == null || memberByUniqueHealthIdAndFamilyId.getNameAsPerAadhar().trim().isEmpty()) {
-                memberByUniqueHealthIdAndFamilyId.setAadharNumber(aadharUpdationBean.getAadharNumber());
-                memberByUniqueHealthIdAndFamilyId.setAadharNumberAvailable(Boolean.TRUE);
-                if (aadharUpdationBean.getNameBasedOnAadhar() != null && !aadharUpdationBean.getNameBasedOnAadhar().isEmpty()) {
-                    memberByUniqueHealthIdAndFamilyId.setNameAsPerAadhar(aadharUpdationBean.getNameBasedOnAadhar());
-                }
-                toBeUpdated = true;
-            }
-        }
-
-        if (aadharUpdationBean.getMobileNumber() != null && !aadharUpdationBean.getMobileNumber().isEmpty()) {
-            memberByUniqueHealthIdAndFamilyId.setMobileNumber(aadharUpdationBean.getMobileNumber());
-            toBeUpdated = true;
-        }
-
-        if (aadharUpdationBean.getDob() != null) {
-            memberByUniqueHealthIdAndFamilyId.setDob(aadharUpdationBean.getDob());
-            toBeUpdated = true;
-        }
-
-        if (toBeUpdated) {
-            familyHealthSurveyService.updateMember(memberByUniqueHealthIdAndFamilyId, null, null);
-        }
-        return memberByUniqueHealthIdAndFamilyId.getId();
-    }
+//    @Override
+//    public Integer saveAadharUpdateDetails(AadharUpdationBean aadharUpdationBean) {
+//        boolean toBeUpdated = false;
+//        MemberEntity memberByUniqueHealthIdAndFamilyId = memberDao.getMemberByUniqueHealthIdAndFamilyId(aadharUpdationBean.getMemberId(), null);
+//
+//        if (memberByUniqueHealthIdAndFamilyId == null) {
+//            Logger.getLogger(getClass().getName()).log(Level.SEVERE,
+//                    "Member Not Found For Member ID:" + aadharUpdationBean.getMemberId() + " and FamilyID:" + aadharUpdationBean.getFamilyId());
+//            return null;
+//        }
+//
+//        if (aadharUpdationBean.getAadharNumber() != null) {
+//            if (memberByUniqueHealthIdAndFamilyId.getNameAsPerAadhar() == null || memberByUniqueHealthIdAndFamilyId.getNameAsPerAadhar().trim().isEmpty()) {
+//                memberByUniqueHealthIdAndFamilyId.setAadharNumber(aadharUpdationBean.getAadharNumber());
+//                memberByUniqueHealthIdAndFamilyId.setAadharNumberAvailable(Boolean.TRUE);
+//                if (aadharUpdationBean.getNameBasedOnAadhar() != null && !aadharUpdationBean.getNameBasedOnAadhar().isEmpty()) {
+//                    memberByUniqueHealthIdAndFamilyId.setNameAsPerAadhar(aadharUpdationBean.getNameBasedOnAadhar());
+//                }
+//                toBeUpdated = true;
+//            }
+//        }
+//
+//        if (aadharUpdationBean.getMobileNumber() != null && !aadharUpdationBean.getMobileNumber().isEmpty()) {
+//            memberByUniqueHealthIdAndFamilyId.setMobileNumber(aadharUpdationBean.getMobileNumber());
+//            toBeUpdated = true;
+//        }
+//
+//        if (aadharUpdationBean.getDob() != null) {
+//            memberByUniqueHealthIdAndFamilyId.setDob(aadharUpdationBean.getDob());
+//            toBeUpdated = true;
+//        }
+//
+//        if (toBeUpdated) {
+//            familyHealthSurveyService.updateMember(memberByUniqueHealthIdAndFamilyId, null, null);
+//        }
+//        return memberByUniqueHealthIdAndFamilyId.getId();
+//    }
 
 
     public void getUpdatedFamilyDataByDate(UserMaster user, String lastUpdatedDate, LoggedInUserPrincipleDto loggedInUserPrincipleDto) {
@@ -1495,26 +1495,26 @@ public class MobileFhsServiceImpl extends GenericSessionUtilService implements M
             memberEntity.setIfsc(ifsc);
             toUpdate = true;
         }
-        if (aadharMapString != null) {
-            Map<String, String> aadharValuesMap = new HashMap<>();
-            String keyValueString = StringUtils.substringBetween(aadharMapString, "{", "}");
-            String[] keyValueSplit = keyValueString.split(",");
-            for (String keyValuePair : keyValueSplit) {
-                String[] split = keyValuePair.split("=");
-                if (split.length == 2) {
-                    aadharValuesMap.put(split[0].trim(), split[1].trim());
-                }
-            }
-            memberEntity.setAadharNumber(aadharValuesMap.get("uid"));
-            memberEntity.setNameAsPerAadhar(aadharValuesMap.get("name"));
-            memberEntity.setAadharNumberAvailable(Boolean.TRUE);
-            toUpdate = true;
-        }
-        if (aadharNumber != null) {
-            memberEntity.setAadharNumber(aadharNumber);
-            memberEntity.setAadharNumberAvailable(Boolean.TRUE);
-            toUpdate = true;
-        }
+//        if (aadharMapString != null) {
+//            Map<String, String> aadharValuesMap = new HashMap<>();
+//            String keyValueString = StringUtils.substringBetween(aadharMapString, "{", "}");
+//            String[] keyValueSplit = keyValueString.split(",");
+//            for (String keyValuePair : keyValueSplit) {
+//                String[] split = keyValuePair.split("=");
+//                if (split.length == 2) {
+//                    aadharValuesMap.put(split[0].trim(), split[1].trim());
+//                }
+//            }
+//            memberEntity.setAadharNumber(aadharValuesMap.get("uid"));
+//            memberEntity.setNameAsPerAadhar(aadharValuesMap.get("name"));
+//            memberEntity.setAadharNumberAvailable(Boolean.TRUE);
+//            toUpdate = true;
+//        }
+//        if (aadharNumber != null) {
+//            memberEntity.setAadharNumber(aadharNumber);
+//            memberEntity.setAadharNumberAvailable(Boolean.TRUE);
+//            toUpdate = true;
+//        }
 
         if (toUpdate) {
             memberDao.update(memberEntity);
@@ -1664,7 +1664,7 @@ public class MobileFhsServiceImpl extends GenericSessionUtilService implements M
         end = record.indexOf(MobileConstantUtil.CHECKSUM_AND_ENTITY_TYPE_SEPARATER, start);
         formFillUpTime = record.substring(start, end);
 
-        //  Notification Id        
+        //  Notification Id
         start = end + 1;
         end = record.indexOf(MobileConstantUtil.CHECKSUM_AND_ENTITY_TYPE_SEPARATER, start);
         notificationId = record.substring(start, end);
@@ -1769,6 +1769,31 @@ public class MobileFhsServiceImpl extends GenericSessionUtilService implements M
         List<String> formNames = mobileFormDao.getFileNames();
 
         Map<String, List<ComponentTagDto>> retrievedXlsData = new HashMap<>();
+        Map<String, List<ComponentTagDto>> retrievedXlsDataFhw = new HashMap<>();
+        SystemConstantUtil.FHW_SHEETS.forEach((String sheetName) -> {
+            List<ComponentTagDto> componentTagDtos = xlsToDtoConversion.xlsConversionMain(sheetName, mobileFormVersion.getKeyValue());
+            retrievedXlsDataFhw.put(sheetName, componentTagDtos);
+            // This will create or Update all the Xls form of Mobile to MobileFormMaster and store it to database
+//            if (!mobileFormMastersCreated.contains(sheetName)) {
+//                mobileFormMasterService.createMobileFormMaster(componentTagDtos, sheetName);
+//                mobileFormMastersCreated.add(sheetName);
+//            }
+//            retrievedXlsDataFhw.put(sheetName, mobileFormMasterService.retrieveMobileFormBySheet(sheetName));
+        });
+        SystemConstantUtil.xlsDataFhw = retrievedXlsDataFhw;
+
+        Map<String, List<ComponentTagDto>> retrievedXlsDataAsha = new HashMap<>();
+        SystemConstantUtil.ASHA_SHEETS.forEach((String sheetName) -> {
+            List<ComponentTagDto> componentTagDtos = xlsToDtoConversion.xlsConversionMain(sheetName, mobileFormVersion.getKeyValue());
+            retrievedXlsDataAsha.put(sheetName, componentTagDtos);
+            // This will create or Update all the Xls form of Mobile to MobileFormMaster and store it to database
+//            if (!mobileFormMastersCreated.contains(sheetName)) {
+//                mobileFormMasterService.createMobileFormMaster(componentTagDtos, sheetName);
+//                mobileFormMastersCreated.add(sheetName);
+//            }
+//            retrievedXlsDataAsha.put(sheetName, mobileFormMasterService.retrieveMobileFormBySheet(sheetName));
+        });
+        SystemConstantUtil.xlsDataAsha = retrievedXlsDataAsha;
 
         List<String> mobileForms = systemConstraintService.getActiveMobileForms();
         formNames.forEach((String sheetName) -> {
@@ -1785,7 +1810,7 @@ public class MobileFhsServiceImpl extends GenericSessionUtilService implements M
             }
             retrievedXlsData.put(sheetName, componentTagDtos);
         });
-        SystemConstantUtil.retrievedXlsData = retrievedXlsData;
+        SystemConstantUtil.xlsAllData = retrievedXlsData;
     }
 
     @Override
@@ -1821,11 +1846,7 @@ public class MobileFhsServiceImpl extends GenericSessionUtilService implements M
             return;
         }
 
-        if (SystemConstantUtil.retrievedXlsData == null){
-            setXlsSheetsAsComponentTagsInMemory();
-        }
-
-        Map<String, List<ComponentTagDto>> allFormData = SystemConstantUtil.retrievedXlsData;
+        Map<String, List<ComponentTagDto>> allFormData = SystemConstantUtil.xlsAllData;
         Map<String, List<ComponentTagDto>> retrievedAllXlsData = new HashMap<>();
 
         formsByRole.forEach((sheetName) -> retrievedAllXlsData.put(sheetName, allFormData.get(sheetName)));

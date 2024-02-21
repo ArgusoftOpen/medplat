@@ -41,6 +41,13 @@ public class FormConstants {
     public static final String GERIATRICS_MEDICATION_ALERT = "GMA";
     public static final String TRAVELLERS_SCREENING = "TRAVELLERS_SCREENING";
 
+    //DNHDD related forms
+    public static final String CANCER_SCREENING = "CANCER_SCREENING";
+
+    public static final String DNHDD_NCD_CBAC_AND_NUTRITION = "DNHDD_NCD_CBAC_AND_NUTRITION";
+    public static final String DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH = "DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH";
+
+
     //TeCHO NCD FHW SHEETS
     public static final String NCD_FHW_MENTAL_HEALTH = "NCD_FHW_MENTAL_HEALTH";
     public static final String NCD_FHW_HYPERTENSION = "NCD_FHW_HYPERTENSION";
@@ -218,6 +225,9 @@ public class FormConstants {
         stringList.add(FormConstants.NCD_FHW_DIABETES_CONFIRMATION);
         stringList.add(FormConstants.NCD_FHW_WEEKLY_HOME);
         stringList.add(FormConstants.NCD_FHW_WEEKLY_CLINIC);
+        stringList.add(FormConstants.DNHDD_NCD_CBAC_AND_NUTRITION);
+        stringList.add(FormConstants.DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH);
+        stringList.add(FormConstants.CANCER_SCREENING);
         return stringList;
     }
 

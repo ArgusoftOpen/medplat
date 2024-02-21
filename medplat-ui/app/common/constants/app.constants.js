@@ -11,7 +11,7 @@
             angularDateFormat: 'dd/MM/yyyy',
             angularMonthFormat: 'MMMM yyyy',
             limit: 100,
-            menuTypes: ['fhs', 'training', 'manage', 'admin'],
+            menuTypes: ['fhs', 'training', 'manage', 'admin','ncd'],
             familyIdFormat: '**/****/***?*?*?*?*?*?*?*?*?'
         })
         .constant('REPORTS', {

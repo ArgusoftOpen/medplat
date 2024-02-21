@@ -25,6 +25,8 @@ public class FormulaConstants {
     public static final String VALIDATION_GREATER_THEN_0 = "GreaterThen0";
     public static final String VALIDATION_CHECK_INPUT_LENGTH = "checkInputLength";
     public static final String VALIDATION_CHECK_MOBILE_NUMBER = "mobileNumber";
+    public static final String FORMULA_SET_DNHDD_HYPERTENSION_STATUS = "setdnhddhypertensionstatus";
+    public static final String FORMULA_SET_DNHDD_DIABETES_STATUS = "setdnhdiabetesstatus";
     public static final String VALIDATION_CHECK_AADHAAR_NUMBER = "aadhaarNumber";
     public static final String VALIDATION_CHECK_INPUT_LENGTH_RANGE = "inputLengthRange";
     public static final String VALIDATION_GREATER_THAN = "GreaterThan";
@@ -149,6 +151,7 @@ public class FormulaConstants {
     public static final String FORMULA_SET_COLOR = "setcolor"; // setColor
     public static final String FORMULA_SET_DATE_SET = "setdateset"; // setDateSet
     public static final String FORMULA_SET_HINT = "sethint"; // setHint
+    public static final String FORMULA_CHECK_IF_YES_IN_ANY = "checkifyesinany"; // showAlertIfYesInAny
     public static final String FORMULA_SET_VALUE_AS_PROPERTY = "setvalueasproperty"; // setValueAsProperty
     public static final String FORMULA_GET_TIME = "gettime"; // getTime
     public static final String FORMULA_FILL_LOCATION = "filllocation"; // fillLocation

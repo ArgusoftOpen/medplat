@@ -50,7 +50,13 @@ public class MemberBean extends BaseEntity implements Serializable {
     private boolean isAadharUpdated;
 
     @DatabaseField
+    private String aadharStatus;
+
+    @DatabaseField
     private String mobileNumber;
+
+    @DatabaseField
+    private String alternateNumber;
 
     @DatabaseField(index = true)
     private Boolean familyHeadFlag;
@@ -117,6 +123,9 @@ public class MemberBean extends BaseEntity implements Serializable {
 
     @DatabaseField//Comma Separated IDs
     private String chronicDiseaseIds;
+
+    @DatabaseField//Comma Separated IDs
+    private Boolean underTreatmentChronic;
 
     @DatabaseField//Comma Separated IDs
     private String currentDiseaseIds;
@@ -317,6 +326,117 @@ public class MemberBean extends BaseEntity implements Serializable {
     @DatabaseField
     private String tobaccoAddiction;
 
+    @DatabaseField
+    private Boolean moConfirmedDiabetes;
+
+    @DatabaseField
+    private Boolean moConfirmedHypertension;
+
+    @DatabaseField
+    private Boolean generalScreeningDone;
+
+    @DatabaseField
+    private Boolean ecgTestDone;
+
+    @DatabaseField
+    private Boolean retinopathyTestDone;
+
+    @DatabaseField
+    private Boolean urineTestDone;
+
+    @DatabaseField
+    private String occupation;
+
+    @DatabaseField
+    private String physicalDisability;
+
+    @DatabaseField
+    private String otherDisability;
+
+    @DatabaseField
+    private String cataractSurgery;
+
+    @DatabaseField
+    private String otherChronic;
+
+    @DatabaseField
+    private String otherEyeIssue;
+
+    @DatabaseField
+    private String sickleCellStatus;
+
+    @DatabaseField
+    private Boolean isChildGoingSchool;
+
+    @DatabaseField
+    private String currentStudyingStandard;
+
+    @DatabaseField
+    private String pensionScheme;
+
+    @DatabaseField
+    private Long hmisId;
+
+    @DatabaseField
+    private Long adolescentScreeningDate;
+
+    @DatabaseField
+    private Date hypDiaMentalServiceDate;
+
+    @DatabaseField
+    private Date cancerServiceDate;
+
+    @DatabaseField
+    private String isHivPositive;
+
+    @DatabaseField
+    private String isVdrlPositive;
+
+    @DatabaseField
+    private String nutritionStatus;
+
+    @DatabaseField
+    private String nrcNumber;
+
+    @DatabaseField
+    private Boolean isTbCured;
+
+    @DatabaseField
+    private Boolean isTbSuspected;
+
+    @DatabaseField
+    private Boolean indexCase;
+
+    @DatabaseField
+    private String rdtStatus;
+
+    @DatabaseField
+    private String memberReligion;
+
+    @DatabaseField
+    private String passportNumber;
+
+    @DatabaseField
+    private String searchString;
+
+    @DatabaseField
+    private String chronicDiseaseIdsForTreatment;
+
+    @DatabaseField
+    private Boolean bcgSurveyStatus;
+
+    @DatabaseField
+    private String otherChronicDiseaseTreatment;
+
+    @DatabaseField
+    private Boolean bcgEligible;
+    @DatabaseField
+    private Boolean bcgEligibleFilled;
+
+    @DatabaseField
+    private String birthCertNumber;
+
+
     public MemberBean() {
     }
 
@@ -406,9 +526,50 @@ public class MemberBean extends BaseEntity implements Serializable {
         this.alcoholAddiction = memberDataBean.getAlcoholAddiction();
         this.smokingAddiction = memberDataBean.getSmokingAddiction();
         this.tobaccoAddiction = memberDataBean.getTobaccoAddiction();
+        this.moConfirmedDiabetes = memberDataBean.getMoConfirmedDiabetes();
+        this.moConfirmedHypertension = memberDataBean.getMoConfirmedHypertension();
+        this.generalScreeningDone = memberDataBean.getGeneralScreeningDone();
+        this.ecgTestDone = memberDataBean.getEcgTestDone();
+        this.retinopathyTestDone = memberDataBean.getRetinopathyTestDone();
+        this.urineTestDone = memberDataBean.getUrineTestDone();
+        this.occupation = memberDataBean.getOccupation();
+        this.physicalDisability = memberDataBean.getPhysicalDisability();
+        this.otherDisability = memberDataBean.getOtherDisability();
+        this.otherChronic = memberDataBean.getOtherChronic();
+        this.otherEyeIssue = memberDataBean.getOtherEyeIssue();
+        this.cataractSurgery = memberDataBean.getCataractSurgery();
+        this.sickleCellStatus = memberDataBean.getSickleCellStatus();
+        this.isChildGoingSchool = memberDataBean.getIsChildGoingSchool();
+        this.currentStudyingStandard = memberDataBean.getCurrentStudyingStandard();
+        this.aadharStatus = memberDataBean.getAadharStatus();
+        this.pensionScheme = memberDataBean.getPensionScheme();
+        this.underTreatmentChronic = memberDataBean.getUnderTreatmentChronic();
+        this.alternateNumber = memberDataBean.getAlternateNumber();
+        this.hmisId = memberDataBean.getHmisId();
+        this.isHivPositive = memberDataBean.getIsHivPositive();
+        this.isVdrlPositive = memberDataBean.getIsVDRLPositive();
+        this.nutritionStatus = memberDataBean.getNutritionStatus();
+        this.nrcNumber = memberDataBean.getNrcNumber();
+        this.memberReligion = memberDataBean.getMemberReligion();
+        this.passportNumber = memberDataBean.getPassportNumber();
+        this.searchString = memberDataBean.getSearchString();
+        this.chronicDiseaseIdsForTreatment = memberDataBean.getChronicDiseaseIdsForTreatment();
+        this.otherChronicDiseaseTreatment = memberDataBean.getOtherChronicDiseaseTreatment();
+        this.bcgSurveyStatus = memberDataBean.getBcgSurveyStatus();
+        this.birthCertNumber = memberDataBean.getBirthCertNumber();
+
 
         if (memberDataBean.getAdditionalInfo() != null) {
-            this.npcbStatus = new Gson().fromJson(memberDataBean.getAdditionalInfo(), MemberAdditionalInfoDataBean.class).getNpcbStatus();
+            MemberAdditionalInfoDataBean additionalInfo = new Gson().fromJson(memberDataBean.getAdditionalInfo(), MemberAdditionalInfoDataBean.class);
+            this.adolescentScreeningDate = additionalInfo.getAdolescentScreeningDate();
+            this.npcbStatus = additionalInfo.getNpcbStatus();
+            this.isTbCured = additionalInfo.getTbCured();
+            this.isTbSuspected = additionalInfo.getTbSuspected();
+            this.indexCase = additionalInfo.getIndexCase();
+            this.rdtStatus = additionalInfo.getRdtStatus();
+            this.bcgEligible = additionalInfo.getBcgEligible();
+            this.bcgEligibleFilled = additionalInfo.getBcgEligibleFilled();
+
         }
 
         if (memberDataBean.getDateOfWedding() != null) {
@@ -457,6 +618,14 @@ public class MemberBean extends BaseEntity implements Serializable {
 
         if (memberDataBean.getCbacDate() != null) {
             this.cbacDate = new Date(memberDataBean.getCbacDate());
+        }
+
+        if (memberDataBean.getCancerServiceDate() != null) {
+            this.cancerServiceDate = new Date(memberDataBean.getCancerServiceDate());
+        }
+
+        if (memberDataBean.getHypDiaMentalServiceDate() != null) {
+            this.hypDiaMentalServiceDate = new Date(memberDataBean.getHypDiaMentalServiceDate());
         }
     }
 
@@ -1004,6 +1173,7 @@ public class MemberBean extends BaseEntity implements Serializable {
         this.additionalInfo = additionalInfo;
         if (additionalInfo != null) {
             this.npcbStatus = new Gson().fromJson(additionalInfo, MemberAdditionalInfoDataBean.class).getNpcbStatus();
+            this.adolescentScreeningDate = new Gson().fromJson(additionalInfo, MemberAdditionalInfoDataBean.class).getAdolescentScreeningDate();
         }
     }
 
@@ -1247,6 +1417,126 @@ public class MemberBean extends BaseEntity implements Serializable {
         this.tobaccoAddiction = tobaccoAddiction;
     }
 
+    public Boolean getMoConfirmedDiabetes() {
+        return moConfirmedDiabetes;
+    }
+
+    public void setMoConfirmedDiabetes(Boolean moConfirmedDiabetes) {
+        this.moConfirmedDiabetes = moConfirmedDiabetes;
+    }
+
+    public Boolean getMoConfirmedHypertension() {
+        return moConfirmedHypertension;
+    }
+
+    public void setMoConfirmedHypertension(Boolean moConfirmedHypertension) {
+        this.moConfirmedHypertension = moConfirmedHypertension;
+    }
+
+    public Boolean getGeneralScreeningDone() {
+        return generalScreeningDone;
+    }
+
+    public void setGeneralScreeningDone(Boolean generalScreeningDone) {
+        this.generalScreeningDone = generalScreeningDone;
+    }
+
+    public Boolean getEcgTestDone() {
+        return ecgTestDone;
+    }
+
+    public void setEcgTestDone(Boolean ecgTestDone) {
+        this.ecgTestDone = ecgTestDone;
+    }
+
+    public Boolean getRetinopathyTestDone() {
+        return retinopathyTestDone;
+    }
+
+    public void setRetinopathyTestDone(Boolean retinopathyTestDone) {
+        this.retinopathyTestDone = retinopathyTestDone;
+    }
+
+    public Boolean getUrineTestDone() {
+        return urineTestDone;
+    }
+
+    public void setUrineTestDone(Boolean urineTestDone) {
+        this.urineTestDone = urineTestDone;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public String getPhysicalDisability() {
+        return physicalDisability;
+    }
+
+    public void setPhysicalDisability(String physicalDisability) {
+        this.physicalDisability = physicalDisability;
+    }
+
+    public String getOtherDisability() {
+        return otherDisability;
+    }
+
+    public void setOtherDisability(String otherDisability) {
+        this.otherDisability = otherDisability;
+    }
+
+    public String getCataractSurgery() {
+        return cataractSurgery;
+    }
+
+    public void setCataractSurgery(String cataractSurgery) {
+        this.cataractSurgery = cataractSurgery;
+    }
+
+    public String getOtherChronic() {
+        return otherChronic;
+    }
+
+    public void setOtherChronic(String otherChronic) {
+        this.otherChronic = otherChronic;
+    }
+
+    public String getOtherEyeIssue() {
+        return otherEyeIssue;
+    }
+
+    public void setOtherEyeIssue(String otherEyeIssue) {
+        this.otherEyeIssue = otherEyeIssue;
+    }
+
+    public String getSickleCellStatus() {
+        return sickleCellStatus;
+    }
+
+    public void setSickleCellStatus(String sickleCellStatus) {
+        this.sickleCellStatus = sickleCellStatus;
+    }
+
+    public Boolean getIsChildGoingSchool() {
+        return isChildGoingSchool;
+    }
+
+    public void setIsChildGoingSchool(Boolean isChildGoingSchool) {
+        this.isChildGoingSchool = isChildGoingSchool;
+    }
+
+    public String getCurrentStudyingStandard() {
+        return currentStudyingStandard;
+    }
+
+    public void setCurrentStudyingStandard(String currentStudyingStandard) {
+        this.currentStudyingStandard = currentStudyingStandard;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -1265,5 +1555,221 @@ public class MemberBean extends BaseEntity implements Serializable {
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    public String getAadharStatus() {
+        return aadharStatus;
+    }
+
+    public void setAadharStatus(String aadharStatus) {
+        this.aadharStatus = aadharStatus;
+    }
+
+    public String getPensionScheme() {
+        return pensionScheme;
+    }
+
+    public void setPensionScheme(String pensionScheme) {
+        this.pensionScheme = pensionScheme;
+    }
+
+    public Boolean getUnderTreatmentChronic() {
+        return underTreatmentChronic;
+    }
+
+    public void setUnderTreatmentChronic(Boolean underTreatmentChronic) {
+        this.underTreatmentChronic = underTreatmentChronic;
+    }
+
+    public String getAlternateNumber() {
+        return alternateNumber;
+    }
+
+    public void setAlternateNumber(String alternateNumber) {
+        this.alternateNumber = alternateNumber;
+    }
+
+    public Long getHmisId() {
+        return hmisId;
+    }
+
+    public void setHmisId(Long hmisId) {
+        this.hmisId = hmisId;
+    }
+
+    public Long getAdolescentScreeningDate() {
+        return adolescentScreeningDate;
+    }
+
+    public void setAdolescentScreeningDate(Long adolescentScreeningDate) {
+        this.adolescentScreeningDate = adolescentScreeningDate;
+    }
+
+    public Date getHypDiaMentalServiceDate() {
+        return hypDiaMentalServiceDate;
+    }
+
+    public void setHypDiaMentalServiceDate(Date hypDiaMentalServiceDate) {
+        this.hypDiaMentalServiceDate = hypDiaMentalServiceDate;
+    }
+
+    public Date getCancerServiceDate() {
+        return cancerServiceDate;
+    }
+
+    public void setCancerServiceDate(Date cancerServiceDate) {
+        this.cancerServiceDate = cancerServiceDate;
+    }
+
+    public String getIsHivPositive() {
+        return isHivPositive;
+    }
+
+    public void setIsHivPositive(String isHivPositive) {
+        this.isHivPositive = isHivPositive;
+    }
+
+    public String getIsVdrlPositive() {
+        return isVdrlPositive;
+    }
+
+    public void setIsVdrlPositive(String isVdrlPositive) {
+        this.isVdrlPositive = isVdrlPositive;
+    }
+
+    public String getNutritionStatus() {
+        return nutritionStatus;
+    }
+
+    public void setNutritionStatus(String nutritionStatus) {
+        this.nutritionStatus = nutritionStatus;
+    }
+
+    public String getNrcNumber() {
+        return nrcNumber;
+    }
+
+    public void setNrcNumber(String nrcNumber) {
+        this.nrcNumber = nrcNumber;
+    }
+
+    public Boolean getTbCured() {
+        return isTbCured;
+    }
+
+    public void setTbCured(Boolean tbCured) {
+        isTbCured = tbCured;
+    }
+
+    public Boolean getTbSuspected() {
+        return isTbSuspected;
+    }
+
+    public void setTbSuspected(Boolean tbSuspected) {
+        isTbSuspected = tbSuspected;
+    }
+
+    public Boolean getIndexCase() {
+        return indexCase;
+    }
+
+    public void setIndexCase(Boolean indexCase) {
+        this.indexCase = indexCase;
+    }
+
+    public String getMemberReligion() {
+        return memberReligion;
+    }
+
+    public void setMemberReligion(String memberReligion) {
+        this.memberReligion = memberReligion;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = firstName + " " + middleName + " " + lastName + " " + uniqueHealthId + " " + nrcNumber + " " + passportNumber + " " + familyId + " " + mobileNumber;
+    }
+
+    public String getChronicDiseaseIdsForTreatment() {
+        return chronicDiseaseIdsForTreatment;
+    }
+
+    public void setChronicDiseaseIdsForTreatment(String chronicDiseaseIdsForTreatment) {
+        this.chronicDiseaseIdsForTreatment = chronicDiseaseIdsForTreatment;
+    }
+
+    public Boolean getBcgSurveyStatus() {
+        return bcgSurveyStatus;
+    }
+
+    public void setBcgSurveyStatus(Boolean bcgSurveyStatus) {
+        this.bcgSurveyStatus = bcgSurveyStatus;
+    }
+
+    public String getOtherChronicDiseaseTreatment() {
+        return otherChronicDiseaseTreatment;
+    }
+
+    public void setOtherChronicDiseaseTreatment(String otherChronicDiseaseTreatment) {
+        this.otherChronicDiseaseTreatment = otherChronicDiseaseTreatment;
+    }
+
+    public Boolean getPregnantFlag() {
+        return isPregnantFlag;
+    }
+
+    public void setPregnantFlag(Boolean pregnantFlag) {
+        isPregnantFlag = pregnantFlag;
+    }
+
+    public Boolean getChildGoingSchool() {
+        return isChildGoingSchool;
+    }
+
+    public void setChildGoingSchool(Boolean childGoingSchool) {
+        isChildGoingSchool = childGoingSchool;
+    }
+
+    public Boolean getBcgEligible() {
+        return bcgEligible;
+    }
+
+    public void setBcgEligible(Boolean bcgEligible) {
+        this.bcgEligible = bcgEligible;
+    }
+
+    public Boolean getBcgEligibleFilled() {
+        return bcgEligibleFilled;
+    }
+
+    public void setBcgEligibleFilled(Boolean bcgEligibleFilled) {
+        this.bcgEligibleFilled = bcgEligibleFilled;
+    }
+
+    public String getRdtStatus() {
+        return rdtStatus;
+    }
+
+    public void setRdtStatus(String rdtStatus) {
+        this.rdtStatus = rdtStatus;
+    }
+
+    public String getBirthCertNumber() {
+        return birthCertNumber;
+    }
+
+    public void setBirthCertNumber(String birthCertNumber) {
+        this.birthCertNumber = birthCertNumber;
     }
 }

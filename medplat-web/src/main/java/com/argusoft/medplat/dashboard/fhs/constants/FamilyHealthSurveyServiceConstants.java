@@ -135,6 +135,10 @@ public class FamilyHealthSurveyServiceConstants {
     public static final String CFHC_MEMBER_STATE_MO_VERIFIED = "CFHC_MMOV";
     public static final String CFHC_MEMBER_STATE_DEAD = "CFHC_MD";
 
+    // NCD MEMBER STATES
+    public static final String NCD_MEMBER_STATE_NEW = "NCD_MN";
+    public static final String NCD_FAMILY_STATE_NEW = "NCD_FN";
+
     //MEMBER BASIC STATES
     public static final String FHS_MEMBER_BASIC_STATE_VERIFIED = VERIFIED;
     public static final String FHS_MEMBER_BASIC_STATE_NEW = "NEW";

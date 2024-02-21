@@ -40,6 +40,8 @@ public class ListItemDataBean {
     private String screeningStatus;
     private Integer isScreeningDone;
     private int pendingAbhaCount;
+    private String color;
+
     private String healthInfraName;
     private String requestStatus;
     private String requestReason;
@@ -540,5 +542,12 @@ public class ListItemDataBean {
 
     public void setContactNumber(StringBuilder contactNumber) {
         this.contactNumber = contactNumber;
+    }
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
