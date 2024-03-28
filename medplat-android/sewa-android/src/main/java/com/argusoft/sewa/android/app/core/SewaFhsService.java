@@ -81,6 +81,7 @@ public interface SewaFhsService {
     List<MemberDataBean> retrievePncMothersByAshaArea(List<Integer> locationIds, Integer villageId, CharSequence searchString, long limit, long offset, LinkedHashMap<String, String> qrData);
 
     List<MemberDataBean> retrieveChildsBelow5YearsByAshaArea(List<Integer> locationIds, Boolean isHighRisk, List<Integer> villageIds, CharSequence s, long limit, long offset, LinkedHashMap<String, String> qrData);
+    List<MemberDataBean> retrieveAdolescentChildren(List<Integer> locationIds, Boolean isHighRisk, List<Integer> villageIds, CharSequence s, long limit, long offset, LinkedHashMap<String, String> qrData);
 
     List<MemberDataBean> retrieveChildsBelow6YearsByAshaArea(Integer locationId, CharSequence s, long limit, long offset, LinkedHashMap<String, String> qrData);
 

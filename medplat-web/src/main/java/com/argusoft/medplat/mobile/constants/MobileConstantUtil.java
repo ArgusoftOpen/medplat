@@ -194,6 +194,7 @@ public class MobileConstantUtil {
     public static final String INVALID_USERNAME_OR_PASSWORD_STR = "Incorrect Username or Password";
     public static final String ACCOUNT_LOCKED = "Your account is locked for 15 minutes. Please try again later";
     public static final String ACCOUNT_DISABLED = "Your account is disabled by Administrator.";
+    public static final String ADOLESCENT_SCREENING = "ADOLESCENT_SCREENING";
     public static final String LOCATION_NOT_ASSIGNED = "Location is not assigned correctly to the user, please contact your co-ordinator.";
     public static final String MENU_NOT_FOUND = "User is not authorised to login.";
 

@@ -216,6 +216,7 @@ public class FormMetaDataUtil {
         SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.MEMBER_NAME, UtilBean.getMemberFullName(memberBean));
         SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.NAME_OF_BENEFICIARY, UtilBean.getMemberFullName(memberBean));
         SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.VISIT_DATE, String.valueOf(new Date().getTime()));
+        SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.MEMBER_FULL_NAME, UtilBean.getMemberFullName(memberBean));
         SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.MEMBER_ACTUAL_ID, memberBean.getActualId());
         SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.PHONE_NUMBER, memberBean.getMobileNumber());
         SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.ADDRESS, UtilBean.getFamilyFullAddress(familyDataBean));

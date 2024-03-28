@@ -122,6 +122,7 @@ public class FormConstants {
     public static final String ASHA_REPORT_FAMILY_SPLIT = "REPORT_FAMILY_SPLIT";
     public static final String ASHA_REPORT_MEMBER_MIGRATION = "REPORT_MIGRATION";
     public static final String ASHA_REPORT_MEMBER_DEATH = "REPORT_DEATH";
+    public static final String ADOLESCENT_SCREENING = "ADOLESCENT_SCREENING";
     public static final String ASHA_REPORT_MEMBER_DELIVERY = "REPORT_DELIVERY";
 
     //FHW Confirmation Forms for ASHA Reported Events

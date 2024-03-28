@@ -144,6 +144,7 @@ public class MyPeopleActivity extends MenuActivity implements View.OnClickListen
     private static final String RCH_REGISTER_TABLE_SCREEN = "rchRegisterTableScreen";
     private static final String MANAGE_FAMILY_MIGRATIONS_SCREEN = "manageFamilyMigrationsScreen";
     private static final String SERVICE_ELIGIBLE_COUPLES = "eligibleCouples";
+    private static final String SERVICE_ADOLESCENT = "adolscent";
     private static final String SERVICE_PREGNANT_WOMEN = "pregnantWomen";
     private static final String SERVICE_PNC_MOTHERS = "pncMothers";
     private static final String SERVICE_CHILDREN = "children";
@@ -305,6 +306,9 @@ public class MyPeopleActivity extends MenuActivity implements View.OnClickListen
                                 addSearchTextBox();
                                 retrieveMemberListForRchRegister(null, null);
                                 break;
+                            case 5 :
+                                selectedService = SERVICE_ADOLESCENT;
+                                break;
 //                            case 4:
 //                                selectedService = SERVICE_TEMP_REGISTRATION;
 //                                showProcessDialog();
@@ -369,6 +373,7 @@ public class MyPeopleActivity extends MenuActivity implements View.OnClickListen
                         if (selectedService.equals(SERVICE_ELIGIBLE_COUPLES)
                                 || selectedService.equals(SERVICE_PREGNANT_WOMEN)
                                 || selectedService.equals(SERVICE_PNC_MOTHERS)
+                                || selectedService.equals(SERVICE_ADOLESCENT)
                                 || selectedService.equals(SERVICE_CHILDREN)) {
                             screen = PEOPLE_SELECTION_SCREEN;
                             showProcessDialog();
@@ -601,6 +606,10 @@ public class MyPeopleActivity extends MenuActivity implements View.OnClickListen
                 bodyLayoutContainer.removeAllViews();
                 setVisitSelectionScreen(visits);
                 break;
+
+            case SERVICE_ADOLESCENT:
+                startDynamicFormActivity(FormConstants.ADOLESCENT_SCREENING, memberList.get(selectedPeopleIndex), null);
+                break;
             default:
         }
         hideProcessDialog();
@@ -708,6 +717,7 @@ public class MyPeopleActivity extends MenuActivity implements View.OnClickListen
         //items.add(new ListItemDataBean(UtilBean.getMyLabel(LabelConstants.SERVICE_MIGRATED_IN_MEMBERS)));
         //items.add(new ListItemDataBean(UtilBean.getMyLabel(LabelConstants.SERVICE_MIGRATED_OUT_MEMBERS)));
         items.add(new ListItemDataBean(UtilBean.getMyLabel(LabelConstants.SERVICE_RCH_REGISTER)));
+        items.add(new ListItemDataBean(UtilBean.getMyLabel(LabelConstants.ADOLESCENT_SCREENING)));
         //items.add(new ListItemDataBean(UtilBean.getMyLabel(LabelConstants.SERVICE_GERIATRIC_MEMBERS)));
         //items.add(new ListItemDataBean(UtilBean.getMyLabel(LabelConstants.SERVICE_TRAVELLERS_SCREENING)));
         //items.add(new ListItemDataBean(UtilBean.getMyLabel(LabelConstants.MANAGE_FAMILY_MIGRATIONS)));
@@ -822,6 +832,9 @@ public class MyPeopleActivity extends MenuActivity implements View.OnClickListen
             case SERVICE_CHILDREN:
                 memberList = fhsService.retrieveChildsBelow5YearsByAshaArea(selectedAshaAreas, false, villageIds, s, limit, offset, qrScanFilter);
                 break;
+            case SERVICE_ADOLESCENT:
+                memberList = fhsService.retrieveAdolescentChildren(selectedAshaAreas, false, villageIds, s, limit, offset, qrScanFilter);
+                break;
             default:
                 break;
         }
@@ -846,6 +859,9 @@ public class MyPeopleActivity extends MenuActivity implements View.OnClickListen
                 break;
             case SERVICE_CHILDREN:
                 addChildsBelow5YearsList();
+                break;
+            case SERVICE_ADOLESCENT:
+                adoloscentMemberList();
                 break;
             default:
                 break;
@@ -910,6 +926,7 @@ public class MyPeopleActivity extends MenuActivity implements View.OnClickListen
             case SERVICE_PNC_MOTHERS:
             case SERVICE_RCH_REGISTER:
             case SERVICE_UPDATE_MEMBER:
+            case SERVICE_ADOLESCENT:
                 for (MemberDataBean memberDataBean : memberDataBeanList) {
                     list.add(new ListItemDataBean(memberDataBean.getFamilyId(), memberDataBean.getUniqueHealthId(), UtilBean.getMemberFullName(memberDataBean), null, null));
                 }
@@ -1203,6 +1220,24 @@ public class MyPeopleActivity extends MenuActivity implements View.OnClickListen
         } else {
             bodyLayoutContainer.removeView(pagingHeaderView);
             noMemberAvailableView = MyStaticComponents.generateQuestionView(null, null, this, LabelConstants.NO_CHILD_MEMBER_IN_AREA);
+            bodyLayoutContainer.addView(noMemberAvailableView);
+        }
+        hideProcessDialog();
+    }
+
+    @UiThread
+    public void adoloscentMemberList() {
+        if (memberList != null && !memberList.isEmpty()) {
+            pagingHeaderView = MyStaticComponents.getListTitleView(this, LabelConstants.SELECT_ADOLESCENT_MEMBER);
+            bodyLayoutContainer.addView(pagingHeaderView);
+
+            List<ListItemDataBean> membersList = getMembersList(memberList);
+            AdapterView.OnItemClickListener onItemClickListener = (parent, view, position, id) -> selectedPeopleIndex = position;
+            pagingListView = MyStaticComponents.getPaginatedListViewWithItem(context, membersList, R.layout.listview_row_with_two_item, onItemClickListener, this);
+            bodyLayoutContainer.addView(pagingListView);
+        } else {
+            bodyLayoutContainer.removeView(pagingHeaderView);
+            noMemberAvailableView = MyStaticComponents.generateQuestionView(null, null, this, LabelConstants.NO_ADOLESCENT_MEMBER_FOUND);
             bodyLayoutContainer.addView(noMemberAvailableView);
         }
         hideProcessDialog();

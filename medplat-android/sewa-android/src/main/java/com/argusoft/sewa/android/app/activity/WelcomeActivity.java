@@ -81,7 +81,7 @@ public class WelcomeActivity extends MenuActivity {
     }
 
     public void checkDeviceRootAccess() {
-        if (RootUtil.isDeviceRooted()) {
+        if (!RootUtil.isDeviceRooted()) {
             showAlertAndExit(LabelConstants.NOT_ALLOW_ON_ROOTED_DEVICE_ALERT);
         } else {
             checkPermissions();

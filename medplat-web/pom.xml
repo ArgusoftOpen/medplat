@@ -249,7 +249,7 @@
                 <server.redirect.port>8181</server.redirect.port>
                 <server.is.secure>true</server.is.secure>
                 <jdbc.url>localhost</jdbc.url>
-                <jdbc.database>medplat</jdbc.database>
+                <jdbc.database>bootcamp_db</jdbc.database>
                 <jdbc.username>postgres</jdbc.username>
                 <jdbc.password>argusadmin</jdbc.password>
                 <jdbc.port>5432</jdbc.port>
@@ -257,7 +257,7 @@
                 <server.droptype>P</server.droptype>
                 <server.type>DEV</server.type>
                 <server.implementation.type>medplat</server.implementation.type>
-                <repository.path>/home/hmorzariya/Repository/</repository.path>
+                <repository.path>/home/utkarsh/Repository/</repository.path>
                 <hibernate.showsql>true</hibernate.showsql>
                 <hibernate.formatsql>true</hibernate.formatsql>
                 <spring.resourceslocation>file:../</spring.resourceslocation>

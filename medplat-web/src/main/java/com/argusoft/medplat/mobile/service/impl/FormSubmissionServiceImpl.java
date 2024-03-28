@@ -29,6 +29,7 @@ import com.argusoft.medplat.nutrition.service.ChildCmtcNrcScreeningService;
 import com.argusoft.medplat.rch.dto.AshaEventRejectionDataBean;
 import com.argusoft.medplat.rch.dto.AshaReportedEventDataBean;
 import com.argusoft.medplat.rch.service.*;
+import com.argusoft.medplat.rch.service.impl.AdolescentServiceImpl;
 import com.argusoft.medplat.web.users.dao.UserDao;
 import com.argusoft.medplat.web.users.dao.UserTokenDao;
 import com.argusoft.medplat.web.users.model.UserMaster;
@@ -82,6 +83,8 @@ public class FormSubmissionServiceImpl extends GenericSessionUtilService impleme
     private ChildCmtcNrcScreeningService childCmtcNrcScreeningService;
     @Autowired
     private VaccineAdverseEffectService vaccineAdverseEffectService;
+    @Autowired
+    private AdolescentServiceImpl adolescentService;
 //    @Autowired
 //    private NcdService ncdService;
 //    @Autowired
@@ -785,6 +788,8 @@ public class FormSubmissionServiceImpl extends GenericSessionUtilService impleme
 //                } else {
 //                    return chardhamMemberScreeningService.storeChardhamMemberScreeningForm(parsedRecordBean, keyAndAnswerMap, user);
 //                }
+            case MobileConstantUtil.ADOLESCENT_SCREENING:
+                return adolescentService.storeAdolescentForm(parsedRecordBean,keyAndAnswerMap, user);
             default:
         }
         return createdInstanceId;

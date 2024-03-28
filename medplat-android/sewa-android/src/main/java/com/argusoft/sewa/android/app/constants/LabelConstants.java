@@ -260,6 +260,7 @@ public class LabelConstants {
     public static final String SERVICE_MIGRATED_IN_MEMBERS = "Migrated In Members";
     public static final String SERVICE_MIGRATED_OUT_MEMBERS = "Migrated Out Members";
     public static final String SERVICE_RCH_REGISTER = "RCH Register";
+    public static final String ADOLESCENT_SCREENING = "Adolescent Health Screening";
     public static final String SERVICE_GERIATRIC_MEMBERS = "Geriatric Members";
     public static final String SERVICE_TRAVELLERS_SCREENING = "Travellers' Screening";
     public static final String SERVICE_SELECTION_REQUIRED_ALERT = "Please select a type of service";
@@ -279,6 +280,7 @@ public class LabelConstants {
     public static final String NO_PREGNANT_WOMEN_IN_AREA = "No pregnant women in your area";
     public static final String NO_PNC_WOMEN_IN_AREA = "No PNC Women in your Area";
     public static final String NO_CHILD_MEMBER_IN_AREA = "No child member in your Area";
+    public static final String NO_ADOLESCENT_MEMBER_FOUND = "No adolescent member found";
     public static final String NO_MIGRATED_MEMBER_FOUND = "No Migrated Members found in this Location";
     public static final String NO_TOURIST_FOUND = "No Records Found";
     public static final String NO_EMERGENCY_SUPPORTER_FOUND = "No emergency supporter found";
@@ -335,6 +337,7 @@ public class LabelConstants {
     public static final String SELECT_ADOLESCENT_GIRL = "Select an Adolescent Girl";
     public static final String SELECT_MOTHER = "Select Mother";
     public static final String SELECT_CHILD = "Select a Child";
+    public static final String SELECT_ADOLESCENT_MEMBER = "Select adolescent member";
     public static final String NO_ADOLESCENT_GIRLS_IN_YOUR_AREA = "No adolescent girl in your area";
     public static final String NO_MOTHERS_WITH_LAST_DELIVERY_BEFORE_6_MONTHS_ALERT = "No mother with last delivery date within 6 months in your area";
     public static final String NO_CHILDREN_OF_AGE_0_TO_6_YEARS_ALERT = "No child is younger than 6 years in your area";
