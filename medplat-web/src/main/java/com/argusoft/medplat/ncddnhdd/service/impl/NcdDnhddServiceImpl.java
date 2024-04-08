@@ -189,7 +189,7 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
         memberCbacDetail.setMobileEndDate(ImtechoUtil.getMobileStartOrEndDateFromString(keyAndAnswerMap.get("-9")));
         memberCbacDetail.setDoneOn(ImtechoUtil.getMobileStartOrEndDateFromString(keyAndAnswerMap.get("10")));
         memberCbacDetail.setCbacAndNutritionMasterId(masterId);
-//        memberCbacDetail.setDoneBy(getDoneByForCbacFor(user));
+        memberCbacDetail.setDoneBy(MemberCbacDetail.DoneBy.ASHA);
 
         for (Map.Entry<String, String> entrySet : keyAndAnswerMap.entrySet()) {
             String key = entrySet.getKey();
@@ -604,7 +604,7 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
         memberReferral.setReferredOn(referredOn);
         memberReferral.setReferredFromHealthInfrastructureId(infraId);
         memberReferral.setState(State.PENDING);
-//        memberReferral.setReferredFrom(getReferredFromForMemberReferral(user));
+        memberReferral.setReferredFrom(ReferralPlace.ASHA);
 
         if (infraId == -1) {
             memberReferral.setReferredTo(ReferralPlace.PVT);
