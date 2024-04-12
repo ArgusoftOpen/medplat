@@ -34,6 +34,12 @@ public class AdolescentEntity extends EntityAuditInfo implements Serializable {
     @Column(name = "weight")
     private Integer weight;
 
+    @Column(name = "has_addictions")
+    private Boolean hasAddictions;
+
+    @Column(name = "addictions")
+    private String addictions;
+
     public Integer getId() {
         return id;
     }
@@ -56,5 +62,21 @@ public class AdolescentEntity extends EntityAuditInfo implements Serializable {
 
     public void setWeight(Integer weight) {
         this.weight = weight;
+    }
+
+    public Boolean getHasAddictions() {
+        return hasAddictions;
+    }
+
+    public void setHasAddictions(Boolean hasAddictions) {
+        this.hasAddictions = hasAddictions;
+    }
+
+    public String getAddictions() {
+        return addictions;
+    }
+
+    public void setAddictions(String addictions) {
+        this.addictions = addictions;
     }
 }

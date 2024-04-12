@@ -83,6 +83,12 @@ public class AdolescentServiceImpl implements AdolescentService {
             case "4" :
                 adolescentEntity.setWeight(Integer.parseInt(answer));
                 break;
+            case "5" :
+                adolescentEntity.setHasAddictions(ImtechoUtil.returnTrueFalseFromInitials(answer));
+                break;
+            case "6" :
+                adolescentEntity.setAddictions(answer);
+                break;
         }
     }
 }

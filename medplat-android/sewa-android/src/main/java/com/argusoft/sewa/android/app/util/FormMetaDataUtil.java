@@ -220,6 +220,7 @@ public class FormMetaDataUtil {
         SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.MEMBER_ACTUAL_ID, memberBean.getActualId());
         SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.PHONE_NUMBER, memberBean.getMobileNumber());
         SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.ADDRESS, UtilBean.getFamilyFullAddress(familyDataBean));
+        SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.GENDER, memberBean.getGender());
         SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.BENEFICIARY_NAME_FOR_LOG,
                 UtilBean.getMemberFullName(memberBean) + "(" + memberBean.getUniqueHealthId() + ")"); //for showing purpose...in worklog
 
