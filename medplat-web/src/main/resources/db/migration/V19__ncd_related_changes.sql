@@ -1770,3 +1770,6 @@ delete from listvalue_field_form_relation where form_id in (59,60) and field = '
 insert into listvalue_field_form_relation(field,form_id) values
      ('mentalHealthOtherProblemList',59),
      ('mentalHealthOtherProblemList',60);
+
+
+ALTER TABLE ncd_member_mental_health_detail ADD COLUMN IF NOT EXISTS is_suspected boolean;
