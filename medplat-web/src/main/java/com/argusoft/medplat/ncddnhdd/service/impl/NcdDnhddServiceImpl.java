@@ -568,7 +568,7 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
                 mentalHealthDetails.getMemberId(), mentalHealthDetails.getLocationId(),
                 DiseaseCode.MH, user, new Date(), mentalHealthDetails.getHealthInfraId()));
 
-//        hypertensionDetailDao.create(hypertensionDetail);
+        hypertensionDetailDao.create(hypertensionDetail);
         diabetesDetailDao.create(diabetesDetail);
         mentalHealthDetailDao.create(mentalHealthDetails);
 
@@ -954,16 +954,16 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
 
         if (breastDetail != null) {
             breastDetail.setReferralId(storeMemberReferralFromForms(
-                    breastDetail.getMemberId(), breastDetail.getLocationId(),
-                    DiseaseCode.B, user, new Date(), breastDetail.getHealthInfraId()));
+            breastDetail.getMemberId(), breastDetail.getLocationId(),
+            DiseaseCode.B, user, new Date(), breastDetail.getHealthInfraId()));
             breastDetailDao.create(breastDetail);
             cancerScreeningMaster.setBreastId(breastDetail.getId());
             updateMemberAdditionalInfoFromBreast(member, breastDetail, false);
         }
         if (cervicalDetail != null) {
             cervicalDetail.setReferralId(storeMemberReferralFromForms(
-                    cervicalDetail.getMemberId(), cervicalDetail.getLocationId(), DiseaseCode.C,
-                    user, new Date(), cervicalDetail.getHealthInfraId()));
+            cervicalDetail.getMemberId(), cervicalDetail.getLocationId(), DiseaseCode.C,
+            user, new Date(), cervicalDetail.getHealthInfraId()));
             cervicalDetailDao.create(cervicalDetail);
             cancerScreeningMaster.setCervicalId(cervicalDetail.getId());
             updateMemberAdditionalInfoFromCervical(member, cervicalDetail, false);

@@ -1,34 +1,172 @@
+<head>
+    <link href="styles/css/fontAwesome6.5.1/css/all.min.css" rel="stylesheet" type="text/css" />
+</head>
 <style>
     .cursor-pointer {
         cursor: pointer;
     }
+
     .red-text {
         color: red;
     }
+
     .green-text {
         color: green;
     }
+
     .black-text {
         color: black;
     }
+
     .custom-style {
         color: #214761;
     }
+
+    .capitalize {
+        text-transform: capitalize;
+    }
+
+
+    .collapse.show {
+        display: block !important;
+    }
+
+    .btn-link {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+    }
+
+    .section-heading {
+        background-color: #f0f0f0;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .lighter-text {
+        text-align: left;
+        font-size: 15px;
+    }
+
+    .btn-print {
+        color: white;
+        font-size: 14px;
+        padding: 8px 16px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-print:hover {
+        background-color: #0056b3;
+    }
+
+    .bi-printer {
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
+    .heading {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 16px 0 16px;
+        align-items: center;
+        background-color: #2b7dce;
+        cursor: pointer;
+    }
+
+    .collapseable-container {
+        overflow: hidden;
+        transition: width 0.3s ease;
+    }
+
+    .collapsed {
+        width: 0;
+    }    
+
+    #barsButton {
+        position: absolute;
+        left: 1400px;
+        padding: 8px;
+        font-size: 24px;
+
+    }
+
+    .patient-summary-heading {
+        padding: 5px 0 0 0;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+    }
+
+    .print-button {
+        font-size: 18px;
+        color: white;
+    }
+
+    .print-button:hover {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .patient-img {
+        width: 80px;
+        height: auto;
+    }
+
+    .patient-summary {
+        transition: width 0.3s ease;
+        position: relative;
+        padding: 0 0 10px 0;
+        overflow: auto;
+    }
+
+    #toggleButtonLi {
+        background-color: #2b7dce;
+        z-index: 100;
+        display: none;
+        margin-left: auto;
+        margin-right: 15px;
+        position: absolute;
+        right: 0;
+    }
+
+    #toggleButtonLi i {
+        color: #ffffff;
+        font-size: larger;
+    }
+
+    button[aria-expanded=false] .fa-chevron-up {
+        display: none;
+    }
+    button[aria-expanded=true] .fa-chevron-down {
+        display: none;
+    }
+
 </style>
+<script>
+
+</script>
 <div class="no-print container-fluid">
-    <div class="row">
-        <div class="col-xl-10">
+    <div class="row mx-0">
+        <div class="col">
             <div class="tabbable boxed parentTabs cst-tab cst-tab-white-style">
+                <div id="toggleButtonLi" class="float-right" ng-click="ncdmd.togglePatientSummary()">
+                    <a href="javascript:void(0)" class="nav-link"><i id="toggleButton" class="fa fa-bars"></i></a>
+                </div>
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#hypertension-main" class="nav-link">Hypertension and Diabetes</a>
                     </li>
                     <li ng-click="ncdmd.navigateToTab('oral-main')"><a href="#oral-main" class="nav-link">Oral</a>
                     </li>
-                    <li ng-show="ncdmd.member.basicDetails.gender === 'F'" ng-click="ncdmd.navigateToTab('breast-main')"><a
-                            href="#breast-main" class="nav-link">Breast</a>
+                    <li ng-show="ncdmd.member.basicDetails.gender === 'F'"
+                        ng-click="ncdmd.navigateToTab('breast-main')"><a href="#breast-main" class="nav-link disabled">Breast</a>
                     </li>
-                    <li ng-show="ncdmd.member.basicDetails.gender === 'F'" ng-click="ncdmd.navigateToTab('cervical-main')">
-                        <a href="#cervical-main" class="nav-link">Cervical</a>
+                    <li ng-show="ncdmd.member.basicDetails.gender === 'F'"
+                        ng-click="ncdmd.navigateToTab('cervical-main')">
+                        <a href="#cervical-main" class="nav-link disabled">Cervical</a>
                     </li>
                 </ul>
                 <div class="tab-content cst-scrollbar thin">
@@ -53,21 +191,26 @@
                                                                         form-control
                                                                         ng-model="ncdmd.member.memberHypertensionDto.screeningDate"
                                                                         ng-change="ncdmd.retrieveHypertensionDetailsByMemberAndDate(); ncdmd.retrieveDiabetesDetailsByMemberAndDate();"
-                                                                        max-date="today" min-date="ncdmd.lastScreeningDate">
+                                                                        max-date="ncdmd.today"
+                                                                        min-date="ncdmd.lastScreeningDate">
                                                                     <placeholder></placeholder>
                                                                 </validate>
                                                             </div>
                                                             <div class="form-group"
                                                                 ng-if="ncdmd.showAssignedInfrastructuresForHypertension && ncdmd.isUserHealthFetch">
-                                                                <validate for='healthInfra' required-msg="Select health infrastructure">
-                                                                    <label style="vertical-align: middle;white-space: initial" control-label>
+                                                                <validate for='healthInfra'
+                                                                    required-msg="Select health infrastructure">
+                                                                    <label
+                                                                        style="vertical-align: middle;white-space: initial"
+                                                                        control-label>
                                                                         <span class="info_type">
                                                                             Health Infrastructure
                                                                         </span>
                                                                     </label>
                                                                     <select class="form-control cst-form-control"
-                                                                        ng-if="!ncdmd.isSingleInfra"
-                                                                        form-control chosen-directive="ncdmd.userHealthInfras" name="healthInfra"
+                                                                        ng-if="!ncdmd.isSingleInfra" form-control
+                                                                        chosen-directive="ncdmd.userHealthInfras"
+                                                                        name="healthInfra"
                                                                         ng-model="ncdmd.member.memberHypertensionDto.referredFromInstitute"
                                                                         required>
                                                                         <option value="" selected>--Select--</option>
@@ -76,11 +219,15 @@
                                                                             value="{{institute}}">{{institute.name}}
                                                                         </option>
                                                                     </select>
-                                                                    <input type="text" class="form-control cst-form-control" form-control
-                                                                        name="healthInfraSingle" id="healthInfraSingle"
+                                                                    <input type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="healthInfraSingle"
+                                                                        id="healthInfraSingle"
                                                                         ng-model="ncdmd.userHealthInfras.name"
-                                                                        ng-if="ncdmd.isSingleInfra" disabled="true" required>
-                                                                    <placeholder style="margin-right: -50px;"></placeholder>
+                                                                        ng-if="ncdmd.isSingleInfra" disabled="true"
+                                                                        required>
+                                                                    <placeholder style="margin-right: -50px;">
+                                                                    </placeholder>
                                                                 </validate>
                                                             </div>
                                                         </div>
@@ -90,14 +237,17 @@
                                                             <h6>
                                                                 Hypertension Examination
                                                                 <span class="float-right" style="margin-top: -3px;">
-                                                                    <button type="button" ng-click="ncdmd.showTreatmentHistory('HT')" 
-                                                                        class="btn btn-sm btn-primary">Treatment History</button>
+                                                                    <button type="button"
+                                                                        ng-click="ncdmd.showTreatmentHistory('HT')"
+                                                                        class="btn btn-sm btn-primary">Treatment
+                                                                        History</button>
                                                                 </span>
-                                                            </h6>                                                            
+                                                            </h6>
                                                             <div class="input-box--inner row">
                                                                 <div class="form-group col-xl-3">
                                                                     <validate for='systolicBloodPressure'
-                                                                        required-msg="Please enter systolic BP" max-msg="SystolicBP cannot be > {{ ncdmd.maxAllowedSysBP }}"
+                                                                        required-msg="Please enter systolic BP"
+                                                                        max-msg="SystolicBP cannot be > {{ ncdmd.maxAllowedSysBP }}"
                                                                         min-msg="SystolicBP cannot be < {{ ncdmd.minAllowedSysBP }}">
                                                                         <label for="systolicBloodPressure"
                                                                             control-label>Systolic BP
@@ -110,14 +260,17 @@
                                                                             ng-change="ncdmd.hypertensionExaminedValuesChanged()"
                                                                             ng-disabled="ncdmd.hypertensionAlreadyFilled"
                                                                             numbers-only required decimalallowed="false"
-                                                                            negativeallowed="false" maxlength="3" ng-max="ncdmd.maxAllowedSysBP" ng-min="ncdmd.minAllowedSysBP"
+                                                                            negativeallowed="false" maxlength="3"
+                                                                            ng-max="ncdmd.maxAllowedSysBP"
+                                                                            ng-min="ncdmd.minAllowedSysBP"
                                                                             ng-class="{'text-danger':ncdmd.member.memberHypertensionDto.systolicBloodPressure>=ncdmd.maxSysBP || ncdmd.member.memberHypertensionDto.systolicBloodPressure<=ncdmd.minAllowedSysBP}">
                                                                         <placeholder></placeholder>
                                                                     </validate>
                                                                 </div>
                                                                 <div class="form-group col-xl-3">
                                                                     <validate for='diastolicBloodPressure'
-                                                                        required-msg="Please enter diastolic BP" max-msg="DiastolicBP cannot be > {{ncdmd.maxAllowedDiaBP}}"
+                                                                        required-msg="Please enter diastolic BP"
+                                                                        max-msg="DiastolicBP cannot be > {{ncdmd.maxAllowedDiaBP}}"
                                                                         min-msg="DiastolicBP cannot be < {{ncdmd.minAllowedDiaBP}}">
                                                                         <label for="diastolicBloodPressure"
                                                                             control-label>Diastolic BP
@@ -138,7 +291,8 @@
                                                                 </div>
                                                                 <div class="form-group col-xl-3">
                                                                     <validate for='heartRate'
-                                                                        required-msg="Please enter heart rate" max-msg="Heart rate cannot be > {{ncdmd.maxHeartRate}}"
+                                                                        required-msg="Please enter heart rate"
+                                                                        max-msg="Heart rate cannot be > {{ncdmd.maxHeartRate}}"
                                                                         min-msg="Heart rate cannot be < {{ncdmd.minHeartRate}}">
                                                                         <label for="heartRate" control-label>Heart Rate
                                                                             (BPM)</label>
@@ -148,7 +302,9 @@
                                                                             ng-model="ncdmd.member.memberHypertensionDto.heartRate"
                                                                             ng-disabled="ncdmd.hypertensionAlreadyFilled"
                                                                             numbers-only required decimalallowed="false"
-                                                                            negativeallowed="false" maxlength="3" ng-max="ncdmd.maxHeartRate"ng-min="ncdmd.minHeartRate"
+                                                                            negativeallowed="false" maxlength="3"
+                                                                            ng-max="ncdmd.maxHeartRate"
+                                                                            ng-min="ncdmd.minHeartRate"
                                                                             ng-class="{'text-danger':ncdmd.member.memberHypertensionDto.heartRate>ncdmd.maxHeartRate || ncdmd.member.memberHypertensionDto.heartRate<=ncdmd.minHeartRate}">
                                                                         <placeholder></placeholder>
                                                                     </validate>
@@ -156,11 +312,15 @@
                                                                 <div class="form-group col-xl-3"
                                                                     ng-if="!ncdmd.showHypertensionSubType && !ncdmd.hypertensionAlreadyFilled">
                                                                     <validate required-msg="Please select status">
-                                                                        <label for="status"control-label>
-                                                                            <span style="font-weight: bold;">Status</span>
+                                                                        <label for="status" control-label>
+                                                                            <span
+                                                                                style="font-weight: bold;">Status</span>
                                                                         </label>
-                                                                        <select class="form-control cst-form-control"                                                                        <select class="form-control cst-form-control"
-                                                                            form-control ng-change="ncdmd.onChange('HSTATUS')"
+                                                                        <select class="form-control cst-form-control"
+                                                                            <select
+                                                                            class="form-control cst-form-control"
+                                                                            form-control
+                                                                            ng-change="ncdmd.onChange('HSTATUS')"
                                                                             ng-model="ncdmd.member.memberHypertensionDto.status"
                                                                             name="status" id="status" required>
                                                                             <option value="" selected>--Select--
@@ -174,9 +334,9 @@
                                                                 </div>
                                                                 <div class="form-group"
                                                                     ng-if="ncdmd.showHypertensionSubType && !ncdmd.hypertensionAlreadyFilled">
-                                                                    <label for="status"control-label>
+                                                                    <label for="status" control-label>
                                                                         <span style="font-weight: bold;">Status</span>
-                                                                    </label><br/>
+                                                                    </label><br />
                                                                     <label class="long"
                                                                         ng-if="ncdmd.member.memberHypertensionDto.subType!=null"><strong>{{ncdmd.member.memberHypertensionDto.subType}}</strong></label>
                                                                     <label class="long"
@@ -252,8 +412,10 @@
                                                             <h6>
                                                                 Diabetes Examination
                                                                 <span class="float-right" style="margin-top: -3px;">
-                                                                    <button type="button" ng-click="ncdmd.showTreatmentHistory('D')" 
-                                                                        class="btn btn-sm btn-primary">Treatment History</button>
+                                                                    <button type="button"
+                                                                        ng-click="ncdmd.showTreatmentHistory('D')"
+                                                                        class="btn btn-sm btn-primary">Treatment
+                                                                        History</button>
                                                                 </span>
                                                             </h6>
                                                             <div class="input-box--inner row ">
@@ -261,7 +423,8 @@
                                                                     <validate for='fastingBloodSugar'
                                                                         required-msg="Please enter readings">
                                                                         <label for="fastingBloodSugar"
-                                                                            class="control-label" control-label>Fasting (empty stomach)
+                                                                            class="control-label" control-label>Fasting
+                                                                            (empty stomach)
                                                                         </label>
                                                                         <input type="text"
                                                                             class="form-control cst-form-control"
@@ -367,12 +530,14 @@
                                                                     <validate for='status'
                                                                         required-msg="Please select status">
                                                                         <label for="status" control-label>
-                                                                            <span style="font-weight: bold;">Status</span>
+                                                                            <span
+                                                                                style="font-weight: bold;">Status</span>
                                                                         </label>
                                                                         <select class="form-control cst-form-control"
-                                                                            form-control ng-change="ncdmd.onChange('DSTATUS')"
+                                                                            form-control
+                                                                            ng-change="ncdmd.onChange('DSTATUS')"
                                                                             ng-model="ncdmd.member.memberDiabetesDto.status"
-                                                                            name="status" id="status" required>
+                                                                            name="status" id="status" required disabled>
                                                                             <option value="" selected>--Select--
                                                                             </option>
                                                                             <option value="CONFIRMED">Confirmed</option>
@@ -384,7 +549,8 @@
                                                                 </div>
                                                                 <div class="form-group"
                                                                     ng-if="ncdmd.showDiabetesSubType && !ncdmd.diabetesAlreadyFilled">
-                                                                    <label class="long"><span class="info_type" style="font-weight: bold;"
+                                                                    <label class="long"><span class="info_type"
+                                                                            style="font-weight: bold;"
                                                                             control-label>Status</span></label><br>
                                                                     <label class="long"
                                                                         ng-if="ncdmd.member.memberDiabetesDto.subType!=null"><strong>{{ncdmd.member.memberDiabetesDto.subType}}</strong></label>
@@ -396,19 +562,19 @@
                                                     </div>
                                                     <div class="row mb-3 px-15"
                                                         ng-if="((ncdmd.member.memberDiabetesDto.status==='CONFIRMED' || ncdmd.showDiabetesSubType) && !ncdmd.diabetesAlreadyFilled)
-                                                            || ((ncdmd.member.memberHypertensionDto.status==='CONFIRMED' || ncdmd.showHypertensionSubType) && !ncdmd.hypertensionAlreadyFilled)">
+                                                            || ((ncdmd.member.memberHypertensionDto.status==='CONFIRMED' || ncdmd.showHypertensionSubType) && !ncdmd.hypertensionAlreadyFilled )">
                                                         <div class="col-xl-12 input-box br-0 ">
                                                             <h6>Treatment and Referral</h6>
                                                             <div class="input-box--inner row">
                                                                 <div class="col-12">
                                                                     <div>
-                                                                        <div class="form-group" ng-if="ncdmd.askDiabetesTreatmentQuestion || ncdmd.askHypertensionTreatmentQuestion">
+                                                                        <div class="form-group col-xl-5"
+                                                                            ng-if="ncdmd.askDiabetesTreatmentQuestion || ncdmd.askHypertensionTreatmentQuestion">
+                                                                            <label for="startTreatment"
+                                                                            class="control-label required" control-label>
+                                                                            Would you like to start treatment?</label>
                                                                             <validate for='startTreatment'
-                                                                                required-msg="Please select an answer">
-                                                                                <label for="startTreatment"
-                                                                                    class="control-label"
-                                                                                    control-label>Would you like to start
-                                                                                    treatment?</label>
+                                                                                required-msg="Please select an answer">               
                                                                                 <label class="control control-radio">Yes
                                                                                     <input value="true"
                                                                                         name="startTreatment"
@@ -416,39 +582,56 @@
                                                                                         ng-change="ncdmd.onChange('D')"
                                                                                         ng-model="ncdmd.member.memberDiabetesDto.startTreatment"
                                                                                         form-control required>
-                                                                                    <div class="control_indicator"></div>
+                                                                                    <div class="control_indicator">
+                                                                                    </div>
                                                                                 </label>
                                                                                 <label class="control control-radio">No
                                                                                     <input value="false"
-                                                                                        name="startTreatment" type="radio"
+                                                                                        name="startTreatment"
+                                                                                        type="radio"
                                                                                         ng-change="ncdmd.onChange('D')"
                                                                                         ng-model="ncdmd.member.memberDiabetesDto.startTreatment"
                                                                                         form-control required>
-                                                                                    <div class="control_indicator"></div>
+                                                                                    <div class="control_indicator">
+                                                                                    </div>
                                                                                 </label>
                                                                                 <placeholder></placeholder>
                                                                             </validate>
                                                                         </div>
 
-                                                                        <div class="input-box--inner row" ng-if="ncdmd.member.memberDiabetesDto.startTreatment === 'true'">
+                                                                        <div class="input-box--inner row"
+                                                                            ng-if="ncdmd.member.memberDiabetesDto.startTreatment === 'true'">
 
                                                                             <div class="col-xl-12">
-                                                                                <table class="table table-striped" style=" border: 1px solid lightgray;">
+                                                                                <table class="table table-striped"
+                                                                                    style=" border: 1px solid lightgray;">
                                                                                     <thead class="cst-thead">
                                                                                         <tr>
-                                                                                            <th style="width: 25%;" class="table-heading">
+                                                                                            <th style="width: 25%;"
+                                                                                                class="table-heading">
                                                                                                 Medicine Name</th>
-                                                                                            <th style="width: 25%;" class="table-heading">Start Date</th>
-                                                                                            <th style="width: 5%;" class="table-heading">Frequency(per day)
+                                                                                            <th style="width: 45%;"
+                                                                                                class="table-heading">
+                                                                                                Start Date</th>
+                                                                                            <th style="width: 5%;"
+                                                                                                class="table-heading">
+                                                                                                Frequency(per day)
                                                                                             </th>
-                                                                                            <th style="width: 5%;" class="table-heading">Duration(number of days)
+                                                                                            <th style="width: 5%;"
+                                                                                                class="table-heading">
+                                                                                                Duration(number of days)
                                                                                             </th>
-                                                                                            <th style="width: 15%;" class="table-heading">Quantity
+                                                                                            <th style="width: 5%;"
+                                                                                                class="table-heading">
+                                                                                                Quantity
                                                                                             </th>
-                                                                                            <th style="width: 20%;" class="table-heading">Special
+                                                                                            <th style="width: 20%;"
+                                                                                                class="table-heading">
+                                                                                                Special
                                                                                                 Instruction
                                                                                             </th>
-                                                                                            <th style="width: 5%;" class="table-heading">
+                                                                                            <th style="width: 5%;"
+                                                                                                class="table-heading">
                                                                                                 Action</th>
                                                                                         </tr>
                                                                                     </thead>
@@ -456,62 +639,117 @@
                                                                                         <tr>
                                                                                             <td>
                                                                                                 <div class="form-group">
-                                                                                                    <validate for="med" required-msg="Please select Medicine Name">
-                                                                                                        <select class="form-control cst-form-control" form-control
-                                                                                                            ng-model="ncdmd.member.memberHypertensionDto.medicine" form="ncdmd.medicineform" name="medicine"
+                                                                                                    <validate for="med"
+                                                                                                        required-msg="Please select Medicine Name">
+                                                                                                        <select
+                                                                                                            class="form-control cst-form-control"
+                                                                                                            form-control
+                                                                                                            ng-model="ncdmd.member.memberHypertensionDto.medicine"
+                                                                                                            form="ncdmd.medicineform"
+                                                                                                            name="medicine"
                                                                                                             ng-options="medicine as medicine.name for medicine in ncdmd.medicines"
                                                                                                             id="medicine"
+                                                                                                            chosen-directive="ncdmd.medicines"
                                                                                                             ng-change="ncdmd.member.memberHypertensionDto.medicineDetail!=null?ncdmd.isSubmit = false:ncdmd.isSubmit = true;">
-                                                                                                            <option value="" selected>
+                                                                                                            <option
+                                                                                                                value=""
+                                                                                                                selected>
                                                                                                                 --Select--
                                                                                                             </option>
                                                                                                         </select>
-                                                                                                        <placeholder></placeholder>
+                                                                                                        <placeholder>
+                                                                                                        </placeholder>
                                                                                                     </validate>
                                                                                                 </div>
                                                                                             </td>
                                                                                             <td>
                                                                                                 <div class="form-group">
-                                                                                                    <validate for='startDate' required-msg="Please select start date">
+                                                                                                    <validate
+                                                                                                        for='startDate'
+                                                                                                        required-msg="Please select start date">
                                                                                                         <!-- <label for="startDate" title="Date" control-label></label> -->
-                                                                                                        <input datepicker type="text" name="startDate" id="startDate" name="startDate"
-                                                                                                            form-control ng-model="ncdmd.member.memberHypertensionDto.medicine.startDate" min-date="ncdmd.today" max-date="ncdmd.maxStartDate">
-                                                                                                        <placeholder></placeholder>
+                                                                                                        <input
+                                                                                                            datepicker
+                                                                                                            type="text"
+                                                                                                            name="startDate"
+                                                                                                            id="startDate"
+                                                                                                            name="startDate"
+                                                                                                            form-control
+                                                                                                            ng-model="ncdmd.member.memberHypertensionDto.medicine.startDate"
+                                                                                                            min-date="ncdmd.today"
+                                                                                                            max-date="ncdmd.maxStartDate">
+                                                                                                        <placeholder>
+                                                                                                        </placeholder>
                                                                                                     </validate>
                                                                                                 </div>
                                                                                             </td>
                                                                                             <td>
                                                                                                 <div class="form-group">
-                                                                                                    <validate for="frequency" required-msg="Please Enter Value">
-                                                                                                        <input type="text" form-control class="form-control cst-form-control" min="1"
-                                                                                                            max="5" id="frequency" name="frequency" ng-model="ncdmd.member.memberHypertensionDto.medicine.frequency"
-                                                                                                            numbers-only decimalallowed="false" negativeallowed="false" ng-pattern="/[^.]{0,2}/"
+                                                                                                    <validate
+                                                                                                        for="frequency"
+                                                                                                        required-msg="Please Enter Value">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            form-control
+                                                                                                            class="form-control cst-form-control"
+                                                                                                            min="1"
+                                                                                                            max="5"
+                                                                                                            id="frequency"
+                                                                                                            name="frequency"
+                                                                                                            ng-model="ncdmd.member.memberHypertensionDto.medicine.frequency"
+                                                                                                            numbers-only
+                                                                                                            decimalallowed="false"
+                                                                                                            negativeallowed="false"
+                                                                                                            ng-pattern="/[^.]{0,2}/"
                                                                                                             form="ncdmd.medicineform"
                                                                                                             ng-change="ncdmd.calculateMedicineQuantity(); ncdmd.medicine.frequency!=null?ncdmd.isSubmit = false:ncdmd.isSubmit = true;">
-                                                                                                        <placeholder style="position: relative; max-width: 100%;" >
+                                                                                                        <placeholder
+                                                                                                            style="position: relative; max-width: 100%;">
                                                                                                         </placeholder>
                                                                                                     </validate>
                                                                                                 </div>
                                                                                             </td>
                                                                                             <td>
                                                                                                 <div class="form-group">
-                                                                                                    <validate for="duration" required-msg="Please Enter Value">
-                                                                                                        <input type="text" form-control class="form-control cst-form-control" min="1"
-                                                                                                            max="60" id="duration" name="duration" ng-model="ncdmd.member.memberHypertensionDto.medicine.duration"
-                                                                                                            numbers-only decimalallowed="false" negativeallowed="false" ng-pattern="/[^.]{0,2}/"
+                                                                                                    <validate
+                                                                                                        for="duration"
+                                                                                                        required-msg="Please Enter Value">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            form-control
+                                                                                                            class="form-control cst-form-control"
+                                                                                                            min="1"
+                                                                                                            max="60"
+                                                                                                            id="duration"
+                                                                                                            name="duration"
+                                                                                                            ng-model="ncdmd.member.memberHypertensionDto.medicine.duration"
+                                                                                                            numbers-only
+                                                                                                            decimalallowed="false"
+                                                                                                            negativeallowed="false"
+                                                                                                            ng-pattern="/[^.]{0,2}/"
                                                                                                             form="ncdmd.medicineform"
                                                                                                             ng-change="ncdmd.calculateMedicineQuantity(); ncdmd.medicine.duration!=null?ncdmd.isSubmit = false:ncdmd.isSubmit = true;">
-                                                                                                        <placeholder  style="position: relative; max-width: 100%;">
+                                                                                                        <placeholder
+                                                                                                            style="position: relative; max-width: 100%;">
                                                                                                         </placeholder>
                                                                                                     </validate>
                                                                                                 </div>
                                                                                             </td>
                                                                                             <td>
                                                                                                 <div class="form-group">
-                                                                                                    <validate for="quantity" required-msg="Please Enter Value">
-                                                                                                        <input type="text" form-control form="ncdmd.medicineform"
-                                                                                                            class="form-control cst-form-control" id="quantity" name="quantity"
-                                                                                                            ng-model="ncdmd.member.memberHypertensionDto.medicine.quantity" decimalallowed="false" negativeallowed="false"
+                                                                                                    <validate
+                                                                                                        for="quantity"
+                                                                                                        required-msg="Please Enter Value">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            form-control
+                                                                                                            form="ncdmd.medicineform"
+                                                                                                            class="form-control cst-form-control"
+                                                                                                            id="quantity"
+                                                                                                            name="quantity"
+                                                                                                            ng-model="ncdmd.member.memberHypertensionDto.medicine.quantity"
+                                                                                                            decimalallowed="false"
+                                                                                                            negativeallowed="false"
                                                                                                             ng-disabled="true">
                                                                                                         <placeholder>
                                                                                                         </placeholder>
@@ -520,15 +758,22 @@
                                                                                             </td>
                                                                                             <td>
                                                                                                 <div class="form-group">
-                                                                                                    <input type="text" form-control form="ncdmd.medicineform"
-                                                                                                        class="form-control cst-form-control" id="specialInstruction"
-                                                                                                        name="specialInstruction" ng-model="ncdmd.member.memberHypertensionDto.medicine.specialInstruction"
+                                                                                                    <input type="text"
+                                                                                                        form-control
+                                                                                                        form="ncdmd.medicineform"
+                                                                                                        class="form-control cst-form-control"
+                                                                                                        id="specialInstruction"
+                                                                                                        name="specialInstruction"
+                                                                                                        ng-model="ncdmd.member.memberHypertensionDto.medicine.specialInstruction"
                                                                                                         maxlength="200"
                                                                                                         ng-change="ncdmd.medicine.specialInstruction!=null?ncdmd.isSubmit = false:ncdmd.isSubmit = true;">
                                                                                                 </div>
                                                                                             </td>
                                                                                             <td>
-                                                                                                <button ng-click="ncdmd.addMedicine()" type="submit" class="btn btn-primary"
+                                                                                                <button
+                                                                                                    ng-click="ncdmd.addMedicine()"
+                                                                                                    type="submit"
+                                                                                                    class="btn btn-primary"
                                                                                                     form="ncdmd.medicineform">Add</button>
                                                                                             </td>
                                                                                         </tr>
@@ -537,38 +782,61 @@
                                                                             </div>
                                                                         </div>
                                                                         <!-- <h6 ng-if="ncdmd.member.memberHypertensionDto.medicineDetail.length > 0">Newly added Medicines</h6> -->
-                                                                        <div class="input-box--inner row" ng-if="ncdmd.member.memberHypertensionDto.medicineDetail.length > 0">
+                                                                        <div class="input-box--inner row"
+                                                                            ng-if="ncdmd.member.memberHypertensionDto.medicineDetail.length > 0">
                                                                             <div class="col-xl-12 cst-table">
-                                                                                <table class="table table-striped" style=" border: 1px solid lightgray;">
+                                                                                <table class="table table-striped"
+                                                                                    style=" border: 1px solid lightgray;">
                                                                                     <thead class="cst-thead">
                                                                                         <tr>
-                                                                                            <th style="width: 25%;" class="table-heading">
+                                                                                            <th style="width: 25%;"
+                                                                                                class="table-heading">
                                                                                                 Medicine Name</th>
-                                                                                            <th style="width: 10%;" class="table-heading">Start date</th>
-                                                                                            <th style="width: 10%;" class="table-heading">Frequency
+                                                                                            <th style="width: 10%;"
+                                                                                                class="table-heading">
+                                                                                                Start date</th>
+                                                                                            <th style="width: 10%;"
+                                                                                                class="table-heading">
+                                                                                                Frequency
                                                                                             </th>
-                                                                                            <th style="width: 10%;" class="table-heading">Duration
+                                                                                            <th style="width: 10%;"
+                                                                                                class="table-heading">
+                                                                                                Duration
                                                                                             </th>
-                                                                                            <th style="width: 15%;" class="table-heading">Quantity
+                                                                                            <th style="width: 15%;"
+                                                                                                class="table-heading">
+                                                                                                Quantity
                                                                                             </th>
-                                                                                            <th style="width: 15%;" class="table-heading">Special
+                                                                                            <th style="width: 15%;"
+                                                                                                class="table-heading">
+                                                                                                Special
                                                                                                 Instruction
                                                                                             </th>
-                                                                                            <th style="width: 15%;" class="table-heading">Action
+                                                                                            <th style="width: 15%;"
+                                                                                                class="table-heading">
+                                                                                                Action
                                                                                             </th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <tr ng-repeat="item in ncdmd.member.memberHypertensionDto.medicineDetail">
-                                                                                            <td>{{item.medicineName}}</td>
-                                                                                            <td>{{item.startDate | date:'dd/MM/yyyy'}}</td>
+                                                                                        <tr
+                                                                                            ng-repeat="item in ncdmd.member.memberHypertensionDto.medicineDetail">
+                                                                                            <td>{{item.medicineName}}
+                                                                                            </td>
+                                                                                            <td>{{item.startDate |
+                                                                                                date:'dd/MM/yyyy'}}</td>
                                                                                             <td>{{item.frequency}}</td>
                                                                                             <td>{{item.duration}}</td>
                                                                                             <td>{{item.quantity}}</td>
-                                                                                            <td style="max-width: 200px;">{{item.specialInstruction}}</td>
+                                                                                            <td
+                                                                                                style="max-width: 200px;">
+                                                                                                {{item.specialInstruction}}
+                                                                                            </td>
                                                                                             <td class="action-cell">
                                                                                                 <ul class="action-item">
-                                                                                                    <li style="cursor: pointer;"><a class="action-icon delete-icon"
+                                                                                                    <li
+                                                                                                        style="cursor: pointer;">
+                                                                                                        <a class="action-icon delete-icon"
                                                                                                             ng-click='ncdmd.deleteMedicine($index,item)'></a>
                                                                                                     </li>
                                                                                                 </ul>
@@ -578,78 +846,141 @@
                                                                                 </table>
                                                                             </div>
                                                                         </div>
-                                                                        <h6 ng-if="ncdmd.prescribedMedicine.length > 0">Previously Prescribed Medicines</h6>
-                                                                        <div class="input-box--inner row" ng-if="ncdmd.prescribedMedicine.length > 0">
+                                                                        <h6 ng-if="ncdmd.prescribedMedicine.length > 0">
+                                                                            Previously Prescribed Medicines</h6>
+                                                                        <div class="input-box--inner row"
+                                                                            ng-if="ncdmd.prescribedMedicine.length > 0">
                                                                             <div class="col-xl-12 cst-table">
-                                                                                <table class="table table-striped" style=" border: 1px solid lightgray;">
+                                                                                <table class="table table-striped"
+                                                                                    style=" border: 1px solid lightgray;">
                                                                                     <thead class="cst-thead">
                                                                                         <tr>
-                                                                                            <th style="width: 20%;" class="table-heading">
+                                                                                            <th style="width: 20%;"
+                                                                                                class="table-heading">
                                                                                                 Medicine Name</th>
-                                                                                            <th style="width: 10%;" class="table-heading">Start date</th>
-                                                                                            <th style="width: 10%;" class="table-heading">Frequency
+                                                                                            <th style="width: 10%;"
+                                                                                                class="table-heading">
+                                                                                                Start date</th>
+                                                                                            <th style="width: 10%;"
+                                                                                                class="table-heading">
+                                                                                                Frequency
                                                                                             </th>
-                                                                                            <th style="width: 10%;" class="table-heading">Duration
+                                                                                            <th style="width: 10%;"
+                                                                                                class="table-heading">
+                                                                                                Duration
                                                                                             </th>
-                                                                                            <th style="width: 15%;" class="table-heading">Quantity
+                                                                                            <th style="width: 15%;"
+                                                                                                class="table-heading">
+                                                                                                Quantity
                                                                                             </th>
-                                                                                            <th style="width: 15%;" class="table-heading">Special
+                                                                                            <th style="width: 15%;"
+                                                                                                class="table-heading">
+                                                                                                Special
                                                                                                 Instruction
                                                                                             </th>
-                                                                                            <th tyle="width: 10%;" class="table-heading">Is medicine returned?</th>
-                                                                                            <th style="width: 10%;" class="table-heading">Last day of Medicine
+                                                                                            <th tyle="width: 10%;"
+                                                                                                class="table-heading">Is
+                                                                                                medicine returned?</th>
+                                                                                            <th style="width: 10%;"
+                                                                                                class="table-heading">
+                                                                                                Last day of Medicine
                                                                                             </th>
-                                                                                            <th style="width: 15%;" class="table-heading" ng-if="ncdmd.showEdit">
+                                                                                            <th style="width: 15%;"
+                                                                                                class="table-heading"
+                                                                                                ng-if="ncdmd.showEdit">
                                                                                                 Action
                                                                                             </th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <tr ng-repeat="item in ncdmd.prescribedMedicine">
-                                                                                            <td>{{item.medicineName}}</td>
-                                                                                            <td>{{item.startDate | date:'dd/MM/yyyy'}}</td>
-                                                                                            <td ng-if="!item.isEdit">{{item.frequency}}</td>
+                                                                                        <tr
+                                                                                            ng-repeat="item in ncdmd.prescribedMedicine">
+                                                                                            <td>{{item.medicineName}}
+                                                                                            </td>
+                                                                                            <td>{{item.startDate |
+                                                                                                date:'dd/MM/yyyy'}}</td>
+                                                                                            <td ng-if="!item.isEdit">
+                                                                                                {{item.frequency}}</td>
                                                                                             <td ng-if="item.isEdit">
                                                                                                 <validate>
-                                                                                                    <input type="number" form-control form="ncdmd.medicineform"
-                                                                                                        class="form-control cst-form-control" id="frequency" name="frequency" min="1"
-                                                                                                        max="5" ng-model="item.frequencyNew" ng-change="ncdmd.editMedicineChange(item)"
-                                                                                                        decimalallowed="false" negativeallowed="false">
+                                                                                                    <input type="number"
+                                                                                                        form-control
+                                                                                                        form="ncdmd.medicineform"
+                                                                                                        class="form-control cst-form-control"
+                                                                                                        id="frequency"
+                                                                                                        name="frequency"
+                                                                                                        min="1" max="5"
+                                                                                                        ng-model="item.frequencyNew"
+                                                                                                        ng-change="ncdmd.editMedicineChange(item)"
+                                                                                                        decimalallowed="false"
+                                                                                                        negativeallowed="false">
                                                                                                     <placeholder>
                                                                                                     </placeholder>
                                                                                                 </validate>
                                                                                             </td>
-                                                                                            <td ng-if="!item.isEdit">{{item.duration}}</td>
+                                                                                            <td ng-if="!item.isEdit">
+                                                                                                {{item.duration}}</td>
                                                                                             <td ng-if="item.isEdit">
-                                                                                                <validate><input type="number" form-control form="ncdmd.medicineform"
-                                                                                                        class="form-control cst-form-control" id="duration" name="duration"
-                                                                                                        ng-model="item.durationNew" ng-change="ncdmd.editMedicineChange(item)"
-                                                                                                        decimalallowed="false" negativeallowed="false">
+                                                                                                <validate><input
+                                                                                                        type="number"
+                                                                                                        form-control
+                                                                                                        form="ncdmd.medicineform"
+                                                                                                        class="form-control cst-form-control"
+                                                                                                        id="duration"
+                                                                                                        name="duration"
+                                                                                                        ng-model="item.durationNew"
+                                                                                                        ng-change="ncdmd.editMedicineChange(item)"
+                                                                                                        decimalallowed="false"
+                                                                                                        negativeallowed="false">
                                                                                                     <placeholder>
                                                                                                     </placeholder>
                                                                                                 </validate>
                                                                                             </td>
                                                                                             <td>{{item.quantity}}</td>
-                                                                                            <td style="max-width: 200px;">{{item.specialInstruction ? item.specialInstruction : '-'}}</td>
-                                                                                            <td ng-if="item.isEdit"><input type="checkbox" form-control form="ncdmd.medicineform"
-                                                                                                    id="isReturn" name="isReturn" ng-model="item.isReturn"
-                                                                                                    ng-disabled="!item.isEnableReturnButton" required></td>
-                                                                                            <td ng-if="!item.isEdit">{{item.isReturn?'Yes':'No'}}</td>
-                                                                                            <td>{{item.expiryDate | date:'dd/MM/yyyy'}}</td>
-                                                                                            <td class="action-cell" ng-if="ncdmd.showEdit">
+                                                                                            <td
+                                                                                                style="max-width: 200px;">
+                                                                                                {{item.specialInstruction
+                                                                                                ?
+                                                                                                item.specialInstruction
+                                                                                                : '-'}}</td>
+                                                                                            <td ng-if="item.isEdit">
+                                                                                                <input type="checkbox"
+                                                                                                    form-control
+                                                                                                    form="ncdmd.medicineform"
+                                                                                                    id="isReturn"
+                                                                                                    name="isReturn"
+                                                                                                    ng-model="item.isReturn"
+                                                                                                    ng-disabled="!item.isEnableReturnButton"
+                                                                                                    required></td>
+                                                                                            <td ng-if="!item.isEdit">
+                                                                                                {{item.isReturn?'Yes':'No'}}
+                                                                                            </td>
+                                                                                            <td>{{item.expiryDate |
+                                                                                                date:'dd/MM/yyyy'}}</td>
+                                                                                            <td class="action-cell"
+                                                                                                ng-if="ncdmd.showEdit">
                                                                                                 <ul class="action-item"
                                                                                                     ng-if="((item.issuedDate | date:'dd/MM/yyyy') === (ncdmd.date | date:'dd/MM/yyyy') || ncdmd.fromMoReview) && !item.isEdit">
-                                                                                                    <li style="cursor: pointer;"><a class="action-icon edit-icon"
+                                                                                                    <li
+                                                                                                        style="cursor: pointer;">
+                                                                                                        <a class="action-icon edit-icon"
                                                                                                             ng-click='item.isEdit = !item.isEdit; item.frequencyNew = item.frequency; item.durationNew = item.duration;'></a>
                                                                                                     </li>
-                                                                                                    <li style="cursor: pointer;"><a class="action-icon delete-icon"
+                                                                                                    <li
+                                                                                                        style="cursor: pointer;">
+                                                                                                        <a class="action-icon delete-icon"
                                                                                                             ng-click='ncdmd.addMedicineToDelete($index,item)'></a>
                                                                                                     </li>
                                                                                                 </ul>
-                                                                                                <div ng-if="item.isEdit">
-                                                                                                    <button ng-click="ncdmd.addMedicineToEdit($index,item)" type="submit"
+                                                                                                <div
+                                                                                                    ng-if="item.isEdit">
+                                                                                                    <button
+                                                                                                        ng-click="ncdmd.addMedicineToEdit($index,item)"
+                                                                                                        type="submit"
                                                                                                         class="btn btn-primary">Save</button>
-                                                                                                    <button ng-click="item.isEdit = !item.isEdit" class="btn btn-primary">Cancel</button>
+                                                                                                    <button
+                                                                                                        ng-click="item.isEdit = !item.isEdit"
+                                                                                                        class="btn btn-primary">Cancel</button>
                                                                                                 </div>
                                                                                             </td>
                                                                                         </tr>
@@ -673,23 +1004,30 @@
                                                                             </validate>
                                                                         </div> -->
                                                                         <div class="form-group"
-                                                                            ng-if="ncdmd.member.memberDiabetesDto.startTreatment === 'false'">
+                                                                        ng-if="(ncdmd.member.memberDiabetesDto.status==='CONFIRMED' ||ncdmd.member.memberHypertensionDto.status==='CONFIRMED' 
+                                                                        || ncdmd.showHypertensionReferral || ncdmd.showDiabetesReferral) 
+                                                                        && !ncdmd.diabetesAlreadyFilled && !ncdmd.hypertensionAlreadyFilled ">
                                                                             <referral
                                                                                 referral-dto="ncdmd.member.memberDiabetesDto.referralDto"
+                                                                                fetch-levels="ncdmd.fetchLevels"
+                                                                                infrastructure-id="ncdmd.infrastructureTypeId"
                                                                                 institution-type="ncdmd.isSingleInfra ? ncdmd.userHealthInfras : ncdmd.member.memberHypertensionDto.referredFromInstitute">
                                                                             </referral>
                                                                         </div>
                                                                     </div>
-                                                                    <div ng-if="((ncdmd.member.memberDiabetesDto.status==='CONFIRMED' || ncdmd.showDiabetesSubType) && !ncdmd.diabetesAlreadyFilled)
+                                                                    <div
+                                                                        ng-if="((ncdmd.member.memberDiabetesDto.status==='CONFIRMED' || ncdmd.showDiabetesSubType) && !ncdmd.diabetesAlreadyFilled)
                                                                                 || ((ncdmd.member.memberHypertensionDto.status==='CONFIRMED' || ncdmd.showHypertensionSubType) && !ncdmd.hypertensionAlreadyFilled)">
-                                                                        <div class="form-group col-xl-4" style="padding-left: 0px;">
+                                                                        <div class="form-group col-xl-4"
+                                                                            style="padding-left: 0px;">
                                                                             <validate for='followUpDate'
                                                                                 required-msg="Please select followup date">
                                                                                 <label for="followUpDate"
                                                                                     class="control-label" control-label
                                                                                     title="Date">Follow up Date</label>
-                                                                                <input datepicker type="text" form-control
-                                                                                    required id="followUpDate"
+                                                                                <input datepicker type="text"
+                                                                                    form-control required
+                                                                                    id="followUpDate"
                                                                                     name="followUpDate"
                                                                                     min-date="ncdmd.minHypertensionFollowUpDate"
                                                                                     max-date="ncdmd.maxHypertensionDiabetesFollowUpDate"
@@ -702,12 +1040,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="row" ng-if="!ncdmd.hypertensionAlreadyFilled || !ncdmd.diabetesAlreadyFilled">
+                                                    <div class="row"
+                                                        ng-if="!ncdmd.hypertensionAlreadyFilled || !ncdmd.diabetesAlreadyFilled">
                                                         <div class="col-12">
                                                             <div class="button-footer" style="border: 0px;">
                                                                 <button class="btn btn-primary"
-                                                                    ng-click="ncdmd.saveHyperTensionAndDiabetes();">Save
-                                                                    & Continue
+                                                                    ng-click="ncdmd.saveHyperTensionAndDiabetes()">Save & Continue
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -739,21 +1077,25 @@
                                                                         name="screeningDate" form-control required
                                                                         ng-model="ncdmd.member.memberOralDto.screeningDate"
                                                                         ng-change="ncdmd.retrieveOralDetailsByMemberAndDate()"
-                                                                        max-date="today" min-date="ncdmd.lastCancerServiceDate">
+                                                                        max-date="ncdmd.today"
+                                                                        min-date="ncdmd.lastCancerServiceDate">
                                                                     <placeholder></placeholder>
                                                                 </validate>
                                                             </div>
                                                             <div class="form-group"
                                                                 ng-if="ncdmd.showAssignedInfrastructuresForOral && ncdmd.isUserHealthFetch">
-                                                                <validate for='hospital' required-msg="Select health infrastructure">
-                                                                    <label style="vertical-align: middle;white-space: initial" control-label>
+                                                                <validate for='hospital'
+                                                                    required-msg="Select health infrastructure">
+                                                                    <label
+                                                                        style="vertical-align: middle;white-space: initial"
+                                                                        control-label>
                                                                         <span class="info_type">
                                                                             Health Infrastructure
                                                                         </span>
                                                                     </label>
                                                                     <select class="form-control cst-form-control"
-                                                                        ng-if="!ncdmd.isSingleInfra"
-                                                                        form-control chosen-directive name="hospital"
+                                                                        ng-if="!ncdmd.isSingleInfra" form-control
+                                                                        chosen-directive name="hospital"
                                                                         ng-model="ncdmd.member.memberOralDto.referredFromInstitute"
                                                                         required>
                                                                         <option value="" selected>--Select--</option>
@@ -762,11 +1104,15 @@
                                                                             value="{{institute}}">{{institute.name}}
                                                                         </option>
                                                                     </select>
-                                                                    <input type="text" class="form-control cst-form-control" form-control
-                                                                        name="healthInfraSingle" id="healthInfraSingle"
+                                                                    <input type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="healthInfraSingle"
+                                                                        id="healthInfraSingle"
                                                                         ng-model="ncdmd.userHealthInfras.name"
-                                                                        ng-if="ncdmd.isSingleInfra" disabled="true" required>
-                                                                    <placeholder style="margin-right: -50px;"></placeholder>
+                                                                        ng-if="ncdmd.isSingleInfra" disabled="true"
+                                                                        required>
+                                                                    <placeholder style="margin-right: -50px;">
+                                                                    </placeholder>
                                                                 </validate>
                                                             </div>
                                                             <div class="form-group" style="float: right;">
@@ -841,11 +1187,13 @@
                                                                             ng-if="!ncdmd.showOralDirectStatus && !ncdmd.oralAlreadyFilled">
                                                                             <validate for='status'
                                                                                 required-msg="Please select status">
-                                                                                <label for="status"control-label>
-                                                                                    <span style="font-weight: bold;">Status</span></label>
+                                                                                <label for="status" control-label>
+                                                                                    <span
+                                                                                        style="font-weight: bold;">Status</span></label>
                                                                                 <select
                                                                                     class="form-control cst-form-control"
-                                                                                    form-control ng-change="ncdmd.onChange('OSTATUS')"
+                                                                                    form-control
+                                                                                    ng-change="ncdmd.onChange('OSTATUS')"
                                                                                     ng-model="ncdmd.member.memberOralDto.status"
                                                                                     name="status" id="status" required>
                                                                                     <option value="" selected>
@@ -873,7 +1221,8 @@
                                                                         </div>
                                                                         <div class="form-group"
                                                                             ng-if="ncdmd.showOralDirectStatus && !ncdmd.oralAlreadyFilled">
-                                                                            <label class="long"><span class="info_type" style="font-weight: bold;"
+                                                                            <label class="long"><span class="info_type"
+                                                                                    style="font-weight: bold;"
                                                                                     control-label>Status</span></label><br>
                                                                             <label class="long"
                                                                                 ng-if="ncdmd.member.memberOralDto.status!=null"><strong>{{ncdmd.member.memberOralDto.status}}</strong></label>
@@ -1080,6 +1429,8 @@
                                                                     <div class="form-group">
                                                                         <referral
                                                                             referral-dto="ncdmd.member.memberOralDto.referralDto"
+                                                                            fetch-levels="ncdmd.fetchLevels"
+                                                                            infrastructure-id="ncdmd.infrastructureTypeId"
                                                                             institution-type="ncdmd.isSingleInfra ? ncdmd.userHealthInfras : ncdmd.member.memberOralDto.referredFromInstitute">
                                                                         </referral>
                                                                     </div>
@@ -1108,7 +1459,8 @@
                                                         <div class="col-12">
                                                             <div class="button-footer">
                                                                 <button class="btn btn-primary"
-                                                                    ng-click="ncdmd.saveOral()">Save & Continue</button>
+                                                                    ng-click="ncdmd.saveHyperTensionAndDiabetes()"
+                                                                    >Save & Continue</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1141,20 +1493,24 @@
                                                                         name="screeningDate" form-control required
                                                                         ng-model="ncdmd.member.memberBreastDto.screeningDate"
                                                                         ng-change="ncdmd.retrieveBreastDetailsByMemberAndDate()"
-                                                                        max-date="today" min-date="ncdmd.lastCancerServiceDate">
+                                                                        max-date="ncdmd.today"
+                                                                        min-date="ncdmd.lastCancerServiceDate">
                                                                     <placeholder></placeholder>
                                                             </div>
                                                             <div class="form-group"
                                                                 ng-if="ncdmd.showAssignedInfrastructuresForBreast && ncdmd.isUserHealthFetch">
-                                                                <validate for='hospital' required-msg="Select health infrastructure">
-                                                                    <label style="vertical-align: middle;white-space: initial" control-label>
+                                                                <validate for='hospital'
+                                                                    required-msg="Select health infrastructure">
+                                                                    <label
+                                                                        style="vertical-align: middle;white-space: initial"
+                                                                        control-label>
                                                                         <span class="info_type">
                                                                             Health Infrastructure
                                                                         </span>
                                                                     </label>
                                                                     <select class="form-control cst-form-control"
-                                                                        ng-if="!ncdmd.isSingleInfra"
-                                                                        form-control chosen-directive name="hospital"
+                                                                        ng-if="!ncdmd.isSingleInfra" form-control
+                                                                        chosen-directive name="hospital"
                                                                         ng-model="ncdmd.member.memberBreastDto.referredFromInstitute"
                                                                         required>
                                                                         <option value="" selected>--Select--</option>
@@ -1163,11 +1519,15 @@
                                                                             value="{{institute}}">{{institute.name}}
                                                                         </option>
                                                                     </select>
-                                                                    <input type="text" class="form-control cst-form-control" form-control
-                                                                        name="healthInfraSingle" id="healthInfraSingle"
+                                                                    <input type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="healthInfraSingle"
+                                                                        id="healthInfraSingle"
                                                                         ng-model="ncdmd.userHealthInfras.name"
-                                                                        ng-if="ncdmd.isSingleInfra" disabled="true" required>
-                                                                    <placeholder style="margin-right: -50px;"></placeholder>
+                                                                        ng-if="ncdmd.isSingleInfra" disabled="true"
+                                                                        required>
+                                                                    <placeholder style="margin-right: -50px;">
+                                                                    </placeholder>
                                                                 </validate>
                                                             </div>
                                                             <div class="form-group" style="float: right;">
@@ -1318,9 +1678,12 @@
                                                                     <validate for='status'
                                                                         required-msg="Please select status">
                                                                         <label for="status" control-label>
-                                                                            <span style="font-weight: bold">Status</span>
-                                                                        </label>                                                                        <select class="form-control cst-form-control"
-                                                                            form-control ng-change="ncdmd.onChange('BSTATUS')"
+                                                                            <span
+                                                                                style="font-weight: bold">Status</span>
+                                                                        </label> <select
+                                                                            class="form-control cst-form-control"
+                                                                            form-control
+                                                                            ng-change="ncdmd.onChange('BSTATUS')"
                                                                             ng-model="ncdmd.member.memberBreastDto.status"
                                                                             name="status" id="status" required>
                                                                             <option value="" selected>
@@ -1348,7 +1711,8 @@
                                                                 </div>
                                                                 <div class="form-group"
                                                                     ng-if="ncdmd.showBreastDirectStatus && !ncdmd.breastAlreadyFilled">
-                                                                    <label class="long"><span class="info_type" style="font-weight: bold;"
+                                                                    <label class="long"><span class="info_type"
+                                                                            style="font-weight: bold;"
                                                                             control-label>Status</span></label><br>
                                                                     <label class="long"
                                                                         ng-if="ncdmd.member.memberBreastDto.status!=null"><strong>{{ncdmd.member.memberBreastDto.status}}</strong></label>
@@ -1530,6 +1894,8 @@
                                                                     <div class="form-group">
                                                                         <referral
                                                                             referral-dto="ncdmd.member.memberBreastDto.referralDto"
+                                                                            fetch-levels="ncdmd.fetchLevels"
+                                                                            infrastructure-id="ncdmd.infrastructureTypeId"
                                                                             institution-type="ncdmd.isSingleInfra ? ncdmd.userHealthInfras : ncdmd.member.memberBreastDto.referredFromInstitute">
                                                                         </referral>
                                                                     </div>
@@ -1594,14 +1960,18 @@
                                                                         name="screeningDate" required form-control
                                                                         ng-model="ncdmd.member.memberCervicalDto.screeningDate"
                                                                         ng-change="ncdmd.retrieveCervicalDetailsByMemberAndDate()"
-                                                                        max-date="today" min-date="ncdmd.lastCancerServiceDate">
+                                                                        max-date="ncdmd.today"
+                                                                        min-date="ncdmd.lastCancerServiceDate">
                                                                     <placeholder></placeholder>
                                                                 </validate>
                                                             </div>
                                                             <div class="form-group"
                                                                 ng-if="ncdmd.showAssignedInfrastructuresForCervical && ncdmd.isUserHealthFetch">
-                                                                <validate for='hospital' required-msg="Select health infrastructure">
-                                                                    <label style="vertical-align: middle;white-space: initial" control-label>
+                                                                <validate for='hospital'
+                                                                    required-msg="Select health infrastructure">
+                                                                    <label
+                                                                        style="vertical-align: middle;white-space: initial"
+                                                                        control-label>
                                                                         <span class="info_type">
                                                                             Health Infrastructure
                                                                         </span>
@@ -1617,11 +1987,15 @@
                                                                             value="{{institute}}">{{institute.name}}
                                                                         </option>
                                                                     </select>
-                                                                    <input type="text" class="form-control cst-form-control" form-control
-                                                                        name="healthInfraSingle" id="healthInfraSingle"
+                                                                    <input type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="healthInfraSingle"
+                                                                        id="healthInfraSingle"
                                                                         ng-model="ncdmd.userHealthInfras.name"
-                                                                        ng-if="ncdmd.isSingleInfra" disabled="true" required>
-                                                                    <placeholder style="margin-right: -50px;"></placeholder>
+                                                                        ng-if="ncdmd.isSingleInfra" disabled="true"
+                                                                        required>
+                                                                    <placeholder style="margin-right: -50px;">
+                                                                    </placeholder>
                                                                 </validate>
                                                             </div>
                                                             <div class="form-group" style="float: right;">
@@ -1634,7 +2008,8 @@
                                                     </div>
                                                     <div class="row mb-3 px-15 ">
                                                         <div class="col-xl-4 form-group">
-                                                            <validate for='papsmearTest' required-msg="Please select result">
+                                                            <validate for='papsmearTest'
+                                                                required-msg="Please select result">
                                                                 <label for="papsmearTest" control-label
                                                                     class="d-block control-label">PAP Smear Test</label>
                                                                 <label class="control control-radio">Positive
@@ -1646,18 +2021,16 @@
                                                                     <div class="control_indicator"></div>
                                                                 </label>
                                                                 <label class="control control-radio">Negative
-                                                                    <input name="papsmearTest"
-                                                                        id="papsmearTest" required type="radio"
-                                                                        form-control
+                                                                    <input name="papsmearTest" id="papsmearTest"
+                                                                        required type="radio" form-control
                                                                         ng-model="ncdmd.member.memberCervicalDto.papsmearTest"
                                                                         ng-disabled="ncdmd.cervicalAlreadyFilled"
                                                                         ng-value="false">
                                                                     <div class="control_indicator"></div>
                                                                 </label>
                                                                 <label class="control control-radio">Not Done
-                                                                    <input name="papsmearTest"
-                                                                        id="papsmearTest" required type="radio"
-                                                                        form-control
+                                                                    <input name="papsmearTest" id="papsmearTest"
+                                                                        required type="radio" form-control
                                                                         ng-model="ncdmd.member.memberCervicalDto.papsmearTest"
                                                                         ng-disabled="ncdmd.cervicalAlreadyFilled"
                                                                         ng-value="'null'">
@@ -1667,8 +2040,7 @@
                                                             </validate>
                                                         </div>
                                                         <div class="col-xl-4 form-group">
-                                                            <validate for='viaTest'
-                                                                required-msg="Please select result">
+                                                            <validate for='viaTest' required-msg="Please select result">
                                                                 <label for="viaTest" control-label class="d-block">VIA
                                                                     Test</label>
                                                                 <label class="control control-radio">Positive
@@ -1703,7 +2075,7 @@
                                                             <validate for='status' required-msg="Please select status">
                                                                 <label for="status" control-label>
                                                                     <span style="font-weight: bold;">Status</span>
-                                                                </label>                                                                <select class="form-control cst-form-control"
+                                                                </label> <select class="form-control cst-form-control"
                                                                     form-control ng-change="ncdmd.onChange('CSTATUS')"
                                                                     ng-model="ncdmd.member.memberCervicalDto.status"
                                                                     name="status" id="status" required>
@@ -1731,7 +2103,8 @@
                                                         </div>
                                                         <div class="form-group col-xl-4"
                                                             ng-if="ncdmd.showCervicalDirectStatus && !ncdmd.cervicalAlreadyFilled">
-                                                            <label class="long"><span class="info_type" style="font-weight: bold;"
+                                                            <label class="long"><span class="info_type"
+                                                                    style="font-weight: bold;"
                                                                     control-label>Status</span></label><br>
                                                             <label class="long"
                                                                 ng-if="ncdmd.member.memberCervicalDto.status!=null"><strong>{{ncdmd.member.memberCervicalDto.status}}</strong></label>
@@ -1746,6 +2119,8 @@
                                                                     <div class="form-group">
                                                                         <referral
                                                                             referral-dto="ncdmd.member.memberCervicalDto.referralDto"
+                                                                            fetch-levels="ncdmd.fetchLevels"
+                                                                            infrastructure-id="ncdmd.infrastructureTypeId"
                                                                             institution-type="ncdmd.isSingleInfra ? ncdmd.userHealthInfras : ncdmd.member.memberCervicalDto.referredFromInstitute">
                                                                         </referral>
                                                                     </div>
@@ -1789,109 +2164,317 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-2 patient-summary cst-scrollbar thin">
-            <div class="row">
-                <div class="col-xl-12">
-                    <img alt="image" src="img/default-avatar.png"
-                        class="patient-img patient-img--big d-block mx-auto" />
+        
+
+        <div class="col-md-4 collapseable-container collapsed" id="patientSummary">
+            <div class="heading">
+                <p class="patient-summary-heading mt-2">Patient Summary</p>
+                <div class="d-flex">
+                    <a href="javascript:void(0)" ng-click="ncdmd.printPatientSummary()"
+                        class="fa fa-print print-button"></a>
+                    <i id="toggleButton" class="fa fa-solid fa-times fa-lg heading" style="color: #ffffff;"
+                        ng-click="ncdmd.togglePatientSummary()"></i>
                 </div>
-                <div class="col-xl-12 text-center">
-                    <h4>{{ncdmd.member.name}}</h4>
-                    <h6 class="text-muted">{{ncdmd.member.age}}/{{ncdmd.member.basicDetails.gender}}</h6>
+            </div>           
+            <div class="patient-summary cst-scrollbar thin w-100 px-2" id="patientSummaryContent">
+                <div class="container">
+                    <div class="row mt-4 align-items-center">
+                        <div class="col-md-4">
+                            <img alt="image" ng-src="{{ncdmd.member.basicDetails.gender === 'M' ? 'img/male-avatar.png' : 'img/female-avatar.png'}}" class="patient-img d-block mx-auto" />
+                        </div>
+                        <div class="col-md-8 text-left ">
+                            <h5 class="capitalize">{{ncdmd.member.name}}</h5>
+                            <h6>({{ncdmd.member.basicDetails.uniqueHealthId}})</h6>
+                            <h6 class="lighter-text">{{ ncdmd.member.age }} years | {{ ncdmd.member.basicDetails.gender
+                                === 'F' ? 'Female' : 'Male' }}</h6>
+
+                        </div>
+                    </div>                
+                
+                    <div class="col-xl-12 text-center mt-3" ng-if="ncdmd.isCbacDone">
+                        <span class="float-left" ng-show="!!ncdmd.lastRecordOfCbac.hmisId"><small class="bold">*HMIS
+                                ID</small></span>
+                        <input type="text" class="form-control cst-form-control" id="hmisId" name="hmisId"
+                            ng-model="ncdmd.hmisId" placeholder="Enter HMIS ID" maxlength="15"
+                            ng-disabled="!!ncdmd.lastRecordOfCbac.hmisId" numbers-only decimalallowed="false"
+                            negativeallowed="false">
+                    </div>
+                <hr>
+                    <div class="row"
+                        ng-if="ncdmd.member.onTreatment != null || ncdmd.member.caseOfDiabetes != null || ncdmd.member.caseOfHypertension != null">
+                        <div class="col-xl-12">
+                            <ul>
+                                <li ng-if="!ncdmd.previousCase"> <strong>Suspected Case for : </strong>
+                                    <ul ng-repeat="disease in ncdmd.member.suspectedDisease" style="color: green;">
+                                        <li>{{disease}}</li>
+                                    </ul>
+                                </li>
+                                <li> <strong>On Treatment :</strong> <span
+                                        ng-class="{'green-text': ncdmd.member.onTreatment, 'red-text': !ncdmd.member.onTreatment}">{{
+                                        ncdmd.member.onTreatment ? 'Yes' : 'No' | emptylabel }}</span> </li>
+                                <li> <strong>ANM Details :</strong> <span>{{ ncdmd.member.anm_details }} ({{
+                                        ncdmd.member.previousDiagnosisDet.location }})</span></li>
+                                <li ng-if="ncdmd.member.onTreatment && ncdmd.onTreatmentDiseases"> <strong>On Treatment For
+                                        :</strong>
+                                    <span ng-class="{ 'red-text': ncdmd.member.onTreatment }">{{
+                                        ncdmd.onTreatmentDiseases.join() }}</span>
+                                </li>
+                                <li><strong>Known case for :</strong>
+                                    <ul>
+                                        <li ng-if="ncdmd.member.caseOfHypertension" class="lighter-text mr-4" style="color: red;"> Hypertension</li>
+                                        <li ng-if="ncdmd.member.caseOfDiabetes" class="lighter-text mt-2" style="color: red;"> Diabetes </li>
+                                        <li ng-if="ncdmd.member.caseOfBreastCancer" class="lighter-text mr-4" style="color: red;"> Breast Cancer</li>
+                                        <li ng-if="ncdmd.member.caseOfOralCancer" class="lighter-text mt-2" style="color: red;"> Oral Cancer </li>
+                                        <li ng-if="ncdmd.member.caseOfCervicalCancer" class="lighter-text mr-4" style="color: red;"> Cervical Cancer</li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                <hr
+                    ng-if="ncdmd.member.onTreatment != null || ncdmd.member.caseOfDiabetes != null || ncdmd.member.caseOfHypertension != null">
+                    <div class="row"
+                        ng-if="ncdmd.lastRecordOfHypertension!=null && ncdmd.lastRecordOfHypertension.id!=null">              
+                            <button class="btn d-flex justify-content-between align-items-center w-100 p-0" type="button" data-toggle="collapse"
+                                data-target="#hypertensionCollapse" aria-expanded="true"
+                                aria-controls="hypertensionCollapse">
+                                <div class="d-flex">
+                                    <i class="fa-solid fa-heart-pulse pr-2" style="color: red; font-size: 20px;"></i>
+                                    <h5 style="color: #2b7dce;">Hypertension</h5>
+                                </div>
+                                    <i class="fa-solid fa-chevron-up" ></i>
+                                    <i class="fa-solid fa-chevron-down" ></i>                                                       
+                            </button>                    
+                    </div>
+
+                    <div class="collapse show" id="hypertensionCollapse">
+                        <div class="row"
+                            ng-if="ncdmd.lastRecordOfHypertension != null && ncdmd.lastRecordOfHypertension.id != null">
+                            <div class="col-xl-12 text-center mt-1">
+                                <div ng-if="ncdmd.lastRecordOfHypertension.diagnosedEarlier && ncdmd.lastRecordOfHypertension.currentlyUnderTreatment" class="d-flex justify-content-between">
+                                    <h6 class="lighter-text ml-3">Treatment Place</h6>
+                                    <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfHypertension.currentTreatmentPlace | emptylabel }}</h6>            
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="lighter-text ml-3">Systolic BP</h6>
+                                    <h6 class="lighter-text mr-4"
+                                        ng-class="{'red-text': ncdmd.lastRecordOfHypertension.systolicBloodPressure > 140, 'green-text': ncdmd.lastRecordOfHypertension.systolicBloodPressure <= 140}">
+                                        {{ ncdmd.lastRecordOfHypertension.systolicBloodPressure | emptylabel }}
+                                    </h6>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="lighter-text ml-3">Diastolic BP</h6>
+                                    <h6 class="lighter-text mr-4"
+                                        ng-class="{'red-text': ncdmd.lastRecordOfHypertension.diastolicBloodPressure > 80, 'green-text': ncdmd.lastRecordOfHypertension.diastolicBloodPressure <= 80}">
+                                        {{ ncdmd.lastRecordOfHypertension.diastolicBloodPressure | emptylabel }}
+                                    </h6>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="lighter-text ml-3">Heart Rate</h6>
+                                    <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfHypertension.heartRate | emptylabel
+                                        }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <hr ng-if="ncdmd.lastRecordOfHypertension!=null && ncdmd.lastRecordOfHypertension.id!=null">
+                <div class="row" ng-if="ncdmd.lastRecordOfDiabetes!=null && ncdmd.lastRecordOfDiabetes.id!=null">               
+                        <button class="btn d-flex justify-content-between align-items-center w-100 p-0" type="button" data-toggle="collapse"
+                            data-target="#diabetesCollapse" aria-expanded="true" aria-controls="diabetesCollapse">
+                            <div class="m-0 d-flex align-items-end mb-0">
+                                <svg width="20" height="30" fill="none" class="mr-2" viewBox="0 0 20 33"><g fill="red"><rect width="18.424" height="20.969" x=".667" y="2.363" rx="2"/><rect width="18.666" height="19.636" x=".667" y=".788" rx="5"/></g><path fill="#fff" d="M9.212.008l-.97.115-4.939.842a5.94 5.94 0 00-1.455.424 3.27 3.27 0 00-1.057.82c-.292.343-.51.743-.64 1.174L0 3.857v8.37l.382 9.467a3.453 3.453 0 001.909 1.612c.497.151 5.224.727 5.982.727h.212v4.188c0 4.564-.006 4.497.339 4.655.097.042.545.067 1.206.067h1.061l.194-.176.2-.176.018-4.273.012-4.267.533-.042L17 23.457a3.448 3.448 0 002.933-2.624c.049-.224.067-2.836.067-8.636l-.091-8.648a3.33 3.33 0 00-.656-1.287 3.336 3.336 0 00-1.138-.889c-.418-.2-.727-.285-1.751-.485L11.788.123A16.97 16.97 0 009.212.008zm2.17 1.212c1.97.224 5.812.945 6.279 1.176a2.314 2.314 0 011.194 1.703c.036.248.054 3.321.042 8.418l-.018 8.03-.139.345a2.79 2.79 0 01-.927 1.109 2.38 2.38 0 01-.546.236c-.564.158-4.836.63-6.721.739-.952.055-2.667-.079-5.939-.467-1.642-.194-2.061-.279-2.418-.509a2.666 2.666 0 01-.915-1.097c-.121-.333-.121-.376-.109-8.739l.018-8.406.133-.291c.244-.469.627-.85 1.097-1.091.345-.158 2.436-.582 4.533-.915 2.188-.358 3.061-.4 4.436-.242zm-1.255 22.933h.236l-.012 2.588-.018 2.594h-.667l-.018-2.545.018-2.63c.024-.044.067-.059.127-.042.089.024.2.036.333.036zm.236 6.97v.667h-.727v-1.333h.727v.667z"/><path fill="red" d="M9.107 23.933h1.694v8.048H9.107v-8.048z"/><g fill="#fff"><path d="M4.333 3.547a2.51 2.51 0 00-1.073.758c-.43.57-.418.394-.4 4.915l.018 4.054.17.321c.224.424.588.776 1.006.976l.339.157h11.212l.345-.17a2.3 2.3 0 001.006-.982l.164-.303V4.971l-.139-.279a2.12 2.12 0 00-.933-.97l-.382-.206-5.576-.012c-3.109-.006-5.654.018-5.757.042zM15.727 4.88c.115.115.242.303.273.424.036.127.061 1.648.061 3.848v3.642l-.133.267a1.4 1.4 0 01-.309.388c-.17.127-.218.127-5.618.127s-5.448 0-5.618-.127a1.351 1.351 0 01-.309-.394l-.133-.267.012-3.77.145-3.939a1.8 1.8 0 01.327-.309l.2-.133 5.442.012 5.442.018.218.212z"/><path d="M9.679 5.802L7.637 8.518a2.71 2.71 0 00.108 2.642 2.707 2.707 0 002.304 1.297c.97 0 1.745-.4 2.261-1.17a2.73 2.73 0 00.2-2.733c-.152-.309-1.939-2.667-2.127-2.812-.17-.121-.551-.091-.703.061zm1.073 2.23c.266.331.515.674.745 1.03.17.345.176.952.018 1.327-.178.387-.5.689-.897.842-.582.176-1.273.036-1.673-.339a1.695 1.695 0 01-.339-1.757c.127-.285 1.4-1.958 1.467-1.933.024.006.327.382.679.83zm-7.006 9.036c-.285.085-.685.424-.855.745-.121.224-.133.333-.133 1.188 0 1.036.048 1.218.412 1.582.339.346.485.382 1.43.406 1.091.03 1.327-.03 1.715-.418.358-.358.412-.558.412-1.564 0-.903-.055-1.176-.315-1.491-.339-.406-.57-.479-1.564-.497-.485-.006-.976.018-1.103.049zm1.758 1.133c.055.042.073.248.061.836l-.018.782-.758.018c-.661.012-.764 0-.83-.091a3.88 3.88 0 01-.018-1.479c.061-.103.133-.115.776-.115.388 0 .745.024.788.049zm3.703-1.109a1.47 1.47 0 00-.533.339c-.364.364-.448.709-.418 1.709.024.939.139 1.261.552 1.564.364.261.63.309 1.582.285.946-.024 1.2-.103 1.509-.467s.358-.636.333-1.624c-.018-.885-.024-.915-.2-1.206a1.632 1.632 0 00-.479-.479c-.291-.176-.315-.182-1.182-.194a4.174 4.174 0 00-1.164.073zm1.812 1.133c.103.103.103 1.448 0 1.551s-1.448.103-1.551 0c-.048-.048-.073-.307-.073-.776 0-.703.024-.727.073-.776s.309-.073.776-.073.727.024.776.073zm3.764-1.139a1.4 1.4 0 00-.764.63c-.17.279-.17.303-.17 1.285 0 .861.018 1.03.115 1.212.158.297.333.479.612.624.218.121.333.133 1.249.133h1.006l.297-.182a1.64 1.64 0 00.479-.479c.176-.285.182-.327.2-1.127.018-.636 0-.909-.073-1.164a1.397 1.397 0 00-.903-.927 6.12 6.12 0 00-2.048-.006zm1.812 1.139c.103.103.103 1.448 0 1.551s-1.449.103-1.552 0-.103-1.448 0-1.551c.048-.049.307-.073.776-.073.703 0 .727.024.776.073z"/></g></svg>
+                                <h5 style="color: #2b7dce;">Diabetes</h5>
+                            </div>
+                            <i class="fa-solid fa-chevron-up" ></i>
+                            <i class="fa-solid fa-chevron-down" ></i>
+                        </button>                    
                 </div>
-                <div class="col-xl-12 text-center">
-                    <a href="javascript:void(0)" ng-click="ncdmd.printPatientSummary()" class="btn btn-primary mt-1">
-                        <em class="ion-printer mr-2"></em>
-                        Patient Summary
-                    </a>
+
+                <div class="collapse show" id="diabetesCollapse">
+                    <div class="row" ng-if=" ncdmd.lastRecordOfDiabetes !=null && ncdmd.lastRecordOfDiabetes.id
+                        !=null">
+                        <div class="col-xl-12 text-center mt-1">
+                            <div ng-if="ncdmd.lastRecordOfDiabetes.currentlyUnderTreatment" class="d-flex justify-content-between">
+                                <h6 class="lighter-text ml-3">Treatment Place</h6>
+                                <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfDiabetes.currentTreatmentPlace | emptylabel }}</h6>            
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6 class="lighter-text ml-3">FBS</h6>
+                                <h6 ng-class="{'red-text': ncdmd.lastRecordOfDiabetes.fastingBloodSugar >= 126, 'green-text': ncdmd.lastRecordOfDiabetes.fastingBloodSugar < 126,
+                                    'black-text': !ncdmd.lastRecordOfDiabetes.fastingBloodSugar || ncdmd.lastRecordOfDiabetes.fastingBloodSugar === 'emptylabel'}"
+                                class="lighter-text mr-4">{{ ncdmd.lastRecordOfDiabetes.fastingBloodSugar |
+                                    emptylabel }}</h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6 class="lighter-text ml-3">RBS</h6>
+                                <h6 ng-class="{'red-text': ncdmd.lastRecordOfDiabetes.bloodSugar >= 141, 'green-text': ncdmd.lastRecordOfDiabetes.bloodSugar < 141,
+                                    'black-text': !ncdmd.lastRecordOfDiabetes.bloodSugar || ncdmd.lastRecordOfDiabetes.bloodSugar === 'emptylabel'}" 
+                                class="lighter-text mr-4">{{ ncdmd.lastRecordOfDiabetes.bloodSugar | emptylabel }}
+                                </h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6 class="lighter-text ml-3">PP2BS</h6>
+                                <h6 ng-class="{'red-text': ncdmd.lastRecordOfDiabetes.postPrandialBloodSugar >= 201, 'green-text': ncdmd.lastRecordOfDiabetes.postPrandialBloodSugar < 201                                       ,
+                                    'black-text': !ncdmd.lastRecordOfDiabetes.postPrandialBloodSugar || ncdmd.lastRecordOfDiabetes.postPrandialBloodSugar === 'emptylabel'}" 
+                                class="lighter-text mr-4">{{ ncdmd.lastRecordOfDiabetes.postPrandialBloodSugar |
+                                    emptylabel }}</h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6 class="lighter-text ml-3">Hb1AC</h6>
+                                <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfDiabetes.hba1c | emptylabel }}</h6>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xl-12 text-center mt-1" ng-if="ncdmd.isCbacDone">
-                    <span class="float-left" ng-show="!!ncdmd.lastRecordOfCbac.hmisId"><small class="bold">*HMIS ID</small></span>
-                    <input type="text" class="form-control cst-form-control"
-                        id="hmisId" name="hmisId" ng-model="ncdmd.hmisId"
-                        placeholder="Enter HMIS ID" maxlength="15" ng-disabled="!!ncdmd.lastRecordOfCbac.hmisId"
-                        numbers-only decimalallowed="false" negativeallowed="false">
+
+                <hr ng-if="ncdmd.lastRecordOfDiabetes!=null && ncdmd.lastRecordOfDiabetes.id!=null">
+                <div class="row"
+                    ng-if="ncdmd.lastRecordOfOral!=null && ncdmd.lastRecordOfOral.id!=null">          
+                        <button class="btn d-flex justify-content-between align-items-center w-100 p-0" type="button" data-toggle="collapse" data-target="#oralCollapse"
+                            aria-expanded="true" aria-controls="oralCollapse">
+                            <div class="d-flex">
+                                <i class="fa-solid fa-tooth pr-2" style="color: red; font-size: 20px;"></i>
+                                <h5 style="color: #2b7dce;">Oral</h5>
+                            </div>
+                            <i class="fa-solid fa-chevron-up" ></i>
+                            <i class="fa-solid fa-chevron-down" ></i>
+                        </button>                                          
                 </div>
+
+                <div class="collapse show" id="oralCollapse">
+                    <div class="row" ng-if="ncdmd.lastRecordOfOral != null && ncdmd.lastRecordOfOral.id != null">
+                        <div class="col-xl-12 text-center">
+                            <div ng-if="ncdmd.lastRecordOfOral.diagnosedEarlier && ncdmd.lastRecordOfOral.currentlyUnderTreatment" class="d-flex justify-content-between">
+                                <h6 class="lighter-text ml-3">Treatment Place</h6>
+                                <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfDiabetes.currentTreatmentPlace | emptylabel }}</h6>            
+                            </div>
+                            <h6 class="lighter-text" ng-bind-html="ncdmd.oralHistoryDisplay | emptylabel"></h6>
+                        </div>
+                    </div>
+                </div>
+
+                <hr ng-if="ncdmd.lastRecordOfOral != null && ncdmd.lastRecordOfOral.id != null">
+
+                <div class="row" style="color: #2b7dce;"
+                    ng-if="ncdmd.lastRecordOfBreast!=null && ncdmd.lastRecordOfBreast.id!=null">              
+                        <button class="btn d-flex justify-content-between align-items-center w-100" type="button" data-toggle="collapse" data-target="#breastCollapse"
+                            aria-expanded="true" aria-controls="breastCollapse">
+                            <div class="d-flex">
+                                <i class="fa-solid fa-ribbon pr-2" style="color: red; font-size: 20px;"></i>
+                                <h5  style="color: #2b7dce;">Breast</h5>
+                            </div>
+                            <i class="fa-solid fa-chevron-up" ></i>
+                            <i class="fa-solid fa-chevron-down" ></i>
+                        </button>                                             
+
+                </div>
+
+                <div class="collapse show" id="breastCollapse">
+                    <div class="row" ng-if="ncdmd.lastRecordOfBreast != null && ncdmd.lastRecordOfBreast.id != null">
+                        <div class="col-xl-12 text-center">
+                            <div ng-if="ncdmd.lastRecordOfBreast.diagnosedEarlier && ncdmd.lastRecordOfBreast.currentlyUnderTreatment" class="d-flex justify-content-between">
+                                <h6 class="lighter-text ml-3">Treatment Place</h6>
+                                <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfBreast.currentTreatmentPlace | emptylabel }}</h6>            
+                            </div>
+                            <h6 class="lighter-text" ng-bind-html="ncdmd.breastHistoryDisplay | emptylabel"></h6>
+                        </div>
+                    </div>
+                </div>
+
+                <hr ng-if="ncdmd.lastRecordOfBreast != null && ncdmd.lastRecordOfBreast.id != null">
+
+                <div class="row" style="color: #2b7dce;" ng-if="ncdmd.cervicalHistoryArray.length > 0">                   
+                    
+                        <button class="btn d-flex justify-content-between align-items-center w-100" type="button" data-toggle="collapse"
+                            data-target="#cervicalCollapse" aria-expanded="true" aria-controls="cervicalCollapse">
+                            <div class="d-flex">
+                                <i class="fa-solid fa-suitcase-medical pr-2" style="color: red; font-size: 20px;"></i>
+                                <h5  style="color: #2b7dce;">Cervical</h5>
+                            </div>
+                            <i class="fa-solid fa-chevron-up"></i>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    
+                </div>
+
+                <div class="collapse show" id="cervicalCollapse">
+                    <div class="row" ng-if="ncdmd.cervicalHistoryArray.length > 0">
+                        <div class="col-xl-12 text-center">
+                            <h6 class="lighter-text">{{ ncdmd.cervicalHistoryDisplay | emptylabel }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <hr ng-if="ncdmd.cervicalHistoryArray.length > 0">
+
+                <div class="row" ng-if="ncdmd.isCbacDone">                 
+                        <button class="btn d-flex justify-content-between align-items-center w-100" type="button" data-toggle="collapse" data-target="#cbacCollapse"
+                            aria-expanded="true" aria-controls="cbacCollapse">
+                            <div class="d-flex">
+                                <i class="fa-solid fa-clipboard-check pr-2" style="color: red; font-size: 20px;"></i>
+                                <h5 style="color: #2b7dce;">CBAC</h5>
+                            </div>
+                            <i class="fa-solid fa-chevron-up" ></i>
+                            <i class="fa-solid fa-chevron-down" ></i>
+                        </button>                        
+                </div>
+
+                <div class="collapse show" id="cbacCollapse">
+                    <div class="row " ng-if="ncdmd.isCbacDone">
+                        <div class="col-xl-12 text-center mt-1">                            <
+                            <div class="d-flex justify-content-between">
+                                <h6 class="lighter-text ml-3">Score</h6>
+                                <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfCbac.score | emptylabel }}</h6>
+                            </div>
+                            <div class="d-flex justify-content-between" ng-if="ncdmd.env==='dnhdd'">
+                                <h6 class="lighter-text ml-3">Height</h6>
+                                <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfCbac.height | emptylabel }} cms</h6>
+                            </div>
+                            <div class="d-flex justify-content-between" ng-if="ncdmd.env==='dnhdd'">
+                                <h6 class="lighter-text ml-3">Weight</h6>
+                                <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfCbac.weight | emptylabel }} kg</h6>
+                            </div>
+                            <div class="d-flex justify-content-between" ng-if="ncdmd.env==='dnhdd'">
+                                <h6 class="lighter-text ml-3">Waist Circumference</h6>
+                                <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfCbac.waist | emptylabel }}</h6>
+                            </div>
+                            <div class="d-flex justify-content-between" ng-if="ncdmd.env==='dnhdd'">
+                                <h6 class="lighter-text ml-3">BMI Categorization</h6>
+                                <h6 class="lighter-text mr-4">{{ ncdmd.lastRecordOfCbac.bmiCategory | emptylabel }}</h6>
+                            </div>
+                            <div class="d-flex justify-content-between" ng-if="ncdmd.env==='dnhdd'">
+                                <h6 class="lighter-text ml-3">Alcoholic</h6>
+                                <h6 class="lighter-text mr-4"
+                                    ng-class="ncdmd.lastRecordOfCbac.isAlcoholic === 'POSITIVE' ? 'red-text' : (ncdmd.lastRecordOfCbac.isAlcoholic == 'NEGATIVE') ? 'green-text' : 'black-text'">
+                                    {{ ncdmd.lastRecordOfCbac.isAlcoholic | emptylabel }}
+                                </h6>
+                            </div>
+                            <div class="d-flex justify-content-between" ng-if="ncdmd.env==='dnhdd'">
+                                <h6 class="lighter-text ml-3">Smoker</h6>
+                                <h6 class="lighter-text mr-4"
+                                    ng-class="{ 'red-text': ncdmd.lastRecordOfCbac.isSmoker === 'POSITIVE', 'green-text': ncdmd.lastRecordOfCbac.isSmoker === 'NEGATIVE' }">
+                                    {{ ncdmd.lastRecordOfCbac.isSmoker | emptylabel }}
+                                </h6>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> 
             </div>
-            <hr>
-            <div class="row" ng-if="ncdmd.member.onTreatment != null || ncdmd.member.caseOfDiabetes != null || ncdmd.member.caseOfHypertension != null">
-                <div class="col-xl-12 text-center">
-                    <h6><strong>On Treatment</strong> -
-                        {{ncdmd.member.onTreatment ? 'Yes' : 'No' | emptylabel}}
-                    </h6>
-                    <h6 ng-if="ncdmd.member.caseOfHypertension" style="width:max-content"><strong class="font-italic custom-style">Known case of hypertension</strong></h6>
-                    <h6 ng-if="ncdmd.member.caseOfDiabetes"><strong class="font-italic custom-style">Known case of diabetes</strong></h6>
-                </div>
-            </div>
-            <hr ng-if="ncdmd.member.onTreatment != null || ncdmd.member.caseOfDiabetes != null || ncdmd.member.caseOfHypertension != null">
-            <div class="row" ng-if="ncdmd.lastRecordOfHypertension!=null && ncdmd.lastRecordOfHypertension.id!=null">
-                <div class="col-xl-12 text-center">
-                    <h5>Hypertension</h5>
-                    <h6><strong>Systolic BP</strong> -
-                        {{ncdmd.lastRecordOfHypertension.systolicBloodPressure| emptylabel}}</h6>
-                    <h6><strong>Diastolic BP</strong> -
-                        {{ncdmd.lastRecordOfHypertension.diastolicBloodPressure| emptylabel}}</h6>
-                    <h6><strong>Heart Rate</strong> - {{ncdmd.lastRecordOfHypertension.heartRate| emptylabel}}</h6>
-                </div>
-            </div>
-            <hr ng-if="ncdmd.lastRecordOfHypertension!=null && ncdmd.lastRecordOfHypertension.id!=null">
-            <div class="row" ng-if="ncdmd.lastRecordOfDiabetes!=null && ncdmd.lastRecordOfDiabetes.id!=null">
-                <div class="col-xl-12 text-center">
-                    <h5>Diabetes</h5>
-                    <h6><strong>FBS</strong> - {{ncdmd.lastRecordOfDiabetes.fastingBloodSugar| emptylabel}}</h6>
-                    <h6><strong>RBS</strong> - {{ncdmd.lastRecordOfDiabetes.bloodSugar| emptylabel}}</h6>
-                    <h6><strong>PP2BS</strong> - {{ncdmd.lastRecordOfDiabetes.postPrandialBloodSugar| emptylabel}}</h6>
-                    <h6><strong>Hb1AC</strong> - {{ncdmd.lastRecordOfDiabetes.hba1c| emptylabel}}</h6>
-                </div>
-            </div>
-            <hr ng-if="ncdmd.lastRecordOfDiabetes!=null && ncdmd.lastRecordOfDiabetes.id!=null">
-            <div class="row" ng-if="ncdmd.lastRecordOfOral!=null && ncdmd.lastRecordOfOral.id!=null">
-                <div class="col-xl-12 text-center">
-                    <h5>Oral</h5>
-                    <h6 ng-bind-html="ncdmd.oralHistoryDisplay | emptylabel"></h6>
-                </div>
-            </div>
-            <hr ng-if="ncdmd.lastRecordOfOral!=null && ncdmd.lastRecordOfOral.id!=null">
-            <div class="row" ng-if="ncdmd.lastRecordOfBreast!=null && ncdmd.lastRecordOfBreast.id!=null">
-                <div class="col-xl-12 text-center">
-                    <h5>Breast</h5>
-                    <h6 ng-bind-html="ncdmd.breastHistoryDisplay | emptylabel"></h6>
-                </div>
-            </div>
-            <hr ng-if="ncdmd.lastRecordOfBreast != null && ncdmd.lastRecordOfBreast.id != null">
-            <div class="row" ng-if="ncdmd.cervicalHistoryArray.length > 0">
-                <div class="col-xl-12 text-center">
-                    <h5>Cervical</h5>
-                    <h6>{{ncdmd.cervicalHistoryDisplay| emptylabel}}</h6>
-                </div>
-            </div>
-            <hr ng-if="ncdmd.cervicalHistoryArray.length > 0">
-            <div class="row" ng-if="ncdmd.isCbacDone">
-                <div class="col-xl-12 text-center">
-                    <h5>CBAC</h5>
-                    <h6><strong>Score</strong> - {{ ncdmd.lastRecordOfCbac.score | emptylabel }} </h6>
-                    <h6 ng-if="ncdmd.env==='dnhdd'"><strong>Height</strong> - {{ ncdmd.lastRecordOfCbac.height | emptylabel }} cms </h6>
-                    <h6 ng-if="ncdmd.env==='dnhdd'"><strong>Weight</strong> - {{ ncdmd.lastRecordOfCbac.weight | emptylabel }} kg </h6>
-                    <h6 ng-if="ncdmd.env==='dnhdd'"><strong>Waist Circumference</strong> - {{ ncdmd.lastRecordOfCbac.waist | emptylabel }} </h6>
-                   
-                    <h6><strong>BMI Categorization</strong> - <br>
-                        <span class="font-italic">{{ ncdmd.lastRecordOfCbac.bmiCategory | emptylabel }}</span> 
-                    </h6>
-                    <h6><strong>Alcoholic</strong> -
-                        <span ng-class="ncdmd.lastRecordOfCbac.isAlcoholic === 'POSITIVE' ? 'red-text' : (ncdmd.lastRecordOfCbac.isAlcoholic == 'NEGATIVE') ? 'green-text' : 'black-text'">
-                            {{ ncdmd.lastRecordOfCbac.isAlcoholic | emptylabel }} 
-                        </span>
-                    </h6>
-                    <h6><strong>Smoker</strong> - 
-                        <span ng-class="{ 'red-text': ncdmd.lastRecordOfCbac.isSmoker === 'POSITIVE', 'green-text': ncdmd.lastRecordOfCbac.isSmoker === 'NEGATIVE' }">
-                            {{ ncdmd.lastRecordOfCbac.isSmoker | emptylabel }}
-                        </span>
-                    </h6>
-                </div>
             </div>
         </div>
-        <hr>
     </div>
+
+
+
+</div>
+<hr>
+</div>
 </div>
 </div>
 <div class="display-none" id="printableDiv">
@@ -1901,8 +2484,7 @@
     $(document).ready(function () {
         //Tab show hide
         $("ul.nav-tabs a").click(function (e) {
-            e.preventDefault();
-            console.log(this)
+            e.preventDefault();           
             $(this).tab('show');
         });
         //Physical Examination Modal

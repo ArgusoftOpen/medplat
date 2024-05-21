@@ -7,6 +7,14 @@
             <div>
                 <div class="row mb-15 ">
                     <div class="col-12 mb-15 text-right">
+                        <span class="checkbox">
+                            <input type="checkbox" ng-model="eventConfigs.showInactive"
+                                ng-change="eventConfigs.showInactiveCheckboxChanged()">
+                            <label for="checkbox">Show Inactive ?</label>
+                        </span>
+
+                        <button class="btn btn-primary fa fa-refresh" aria-hidden="true"
+                            ng-click="eventConfigs.refresh()"></button>
                         <input type="text" ng-model="search" id="search" placeholder="Search Name">
                         <button class="btn btn-primary " ui-sref="techo.notification.config">Configure New</button>
                     </div>

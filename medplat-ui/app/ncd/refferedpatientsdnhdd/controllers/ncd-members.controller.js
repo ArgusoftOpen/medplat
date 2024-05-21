@@ -65,7 +65,14 @@
             });
         };
 
+        mlisting.openInNewTab = function(memberId, listingType) {
+            sessionStorage.setItem('linkClick', 'true');
+            window.open($state.href('techo.ncd.memberdetailsdnhdd', { id: memberId, type: listingType }));
+        };
+
         mlisting.retrieveMembers = function (reset, forSuspected) {
+            mlisting.isSuspectedOrExaminedNormalTab = true;
+            mlisting.suspected = forSuspected;
             if (!reset) {
                 mlisting.members = [];
                 mlisting.pagingService.resetOffSetAndVariables();
@@ -133,6 +140,8 @@
         };
 
         mlisting.retrieveMembersForFollowup = function (reset, status) {
+            mlisting.followupTabStatus = status;
+            mlisting.isSuspectedOrExaminedNormalTab = false;
             if (!reset) {
                 mlisting.membersForFollowup = [];
                 mlisting.pagingService.resetOffSetAndVariables();
@@ -230,44 +239,83 @@
 
         mlisting.downloadExcel = () => {
             mlisting.excelMembers = [];
-            let criteria = {
-                limit: null,
-                offset: null
-            };
             Mask.show();
-            PagingService.getNextPage(NcdDnhddDAO.retrieveMembers, criteria, mlisting.excelMembers, null).then((response) => {
-                if (response != null && response.length > 0) {
-                    response.forEach((member) => {
-                        mlisting.excelMembers.push({
-                            "Unique Health Id": member.uniqueHealthId,
-                            "Name": member.name,
-                            "Location": member.locationHierarchy,
-                            "Hypertension": member.referredForHypertension != null && member.referredForHypertension != 0 ? member.referredForHypertension : "No",
-                            "Diabetes": member.referredForDiabetes != null && member.referredForDiabetes != 0 ? member.referredForDiabetes : "No",
-                            "Breast Cancer": member.referredForBreast === 't' ? "Yes" : "No",
-                            "Oral Cancer": member.referredForOral === 't' ? "Yes" : "No",
-                            "Cervical Cancer": member.referredForCervical === 't' ? "Yes" : "No"
-                        });
-                    });
-                    mlisting.processAndDownloadExcel(mlisting.excelMembers);
-                } else {
-                    return Promise.reject({ data: { message: 'No record found' } });
+            if (mlisting.isSuspectedOrExaminedNormalTab){
+                let criteria = {
+                    limit: null,
+                    offset: null,
+                    healthInfrastructureType: $state.params.type,
+                    searchString: mlisting.search.searchString,
+                    searchBy: mlisting.search.searchBy,
+                    isSus: mlisting.suspected
+    
+                };
+                NcdDnhddDAO.retrieveMembers(criteria).then((response) => {
+                    if (response != null && response.length > 0) {
+                        mlisting.excelRetrievedMembers = response;
+                        mlisting.processAndDownloadExcel();
+                    } else {
+                        return Promise.reject({ data: { message: 'No record found' } });
+                    }
+                }).catch((error) => {
+                    GeneralUtil.showMessageOnApiCallFailure(error);
+                }).finally(() => {
+                    Mask.hide();
+                });
+            }
+            else {
+                let criteria = {
+                    limit: null,
+                    offset: null,
+                    healthInfrastructureType: $state.params.type,
+                    status: mlisting.followupTabStatus
                 }
-            }).catch((error) => {
-                GeneralUtil.showMessageOnApiCallFailure(error);
-            }).finally(() => {
-                Mask.hide();
-            });
+                NcdDnhddDAO.retrieveAllForFollowup(criteria).then((response) => {
+                    if (response != null && response.length > 0) {
+                        mlisting.excelRetrievedMembers = response;
+                        mlisting.processAndDownloadExcel();
+                    } else {
+                        return Promise.reject({ data: { message: 'No record found' } });
+                    }
+                }).catch((error) => {
+                    GeneralUtil.showMessageOnApiCallFailure(error);
+                }).finally(() => {
+                    Mask.hide();
+                });
+            }
+            
         }
 
-        mlisting.processAndDownloadExcel = (data) => {
+        mlisting.processAndDownloadExcel = () => {
+            mlisting.excelRetrievedMembers.forEach((member) => {
+                let fieldFindingsDet = member.referredForDiseases.split('<br>');
+                member.diseaseSummary = member.referredForDiseases;
+                if (member.gender === 'M')
+                {
+                    member.diseaseSummary = '';
+                    member.diseaseSummary = member.diseaseSummary.concat(fieldFindingsDet[0],"<br>",fieldFindingsDet[1],"<br>",fieldFindingsDet[2]);
+                }
+                let fieldFinding = member.diseaseSummary.replaceAll("<br>", ", ").replaceAll("<b style=\"color:red;\">", "").replaceAll("</b>", "");
+                let excelBasicDto = ({
+                    "Patient Name": member.name.concat(' (', member.uniqueHealthId, ')'),
+                    "Family Id": mlisting.isSuspectedOrExaminedNormalTab ? member.familyId : member.famId,
+                    "Address": member.locationName,
+                    "Contact Number": member.mobileNumber ? member.mobileNumber : 'NA.',
+                    "Field findings": fieldFinding,
+                    "HMIS ID": member.hmisId ? member.hmisId : 'NA.'
+                });
+                if (member.followUpDate != null) {
+                    excelBasicDto["Follow Up Date"]= member.followUpDate;
+                }
+                mlisting.excelMembers.push(excelBasicDto);
+            });
             let mystyle = {
                 headers: true,
                 column: { style: { Font: { Bold: "1" } } }
             };
             let fileName = "Referred Patients List";
             let dataCopy = [];
-            dataCopy = data;
+            dataCopy = mlisting.excelMembers;
             dataCopy = JSON.parse(JSON.stringify(dataCopy));
             alasql('SELECT * INTO XLSX("' + fileName + '",?) FROM ?', [mystyle, dataCopy]);
         }
@@ -275,28 +323,12 @@
         mlisting.getDiseaseSummary = (members) => {
             members.map((member) => {
                 member.diseaseSummary = "";
-                if (member.referredForHypertension?.includes("BP Reading")) {
-                    member.diseaseSummary = member.diseaseSummary.concat(member.referredForHypertension).concat("<br>");
-                }
-                if (member.referredForDiabetes?.includes("Sugar Reading")) {
-                    member.diseaseSummary = member.diseaseSummary.concat(member.referredForDiabetes).concat("<br>");
-                }
-                if (!(member.referredForOral?.includes("NA"))) {
-                    if (member.referredForOral.includes("SUSPECTED")) {
-                        member.diseaseSummary = member.diseaseSummary.concat('Oral cancer: <span style="color:red;">Abnormality detected</span>').concat("<br>");
-                    } else {
-                        member.diseaseSummary = member.diseaseSummary.concat('Oral cancer: No abnormality detected').concat("<br>");
-                    }
-                }
-                if (!(member.referredForBreast?.includes("NA"))) {
-                    if (member.referredForBreast.includes("SUSPECTED")) {
-                        member.diseaseSummary = member.diseaseSummary.concat('Breast cancer: <span style="color:red;">Abnormality detected</span>').concat("<br>");
-                    } else {
-                        member.diseaseSummary = member.diseaseSummary.concat('Breast cancer: No abnormality detected').concat("<br>");
-                    }
-                }
-                if (member.referredForCervical?.includes("t")) {
-                    member.diseaseSummary = member.diseaseSummary.concat('Cervical cancer: Not done')
+                mlisting.fieldFindingsDet = member.referredForDiseases.split('<br>');
+                member.diseaseSummary = member.referredForDiseases;
+                if (member.gender === 'M')
+                {
+                    member.diseaseSummary = '';
+                    member.diseaseSummary = member.diseaseSummary.concat(mlisting.fieldFindingsDet[0],"<br>",mlisting.fieldFindingsDet[1],"<br>",mlisting.fieldFindingsDet[2]);
                 }
             });
             return members;

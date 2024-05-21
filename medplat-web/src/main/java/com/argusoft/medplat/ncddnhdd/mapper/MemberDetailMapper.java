@@ -7,6 +7,7 @@ package com.argusoft.medplat.ncddnhdd.mapper;
 
 import com.argusoft.medplat.ncddnhdd.dto.*;
 import com.argusoft.medplat.ncddnhdd.dto.MemberReferralDto;
+import com.argusoft.medplat.ncddnhdd.enums.ReferralPlace;
 import com.argusoft.medplat.ncddnhdd.model.*;
 
 import java.util.Date;
@@ -533,7 +534,7 @@ public class MemberDetailMapper {
         MemberReferral memberReferral = new MemberReferral();
         memberReferral.setMemberId(memberReferralDto.getMemberId());
         memberReferral.setDiseaseCode(memberReferralDto.getDiseaseCode());
-        memberReferral.setReferredFrom(memberReferralDto.getReferredFrom());
+        memberReferral.setReferredFrom(ReferralPlace.MO);
         memberReferral.setReferredBy(memberReferralDto.getReferredBy());
         memberReferral.setReferredOn(memberReferralDto.getReferredOn());
         memberReferral.setReferredTo(memberReferralDto.getReferredTo());

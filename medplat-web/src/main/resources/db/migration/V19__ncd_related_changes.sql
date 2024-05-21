@@ -146,6 +146,18 @@ CREATE TABLE IF NOT EXISTS public.ncd_hypertension_diabetes_mental_health_master
 	CONSTRAINT ncd_hypertension_diabetes_mental_health_master_pkey PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS public.ncd_member_status_history (
+	member_id int4 NULL,
+	created_by int4 NULL,
+	created_on timestamp NULL,
+	modified_by int4 NULL,
+	modified_on timestamp NULL,
+	from_status varchar(50) NULL,
+	to_status varchar(50) NULL,
+	from_sub_status varchar(50) NULL,
+	to_sub_status varchar(50) NULL,
+	disease_code varchar(20) NULL
+);
 
 -- public.ncd_master definition
 
@@ -1773,3 +1785,9 @@ insert into listvalue_field_form_relation(field,form_id) values
 
 
 ALTER TABLE ncd_member_mental_health_detail ADD COLUMN IF NOT EXISTS is_suspected boolean;
+
+
+INSERT INTO public.user_health_infrastructure
+(id, user_id, health_infrastrucutre_id, created_by, created_on, modified_by, modified_on, state, is_default)
+VALUES(1, 1, 1, 1, now(), 1, now(), 'ACTIVE', false),
+(2, 1, 2, 1, now(), 1, now(), 'ACTIVE', false);

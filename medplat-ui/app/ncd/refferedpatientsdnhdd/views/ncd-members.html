@@ -33,10 +33,10 @@
             </div>
             <div class="cst-tab">
                 <uib-tabset active='mlisting.selectedTab'>
-                    <!-- Suspected Cases -->
-                    <uib-tab heading="Suspected Cases" index=0 ng-click="mlisting.retrieveMembers(false, true)">
+                    <!-- Referred Cases -->
+                    <uib-tab heading="Referred Cases" index=0 ng-click="mlisting.retrieveMembers(false, true)">
                         <div class="cst-table table-responsive table-set-height" id="member-scroll">
-                            <table aria-describedby="Suspected Cases"
+                            <table aria-describedby="Referred Cases"
                                 class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
                                 <thead class="cst-thead">
                                     <tr>
@@ -70,7 +70,7 @@
                                         <td ng-bind-html="member.hmisId | emptylabel"></td>
                                         <td class="action-cell" ng-if="mlisting.rights.canExamine">
                                             <button
-                                                ui-sref="techo.ncd.memberdetailsdnhdd({id:member.id,type:mlisting.type})"
+                                                ng-click="mlisting.openInNewTab(member.id, mlisting.type)"
                                                 class="btn btn-primary">Examine</button>
                                         </td>
                                     </tr>
@@ -116,7 +116,7 @@
                                         <td ng-bind-html="member.diseaseSummary | emptylabel"></td>
                                         <td class="action-cell" ng-if="mlisting.rights.canExamine">
                                             <button
-                                                ui-sref="techo.ncd.memberdetailsdnhdd({id:member.id,type:mlisting.type})"
+                                                ng-click="mlisting.openInNewTab(member.id, mlisting.type)"
                                                 class="btn btn-primary">Examine</button>
                                         </td>
                                     </tr>
@@ -145,6 +145,7 @@
                                         <th id="mobileNumber" class="table-heading">Contact No.</th>
                                         <th id="followUpDate" class="table-heading">Follow Up Date</th>
                                         <th id="diseaseSummary">Field findings</th>
+                                        <th id="lastScreeningDate">Last Screening Date</th>
                                         <th id="actions" class="table-heading">
                                             Actions
                                         </th>
@@ -162,10 +163,11 @@
                                         <td ng-bind="member.mobileNumber | emptylabel"></td>
                                         <td ng-bind="member.followUpDate | emptylabel"></td>
                                         <td ng-bind-html="member.diseaseSummary|emptylabel"></td>
+                                        <td ng-bind="member.lastScreeningDate"></td>
                                         <td class="action-cell">
                                             <button
-                                                ui-sref="techo.ncd.memberdetailsdnhdd({id:member.id,type:mlisting.type})"
-                                                class="btn btn-primary">
+                                                ng-click="mlisting.openInNewTab(member.id, mlisting.type)"
+                                                class="btn btn-primary" ng-disabled="!member.examineAllowed">
                                                 Examine
                                             </button>
                                         </td>
@@ -213,7 +215,7 @@
                                         <td ng-bind-html="member.diseaseSummary | emptylabel"></td>
                                         <td class="action-cell" ng-if="mlisting.rights.canExamine">
                                             <button
-                                                ui-sref="techo.ncd.memberdetailsdnhdd({id:member.id,type:mlisting.type})"
+                                                ng-click="mlisting.openInNewTab(member.id, mlisting.type)"
                                                 class="btn btn-primary">Examine</button>
                                         </td>
                                     </tr>
@@ -259,7 +261,7 @@
                                         <td ng-bind-html="member.hmisId | emptylabel"></td>
                                         <td class="action-cell" ng-if="mlisting.rights.canExamine">
                                             <button
-                                                ui-sref="techo.ncd.memberdetailsdnhdd({id:member.id,type:mlisting.type})"
+                                                ng-click="mlisting.openInNewTab(member.id, mlisting.type)"
                                                 class="btn btn-primary">Examine</button>
                                         </td>
                                     </tr>
@@ -679,7 +681,7 @@
                             <div class="control_indicator"></div>
                         </label>
                         <br>
-                        <label style="margin-left: 14%" class="control control-radio"> Organization Unit
+                        <label style="margin-left: 14%" class="control control-radio"> Location
                             <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy" value="orgUnit"
                                 ng-change="mlisting.search.searchString = null; mlisting.selectedLocation = null;" />
                             <div class="control_indicator"></div>
@@ -735,7 +737,7 @@
                         <div class="form-group" ng-if="mlisting.search.searchBy === 'orgUnit'">
                             <location-directive template-type="'twoPart'" ng-model="mlisting.search.searchString"
                                 selected-location="mlisting.selectedLocation" required-upto-level="3"
-                                template-type="'inline'" fetch-according-to-user-aoi="false"> </location-directive>
+                                template-type="'inline'" fetch-according-to-user-aoi="true"> </location-directive>
                         </div>
                         <div class="form-group" ng-if="mlisting.search.searchBy === 'villageName'">
                             <label>Search Village</label>

@@ -5,6 +5,17 @@
             eventConfigs.retrieveAll();
         };
 
+        eventConfigs.refresh = function () {
+            var isActive = eventConfigs.showInactive ? false : true;
+            eventConfigs.retrieveAll(isActive);
+        };
+
+        eventConfigs.showInactiveCheckboxChanged = function () {
+            var isActive = eventConfigs.showInactive ? false : true;
+            eventConfigs.retrieveAll(isActive);
+           
+        };
+
         eventConfigs.retrieveAll = function () {
             Mask.show();
             EventConfigDAO.retrieveAll().then(function (res) {

@@ -10,12 +10,11 @@
         ncdmd.lastScreeningDate = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD');
         ncdmd.lastCancerServiceDate = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD');
         $scope.isArray = angular.isArray
-        $scope.today = new Date();
         ncdmd.maxSysBP = 140; //mmHg
         ncdmd.maxDiaBP = 90; //mmHg
-        ncdmd.maxAllowedSysBP = 250; //mmHg
+        ncdmd.maxAllowedSysBP = 300; //mmHg
         ncdmd.minAllowedSysBP = 60; //mmHg
-        ncdmd.maxAllowedDiaBP = 200; //mmHg
+        ncdmd.maxAllowedDiaBP = 300; //mmHg
         ncdmd.minAllowedDiaBP = 40; //mmHg
         ncdmd.maxHeartRate = 250;
         ncdmd.minHeartRate = 30;
@@ -23,6 +22,8 @@
         ncdmd.maxPP2BS = 200; //mg/dL
         ncdmd.maxBloodSugar = 200; //mg/dL
         ncdmd.env = GeneralUtil.getEnv();
+        ncdmd.previousCase = false;
+
 
         const wcForFemales = [
             {
@@ -70,25 +71,73 @@
                 ncdmd.loggedInUser = res.data;
                 ncdmd.retrieveLoggedInUserHealthInfra(res.data.id);
             })
+            Mask.show()
+            QueryDAO.execute({
+                code: 'retrival_listvalue_values_acc_field',
+                parameters: {
+                    fieldKey: 'infra_type'
+                }
+            }).then(function (res) {
+                ncdmd.lfvdRecords = res.result;
+                ncdmd.infrastructureTypeRecord = ncdmd.lfvdRecords.find(record => {
+                        return record.code === 'M'; //level 3 health infra
+                        });
+                ncdmd.infrastructureTypeId = ncdmd.infrastructureTypeRecord.id;
+                ncdmd.fetchLevels = 'U';
+            }, GeneralUtil.showMessageOnApiCallFailure
+            ).finally(function(){
+                Mask.hide()
+            })
 
             NcdDnhddDAO.retrieveAllMedicines().then(function (res) {
                 ncdmd.medicines = res;
+                
+                ncdmd.medicines.forEach(function(medicine) {                    
+                    if (medicine.name.startsWith('Tab.') || medicine.name.startsWith('Tab ')) {
+                        // console.log(medicine.name)
+                        medicine.name = medicine.name.slice(4); 
+                    }
+                });
                 ncdmd.medicines.sort(function(a, b) {
                     return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
                 });
+                
             }, GeneralUtil.showMessageOnApiCallFailure);
             ncdmd.alcoholConsumptions =
                 ['Daily or almost daily', 'Weekly', 'Monthly', 'Less than monthly', 'Never']
 
             if ($state.params.id) {
                 ncdmd.patientId = $state.params.id;
-                ncdmd.retrieveMemberDetails();
+                // ncdmd.retrieveMemberDetails();
+                ncdmd.retrievePatientTreatmentHistory();
             }
             ncdmd.today = new Date();
             ncdmd.maxStartDate = new Date();
             ncdmd.maxStartDate.setDate(ncdmd.maxStartDate.getDate() + 60);
 
         };
+        ncdmd.togglePatientSummary = function () {
+            var patientSummary = document.getElementById("patientSummary");
+            var toggleButtonLi = document.getElementById("toggleButtonLi");
+        
+        
+            if (patientSummary.classList.contains("collapsed")) {
+                // Hide the patient-summary div
+                patientSummary.style.display = "none";
+                patientSummary.classList.toggle("collapsed");
+
+                // Show the toggle button
+                toggleButtonLi.style.display = "block";
+            } else {
+                // Show the patient-summary div
+                patientSummary.style.display = "block";
+                patientSummary.classList.toggle("collapsed");
+
+                // Hide the toggle button
+                toggleButtonLi.style.display = "none";
+            }
+        }
+        
 
         const getAge = function (DOB) {
             let birthDate = new Date(DOB);
@@ -231,6 +280,329 @@
 
             });
         }
+        ncdmd.retrievePatientTreatmentHistory = function (isSaveAction) {
+            Mask.show();
+            ncdmd.showHypertensionSubType = false;
+            ncdmd.askHypertensionTreatmentQuestion = true;
+            ncdmd.showHypertensionMedicines = false;
+            ncdmd.showHypertensionReferral = false;
+
+            ncdmd.showDiabetesSubType = false;
+            ncdmd.askDiabetesTreatmentQuestion = true;
+            ncdmd.showDiabetesMedicines = false;
+            ncdmd.showDiabetesReferral = false;
+
+            ncdmd.showOralSubStatus = false;
+            ncdmd.showOralDirectStatus = false;
+            ncdmd.showOralReferral = false;
+
+            ncdmd.showBreastSubStatus = false;
+            ncdmd.showBreastDirectStatus = false;
+            ncdmd.showBreastReferral = false;
+
+            ncdmd.showCervicalSubStatus = false;
+            ncdmd.showCervicalDirectStatus = false;
+            ncdmd.showCervicalReferral = false;
+
+            ncdmd.showAssignedInfrastructuresForHypertension = true;
+            ncdmd.showAssignedInfrastructuresForDiabetes = true;
+            ncdmd.showAssignedInfrastructuresForOral = true;
+            ncdmd.showAssignedInfrastructuresForBreast = true;
+            ncdmd.showAssignedInfrastructuresForCervical = true;
+
+            return NcdDnhddDAO.retrieveDetails(ncdmd.patientId).then(function (res) {
+                ncdmd.member = {};
+                ncdmd.member = res;
+                ncdmd.lastRecordOfDiabetes = {}; 
+                ncdmd.onTreatmentDiseases = [];                
+                ncdmd.member.age = getAge(ncdmd.member.basicDetails.dob);
+                if (ncdmd.member.additionalInfo !== null) {
+                    ncdmd.member.additionalInfo = JSON.parse(ncdmd.member.additionalInfo);
+                    ncdmd.lastScreeningDate = ncdmd.member.additionalInfo.hypDiaMentalServiceDate ? moment(ncdmd.member.additionalInfo.hypDiaMentalServiceDate) : ncdmd.lastScreeningDate;
+                    ncdmd.lastCancerServiceDate = ncdmd.member.additionalInfo.cancerServiceDate ? moment(ncdmd.member.additionalInfo.cancerServiceDate) : ncdmd.lastCancerServiceDate;
+                    ncdmd.member.memberHypertensionDto.screeningDate = ncdmd.member.serverDate;
+                }
+                ncdmd.member.onTreatment = false;
+                                  
+                    NcdDnhddDAO.retrieveFirstRecordForDiseaseByMemberId(ncdmd.patientId).then(function (response) {
+
+                        ncdmd.lastRecordOfHypertension = response.memberHypertensionDto;
+                        ncdmd.lastRecordOfDiabetes = response.memberDiabetesDto;
+                        ncdmd.lastRecordOfOral = response.memberOralDto;
+                        ncdmd.lastRecordOfBreast = response.memberBreastDto;
+                        ncdmd.lastRecordOfCervical = response.memberCervicalDto;   
+                        
+                        if (ncdmd.member.memberHypertensionDto != null) { 
+
+                            ncdmd.showHypertensionSubType = ncdmd.lastRecordOfHypertension.diagnosedEarlier;
+                            ncdmd.member.memberHypertensionDto.medicineDetail = [];
+                            ncdmd.member.memberHypertensionDto.medicines = [];
+                            ncdmd.member.onTreatment = ncdmd.member.onTreatment || ncdmd.lastRecordOfHypertension.currentlyUnderTreatment;
+                            if (ncdmd.member.onTreatment && ncdmd.lastRecordOfHypertension.currentlyUnderTreatment){
+                                ncdmd.onTreatmentDiseases.push("Hypertension");
+                                }
+                            ncdmd.member.memberHypertensionDto.previousFollowUpDate = ncdmd.member.memberHypertensionDto.followUpDate;
+                            ncdmd.member.memberHypertensionDto.followUpDate = null;
+                            ncdmd.member.memberHypertensionDto.referralId = ncdmd.member.memberHypertensionDto.id
+                            switch (ncdmd.member.memberHypertensionDto.status) {
+                                case 'CONFIRMED':
+                                    ncdmd.showHypertensionSubType = true;
+                                    break;
+                                case 'TREATMENT_STARTED':
+                                    ncdmd.showHypertensionSubType = true;
+                                    ncdmd.askHypertensionTreatmentQuestion = false;
+                                    ncdmd.showHypertensionMedicines = true;
+                                    ncdmd.showHypertensionReferral = true;
+                                    break;
+                                case 'REFERRED':
+                                    ncdmd.showHypertensionSubType = true;
+                                    ncdmd.askHypertensionTreatmentQuestion = false;
+                                    ncdmd.showHypertensionMedicines = false;
+                                    ncdmd.showHypertensionReferral = true;
+                                    break;
+                        }
+                        if (isSaveAction) {
+                            ncdmd.hypertensionForm.$setPristine();
+                        }
+                    }
+                    if (ncdmd.member.memberDiabetesDto != null) {                    
+                        
+                        ncdmd.showDiabetesSubType = ncdmd.lastRecordOfDiabetes.earlierDiabetesDiagnosis;
+                        ncdmd.member.memberDiabetesDto.medicineDetail = ncdmd.lastRecordOfDiabetes?.medicineMasters != null ? ncdmd.lastRecordOfDiabetes.medicineMasters.map(function (medicine) {
+                            return medicine.id
+                        }) : null;
+                        ncdmd.member.onTreatment = ncdmd.member.onTreatment || ncdmd.lastRecordOfDiabetes.currentlyUnderTreatment;
+                        console.log(ncdmd.member.onTreatment && ncdmd.lastRecordOfDiabetes.currentlyUnderTreatment)
+                        if (ncdmd.member.onTreatment && ncdmd.lastRecordOfDiabetes.currentlyUnderTreatment){
+                            ncdmd.onTreatmentDiseases.push("Diabetes");
+                        }
+                    
+                    ncdmd.member.memberDiabetesDto.previousFollowUpDate = ncdmd.member.memberDiabetesDto.followUpDate;
+                    ncdmd.member.memberDiabetesDto.followUpDate = null;
+                    ncdmd.member.memberDiabetesDto.referralId = ncdmd.member.memberDiabetesDto.id
+                    switch (ncdmd.member.memberDiabetesDto.status) {
+                        case 'CONFIRMED':
+                            ncdmd.showDiabetesSubType = true;
+                            break;
+                        case 'TREATMENT_STARTED':
+                            ncdmd.showDiabetesSubType = true;
+                            ncdmd.askDiabetesTreatmentQuestion = false;
+                            ncdmd.showDiabetesMedicines = true;
+                            ncdmd.showDiabetesReferral = true;
+                            break;
+                        case 'REFERRED':
+                            ncdmd.showDiabetesSubType = true;
+                            ncdmd.askDiabetesTreatmentQuestion = false;
+                            ncdmd.showDiabetesMedicines = false;
+                            ncdmd.showDiabetesReferral = true;
+                            break;
+                    }
+                }
+                if (ncdmd.member.memberOralDto != null){              
+                       
+                        if (ncdmd.lastRecordOfOral != null) {
+                            ncdmd.oralHistoryArray = [];
+                            if (ncdmd.lastRecordOfOral.restrictedMouthOpening) {
+                                ncdmd.oralHistoryArray.push("Restricted Mouth Opening");
+                            }
+                            if (ncdmd.lastRecordOfOral.whitePatches) {
+                                ncdmd.oralHistoryArray.push("White Patches");
+                            }
+                            if (ncdmd.lastRecordOfOral.redPatches) {
+                                ncdmd.oralHistoryArray.push("Red Patches");
+                            }
+                            if (ncdmd.lastRecordOfOral.nonHealingUlcers) {
+                                ncdmd.oralHistoryArray.push("Non Healing Ulcers");
+                            }
+                            if (ncdmd.lastRecordOfOral.growthOfRecentOrigins) {
+                                ncdmd.oralHistoryArray.push("Growth of recent origins");
+                            }
+                            ncdmd.oralHistoryDisplay = ncdmd.oralHistoryArray.join("<br>");
+                            ncdmd.member.onTreatment = ncdmd.member.onTreatment || ncdmd.lastRecordOfOral.currentlyUnderTreatment;
+                            if (ncdmd.member.onTreatment && ncdmd.lastRecordOfOral.currentlyUnderTreatment){
+                                ncdmd.onTreatmentDiseases.push("Oral Cancer");
+                            }
+                        }
+                    
+                    ncdmd.member.memberOralDto.screeningDate = ncdmd.member.serverDate;
+                    ncdmd.member.memberOralDto.previousFollowUpDate = ncdmd.member.memberOralDto.followUpDate;
+                    ncdmd.member.memberOralDto.followUpDate = null;
+                    ncdmd.member.memberOralDto.referralId = ncdmd.member.memberOralDto.id
+                    let temp = ncdmd.member.memberOralDto.status;
+                    ncdmd.member.memberOralDto.status = null;
+                    switch (temp) {
+                        case 'SUSPECTED':
+                        case 'CONFIRMATION_PENDING':
+                            ncdmd.showOralSubStatus = true;
+                            ncdmd.showOralReferral = true
+                            break;
+                        case 'CONFIRMED':
+                        case 'REFERRED':
+                            ncdmd.showOralDirectStatus = true;
+                            ncdmd.showOralReferral = true;
+                            ncdmd.member.memberOralDto.status = temp;
+                            break;
+                    }
+                    if (isSaveAction) {
+                        ncdmd.oralForm.$setPristine();
+                    }
+                }
+                ncdmd.member.memberOralDto = {};
+                ncdmd.member.memberOralDto.screeningDate = ncdmd.member.serverDate;
+                if (ncdmd.member.memberBreastDto != null) {                 
+                       
+                        if (ncdmd.lastRecordOfBreast != null) {
+                            ncdmd.breastHistoryArray = [];
+                            if (ncdmd.lastRecordOfBreast.sizeChange) {
+                                ncdmd.breastHistoryArray.push("Change in shape /size of the breast");
+                            }
+                            if (ncdmd.lastRecordOfBreast.nippleNotOnSameLevel) {
+                                ncdmd.breastHistoryArray.push("Nipples not at same level");
+                            }
+                            if (ncdmd.lastRecordOfBreast.anyRetractionOfNipple) {
+                                ncdmd.breastHistoryArray.push("Retraction of nipples");
+                            }
+                            if (ncdmd.lastRecordOfBreast.lymphadenopathy) {
+                                ncdmd.breastHistoryArray.push("Lymphadenopathy");
+                            }
+                            if (ncdmd.lastRecordOfBreast.dischargeFromNipple) {
+                                ncdmd.breastHistoryArray.push("Discharge from nipples");
+                            }
+                            if (ncdmd.lastRecordOfBreast.visualSkinDimplingRetraction) {
+                                ncdmd.breastHistoryArray.push("Skin dimpling/puckering");
+                            }
+                            if (ncdmd.lastRecordOfBreast.visualLumpInBreast) {
+                                ncdmd.breastHistoryArray.push("Lump in breasts");
+                            }
+                            ncdmd.breastHistoryDisplay = ncdmd.breastHistoryArray.join("<br>");
+                            ncdmd.member.onTreatment = ncdmd.member.onTreatment || ncdmd.lastRecordOfBreast.currentlyUnderTreatment;
+                            if (ncdmd.member.onTreatment && ncdmd.lastRecordOfBreast.currentlyUnderTreatment){
+                                ncdmd.onTreatmentDiseases.push("Breast Cancer");
+                            }
+                        }
+                    
+                    ncdmd.member.memberBreastDto.screeningDate = ncdmd.member.serverDate;
+                    ncdmd.member.memberBreastDto.previousFollowUpDate = ncdmd.member.memberBreastDto.followUpDate;
+                    ncdmd.member.memberBreastDto.followUpDate = null;
+                    ncdmd.member.memberBreastDto.referralId = ncdmd.member.memberBreastDto.id
+                    let temp = ncdmd.member.memberBreastDto.status;
+                    ncdmd.member.memberBreastDto.status = null;
+                    switch (temp) {
+                        case 'SUSPECTED':
+                        case 'CONFIRMATION_PENDING':
+                            ncdmd.showBreastSubStatus = true;
+                            ncdmd.showBreastReferral = true
+                            break;
+                        case 'CONFIRMED':
+                        case 'REFERRED':
+                            ncdmd.showBreastDirectStatus = true;
+                            ncdmd.showBreastReferral = true;
+                            ncdmd.member.memberBreastDto.status = temp;
+                            break;
+                    }
+                    if (isSaveAction) {
+                        ncdmd.breastForm.$setPristine();
+                    }
+                }
+                ncdmd.member.memberBreastDto = {};
+                ncdmd.member.memberBreastDto.screeningDate = ncdmd.member.serverDate;
+                if (ncdmd.member.memberCervicalDto != null) {
+                 
+                       
+                        if (ncdmd.lastRecordOfCervical != null) {
+                            ncdmd.cervicalHistoryArray = [];
+                            if (ncdmd.lastRecordOfCervical.papsmearTest) {
+                                ncdmd.cervicalHistoryArray.push("PAP Smear positive")
+                            }
+                            if (ncdmd.lastRecordOfCervical.viaTest === 'true') {
+                                ncdmd.cervicalHistoryArray.push("VIA positive")
+                            }
+                            ncdmd.cervicalHistoryDisplay = ncdmd.cervicalHistoryArray.join();
+                            ncdmd.member.onTreatment = ncdmd.member.onTreatment || ncdmd.lastRecordOfCervical.currentlyUnderTreatment;
+                            if (ncdmd.member.onTreatment && ncdmd.lastRecordOfCervical.currentlyUnderTreatment){
+                                ncdmd.onTreatmentDiseases.push("Cervical Cancer");
+                            }
+                        }
+                    
+                    ncdmd.member.memberCervicalDto.screeningDate = ncdmd.member.serverDate;
+                    ncdmd.member.memberCervicalDto.previousFollowUpDate = ncdmd.member.memberCervicalDto.followUpDate;
+                    ncdmd.member.memberCervicalDto.followUpDate = null;
+                    ncdmd.member.memberCervicalDto.referralId = ncdmd.member.memberCervicalDto.id
+                    let temp = ncdmd.member.memberCervicalDto.status;
+                    ncdmd.member.memberCervicalDto.status = null;
+                    switch (temp) {
+                        case 'SUSPECTED':
+                        case 'CONFIRMATION_PENDING':
+                            ncdmd.showCervicalSubStatus = true;
+                            ncdmd.showCervicalReferral = true
+                            break;
+                        case 'CONFIRMED':
+                        case 'REFERRED':
+                            ncdmd.showCervicalDirectStatus = true;
+                            ncdmd.showCervicalReferral = true;
+                            ncdmd.member.memberCervicalDto.status = temp;
+                            break;
+                    }
+                    if (isSaveAction) {
+                        ncdmd.cervicalForm.$setPristine();
+                    }
+                }
+                ncdmd.member.memberCervicalDto = {};
+                ncdmd.member.memberCervicalDto.screeningDate = ncdmd.member.serverDate;                       
+                }, GeneralUtil.showMessageOnApiCallFailure).finally(function (res) {
+                        Mask.hide();
+                })
+                    
+                
+               Mask.show()
+               QueryDAO.execute({
+                    code: 'ncd_member_prev_diagnosis_det',
+                    parameters: {
+                        memberId: parseInt(ncdmd.patientId),
+                        locationId: ncdmd.member.locationId
+                    }
+                }).then(function (response) {
+                    if(response?.result?.length > 0)
+                    ncdmd.member.previousDiagnosisDet = response.result[0];
+                    ncdmd.previousCase = ncdmd.member.previousDiagnosisDet.hyp_early_diagnosed || ncdmd.member.previousDiagnosisDet.diab_early_diagnosed || ncdmd.member.previousDiagnosisDet.oral_cancer_early_diagnosed;
+                    if(ncdmd.member.basicDetails.gender === 'F')
+                    {
+                        ncdmd.previousCase = ncdmd.previousCase || ncdmd.member.previousDiagnosisDet.breast_cancer_early_diagnosed || ncdmd.member.previousDiagnosisDet.cervical_cancer_early_diagnosed;
+                    }
+
+                    let suspectedDiseases = [];
+                    const diseases = {
+                        breast_cancer_early_diagnosed: 'Breast Cancer',
+                        cervical_cancer_early_diagnosed: 'Cervical Cancer',
+                        diab_early_diagnosed: 'Diabetes',
+                        hyp_early_diagnosed: 'Hypertension',
+                        oral_cancer_early_diagnosed: 'Oral Cancer'
+                    };
+
+                    for (let disease in diseases) {
+                        if (!ncdmd.member.previousDiagnosisDet[disease]) { 
+                            if ((disease === 'breast_cancer_early_diagnosed' || disease === 'cervical_cancer_early_diagnosed') && ncdmd.member.basicDetails.gender === 'M') {
+                                continue;
+                            }          
+                            suspectedDiseases.push(diseases[disease]);
+                        }
+                    }
+                    ncdmd.member.suspectedDisease = suspectedDiseases;
+                    // console.log(ncdmd.member.suspectedDisease)
+                    let anm_details = ncdmd.member.previousDiagnosisDet.anm_details
+                    anm_details = anm_details.substring(0, anm_details.indexOf("(")).trim();
+                    ncdmd.member.anm_details = anm_details.charAt(0).toUpperCase() + anm_details.slice(1)
+
+                }, GeneralUtil.showMessageOnApiCallFailure ).finally(function(){
+                    Mask.hide();
+                });
+                ncdmd.retrieveLastCbacDetails(ncdmd.patientId);
+            }, GeneralUtil.showMessageOnApiCallFailure).finally(function (res) {
+                Mask.hide();
+            })
+        }
+
+
         ncdmd.retrieveMemberDetails = function (isSaveAction) {
             Mask.show();
             ncdmd.showHypertensionSubType = false;
@@ -263,6 +635,7 @@
             return NcdDnhddDAO.retrieveDetails(ncdmd.patientId).then(function (res) {
                 ncdmd.member = {};
                 ncdmd.member = res;
+                ncdmd.onTreatmentDiseases = [];
                 ncdmd.member.age = getAge(ncdmd.member.basicDetails.dob);
                 if (ncdmd.member.additionalInfo !== null) {
                     ncdmd.member.additionalInfo = JSON.parse(ncdmd.member.additionalInfo);
@@ -276,9 +649,11 @@
                         ncdmd.showHypertensionSubType = ncdmd.lastRecordOfHypertension.diagnosedEarlier;
                         ncdmd.member.memberHypertensionDto.medicineDetail = [];
                         ncdmd.member.memberHypertensionDto.medicines = [];
+                        ncdmd.member.memberHypertensionDto.healthInfraId = null;
+                        ncdmd.member.memberHypertensionDto.reason = null;
                         if (response.id != null && (response.doneBy === 'FHW' || response.doneBy === 'MPHW' || response.doneBy === 'CHO')) {
                             ncdmd.hypertensionAlreadyFilled = true;
-                            ncdmd.member.memberHypertensionDto.screeningDate = moment(response.screeningDate);
+                            ncdmd.member.memberHypertensionDto.screeningDate = ncdmd.today;
                             ncdmd.member.memberHypertensionDto.systolicBloodPressure = response.systolicBloodPressure
                             ncdmd.member.memberHypertensionDto.diastolicBloodPressure = response.diastolicBloodPressure
                             ncdmd.member.memberHypertensionDto.heartRate = response.heartRate
@@ -286,6 +661,9 @@
                             ncdmd.hypertensionAlreadyFilled = false;
                         }
                         ncdmd.member.onTreatment = ncdmd.member.onTreatment || ncdmd.lastRecordOfHypertension.currentlyUnderTreatment;
+                        if (ncdmd.member.onTreatment && ncdmd.lastRecordOfHypertension.currentlyUnderTreatment){
+                            ncdmd.onTreatmentDiseases.push("Hypertension");
+                        }
                     }, GeneralUtil.showMessageOnApiCallFailure).finally(function (res) {
                         Mask.hide();
                     })
@@ -317,6 +695,8 @@
                     NcdDnhddDAO.retrieveLastRecordForDiabetesByMemberId(ncdmd.patientId).then(function (response) {
                         ncdmd.lastRecordOfDiabetes = response;
                         ncdmd.showDiabetesSubType = ncdmd.lastRecordOfDiabetes.earlierDiabetesDiagnosis;
+                        ncdmd.member.memberDiabetesDto.healthInfraId = null;
+                        ncdmd.member.memberDiabetesDto.reason = null;
                         ncdmd.member.memberDiabetesDto.medicineDetail = ncdmd.lastRecordOfDiabetes?.medicineMasters != null ? ncdmd.lastRecordOfDiabetes.medicineMasters.map(function (medicine) {
                             return medicine.id
                         }) : null;
@@ -331,6 +711,9 @@
                             ncdmd.diabetesAlreadyFilled = false;
                         }
                         ncdmd.member.onTreatment = ncdmd.member.onTreatment || ncdmd.lastRecordOfDiabetes.currentlyUnderTreatment;
+                        if (ncdmd.member.onTreatment && ncdmd.lastRecordOfDiabetes.currentlyUnderTreatment){
+                            ncdmd.onTreatmentDiseases.push("Diabetes");
+                        }
                     }, GeneralUtil.showMessageOnApiCallFailure).finally(function (res) {
                         Mask.hide();
                     })
@@ -358,6 +741,8 @@
                 if (ncdmd.member.memberOralDto != null) {
                     NcdDnhddDAO.retrieveLastRecordForOralByMemberId(ncdmd.patientId).then(function (response) {
                         ncdmd.lastRecordOfOral = response;
+                        ncdmd.member.memberOralDto.healthInfraId = null;
+                        ncdmd.member.memberOralDto.reason = null;
                         if (ncdmd.lastRecordOfOral != null) {
                             ncdmd.oralHistoryArray = [];
                             if (ncdmd.lastRecordOfOral.restrictedMouthOpening) {
@@ -377,10 +762,14 @@
                             }
                             ncdmd.oralHistoryDisplay = ncdmd.oralHistoryArray.join("<br>");
                             ncdmd.member.onTreatment = ncdmd.member.onTreatment || ncdmd.lastRecordOfOral.currentlyUnderTreatment;
+                            if (ncdmd.member.onTreatment && ncdmd.lastRecordOfOral.currentlyUnderTreatment){
+                                ncdmd.onTreatmentDiseases.push("Oral Cancer");
+                            }
                         }
                     }, GeneralUtil.showMessageOnApiCallFailure).finally(function (res) {
                         Mask.hide();
                     })
+                    ncdmd.member.memberOralDto.screeningDate = ncdmd.today;
                     ncdmd.member.memberOralDto.previousFollowUpDate = ncdmd.member.memberOralDto.followUpDate;
                     ncdmd.member.memberOralDto.followUpDate = null;
                     ncdmd.member.memberOralDto.referralId = ncdmd.member.memberOralDto.id
@@ -406,6 +795,8 @@
                 if (ncdmd.member.memberBreastDto != null) {
                     NcdDnhddDAO.retrieveLastRecordForBreastByMemberId(ncdmd.patientId).then(function (response) {
                         ncdmd.lastRecordOfBreast = response;
+                        ncdmd.member.memberBreastDto.healthInfraId = null;
+                        ncdmd.member.memberBreastDto.reason = null;
                         if (ncdmd.lastRecordOfBreast != null) {
                             ncdmd.breastHistoryArray = [];
                             if (ncdmd.lastRecordOfBreast.sizeChange) {
@@ -431,10 +822,14 @@
                             }
                             ncdmd.breastHistoryDisplay = ncdmd.breastHistoryArray.join("<br>");
                             ncdmd.member.onTreatment = ncdmd.member.onTreatment || ncdmd.lastRecordOfBreast.currentlyUnderTreatment;
+                            if (ncdmd.member.onTreatment && ncdmd.lastRecordOfBreast.currentlyUnderTreatment){
+                                ncdmd.onTreatmentDiseases.push("Breast Cancer");
+                            }
                         }
                     }, GeneralUtil.showMessageOnApiCallFailure).finally(function (res) {
                         Mask.hide();
                     })
+                    ncdmd.member.memberBreastDto.screeningDate = ncdmd.today;
                     ncdmd.member.memberBreastDto.previousFollowUpDate = ncdmd.member.memberBreastDto.followUpDate;
                     ncdmd.member.memberBreastDto.followUpDate = null;
                     ncdmd.member.memberBreastDto.referralId = ncdmd.member.memberBreastDto.id
@@ -460,6 +855,8 @@
                 if (ncdmd.member.memberCervicalDto != null) {
                     NcdDnhddDAO.retrieveLastRecordForCervicalByMemberId(ncdmd.patientId).then(function (response) {
                         ncdmd.lastRecordOfCervical = response;
+                        ncdmd.member.memberCervicalDto.healthInfraId = null;
+                        ncdmd.member.memberCervicalDto.reason = null;
                         if (ncdmd.lastRecordOfCervical != null) {
                             ncdmd.cervicalHistoryArray = [];
                             if (ncdmd.lastRecordOfCervical.papsmearTest) {
@@ -470,10 +867,14 @@
                             }
                             ncdmd.cervicalHistoryDisplay = ncdmd.cervicalHistoryArray.join();
                             ncdmd.member.onTreatment = ncdmd.member.onTreatment || ncdmd.lastRecordOfCervical.currentlyUnderTreatment;
+                            if (ncdmd.member.onTreatment && ncdmd.lastRecordOfCervical.currentlyUnderTreatment){
+                                ncdmd.onTreatmentDiseases.push("Cervical Cancer");
+                            }
                         }
                     }, GeneralUtil.showMessageOnApiCallFailure).finally(function (res) {
                         Mask.hide();
                     })
+                    ncdmd.member.memberCervicalDto.screeningDate = ncdmd.today;
                     ncdmd.member.memberCervicalDto.previousFollowUpDate = ncdmd.member.memberCervicalDto.followUpDate;
                     ncdmd.member.memberCervicalDto.followUpDate = null;
                     ncdmd.member.memberCervicalDto.referralId = ncdmd.member.memberCervicalDto.id
@@ -495,103 +896,113 @@
                     if (isSaveAction) {
                         ncdmd.cervicalForm.$setPristine();
                     }
-                }
-                if (ncdmd.member.basicDetails.gender == 'M') {
-                    ncdmd.wc = wcForMales;
-                } else {
-                    ncdmd.wc = wcForFemales;
-                }
-                ncdmd.retrieveLastCbacDetails(ncdmd.patientId);
-            }, GeneralUtil.showMessageOnApiCallFailure).finally(function (res) {
-                Mask.hide();
+                }              
             })
+        } 
+
+        ncdmd.setHypertensionAndDiabetesDtos = function () {
+            if (!!ncdmd.userHealthInfras) {
+                let referredFromInstitute = ncdmd.isSingleInfra ? ncdmd.userHealthInfras : JSON.parse(ncdmd.member.memberHypertensionDto.referredFromInstitute);
+                ncdmd.member.memberHypertensionDto.referredFromHealthInfrastructureId = referredFromInstitute.id;
+                ncdmd.member.memberDiabetesDto.referredFromHealthInfrastructureId = referredFromInstitute.id;
+            }
+            if (!ncdmd.member.memberHypertensionDto.memberId) {
+                ncdmd.member.memberHypertensionDto.memberId = Number(ncdmd.patientId);
+            }
+            if ((ncdmd.member.memberDiabetesDto.startTreatment === 'true' && ncdmd.member.memberHypertensionDto.status ==='CONFIRMED') || ncdmd.showHypertensionMedicines) {
+                ncdmd.member.memberHypertensionDto.status = 'TREATMENT_STARTED';
+            }
+            if (ncdmd.member.memberDiabetesDto.referralDto?.isReferred && ncdmd.member.memberHypertensionDto.status ==='CONFIRMED') {
+                ncdmd.member.memberHypertensionDto.status = 'REFERRED';
+                ncdmd.member.memberHypertensionDto.reason = ncdmd.member.memberDiabetesDto.referralDto.reason;
+                if (ncdmd.member.memberDiabetesDto.referralDto.healthInfraId === ncdmd.member.memberHypertensionDto.referredFromHealthInfrastructureId) {
+                    toaster.pop('warning', 'Cannot refer to same health infrastructure!');
+                    ncdmd.onChange('SAME_INFRA');
+                    return;
+                } else if (!!ncdmd.member.memberDiabetesDto.referralDto.pvtHealthInfraName) {
+                    ncdmd.member.memberHypertensionDto.pvtHealthInfraName = ncdmd.member.memberDiabetesDto.referralDto.pvtHealthInfraName;
+                } else {
+                    ncdmd.member.memberHypertensionDto.healthInfraId = ncdmd.member.memberDiabetesDto.referralDto.healthInfraId;
+                    ncdmd.member.memberHypertensionDto.healthInfraType = ncdmd.member.memberDiabetesDto.referralDto.healthInfraType;
+                }
+            }
+            if(!!ncdmd.hmisId && !!ncdmd.lastRecordOfCbac.id) {
+                ncdmd.member.memberHypertensionDto.cbacId = ncdmd.lastRecordOfCbac.id;
+                ncdmd.member.memberHypertensionDto.hmisId = Number(ncdmd.hmisId);
+            }
+
+            ncdmd.member.memberDiabetesDto.screeningDate = ncdmd.member.memberHypertensionDto.screeningDate;
+            ncdmd.member.memberDiabetesDto.followUpDate = ncdmd.member.memberHypertensionDto.followUpDate;
+            if (!ncdmd.member.memberDiabetesDto.memberId) {
+                ncdmd.member.memberDiabetesDto.memberId = Number(ncdmd.patientId);
+            }
+            if ((ncdmd.member.memberDiabetesDto.startTreatment === 'true' && ncdmd.member.memberDiabetesDto.status === 'CONFIRMED') || ncdmd.showDiabetesMedicines) {
+                ncdmd.member.memberDiabetesDto.status = 'TREATMENT_STARTED';
+                ncdmd.member.memberDiabetesDto.medicine = ncdmd.member.memberHypertensionDto.medicine
+                ncdmd.member.memberDiabetesDto.medicines = ncdmd.member.memberHypertensionDto.medicines;
+                ncdmd.member.memberDiabetesDto.medicineDetail = ncdmd.member.memberHypertensionDto.medicineDetail;
+            }
+            if (ncdmd.member.memberDiabetesDto.referralDto?.isReferred && ncdmd.member.memberDiabetesDto.status === 'CONFIRMED') {
+                ncdmd.member.memberDiabetesDto.status = 'REFERRED';
+                ncdmd.member.memberDiabetesDto.reason = ncdmd.member.memberDiabetesDto.referralDto.reason;
+                if (ncdmd.member.memberDiabetesDto.referralDto.healthInfraId === ncdmd.member.memberDiabetesDto.referredFromHealthInfrastructureId) {
+                    toaster.pop('warning', 'Cannot refer to same health infrastructure!');
+                    ncdmd.onChange('SAME_INFRA');
+                    return;
+                } else if (!!ncdmd.member.memberDiabetesDto.referralDto.pvtHealthInfraName) {
+                    ncdmd.member.memberDiabetesDto.pvtHealthInfraName = ncdmd.member.memberDiabetesDto.referralDto.pvtHealthInfraName;
+                } else {
+                    ncdmd.member.memberDiabetesDto.healthInfraId = ncdmd.member.memberDiabetesDto.referralDto.healthInfraId;
+                    
+                    ncdmd.member.memberDiabetesDto.healthInfraType = ncdmd.member.memberDiabetesDto.referralDto.healthInfraType;
+                }
+            }
+            ncdmd.diabetesDto = angular.copy(ncdmd.member.memberDiabetesDto);
+            ncdmd.callHypertensionAndDiabetesApis(ncdmd.member.memberHypertensionDto);
         }
-
+        ncdmd.callHypertensionAndDiabetesApis = function (memberHypertensionDto) {
+            const modalInstance = $uibModal.open({
+                templateUrl: 'app/common/views/confirmation.modal.html',
+                controller: 'ConfirmModalController',
+                windowClass: 'cst-modal',
+                size: 'med',
+                resolve: {
+                    message: function () {
+                        return "It is recommended that blood pressure is checked atleast 3 times. Are you sure you want to proceed?";
+                    }
+                }
+            });
+            modalInstance.result.then(function () {
+                let promiseArray = [];
+                if (!ncdmd.hypertensionAlreadyFilled) {
+                    promiseArray.push(NcdDnhddDAO.saveHyperTension(memberHypertensionDto));
+                }
+                if (!ncdmd.diabetesAlreadyFilled) {
+                    promiseArray.push(NcdDnhddDAO.saveDiabetes(ncdmd.diabetesDto));
+                }
+                Promise.all(promiseArray).then(function () {
+                    toaster.pop('success', "Hypertension and Diabetes Details saved successfully");
+                    ncdmd.retrieveMemberDetails(true);
+                    ncdmd.hypertensionForm.$setPristine();
+                    ncdmd.member.memberHypertensionDto.medicineDetail = [];
+                    ncdmd.member.memberHypertensionDto.medicines = [];
+                }, GeneralUtil.showMessageOnApiCallFailure);
+                if (!ncdmd.oralAlreadyFilled) {
+                    ncdmd.saveOral();
+                }
+            });
+        }
         ncdmd.saveHyperTensionAndDiabetes = function () {
-            if (!ncdmd.hypertensionAlreadyFilled) {
-                if (ncdmd.hypertensionForm.$valid) {
-                    if (!!ncdmd.userHealthInfras) {
-                        let referredFromInstitute = ncdmd.isSingleInfra ? ncdmd.userHealthInfras : JSON.parse(ncdmd.member.memberHypertensionDto.referredFromInstitute);
-                        ncdmd.member.memberHypertensionDto.referredFromHealthInfrastructureId = referredFromInstitute.id;
-                        ncdmd.member.memberDiabetesDto.referredFromHealthInfrastructureId = referredFromInstitute.id;
-                    }
-                    if (!ncdmd.member.memberHypertensionDto.memberId) {
-                        ncdmd.member.memberHypertensionDto.memberId = Number(ncdmd.patientId);
-                    }
-                    if (ncdmd.member.memberHypertensionDto.startTreatment === 'true' || ncdmd.showHypertensionMedicines) {
-                        ncdmd.member.memberHypertensionDto.status = 'TREATMENT_STARTED';
-                    }
-                    if (ncdmd.member.memberHypertensionDto.referralDto?.isReferred) {
-                        ncdmd.member.memberHypertensionDto.status = 'REFERRED';
-                        ncdmd.member.memberHypertensionDto.reason = ncdmd.member.memberHypertensionDto.referralDto.reason;
-                        if (ncdmd.member.memberHypertensionDto.referralDto.healthInfraId === ncdmd.member.memberHypertensionDto.referredFromHealthInfrastructureId) {
-                            toaster.pop('warning', 'Cannot refer to same health infrastructure!');
-                            ncdmd.onChange('SAME_INFRA');
-                            return;
-                        } else if (!!ncdmd.member.memberHypertensionDto.referralDto.pvtHealthInfraName) {
-                            ncdmd.member.memberHypertensionDto.pvtHealthInfraName = ncdmd.member.memberHypertensionDto.referralDto.pvtHealthInfraName;
-                        } else {
-                            ncdmd.member.memberHypertensionDto.healthInfraId = ncdmd.member.memberHypertensionDto.referralDto.healthInfraId;
-                        }
-                    }
-                    if(!!ncdmd.hmisId && !!ncdmd.lastRecordOfCbac.id) {
-                        ncdmd.member.memberHypertensionDto.cbacId = ncdmd.lastRecordOfCbac.id;
-                        ncdmd.member.memberHypertensionDto.hmisId = Number(ncdmd.hmisId);
-                    }
-
-                    ncdmd.member.memberDiabetesDto.screeningDate = ncdmd.member.memberHypertensionDto.screeningDate;
-                    ncdmd.member.memberDiabetesDto.followUpDate = ncdmd.member.memberHypertensionDto.followUpDate;
-                    if (!ncdmd.member.memberDiabetesDto.memberId) {
-                        ncdmd.member.memberDiabetesDto.memberId = Number(ncdmd.patientId);
-                    }
-                    if (ncdmd.member.memberDiabetesDto.startTreatment === 'true' || ncdmd.showDiabetesMedicines) {
-                        ncdmd.member.memberDiabetesDto.status = 'TREATMENT_STARTED';
-                    }
-                    if (ncdmd.member.memberDiabetesDto.referralDto?.isReferred) {
-                        ncdmd.member.memberDiabetesDto.status = 'REFERRED';
-                        ncdmd.member.memberDiabetesDto.reason = ncdmd.member.memberDiabetesDto.referralDto.reason;
-                        if (ncdmd.member.memberDiabetesDto.referralDto.healthInfraId === ncdmd.member.memberDiabetesDto.referredFromHealthInfrastructureId) {
-                            toaster.pop('warning', 'Cannot refer to same health infrastructure!');
-                            ncdmd.onChange('SAME_INFRA');
-                            return;
-                        } else if (!!ncdmd.member.memberDiabetesDto.referralDto.pvtHealthInfraName) {
-                            ncdmd.member.memberDiabetesDto.pvtHealthInfraName = ncdmd.member.memberDiabetesDto.referralDto.pvtHealthInfraName;
-                        } else {
-                            ncdmd.member.memberDiabetesDto.healthInfraId = ncdmd.member.memberDiabetesDto.referralDto.healthInfraId;
-                        }
-                    }
-                    const modalInstance = $uibModal.open({
-                        templateUrl: 'app/common/views/confirmation.modal.html',
-                        controller: 'ConfirmModalController',
-                        windowClass: 'cst-modal',
-                        size: 'med',
-                        resolve: {
-                            message: function () {
-                                return "It is recommended that blood pressure is checked atleast 3 times. Are you sure you want to proceed?";
-                            }
-                        }
-                    });
-                    modalInstance.result.then(function () {
-                        let promiseArray = [];
-                        if (!ncdmd.hypertensionAlreadyFilled) {
-                            promiseArray.push(NcdDnhddDAO.saveHyperTension(ncdmd.member.memberHypertensionDto));
-                        }
-                        if (!ncdmd.diabetesAlreadyFilled) {
-                            promiseArray.push(NcdDnhddDAO.saveDiabetes(ncdmd.member.memberDiabetesDto));
-                        }
-
-                        Promise.all(promiseArray).then(function () {
-                            toaster.pop('success', "Hypertension and Diabetes Details saved successfully");
-                            ncdmd.retrieveMemberDetails(true);
-                            ncdmd.hypertensionForm.$setPristine();
-                            ncdmd.member.memberHypertensionDto.medicineDetail = [];
-                            ncdmd.member.memberHypertensionDto.medicines = [];
-                        }, GeneralUtil.showMessageOnApiCallFailure);
-                    });
+            if (!ncdmd.hypertensionAlreadyFilled || !ncdmd.diabetesAlreadyFilled) {
+                if(!ncdmd.hypertensionForm?.$valid || !ncdmd.oralForm?.$valid){
+                    toaster.pop('error',"Please fill all the NCD forms");
+                }
+                else{                 
+                    ncdmd.setHypertensionAndDiabetesDtos();
                 }
             }
         };
-
+        
         ncdmd.saveCervical = function () {
             if (ncdmd.cervicalForm.$valid) {
                 if (!!ncdmd.userHealthInfras) {
@@ -665,11 +1076,13 @@
                     ncdmd.member.memberOralDto.cbacId = ncdmd.lastRecordOfCbac.id;
                     ncdmd.member.memberOralDto.hmisId = Number(ncdmd.hmisId);
                 }
-                NcdDnhddDAO.saveOral(ncdmd.member.memberOralDto).then(function () {
-                    toaster.pop('success', "Oral Details saved successfully");
-                    ncdmd.retrieveMemberDetails(true);
-                    ncdmd.oralForm.$setPristine();
-                }, GeneralUtil.showMessageOnApiCallFailure)
+                else{
+                    NcdDnhddDAO.saveOral(ncdmd.member.memberOralDto).then(function () {
+                        toaster.pop('success', "Oral Details saved successfully");
+                        ncdmd.retrieveMemberDetails(true);
+                        ncdmd.oralForm.$setPristine();                       
+                    }, GeneralUtil.showMessageOnApiCallFailure)
+                }
             }
         };
 
@@ -927,10 +1340,12 @@
                 && ncdmd.member.memberHypertensionDto.medicine.startDate && ncdmd.member.memberHypertensionDto.medicine.frequency > 0 && ncdmd.member.memberHypertensionDto.medicine.duration > 0
                 && ncdmd.member.memberHypertensionDto.medicine.frequency <= 5 && ncdmd.member.memberHypertensionDto.medicine.duration <= 60) {
 
+                ncdmd.member.memberHypertensionDto.medicines = ncdmd.member.memberHypertensionDto.medicines? ncdmd.member.memberHypertensionDto.medicines : [];
+
                 ncdmd.member.memberHypertensionDto.medicines.push(
                     ncdmd.member.memberHypertensionDto.medicine.id
                 )
-
+                ncdmd.member.memberHypertensionDto.medicineDetail = ncdmd.member.memberHypertensionDto.medicineDetail? ncdmd.member.memberHypertensionDto.medicineDetail : [];
                 ncdmd.member.memberHypertensionDto.medicineDetail.push({
                     medicineName: ncdmd.member.memberHypertensionDto.medicine.name,
                     medicineId: ncdmd.member.memberHypertensionDto.medicine.id,
@@ -1200,7 +1615,7 @@
 
         ncdmd.hypertensionExaminedValuesChanged = function () {
             ncdmd.member.memberHypertensionDto.startTreatment = null;
-            ncdmd.member.memberHypertensionDto.referralDto = null;
+            ncdmd.member.memberDiabetesDto.referralDto = null;
 
             const sysBP = ncdmd.member.memberHypertensionDto.systolicBloodPressure;
             const diaBP = ncdmd.member.memberHypertensionDto.diastolicBloodPressure;
@@ -1218,9 +1633,11 @@
 
             if (sysBP < ncdmd.maxSysBP && diaBP < ncdmd.maxDiaBP &&
                 sysBP > ncdmd.minAllowedSysBP && diaBP > ncdmd.minAllowedDiaBP) {
-                ncdmd.member.memberHypertensionDto.subType = 'CONTROLLED'
+                ncdmd.member.memberHypertensionDto.subType = 'CONTROLLED';
+                ncdmd.member.memberHypertensionDto.status = 'NO_ABNORMALITY';
             } else {
-                ncdmd.member.memberHypertensionDto.subType = 'UNCONTROLLED'
+                ncdmd.member.memberHypertensionDto.subType = 'UNCONTROLLED';
+                ncdmd.member.memberHypertensionDto.status = 'CONFIRMED'
             }
         }
 
@@ -1247,8 +1664,10 @@
                     && !diabetesDto.dka
                     && diabetesDto.hba1c < 7) {
                     ncdmd.member.memberDiabetesDto.subType = 'CONTROLLED';
+                    ncdmd.member.memberDiabetesDto.status = 'NO_ABNORMALITY';
                 } else {
                     ncdmd.member.memberDiabetesDto.subType = 'UNCONTROLLED';
+                    ncdmd.member.memberDiabetesDto.status = 'CONFIRMED';
                 }
             }
         }
@@ -1506,7 +1925,10 @@
                     if (ncdmd.member.memberHypertensionDto?.medicineDetail) {
                         ncdmd.member.memberHypertensionDto.medicineDetail = [];
                     }
-                    ncdmd.member.memberHypertensionDto.referralDto = {};
+                    if (ncdmd.member.memberHypertensionDto?.medicines) {
+                        ncdmd.member.memberHypertensionDto.medicines = [];
+                    }
+                    ncdmd.member.memberDiabetesDto.referralDto = {};
                     break;
                 case 'D':
                     if (ncdmd.member.memberDiabetesDto?.medicineDetail) {
@@ -1516,7 +1938,13 @@
                     if (ncdmd.member.memberHypertensionDto?.medicineDetail) {
                         ncdmd.member.memberHypertensionDto.medicineDetail = [];
                     }
-                    ncdmd.member.memberHypertensionDto.referralDto = {};
+                    if (ncdmd.member.memberHypertensionDto?.medicines) {
+                        ncdmd.member.memberHypertensionDto.medicines = [];
+                    }
+                    if (ncdmd.member.memberDiabetesDto?.medicines) {
+                        ncdmd.member.memberDiabetesDto.medicines = [];
+                    }
+                    ncdmd.member.memberDiabetesDto.referralDto = {};
 
                     break;
                 case 'SAME_INFRA':
