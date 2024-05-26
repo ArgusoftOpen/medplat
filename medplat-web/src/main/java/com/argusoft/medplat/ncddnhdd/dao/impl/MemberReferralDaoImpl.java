@@ -220,37 +220,19 @@ public class MemberReferralDaoImpl extends GenericDaoImpl<MemberReferral, Intege
                 "\tcase when dia.id is not null\n" +
                 "\t\t then concat(\n" +
                 "\t\t \t'Sugar Reading - ',\n" +
-                "\t\t \tcase when dia.fasting_blood_sugar is not null\n" +
-                "\t\t \t\t then case when dia.fasting_blood_sugar >= 126\n" +
-                "\t\t \t\t \t\t   then concat(\n" +
-                "\t\t \t\t \t\t   \t\t'<b style=\"color:red;\">',\n" +
-                "\t\t \t\t \t\t   \t\tcast(dia.fasting_blood_sugar as text),\n" +
-                "\t\t \t\t \t\t   \t\t'</b>'\n" +
+                "\t\t \tcase when (dia.measurement_type ='FBS' and dia.blood_sugar >= 126) or\n" +
+                "\t\t \t          (dia.measurement_type ='PP2BS' and dia.blood_sugar >= 201) or\n" +
+                "\t\t \t          (dia.measurement_type ='RBS' and dia.blood_sugar >= 141)\n" +
+                "\t\t \t\t then concat(\n" +
+                "\t\t \t\t \t\t   '<b style=\"color:red;\">',\n" +
+                "\t\t \t\t \t\t   cast(dia.blood_sugar as text),\n" +
+                "\t\t \t\t \t\t   '</b>'\n" +
                 "\t\t \t\t \t\t   )\n" +
-                "\t\t \t\t \t\t   else cast(dia.fasting_blood_sugar as text)\n" +
-                "\t\t \t\t \t\t   end\n" +
-                "\t\t \t\t when dia.post_prandial_blood_sugar is not null\n" +
-                "\t\t \t\t then case when dia.post_prandial_blood_sugar >= 200\n" +
-                "\t\t \t\t \t\t   then concat(\n" +
-                "\t\t \t\t \t\t   \t\t'<b style=\"color:red;\">',\n" +
-                "\t\t \t\t \t\t   \t\tcast(dia.post_prandial_blood_sugar as text),\n" +
-                "\t\t \t\t \t\t   \t\t'</b>'\n" +
-                "\t\t \t\t \t\t   )\n" +
-                "\t\t \t\t \t\t   else cast(dia.post_prandial_blood_sugar as text)\n" +
-                "\t\t \t\t \t\t   end\n" +
-                "\t\t \t\t when dia.blood_sugar is not null\n" +
-                "\t\t \t\t then case when dia.blood_sugar >= 200\n" +
-                "\t\t \t\t \t\t   then concat(\n" +
-                "\t\t \t\t \t\t   \t\t'<b style=\"color:red;\">',\n" +
-                "\t\t \t\t \t\t   \t\tcast(dia.blood_sugar as text),\n" +
-                "\t\t \t\t \t\t   \t\t'</b>'\n" +
-                "\t\t \t\t \t\t   )\n" +
-                "\t\t \t\t \t\t   else cast(dia.blood_sugar as text)\n" +
-                "\t\t \t\t \t\t   end\n" +
+                "\t\t \t\t else cast(dia.blood_sugar as text)\n" +
                 "\t\t \t\t end\n" +
                 "\t\t )\n" +
                 "\t\t else 'Sugar reading - Not done'\n" +
-                "\t\t end,\n" +
+                "\t\t end,\n"+
                 "\tcase when oral.id is not null\n" +
                 "\t\t then concat(\n" +
                 "\t\t \t'Oral Cancer - ',\n" +
@@ -282,7 +264,7 @@ public class MemberReferralDaoImpl extends GenericDaoImpl<MemberReferral, Intege
                 "\t'Cervical Cancer - Not done'\n" +
                 ") as \"referredForDiseases\"\n";
 
-                String basicQueryTables = "from data\n" +
+        String basicQueryTables = "from data\n" +
                 "left join ncd_member_hypertension_detail hyp on data.hyp_id = hyp.id\n" +
                 "left join ncd_member_diabetes_detail dia on data.dia_id = dia.id\n" +
                 "left join ncd_member_oral_detail oral on data.oral_id = oral.id\n" +
@@ -295,7 +277,7 @@ public class MemberReferralDaoImpl extends GenericDaoImpl<MemberReferral, Intege
                 "where date_part('year',age(imt_member.dob)) >= 30\n" +
                 "and (imt_member.basic_state in ('NEW','VERIFIED','REVERIFICATION') or (imt_member.state = 'com.argusoft.imtecho.member.state.temporary'))\n";
 
-                String orderBy = "order by \"name\",\"referredDate\" desc ";
+        String orderBy = "order by \"name\",\"referredDate\" desc ";
 
         String limitQuery = "limit :limit offset :offset\n";
         finalQuery = baseQuery + basicQueryTables + orderBy;

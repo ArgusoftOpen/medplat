@@ -193,16 +193,16 @@ public class NCDScreeningAshaActivity extends MenuActivity implements View.OnCli
                 if (selectedMemberIndex != -1) {
                     selectedMember = memberDataBeans.get(selectedMemberIndex);
                     setServiceSelectionScreen();
-//                    if (selectedMember.getCbacDate() != null && new Date(selectedMember.getCbacDate()).after(UtilBean.getStartOfFinancialYear(null))) {
-//                        SewaUtil.generateToast(this, UtilBean.getMyLabel(LabelConstants.CBAC_ENTRY_FOR_SELECTED_MEMBER_IS_ALREADY_DONE));
-//                        return;
-//                    }
-//                    showProcessDialog();
-//                    Intent myIntent = new Intent(this, DynamicFormActivity_.class);
-//                    myIntent.putExtra(SewaConstants.ENTITY, FormConstants.NCD_ASHA_CBAC);
-//                    setMetadataForFormByFormType(selectedMember);
-//                    startActivityForResult(myIntent, REQUEST_CODE_FOR_NCD_SCREENING_ACTIVITY);
-//                    hideProcessDialog();
+                    if (selectedMember.getCbacDate() != null && new Date(selectedMember.getCbacDate()).after(UtilBean.getStartOfFinancialYear(null))) {
+                        SewaUtil.generateToast(this, UtilBean.getMyLabel(LabelConstants.CBAC_ENTRY_FOR_SELECTED_MEMBER_IS_ALREADY_DONE));
+                        return;
+                    }
+                    showProcessDialog();
+                    Intent myIntent = new Intent(this, DynamicFormActivity_.class);
+                    myIntent.putExtra(SewaConstants.ENTITY, FormConstants.NCD_ASHA_CBAC);
+                    setMetadataForFormByFormType(selectedMember);
+                    startActivityForResult(myIntent, REQUEST_CODE_FOR_NCD_SCREENING_ACTIVITY);
+                    hideProcessDialog();
                 } else {
                     SewaUtil.generateToast(this, UtilBean.getMyLabel(LabelConstants.MEMBER_SELECTION_REQUIRED_FROM_FAMILY_ALERT));
                 }

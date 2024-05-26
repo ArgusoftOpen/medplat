@@ -360,4 +360,6 @@ public interface MemberDao extends GenericDao<MemberEntity, Integer> {
 
     void createPregnancyRegistrationDetEntry(Integer memberId, Integer familyId, Date lmpDate, Date edd, Date regDate,
                                              Integer locationId, Integer userId);
+
+    List<MemberDetailDto> retrieveNcdMembersForFollowupNew(Integer userId, Integer limit, Integer offset, String healthInfrastructureType, String[] status);
 }

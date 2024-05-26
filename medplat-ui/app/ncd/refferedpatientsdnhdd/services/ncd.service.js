@@ -26,6 +26,9 @@
             retrieveLastRecordForCervicalByMemberId: {
                 method: 'GET'
             },
+            retrieveFirstRecordForDiseaseByMemberId: {
+                method: 'GET'
+            },
             retrieveHypertensionDetailsByMemberAndDate: {
                 method: 'GET',
                 params: {
@@ -119,6 +122,9 @@
             retrieveLastRecordForCervicalByMemberId: function (memberId) {
                 return api.retrieveLastRecordForCervicalByMemberId({ action: 'lastrecordforcervical', memberId: memberId }, {}).$promise;
             },
+            retrieveFirstRecordForDiseaseByMemberId: function (memberId, diseaseCode) {
+                return api.retrieveFirstRecordForDiseaseByMemberId({ action: 'firstrecordfordisease', memberId: memberId , diseaseCode: diseaseCode}, {}).$promise;
+            },            
             saveHyperTension: function (req) {
                 return api.save({ 'action': 'hypertension' }, req).$promise;
             },

@@ -1793,7 +1793,7 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
     @Override
     public List<MemberReferralDnhddDto> retrieveMembers(Integer limit, Integer offset, String
             healthInfrastructureType, String searchBy, String searchString, Boolean isSus) {
-        return memberReferralDao.retrieveMembers(user.getId(), limit, offset, healthInfrastructureType, searchBy, searchString, isSus);
+        return memberReferralDao.retrieveMembersNew(user.getId(), limit, offset, healthInfrastructureType, searchBy, searchString, isSus);
     }
 
     @Override

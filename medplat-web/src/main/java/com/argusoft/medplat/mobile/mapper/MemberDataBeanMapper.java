@@ -157,6 +157,8 @@ public class MemberDataBeanMapper {
             memberDataBean.setConfirmedDiabetes(additionalInfo.getConfirmedDiabetes());
             memberDataBean.setSuspectedForDiabetes(additionalInfo.getSuspectedForDiabetes());
             memberDataBean.setCbacScore(additionalInfo.getCbacScore());
+            memberDataBean.setHypDiaMentalServiceDate(additionalInfo.getHypDiaMentalServiceDate());
+            memberDataBean.setCancerServiceDate(additionalInfo.getCancerServiceDate());
             memberDataBean.setSufferingDiabetes(additionalInfo.getSufferingDiabetes());
             memberDataBean.setSufferingMentalHealth(additionalInfo.getSufferingMentalHealth());
             memberDataBean.setSufferingHypertension(additionalInfo.getSufferingHypertension());

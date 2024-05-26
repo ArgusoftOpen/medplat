@@ -67,7 +67,8 @@ public class MemberReferral extends EntityAuditInfo implements Serializable {
 
     @Column(name = "health_infrastructure_id")
     private Integer healthInfraId;
-
+    @Column(name = "mo_referred_health_infra_type")
+    private String healthInfraType;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -84,6 +85,15 @@ public class MemberReferral extends EntityAuditInfo implements Serializable {
 
     @Column(name = "pvt_health_infra_name")
     private String pvtHealthInfraName;
+
+    public String getHealthInfraType() {
+        return healthInfraType;
+    }
+
+    public void setHealthInfraType(String healthInfraType) {
+        this.healthInfraType = healthInfraType;
+    }
+
 
     public String getPvtHealthInfraName() {
         return pvtHealthInfraName;
@@ -230,3 +240,4 @@ public class MemberReferral extends EntityAuditInfo implements Serializable {
         public static final String HEALTH_INFRA_ID  = "healthInfraId";
     }
 }
+

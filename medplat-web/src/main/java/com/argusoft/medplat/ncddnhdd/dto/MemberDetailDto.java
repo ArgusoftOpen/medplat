@@ -29,6 +29,8 @@ public class MemberDetailDto {
     private String referredForBreast;
     private String referredForOral;
     private String referredForCervical;
+    private String referredForDiseases;
+    private Boolean examineAllowed;
     private String name;
     private String gender;
     private java.sql.Date dob;
@@ -39,6 +41,7 @@ public class MemberDetailDto {
     private String locationHierarchy;
     private String locationName;
     private String followUpDate;
+    private String lastScreeningDate;
     private MemberReferral memberHypertensionDto;
     private MemberReferral memberDiabetesDto;
     private MemberReferral memberOralDto;
@@ -273,6 +276,14 @@ public class MemberDetailDto {
         this.followUpDate = followUpDate;
     }
 
+    public String getLastScreeningDate() {
+        return lastScreeningDate;
+    }
+
+    public void setLastScreeningDate(String lastScreeningDate) {
+        this.lastScreeningDate = lastScreeningDate;
+    }
+
     public String getMobileNumber() {
         return mobileNumber;
     }
@@ -357,5 +368,21 @@ public class MemberDetailDto {
                 ", village='" + village + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    public String getReferredForDiseases() {
+        return referredForDiseases;
+    }
+
+    public void setReferredForDiseases(String referredForDiseases) {
+        this.referredForDiseases = referredForDiseases;
+    }
+
+    public Boolean getExamineAllowed() {
+        return examineAllowed;
+    }
+
+    public void setExamineAllowed(Boolean examineAllowed) {
+        this.examineAllowed = examineAllowed;
     }
 }

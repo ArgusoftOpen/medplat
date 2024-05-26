@@ -1,6 +1,5 @@
-delete from um_user where user_name = 'asha_test';
 delete from um_role_master where id = 24;
-INSERT INTO um_role_master (Id,created_by,created_on,modified_by,modified_on,code,description,"name",state,max_position,is_email_mandatory,is_contact_num_mandatory,is_aadhar_num_mandatory,is_convox_id_mandatory,short_name,is_last_name_mandatory,role_type,is_health_infra_mandatory,is_geolocation_mandatory) VALUES
+INSERT INTO um_role_master (Id,created_by,created_on,modified_by,modified_on,code,description,name,state,max_position,is_email_mandatory,is_contact_num_mandatory,is_aadhar_num_mandatory,is_convox_id_mandatory,short_name,is_last_name_mandatory,role_type,is_health_infra_mandatory,is_geolocation_mandatory) VALUES
 	 (24,1,now(),97067,now(),'ASHA',NULL,'ASHA','ACTIVE',2,false,false,false,false,'ASHA',null,'MOBILE',null,null);
 
 -- public.ncd_analytics_detail definition
@@ -1725,33 +1724,47 @@ CREATE TABLE IF NOT EXISTS public.ncd_visit_history (
 
 
 
---Insert into mobile menu management
-delete from mobile_menu_master where id in (81,82,83,84,85,86,97,98,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116);
 
-INSERT INTO public.mobile_menu_master
-    (id, config_json, menu_name, created_on, created_by, modified_on, modified_by)
+DELETE FROM QUERY_MASTER WHERE CODE='mobile_menu_list';
+
+INSERT INTO QUERY_MASTER (uuid, created_by, created_on, modified_by, modified_on, code, params, query, description, returns_result_set, state )
+VALUES (
+'68b5486f-42aa-40c1-ba8a-00a00750ee64', 74841,  current_date , 74841,  current_date , 'mobile_menu_list',
+'search,offset,limit',
+'with menu_mobile as (
+	select
+	mm.id,
+	jsonb_array_elements(cast(mm.config_json as jsonb) ) ->> ''mobile_constant'' as  mobile_constant
+	from mobile_menu_master mm),
+mobile_features as (
+	select
+	mm.id,
+	string_agg(mfm.feature_name, '', '') as features
+	from menu_mobile mm
+	inner join mobile_feature_master mfm on mfm.mobile_constant = mm.mobile_constant
+	group by mm.id
+)
+select
+mr.role_id as id,
+mm.menu_name, ur."name" as role_name ,
+mf.features
+from mobile_menu_role_relation mr
+left join mobile_menu_master mm on mm.id = mr.menu_id
+left join um_role_master ur on ur.id = mr.role_id
+left join mobile_features mf on mf.id = mm.id
+where case when ''#search#'' = ''null'' or mm.menu_name ilike ''%#search#%'' then
+true else false end
+order by mr.menu_id
+limit #limit# offset #offset#',
+null,
+true, 'ACTIVE');
+
+
+
+INSERT INTO public.mobile_menu_master(config_json, menu_name, created_on, created_by, modified_on, modified_by)
 VALUES
-    (81, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_CBAC_AND_NUTRITION","order":5}]', 'FHW Menu', now(), 100954, now(), 100954),
-    (82, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"DNHDD_NCD_CBAC_AND_NUTRITION","order":4}]', 'ASHA Menu', now(), 100954, now(), 100954),
-    (83, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_CBAC_AND_NUTRITION","order":5},{"mobile_constant":"DNHDD_NCD_SCREENING","order":6}]', 'FHW Menu', now(), 100954, now(), 100954),
-    (84, '[{"mobile_constant":"FHW_WORK_STATUS","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FAMILY_FOLDER","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5}]', 'CHO menu', now(), 100954, now(), 100954),
-    (85, '[{"mobile_constant":"FHW_WORK_STATUS","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FAMILY_FOLDER","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5}]', 'CHO menu', now(), 100954,now(), 100954),
-    (86, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5}]', 'FHW Menu', now(), 100954, now(), 100954),
-    (102, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NOTIFICATION","order":6}]', 'FHW Menu', now(), 100954, now(), 100954),
-    (103, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NOTIFICATION","order":6},{"mobile_constant":"ADULT_BCG_VACCINATION","order":7}]', 'FHW Menu', now(), 121657, now(), 121657),
-    (104, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"DNHDD_NCD_CBAC_AND_NUTRITION","order":4},{"mobile_constant":"ADULT_BCG_VACCINATION","order":5}]', 'ASHA Menu', now(), 121657, now(), 121657),
-    (105, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NOTIFICATION","order":6}]', 'FHW Menu',now(), 100954, now(), 100954),
-    (106, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"DNHDD_NCD_CBAC_AND_NUTRITION","order":4}]', 'ASHA Menu', now(), 100954, now(), 100954),
-    (107, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NOTIFICATION","order":6},{"mobile_constant":"ADULT_BCG_VACCINATION","order":7}]', 'FHW Menu', now(), 100954, now(), 100954),
-    (108, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NOTIFICATION","order":6}]', 'FHW Menu', now(), 121554, now(), 121554),
-    (109, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NOTIFICATION","order":6},{"mobile_constant":"ADULT_BCG_VACCINATION","order":7}]', 'FHW Menu', now(), 100954, now(), 100954),
-    (110, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NOTIFICATION","order":6}]', 'FHW Menu', '12-01-2024', 100954, '12-01-2024', 100954),
-    (111, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NOTIFICATION","order":6},{"mobile_constant":"ADULT_BCG_VACCINATION","order":7}]', 'FHW Menu', now(), 121554, now(), 121554),
-    (112, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NOTIFICATION","order":6},{"mobile_constant":"ADULT_BCG_VACCINATION","order":7},{"mobile_constant":"FHW_NCD_REGISTER","order":8}]', 'FHW Menu', now(), 121554, now(), 121554),
-    (113, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"DNHDD_NCD_CBAC_AND_NUTRITION","order":4},{"mobile_constant":"ADULT_BCG_VACCINATION","order":5}]', 'ASHA Menu', now(), 100954, now(), 100954),
-    (114, '[{"mobile_constant":"FAMILY_FOLDER","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FHW_WORK_STATUS","order":3},{"mobile_constant":"DNHDD_NCD_CBAC_AND_NUTRITION","order":4},{"mobile_constant":"ADULT_BCG_VACCINATION","order":5},{"mobile_constant":"ASHA_NCD_REGISTER","order":6}]', 'ASHA Menu', now(), 100954,now(), -1),
-    (115, '[{"mobile_constant":"FHW_WORK_STATUS","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FAMILY_FOLDER","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NCD_REGISTER","order":6}]', 'CHO menu', now(), 100954, now(), 100954),
-    (116, '[{"mobile_constant":"FHW_WORK_STATUS","order":1},{"mobile_constant":"FAMILY_AVAILABILITY","order":2},{"mobile_constant":"FAMILY_FOLDER","order":3},{"mobile_constant":"FAMILY_FOLDER_REVERIFICATION","order":4},{"mobile_constant":"DNHDD_NCD_SCREENING","order":5},{"mobile_constant":"FHW_NCD_REGISTER","order":6}]', 'CHO menu', now(), 100954, now(), 100954);
+('[{"mobile_constant":"FHW_CFHC","order":1},{"mobile_constant":"FHW_DATA_QUALITY","order":2},{"mobile_constant":"FHW_SURVEILLANCE","order":3},{"mobile_constant":"FHW_ASSIGN_FAMILY","order":4},{"mobile_constant":"FHW_MY_PEOPLE","order":5},{"mobile_constant":"FHW_MOBILE_VERIFICATION","order":6},{"mobile_constant":"FHW_NOTIFICATION","order":7},{"mobile_constant":"FHW_HIGH_RISK_WOMEN_AND_CHILD","order":8},{"mobile_constant":"DNHDD_NCD_SCREENING","order":9},{"mobile_constant":"FHW_NCD_REGISTER","order":10},{"mobile_constant":"FHW_WORK_REGISTER","order":11},{"mobile_constant":"FHW_WORK_STATUS","order":12}]','FHW Menu',now(),-1,now(),-1),
+('[{"mobile_constant":"ASHA_FHS","order":1},{"mobile_constant":"ASHA_MY_PEOPLE","order":2},{"mobile_constant":"FHW_SURVEILLANCE","order":3},{"mobile_constant":"ASHA_NOTIFICATION","order":4},{"mobile_constant":"ASHA_HIGH_RISK_BENEFICIARIES","order":5},{"mobile_constant":"DNHDD_NCD_CBAC_AND_NUTRITION","order":6},{"mobile_constant":"ASHA_NCD_REGISTER","order":7},{"mobile_constant":"ASHA_NPCB_SCREENING","order":8},{"mobile_constant":"LIBRARY","order":9},{"mobile_constant":"ANNOUNCEMENTS","order":10},{"mobile_constant":"WORK_LOG","order":11},{"mobile_constant":"ASHA_WORK_REGISTER","order":12}]','ASHA Menu',now(),-1,now(),-1);
 
 --insert into mobile_feature_master
 delete from mobile_feature_master where mobile_constant in ('DNHDD_NCD_CBAC_AND_NUTRITION','DNHDD_NCD_SCREENING');
@@ -1766,24 +1779,6 @@ values ('DNHDD_NCD_CBAC_AND_NUTRITION', 'DNHDD_NCD_CBAC_AND_NUTRITION', now(), -
        ('DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH', 'DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH', now(), -1, now(), -1);
 
 
-delete from mobile_form_feature_rel where form_id in (57,59,60);
-INSERT INTO mobile_form_feature_rel (form_id,mobile_constant) VALUES
-	 (57,'DNHDD_NCD_CBAC_AND_NUTRITION'),
-	 (59,'DNHDD_NCD_SCREENING'),
-	 (60,'DNHDD_NCD_SCREENING');
-
-
-delete from listvalue_field_form_relation where form_id in (59,60) and field = 'chronicDiseaseList';
-insert into listvalue_field_form_relation(field,form_id) values
-     ('chronicDiseaseList',59),
-     ('chronicDiseaseList',60);
-
-delete from listvalue_field_form_relation where form_id in (59,60) and field = 'mentalHealthOtherProblemList';
-insert into listvalue_field_form_relation(field,form_id) values
-     ('mentalHealthOtherProblemList',59),
-     ('mentalHealthOtherProblemList',60);
-
-
 ALTER TABLE ncd_member_mental_health_detail ADD COLUMN IF NOT EXISTS is_suspected boolean;
 
 
@@ -1791,3 +1786,11 @@ INSERT INTO public.user_health_infrastructure
 (id, user_id, health_infrastrucutre_id, created_by, created_on, modified_by, modified_on, state, is_default)
 VALUES(1, 1, 1, 1, now(), 1, now(), 'ACTIVE', false),
 (2, 1, 2, 1, now(), 1, now(), 'ACTIVE', false);
+
+
+--ADDED NEW COLUMN IN ncd_member_referral TABLE
+ALTER TABLE if exists ncd_member_referral
+ADD column IF NOT EXISTS mo_referred_health_infra_type varchar(15);
+
+
+

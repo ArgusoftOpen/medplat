@@ -18,6 +18,23 @@
     .no-data-placeholder {
         padding: 25px 0px;
     }
+    .information {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    margin-top: 80px;
+    color: black;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    z-index: 1000;
+}
+
+.fa-info-circle:hover + .information {
+    display: inline;
+   
+}
+
 </style>
 <script>
     $(".header-fixed").tableHeadFixer();
@@ -34,7 +51,20 @@
             <div class="cst-tab">
                 <uib-tabset active='mlisting.selectedTab'>
                     <!-- Referred Cases -->
-                    <uib-tab heading="Referred Cases" index=0 ng-click="mlisting.retrieveMembers(false, true)">
+                    <uib-tab  index=0 ng-click="mlisting.retrieveMembers(false, true)">
+                        <uib-tab-heading>
+                            <span style="display: flex; align-items: center;">
+                                <span>Referred Cases</span>
+                                <i   class="fa fa-info-circle" style="margin-left: 15px;"
+                              
+
+                                ></i>
+                                <div class="information">              
+                                    Referred Cases contains the list of members who have been referred by the ANM/CHO/MPW during NCD Screening.
+                              </div>
+                            </span>
+                        </uib-tab-heading>
+                      
                         <div class="cst-table table-responsive table-set-height" id="member-scroll">
                             <table aria-describedby="Referred Cases"
                                 class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
@@ -82,7 +112,14 @@
                         </div>
                     </uib-tab>
                     <!-- Confirmed and initiated on treatment -->
-                    <uib-tab heading="Confirmed and initiated on treatment" index=1 ng-click="mlisting.retrieveMembersForFollowup(false, ['TREATMENT_STARTED'])">
+                    <uib-tab  index=1 ng-click="mlisting.retrieveMembersForFollowup(false, ['TREATMENT_STARTED'])">
+                        <uib-tab-heading>
+                            <span style="display: flex; align-items: center;">
+                                <span>Confirmed and initiated on treatment</span>
+                                <i   class="fa fa-info-circle" style="margin-left: 15px;" ></i>
+                               
+                            </span>
+                        </uib-tab-heading>
                         <div class="cst-table table-responsive table-set-height" id="member-scroll1">
                             <table aria-describedby="Confirmed and initiated on treatment"
                                 class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
@@ -128,7 +165,14 @@
                         </div>
                     </uib-tab>
                     <!-- Follow Up Case -->
-                    <uib-tab heading="Follow Up Case" index=2 ng-click="mlisting.retrieveMembersForFollowup(false, ['CONFIRMED'])">
+                    <uib-tab  index=2 ng-click="mlisting.retrieveMembersForFollowup(false, ['CONFIRMED'])">
+                        <uib-tab-heading>
+                            <span style="display: flex; align-items: center;">
+                                <span>Follow Up Case</span>
+                                <i   class="fa fa-info-circle" style="margin-left: 15px;" ></i>
+                               
+                            </span>
+                        </uib-tab-heading>
                         <div class="cst-table table-responsive table-set-height" id="member-scroll2">
                             <table aria-describedby="member list"
                                 class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
@@ -181,7 +225,14 @@
                         </div>
                     </uib-tab>
                     <!-- Secondary Referral -->
-                    <uib-tab heading="Secondary Referral" index=3 ng-click="mlisting.retrieveMembersForFollowup(false, ['REFERRED'])">
+                    <uib-tab  index=3 ng-click="mlisting.retrieveMembersForFollowup(false, ['REFERRED'])">
+                        <uib-tab-heading>
+                            <span style="display: flex; align-items: center;">
+                                <span>Secondary Referral</span>
+                                <i   class="fa fa-info-circle" style="margin-left: 15px;" ></i>
+                               
+                            </span>
+                        </uib-tab-heading>
                         <div class="cst-table table-responsive table-set-height" id="member-scroll3">
                             <table aria-describedby="member list"
                                 class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
@@ -227,7 +278,14 @@
                         </div>
                     </uib-tab>
                     <!-- Examined and found normal -->
-                    <uib-tab heading="Examined and found normal" index=4 ng-click="mlisting.retrieveMembers(false, false)">
+                    <uib-tab index=4 ng-click="mlisting.retrieveMembers(false, false)">
+                        <uib-tab-heading>
+                            <span style="display: flex; align-items: center;">
+                                <span>Examined and found normal</span>
+                                <i   class="fa fa-info-circle" style="margin-left: 15px;" ></i>
+                               
+                            </span>
+                        </uib-tab-heading>
                         <div class="cst-table table-responsive table-set-height" id="member-scroll4">
                             <table aria-describedby="member list"
                                 class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">

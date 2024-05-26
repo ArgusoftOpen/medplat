@@ -213,6 +213,25 @@ public class MemberDataBean {
     private String alcoholAddiction;
     private String smokingAddiction;
     private String tobaccoAddiction;
+    private Long hypDiaMentalServiceDate;
+
+    public Long getHypDiaMentalServiceDate() {
+        return hypDiaMentalServiceDate;
+    }
+
+    public void setHypDiaMentalServiceDate(Long hypDiaMentalServiceDate) {
+        this.hypDiaMentalServiceDate = hypDiaMentalServiceDate;
+    }
+
+    public Long getCancerServiceDate() {
+        return cancerServiceDate;
+    }
+
+    public void setCancerServiceDate(Long cancerServiceDate) {
+        this.cancerServiceDate = cancerServiceDate;
+    }
+
+    private Long cancerServiceDate;
 
     public Integer getId() {
         return id;

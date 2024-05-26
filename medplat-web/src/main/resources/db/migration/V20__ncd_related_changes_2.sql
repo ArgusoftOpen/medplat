@@ -8,5 +8,25 @@ INSERT INTO public.menu_config (id,feature_json,group_id,active,is_dynamic_repor
 (148,'{"isShowHealthIdModal":true,"isShowHIPModal":false, "canExamine":true}',null,true,null,'Referred Patients','techo.ncd.membersdnhdd',null,'ncd',null,null,'49d9bb10-05c0-42c5-87c6-f5ac0554e942','c7104aa4-1f42-460a-91d4-256057cb8b42','408b3025-9e3a-4294-826d-7dc33e357545');
 
 --adding asha user
-INSERT INTO public.um_user (created_by,created_on,modified_by,modified_on,aadhar_number,address,code,contact_number,date_of_birth,email_id,first_name,gender,last_name,middle_name,"password",prefered_language,role_id,state,user_name,server_type,search_text,title,imei_number,techo_phone_number,aadhar_number_encrypted,no_of_attempts,rch_institution_master_id,infrastructure_id,sdk_version,free_space_mb,latitude,longitude,report_preferred_language,login_code,convox_id,activation_date,member_master_id,location_id,pincode,pin,first_time_password_changed) VALUES
-         (1,'2024-01-24 18:54:36.53',-1,'2024-01-31 11:34:12.106',NULL,NULL,NULL,NULL,NULL,NULL,'asha','F','test',NULL,'onfoP0JuT+ShfKQ+5xsjzhHYSRjwGa0o','EN',24,'ACTIVE','asha_test',NULL,'Mrs asha test asha_test SUPERADMIN','Mr',NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-01-24 18:54:36.462413',NULL,NULL,NULL,NULL,true);
+INSERT INTO public.um_user(created_by, created_on, first_name, last_name, password, role_id, state, user_name)
+    VALUES (1, now(), 'asha', 'test', '2JpZ8jdGmQ0uln1aaUpZGTN8x3Ixqg8C',24, 'ACTIVE', 'asha_test') ;
+
+INSERT INTO public.um_user_location(created_by, created_on, loc_id, state, type, user_id, level)
+    VALUES (1, now(),7,'ACTIVE','V',24, 7);
+
+INSERT INTO mobile_form_feature_rel (form_id,mobile_constant) VALUES
+	 ((select id from mobile_form_details where form_name = 'DNHDD_NCD_CBAC_AND_NUTRITION') ,'DNHDD_NCD_CBAC_AND_NUTRITION'),
+	 ((select id from mobile_form_details where form_name = 'CANCER_SCREENING'),'DNHDD_NCD_SCREENING'),
+	 ((select id from mobile_form_details where form_name = 'DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH'),'DNHDD_NCD_SCREENING');
+
+insert into listvalue_field_form_relation(field,form_id) values
+     ('chronicDiseaseList',(select id from mobile_form_details where form_name = 'CANCER_SCREENING')),
+     ('chronicDiseaseList',(select id from mobile_form_details where form_name = 'DNHDD_NCD_CBAC_AND_NUTRITION'));
+
+insert into listvalue_field_form_relation(field,form_id) values
+     ('mentalHealthOtherProblemList',(select id from mobile_form_details where form_name = 'DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH'));
+
+delete from mobile_menu_role_relation where role_id in (2,24);
+INSERT INTO mobile_menu_role_relation(menu_id, role_id) values
+     ((select id from mobile_menu_master where menu_name = 'FHW Menu' order by id desc limit 1), 2),
+     ((select id from mobile_menu_master where menu_name = 'ASHA Menu' order by id desc limit 1), 24);

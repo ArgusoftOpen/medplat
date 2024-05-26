@@ -20,6 +20,7 @@ public class MemberReferralDnhddDto {
     private Integer id;
     private String uniqueHealthId;
     private String familyId;
+    private String referredForDiseases;
     private String referredForHypertension;
     private String referredForDiabetes;
     private String referredForBreast;
