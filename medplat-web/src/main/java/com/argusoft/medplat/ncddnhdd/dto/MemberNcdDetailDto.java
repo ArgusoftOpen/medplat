@@ -8,6 +8,8 @@ package com.argusoft.medplat.ncddnhdd.dto;
 import com.argusoft.medplat.fhs.dto.MemberDto;
 import com.argusoft.medplat.ncddnhdd.model.MemberReferral;
 
+import java.util.Date;
+
 /**
  * @author vaishali
  */
@@ -36,6 +38,18 @@ public class MemberNcdDetailDto {
     private String additionalInfo;
     private Boolean caseOfHypertension;
     private Boolean caseOfDiabetes;
+    private Boolean caseOfBreastCancer;
+    private Boolean caseOfOralCancer;
+    private Boolean caseOfCervicalCancer;
+    private Date serverDate;
+
+    public Date getServerDate() {
+        return serverDate;
+    }
+
+    public void setServerDate(Date serverDate) {
+        this.serverDate = serverDate;
+    }
 
     public String getName() {
         return name;
@@ -219,5 +233,29 @@ public class MemberNcdDetailDto {
 
     public void setCaseOfDiabetes(Boolean caseOfDiabetes) {
         this.caseOfDiabetes = caseOfDiabetes;
+    }
+
+    public Boolean getCaseOfBreastCancer() {
+        return caseOfBreastCancer;
+    }
+
+    public void setCaseOfBreastCancer(Boolean caseOfBreastCancer) {
+        this.caseOfBreastCancer = caseOfBreastCancer;
+    }
+
+    public Boolean getCaseOfOralCancer() {
+        return caseOfOralCancer;
+    }
+
+    public void setCaseOfOralCancer(Boolean caseOfOralCancer) {
+        this.caseOfOralCancer = caseOfOralCancer;
+    }
+
+    public Boolean getCaseOfCervicalCancer() {
+        return caseOfCervicalCancer;
+    }
+
+    public void setCaseOfCervicalCancer(Boolean caseOfCervicalCancer) {
+        this.caseOfCervicalCancer = caseOfCervicalCancer;
     }
 }

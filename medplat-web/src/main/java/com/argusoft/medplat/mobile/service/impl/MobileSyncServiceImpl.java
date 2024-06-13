@@ -6,6 +6,10 @@ package com.argusoft.medplat.mobile.service.impl;
 //import com.argusoft.medplat.chardham.service.ChardhamMemberScreeningService;
 import com.argusoft.medplat.infrastructure.dto.SchoolDataBean;
 import com.argusoft.medplat.mobile.service.*;
+import com.argusoft.medplat.ncddnhdd.dao.MemberCbacDetailDao;
+import com.argusoft.medplat.ncddnhdd.dto.MemberCbacDetailDataBean;
+import com.argusoft.medplat.ncddnhdd.mapper.MemberCbacDetailMapper;
+import com.argusoft.medplat.ncddnhdd.model.MemberCbacDetail;
 import com.argusoft.medplat.web.users.dao.RoleDao;
 import com.argusoft.medplat.web.users.dao.UserDao;
 import com.argusoft.medplat.web.users.dao.UserLocationDao;
@@ -123,8 +127,8 @@ public class MobileSyncServiceImpl extends GenericSessionUtilService implements 
 //    private MigrationService migrationService;
 //    @Autowired
 //    private FamilyMigrationService familyMigrationService;
-//    @Autowired
-//    private MemberCbacDetailDao memberCbacDetailDao;
+    @Autowired
+    private MemberCbacDetailDao memberCbacDetailDao;
 //    @Autowired
 //    private CovidTravellersInfoService covidTravellersInfoService;
     @Autowired
@@ -354,12 +358,12 @@ public class MobileSyncServiceImpl extends GenericSessionUtilService implements 
             loggedInUserPrincipleDto.setFhwServiceStatusDtos(fhwServiceDetailDtoCF.get());
         }
 
-//        if (beans.contains(SyncConstant.MEMBER_CBAC_DETAIL_BEAN)) {
-//            CompletableFuture<List<MemberCbacDetailDataBean>> cbacDetailsCF = CompletableFuture.supplyAsync(()
-//                            -> this.retrieveMemberCbacDetails(user.getId(), paramDetailDto.getLastUpdateDateForCbacDetails()),
-//                    TechoCompletableFuture.mobileGetDetailAshaThreadPool);
-//            loggedInUserPrincipleDto.setMemberCbacDetails(cbacDetailsCF.get());
-//        }
+        if (beans.contains(SyncConstant.MEMBER_CBAC_DETAIL_BEAN)) {
+            CompletableFuture<List<MemberCbacDetailDataBean>> cbacDetailsCF = CompletableFuture.supplyAsync(()
+                            -> this.retrieveMemberCbacDetails(user.getId(), paramDetailDto.getLastUpdateDateForCbacDetails()),
+                    TechoCompletableFuture.mobileGetDetailAshaThreadPool);
+            loggedInUserPrincipleDto.setMemberCbacDetails(cbacDetailsCF.get());
+        }
 
 //        if (beans.contains(SyncConstant.COVID_TRAVELLERS_INFO_BEAN)) {
 //            CompletableFuture<List<CovidTravellersInfoMobileDto>> covidTravellersInfoCF = CompletableFuture.supplyAsync(()
@@ -662,22 +666,22 @@ public class MobileSyncServiceImpl extends GenericSessionUtilService implements 
         return mapOfLocations;
     }
 
-//    private List<MemberCbacDetailDataBean> retrieveMemberCbacDetails(Integer userId, Long lastModifiedOn) {
-//        if (userId != null) {
-//            Date lastUpdateDate;
-//            lastUpdateDate = new Date(ImtechoUtil.getValueOrDefault(lastModifiedOn, 0L));
-//
-//            List<MemberCbacDetailDataBean> memberCbacDetailDataBeans = new ArrayList<>();
-//            List<MemberCbacDetail> cbacDetails = memberCbacDetailDao.retrieveCbacDetailsForAsha(userId, lastUpdateDate);
-//            if (cbacDetails != null) {
-//                for (MemberCbacDetail memberCbacDetail : cbacDetails) {
-//                    memberCbacDetailDataBeans.add(MemberCbacDetailMapper.convertMemberCbacDetailEntityToDataBean(memberCbacDetail));
-//                }
-//            }
-//            return memberCbacDetailDataBeans;
-//        }
-//        return new ArrayList<>();
-//    }
+    private List<MemberCbacDetailDataBean> retrieveMemberCbacDetails(Integer userId, Long lastModifiedOn) {
+        if (userId != null) {
+            Date lastUpdateDate;
+            lastUpdateDate = new Date(ImtechoUtil.getValueOrDefault(lastModifiedOn, 0L));
+
+            List<MemberCbacDetailDataBean> memberCbacDetailDataBeans = new ArrayList<>();
+            List<MemberCbacDetail> cbacDetails = memberCbacDetailDao.retrieveCbacDetailsForAsha(userId, lastUpdateDate);
+            if (cbacDetails != null) {
+                for (MemberCbacDetail memberCbacDetail : cbacDetails) {
+                    memberCbacDetailDataBeans.add(MemberCbacDetailMapper.convertMemberCbacDetailEntityToDataBean(memberCbacDetail));
+                }
+            }
+            return memberCbacDetailDataBeans;
+        }
+        return new ArrayList<>();
+    }
 
 //    private List<MemberMoConfirmedDetailDataBean> retrieveMoConfirmedMemberDetails(Integer userId) {
 //        if (userId != null) {

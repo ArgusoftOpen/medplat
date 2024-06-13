@@ -60,6 +60,9 @@ public class RelatedPropertyNameConstants {
     public static final String FIRST_NAME = "firstName";
     public static final String MIDDLE_NAME = "middleName";
     public static final String LAST_NAME = "lastName";
+    public static final String HMIS_ID = "hmisId";
+    public static final String BMI_CATEGORY = "bmiCategory";
+
     public static final String MEMBER_STATE = "memberState";
     public static final String DOB = "dob";
     public static final String DOB_DISPLAY = "dobDisplay";
@@ -144,6 +147,7 @@ public class RelatedPropertyNameConstants {
     // Related Property Name for RCH forms
     public static final String MONTH_START = "monthStart";
     public static final String MEMBER_ID_AND_NAME = "memberIdAndName";
+    public static final String STANDARD = "standard";
     public static final String NOTIFICATION_ID = "notificationId";
     public static final String VISIT_NUMBER = "visitNumber";
     public static final String ASHA_INFO = "ashaInfo";

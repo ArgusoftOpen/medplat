@@ -55,10 +55,7 @@
                         <uib-tab-heading>
                             <span style="display: flex; align-items: center;">
                                 <span>Referred Cases</span>
-                                <i   class="fa fa-info-circle" style="margin-left: 15px;"
-                              
-
-                                ></i>
+                                <i class="fa fa-info-circle" style="margin-left: 15px;"></i>
                                 <div class="information">              
                                     Referred Cases contains the list of members who have been referred by the ANM/CHO/MPW during NCD Screening.
                               </div>
@@ -761,7 +758,7 @@
                                 ng-change="mlisting.search.searchString = 'All';" />
                             <div class="control_indicator"></div>
                         </label>
-                        <label class="control control-radio"> ABHA Number
+                        <!-- <label class="control control-radio"> ABHA Number
                             <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
                                 ng-change="mlisting.search.searchString = null;" value="abhaNumber" />
                             <div class="control_indicator"></div>
@@ -770,7 +767,7 @@
                             <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
                                 ng-change="mlisting.search.searchString = null;" value="abhaAddress" />
                             <div class="control_indicator"></div>
-                        </label>
+                        </label> -->
                         <div class="form-group" ng-if="mlisting.search.searchBy === 'disease'">
                             <label for="disease" control-label>
                                 Select Disease
@@ -820,7 +817,7 @@
                         </div>
                         <div style="margin-top: 10px">
                             <validate for="searchString" pattern-msg='Enter Valid details'
-                                ng-if="mlisting.search.searchBy === 'memberId' || mlisting.search.searchBy === 'familyId' || mlisting.search.searchBy === 'abhaNumber' || mlisting.search.searchBy === 'abhaAddress'">
+                                ng-if="mlisting.search.searchBy === 'memberId' || mlisting.search.searchBy === 'familyId'">
                                 <input type="text" name="searchString" form-control
                                     ng-model="mlisting.search.searchString"
                                     ng-change="mlisting.handleChangeEvent(mlisting.search.searchString)"

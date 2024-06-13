@@ -189,7 +189,7 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
         memberCbacDetail.setMobileEndDate(ImtechoUtil.getMobileStartOrEndDateFromString(keyAndAnswerMap.get("-9")));
         memberCbacDetail.setDoneOn(ImtechoUtil.getMobileStartOrEndDateFromString(keyAndAnswerMap.get("10")));
         memberCbacDetail.setCbacAndNutritionMasterId(masterId);
-        memberCbacDetail.setDoneBy(MemberCbacDetail.DoneBy.ASHA);
+        memberCbacDetail.setDoneBy(getDoneByForCbacFor(user));
 
         for (Map.Entry<String, String> entrySet : keyAndAnswerMap.entrySet()) {
             String key = entrySet.getKey();
@@ -237,16 +237,25 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
         return memberCbacAndNutritionMaster.getId();
     }
 
-//    public MemberCbacDetail.DoneBy getDoneByForCbacFor(UserMaster user) {
-//        return switch (user.getRole().getCode() != null ? user.getRole().getCode() : user.getRole().getName()) {
-//            case MobileConstantUtil.Roles.ASHA, "ASHA" -> MemberCbacDetail.DoneBy.ASHA;
-//            case MobileConstantUtil.Roles.FHW, MobileConstantUtil.Roles.ANM -> MemberCbacDetail.DoneBy.FHW;
-//            case MobileConstantUtil.Roles.CHO_HWC, MobileConstantUtil.Roles.CHO -> MemberCbacDetail.DoneBy.CHO;
-//            case "MPW" -> MemberCbacDetail.DoneBy.MPW;
-//            case "RBSK" -> MemberCbacDetail.DoneBy.RBSK;
-//            default -> null;
-//        };
-//    }
+    public MemberCbacDetail.DoneBy getDoneByForCbacFor(UserMaster user) {
+        switch (user.getRole().getCode() != null ? user.getRole().getCode() : user.getRole().getName()) {
+            case MobileConstantUtil.Roles.ASHA:
+            case "ASHA":
+                return MemberCbacDetail.DoneBy.ASHA;
+            case MobileConstantUtil.Roles.FHW:
+            case MobileConstantUtil.Roles.ANM:
+                return MemberCbacDetail.DoneBy.FHW;
+            case MobileConstantUtil.Roles.CHO_HWC:
+            case MobileConstantUtil.Roles.CHO:
+                return MemberCbacDetail.DoneBy.CHO;
+            case "MPW":
+                return MemberCbacDetail.DoneBy.MPW;
+            case "RBSK":
+                return MemberCbacDetail.DoneBy.RBSK;
+            default:
+                return null;
+        }
+    }
 
     @Override
     public MemberBreastDetail retrieveLastRecordForBreastByMemberId(Integer memberId) {
@@ -604,7 +613,7 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
         memberReferral.setReferredOn(referredOn);
         memberReferral.setReferredFromHealthInfrastructureId(infraId);
         memberReferral.setState(State.PENDING);
-        memberReferral.setReferredFrom(ReferralPlace.ASHA);
+        memberReferral.setReferredFrom(getReferredFromForMemberReferral(user));
 
         if (infraId == -1) {
             memberReferral.setReferredTo(ReferralPlace.PVT);
@@ -617,17 +626,27 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
         return memberReferral.getId();
     }
 
-//    public static ReferralPlace getReferredFromForMemberReferral(UserMaster user) {
-//        return switch (user.getRole().getCode() != null ? user.getRole().getCode() : user.getRole().getName()) {
-//            case MobileConstantUtil.Roles.ASHA, "ASHA" -> ReferralPlace.ASHA;
-//            case MobileConstantUtil.Roles.FHW, MobileConstantUtil.Roles.ANM -> ReferralPlace.FHW;
-//            case MobileConstantUtil.Roles.CHO_HWC, MobileConstantUtil.Roles.CHO -> ReferralPlace.CHO;
-//            case MobileConstantUtil.Roles.MPHW -> ReferralPlace.MPHW;
-//            case "MPW" -> ReferralPlace.MPW;
-//            case "RBSK" -> ReferralPlace.RBSK;
-//            default -> ReferralPlace.OTHERS;
-//        };
-//    }
+    public static ReferralPlace getReferredFromForMemberReferral(UserMaster user) {
+        switch (user.getRole().getCode() != null ? user.getRole().getCode() : user.getRole().getName()) {
+            case MobileConstantUtil.Roles.ASHA:
+            case "ASHA":
+                return ReferralPlace.ASHA;
+            case MobileConstantUtil.Roles.FHW:
+            case MobileConstantUtil.Roles.ANM:
+                return ReferralPlace.FHW;
+            case MobileConstantUtil.Roles.CHO_HWC:
+            case MobileConstantUtil.Roles.CHO:
+                return ReferralPlace.CHO;
+            case MobileConstantUtil.Roles.MPHW:
+                return ReferralPlace.MPHW;
+            case "MPW":
+                return ReferralPlace.MPW;
+            case "RBSK":
+                return ReferralPlace.RBSK;
+            default:
+                return ReferralPlace.OTHERS;
+        }
+    }
 
     public static ReferralPlace getReferralPlaceFromInfraTypeForMemberReferral(Integer infraType) {
         if (HealthInfrastructureConstants.INFRA_DISTRICT_HOSPITAL.equals(infraType)) {
@@ -1808,6 +1827,7 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
         MemberEntity basicDetail = memberDao.retrieveMemberById(memberId);
         FamilyEntity familyEntity = familyDao.retrieveFamilyByFamilyId(basicDetail.getFamilyId());
         memberDetailDto.setFamilyId(familyEntity.getId());
+        memberDetailDto.setServerDate(new Date());
         memberDetailDto.setLocationId(familyEntity.getAreaId() != null ? familyEntity.getAreaId() : familyEntity.getLocationId());
         memberDetailDto.setLocationHierarchy(locationHierchyCloserDetailDao.getLocationHierarchyStringByLocationId(memberDetailDto.getLocationId()));
         memberDetailDto.setBasicDetails(MemberMapper.getMemberDto(basicDetail));
@@ -1818,9 +1838,25 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
         memberDetailDto.setMemberCervicalDto(cervicalDetail);
         memberDetailDto.setName(Stream.of(basicDetail.getFirstName(), basicDetail.getMiddleName(), basicDetail.getLastName()).filter(Objects::nonNull).collect(Collectors.joining(" ")));
         memberDetailDto.setAdditionalInfo(basicDetail.getAdditionalInfo());
-        if (Objects.nonNull(basicDetail.getChronicDisease())) {
-            memberDetailDto.setCaseOfHypertension(basicDetail.getChronicDisease().contains(memberDao.retrieveIdOfListValuesByFieldKeyAndValue(FIELD_KEY_FOR_CHRONIC_DISEASE, "Hypertension").toString()));
-            memberDetailDto.setCaseOfDiabetes(basicDetail.getChronicDisease().contains(memberDao.retrieveIdOfListValuesByFieldKeyAndValue(FIELD_KEY_FOR_CHRONIC_DISEASE, "Diabetes").toString()));
+        MemberBreastDetail memberBreastDetail = breastDetailDao.retrieveFirstRecordByMemberId(memberId);
+        if (memberBreastDetail != null && memberBreastDetail.getDiagnosedEarlier() != null && memberBreastDetail.getDiagnosedEarlier()) {
+            memberDetailDto.setCaseOfBreastCancer(true);
+        }
+        MemberCervicalDetail memberCervicalDetail = cervicalDetailDao.retrieveFirstRecordByMemberId(memberId);
+        if (memberCervicalDetail != null && memberCervicalDetail.getDiagnosedEarlier() != null && memberCervicalDetail.getDiagnosedEarlier()) {
+            memberDetailDto.setCaseOfCervicalCancer(true);
+        }
+        MemberOralDetail memberOralDetail = oralDetailDao.retrieveFirstRecordByMemberId(memberId);
+        if (memberOralDetail != null && memberOralDetail.getDiagnosedEarlier() != null && memberOralDetail.getDiagnosedEarlier()) {
+            memberDetailDto.setCaseOfOralCancer(true);
+        }
+        MemberHypertensionDetail memberHypertensionDetail = hypertensionDetailDao.retrieveFirstRecordByMemberId(memberId);
+        if (memberHypertensionDetail != null && memberHypertensionDetail.getDiagnosedEarlier() != null && memberHypertensionDetail.getDiagnosedEarlier()) {
+            memberDetailDto.setCaseOfHypertension(true);
+        }
+        MemberDiabetesDetail memberDiabetesDetail = diabetesDetailDao.retrieveFirstRecordByMemberId(memberId);
+        if (memberDiabetesDetail != null && memberDiabetesDetail.getEarlierDiabetesDiagnosis() != null && memberDiabetesDetail.getEarlierDiabetesDiagnosis()) {
+            memberDetailDto.setCaseOfDiabetes(true);
         }
         return memberDetailDto;
     }

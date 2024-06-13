@@ -383,6 +383,23 @@ public class UtilBean {
         }
         return null;
     }
+    public static String getBmiCategoryFromValue(Float bmi) {
+        String bmiCategory;
+        if (bmi < 18.5) {
+            bmiCategory = "Under Weight";
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            bmiCategory = "Normal";
+        } else if (bmi >= 25 && bmi <= 29.9) {
+            bmiCategory = "Pre-Obesity";
+        } else if (bmi >= 30 && bmi <= 34.9) {
+            bmiCategory = "Obesity class I";
+        } else if (bmi >= 35 && bmi <= 39.9) {
+            bmiCategory = "Obesity class II";
+        } else {
+            bmiCategory = "Obesity class III";
+        }
+        return bmiCategory;
+    }
 
     public static void addLBWorAsphyxiaIntoLICForFirstPNC(String loop) {
         String tempDataObj = SharedStructureData.relatedPropertyHashTable.get(RelatedPropertyNameConstants.IS_CHILD_FIRST_PNC_DONE);

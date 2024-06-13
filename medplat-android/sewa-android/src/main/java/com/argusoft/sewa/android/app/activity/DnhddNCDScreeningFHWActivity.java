@@ -428,7 +428,7 @@ public class DnhddNCDScreeningFHWActivity extends MenuActivity implements View.O
             if (hypDiaMenScreenCount == totalMemberCount && cancerScreeningCount == totalMemberCount) {
                 color = "GREEN";
             } else if (referredMemberCount > 0) {
-                color = "BLUE";
+                color = "NORMAL";
             } else if (hypDiaMenScreenCount > 0 || cancerScreeningCount > 0) {
                 color = "ORANGE";
             } else if (hypDiaMenScreenCount == 0 && cancerScreeningCount == 0) {

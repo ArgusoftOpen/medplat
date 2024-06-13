@@ -9,6 +9,7 @@ package com.argusoft.medplat.mobile.dto;
 import com.argusoft.medplat.course.model.LmsUserMetaData;
 import com.argusoft.medplat.fhs.dto.FhwServiceStatusDto;
 import com.argusoft.medplat.infrastructure.dto.SchoolDataBean;
+import com.argusoft.medplat.ncddnhdd.dto.MemberCbacDetailDataBean;
 import com.argusoft.medplat.query.dto.QueryDto;
 import com.argusoft.medplat.rch.dto.MemberPregnancyStatusBean;
 import com.argusoft.medplat.rch.dto.RchVillageProfileDto;
@@ -45,6 +46,7 @@ public class LoggedInUserPrincipleDto {
     private List<LocationMasterDataBean> locationMasterBeans;
     private List<Integer> locationsForFamilyDataDeletion;
     private String newToken;
+    private List<MemberCbacDetailDataBean> memberCbacDetails;
 
     private List<String> features;
     private List<MobileLibraryDataBean> mobileLibraryDataBeans;
@@ -281,7 +283,13 @@ public class LoggedInUserPrincipleDto {
     public void setPregnancyStatus(List<MemberPregnancyStatusBean> pregnancyStatus) {
         this.pregnancyStatus = pregnancyStatus;
     }
+    public List<MemberCbacDetailDataBean> getMemberCbacDetails() {
+        return memberCbacDetails;
+    }
 
+    public void setMemberCbacDetails(List<MemberCbacDetailDataBean> memberCbacDetails) {
+        this.memberCbacDetails = memberCbacDetails;
+    }
     public Long getLastPregnancyStatusDate() {
         return lastPregnancyStatusDate;
     }

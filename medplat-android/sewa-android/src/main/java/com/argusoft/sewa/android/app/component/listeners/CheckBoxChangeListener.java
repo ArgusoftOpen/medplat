@@ -16,7 +16,9 @@ import com.argusoft.sewa.android.app.util.UtilBean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author alpeshkyada
@@ -26,13 +28,17 @@ public class CheckBoxChangeListener implements CompoundButton.OnCheckedChangeLis
     private final QueFormBean queFormBean;
     private List<OptionDataBean> optionBeans;
     private final boolean isMulti;
-    private List<String> answer;
+    private Set<String> answer;
     private List<String> answerOptionsValue;
     private boolean noneCheck;
     private String noneKey;
     private int noneIndex;
     private List<String> uncheckedOption;
-    //added in phase 3 
+    private boolean selectAllCheck;
+    private String selectAllKey;
+    private int selectAllIndex;
+    private List<String> checkedOption;
+    //added in phase 3
     private boolean isMorbidityQuestion;
     private String[] morbidityOptions;
     private LinearLayout layout;
@@ -40,7 +46,8 @@ public class CheckBoxChangeListener implements CompoundButton.OnCheckedChangeLis
     public CheckBoxChangeListener(QueFormBean queFormBean, boolean isMulti, boolean isChecked) {
         this.queFormBean = queFormBean;
         this.isMulti = isMulti;
-        if (queFormBean.getSubform() != null && queFormBean.getSubform().toLowerCase().contains(GlobalTypes.DATA_MAP_MORBIDITY_CONDITION.toLowerCase())) {
+        if (queFormBean.getSubform() != null
+                && queFormBean.getSubform().toLowerCase().contains(GlobalTypes.DATA_MAP_MORBIDITY_CONDITION.toLowerCase())) {
             isMorbidityQuestion = true;
             String[] split = UtilBean.split(queFormBean.getSubform().trim(), GlobalTypes.COMMA);
             if (isMulti) {
@@ -54,7 +61,8 @@ public class CheckBoxChangeListener implements CompoundButton.OnCheckedChangeLis
             }
         }
         this.optionBeans = UtilBean.getOptionsOrDataMap(queFormBean, false);
-        if (optionBeans.size() == 1 && optionBeans.get(0).getKey() != null && optionBeans.get(0).getKey().equalsIgnoreCase(GlobalTypes.NO_OPTION_AVAILABLE)) {
+        if (optionBeans.size() == 1 && optionBeans.get(0).getKey() != null
+                && optionBeans.get(0).getKey().equalsIgnoreCase(GlobalTypes.NO_OPTION_AVAILABLE)) {
             List<String> defaultValues;
             if (queFormBean.getRelatedpropertyname() != null && queFormBean.getRelatedpropertyname().trim().length() > 0) {
                 String propertyName = queFormBean.getRelatedpropertyname().trim();
@@ -77,15 +85,26 @@ public class CheckBoxChangeListener implements CompoundButton.OnCheckedChangeLis
             }
         }
         if (isMulti) {
-            answer = new ArrayList<>();
+            answer = new HashSet<>();
             List<FormulaTagBean> formulas = queFormBean.getFormulas();
             if (formulas != null && !formulas.isEmpty()) {
-                FormulaTagBean formula = formulas.get(0);
-                String myFormula = formula.getFormulavalue();
-                if (myFormula != null && myFormula.length() > 0 && myFormula.toLowerCase().contains(FormulaConstants.MULTI_OPTION_UNCHECK.toLowerCase())) {
-                    String[] split = UtilBean.split(formula.getFormulavalue().toLowerCase(), FormulaConstants.MULTI_OPTION_UNCHECK.toLowerCase() + "-");
-                    if (split.length > 1) {
-                        uncheckedOption = Arrays.asList(UtilBean.split(split[split.length - 1].toLowerCase(), GlobalTypes.KEY_VALUE_SEPARATOR));
+                for (FormulaTagBean formula : formulas) {
+                    String myFormula = formula.getFormulavalue();
+                    if (myFormula != null && myFormula.length() > 0) {
+                        if (myFormula.toLowerCase().contains(FormulaConstants.MULTI_OPTION_UNCHECK.toLowerCase())) {
+                            String[] split = UtilBean.split(formula.getFormulavalue().toLowerCase(),
+                                    FormulaConstants.MULTI_OPTION_UNCHECK.toLowerCase() + "-");
+                            if (split.length > 1) {
+                                uncheckedOption = Arrays.asList(UtilBean.split(split[split.length - 1].toLowerCase(), GlobalTypes.KEY_VALUE_SEPARATOR));
+                            }
+                        }
+                        if (myFormula.toLowerCase().contains(FormulaConstants.ALL_OPTION_CHECK.toLowerCase())) {
+                            String[] split = UtilBean.split(formula.getFormulavalue().toLowerCase(),
+                                    FormulaConstants.ALL_OPTION_CHECK.toLowerCase() + "-");
+                            if (split.length > 1) {
+                                checkedOption = Arrays.asList(UtilBean.split(split[split.length - 1].toLowerCase(), GlobalTypes.KEY_VALUE_SEPARATOR));
+                            }
+                        }
                     }
                 }
             }
@@ -103,10 +122,10 @@ public class CheckBoxChangeListener implements CompoundButton.OnCheckedChangeLis
 
                 if (queFormBean.getAnswer() != null) {
                     List<String> strings = Arrays.asList(queFormBean.getAnswer().toString().split(","));
-                    answer = new ArrayList<>(strings);
+                    answer = new HashSet<>(strings);
                 }
 
-                if (bln) {  // if Checked 
+                if (bln) {  // if Checked
                     if (answer != null && !answer.contains(option.getKey())) {
                         if (uncheckedOption != null && uncheckedOption.contains(option.getValue().trim().toLowerCase())) {
                             noneCheck = true;
@@ -124,6 +143,34 @@ public class CheckBoxChangeListener implements CompoundButton.OnCheckedChangeLis
                                 }
                             }
                             answer.add(option.getKey());
+                            if (isMorbidityQuestion) {
+                                // here we have remove the morbidity
+                                answerOptionsValue.clear();
+                                SharedStructureData.removeItemFromLICList(queFormBean.getQuestion(), queFormBean.getLoopCounter() + "");
+                            }
+                        } else if (checkedOption != null && checkedOption.contains(option.getValue().trim().toLowerCase())) {
+                            selectAllCheck = true;
+                            selectAllKey = option.getKey();
+                            selectAllIndex = optionIndex;
+                            answer.clear();
+                            if (layout == null) {
+                                layout = (LinearLayout) queFormBean.getQuestionTypeView();
+                            }
+                            List<String> selectAllAnswers = new ArrayList<>();
+                            for (int i = 0; i < optionBeans.size(); i++) {
+                                if (i == optionIndex) {
+                                    continue;
+                                }
+                                CheckBox checkBox = layout.findViewById(i);
+                                if (uncheckedOption != null && uncheckedOption.contains(optionBeans.get(i).getValue().trim().toLowerCase())) {
+                                    checkBox.setChecked(false);
+                                } else {
+                                    checkBox.setChecked(true);
+                                    selectAllAnswers.add(optionBeans.get(i).getKey());
+                                }
+                                checkBox.setTextColor(SewaUtil.COLOR_MORBIDITY_NORMAL);
+                            }
+                            answer.addAll(selectAllAnswers);
                             if (isMorbidityQuestion) {
                                 // here we have remove the morbidity
                                 answerOptionsValue.clear();
@@ -150,6 +197,13 @@ public class CheckBoxChangeListener implements CompoundButton.OnCheckedChangeLis
                         }
                     }
                 } else {
+                    if (selectAllCheck) {
+                        answer.remove(selectAllKey);
+                        selectAllCheck = false;
+                        LinearLayout layout = (LinearLayout) queFormBean.getQuestionTypeView();
+                        CheckBox checkBox = layout.findViewById(selectAllIndex);
+                        checkBox.setChecked(false);
+                    }
                     answer.remove(option.getKey());
                     if (isMorbidityQuestion) {
                         answerOptionsValue.remove(option.getValue());
