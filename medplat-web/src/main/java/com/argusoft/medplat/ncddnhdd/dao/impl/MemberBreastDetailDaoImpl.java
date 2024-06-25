@@ -94,5 +94,17 @@ public class MemberBreastDetailDaoImpl extends GenericDaoImpl<MemberBreastDetail
         sqlQuery.addEntity(MemberBreastDetail.class);
         return sqlQuery.uniqueResult();
     }
+    @Override
+    public MemberBreastDetail retrieveFirstRecordByMemberId(Integer memberId) {
+        String query = "select distinct on(member_id) *\n" +
+                "from ncd_member_breast_detail\n" +
+                "where member_id = :memberId\n" +
+                "order by member_id, screening_date asc, id asc;\n";
+
+        NativeQuery<MemberBreastDetail> sqlQuery = sessionFactory.getCurrentSession().createNativeQuery(query);
+        sqlQuery.setParameter("memberId", memberId);
+        sqlQuery.addEntity(MemberBreastDetail.class);
+        return sqlQuery.uniqueResult();
+    }
 
 }

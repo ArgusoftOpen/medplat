@@ -47,5 +47,6 @@ public interface MemberDiabetesDetailDao extends GenericDao<MemberDiabetesDetail
     List<MemberDiabetesDetail> retrieveLastNRecordsByMemberIdAndMeasurement(Integer memberId, String measurementType, String visitType, Integer numberOfRecords);
 
     void updateDiabetesDetailsInNcdMemberDetail(Integer memberId);
+    MemberDiabetesDetail retrieveFirstRecordByMemberId(Integer memberId);
 
 }

@@ -93,5 +93,16 @@ public class MemberCervicalDetailDaoImpl extends GenericDaoImpl<MemberCervicalDe
         sqlQuery.addEntity(MemberCervicalDetail.class);
         return sqlQuery.uniqueResult();
     }
+    @Override
+    public MemberCervicalDetail retrieveFirstRecordByMemberId(Integer memberId) {
+        String query = "select distinct on(member_id) *\n" +
+                "from ncd_member_cervical_detail\n" +
+                "where member_id = :memberId\n" +
+                "order by member_id, screening_date asc, id asc;\n";
 
+        NativeQuery<MemberCervicalDetail> sqlQuery = sessionFactory.getCurrentSession().createNativeQuery(query);
+        sqlQuery.setParameter("memberId", memberId);
+        sqlQuery.addEntity(MemberCervicalDetail.class);
+        return sqlQuery.uniqueResult();
+    }
 }

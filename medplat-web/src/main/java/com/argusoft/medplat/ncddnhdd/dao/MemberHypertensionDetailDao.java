@@ -54,5 +54,6 @@ public interface MemberHypertensionDetailDao extends GenericDao<MemberHypertensi
     List<MemberHypertensionDetail> retrieveLastNRecordsByMemberId(Integer memberId, String visitType, Integer numberOfRecords);
 
     void updateHypertensionDetailsInNcdMemberDetail(Integer memberId);
+    MemberHypertensionDetail retrieveFirstRecordByMemberId(Integer memberId);
 
 }

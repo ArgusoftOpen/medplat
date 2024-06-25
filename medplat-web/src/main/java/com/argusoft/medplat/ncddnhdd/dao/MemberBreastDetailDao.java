@@ -39,4 +39,6 @@ public interface MemberBreastDetailDao extends GenericDao<MemberBreastDetail, In
      * @return Returns last record of breast.
      */
     MemberBreastDetail retrieveLastRecordByMemberId(Integer memberId);
+    MemberBreastDetail retrieveFirstRecordByMemberId(Integer memberId);
+
 }

@@ -39,4 +39,6 @@ public interface MemberOralDetailDao extends GenericDao<MemberOralDetail, Intege
      * @return Returns last record of oral.
      */
     MemberOralDetail retrieveLastRecordByMemberId(Integer memberId);
+    MemberOralDetail retrieveFirstRecordByMemberId(Integer memberId);
+
 }

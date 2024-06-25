@@ -154,4 +154,16 @@ public class MemberDiabetesDetailDaoImpl extends GenericDaoImpl<MemberDiabetesDe
         nativeQuery.setParameter("memberId", memberId);
         nativeQuery.executeUpdate();
     }
+    @Override
+    public MemberDiabetesDetail retrieveFirstRecordByMemberId(Integer memberId) {
+        String query = "select distinct on(member_id) *\n" +
+                "from ncd_member_diabetes_detail\n" +
+                "where member_id = :memberId\n" +
+                "order by member_id, screening_date asc, id asc;\n";
+
+        NativeQuery<MemberDiabetesDetail> sqlQuery = sessionFactory.getCurrentSession().createNativeQuery(query);
+        sqlQuery.setParameter("memberId", memberId);
+        sqlQuery.addEntity(MemberDiabetesDetail.class);
+        return sqlQuery.uniqueResult();
+    }
 }

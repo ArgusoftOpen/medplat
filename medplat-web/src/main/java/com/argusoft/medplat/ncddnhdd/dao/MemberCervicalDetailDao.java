@@ -39,4 +39,6 @@ public interface MemberCervicalDetailDao extends GenericDao<MemberCervicalDetail
      * @return Returns last record of cervical.
      */
     MemberCervicalDetail retrieveLastRecordByMemberId(Integer memberId);
+    MemberCervicalDetail retrieveFirstRecordByMemberId(Integer memberId);
+
 }

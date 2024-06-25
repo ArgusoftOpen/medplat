@@ -163,5 +163,16 @@ public class MemberHypertensionDetailDaoImpl extends GenericDaoImpl<MemberHypert
         nativeQuery.setParameter("memberId", memberId);
         nativeQuery.executeUpdate();
     }
+    @Override
+    public MemberHypertensionDetail retrieveFirstRecordByMemberId(Integer memberId) {
+        String query = "select distinct on(member_id) *\n" +
+                "from ncd_member_hypertension_detail\n" +
+                "where member_id = :memberId\n" +
+                "order by member_id, screening_date asc, id asc;\n";
 
+        NativeQuery<MemberHypertensionDetail> sqlQuery = sessionFactory.getCurrentSession().createNativeQuery(query);
+        sqlQuery.setParameter("memberId", memberId);
+        sqlQuery.addEntity(MemberHypertensionDetail.class);
+        return sqlQuery.uniqueResult();
+    }
 }
