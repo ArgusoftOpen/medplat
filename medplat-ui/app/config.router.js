@@ -2587,8 +2587,8 @@
                     resolve: load([
                         'ncd-member-detail-dnhdd.controller',
                         'ncd-dnhdd.service',
-                        'referral-dnhdd.component',
-                        'treatment.component'
+                        'referral-dnhdd.component'
+                        
                     ])
                 })
                 .state('techo.ncd.membersdnhdd', {

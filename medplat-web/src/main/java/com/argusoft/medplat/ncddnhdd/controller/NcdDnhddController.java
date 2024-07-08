@@ -72,6 +72,11 @@ public class NcdDnhddController {
         return ncdDnhddService.retrieveLastRecordForCervicalByMemberId(memberId);
     }
 
+    @GetMapping(value = "/firstrecordfordisease")
+    public MemberDiseasesDto retrieveFirstRecordForDiseaseByMemberId(@RequestParam Integer memberId,@RequestParam(name = "diseaseCode", required = false) String diseaseCode) {
+        return ncdDnhddService.retrieveFirstRecordForDiseaseByMemberId(memberId, diseaseCode);
+    }
+
     @PostMapping(value = "/hypertension")
     public void saveHypertension(@RequestBody MemberHyperTensionDto hyperTensionDto) {
         ncdDnhddService.saveHypertension(hyperTensionDto);

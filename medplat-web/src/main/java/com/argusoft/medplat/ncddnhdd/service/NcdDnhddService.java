@@ -75,4 +75,6 @@ public interface NcdDnhddService {
     MemberCervicalDetail retrieveCervicalDetailsByMemberAndDate(Integer memberId, Date screeningDate);
 
     Map<String, String> registerNewMember(MemberRegistrationDto ncdMember);
+
+    MemberDiseasesDto retrieveFirstRecordForDiseaseByMemberId(Integer memberId,String diseaseCode);
 }

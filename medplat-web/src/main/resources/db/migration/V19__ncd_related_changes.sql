@@ -1793,4 +1793,194 @@ ALTER TABLE if exists ncd_member_referral
 ADD column IF NOT EXISTS mo_referred_health_infra_type varchar(15);
 
 
+-- create medicine_master
+drop table if exists medicine_master;
+
+CREATE TABLE public.medicine_master
+(
+   id bigserial,
+   name character varying(1000),
+   created_by bigint,
+   created_on timestamp without time zone,
+   modified_by bigint,
+   modified_on timestamp without time zone
+)
+WITH (
+  OIDS = FALSE
+)
+;
+
+-- create function get_fhw_by_location
+
+CREATE OR REPLACE FUNCTION public.get_fhw_by_location(
+	location_id bigint)
+    RETURNS text
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE
+    fhw_list text;
+BEGIN
+     WITH village_loc AS (
+            SELECT
+                CASE
+                    WHEN lm."type" in ('V','ANG','ANM') THEN lm.id
+                    WHEN lm."type" in ('AA','A') THEN lm.parent
+                END AS village_id
+            FROM location_master lm
+            WHERE lm.id = location_id
+        )
+    SELECT string_agg(
+        concat(
+            usr.first_name, ' ', usr.middle_name, ' ', usr.last_name,
+            COALESCE('(userName: ' || usr.user_name || ')', ''),
+            COALESCE('(mobileNo: ' || usr.contact_number || ')', '')
+        ), ', '
+    )
+    INTO fhw_list
+    FROM um_user usr
+    INNER JOIN um_user_location ul ON ul.user_id = usr.id AND usr.role_id = 30
+    INNER JOIN village_loc vl ON ul.loc_id = vl.village_id
+    WHERE ul.loc_id = vl.village_id
+    AND usr.state = 'ACTIVE'
+    AND ul.state = 'ACTIVE';
+
+    RETURN fhw_list;
+END;
+$BODY$;
+
+ALTER FUNCTION public.get_fhw_by_location(bigint)
+    OWNER TO postgres;
+
+-- Added get_location_hierarchy_by_type function
+CREATE OR REPLACE FUNCTION public.get_location_hierarchy_by_type(
+	location_id bigint,
+	type character varying)
+    RETURNS text
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+
+	DECLARE
+	hierarchy text;
+
+        BEGIN
+		if(type = 'D' or type = 'C') then
+
+		return (select parent.name from  location_hierchy_closer_det lhcd
+				inner join location_master parent on parent.id = lhcd.parent_id
+				where lhcd.child_id = location_id
+				and (parent_loc_type = 'D' or (parent_loc_type='C')));
+		end if;
+
+		if(type = 'B' or type = 'Z') then
+
+		return (select parent.name from  location_hierchy_closer_det lhcd
+				inner join location_master parent on parent.id = lhcd.parent_id
+				where lhcd.child_id = location_id
+				and (parent_loc_type = 'B' or (parent_loc_type='Z')));
+		end if;
+
+		if(type = 'P' or type = 'U') then
+
+		return (select parent.name from  location_hierchy_closer_det lhcd
+				inner join location_master parent on parent.id = lhcd.parent_id
+				where lhcd.child_id = location_id
+				and (parent_loc_type = 'P' or (parent_loc_type='U')));
+		end if;
+
+		if(type = 'SC') then
+
+		return (select parent.name from  location_hierchy_closer_det lhcd
+				inner join location_master parent on parent.id = lhcd.parent_id
+				where lhcd.child_id = location_id
+				and parent_loc_type = 'SC');
+		end if;
+
+        END;
+$BODY$;
+
+ALTER FUNCTION public.get_location_hierarchy_by_type(bigint, character varying)
+    OWNER TO postgres;
+
+-- Health infra retrieval
+DELETE FROM QUERY_MASTER WHERE CODE='health_infras_retrival_by_type';
+
+INSERT INTO QUERY_MASTER (uuid, created_by, created_on, modified_by, modified_on, code, params, query, description, returns_result_set, state )
+VALUES (
+'db6e73db-3b36-4028-a23c-91dadb04ff1b', 1,  current_date , 1,  current_date , 'health_infras_retrival_by_type',
+'types',
+'select h.id as id , h.name as name from health_infrastructure_details h where h.type in #types# and h.state = ''ACTIVE'';',
+'retrieves health infras by type',
+true, 'ACTIVE');
+
+-- ncd_retrieve_last_cbac_details
+DELETE FROM QUERY_MASTER WHERE CODE='ncd_retrieve_last_cbac_details';
+
+INSERT INTO QUERY_MASTER (uuid, created_by, created_on, modified_by, modified_on, code, params, query, description, returns_result_set, state )
+VALUES (
+'1e13d595-5590-4d1f-9472-34028b2c828a', 1,  current_date , 1,  current_date , 'ncd_retrieve_last_cbac_details',
+'userId',
+'with last_cbac_det as (
+	select max(done_on) as done_on from ncd_member_cbac_detail nmcd where member_id = #userId#
+)
+select
+	nmcd.id,
+	nmcd.member_id,
+	nmcd.score,
+	nmcd.bmi,
+	nmcd.height,
+	nmcd.weight,
+	case
+	when nmcd.waist = ''LT80'' then ''80 cm or less''
+	when nmcd.waist = ''LT90'' then ''90 cm or less''
+	when nmcd.waist = ''GT90'' then ''More than 90 cm''
+	when nmcd.waist = ''GT100'' then ''More than 100 cm''
+	when nmcd.waist = ''81TO90'' then ''81-90 cm''
+	when nmcd.waist = ''91TO100'' then ''91-100 cm''
+	end as "waist",
+
+
+	case
+		when nmcd.consume_alcohol_daily is true then ''POSITIVE''
+		when nmcd.consume_alcohol_daily is false then ''NEGATIVE''
+	end as "isAlcoholic",
+	case
+		when nmcd.smoke_or_consume_gutka = ''DAILY'' then ''POSITIVE''
+		else ''NEGATIVE''
+	end as "isSmoker",
+	nmcd.hmis_id as "hmisId"
+from ncd_member_cbac_detail nmcd
+inner join last_cbac_det lcd on nmcd.member_id = #userId# and lcd.done_on = nmcd.done_on',
+'To retrieve last cbac details of member',
+true, 'ACTIVE');
+
+-- ncd_member_prev_diagnosis_det
+
+DELETE FROM QUERY_MASTER WHERE CODE='ncd_member_prev_diagnosis_det';
+
+INSERT INTO QUERY_MASTER (uuid, created_by, created_on, modified_by, modified_on, code, params, query, description, returns_result_set, state )
+VALUES (
+'a8a6a287-584a-4867-b675-85a4bb301f68', 1,  current_date , 1,  current_date , 'ncd_member_prev_diagnosis_det',
+'locationId,memberId',
+'with max_record_ids as (
+select
+ (select max(id) from ncd_member_hypertension_detail where member_id = #memberId# and done_by != ''MO'') as hyp_id,
+ (select max(id) from ncd_member_diabetes_detail where member_id = #memberId# and done_by != ''MO'') as diab_id,
+ (select max(id) from ncd_member_breast_detail where member_id = #memberId# and done_by != ''MO'') as breast_cancer_id,
+ (select max(id) from ncd_member_oral_detail where member_id = #memberId# and done_by != ''MO'') as oral_cancer_id,
+ (select max(id) from ncd_member_cervical_detail where member_id = #memberId# and done_by != ''MO'') as cervical_cancer_id
+ )
+select
+ (select diagnosed_earlier from ncd_member_hypertension_detail where id = hyp_id) as hyp_early_diagnosed,
+ (select earlier_diabetes_diagnosis from ncd_member_diabetes_detail where id = diab_id) as diab_early_diagnosed,
+ (select diagnosed_earlier from ncd_member_breast_detail where id = breast_cancer_id) as breast_cancer_early_diagnosed,
+ (select diagnosed_earlier from ncd_member_oral_detail where id = oral_cancer_id) as oral_cancer_early_diagnosed,
+ (select diagnosed_earlier from ncd_member_cervical_detail where id = cervical_cancer_id) as cervical_cancer_early_diagnosed,
+ get_fhw_by_location(#locationId#) as anm_details, get_location_hierarchy_by_type(#locationId#, ''SC'') as location
+ from max_record_ids;',
+'retrieve previous diagnose of ncd members',
+true, 'ACTIVE');
 

@@ -1967,6 +1967,74 @@ public class NcdDnhddServiceImpl implements NcdDnhddService {
         result.put("id", imtMemberId.toString());
         return result;
     }
+    private MemberHyperTensionDto setHypertensionDiseaseDto(MemberHypertensionDetail memberHypertensionDetails) {
+        if (Objects.nonNull(memberHypertensionDetails)) {
+            MemberHyperTensionDto memberHyperTensionDto = MemberDetailMapper.entityToDtoForHyperTension(memberHypertensionDetails);
+            List<MedicineMaster> medicines = new ArrayList<>();
+            List<MemberDiseaseMedicine> memberDiseaseMedicines = memberDiseaseMedicineDao.retrieveMedicinesByReferenceId(memberHypertensionDetails.getId());
+            for (MemberDiseaseMedicine memberDiseaseMedicine : memberDiseaseMedicines) {
+                medicines.add(medicineMasterDao.retrieveById(memberDiseaseMedicine.getMedicineId()));
+            }
+            memberHyperTensionDto.setMedicineMasters(medicines);
+            return memberHyperTensionDto;
+        } else {
+            return null;
+        }
+    }
+    private MemberDiabetesDto setDiabetesDiseaseDto(MemberDiabetesDetail memberDiabetesDetails) {
+        if (Objects.nonNull(memberDiabetesDetails)) {
+            MemberDiabetesDto memberDiabetesDto = MemberDetailMapper.entityToDtoForDiabetes(memberDiabetesDetails);
+            List<MedicineMaster> medicines = new ArrayList<>();
+            List<MemberDiseaseMedicine> memberDiseaseMedicines = memberDiseaseMedicineDao.retrieveMedicinesByReferenceId(memberDiabetesDetails.getId());
+            for (MemberDiseaseMedicine memberDiseaseMedicine : memberDiseaseMedicines) {
+                medicines.add(medicineMasterDao.retrieveById(memberDiseaseMedicine.getMedicineId()));
+            }
+            memberDiabetesDto.setMedicineMasters(medicines);
+            return memberDiabetesDto;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public MemberDiseasesDto retrieveFirstRecordForDiseaseByMemberId(Integer memberId, String diseaseCode) {
+        MemberDiseasesDto memberDiseasesDto = new MemberDiseasesDto();
+        if (diseaseCode != null) {
+            switch (diseaseCode) {
+                case "D":
+                    MemberDiabetesDetail memberDiabetesDetails = diabetesDetailDao.retrieveFirstRecordByMemberId(memberId);
+                    memberDiseasesDto.setMemberDiabetesDto(setDiabetesDiseaseDto(memberDiabetesDetails));
+                    break;
+                case "HT":
+                    MemberHypertensionDetail memberHypertensionDetails = hypertensionDetailDao.retrieveFirstRecordByMemberId(memberId);
+                    memberDiseasesDto.setMemberHypertensionDto(setHypertensionDiseaseDto(memberHypertensionDetails));
+                    break;
+                case "C":
+                    memberDiseasesDto.setMemberCervicalDto(cervicalDetailDao.retrieveFirstRecordByMemberId(memberId));
+                    break;
+                case "B":
+                    memberDiseasesDto.setMemberBreastDto(breastDetailDao.retrieveFirstRecordByMemberId(memberId));
+                    break;
+                case "O":
+                    memberDiseasesDto.setMemberOralDto(oralDetailDao.retrieveFirstRecordByMemberId(memberId));
+                    break;
+
+                default:
+            }
+        } else {
+            MemberHypertensionDetail memberHypertensionDetails = hypertensionDetailDao.retrieveFirstRecordByMemberId(memberId);
+            memberDiseasesDto.setMemberHypertensionDto(setHypertensionDiseaseDto(memberHypertensionDetails));
+
+            MemberDiabetesDetail memberDiabetesDetails = diabetesDetailDao.retrieveFirstRecordByMemberId(memberId);
+            memberDiseasesDto.setMemberDiabetesDto(setDiabetesDiseaseDto(memberDiabetesDetails));
+
+            memberDiseasesDto.setMemberOralDto(oralDetailDao.retrieveFirstRecordByMemberId(memberId));
+            memberDiseasesDto.setMemberCervicalDto(cervicalDetailDao.retrieveFirstRecordByMemberId(memberId));
+            memberDiseasesDto.setMemberBreastDto(breastDetailDao.retrieveFirstRecordByMemberId(memberId));
+        }
+
+        return memberDiseasesDto;
+    }
 
 //    private void saveMemberAbhaConsent(Map<Integer, String> memberAbhaConsentMap) {
 //        for (Map.Entry<Integer, String> entrySet : memberAbhaConsentMap.entrySet()) {
