@@ -21,9 +21,8 @@ INSERT INTO mobile_form_feature_rel (form_id,mobile_constant) VALUES
 
 insert into listvalue_field_form_relation(field,form_id) values
      ('chronicDiseaseList',(select id from mobile_form_details where form_name = 'CANCER_SCREENING')),
-     ('chronicDiseaseList',(select id from mobile_form_details where form_name = 'DNHDD_NCD_CBAC_AND_NUTRITION'));
-
-insert into listvalue_field_form_relation(field,form_id) values
+     ('chronicDiseaseList',(select id from mobile_form_details where form_name = 'DNHDD_NCD_CBAC_AND_NUTRITION')),
+     ('eyeIssueList',(select id from mobile_form_details where form_name = 'DNHDD_NCD_CBAC_AND_NUTRITION')),
      ('mentalHealthOtherProblemList',(select id from mobile_form_details where form_name = 'DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH'));
 
 delete from mobile_menu_role_relation where role_id in (2,24);
@@ -363,3 +362,29 @@ INSERT INTO medicine_master (id, name, created_by, created_on, modified_by, modi
 (333, 'Ciprofloxacin Drops 0.3 %', 111559, '2023-08-16 16:58:13.074', 111559.0, '2023-08-16 16:58:13.074'),
 (334, 'Non- hormonal Ormeloxifene (30 mg Tablet)', 111559, '2023-08-16 16:58:13.074', 111559.0, '2023-08-16 16:58:13.074'),
 (335, 'Medroxprogesterone Acetate Injection 150mg', 111559, '2023-08-16 16:58:13.074', 111559.0, '2023-08-16 16:58:13.074');
+
+
+
+insert into listvalue_field_value_detail (is_active,is_archive,value,field_key,last_modified_by,last_modified_on,file_size)
+select true,false,'Difficulty in Near Vision',field_key,'admin',now(),0
+from listvalue_field_master where field = 'eyeIssueList';
+
+insert into listvalue_field_value_detail (is_active,is_archive,value,field_key,last_modified_by,last_modified_on,file_size)
+select true,false,'Difficulty to see at Distance Vision',field_key,'admin',now(),0
+from listvalue_field_master where field = 'eyeIssueList';
+
+insert into listvalue_field_value_detail (is_active,is_archive,value,field_key,last_modified_by,last_modified_on,file_size)
+select true,false,'Frequent change in Spectacles',field_key,'admin',now(),0
+from listvalue_field_master where field = 'eyeIssueList';
+
+insert into listvalue_field_value_detail (is_active,is_archive,value,field_key,last_modified_by,last_modified_on,file_size)
+select true,false,'Difficulty in Night Vision',field_key,'admin',now(),0
+from listvalue_field_master where field = 'eyeIssueList';
+
+insert into listvalue_field_value_detail (is_active,is_archive,value,field_key,last_modified_by,last_modified_on,file_size)
+select true,false,'Squint',field_key,'admin',now(),0
+from listvalue_field_master where field = 'eyeIssueList';
+
+insert into listvalue_field_value_detail (is_active,is_archive,value,field_key,last_modified_by,last_modified_on,file_size)
+select true,false,'Blindness',field_key,'admin',now(),0
+from listvalue_field_master where field = 'eyeIssueList';
