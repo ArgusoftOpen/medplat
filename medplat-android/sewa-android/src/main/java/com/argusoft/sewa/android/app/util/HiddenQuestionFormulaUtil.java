@@ -332,6 +332,55 @@ public class HiddenQuestionFormulaUtil {
             }
         }
     }
+    public static void setReferralReason(String[] split) {
+
+        String hypStatus = SharedStructureData.relatedPropertyHashTable.get(split[1]);
+        String diabetesStatus = SharedStructureData.relatedPropertyHashTable.get(split[2]);
+        String mentalObservations = SharedStructureData.relatedPropertyHashTable.get(split[3]);
+        String bpValue1 = SharedStructureData.relatedPropertyHashTable.get(split[4]);
+        String bpValue2 = SharedStructureData.relatedPropertyHashTable.get(split[5]);
+        int sugarValue = Integer.parseInt(SharedStructureData.relatedPropertyHashTable.get(split[7]));
+
+        int systolicBp;
+        int diastolicBp;
+        if (bpValue2 != null) {
+            String[] substring = bpValue2.split("-");
+            systolicBp = Integer.parseInt(substring[1]);
+            diastolicBp = Integer.parseInt(substring[2]);
+        } else {
+            String[] substring = bpValue1.split("-");
+            systolicBp = Integer.parseInt(substring[1]);
+            diastolicBp = Integer.parseInt(substring[2]);
+        }
+
+        StringBuilder riskFound = new StringBuilder();
+        if (hypStatus != null && !hypStatus.isEmpty() && (hypStatus.equalsIgnoreCase("suspected")
+                || hypStatus.equalsIgnoreCase("uncontrolled"))) {
+            riskFound.append(UtilBean.getMyLabel("Suspected Hypertension  (BP : " + systolicBp + "/" + diastolicBp + ")"));
+            riskFound.append("\n");
+        }
+        if (diabetesStatus != null && !diabetesStatus.isEmpty() && (diabetesStatus.equalsIgnoreCase("suspected")
+                || diabetesStatus.equalsIgnoreCase("uncontrolled"))) {
+            riskFound.append(UtilBean.getMyLabel("Suspected Diabetes (Sugar Value : " + sugarValue + ")"));
+            riskFound.append("\n");
+        }
+        if (mentalObservations != null && !mentalObservations.isEmpty()
+                && !mentalObservations.equalsIgnoreCase("NONE")) {
+            riskFound.append(UtilBean.getMyLabel("Mental Health issues"));
+            riskFound.append("\n");
+        }
+
+        String referralReason = riskFound.toString().length() > 0 ? riskFound.toString() : UtilBean.getMyLabel(RchConstants.NO_RISK_FOUND);
+
+        QueFormBean displayReasonQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[8]));
+        if (displayReasonQue != null) {
+            TextView textView = (TextView) displayReasonQue.getQuestionTypeView();
+            if (textView != null) {
+                textView.setText(referralReason);
+            }
+            displayReasonQue.setAnswer(referralReason);
+        }
+    }   
 
     public static void setTrue(String[] split, QueFormBean queFormBean) {
         if (split.length == 5) {

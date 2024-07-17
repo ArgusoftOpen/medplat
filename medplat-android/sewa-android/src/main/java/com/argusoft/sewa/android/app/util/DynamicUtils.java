@@ -625,6 +625,9 @@ public class DynamicUtils {
                         case FormulaConstants.FORMULA_IDENTIFY_HIGH_RISKS_CHARDHAM_TOURIST:
                             HiddenQuestionFormulaUtil.identifyHighRiskChardhamTourist(split);
                             break;
+                        case FormulaConstants.FORMULA_SET_REFERRAL_REASON:
+                            HiddenQuestionFormulaUtil.setReferralReason(split);
+                            break;
                         default:
                             Log.i(TAG, "Formula for Hidden Question Not Handled : " + formulaTag.getFormulavalue());
                             break;
