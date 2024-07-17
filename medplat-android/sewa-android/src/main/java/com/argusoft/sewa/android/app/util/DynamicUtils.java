@@ -628,6 +628,9 @@ public class DynamicUtils {
                         case FormulaConstants.FORMULA_SET_REFERRAL_REASON:
                             HiddenQuestionFormulaUtil.setReferralReason(split);
                             break;
+                        case FormulaConstants.FORMULA_SET_CANCER_REFERRAL_REASON:
+                            HiddenQuestionFormulaUtil.setCancerReferralReason(split);
+                            break;
                         default:
                             Log.i(TAG, "Formula for Hidden Question Not Handled : " + formulaTag.getFormulavalue());
                             break;

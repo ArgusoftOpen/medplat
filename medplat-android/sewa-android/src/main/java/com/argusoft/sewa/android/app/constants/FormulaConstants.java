@@ -153,6 +153,7 @@ public class FormulaConstants {
     public static final String FORMULA_SET_HINT = "sethint"; // setHint
     public static final String ALL_OPTION_CHECK = "allOptionCheck";
     public static final String FORMULA_SET_REFERRAL_REASON = "setreferralreason";
+    public static final String FORMULA_SET_CANCER_REFERRAL_REASON = "setcancerreferralreason";
 
     public static final String FORMULA_CHECK_IF_YES_IN_ANY = "checkifyesinany"; // showAlertIfYesInAny
     public static final String FORMULA_SET_VALUE_AS_PROPERTY = "setvalueasproperty"; // setValueAsProperty
