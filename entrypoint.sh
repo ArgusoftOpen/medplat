@@ -2,7 +2,7 @@
 
 cd /usr/ui/medplat-ui
 
-npm install
+npm install --force
 bower install
 grunt medplat
 
