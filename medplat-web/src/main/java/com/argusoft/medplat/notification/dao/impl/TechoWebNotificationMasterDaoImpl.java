@@ -72,4 +72,28 @@ public class TechoWebNotificationMasterDaoImpl extends GenericDaoImpl<TechoWebNo
 
         return nativeQuery.setResultTransformer(Transformers.aliasToBean(WebTaskMasterDto.class)).list();
     }
+    @Override
+    public void markNotificationAsCompleted(Integer notificationId, Integer userId) {
+        String query = "update techo_web_notification_master set state = 'COMPLETED', \n"
+                + "action_by = :userId, modified_by = :userId, modified_on = now() \n"
+                + "where id = :notificationId";
+
+        NativeQuery<Integer> nativeQuery = getCurrentSession().createNativeQuery(query);
+        nativeQuery.setParameter("userId", userId);
+        nativeQuery.setParameter("notificationId", notificationId);
+        nativeQuery.executeUpdate();
+    }
+
+    @Override
+    public boolean checkIfMemberNotificationExists(Integer notificationId, Integer memberId) {
+
+        String query = "select * from techo_web_notification_master " +
+                "where id = :notificationId and member_id = :memberId " +
+                "and state = 'COMPLETED'";
+        NativeQuery<WebTaskMasterDto> nativeQuery = getCurrentSession().createNativeQuery(query);
+        nativeQuery.setParameter("notificationId", notificationId);
+        nativeQuery.setParameter("memberId",memberId);
+        List<WebTaskMasterDto> result = nativeQuery.getResultList();
+        return result.isEmpty();
+    }
 }

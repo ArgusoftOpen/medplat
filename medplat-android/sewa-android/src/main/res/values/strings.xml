@@ -114,6 +114,7 @@
     <string name="let_s_start">Let\'s Start</string>
     <string name="well_done_you_ve_completed_the_quiz">Well done you\'ve completed the quiz!</string>
     <string name="_25">25%</string>
+    <string name="choose_search_type">Click here to choose search type</string>
     <string name="restart_quiz">Restart Quiz</string>
     <string name="done">Done</string>
     <string name="lock_quiz_and_view_answer">Lock Quiz and View Answer</string>

@@ -15,6 +15,7 @@ import org.androidannotations.ormlite.annotations.OrmLiteDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @EBean(scope = EBean.Scope.Singleton)
@@ -110,9 +111,8 @@ public class LocationMasterServiceImpl implements LocationMasterService {
         }
         return null;
     }
-
     @Override
-    public LocationMasterBean getLocationMasterBeanByActualId(String actualId) {
+    public LocationMasterBean getLocationMasterBeanByActualId(Integer actualId) {
         try {
             return locationMasterBeanDao.queryBuilder().where().eq(FieldNameConstants.ACTUAL_I_D, actualId).queryForFirst();
         } catch (SQLException e) {
@@ -184,5 +184,45 @@ public class LocationMasterServiceImpl implements LocationMasterService {
         List<LocationMasterBean> beans = new ArrayList<>();
         beans.add(bean);
         return beans;
+    }
+    public List<LocationMasterBean> retrieveLocationMasterBeansByParentList(List<Integer> parentList) {
+        if (parentList == null || parentList.isEmpty()) {
+            return Collections.emptyList();
+        }
+        try {
+            return locationMasterBeanDao.queryBuilder().where()
+                    .in(FieldNameConstants.PARENT, parentList).query();
+        } catch (SQLException e) {
+            Log.e(getClass().getSimpleName(), null, e);
+        }
+        return Collections.emptyList();
+    }
+    public List<Integer> getLocationIdsInsideDistrictOfUser() {
+        List<Integer> allLocationIds = new ArrayList<>();
+        boolean bool = true;
+        LocationMasterBean location = retrieveLocationMastersAssignedToUser().get(0);
+        while (bool) {
+            location = getLocationMasterBeanByActualId(location.getParent());
+            if (location.getType().equalsIgnoreCase("D") || location.getType().equalsIgnoreCase("C")) {
+                bool = false;
+            }
+        }
+
+        List<Integer> currentLevelIds = new ArrayList<>();
+        currentLevelIds.add(location.getActualID().intValue());
+        allLocationIds.add(location.getActualID().intValue());
+        while (!currentLevelIds.isEmpty()) {
+            List<LocationMasterBean> children = retrieveLocationMasterBeansByParentList(currentLevelIds);
+            currentLevelIds.clear();
+            if (children.isEmpty()) {
+                continue;
+            }
+            for (LocationMasterBean master : children) {
+                currentLevelIds.add(master.getActualID().intValue());
+            }
+            allLocationIds.addAll(currentLevelIds);
+        }
+
+        return allLocationIds;
     }
 }

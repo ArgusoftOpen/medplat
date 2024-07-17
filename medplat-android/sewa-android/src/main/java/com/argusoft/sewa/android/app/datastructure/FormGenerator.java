@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.argusoft.sewa.android.app.BuildConfig;
+import com.argusoft.sewa.android.app.component.DistrictHealthInfraComponent;
 import com.argusoft.sewa.android.app.component.MedicineDetailComponent;
 import com.argusoft.sewa.android.app.component.MyDynamicComponents;
 import com.argusoft.sewa.android.app.component.MyListInColorComponent;
@@ -598,6 +599,8 @@ public class FormGenerator {
             queFormBean.setQuestionTypeView(MyDynamicComponents.getFormSubmissionComponent(context, queFormBean));
         } else if (queType.equalsIgnoreCase(GlobalTypes.MEMBER_DETAILS_COMPONENT)) {
             queFormBean.setQuestionTypeView(MyDynamicComponents.getMemberDetailsComponent(context, queFormBean));
+        }else if (queType.equalsIgnoreCase(GlobalTypes.DISTRICT_HEALTH_INFRASTRUCTURE_COMPONENT)) {
+                queFormBean.setQuestionTypeView(new DistrictHealthInfraComponent(context, queFormBean));
         } else if (queType.equalsIgnoreCase(GlobalTypes.OPENRDTREADER_COMPONENT)) {
             queFormBean.setQuestionTypeView(MyDynamicComponents.getORDTComponent(context, queFormBean));
         } else if (queType.equalsIgnoreCase(GlobalTypes.HEALTH_ID_MANAGEMENT_COMPONENT)) {

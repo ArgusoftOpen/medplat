@@ -81,6 +81,67 @@ public class MemberAdditionalInfoDataBean {
 
     private String mentalHealthObservation;
 
+    private Float haemoglobin;
+
+    private String serviceLocation;
+
+    private Boolean isPeriodStarted;
+
+    private String counsellingDone;
+    private Long schoolActualId;
+
+    private Long adolescentScreeningDate;
+
+    private Boolean isHaemoglobinMeasured;
+
+    private Integer ifaTabTakenLastMonth;
+
+    private Integer ifaTabTakenNow;
+
+    private String absorbentMaterialUsed;
+
+    private Boolean isSanitaryPadGiven;
+
+    private Integer numberOfSanitaryPadsGiven;
+
+    private Boolean isHavingMenstrualProblem;
+
+    private String issueWithMenstruation;
+
+    private Boolean isTDInjectionGiven;
+
+    private Long tdInjectionDate;
+
+    private Boolean isAlbandazoleGivenInLastSixMonths;
+
+    private String currentStudyingStandard;
+
+    private Long hypDiaMentalServiceDate;
+
+    private Long cancerServiceDate;
+
+    private String nutritionStatus;
+
+    private String sdScore;
+
+    private Boolean isTbSuspected;
+
+    private Boolean isTbCured;
+
+    private Boolean indexCase;
+    private String rdtStatus;
+    private Long fpServiceDate;
+    private Boolean personallyUsingFp;
+    private Long anemiaServiceDate;
+    private String memberAnemiaStatus;
+    private Boolean bcgSurveyStatus;
+    private Boolean sickleCellSurveyCompleted; // used for UT survey form related entry check
+    private Boolean bcgEligible;
+    private Boolean bcgWilling;
+    private Boolean bcgEligibleFilled;
+    private Boolean havingBirthPlan;
+    private Boolean developmentDelays;
+
     public Integer getHeight() {
         return height;
     }
@@ -367,5 +428,303 @@ public class MemberAdditionalInfoDataBean {
 
     public void setMentalHealthObservation(String mentalHealthObservation) {
         this.mentalHealthObservation = mentalHealthObservation;
+    }
+
+    public Long getSchoolActualId() {
+        return schoolActualId;
+    }
+
+
+    public void setSchoolActualId(Long schoolActualId) {
+        this.schoolActualId = schoolActualId;
+    }
+
+
+    public Boolean getHaemoglobinMeasured() {
+        return isHaemoglobinMeasured;
+    }
+
+    public void setHaemoglobinMeasured(Boolean haemoglobinMeasured) {
+        isHaemoglobinMeasured = haemoglobinMeasured;
+    }
+
+    public Integer getIfaTabTakenLastMonth() {
+        return ifaTabTakenLastMonth;
+    }
+
+    public void setIfaTabTakenLastMonth(Integer ifaTabTakenLastMonth) {
+        this.ifaTabTakenLastMonth = ifaTabTakenLastMonth;
+    }
+
+    public Integer getIfaTabTakenNow() {
+        return ifaTabTakenNow;
+    }
+
+    public void setIfaTabTakenNow(Integer ifaTabTakenNow) {
+        this.ifaTabTakenNow = ifaTabTakenNow;
+    }
+
+    public String getAbsorbentMaterialUsed() {
+        return absorbentMaterialUsed;
+    }
+
+    public void setAbsorbentMaterialUsed(String absorbentMaterialUsed) {
+        this.absorbentMaterialUsed = absorbentMaterialUsed;
+    }
+
+    public Boolean getSanitaryPadGiven() {
+        return isSanitaryPadGiven;
+    }
+
+    public void setSanitaryPadGiven(Boolean sanitaryPadGiven) {
+        isSanitaryPadGiven = sanitaryPadGiven;
+    }
+
+    public Integer getNumberOfSanitaryPadsGiven() {
+        return numberOfSanitaryPadsGiven;
+    }
+
+    public void setNumberOfSanitaryPadsGiven(Integer numberOfSanitaryPadsGiven) {
+        this.numberOfSanitaryPadsGiven = numberOfSanitaryPadsGiven;
+    }
+
+    public Boolean getHavingMenstrualProblem() {
+        return isHavingMenstrualProblem;
+    }
+
+    public void setHavingMenstrualProblem(Boolean havingMenstrualProblem) {
+        isHavingMenstrualProblem = havingMenstrualProblem;
+    }
+
+    public String getIssueWithMenstruation() {
+        return issueWithMenstruation;
+    }
+
+    public void setIssueWithMenstruation(String issueWithMenstruation) {
+        this.issueWithMenstruation = issueWithMenstruation;
+    }
+
+    public Boolean getTDInjectionGiven() {
+        return isTDInjectionGiven;
+    }
+
+    public void setTDInjectionGiven(Boolean TDInjectionGiven) {
+        isTDInjectionGiven = TDInjectionGiven;
+    }
+
+    public Long getAdolescentScreeningDate() {
+        return adolescentScreeningDate;
+    }
+
+    public void setAdolescentScreeningDate(Long adolescentScreeningDate) {
+        this.adolescentScreeningDate = adolescentScreeningDate;
+    }
+
+    public Long getTdInjectionDate() {
+        return tdInjectionDate;
+    }
+
+    public void setTdInjectionDate(Long tdInjectionDate) {
+        this.tdInjectionDate = tdInjectionDate;
+    }
+
+    public Boolean getAlbandazoleGivenInLastSixMonths() {
+        return isAlbandazoleGivenInLastSixMonths;
+    }
+
+    public void setAlbandazoleGivenInLastSixMonths(Boolean albandazoleGivenInLastSixMonths) {
+        isAlbandazoleGivenInLastSixMonths = albandazoleGivenInLastSixMonths;
+    }
+
+    public Float getHaemoglobin() {
+        return haemoglobin;
+    }
+
+    public void setHaemoglobin(Float haemoglobin) {
+        this.haemoglobin = haemoglobin;
+    }
+
+    public String getServiceLocation() {
+        return serviceLocation;
+    }
+
+    public void setServiceLocation(String serviceLocation) {
+        this.serviceLocation = serviceLocation;
+    }
+
+    public Boolean getPeriodStarted() {
+        return isPeriodStarted;
+    }
+
+    public void setPeriodStarted(Boolean periodStarted) {
+        isPeriodStarted = periodStarted;
+    }
+
+    public String getCounsellingDone() {
+        return counsellingDone;
+    }
+
+    public void setCounsellingDone(String counsellingDone) {
+        this.counsellingDone = counsellingDone;
+    }
+
+    public String getCurrentStudyingStandard() {
+        return currentStudyingStandard;
+    }
+
+    public void setCurrentStudyingStandard(String currentStudyingStandard) {
+        this.currentStudyingStandard = currentStudyingStandard;
+    }
+
+    public Long getHypDiaMentalServiceDate() {
+        return hypDiaMentalServiceDate;
+    }
+
+    public void setHypDiaMentalServiceDate(Long hypDiaMentalServiceDate) {
+        this.hypDiaMentalServiceDate = hypDiaMentalServiceDate;
+    }
+
+    public Long getCancerServiceDate() {
+        return cancerServiceDate;
+    }
+
+    public void setCancerServiceDate(Long cancerServiceDate) {
+        this.cancerServiceDate = cancerServiceDate;
+    }
+
+    public String getNutritionStatus() {
+        return nutritionStatus;
+    }
+
+    public void setNutritionStatus(String nutritionStatus) {
+        this.nutritionStatus = nutritionStatus;
+    }
+
+    public String getSdScore() {
+        return sdScore;
+    }
+
+    public void setSdScore(String sdScore) {
+        this.sdScore = sdScore;
+    }
+
+    public Boolean getTbSuspected() {
+        return isTbSuspected;
+    }
+
+    public void setTbSuspected(Boolean tbSuspected) {
+        isTbSuspected = tbSuspected;
+    }
+
+    public Boolean getTbCured() {
+        return isTbCured;
+    }
+
+    public void setTbCured(Boolean tbCured) {
+        isTbCured = tbCured;
+    }
+
+    public Boolean getIndexCase() {
+        return indexCase;
+    }
+
+    public void setIndexCase(Boolean indexCase) {
+        this.indexCase = indexCase;
+    }
+
+    public Long getFpServiceDate() {
+        return fpServiceDate;
+    }
+
+    public void setFpServiceDate(Long fpServiceDate) {
+        this.fpServiceDate = fpServiceDate;
+    }
+
+    public Boolean getPersonallyUsingFp() {
+        return personallyUsingFp;
+    }
+
+    public void setPersonallyUsingFp(Boolean personallyUsingFp) {
+        this.personallyUsingFp = personallyUsingFp;
+    }
+
+    public Long getAnemiaServiceDate() {
+        return anemiaServiceDate;
+    }
+
+    public void setAnemiaServiceDate(Long anemiaServiceDate) {
+        this.anemiaServiceDate = anemiaServiceDate;
+    }
+
+    public String getMemberAnemiaStatus() {
+        return memberAnemiaStatus;
+    }
+
+    public void setMemberAnemiaStatus(String memberAnemiaStatus) {
+        this.memberAnemiaStatus = memberAnemiaStatus;
+    }
+
+    public Boolean getBcgSurveyStatus() {
+        return bcgSurveyStatus;
+    }
+
+    public void setBcgSurveyStatus(Boolean bcgSurveyStatus) {
+        this.bcgSurveyStatus = bcgSurveyStatus;
+    }
+
+    public Boolean getSickleCellSurveyCompleted() {
+        return sickleCellSurveyCompleted;
+    }
+
+    public void setSickleCellSurveyCompleted(Boolean sickleCellSurveyCompleted) {
+        this.sickleCellSurveyCompleted = sickleCellSurveyCompleted;
+    }
+
+    public Boolean getBcgEligible() {
+        return bcgEligible;
+    }
+
+    public void setBcgEligible(Boolean bcgEligible) {
+        this.bcgEligible = bcgEligible;
+    }
+
+    public Boolean getBcgWilling() {
+        return bcgWilling;
+    }
+
+    public void setBcgWilling(Boolean bcgWilling) {
+        this.bcgWilling = bcgWilling;
+    }
+
+    public String getRdtStatus() {
+        return rdtStatus;
+    }
+
+    public void setRdtStatus(String rdtStatus) {
+        this.rdtStatus = rdtStatus;
+    }
+
+    public Boolean getBcgEligibleFilled() {
+        return bcgEligibleFilled;
+    }
+
+    public void setBcgEligibleFilled(Boolean bcgEligibleFilled) {
+        this.bcgEligibleFilled = bcgEligibleFilled;
+    }
+
+    public Boolean getHavingBirthPlan() {
+        return havingBirthPlan;
+    }
+
+    public void setHavingBirthPlan(Boolean havingBirthPlan) {
+        this.havingBirthPlan = havingBirthPlan;
+    }
+
+    public Boolean getDevelopmentDelays() {
+        return developmentDelays;
+    }
+
+    public void setDevelopmentDelays(Boolean developmentDelays) {
+        this.developmentDelays = developmentDelays;
     }
 }

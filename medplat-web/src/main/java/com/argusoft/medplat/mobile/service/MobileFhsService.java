@@ -30,7 +30,7 @@ public interface MobileFhsService {
 
     List<FhwServiceStatusDto> retrieveFhwServiceDetailBean(Integer userId);
 
-    Integer saveAadharUpdateDetails(AadharUpdationBean aadharUpdationBean);
+//    Integer saveAadharUpdateDetails(AadharUpdationBean aadharUpdationBean);
 
     Boolean syncMergedFamiliesInformationWithDb(String userToken, List<MergedFamiliesBean> mergedFamiliesList);
 

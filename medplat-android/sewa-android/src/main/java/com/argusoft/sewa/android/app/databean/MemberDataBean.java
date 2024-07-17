@@ -1,13 +1,17 @@
 package com.argusoft.sewa.android.app.databean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.argusoft.sewa.android.app.model.MemberBean;
 import com.google.gson.Gson;
-import com.j256.ormlite.field.DatabaseField;
+
+import java.util.Objects;
 
 /**
  * @author kunjan
  */
-public class MemberDataBean {
+public class MemberDataBean implements Parcelable {
 
     private String id;
 
@@ -28,6 +32,8 @@ public class MemberDataBean {
     private boolean isAadharUpdated;
 
     private String mobileNumber;
+
+    private String alternateNumber;
 
     private Boolean familyHeadFlag;
 
@@ -127,6 +133,7 @@ public class MemberDataBean {
     private String syncStatus;
 
     private Boolean isIucdRemoved;
+    private String chronicDiseaseIdsForTreatment;
 
     private Long iucdRemovalDate;
 
@@ -210,6 +217,102 @@ public class MemberDataBean {
     private String smokingAddiction;
 
     private String tobaccoAddiction;
+
+    private Boolean moConfirmedDiabetes;
+
+    private Boolean moConfirmedHypertension;
+
+    private Boolean generalScreeningDone;
+
+    private Boolean ecgTestDone;
+
+    private Boolean retinopathyTestDone;
+
+    private Boolean urineTestDone;
+
+    private String occupation;
+
+    private String physicalDisability;
+
+    private String otherDisability;
+
+    private String cataractSurgery;
+
+    private String otherChronic;
+
+    private String otherEyeIssue;
+
+    private String sickleCellStatus;
+
+    private Boolean isChildGoingSchool;
+
+    private String currentStudyingStandard;
+
+    private String aadharStatus;
+
+    private String pensionScheme;
+
+    private Boolean underTreatmentChronic;
+
+    private Long hmisId;
+
+    private String memberId;
+
+    private String serviceLocation;
+
+    private String counsellingDone;
+
+    private Boolean isHaemoglobinMeasured;
+
+    private Integer ifaTabTakenLastMonth;
+
+    private Integer ifaTabTakenNow;
+
+    private String absorbentMaterialUsed;
+
+    private Boolean isSanitaryPadGiven;
+
+    private Integer numberOfSanitaryPadsGiven;
+
+    private Boolean isHavingMenstrualProblem;
+
+    private String issueWithMenstruation;
+
+    private Boolean isTDInjectionGiven;
+
+    private Long tdInjectionDate;
+
+    private Boolean isAlbandazoleGivenInLastSixMonths;
+
+    private Long adolescentScreeningDate;
+
+    private Integer height;
+
+    private Boolean isPeriodStarted;
+    private Long schoolActualId;
+    private Long anganwadiId;
+    private String areaId;
+    private String concatWs;
+    private Long hypDiaMentalServiceDate;
+    private Long cancerServiceDate;
+    private String isHivPositive;
+    private String isVDRLPositive;
+    private String nutritionStatus;
+    private String sdScore;
+    private String nrcNumber;
+    private Boolean isTbCured;
+    private Boolean isTbSuspected;
+    private Boolean indexCase;
+    private String rdtStatus;
+    private String memberReligion;
+    private String passportNumber;
+    private String searchString;
+    private Boolean bcgSurveyStatus;
+    private String otherChronicDiseaseTreatment;
+    private Boolean bcgEligible;
+    private Boolean bcgWilling;
+    private Boolean bcgEligibleFilled;
+    private String birthCertNumber;
 
     public MemberDataBean() {
     }
@@ -300,9 +403,66 @@ public class MemberDataBean {
         this.alcoholAddiction = memberBean.getAlcoholAddiction();
         this.smokingAddiction = memberBean.getSmokingAddiction();
         this.tobaccoAddiction = memberBean.getTobaccoAddiction();
+        this.moConfirmedDiabetes = memberBean.getMoConfirmedDiabetes();
+        this.moConfirmedHypertension = memberBean.getMoConfirmedHypertension();
+        this.generalScreeningDone = memberBean.getGeneralScreeningDone();
+        this.ecgTestDone = memberBean.getEcgTestDone();
+        this.retinopathyTestDone = memberBean.getRetinopathyTestDone();
+        this.urineTestDone = memberBean.getUrineTestDone();
+        this.occupation = memberBean.getOccupation();
+        this.physicalDisability = memberBean.getPhysicalDisability();
+        this.otherDisability = memberBean.getOtherDisability();
+        this.otherChronic = memberBean.getOtherChronic();
+        this.otherEyeIssue = memberBean.getOtherEyeIssue();
+        this.cataractSurgery = memberBean.getCataractSurgery();
+        this.sickleCellStatus = memberBean.getSickleCellStatus();
+        this.isChildGoingSchool = memberBean.getIsChildGoingSchool();
+        this.currentStudyingStandard = memberBean.getCurrentStudyingStandard();
+        this.aadharStatus = memberBean.getAadharStatus();
+        this.pensionScheme = memberBean.getPensionScheme();
+        this.underTreatmentChronic = memberBean.getUnderTreatmentChronic();
+        this.alternateNumber = memberBean.getAlternateNumber();
+        this.hmisId = memberBean.getHmisId();
+        this.isHivPositive = memberBean.getIsHivPositive();
+        this.isVDRLPositive = memberBean.getIsVdrlPositive();
+        this.nutritionStatus = memberBean.getNutritionStatus();
+        this.nrcNumber = memberBean.getNrcNumber();
+        this.memberReligion = memberBean.getMemberReligion();
+        this.passportNumber = memberBean.getPassportNumber();
+        this.searchString = memberBean.getSearchString();
+        this.chronicDiseaseIdsForTreatment = memberBean.getChronicDiseaseIdsForTreatment();
+        this.otherChronicDiseaseTreatment = memberBean.getOtherChronicDiseaseTreatment();
+        this.birthCertNumber = memberBean.getBirthCertNumber();
 
         if (memberBean.getAdditionalInfo() != null) {
-            this.npcbStatus = new Gson().fromJson(memberBean.getAdditionalInfo(), MemberAdditionalInfoDataBean.class).getNpcbStatus();
+            MemberAdditionalInfoDataBean additionalInfo = new Gson().fromJson(memberBean.getAdditionalInfo(), MemberAdditionalInfoDataBean.class);
+            this.npcbStatus = additionalInfo.getNpcbStatus();
+            this.serviceLocation = additionalInfo.getServiceLocation();
+            this.counsellingDone = additionalInfo.getCounsellingDone();
+            this.isHaemoglobinMeasured = additionalInfo.getHaemoglobinMeasured();
+            this.ifaTabTakenLastMonth = additionalInfo.getIfaTabTakenLastMonth();
+            this.ifaTabTakenNow = additionalInfo.getIfaTabTakenNow();
+            this.absorbentMaterialUsed = additionalInfo.getAbsorbentMaterialUsed();
+            this.isSanitaryPadGiven = additionalInfo.getSanitaryPadGiven();
+            this.numberOfSanitaryPadsGiven = additionalInfo.getNumberOfSanitaryPadsGiven();
+            this.isHavingMenstrualProblem = additionalInfo.getHavingMenstrualProblem();
+            this.issueWithMenstruation = additionalInfo.getIssueWithMenstruation();
+            this.isTDInjectionGiven = additionalInfo.getTDInjectionGiven();
+            this.tdInjectionDate = additionalInfo.getTdInjectionDate();
+            this.isAlbandazoleGivenInLastSixMonths = additionalInfo.getAlbandazoleGivenInLastSixMonths();
+            this.adolescentScreeningDate = additionalInfo.getAdolescentScreeningDate();
+            this.height = additionalInfo.getHeight();
+            this.isPeriodStarted = additionalInfo.getPeriodStarted();
+            this.schoolActualId = additionalInfo.getSchoolActualId();
+            this.npcbStatus = additionalInfo.getNpcbStatus();
+            this.nutritionStatus = additionalInfo.getNutritionStatus();
+            this.sdScore = additionalInfo.getSdScore();
+            this.indexCase = additionalInfo.getIndexCase();
+            this.rdtStatus = additionalInfo.getRdtStatus();
+            this.bcgSurveyStatus = additionalInfo.getBcgSurveyStatus();
+            this.bcgEligible = additionalInfo.getBcgEligible();
+            this.bcgWilling = additionalInfo.getBcgWilling();
+            this.bcgEligibleFilled = additionalInfo.getBcgEligibleFilled();
         }
 
         if (memberBean.getLmpDate() != null) {
@@ -352,7 +512,499 @@ public class MemberDataBean {
         if (memberBean.getCbacDate() != null) {
             this.cbacDate = memberBean.getCbacDate().getTime();
         }
+
+        if (memberBean.getHypDiaMentalServiceDate() != null) {
+            this.hypDiaMentalServiceDate = memberBean.getHypDiaMentalServiceDate().getTime();
+        }
+
+        if (memberBean.getCancerServiceDate() != null) {
+            this.cancerServiceDate = memberBean.getCancerServiceDate().getTime();
+        }
     }
+
+
+    protected MemberDataBean(Parcel in) {
+        id = in.readString();
+        familyId = in.readString();
+        firstName = in.readString();
+        middleName = in.readString();
+        lastName = in.readString();
+        gender = in.readString();
+        maritalStatus = in.readString();
+        aadharNumber = in.readString();
+        isAadharUpdated = in.readByte() != 0;
+        mobileNumber = in.readString();
+        alternateNumber = in.readString();
+        byte tmpFamilyHeadFlag = in.readByte();
+        familyHeadFlag = tmpFamilyHeadFlag == 0 ? null : tmpFamilyHeadFlag == 1;
+        if (in.readByte() == 0) {
+            dob = null;
+        } else {
+            dob = in.readLong();
+        }
+        uniqueHealthId = in.readString();
+        ifsc = in.readString();
+        accountNumber = in.readString();
+        maaVatsalyaCardNumber = in.readString();
+        byte tmpIsPregnantFlag = in.readByte();
+        isPregnantFlag = tmpIsPregnantFlag == 0 ? null : tmpIsPregnantFlag == 1;
+        if (in.readByte() == 0) {
+            lmpDate = null;
+        } else {
+            lmpDate = in.readLong();
+        }
+        if (in.readByte() == 0) {
+            normalCycleDays = null;
+        } else {
+            normalCycleDays = in.readInt();
+        }
+        familyPlanningMethod = in.readString();
+        if (in.readByte() == 0) {
+            fpInsertOperateDate = null;
+        } else {
+            fpInsertOperateDate = in.readLong();
+        }
+        type = in.readString();
+        state = in.readString();
+        createdBy = in.readString();
+        updatedBy = in.readString();
+        if (in.readByte() == 0) {
+            createdOn = null;
+        } else {
+            createdOn = in.readLong();
+        }
+        if (in.readByte() == 0) {
+            updatedOn = null;
+        } else {
+            updatedOn = in.readLong();
+        }
+        grandfatherName = in.readString();
+        nameBasedOnAadhar = in.readString();
+        educationStatus = in.readString();
+        congenitalAnomalyIds = in.readString();
+        chronicDiseaseIds = in.readString();
+        currentDiseaseIds = in.readString();
+        eyeIssueIds = in.readString();
+        lastMethodOfContraception = in.readString();
+        if (in.readByte() == 0) {
+            yearOfWedding = null;
+        } else {
+            yearOfWedding = in.readInt();
+        }
+        byte tmpJsyPaymentGiven = in.readByte();
+        jsyPaymentGiven = tmpJsyPaymentGiven == 0 ? null : tmpJsyPaymentGiven == 1;
+        byte tmpIsEarlyRegistration = in.readByte();
+        isEarlyRegistration = tmpIsEarlyRegistration == 0 ? null : tmpIsEarlyRegistration == 1;
+        byte tmpJsyBeneficiary = in.readByte();
+        jsyBeneficiary = tmpJsyBeneficiary == 0 ? null : tmpJsyBeneficiary == 1;
+        byte tmpIayBeneficiary = in.readByte();
+        iayBeneficiary = tmpIayBeneficiary == 0 ? null : tmpIayBeneficiary == 1;
+        byte tmpKpsyBeneficiary = in.readByte();
+        kpsyBeneficiary = tmpKpsyBeneficiary == 0 ? null : tmpKpsyBeneficiary == 1;
+        byte tmpChiranjeeviYojnaBeneficiary = in.readByte();
+        chiranjeeviYojnaBeneficiary = tmpChiranjeeviYojnaBeneficiary == 0 ? null : tmpChiranjeeviYojnaBeneficiary == 1;
+        if (in.readByte() == 0) {
+            haemoglobin = null;
+        } else {
+            haemoglobin = in.readFloat();
+        }
+        if (in.readByte() == 0) {
+            weight = null;
+        } else {
+            weight = in.readFloat();
+        }
+        if (in.readByte() == 0) {
+            edd = null;
+        } else {
+            edd = in.readLong();
+        }
+        ancVisitDates = in.readString();
+        immunisationGiven = in.readString();
+        bloodGroup = in.readString();
+        placeOfBirth = in.readString();
+        if (in.readByte() == 0) {
+            birthWeight = null;
+        } else {
+            birthWeight = in.readFloat();
+        }
+        if (in.readByte() == 0) {
+            motherId = null;
+        } else {
+            motherId = in.readLong();
+        }
+        byte tmpComplementaryFeedingStarted = in.readByte();
+        complementaryFeedingStarted = tmpComplementaryFeedingStarted == 0 ? null : tmpComplementaryFeedingStarted == 1;
+        byte tmpIsHighRiskCase = in.readByte();
+        isHighRiskCase = tmpIsHighRiskCase == 0 ? null : tmpIsHighRiskCase == 1;
+        if (in.readByte() == 0) {
+            curPregRegDetId = null;
+        } else {
+            curPregRegDetId = in.readLong();
+        }
+        if (in.readByte() == 0) {
+            curPregRegDate = null;
+        } else {
+            curPregRegDate = in.readLong();
+        }
+        byte tmpMenopauseArrived = in.readByte();
+        menopauseArrived = tmpMenopauseArrived == 0 ? null : tmpMenopauseArrived == 1;
+        syncStatus = in.readString();
+        byte tmpIsIucdRemoved = in.readByte();
+        isIucdRemoved = tmpIsIucdRemoved == 0 ? null : tmpIsIucdRemoved == 1;
+        if (in.readByte() == 0) {
+            iucdRemovalDate = null;
+        } else {
+            iucdRemovalDate = in.readLong();
+        }
+        if (in.readByte() == 0) {
+            lastDeliveryDate = null;
+        } else {
+            lastDeliveryDate = in.readLong();
+        }
+        byte tmpHysterectomyDone = in.readByte();
+        hysterectomyDone = tmpHysterectomyDone == 0 ? null : tmpHysterectomyDone == 1;
+        childNrcCmtcStatus = in.readString();
+        lastDeliveryOutcome = in.readString();
+        previousPregnancyComplication = in.readString();
+        additionalInfo = in.readString();
+        if (in.readByte() == 0) {
+            npcbScreeningDate = null;
+        } else {
+            npcbScreeningDate = in.readLong();
+        }
+        byte tmpFhsrPhoneVerified = in.readByte();
+        fhsrPhoneVerified = tmpFhsrPhoneVerified == 0 ? null : tmpFhsrPhoneVerified == 1;
+        int tmpCurrentGravida = in.readInt();
+        currentGravida = tmpCurrentGravida != Integer.MAX_VALUE ? (short) tmpCurrentGravida : null;
+        int tmpCurrentPara = in.readInt();
+        currentPara = tmpCurrentPara != Integer.MAX_VALUE ? (short) tmpCurrentPara : null;
+        if (in.readByte() == 0) {
+            dateOfWedding = null;
+        } else {
+            dateOfWedding = in.readLong();
+        }
+        if (in.readByte() == 0) {
+            husbandId = null;
+        } else {
+            husbandId = in.readLong();
+        }
+        npcbStatus = in.readString();
+        byte tmpIsMobileNumberVerified = in.readByte();
+        isMobileNumberVerified = tmpIsMobileNumberVerified == 0 ? null : tmpIsMobileNumberVerified == 1;
+        relationWithHof = in.readString();
+        if (in.readByte() == 0) {
+            cbacDate = null;
+        } else {
+            cbacDate = in.readLong();
+        }
+        hypYear = in.readString();
+        oralYear = in.readString();
+        diabetesYear = in.readString();
+        breastYear = in.readString();
+        cervicalYear = in.readString();
+        mentalHealthYear = in.readString();
+        healthYear = in.readString();
+        healthId = in.readString();
+        healthIdNumber = in.readString();
+        byte tmpVulnerableFlag = in.readByte();
+        vulnerableFlag = tmpVulnerableFlag == 0 ? null : tmpVulnerableFlag == 1;
+        byte tmpHealthInsurance = in.readByte();
+        healthInsurance = tmpHealthInsurance == 0 ? null : tmpHealthInsurance == 1;
+        schemeDetail = in.readString();
+        byte tmpPersonalHistoryDone = in.readByte();
+        personalHistoryDone = tmpPersonalHistoryDone == 0 ? null : tmpPersonalHistoryDone == 1;
+        byte tmpConfirmedDiabetes = in.readByte();
+        confirmedDiabetes = tmpConfirmedDiabetes == 0 ? null : tmpConfirmedDiabetes == 1;
+        byte tmpSuspectedForDiabetes = in.readByte();
+        suspectedForDiabetes = tmpSuspectedForDiabetes == 0 ? null : tmpSuspectedForDiabetes == 1;
+        if (in.readByte() == 0) {
+            cbacScore = null;
+        } else {
+            cbacScore = in.readInt();
+        }
+        byte tmpSufferingDiabetes = in.readByte();
+        sufferingDiabetes = tmpSufferingDiabetes == 0 ? null : tmpSufferingDiabetes == 1;
+        byte tmpSufferingHypertension = in.readByte();
+        sufferingHypertension = tmpSufferingHypertension == 0 ? null : tmpSufferingHypertension == 1;
+        byte tmpSufferingMentalHealth = in.readByte();
+        sufferingMentalHealth = tmpSufferingMentalHealth == 0 ? null : tmpSufferingMentalHealth == 1;
+        byte tmpEveningAvailability = in.readByte();
+        eveningAvailability = tmpEveningAvailability == 0 ? null : tmpEveningAvailability == 1;
+        pmjayAvailability = in.readString();
+        alcoholAddiction = in.readString();
+        smokingAddiction = in.readString();
+        tobaccoAddiction = in.readString();
+        byte tmpMoConfirmedDiabetes = in.readByte();
+        moConfirmedDiabetes = tmpMoConfirmedDiabetes == 0 ? null : tmpMoConfirmedDiabetes == 1;
+        byte tmpMoConfirmedHypertension = in.readByte();
+        moConfirmedHypertension = tmpMoConfirmedHypertension == 0 ? null : tmpMoConfirmedHypertension == 1;
+        byte tmpGeneralScreeningDone = in.readByte();
+        generalScreeningDone = tmpGeneralScreeningDone == 0 ? null : tmpGeneralScreeningDone == 1;
+        byte tmpEcgTestDone = in.readByte();
+        ecgTestDone = tmpEcgTestDone == 0 ? null : tmpEcgTestDone == 1;
+        byte tmpRetinopathyTestDone = in.readByte();
+        retinopathyTestDone = tmpRetinopathyTestDone == 0 ? null : tmpRetinopathyTestDone == 1;
+        byte tmpUrineTestDone = in.readByte();
+        urineTestDone = tmpUrineTestDone == 0 ? null : tmpUrineTestDone == 1;
+        occupation = in.readString();
+        physicalDisability = in.readString();
+        otherDisability = in.readString();
+        cataractSurgery = in.readString();
+        otherChronic = in.readString();
+        otherEyeIssue = in.readString();
+        sickleCellStatus = in.readString();
+        byte tmpIsChildGoingSchool = in.readByte();
+        isChildGoingSchool = tmpIsChildGoingSchool == 0 ? null : tmpIsChildGoingSchool == 1;
+        currentStudyingStandard = in.readString();
+        aadharStatus = in.readString();
+        pensionScheme = in.readString();
+        byte tmpUnderTreatmentChronic = in.readByte();
+        underTreatmentChronic = tmpUnderTreatmentChronic == 0 ? null : tmpUnderTreatmentChronic == 1;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(familyId);
+        dest.writeString(firstName);
+        dest.writeString(middleName);
+        dest.writeString(lastName);
+        dest.writeString(gender);
+        dest.writeString(maritalStatus);
+        dest.writeString(aadharNumber);
+        dest.writeByte((byte) (isAadharUpdated ? 1 : 0));
+        dest.writeString(mobileNumber);
+        dest.writeString(alternateNumber);
+        dest.writeByte((byte) (familyHeadFlag == null ? 0 : familyHeadFlag ? 1 : 2));
+        if (dob == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(dob);
+        }
+        dest.writeString(uniqueHealthId);
+        dest.writeString(ifsc);
+        dest.writeString(accountNumber);
+        dest.writeString(maaVatsalyaCardNumber);
+        dest.writeByte((byte) (isPregnantFlag == null ? 0 : isPregnantFlag ? 1 : 2));
+        if (lmpDate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(lmpDate);
+        }
+        if (normalCycleDays == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(normalCycleDays);
+        }
+        dest.writeString(familyPlanningMethod);
+        if (fpInsertOperateDate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(fpInsertOperateDate);
+        }
+        dest.writeString(type);
+        dest.writeString(state);
+        dest.writeString(createdBy);
+        dest.writeString(updatedBy);
+        if (createdOn == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(createdOn);
+        }
+        if (updatedOn == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(updatedOn);
+        }
+        dest.writeString(grandfatherName);
+        dest.writeString(nameBasedOnAadhar);
+        dest.writeString(educationStatus);
+        dest.writeString(congenitalAnomalyIds);
+        dest.writeString(chronicDiseaseIds);
+        dest.writeString(currentDiseaseIds);
+        dest.writeString(eyeIssueIds);
+        dest.writeString(lastMethodOfContraception);
+        if (yearOfWedding == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(yearOfWedding);
+        }
+        dest.writeByte((byte) (jsyPaymentGiven == null ? 0 : jsyPaymentGiven ? 1 : 2));
+        dest.writeByte((byte) (isEarlyRegistration == null ? 0 : isEarlyRegistration ? 1 : 2));
+        dest.writeByte((byte) (jsyBeneficiary == null ? 0 : jsyBeneficiary ? 1 : 2));
+        dest.writeByte((byte) (iayBeneficiary == null ? 0 : iayBeneficiary ? 1 : 2));
+        dest.writeByte((byte) (kpsyBeneficiary == null ? 0 : kpsyBeneficiary ? 1 : 2));
+        dest.writeByte((byte) (chiranjeeviYojnaBeneficiary == null ? 0 : chiranjeeviYojnaBeneficiary ? 1 : 2));
+        if (haemoglobin == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(haemoglobin);
+        }
+        if (weight == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(weight);
+        }
+        if (edd == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(edd);
+        }
+        dest.writeString(ancVisitDates);
+        dest.writeString(immunisationGiven);
+        dest.writeString(bloodGroup);
+        dest.writeString(placeOfBirth);
+        if (birthWeight == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(birthWeight);
+        }
+        if (motherId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(motherId);
+        }
+        dest.writeByte((byte) (complementaryFeedingStarted == null ? 0 : complementaryFeedingStarted ? 1 : 2));
+        dest.writeByte((byte) (isHighRiskCase == null ? 0 : isHighRiskCase ? 1 : 2));
+        if (curPregRegDetId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(curPregRegDetId);
+        }
+        if (curPregRegDate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(curPregRegDate);
+        }
+        dest.writeByte((byte) (menopauseArrived == null ? 0 : menopauseArrived ? 1 : 2));
+        dest.writeString(syncStatus);
+        dest.writeByte((byte) (isIucdRemoved == null ? 0 : isIucdRemoved ? 1 : 2));
+        if (iucdRemovalDate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(iucdRemovalDate);
+        }
+        if (lastDeliveryDate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(lastDeliveryDate);
+        }
+        dest.writeByte((byte) (hysterectomyDone == null ? 0 : hysterectomyDone ? 1 : 2));
+        dest.writeString(childNrcCmtcStatus);
+        dest.writeString(lastDeliveryOutcome);
+        dest.writeString(previousPregnancyComplication);
+        dest.writeString(additionalInfo);
+        if (npcbScreeningDate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(npcbScreeningDate);
+        }
+        dest.writeByte((byte) (fhsrPhoneVerified == null ? 0 : fhsrPhoneVerified ? 1 : 2));
+        dest.writeInt(currentGravida != null ? (int) currentGravida : Integer.MAX_VALUE);
+        dest.writeInt(currentPara != null ? (int) currentPara : Integer.MAX_VALUE);
+        if (dateOfWedding == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(dateOfWedding);
+        }
+        if (husbandId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(husbandId);
+        }
+        dest.writeString(npcbStatus);
+        dest.writeByte((byte) (isMobileNumberVerified == null ? 0 : isMobileNumberVerified ? 1 : 2));
+        dest.writeString(relationWithHof);
+        if (cbacDate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(cbacDate);
+        }
+        dest.writeString(hypYear);
+        dest.writeString(oralYear);
+        dest.writeString(diabetesYear);
+        dest.writeString(breastYear);
+        dest.writeString(cervicalYear);
+        dest.writeString(mentalHealthYear);
+        dest.writeString(healthYear);
+        dest.writeString(healthId);
+        dest.writeString(healthIdNumber);
+        dest.writeByte((byte) (vulnerableFlag == null ? 0 : vulnerableFlag ? 1 : 2));
+        dest.writeByte((byte) (healthInsurance == null ? 0 : healthInsurance ? 1 : 2));
+        dest.writeString(schemeDetail);
+        dest.writeByte((byte) (personalHistoryDone == null ? 0 : personalHistoryDone ? 1 : 2));
+        dest.writeByte((byte) (confirmedDiabetes == null ? 0 : confirmedDiabetes ? 1 : 2));
+        dest.writeByte((byte) (suspectedForDiabetes == null ? 0 : suspectedForDiabetes ? 1 : 2));
+        if (cbacScore == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(cbacScore);
+        }
+        dest.writeByte((byte) (sufferingDiabetes == null ? 0 : sufferingDiabetes ? 1 : 2));
+        dest.writeByte((byte) (sufferingHypertension == null ? 0 : sufferingHypertension ? 1 : 2));
+        dest.writeByte((byte) (sufferingMentalHealth == null ? 0 : sufferingMentalHealth ? 1 : 2));
+        dest.writeByte((byte) (eveningAvailability == null ? 0 : eveningAvailability ? 1 : 2));
+        dest.writeString(pmjayAvailability);
+        dest.writeString(alcoholAddiction);
+        dest.writeString(smokingAddiction);
+        dest.writeString(tobaccoAddiction);
+        dest.writeByte((byte) (moConfirmedDiabetes == null ? 0 : moConfirmedDiabetes ? 1 : 2));
+        dest.writeByte((byte) (moConfirmedHypertension == null ? 0 : moConfirmedHypertension ? 1 : 2));
+        dest.writeByte((byte) (generalScreeningDone == null ? 0 : generalScreeningDone ? 1 : 2));
+        dest.writeByte((byte) (ecgTestDone == null ? 0 : ecgTestDone ? 1 : 2));
+        dest.writeByte((byte) (retinopathyTestDone == null ? 0 : retinopathyTestDone ? 1 : 2));
+        dest.writeByte((byte) (urineTestDone == null ? 0 : urineTestDone ? 1 : 2));
+        dest.writeString(occupation);
+        dest.writeString(physicalDisability);
+        dest.writeString(otherDisability);
+        dest.writeString(cataractSurgery);
+        dest.writeString(otherChronic);
+        dest.writeString(otherEyeIssue);
+        dest.writeString(sickleCellStatus);
+        dest.writeByte((byte) (isChildGoingSchool == null ? 0 : isChildGoingSchool ? 1 : 2));
+        dest.writeString(currentStudyingStandard);
+        dest.writeString(aadharStatus);
+        dest.writeString(pensionScheme);
+        dest.writeByte((byte) (underTreatmentChronic == null ? 0 : underTreatmentChronic ? 1 : 2));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MemberDataBean> CREATOR = new Creator<MemberDataBean>() {
+        @Override
+        public MemberDataBean createFromParcel(Parcel in) {
+            return new MemberDataBean(in);
+        }
+
+        @Override
+        public MemberDataBean[] newArray(int size) {
+            return new MemberDataBean[size];
+        }
+    };
 
     public Long getDateOfWedding() {
         return dateOfWedding;
@@ -1147,5 +1799,531 @@ public class MemberDataBean {
 
     public void setTobaccoAddiction(String tobaccoAddiction) {
         this.tobaccoAddiction = tobaccoAddiction;
+    }
+
+    public Boolean getMoConfirmedDiabetes() {
+        return moConfirmedDiabetes;
+    }
+
+    public void setMoConfirmedDiabetes(Boolean moConfirmedDiabetes) {
+        this.moConfirmedDiabetes = moConfirmedDiabetes;
+    }
+
+    public Boolean getMoConfirmedHypertension() {
+        return moConfirmedHypertension;
+    }
+
+    public void setMoConfirmedHypertension(Boolean moConfirmedHypertension) {
+        this.moConfirmedHypertension = moConfirmedHypertension;
+    }
+
+    public Boolean getGeneralScreeningDone() {
+        return generalScreeningDone;
+    }
+
+    public void setGeneralScreeningDone(Boolean generalScreeningDone) {
+        this.generalScreeningDone = generalScreeningDone;
+    }
+
+    public Boolean getEcgTestDone() {
+        return ecgTestDone;
+    }
+
+    public void setEcgTestDone(Boolean ecgTestDone) {
+        this.ecgTestDone = ecgTestDone;
+    }
+
+    public Boolean getRetinopathyTestDone() {
+        return retinopathyTestDone;
+    }
+
+    public void setRetinopathyTestDone(Boolean retinopathyTestDone) {
+        this.retinopathyTestDone = retinopathyTestDone;
+    }
+
+    public Boolean getUrineTestDone() {
+        return urineTestDone;
+    }
+
+    public void setUrineTestDone(Boolean urineTestDone) {
+        this.urineTestDone = urineTestDone;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public String getPhysicalDisability() {
+        return physicalDisability;
+    }
+
+    public void setPhysicalDisability(String physicalDisability) {
+        this.physicalDisability = physicalDisability;
+    }
+
+    public String getOtherDisability() {
+        return otherDisability;
+    }
+
+    public void setOtherDisability(String otherDisability) {
+        this.otherDisability = otherDisability;
+    }
+
+    public String getCataractSurgery() {
+        return cataractSurgery;
+    }
+
+    public void setCataractSurgery(String cataractSurgery) {
+        this.cataractSurgery = cataractSurgery;
+    }
+
+    public String getOtherChronic() {
+        return otherChronic;
+    }
+
+    public void setOtherChronic(String otherChronic) {
+        this.otherChronic = otherChronic;
+    }
+
+    public String getOtherEyeIssue() {
+        return otherEyeIssue;
+    }
+
+    public void setOtherEyeIssue(String otherEyeIssue) {
+        this.otherEyeIssue = otherEyeIssue;
+    }
+
+    public String getSickleCellStatus() {
+        return sickleCellStatus;
+    }
+
+    public void setSickleCellStatus(String sickleCellStatus) {
+        this.sickleCellStatus = sickleCellStatus;
+    }
+
+    public Boolean getIsChildGoingSchool() {
+        return isChildGoingSchool;
+    }
+
+    public void setIsChildGoingSchool(Boolean isChildGoingSchool) {
+        this.isChildGoingSchool = isChildGoingSchool;
+    }
+
+    public String getCurrentStudyingStandard() {
+        return currentStudyingStandard;
+    }
+
+    public void setCurrentStudyingStandard(String currentStudyingStandard) {
+        this.currentStudyingStandard = currentStudyingStandard;
+    }
+
+    public String getAadharStatus() {
+        return aadharStatus;
+    }
+
+    public void setAadharStatus(String aadharStatus) {
+        this.aadharStatus = aadharStatus;
+    }
+
+    public String getPensionScheme() {
+        return pensionScheme;
+    }
+
+    public void setPensionScheme(String pensionScheme) {
+        this.pensionScheme = pensionScheme;
+    }
+
+    public Boolean getUnderTreatmentChronic() {
+        return underTreatmentChronic;
+    }
+
+    public void setUnderTreatmentChronic(Boolean underTreatmentChronic) {
+        this.underTreatmentChronic = underTreatmentChronic;
+    }
+
+    public String getAlternateNumber() {
+        return alternateNumber;
+    }
+
+    public void setAlternateNumber(String alternateNumber) {
+        this.alternateNumber = alternateNumber;
+    }
+
+    public Boolean getPregnantFlag() {
+        return isPregnantFlag;
+    }
+
+    public void setPregnantFlag(Boolean pregnantFlag) {
+        isPregnantFlag = pregnantFlag;
+    }
+
+    public Boolean getChildGoingSchool() {
+        return isChildGoingSchool;
+    }
+
+    public void setChildGoingSchool(Boolean childGoingSchool) {
+        isChildGoingSchool = childGoingSchool;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getServiceLocation() {
+        return serviceLocation;
+    }
+
+    public void setServiceLocation(String serviceLocation) {
+        this.serviceLocation = serviceLocation;
+    }
+
+    public String getCounsellingDone() {
+        return counsellingDone;
+    }
+
+    public void setCounsellingDone(String counsellingDone) {
+        this.counsellingDone = counsellingDone;
+    }
+
+    public Boolean getHaemoglobinMeasured() {
+        return isHaemoglobinMeasured;
+    }
+
+    public void setHaemoglobinMeasured(Boolean haemoglobinMeasured) {
+        isHaemoglobinMeasured = haemoglobinMeasured;
+    }
+
+    public Integer getIfaTabTakenLastMonth() {
+        return ifaTabTakenLastMonth;
+    }
+
+    public void setIfaTabTakenLastMonth(Integer ifaTabTakenLastMonth) {
+        this.ifaTabTakenLastMonth = ifaTabTakenLastMonth;
+    }
+
+    public Integer getIfaTabTakenNow() {
+        return ifaTabTakenNow;
+    }
+
+    public void setIfaTabTakenNow(Integer ifaTabTakenNow) {
+        this.ifaTabTakenNow = ifaTabTakenNow;
+    }
+
+    public String getAbsorbentMaterialUsed() {
+        return absorbentMaterialUsed;
+    }
+
+    public void setAbsorbentMaterialUsed(String absorbentMaterialUsed) {
+        this.absorbentMaterialUsed = absorbentMaterialUsed;
+    }
+
+    public Boolean getSanitaryPadGiven() {
+        return isSanitaryPadGiven;
+    }
+
+    public void setSanitaryPadGiven(Boolean sanitaryPadGiven) {
+        isSanitaryPadGiven = sanitaryPadGiven;
+    }
+
+    public Integer getNumberOfSanitaryPadsGiven() {
+        return numberOfSanitaryPadsGiven;
+    }
+
+    public void setNumberOfSanitaryPadsGiven(Integer numberOfSanitaryPadsGiven) {
+        this.numberOfSanitaryPadsGiven = numberOfSanitaryPadsGiven;
+    }
+
+    public Boolean getHavingMenstrualProblem() {
+        return isHavingMenstrualProblem;
+    }
+
+    public void setHavingMenstrualProblem(Boolean havingMenstrualProblem) {
+        isHavingMenstrualProblem = havingMenstrualProblem;
+    }
+
+    public String getIssueWithMenstruation() {
+        return issueWithMenstruation;
+    }
+
+    public void setIssueWithMenstruation(String issueWithMenstruation) {
+        this.issueWithMenstruation = issueWithMenstruation;
+    }
+
+    public Boolean getTDInjectionGiven() {
+        return isTDInjectionGiven;
+    }
+
+    public void setTDInjectionGiven(Boolean TDInjectionGiven) {
+        isTDInjectionGiven = TDInjectionGiven;
+    }
+
+    public Long getTdInjectionDate() {
+        return tdInjectionDate;
+    }
+
+    public void setTdInjectionDate(Long tdInjectionDate) {
+        this.tdInjectionDate = tdInjectionDate;
+    }
+
+    public Boolean getAlbandazoleGivenInLastSixMonths() {
+        return isAlbandazoleGivenInLastSixMonths;
+    }
+
+    public void setAlbandazoleGivenInLastSixMonths(Boolean albandazoleGivenInLastSixMonths) {
+        isAlbandazoleGivenInLastSixMonths = albandazoleGivenInLastSixMonths;
+    }
+
+    public Long getAdolescentScreeningDate() {
+        return adolescentScreeningDate;
+    }
+
+    public void setAdolescentScreeningDate(Long adolescentScreeningDate) {
+        this.adolescentScreeningDate = adolescentScreeningDate;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Boolean getPeriodStarted() {
+        return isPeriodStarted;
+    }
+
+    public void setPeriodStarted(Boolean periodStarted) {
+        isPeriodStarted = periodStarted;
+    }
+
+    public Long getSchoolActualId() {
+        return schoolActualId;
+    }
+
+    public void setSchoolActualId(Long schoolActualId) {
+        this.schoolActualId = schoolActualId;
+    }
+
+    public Long getAnganwadiId() {
+        return anganwadiId;
+    }
+
+    public void setAnganwadiId(Long anganwadiId) {
+        this.anganwadiId = anganwadiId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getConcatWs() {
+        return concatWs;
+    }
+
+    public void setConcatWs(String concatWs) {
+        this.concatWs = concatWs;
+    }
+
+    public Long getHmisId() {
+        return hmisId;
+    }
+
+    public void setHmisId(Long hmisId) {
+        this.hmisId = hmisId;
+    }
+
+    public Long getHypDiaMentalServiceDate() {
+        return hypDiaMentalServiceDate;
+    }
+
+    public void setHypDiaMentalServiceDate(Long hypDiaMentalServiceDate) {
+        this.hypDiaMentalServiceDate = hypDiaMentalServiceDate;
+    }
+
+    public Long getCancerServiceDate() {
+        return cancerServiceDate;
+    }
+
+    public void setCancerServiceDate(Long cancerServiceDate) {
+        this.cancerServiceDate = cancerServiceDate;
+    }
+
+    public String getIsHivPositive() {
+        return isHivPositive;
+    }
+
+    public void setIsHivPositive(String isHivPositive) {
+        this.isHivPositive = isHivPositive;
+    }
+
+    public String getIsVDRLPositive() {
+        return isVDRLPositive;
+    }
+
+    public void setIsVDRLPositive(String isVDRLPositive) {
+        this.isVDRLPositive = isVDRLPositive;
+    }
+
+    public String getNutritionStatus() {
+        return nutritionStatus;
+    }
+
+    public void setNutritionStatus(String nutritionStatus) {
+        this.nutritionStatus = nutritionStatus;
+    }
+
+    public String getSdScore() {
+        return sdScore;
+    }
+
+    public void setSdScore(String sdScore) {
+        this.sdScore = sdScore;
+    }
+
+    public String getNrcNumber() {
+        return nrcNumber;
+    }
+
+    public void setNrcNumber(String nrcNumber) {
+        this.nrcNumber = nrcNumber;
+    }
+
+    public Boolean getTbCured() {
+        return isTbCured;
+    }
+
+    public void setTbCured(Boolean tbCured) {
+        isTbCured = tbCured;
+    }
+
+    public Boolean getTbSuspected() {
+        return isTbSuspected;
+    }
+
+    public void setTbSuspected(Boolean tbSuspected) {
+        isTbSuspected = tbSuspected;
+    }
+
+    public Boolean getIndexCase() {
+        return indexCase;
+    }
+
+    public void setIndexCase(Boolean indexCase) {
+        this.indexCase = indexCase;
+    }
+
+    public String getMemberReligion() {
+        return memberReligion;
+    }
+
+    public void setMemberReligion(String memberReligion) {
+        this.memberReligion = memberReligion;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
+    }
+
+    public String getChronicDiseaseIdsForTreatment() {
+        return chronicDiseaseIdsForTreatment;
+    }
+
+    public void setChronicDiseaseIdsForTreatment(String chronicDiseaseIdsForTreatment) {
+        this.chronicDiseaseIdsForTreatment = chronicDiseaseIdsForTreatment;
+    }
+
+    public Boolean getBcgSurveyStatus() {
+        return bcgSurveyStatus;
+    }
+
+    public void setBcgSurveyStatus(Boolean bcgSurveyStatus) {
+        this.bcgSurveyStatus = bcgSurveyStatus;
+    }
+
+    public Boolean getBcgEligible() {
+        return bcgEligible;
+    }
+
+    public void setBcgEligible(Boolean bcgEligible) {
+        this.bcgEligible = bcgEligible;
+    }
+
+    public Boolean getBcgWilling() {
+        return bcgWilling;
+    }
+
+    public void setBcgWilling(Boolean bcgWilling) {
+        this.bcgWilling = bcgWilling;
+    }
+
+    public Boolean getBcgEligibleFilled() {
+        return bcgEligibleFilled;
+    }
+
+    public void setBcgEligibleFilled(Boolean bcgEligibleFilled) {
+        this.bcgEligibleFilled = bcgEligibleFilled;
+    }
+
+    public String getOtherChronicDiseaseTreatment() {
+        return otherChronicDiseaseTreatment;
+    }
+
+    public void setOtherChronicDiseaseTreatment(String otherChronicDiseaseTreatment) {
+        this.otherChronicDiseaseTreatment = otherChronicDiseaseTreatment;
+    }
+
+    public String getRdtStatus() {
+        return rdtStatus;
+    }
+
+    public void setRdtStatus(String rdtStatus) {
+        this.rdtStatus = rdtStatus;
+    }
+
+    public String getBirthCertNumber() {
+        return birthCertNumber;
+    }
+
+    public void setBirthCertNumber(String birthCertNumber) {
+        this.birthCertNumber = birthCertNumber;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        MemberDataBean that = (MemberDataBean) obj;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(Integer.parseInt(id));
     }
 }

@@ -266,6 +266,12 @@
             android:name=".activity.PregnancyStatusActivity_"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.DnhddNCDScreeningFHWActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DnhddNCDScreeningAshaActivity_"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.HeadToToeScreeningActivity_"
             android:screenOrientation="portrait" />
         <activity

@@ -152,6 +152,9 @@ public class CFHCServiceImpl implements CFHCService {
         Set<MemberEntity> membersToBeArchived = new HashSet<>();
         Set<MemberEntity> membersToBeMarkedDead = new HashSet<>();
         Set<MemberEntity> membersDeadLastYear = new HashSet<>();
+        MemberEntity maleHofMember = null;
+        MemberEntity femaleHofMember = null;
+        MemberEntity hofHusbandOrWifeMember = null;
         for (String aKeyAndAnswer : keyAndAnswerSetList) {
             String[] keyAnswerSplit = aKeyAndAnswer.split(MobileConstantUtil.ANSWER_STRING_SECOND_SEPARATER);
             if (keyAnswerSplit.length != 2) {
@@ -165,12 +168,20 @@ public class CFHCServiceImpl implements CFHCService {
         }
 
         familyId = keyAndAnswerMap.get("1");
-        FamilyEntity familyEntity;
 
+        FamilyEntity familyEntity;
         if (familyId == null || familyId.equals("Not available")) {
             familyEntity = new FamilyEntity();
         } else {
             familyEntity = familyDao.retrieveFamilyByFamilyId(familyId);
+        }
+
+        if ("3".equals(keyAndAnswerMap.get("4")) && familyEntity.getId() != null) {
+            //Archive this family
+            familyEntity.setState(FamilyHealthSurveyServiceConstants.FHS_FAMILY_STATE_ARCHIVED);
+            familyDao.updateFamily(familyEntity);
+            returnMap.put("createdInstanceId", familyEntity.getId().toString());
+            return returnMap;
         }
 
         List<MemberEntity> membersInTheFamily = memberDao.retrieveMemberEntitiesByFamilyId(familyEntity.getFamilyId());
@@ -277,8 +288,23 @@ public class CFHCServiceImpl implements CFHCService {
                 if (memberKeyAndAnswerMap.get("25" + "." + splitKey[1]) != null && memberKeyAndAnswerMap.get("25" + "." + splitKey[1]).equals("2")) {
                     membersToBeMarkedDead.add(memberEntity);
                     mapOfDeadMemberWithLoopIsAsKey.put(splitKey[1], memberEntity);
+                } else if (memberKeyAndAnswerMap.get("25" + "." + splitKey[1]) != null && memberKeyAndAnswerMap.get("25" + "." + splitKey[1]).equals("3")) {
+                    membersToBeArchived.add(memberEntity);
                 } else {
                     this.setAnswersToMemberEntity(splitKey[0], answer, memberEntity, memberCFHCEntity, memberKeyAndAnswerMap, splitKey[1]);
+                }
+
+                if (memberKeyAndAnswerMap.get("31" + "." + splitKey[1]) != null && memberKeyAndAnswerMap.get("31" + "." + splitKey[1]).equals("1")) {
+                    if (memberKeyAndAnswerMap.get("36" + "." + splitKey[1]) != null && memberKeyAndAnswerMap.get("36" + "." + splitKey[1]).equals("1")) {
+                        maleHofMember = memberEntity;
+                    } else if (memberKeyAndAnswerMap.get("36" + "." + splitKey[1]) != null && memberKeyAndAnswerMap.get("36" + "." + splitKey[1]).equals("2")) {
+                        femaleHofMember = memberEntity;
+                    }
+                }
+                if (memberKeyAndAnswerMap.get("311" + "." + splitKey[1]) != null &&
+                        (memberKeyAndAnswerMap.get("311" + "." + splitKey[1]).equals("WIFE")
+                                || memberKeyAndAnswerMap.get("311" + "." + splitKey[1]).equals("HUSBAND"))) {
+                    hofHusbandOrWifeMember = memberEntity;
                 }
             } else {
                 String uniqueHealthId = memberKeyAndAnswerMap.get("23");
@@ -317,9 +343,23 @@ public class CFHCServiceImpl implements CFHCService {
                 if ((memberKeyAndAnswerMap.get("25") != null && memberKeyAndAnswerMap.get("25").equals("2"))) {
                     membersToBeMarkedDead.add(memberEntity);
                     mapOfDeadMemberWithLoopIsAsKey.put("0", memberEntity);
+                } else if (memberKeyAndAnswerMap.get("25") != null && memberKeyAndAnswerMap.get("25").equals("3")) {
+                    membersToBeArchived.add(memberEntity);
                 } else {
                     this.setAnswersToMemberEntity(key, answer, memberEntity, memberCFHCEntity, memberKeyAndAnswerMap, null);
+                }
 
+                if (memberKeyAndAnswerMap.get("31") != null && memberKeyAndAnswerMap.get("31").equals("1")) {
+                    if (memberKeyAndAnswerMap.get("36") != null && memberKeyAndAnswerMap.get("36").equals("1")) {
+                        maleHofMember = memberEntity;
+                    } else if (memberKeyAndAnswerMap.get("36") != null && memberKeyAndAnswerMap.get("36").equals("2")) {
+                        femaleHofMember = memberEntity;
+                    }
+                }
+                if (memberKeyAndAnswerMap.get("311") != null &&
+                        (memberKeyAndAnswerMap.get("311").equals("WIFE")
+                                || memberKeyAndAnswerMap.get("311").equals("HUSBAND"))) {
+                    hofHusbandOrWifeMember = memberEntity;
                 }
             }
         }
@@ -341,7 +381,7 @@ public class CFHCServiceImpl implements CFHCService {
                         membersDeadLastYear.add(memberEntity);
                         mapOfDeadLastYearWithLoopIsAsKey.put(splitKey[1], memberEntity);
                     }
-                    this.setAnswersToDeadMember(splitKey[0], answer, memberEntity);
+                    this.setAnswersToDeadMember(splitKey[0], answer, memberEntity, deadMemberKeyAndAnswerMap, splitKey[1]);
                 } else {
                     memberEntity = mapOfDeadLastYearWithLoopIsAsKey.get("0");
                     if (memberEntity == null) {
@@ -351,7 +391,7 @@ public class CFHCServiceImpl implements CFHCService {
                         membersDeadLastYear.add(memberEntity);
                         mapOfDeadLastYearWithLoopIsAsKey.put("0", memberEntity);
                     }
-                    this.setAnswersToDeadMember(key, answer, memberEntity);
+                    this.setAnswersToDeadMember(key, answer, memberEntity, deadMemberKeyAndAnswerMap, null);
                 }
             }
         }
@@ -360,6 +400,7 @@ public class CFHCServiceImpl implements CFHCService {
         Set<MemberEntity> membersToBeUpdated = new HashSet<>(mapOfMemberWithLoopIdAsKey.values());
         membersToBeUpdated.removeAll(membersToBeMarkedDead);
         membersToBeUpdated.removeAll(membersToBeAdded);
+        membersToBeUpdated.removeAll(membersToBeArchived);
 
         if (familyEntity.getId() != null) {
             familyEntity.setModifiedBy(user.getId());
@@ -371,17 +412,6 @@ public class CFHCServiceImpl implements CFHCService {
         familyHealthSurveyService.persistFamilyCFHC(parsedRecordBean.getChecksum(), familyEntity, membersToBeAdded, membersToBeArchived, membersToBeUpdated,
                 String.valueOf(user.getId()), membersToBeMarkedDead, mapOfMemberWithLoopIdAsKey,
                 motherChildRelationString, husbandWifeRelationString, failedOfflineAbhaMessageMap);
-        familyDao.flush();
-        memberDao.flush();
-
-        for (MemberEntity memberEntity : membersToBeAdded) {
-            if (memberEntity.isMarkedPregnant()){
-                memberDao.createPregnancyRegistrationDetEntry(memberEntity.getId(), familyEntity.getId(), memberEntity.getLmpDate(),
-                        ImtechoUtil.addDaysInDate(memberEntity.getLmpDate(), 281), new Date(),
-                        familyEntity.getAreaId() != null ? familyEntity.getAreaId() : familyEntity.getLocationId(),
-                        user.getId());
-            }
-        }
 
         returnMap.put("createdInstanceId", familyEntity.getId().toString());
 
@@ -394,6 +424,12 @@ public class CFHCServiceImpl implements CFHCService {
                     throw new ImtechoMobileException("Member with Health ID " + memberEntity.getUniqueHealthId() + " is already marked DEAD. "
                             + "You cannot mark a DEAD member DEAD again.", 1);
                 } else {
+                    memberDao.deleteDiseaseRelationsOfMember(memberEntity.getId());
+                    memberEntity.setModifiedBy(user.getId());
+                    memberEntity.setModifiedOn(new Date());
+                    memberEntity.setFamilyHeadFlag(Boolean.FALSE);
+                    familyHealthSurveyService.updateMember(memberEntity, memberEntity.getState(), FamilyHealthSurveyServiceConstants.CFHC_MEMBER_STATE_DEAD);
+                    memberDao.flush();
                     markMemberAsDeath(memberEntity, familyEntity, memberKeyAndAnswerMap, key, user);
                 }
             }
@@ -418,6 +454,17 @@ public class CFHCServiceImpl implements CFHCService {
                 }
             }
         }
+
+        if (femaleHofMember != null && hofHusbandOrWifeMember != null) {
+            femaleHofMember.setHusbandId(hofHusbandOrWifeMember.getId());
+            memberDao.update(femaleHofMember);
+        }
+
+        if (maleHofMember != null && hofHusbandOrWifeMember != null) {
+            hofHusbandOrWifeMember.setHusbandId(maleHofMember.getId());
+            memberDao.update(maleHofMember);
+        }
+        memberDao.flush();
 
         if (isNewFamily) {
             newFamilyMsg(familyEntity, mapOfMemberWithLoopIdAsKey, returnMap, failedOfflineAbhaMessageMap, parsedRecordBean);
@@ -1017,9 +1064,6 @@ public class CFHCServiceImpl implements CFHCService {
                 memberEntity.setTobaccoAddiction(answer);
                 break;
             case "4501":
-                if (!Boolean.TRUE.equals(memberEntity.getIsPregnantFlag()) && Boolean.TRUE.equals(ImtechoUtil.returnTrueFalseFromInitials(answer))) {
-                    memberEntity.setMarkedPregnant(true);
-                }
                 memberEntity.setIsPregnantFlag(ImtechoUtil.returnTrueFalseFromInitials(answer));
                 break;
             case "4502":
@@ -1035,7 +1079,7 @@ public class CFHCServiceImpl implements CFHCService {
         }
     }
 
-    private void setAnswersToDeadMember(String key, String answer, MemberEntity memberEntity) {
+    private void setAnswersToDeadMember(String key, String answer, MemberEntity memberEntity, Map<String, String> keyAnswerMap, String count) {
         switch (key) {
             case "8053":
                 if (answer.trim().length() > 0) {
@@ -1072,6 +1116,11 @@ public class CFHCServiceImpl implements CFHCService {
                 if (answer.trim().length() > 0) {
                     Calendar cal = Calendar.getInstance();
                     cal.add(Calendar.YEAR, -(Integer.parseInt(answer)));
+                    if (count != null && keyAnswerMap.containsKey("8060" + "." + count)) {
+                        cal.add(Calendar.MONTH, -(Integer.parseInt(keyAnswerMap.get("8060" + "." + count))));
+                    } else if (keyAnswerMap.containsKey("8060")) {
+                        cal.add(Calendar.MONTH, -(Integer.parseInt(keyAnswerMap.get("8060"))));
+                    }
                     Date dobDate = cal.getTime();
                     memberEntity.setDob(dobDate);
                 }

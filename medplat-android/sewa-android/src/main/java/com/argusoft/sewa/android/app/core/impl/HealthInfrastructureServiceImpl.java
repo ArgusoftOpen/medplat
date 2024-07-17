@@ -19,6 +19,7 @@ import org.androidannotations.ormlite.annotations.OrmLiteDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -148,6 +149,17 @@ public class HealthInfrastructureServiceImpl implements HealthInfrastructureServ
         }
 
         return infrastructureBeans;
+    }
+
+    public List<HealthInfrastructureBean> retrieveHealthInfraListByLocationList(List<Integer> locationIds) {
+        try {
+            return infrastructureBeanDao.queryBuilder()
+                    .orderBy(FieldNameConstants.TYPE_ID, Boolean.FALSE)
+                    .where().in(FieldNameConstants.LOCATION_ID, locationIds).query();
+        } catch (SQLException e) {
+            Log.e(getClass().getName(), e.getMessage(), e);
+        }
+        return Collections.emptyList();
     }
 
     @Override

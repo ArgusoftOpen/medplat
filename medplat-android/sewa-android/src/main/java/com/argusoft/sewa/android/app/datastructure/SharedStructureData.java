@@ -308,6 +308,8 @@ public class SharedStructureData {
         fhwSheets.add(FormConstants.IDSP_MEMBER_2);
         fhwSheets.add(FormConstants.IDSP_NEW_FAMILY);
         fhwSheets.add(FormConstants.TRAVELLERS_SCREENING);
+        fhwSheets.add(FormConstants.DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH);
+        fhwSheets.add(FormConstants.CANCER_SCREENING);
     }
 
     private static void groupAshaSheets() {
@@ -327,6 +329,8 @@ public class SharedStructureData {
         ashaSheets.add(FormConstants.CMAM_FOLLOWUP);
         ashaSheets.add(FormConstants.IDSP_MEMBER);
         ashaSheets.add(FormConstants.IDSP_MEMBER_2);
+        ashaSheets.add(FormConstants.DNHDD_NCD_CBAC_AND_NUTRITION);
+
     }
 
     private static void groupAwwSheets() {

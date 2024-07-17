@@ -8,20 +8,30 @@ import com.argusoft.medplat.common.service.UserAttendanceMasterService;
 import com.argusoft.medplat.course.service.LmsMobileEventSubmissionService;
 import com.argusoft.medplat.exception.ImtechoSystemException;
 import com.argusoft.medplat.exception.ImtechoUserException;
+import com.argusoft.medplat.listvalues.service.UploadMultimediaService;
 import com.argusoft.medplat.mobile.constants.MobileApiPathConstants;
 import com.argusoft.medplat.mobile.dto.*;
 import com.argusoft.medplat.mobile.model.BlockedDevicesMaster;
 import com.argusoft.medplat.mobile.service.*;
 import com.argusoft.medplat.query.dto.QueryDto;
+import java.io.File;
+
 import com.argusoft.medplat.query.service.QueryMasterService;
 import com.argusoft.medplat.web.users.service.UserService;
 import com.sun.jersey.api.client.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.io.FileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileInputStream;
 import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -57,8 +67,8 @@ public class MobileController extends GenericSessionUtilService {
     private QueryMasterService queryMasterService;
 //    @Autowired
 //    private PatchService patchService;
-//    @Autowired
-//    private UploadMultimediaService uploadMultiMediaService;
+    @Autowired
+    private UploadMultimediaService uploadMultiMediaService;
 //    @Autowired
 //    private DellApiService dellApiService;
     @Autowired
@@ -412,10 +422,10 @@ public class MobileController extends GenericSessionUtilService {
 //                .body(resource);
 //    }
 //
-//    @PostMapping(value = MobileApiPathConstants.TECHO_GET_TOKEN_VALIDITY)
-//    public Boolean getTokenValidity(@RequestBody MobileRequestParamDto mobileRequestParamDto) {
-//        return userService.isUserTokenValid(mobileRequestParamDto.getToken());
-//    }
+    @PostMapping(value = MobileApiPathConstants.TECHO_GET_TOKEN_VALIDITY)
+    public Boolean getTokenValidity(@RequestBody MobileRequestParamDto mobileRequestParamDto) {
+        return userService.isUserTokenValid(mobileRequestParamDto.getToken());
+    }
 //
     @PostMapping(value = MobileApiPathConstants.TECHO_REVALIDATE_TOKEN)
     public Object revalidateUserToken(@RequestBody MobileRequestParamDto mobileRequestParamDto) {
@@ -752,18 +762,18 @@ public class MobileController extends GenericSessionUtilService {
 //        myTechoUserService.resetPassword(userPasswordDto);
 //    }
 //
-//    @GetMapping(value = "getfile")
-//    public ResponseEntity<Resource> getAFile(@RequestParam("filename") String fileName, HttpServletRequest request) throws FileNotFoundException {
-//        File file = uploadMultiMediaService.getLibraryFileByName(fileName);
-//        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-//        String contentType = "video/mp4";
-//
-//        return ResponseEntity.ok()
-//                .contentLength(file.length())
-//                .contentType(MediaType.parseMediaType(contentType))
-//                .header(HttpHeaders.CONTENT_DISPOSITION)
-//                .body(resource);
-//    }
+    @GetMapping(value = "getfile")
+    public ResponseEntity<Resource> getAFile(@RequestParam("filename") String fileName, HttpServletRequest request) throws FileNotFoundException {
+        File file = uploadMultiMediaService.getLibraryFileByName(fileName);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        String contentType = "video/mp4";
+
+        return ResponseEntity.ok()
+                .contentLength(file.length())
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION)
+                .body(resource);
+    }
 //
 //    @PostMapping(value = "mytecho/verifyMemberDetailByFamilyId")
 //    public MemberDataBean verifyDobOrAadharOfMember(@RequestBody MyTechoRequestParamDto myTechoRequestParamDto) {

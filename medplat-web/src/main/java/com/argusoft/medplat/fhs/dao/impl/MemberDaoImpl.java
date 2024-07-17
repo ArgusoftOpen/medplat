@@ -16,11 +16,12 @@ import com.argusoft.medplat.fhs.dto.MemberInformationDto;
 import com.argusoft.medplat.fhs.dto.PregnancyRegistrationDetailDto;
 import com.argusoft.medplat.fhs.model.FamilyEntity;
 import com.argusoft.medplat.fhs.model.MemberEntity;
-import io.swagger.models.auth.In;
+import com.argusoft.medplat.ncddnhdd.dto.MemberDetailDto;
 import org.apache.commons.lang3.time.DateUtils;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.transform.Transformers;
+import org.hibernate.type.LongType;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,7 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -49,6 +51,8 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
     public static final String ID_PROPERTY = "id";
     public static final String MEMBER_ID_PROPERTY = "memberId";
     public static final String FAMILY_ID_PROPERTY = "familyId";
+    public static final String FAMILY_ID_STR_PROPERTY = "famId";
+
     public static final String UNIQUE_HEALTH_ID_PROPERTY = "uniqueHealthId";
     public static final String MOTHER_ID_PROPERTY = "motherId";
     public static final String STATE_PROPERTY = "state";
@@ -73,7 +77,11 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
     public static final String FOLLOW_UP_DATE = "followUpDate";
     public static final String OFFSET = "offset";
     public static final String LIMIT = "limit";
-
+    public static final String HOF_MOBILE_NUMBER_PROPERTY = "hofMobileNumber";
+    public static final String REFERRED_FOR_DISEASES = "referredForDiseases";
+    private static final String SCREENING_DATE = "lastScreeningDate";
+    public static final String GENDER = "gender";
+    public static final String EXAMINE_ALLOWED = "examineAllowed";
 
     /**
      * {@inheritDoc}
@@ -697,6 +705,65 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
 
         q.executeUpdate();
     }
+    @Override
+    public List<MemberDetailDto> retrieveNcdMembersForFollowup(Integer userId, Integer limit, Integer offset, String healthInfrastructureType, String[] status) {
+        String fromColumn = status != null && "REFERRED".equals(status[0]) ? "nmr.health_infrastructure_id" : "nmr.referred_from_health_infrastructure_id";
+        String orWhereClause = "";
+        if (("REFERRED").equals(status[0])) {
+            orWhereClause = " OR ((status = 'SUSPECTED' OR status = 'CONFIRMATION_PENDING') AND health_infrastructure_id IS NOT NULL) ";
+        } else if (("CONFIRMED").equals(status[0])) {
+            orWhereClause = " OR ((status = 'SUSPECTED' OR status = 'CONFIRMATION_PENDING') AND health_infrastructure_id IS NULL) ";
+        }
+        String query = "with referred_members as (select nmr.member_id,nmr.follow_up_date, string_agg(nmr.disease_code,',') disease_code from ncd_member_referral nmr\n"
+                + "where nmr.disease_code in ('O','HT','C','B','D') AND nmr.state = 'PENDING' AND \n"
+                + "(nmr.status IN ('" + String.join("', '", status) + "') " + orWhereClause + ")\n"
+                + "AND follow_up_date < current_date + interval '1 day' - interval '00:00:01'\n"
+                + "and " + fromColumn + " in (\n"
+                + "(select hid.id from health_infrastructure_details hid, user_health_infrastructure uhi\n"
+                + "where uhi.health_infrastrucutre_id = hid.id and uhi.user_id = " + userId + " and uhi.state = 'ACTIVE')\n"
+                + ") group by nmr.member_id,nmr.follow_up_date\n"
+                + "limit :limit "
+                + "offset :offset\n"
+                + ")\n"
+                + "select distinct m.id, m.family_id as \"famId\", r.disease_code,to_char(r.follow_up_date,'MM/DD/YYYY') as \"followUpDate\",r.follow_up_date ,hyp.id,\n"
+                + "m.unique_health_id as uniqueHealthId,\n"
+                + "get_location_hierarchy(if.location_id) as locationHierarchy,\n"
+                + "lm.name as locationName,\n"
+                + "m.mobile_number as mobileNumber,\n"
+                + "concat(m.first_name,' ',m.middle_name,' ',m.last_name) as \"name\",\n"
+                + "(case when 'HT' = ANY(string_to_array(r.disease_code,',')) then CONCAT('Hypertension - ', case when hyp.systolic_bp is not null then cast(hyp.systolic_bp as text) else 'N.A' end, '/', case when hyp.diastolic_bp is not null then cast(hyp.diastolic_bp as text) else 'N.A' end) else null end) as referredForHypertension,\n"
+                + "(case when 'D' = ANY(string_to_array(r.disease_code,',')) then CONCAT('Diabetes - ', case when diab.blood_sugar is not null then cast(diab.blood_sugar as text) else 'N.A' end) else null end) as referredForDiabetes,\n"
+                + "(case when 'B' = ANY(string_to_array(r.disease_code,',')) then true else false end) as referredForBreast,\n"
+                + "(case when 'O' = ANY(string_to_array(r.disease_code,',')) then true else false end) as referredForOral,\n"
+                + "(case when 'C' = ANY(string_to_array(r.disease_code,',')) then true else false end) as referredForCervical\n"
+                + "from referred_members r \n"
+                + "inner join imt_member m on m.id = r.member_id\n"
+                + "inner join imt_family if on m.family_id = if.family_id \n"
+                + "left join location_master lm on lm.id = if.location_id \n"
+                + "left join ncd_member_hypertension_detail hyp on m.id = hyp.member_id and hyp.modified_on = (select max(modified_on) from ncd_member_hypertension_detail where member_id = m.id)\n"
+                + "left join ncd_member_diabetes_detail diab on m.id = diab.member_id and diab.modified_on = (select max(modified_on) from ncd_member_diabetes_detail where member_id = m.id) \n"
+                + "order by r.follow_up_date desc";
+
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery<MemberDetailDto> sqlQuery = session.createNativeQuery(query);
+        return sqlQuery
+                .addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar(FAMILY_ID_STR_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(UNIQUE_HEALTH_ID_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(NAME_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(LOCATION_HIERARCHY_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(LOCATION_NAME_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(MOBILE_NUMBER_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(FOLLOW_UP_DATE, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_HYPERTENSION, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_DIABETES, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_BREAST, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_ORAL, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_CERVICAL, StandardBasicTypes.STRING)
+                .setParameter(LIMIT, limit)
+                .setParameter(OFFSET, offset)
+                .setResultTransformer(Transformers.aliasToBean(MemberDetailDto.class)).list();
+    }
 
     /**
      * {@inheritDoc}
@@ -795,6 +862,30 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
         return count.intValue() != 0;
     }
 
+    @Override
+    public String getFamilyIdByPhoneNumber(String hofMobileNumber, String mobileNumber) {
+        String query = "select imt_member.family_id as \"familyId\", imt_family.state as \"familyState\" from imt_member\n" +
+                "inner join imt_family on imt_member.family_id = imt_family.family_id\n" +
+                "where (imt_member.mobile_number = :hofMobileNumber or imt_member.mobile_number = :mobileNumber) and imt_member.basic_state in ('VERIFIED','REVERIFICATION','NEW','TEMPORARY') ;";
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery<MemberInformationDto> q = session.createNativeQuery(query);
+        q.setParameter(HOF_MOBILE_NUMBER_PROPERTY, hofMobileNumber);
+        q.setParameter(MOBILE_NUMBER_PROPERTY, mobileNumber);
+        List<MemberInformationDto> memberInformationDtos = q.setResultTransformer(Transformers.aliasToBean(MemberInformationDto.class)).list();
+        if (!CollectionUtils.isEmpty(memberInformationDtos)) {
+            if (memberInformationDtos.size() > 1) {
+                List<MemberInformationDto> filteredList = memberInformationDtos.stream()
+                        .filter(member -> member.getFamilyState().equals("CFHC_FN"))
+                        .collect(Collectors.toList());
+                if (!filteredList.isEmpty()) {
+                    return filteredList.get(0).getFamilyId();
+                }
+            }
+            return memberInformationDtos.get(0).getFamilyId();
+        } else {
+            return null;
+        }
+    }
     /**
      * {@inheritDoc}
      */
@@ -832,5 +923,195 @@ public class MemberDaoImpl extends GenericDaoImpl<MemberEntity, Integer> impleme
 
         NativeQuery<Integer> sqlQuery = getCurrentSession().createNativeQuery(query);
         sqlQuery.executeUpdate();
+    }
+    @Override
+    public List<MemberDetailDto> retrieveNcdMembersForFollowupNew(Integer userId, Integer limit, Integer offset, String healthInfrastructureType, String[] status) {
+        String fromColumn = status != null && "REFERRED".equals(status[0]) ? "ref.health_infrastructure_id" : "ref.referred_from_health_infrastructure_id";
+        String orWhereClause = "";
+        String followUpDateColumns = "";
+        if (("REFERRED").equals(status[0])) { // secondary referral tab
+            orWhereClause = " ref.status = 'REFERRED' OR ((ref.status = 'SUSPECTED' OR ref.status = 'CONFIRMATION_PENDING') AND ref.health_infrastructure_id IS NOT NULL) ";
+        } else if (("CONFIRMED").equals(status[0])) { // follow up tab
+            orWhereClause = " ref.status in ('CONFIRMED','TREATMENT_STARTED') OR ((ref.status = 'SUSPECTED' OR ref.status = 'CONFIRMATION_PENDING') AND ref.health_infrastructure_id IS NULL) ";
+            followUpDateColumns = "to_char(data.follow_up_date,'DD/MM/YYYY') as \"followUpDate\",\n"+
+                    "case when cast(data.follow_up_date as date) > now() then false else true end as \"examineAllowed\",\n";
+        } else if (("TREATMENT_STARTED").equals(status[0])) { // confirmed and initiated on treatment tab
+            orWhereClause = " ref.status = 'TREATMENT_STARTED' ";
+        }
+        String query = "with data as (\n" +
+                "\tselect ref.member_id as rid,\n" +
+                "\tmax(ref.referred_on) as ref_date,\n" +
+                "\tmin(ref.follow_up_date) as follow_up_date,\n" +
+                "\tmax(hyp.id) as hyp_id,\n" +
+                "\tmax(dia.id) as dia_id,\n" +
+                "\tmax(oral.id) as oral_id,\n" +
+                "\tmax(breast.id) as breast_id,\n" +
+                "\tmax(cervical.id) as cervical_id,\n" +
+                "\tmax(cbac.id) as cbac_id\n" +
+                "\tfrom ncd_member_referral ref\n" +
+                "\tleft join ncd_member_hypertension_detail hyp on ref.member_id = hyp.member_id\n" +
+                "\tand hyp.done_by in ('MO')\n" +
+                "\tleft join ncd_member_diabetes_detail dia on ref.member_id = dia.member_id\n" +
+                "\tand dia.done_by in ('MO')\n" +
+                "\tleft join ncd_member_oral_detail oral on ref.member_id = oral.member_id\n" +
+                "\tand oral.done_by in ('MO')\n" +
+                "\tleft join ncd_member_breast_detail breast on ref.member_id = breast.member_id\n" +
+                "\tand breast.done_by in ('MO')\n" +
+                "\tleft join ncd_member_cervical_detail cervical on ref.member_id = cervical.member_id\n" +
+                "\tand cervical.done_by in ('MO')\n" +
+                "\tleft join ncd_member_cbac_detail cbac on ref.member_id = cbac.member_id\n" +
+                "\twhere ref.state = 'PENDING'\n" +
+                "\tand"+ orWhereClause +
+                "and " + fromColumn + " in (\n"+
+                "\t\tselect health_infrastrucutre_id\n" +
+                "\t\tfrom user_health_infrastructure\n" +
+                "\t\twhere user_id = " + userId +
+                "\t\tand state = 'ACTIVE'\n" +
+                "\t)\n" +
+                "\tand ref.disease_code in ('O','HT','C','B','D')\n" +
+                "\tand ref.referred_from in ('MO')\n" +
+                "\tgroup by ref.member_id\n" +
+                ")\n" +
+                "select imt_member.id as id,\n" +
+                "imt_member.unique_health_id as \"uniqueHealthId\",\n" +
+                "imt_family.family_id as \"famId\",\n" +
+                "get_location_hierarchy(case when imt_family.area_id is not null then imt_family.area_id else imt_family.location_id end) as \"locationHierarchy\",\n" +
+                "location_master.name as \"locationName\",\n" +
+                "location_master.id as \"locationId\",\n" +
+                "imt_member.mobile_number as \"mobileNumber\",\n" +
+                "data.ref_date as \"referredDate\",\n" + followUpDateColumns +
+                "concat_ws(' ',imt_member.first_name,imt_member.middle_name,imt_member.last_name) as \"name\",\n" +
+                "imt_member.dob as \"dob\",\n" +
+                "imt_member.gender as \"gender\",\n" +
+                "to_char(hyp.screening_date, 'DD/MM/YYYY') AS lastScreeningDate,\n"+
+                "cbac.hmis_id as \"hmisId\",\n" +
+                "concat_ws('<br>',\n" +
+                "\tcase when hyp.id is not null and hyp.systolic_bp is not null and hyp.diastolic_bp is not null\n" +
+                "\t\t then concat(\n" +
+                "\t\t \t'BP reading - ',\n" +
+                "\t\t \tcase when hyp.systolic_bp >= 140\n" +
+                "\t\t \t\t then concat(\n" +
+                "\t\t \t\t \t'<b style=\"color:red;\">',\n" +
+                "\t\t \t\t \tcast(hyp.systolic_bp as text),\n" +
+                "\t\t \t\t \t'</b>'\n" +
+                "\t\t \t\t )\n" +
+                "\t\t \t\t else cast(hyp.systolic_bp as text)\n" +
+                "\t\t \t\t end,\n" +
+                "\t\t \t'/',\n" +
+                "\t\t \tcase when hyp.diastolic_bp >= 90\n" +
+                "\t\t \t\t then concat(\n" +
+                "\t\t \t\t \t'<b style=\"color:red;\">',\n" +
+                "\t\t \t\t \tcast(hyp.diastolic_bp as text),\n" +
+                "\t\t \t\t \t'</b>'\n" +
+                "\t\t \t\t )\n" +
+                "\t\t \t\t else cast(hyp.diastolic_bp as text)\n" +
+                "\t\t \t\t end\n" +
+                "\t\t )\n" +
+                "\t\t else 'BP reading - Not done'\n" +
+                "\t\t end,\n" +
+                "\tcase when dia.id is not null\n" +
+                "\t\t then concat(\n" +
+                "\t\t \t'Sugar Reading - ',\n" +
+                "\t\t \tcase when dia.fasting_blood_sugar is not null\n" +
+                "\t\t \t\t then case when dia.fasting_blood_sugar >= 126\n" +
+                "\t\t \t\t \t\t   then concat(\n" +
+                "\t\t \t\t \t\t   \t\t'<b style=\"color:red;\">',\n" +
+                "\t\t \t\t \t\t   \t\tcast(dia.fasting_blood_sugar as text),\n" +
+                "\t\t \t\t \t\t   \t\t'</b>'\n" +
+                "\t\t \t\t \t\t   )\n" +
+                "\t\t \t\t \t\t   else cast(dia.fasting_blood_sugar as text)\n" +
+                "\t\t \t\t \t\t   end\n" +
+                "\t\t \t\t when dia.post_prandial_blood_sugar is not null\n" +
+                "\t\t \t\t then case when dia.post_prandial_blood_sugar >= 200\n" +
+                "\t\t \t\t \t\t   then concat(\n" +
+                "\t\t \t\t \t\t   \t\t'<b style=\"color:red;\">',\n" +
+                "\t\t \t\t \t\t   \t\tcast(dia.post_prandial_blood_sugar as text),\n" +
+                "\t\t \t\t \t\t   \t\t'</b>'\n" +
+                "\t\t \t\t \t\t   )\n" +
+                "\t\t \t\t \t\t   else cast(dia.post_prandial_blood_sugar as text)\n" +
+                "\t\t \t\t \t\t   end\n" +
+                "\t\t \t\t when dia.blood_sugar is not null\n" +
+                "\t\t \t\t then case when dia.blood_sugar >= 200\n" +
+                "\t\t \t\t \t\t   then concat(\n" +
+                "\t\t \t\t \t\t   \t\t'<b style=\"color:red;\">',\n" +
+                "\t\t \t\t \t\t   \t\tcast(dia.blood_sugar as text),\n" +
+                "\t\t \t\t \t\t   \t\t'</b>'\n" +
+                "\t\t \t\t \t\t   )\n" +
+                "\t\t \t\t \t\t   else cast(dia.blood_sugar as text)\n" +
+                "\t\t \t\t \t\t   end\n" +
+                "\t\t \t\t end\n" +
+                "\t\t )\n" +
+                "\t\t else 'Sugar reading - Not done'\n" +
+                "\t\t end,\n" +
+                "\tcase when oral.id is not null\n" +
+                "\t\t then concat(\n" +
+                "\t\t \t'Oral Cancer - ',\n" +
+                "\t\t \tcase when oral.is_suspected\n" +
+                "\t\t \t\t then concat(\n" +
+                "\t\t \t\t \t'<b style=\"color:red;\">',\n" +
+                "\t\t \t\t \t'Abnormality Detected',\n" +
+                "\t\t \t\t \t'</b>'\n" +
+                "\t\t \t\t )\n" +
+                "\t\t \t\t else 'No abnormality'\n" +
+                "\t\t \t\t end\n" +
+                "\t\t )\n" +
+                "\t\t else 'Oral Cancer - Not done'\n" +
+                "\t\t end,\n" +
+                "\tcase when breast.id is not null\n" +
+                "\t\t then concat(\n" +
+                "\t\t \t'Breast Cancer - ',\n" +
+                "\t\t \tcase when breast.is_suspected\n" +
+                "\t\t \t\t then concat(\n" +
+                "\t\t \t\t \t'<b style=\"color:red;\">',\n" +
+                "\t\t \t\t \t'Abnormality Detected',\n" +
+                "\t\t \t\t \t'</b>'\n" +
+                "\t\t \t\t )\n" +
+                "\t\t \t\t else 'No abnormality'\n" +
+                "\t\t \t\t end\n" +
+                "\t\t )\n" +
+                "\t\t else 'Breast Cancer - Not done'\n" +
+                "\t\t end,\n" +
+                "\t'Cervical Cancer - Not done'\n" +
+                ") as \"referredForDiseases\"\n" +
+                "from data\n" +
+                "left join ncd_member_hypertension_detail hyp on data.hyp_id = hyp.id and hyp.modified_on = (select max(modified_on) from ncd_member_hypertension_detail h where h.member_id = data.rid)\n" +
+                "left join ncd_member_diabetes_detail dia on data.dia_id = dia.id\n" +
+                "left join ncd_member_oral_detail oral on data.oral_id = oral.id\n" +
+                "left join ncd_member_breast_detail breast on data.breast_id = breast.id\n" +
+                "left join ncd_member_cervical_detail cervical on data.cervical_id = cervical.id\n" +
+                "left join ncd_member_cbac_detail cbac on data.cbac_id = cbac.id\n" +
+                "inner join imt_member on data.rid = imt_member.id\n" +
+                "inner join imt_family on imt_member.family_id = imt_family.family_id\n" +
+                "inner join location_master on location_master.id = case when imt_family.area_id is not null then imt_family.area_id else imt_family.location_id end\n" +
+                "order by data.follow_up_date desc\n"
+                + "limit :limit "
+                + "offset :offset\n";
+
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery<MemberDetailDto> sqlQuery = session.createNativeQuery(query);
+        sqlQuery
+                .addScalar(ID_PROPERTY, StandardBasicTypes.INTEGER)
+                .addScalar(FAMILY_ID_STR_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(UNIQUE_HEALTH_ID_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(NAME_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(LOCATION_HIERARCHY_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(LOCATION_NAME_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(MOBILE_NUMBER_PROPERTY, StandardBasicTypes.STRING)
+                .addScalar(REFERRED_FOR_DISEASES, StandardBasicTypes.STRING)
+                .addScalar(SCREENING_DATE, StandardBasicTypes.STRING)
+                .addScalar(GENDER, StandardBasicTypes.STRING);
+
+        if (limit != null) {
+            sqlQuery.setParameter(LIMIT, limit)
+                    .setParameter(OFFSET, offset);
+        } else {
+            sqlQuery.setParameter(LIMIT, limit, LongType.INSTANCE)
+                    .setParameter(OFFSET, offset, LongType.INSTANCE);
+        }
+        if (("CONFIRMED").equals(status[0])){
+            sqlQuery.addScalar(FOLLOW_UP_DATE, StandardBasicTypes.STRING)
+                    .addScalar(EXAMINE_ALLOWED, StandardBasicTypes.BOOLEAN);
+        }
+        return sqlQuery.setResultTransformer(Transformers.aliasToBean(MemberDetailDto.class)).list();
     }
 }

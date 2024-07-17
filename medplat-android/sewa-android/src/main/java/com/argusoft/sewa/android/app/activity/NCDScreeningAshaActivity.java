@@ -55,6 +55,7 @@ import org.androidannotations.annotations.UiThread;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -193,16 +194,16 @@ public class NCDScreeningAshaActivity extends MenuActivity implements View.OnCli
                 if (selectedMemberIndex != -1) {
                     selectedMember = memberDataBeans.get(selectedMemberIndex);
                     setServiceSelectionScreen();
-//                    if (selectedMember.getCbacDate() != null && new Date(selectedMember.getCbacDate()).after(UtilBean.getStartOfFinancialYear(null))) {
-//                        SewaUtil.generateToast(this, UtilBean.getMyLabel(LabelConstants.CBAC_ENTRY_FOR_SELECTED_MEMBER_IS_ALREADY_DONE));
-//                        return;
-//                    }
-//                    showProcessDialog();
-//                    Intent myIntent = new Intent(this, DynamicFormActivity_.class);
-//                    myIntent.putExtra(SewaConstants.ENTITY, FormConstants.NCD_ASHA_CBAC);
-//                    setMetadataForFormByFormType(selectedMember);
-//                    startActivityForResult(myIntent, REQUEST_CODE_FOR_NCD_SCREENING_ACTIVITY);
-//                    hideProcessDialog();
+                    if (selectedMember.getCbacDate() != null && new Date(selectedMember.getCbacDate()).after(UtilBean.getStartOfFinancialYear(null))) {
+                        SewaUtil.generateToast(this, UtilBean.getMyLabel(LabelConstants.CBAC_ENTRY_FOR_SELECTED_MEMBER_IS_ALREADY_DONE));
+                        return;
+                    }
+                    showProcessDialog();
+                    Intent myIntent = new Intent(this, DynamicFormActivity_.class);
+                    myIntent.putExtra(SewaConstants.ENTITY, FormConstants.NCD_ASHA_CBAC);
+                    setMetadataForFormByFormType(selectedMember);
+                    startActivityForResult(myIntent, REQUEST_CODE_FOR_NCD_SCREENING_ACTIVITY);
+                    hideProcessDialog();
                 } else {
                     SewaUtil.generateToast(this, UtilBean.getMyLabel(LabelConstants.MEMBER_SELECTION_REQUIRED_FROM_FAMILY_ALERT));
                 }
@@ -411,17 +412,51 @@ public class NCDScreeningAshaActivity extends MenuActivity implements View.OnCli
             bodyLayoutContainer.addView(MyStaticComponents.getListTitleView(this, LabelConstants.SELECT_A_MEMBER_FROM_LIST));
 
             for (MemberDataBean memberDataBean : memberDataBeans) {
-                if (Boolean.TRUE.equals(memberDataBean.getPersonalHistoryDone()) &&
-                        memberDataBean.getCbacDate() != null && new Date(memberDataBean.getCbacDate()).after(UtilBean.getStartOfFinancialYear(null))) {
-                    memberId = new StringBuilder(" ✔️️");
-                    memberId.append(memberDataBean.getUniqueHealthId());
+                int[] ageArray = UtilBean.calculateAgeYearMonthDay(memberDataBean.getDob());
+                int ageInYears = ageArray[0];
+                int ageInMonth = ageArray[1];
+                int ageInDays = ageArray[2];
+                Long cbacDate = memberDataBean.getCbacDate();
+                if ((ageInYears > 6) || (ageInYears == 6 && (ageInMonth > 0 || ageInDays > 0))) {
+                    Calendar oneYearBack = Calendar.getInstance();
+                    oneYearBack.add(Calendar.YEAR, -1);
+                    if (cbacDate != null && new Date(cbacDate).after(oneYearBack.getTime())) {
+                        memberId = new StringBuilder(" ✔️️");
+                        memberId.append(memberDataBean.getUniqueHealthId());
+                    } else {
+                        memberId = new StringBuilder(memberDataBean.getUniqueHealthId());
+                    }
                 } else {
-                    memberId = new StringBuilder(memberDataBean.getUniqueHealthId());
+                    Calendar fifteenDaysBack = Calendar.getInstance();
+                    fifteenDaysBack.add(Calendar.DAY_OF_YEAR, -15);
+
+                    Calendar threeMonthBack = Calendar.getInstance();
+                    threeMonthBack.add(Calendar.MONTH, -3);
+
+
+                    if (memberDataBean.getDob() != null && ageInYears == 0 && ageInMonth < 6) {
+                        if (cbacDate != null && new Date(cbacDate).after(fifteenDaysBack.getTime())) {
+                            memberId = new StringBuilder(" ✔️️");
+                            memberId.append(memberDataBean.getUniqueHealthId());
+                        } else {
+                            memberId = new StringBuilder(memberDataBean.getUniqueHealthId());
+                        }
+                    } else {
+                        if (cbacDate != null && new Date(cbacDate).after(threeMonthBack.getTime())) {
+                            memberId = new StringBuilder(" ✔️️");
+                            memberId.append(memberDataBean.getUniqueHealthId());
+                        } else {
+                            memberId = new StringBuilder(memberDataBean.getUniqueHealthId());
+                        }
+                    }
                 }
-                list.add(new ListItemDataBean(memberId.toString(), UtilBean.getMemberFullName(memberDataBean)));
+
+                list.add(new ListItemDataBean(memberId.toString(), UtilBean.getMemberFullName(memberDataBean) + " (" + UtilBean.getAgeDisplayOnGivenDate(new Date(memberDataBean.getDob()), new Date()) + ")"));
             }
-            AdapterView.OnItemClickListener onItemClickListener = (parent, view, position, id) -> selectedMemberIndex = position;
-            PagingListView listView = MyStaticComponents.getPaginatedListViewWithItem(context, list, R.layout.listview_row_with_item, onItemClickListener, null);
+            PagingListView listView = MyStaticComponents.getPaginatedListViewWithItem(
+                    context, list, R.layout.listview_row_with_item,
+                    (parent, view, position, id) -> selectedMember = memberDataBeans.get(position),
+                    null);
             bodyLayoutContainer.addView(listView);
             nextButton.setText(UtilBean.getMyLabel(GlobalTypes.EVENT_NEXT));
         } else {

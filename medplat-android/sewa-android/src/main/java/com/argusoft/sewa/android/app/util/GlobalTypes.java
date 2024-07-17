@@ -20,6 +20,8 @@ public class GlobalTypes {
     public static final String STATUS_PENDING = "P";
     public static final String STATUS_SUCCESS = "S";
     public static final String STATUS_ERROR = "E";
+    public static final String FLAVOUR_CHIP = "chip";
+
     public static final String STATUS_HANDLED_ERROR = "HE";
 
     //All the role names which are used at login time
@@ -80,6 +82,7 @@ public class GlobalTypes {
     public static final String MULTI_SELECT = "MS";
     public static final String SEARCHABLE_MULTI_SELECT = "SRMS";
     public static final String CHARDHAM_CHIP_GROUP = "CCG";
+    public static final String DISTRICT_HEALTH_INFRASTRUCTURE_COMPONENT = "DHIC";
     public static final String SINGLE_CHECK_BOX = "SCB";
     public static final String BLOOD_PRESSURE_MEASUREMENT = "BPM";
     public static final String CHARDHAM_BLOOD_PRESSURE_MEASUREMENT = "CD_BPM";

@@ -132,7 +132,93 @@ public class NcdServiceImpl implements NcdService {
         }
         return memberDataBeans;
     }
+    public List<FamilyDataBean> retrieveFamiliesForDnhddNcdScreening(String searchString, List<Integer> areaIds, long limit, long offset,
+                                                                     LinkedHashMap<String, String> qrData) {
+        List<FamilyDataBean> familyDataBeans = new LinkedList<>();
+        try {
+            Calendar instance = Calendar.getInstance();
+            instance.add(Calendar.YEAR, -30);
 
+            if (Objects.equals(qrData.get(FieldNameConstants.IS_QR_SCAN), "true")) {
+                searchString = qrData.get(FieldNameConstants.FAMILY_ID);   //Search By FamilyId
+            }
+            QueryBuilder<MemberBean, Integer> memberQB = memberBeanDao.queryBuilder();
+            Where<MemberBean, Integer> memberWhere = memberQB.where();
+            memberWhere.and(
+                    memberWhere.in(FieldNameConstants.STATE, FhsConstants.FHS_ACTIVE_CRITERIA_MEMBER_STATES),
+                    memberWhere.le(FieldNameConstants.DOB, instance.getTime())
+            );
+
+            if (searchString != null && !searchString.isEmpty()) {
+                memberWhere.and().or(
+                        memberWhere.like(FieldNameConstants.FAMILY_ID, "%" + searchString + "%"),
+                        memberWhere.like(FieldNameConstants.UNIQUE_HEALTH_ID, "%" + searchString + "%"),
+                        memberWhere.like(FieldNameConstants.FIRST_NAME, "%" + searchString + "%"),
+                        memberWhere.like(FieldNameConstants.LAST_NAME, "%" + searchString + "%"),
+                        memberWhere.like(FieldNameConstants.MOBILE_NUMBER, "%" + searchString + "%")
+                );
+            }
+
+            Where<FamilyBean, Integer> where = familyBeanDao.queryBuilder()
+                    .join(FieldNameConstants.FAMILY_ID, FieldNameConstants.FAMILY_ID, memberQB)
+                    .limit(limit).offset(offset).distinct()
+                    .orderBy(FieldNameConstants.UPDATED_ON, true)
+                    .where();
+
+            if (searchString == null) {
+                where.and(
+                        where.and(
+                                where.in(FieldNameConstants.AREA_ID, areaIds),
+                                where.in(FieldNameConstants.STATE, FhsConstants.FHS_ACTIVE_CRITERIA_FAMILY_STATES)
+                        ),
+                        where.or(
+                                where.isNull(FieldNameConstants.LAST_MEMBER_NCD_SCREENING_DATE),
+                                where.le(FieldNameConstants.LAST_MEMBER_NCD_SCREENING_DATE, UtilBean.getStartOfFinancialYear(null).getTime())
+                        )
+                );
+            } else {
+                where.and(
+                        where.in(FieldNameConstants.AREA_ID, areaIds),
+                        where.in(FieldNameConstants.STATE, FhsConstants.FHS_ACTIVE_CRITERIA_FAMILY_STATES)
+                );
+            }
+
+            List<FamilyBean> familyBeans = where.query();
+            for (FamilyBean bean : familyBeans) {
+                familyDataBeans.add(new FamilyDataBean(bean, null));
+            }
+
+        } catch (SQLException e) {
+            Log.e(getClass().getName(), null, e);
+        }
+        return familyDataBeans;
+    }
+    public List<MemberDataBean> retrieveMembersListForDnhddNcdScreening(String familyId) {
+        List<MemberDataBean> memberDataBeans = new ArrayList<>();
+
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.YEAR, -30);
+
+
+            Where<MemberBean, Integer> where = memberBeanDao.queryBuilder().where();
+
+            List<MemberBean> memberBeans = where.and(
+                    where.eq(FieldNameConstants.FAMILY_ID, familyId),
+                    where.le(FieldNameConstants.DOB, calendar.getTime()),
+                    where.in(FieldNameConstants.STATE, FhsConstants.FHS_ACTIVE_CRITERIA_MEMBER_STATES)
+            ).query();
+
+            for (MemberBean bean : memberBeans) {
+                memberDataBeans.add(new MemberDataBean(bean));
+            }
+
+        } catch (SQLException ex) {
+            Log.e(getClass().getSimpleName(), null, ex);
+            return new ArrayList<>();
+        }
+        return memberDataBeans;
+    }
     @Override
     public List<FamilyDataBean> retrieveFamiliesForNcdScreening(String searchString, List<Integer> areaIds, long limit, long offset,
                                                                 LinkedHashMap<String, String> qrData) {
@@ -584,6 +670,76 @@ public class NcdServiceImpl implements NcdService {
         }
 
         return memberDataBeans;
+    }
+
+    @Override
+    public List<MemberDataBean> retrieveMembersListForDnhddCbacAndNutritionEntry(String familyId) {
+        List<MemberDataBean> memberDataBeans = new ArrayList<>();
+
+        try {
+            Calendar calendar = Calendar.getInstance();
+
+            List<MemberBean> memberBeans = new ArrayList<>(
+                    memberBeanDao.queryBuilder().where()
+                            .eq(FieldNameConstants.FAMILY_ID, familyId)
+                            .and().le(FieldNameConstants.DOB, calendar.getTime())
+                            .and().in(FieldNameConstants.STATE, FhsConstants.FHS_ACTIVE_CRITERIA_MEMBER_STATES).query()
+            );
+
+            for (MemberBean bean : memberBeans) {
+                memberDataBeans.add(new MemberDataBean(bean));
+            }
+        } catch (SQLException ex) {
+            Log.e(getClass().getSimpleName(), null, ex);
+            return new ArrayList<>();
+        }
+        return memberDataBeans;
+    }
+    @Override
+    public List<FamilyDataBean> retrieveFamiliesForDnhddCbacAndNutritionEntry(String searchString, Integer areaId, long limit, long offset,
+                                                                              LinkedHashMap<String, String> qrData) {
+        List<FamilyDataBean> familyDataBeans = new ArrayList<>();
+        try {
+            List<FamilyBean> familyBeans;
+            Calendar calendar = Calendar.getInstance();
+
+            if (Objects.equals(qrData.get(FieldNameConstants.IS_QR_SCAN), "true")) {
+                searchString = qrData.get(FieldNameConstants.FAMILY_ID);   //Search By FamilyId
+            }
+
+            QueryBuilder<MemberBean, Integer> memberQb = memberBeanDao.queryBuilder();
+            Where<MemberBean, Integer> where = memberQb.where();
+
+            where.and(
+                    where.in(FieldNameConstants.STATE, FhsConstants.FHS_ACTIVE_CRITERIA_MEMBER_STATES),
+                    where.le(FieldNameConstants.DOB, calendar.getTime())
+            );
+
+            if (searchString != null) {
+                where.and().or(
+                        where.like(FieldNameConstants.FAMILY_ID, "%" + searchString + "%"),
+                        where.like(FieldNameConstants.UNIQUE_HEALTH_ID, "%" + searchString + "%"),
+                        where.like(FieldNameConstants.FIRST_NAME, "%" + searchString + "%"),
+                        where.like(FieldNameConstants.MOBILE_NUMBER, "%" + searchString + "%")
+                );
+            }
+
+            familyBeans = familyBeanDao.queryBuilder()
+                    .join(FieldNameConstants.FAMILY_ID, FieldNameConstants.FAMILY_ID, memberQb)
+                    .limit(limit).offset(offset).selectColumns(FieldNameConstants.FAMILY_ID).distinct()
+                    .where()
+                    .eq(FieldNameConstants.AREA_ID, areaId)
+                    .and().in(FieldNameConstants.STATE, FhsConstants.FHS_ACTIVE_CRITERIA_FAMILY_STATES).query();
+
+            ArrayList<MemberDataBean> memberDataBeans = new ArrayList<>();
+            for (FamilyBean bean : familyBeans) {
+                familyDataBeans.add(new FamilyDataBean(bean, memberDataBeans));
+            }
+        } catch (Exception ex) {
+            Log.e(getClass().getSimpleName(), null, ex);
+            return new ArrayList<>();
+        }
+        return familyDataBeans;
     }
 
     @Override

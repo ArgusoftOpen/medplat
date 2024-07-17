@@ -1,5 +1,6 @@
 package com.argusoft.sewa.android.app.util;
 
+import static com.argusoft.sewa.android.app.datastructure.SharedStructureData.context;
 import static com.argusoft.sewa.android.app.util.UtilBean.createAdapter;
 
 import android.annotation.SuppressLint;
@@ -13,6 +14,9 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
+import com.argusoft.sewa.android.app.R;
 import com.argusoft.sewa.android.app.component.MyStaticComponents;
 import com.argusoft.sewa.android.app.constants.FormulaConstants;
 import com.argusoft.sewa.android.app.constants.IdConstants;
@@ -107,7 +111,160 @@ public class FormulaUtil {
             queFormBean.setAnswer(SharedStructureData.relatedPropertyHashTable.get(queFormBean.getRelatedpropertyname()));
         }
     }
+    @SuppressLint("SetTextI18n")
+    public static void setDnhddHypertensionStatus(String[] split, QueFormBean queFormBean) {
+        QueFormBean queFormBean1 = SharedStructureData.mapIndexQuestion.get(19);
+        MaterialTextView materialTextView = (MaterialTextView) queFormBean1.getQuestionTypeView();
+        String pastStatus = SharedStructureData.relatedPropertyHashTable.get(RelatedPropertyNameConstants.IS_EARLIER_DIAGNOSED_HYPERTENSION);
 
+        if (queFormBean.getAnswer() != null) {
+            String[] subString = queFormBean.getAnswer().toString().split("-");
+            if (subString.length > 2) {
+                int systolicAns = Integer.parseInt(subString[1]);
+                int diastolicAns = Integer.parseInt(subString[2]);
+                if (pastStatus != null && pastStatus.equals("1")) {
+                    if ((systolicAns >= 140) || (diastolicAns >= 90)) {
+                        materialTextView.setText("Uncontrolled Hypertension");
+                        queFormBean1.setAnswer("uncontrolled");
+                        materialTextView.setTextColor(ContextCompat.getColor(context, R.color.pregnantWomenTextColor));
+                    } else {
+                        materialTextView.setText("Controlled Hypertension");
+                        queFormBean1.setAnswer("controlled");
+                        materialTextView.setTextColor(ContextCompat.getColor(context, R.color.hofTextColor));
+                    }
+                } else {
+                    if ((systolicAns >= 140) || (diastolicAns >= 90)) {
+                        materialTextView.setText("Suspected Hypertension");
+                        queFormBean1.setAnswer("suspected");
+                        materialTextView.setTextColor(ContextCompat.getColor(context, R.color.pregnantWomenTextColor));
+                    } else {
+                        materialTextView.setText("NORMAL");
+                        queFormBean1.setAnswer("normal");
+                        materialTextView.setTextColor(ContextCompat.getColor(context, R.color.hofTextColor));
+                    }
+                }
+            }
+        }
+    }
+    @SuppressLint("SetTextI18n")
+    public static void setDnhddDiabetesStatus(String[] split, QueFormBean queFormBean) {
+        QueFormBean queFormBean1 = SharedStructureData.mapIndexQuestion.get(15);
+        MaterialTextView materialTextView = (MaterialTextView) queFormBean1.getQuestionTypeView();
+        String pastStatus = SharedStructureData.relatedPropertyHashTable.get(RelatedPropertyNameConstants.IS_EARLIER_DIAGNOSED_DIABETES);
+
+        if (split.length == 5) {
+            String measurementType = SharedStructureData.relatedPropertyHashTable.get(split[1]);
+            if (measurementType != null) {
+                if (measurementType.equals("FBS")) {
+                    String answerString = queFormBean != null && queFormBean.getAnswer() != null ? queFormBean.getAnswer().toString() : "";
+                    String splitValue = split[2];
+                    if (!answerString.isEmpty() && !splitValue.isEmpty()) {
+                        if (Integer.parseInt(answerString) > Integer.parseInt(splitValue)) {
+                            if (pastStatus != null && pastStatus.equals("1")) {
+                                materialTextView.setText("Uncontrolled Diabetes");
+                                queFormBean1.setAnswer("uncontrolled");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "uncontrolled");
+                                }
+                            } else {
+                                materialTextView.setText("Suspected Diabetes");
+                                queFormBean1.setAnswer("suspected");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "suspected");
+                                }
+                            }
+
+                        } else {
+                            if (pastStatus != null && pastStatus.equals("1")) {
+                                materialTextView.setText("Controlled Diabetes");
+                                queFormBean1.setAnswer("controlled");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "controlled");
+                                }
+                            } else {
+                                materialTextView.setText("Normal");
+                                queFormBean1.setAnswer("normal");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "normal");
+                                }
+                            }
+                        }
+                    }
+                } else if (measurementType.equals("PP2BS")) {
+                    String answerString = queFormBean != null && queFormBean.getAnswer() != null ? queFormBean.getAnswer().toString() : "";
+                    String splitValue = split[3];
+                    if (!answerString.isEmpty() && !splitValue.isEmpty()) {
+                        if (Integer.parseInt(answerString) > Integer.parseInt(splitValue)) {
+                            if (pastStatus != null && pastStatus.equals("1")) {
+                                materialTextView.setText("Uncontrolled Diabetes");
+                                queFormBean1.setAnswer("uncontrolled");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "uncontrolled");
+                                }
+                            } else {
+                                materialTextView.setText("Suspected Diabetes");
+                                queFormBean1.setAnswer("suspected");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "suspected");
+                                }
+                            }
+
+                        } else {
+                            if (pastStatus != null && pastStatus.equals("1")) {
+                                materialTextView.setText("Controlled Diabetes");
+                                queFormBean1.setAnswer("controlled");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "controlled");
+                                }
+                            } else {
+                                materialTextView.setText("Normal");
+                                queFormBean1.setAnswer("normal");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "normal");
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    String answerString = queFormBean != null && queFormBean.getAnswer() != null ? queFormBean.getAnswer().toString() : "";
+                    String splitValue = split[4];
+                    if (!answerString.isEmpty() && !splitValue.isEmpty()) {
+                        if (Integer.parseInt(answerString) > Integer.parseInt(splitValue)) {
+                            if (pastStatus != null && pastStatus.equals("1")) {
+                                materialTextView.setText("Uncontrolled Diabetes");
+                                queFormBean1.setAnswer("uncontrolled");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "uncontrolled");
+                                }
+                            } else {
+                                materialTextView.setText("Suspected Diabetes");
+                                queFormBean1.setAnswer("suspected");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "suspected");
+                                }
+                            }
+
+                        } else {
+                            if (pastStatus != null && pastStatus.equals("1")) {
+                                materialTextView.setText("Controlled Diabetes");
+                                queFormBean1.setAnswer("controlled");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "controlled");
+                                }
+                            } else {
+                                materialTextView.setText("Normal");
+                                queFormBean1.setAnswer("normal");
+                                if (queFormBean1.getRelatedpropertyname() != null && !queFormBean1.getRelatedpropertyname().isEmpty()) {
+                                    SharedStructureData.relatedPropertyHashTable.put(queFormBean1.getRelatedpropertyname(), "normal");
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
     public static void calculateOutComeDate(QueFormBean queFormBean, boolean isValid) {
         if (queFormBean.getAnswer() != null && queFormBean.getAnswer().toString().trim().length() > 0) {
             Calendar dateSubmitted = Calendar.getInstance();

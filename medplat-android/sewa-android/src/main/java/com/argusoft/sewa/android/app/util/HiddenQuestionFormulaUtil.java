@@ -143,6 +143,24 @@ public class HiddenQuestionFormulaUtil {
             }
         }
     }
+    public static void checkIfYesInAny(String[] split, QueFormBean queFormBean, Boolean isFirstCall) {
+//        if (Boolean.TRUE.equals(isFirstCall))
+//            return;
+
+        if (split.length > 1) {
+            queFormBean.setNext(queFormBean.getOptions().get(1).getNext()); // set default false
+            queFormBean.setAnswer(queFormBean.getOptions().get(1).getKey());
+            for (int i = 1; i < split.length; i++) {
+                if (SharedStructureData.relatedPropertyHashTable.containsKey(split[i])
+                        && ("T".equalsIgnoreCase(SharedStructureData.relatedPropertyHashTable.get(split[i]))
+                        || "1".equalsIgnoreCase(SharedStructureData.relatedPropertyHashTable.get(split[i])))) {
+                    queFormBean.setNext(queFormBean.getOptions().get(0).getNext());
+                    queFormBean.setAnswer(queFormBean.getOptions().get(0).getKey());
+                    break;
+                }
+            }
+        }
+    }
 
     public static void lessThan(String[] split, QueFormBean queFormBean) {
         if (queFormBean.getLoopCounter() > 0 && !queFormBean.isIgnoreLoop()) {
@@ -312,6 +330,55 @@ public class HiddenQuestionFormulaUtil {
                 queFormBean.setNext(UtilBean.getOptionsOrDataMap(queFormBean, false).get(1).getNext());
                 queFormBean.setAnswer(queFormBean.getOptions().get(1).getKey());
             }
+        }
+    }
+    public static void setReferralReason(String[] split) {
+
+        String hypStatus = SharedStructureData.relatedPropertyHashTable.get(split[1]);
+        String diabetesStatus = SharedStructureData.relatedPropertyHashTable.get(split[2]);
+        String mentalObservations = SharedStructureData.relatedPropertyHashTable.get(split[3]);
+        String bpValue1 = SharedStructureData.relatedPropertyHashTable.get(split[4]);
+        String bpValue2 = SharedStructureData.relatedPropertyHashTable.get(split[5]);
+        int sugarValue = Integer.parseInt(SharedStructureData.relatedPropertyHashTable.get(split[7]));
+
+        int systolicBp;
+        int diastolicBp;
+        if (bpValue2 != null) {
+            String[] substring = bpValue2.split("-");
+            systolicBp = Integer.parseInt(substring[1]);
+            diastolicBp = Integer.parseInt(substring[2]);
+        } else {
+            String[] substring = bpValue1.split("-");
+            systolicBp = Integer.parseInt(substring[1]);
+            diastolicBp = Integer.parseInt(substring[2]);
+        }
+
+        StringBuilder riskFound = new StringBuilder();
+        if (hypStatus != null && !hypStatus.isEmpty() && (hypStatus.equalsIgnoreCase("suspected")
+                || hypStatus.equalsIgnoreCase("uncontrolled"))) {
+            riskFound.append(UtilBean.getMyLabel("Suspected Hypertension  (BP : " + systolicBp + "/" + diastolicBp + ")"));
+            riskFound.append("\n");
+        }
+        if (diabetesStatus != null && !diabetesStatus.isEmpty() && (diabetesStatus.equalsIgnoreCase("suspected")
+                || diabetesStatus.equalsIgnoreCase("uncontrolled"))) {
+            riskFound.append(UtilBean.getMyLabel("Suspected Diabetes (Sugar Value : " + sugarValue + ")"));
+            riskFound.append("\n");
+        }
+        if (mentalObservations != null && !mentalObservations.isEmpty()
+                && !mentalObservations.equalsIgnoreCase("NONE")) {
+            riskFound.append(UtilBean.getMyLabel("Mental Health issues"));
+            riskFound.append("\n");
+        }
+
+        String referralReason = riskFound.toString().length() > 0 ? riskFound.toString() : UtilBean.getMyLabel(RchConstants.NO_RISK_FOUND);
+
+        QueFormBean displayReasonQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[8]));
+        if (displayReasonQue != null) {
+            TextView textView = (TextView) displayReasonQue.getQuestionTypeView();
+            if (textView != null) {
+                textView.setText(referralReason);
+            }
+            displayReasonQue.setAnswer(referralReason);
         }
     }
 
@@ -1842,6 +1909,113 @@ public class HiddenQuestionFormulaUtil {
         updateMemberCountSetTillLastLoopCount(loopCounter, RelatedPropertyNameConstants.LOOP_COUNTER_FOR_WIFE_MEMBERS, sharedPreferences, edit);
         updateMemberCountSetTillLastLoopCount(loopCounter, RelatedPropertyNameConstants.LOOP_COUNTER_FOR_MALE_MARRIED_MEMBERS, sharedPreferences, edit);
         edit.apply();
+    }
+
+    public static void setCancerReferralReason(String[] split) {
+
+        QueFormBean lumpInBreastQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[1]));
+        QueFormBean erosionOfNippleQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[2]));
+        QueFormBean changeInBreastSizeQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[3]));
+
+        QueFormBean changeInNippleQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[4]));
+        QueFormBean nippleRetractionQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[5]));
+        QueFormBean nippleDischargeQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[6]));
+        QueFormBean rednessOfSkinQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[7]));
+        QueFormBean whiteRedPatchQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[8]));
+
+        QueFormBean ulceration3weeksQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[9]));
+
+        QueFormBean recentOriginGrowthQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[10]));
+
+        QueFormBean changeInVoiceQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[11]));
+
+        QueFormBean spicyFoodQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[12]));
+
+        QueFormBean openingMouthQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[13]));
+
+        QueFormBean displayReasonQue = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[14]));
+        QueFormBean cancerTypeQueFemale = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[15]));
+        QueFormBean cancerTypeQueMale = SharedStructureData.mapIndexQuestion.get(Integer.parseInt(split[16]));
+        String gender = SharedStructureData.relatedPropertyHashTable.get("gender");
+
+        StringBuilder riskFound = new StringBuilder();
+
+        String cancerTypeAnswer = null;
+        if (gender != null && (gender.equalsIgnoreCase("F") || gender.equalsIgnoreCase("FEMALE")) && cancerTypeQueFemale != null) {
+            cancerTypeAnswer = cancerTypeQueFemale.getAnswer().toString();
+        } else {
+            cancerTypeAnswer = cancerTypeQueMale != null ? cancerTypeQueMale.getAnswer().toString() : null;
+        }
+
+        // related to breast cancer
+        if (cancerTypeAnswer != null && cancerTypeAnswer.contains("BREAST")) {
+            if (lumpInBreastQue != null && lumpInBreastQue.getAnswer() != null && (lumpInBreastQue.getAnswer().equals("1") || lumpInBreastQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Lump in breast"));
+                riskFound.append('\n');
+            }
+            if (erosionOfNippleQue != null && erosionOfNippleQue.getAnswer() != null && (erosionOfNippleQue.getAnswer().equals("1") || erosionOfNippleQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Erosion of nipple"));
+                riskFound.append('\n');
+            }
+            if (changeInBreastSizeQue != null && changeInBreastSizeQue.getAnswer() != null && (changeInBreastSizeQue.getAnswer().equals("1") || changeInBreastSizeQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Change in breast size"));
+                riskFound.append('\n');
+            }
+            if (changeInNippleQue != null && changeInNippleQue.getAnswer() != null && (changeInNippleQue.getAnswer().equals("1") || changeInNippleQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Change in shape or position of nipple"));
+                riskFound.append('\n');
+            }
+            if (nippleRetractionQue != null && nippleRetractionQue.getAnswer() != null && (nippleRetractionQue.getAnswer().equals("1") || nippleRetractionQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Retraction of nipple"));
+                riskFound.append('\n');
+            }
+            if (nippleDischargeQue != null && nippleDischargeQue.getAnswer() != null && (nippleDischargeQue.getAnswer().equals("1") || nippleDischargeQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Discharge from nipple"));
+                riskFound.append('\n');
+            }
+            if (rednessOfSkinQue != null && rednessOfSkinQue.getAnswer() != null && (rednessOfSkinQue.getAnswer().equals("1") || rednessOfSkinQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Redness of skin over breast"));
+                riskFound.append('\n');
+            }
+        }
+
+        //related to oral cancer
+        if (cancerTypeAnswer != null && cancerTypeAnswer.contains("ORAL")) {
+            if (whiteRedPatchQue != null && whiteRedPatchQue.getAnswer() != null && (whiteRedPatchQue.getAnswer().equals("1") || whiteRedPatchQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("White or red patch in cavity"));
+                riskFound.append('\n');
+            }
+            if (ulceration3weeksQue != null && ulceration3weeksQue.getAnswer() != null && (ulceration3weeksQue.getAnswer().equals("1") || ulceration3weeksQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Ulceration in mouth"));
+                riskFound.append('\n');
+            }
+            if (recentOriginGrowthQue != null && recentOriginGrowthQue.getAnswer() != null && (recentOriginGrowthQue.getAnswer().equals("1") || recentOriginGrowthQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Growth of recent origin"));
+                riskFound.append('\n');
+            }
+            if (changeInVoiceQue != null && changeInVoiceQue.getAnswer() != null && (changeInVoiceQue.getAnswer().equals("1") || changeInVoiceQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Change in voice"));
+                riskFound.append('\n');
+            }
+            if (spicyFoodQue != null && spicyFoodQue.getAnswer() != null && (spicyFoodQue.getAnswer().equals("1") || spicyFoodQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Difficulty in having spicy food"));
+                riskFound.append('\n');
+            }
+            if (openingMouthQue != null && openingMouthQue.getAnswer() != null && (openingMouthQue.getAnswer().equals("1") || openingMouthQue.getAnswer().equals("T"))) {
+                riskFound.append(UtilBean.getMyLabel("Difficulty in opening mouth"));
+                riskFound.append('\n');
+            }
+        }
+
+        String referralReason = riskFound.toString().length() > 0 ? riskFound.toString() : UtilBean.getMyLabel(RchConstants.NO_RISK_FOUND);
+
+        if (displayReasonQue != null) {
+            TextView textView = (TextView) displayReasonQue.getQuestionTypeView();
+            if (textView != null) {
+                textView.setText(referralReason);
+            }
+            displayReasonQue.setAnswer(referralReason);
+        }
     }
 
     public static void updateMemberCountSetTillLastLoopCount(int loopCount, String key, SharedPreferences sharedPreferences, SharedPreferences.Editor editor) {

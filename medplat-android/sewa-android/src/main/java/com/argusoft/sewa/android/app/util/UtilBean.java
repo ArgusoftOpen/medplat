@@ -383,6 +383,23 @@ public class UtilBean {
         }
         return null;
     }
+    public static String getBmiCategoryFromValue(Float bmi) {
+        String bmiCategory;
+        if (bmi < 18.5) {
+            bmiCategory = "Under Weight";
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            bmiCategory = "Normal";
+        } else if (bmi >= 25 && bmi <= 29.9) {
+            bmiCategory = "Pre-Obesity";
+        } else if (bmi >= 30 && bmi <= 34.9) {
+            bmiCategory = "Obesity class I";
+        } else if (bmi >= 35 && bmi <= 39.9) {
+            bmiCategory = "Obesity class II";
+        } else {
+            bmiCategory = "Obesity class III";
+        }
+        return bmiCategory;
+    }
 
     public static void addLBWorAsphyxiaIntoLICForFirstPNC(String loop) {
         String tempDataObj = SharedStructureData.relatedPropertyHashTable.get(RelatedPropertyNameConstants.IS_CHILD_FIRST_PNC_DONE);
@@ -847,6 +864,9 @@ public class UtilBean {
             entityFullFormNames.put(FormConstants.IDSP_MEMBER_2, "Member Surveillance");
             entityFullFormNames.put(FormConstants.IDSP_FAMILY_2, "Family Surveillance");
             entityFullFormNames.put(FormConstants.IDSP_NEW_FAMILY, "Surveillance New Family");
+            entityFullFormNames.put(FormConstants.DNHDD_NCD_CBAC_AND_NUTRITION, "CBAC Screening and Nutrition");
+            entityFullFormNames.put(FormConstants.DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH, "Hypertension,Diabetes and Mental Health");
+            entityFullFormNames.put(FormConstants.CANCER_SCREENING, "Cancer Screening");
             entityFullFormNames.put(FormConstants.OFFLINE_ABHA_NUMBER_CREATIONS, "Offline ABHA Number Creation");
             entityFullFormNames.put(NotificationConstants.NOTIFICATION_NCD_HOME_VISIT, "NCD Home Visit");
             entityFullFormNames.put(NotificationConstants.NOTIFICATION_NCD_CLINIC_VISIT, "NCD Clinic Visit");

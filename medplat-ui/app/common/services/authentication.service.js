@@ -113,7 +113,7 @@
                 // };
                 $http({
                         method: 'POST',
-                        url: APP_CONFIG.serverPath + "/oauth/token?grant_type=password&username="+AESEncryptionService.encrypt(userName)+"&password="+AESEncryptionService.encrypt(password)+"&loginas=&client_id="+clientId,
+                        url: APP_CONFIG.serverPath + "/oauth/token?grant_type=password&username="+encodeURIComponent(AESEncryptionService.encrypt(userName))+"&password="+encodeURIComponent(AESEncryptionService.encrypt(password))+"&loginas=&client_id="+clientId,
                         headers: {
                             "Authorization": "Basic " + encodedClienSecret,
                             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'

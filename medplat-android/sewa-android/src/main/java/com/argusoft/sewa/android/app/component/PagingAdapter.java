@@ -90,6 +90,35 @@ public class PagingAdapter<T> extends ArrayAdapter<T> {
                 MaterialTextView text = linearLayout.findViewById(R.id.lists_text);
                 text.setText(UtilBean.getMyLabel(item.getText()));
                 break;
+            case R.layout.listview_row_family_list:
+                item = (ListItemDataBean) items.get(position);
+                MaterialTextView familyId = linearLayout.findViewById(R.id.familyId);
+                familyId.setText(item.getFamilyId());
+                MaterialTextView memberName = linearLayout.findViewById(R.id.memberName);
+                memberName.setText(item.getMemberName());
+                switch (item.getColor()) {
+                    case "RED":
+                        familyId.setTextColor(ContextCompat.getColor(getContext(), R.color.pregnantWomenTextColor));
+                        memberName.setTextColor(ContextCompat.getColor(getContext(), R.color.pregnantWomenTextColor));
+                        break;
+                    case "GREEN":
+                        familyId.setTextColor(ContextCompat.getColor(getContext(), R.color.hofTextColor));
+                        memberName.setTextColor(ContextCompat.getColor(getContext(), R.color.hofTextColor));
+                        break;
+                    case "ORANGE":
+                        familyId.setTextColor(ContextCompat.getColor(getContext(), R.color.orange));
+                        memberName.setTextColor(ContextCompat.getColor(getContext(), R.color.orange));
+                        break;
+                    case "BLUE":
+                        familyId.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                        memberName.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                        break;
+                    case "NORMAL":
+                        familyId.setTextColor(ContextCompat.getColor(getContext(), R.color.textColor));
+                        memberName.setTextColor(ContextCompat.getColor(getContext(), R.color.textColor));
+                        break;
+                }
+                break;
 
             case R.layout.listview_row_with_item:
                 item = (ListItemDataBean) items.get(position);

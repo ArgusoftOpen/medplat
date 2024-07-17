@@ -97,7 +97,7 @@ public interface ApiService {
     @POST("api/mobile/getfamiliesbylocation")
     Call<List<FamilyDataBean>> getFamiliesByLocationId(@Body LoginRequestParamDetailDataBean loginRequestParamDetailDataBean);
 
-    @POST("api/mobile/requestParam")
+    @POST("api/mobile/techogettokenvalidity")
     Call<Boolean> getTokenValidity(@Body MobileRequestParamDto mobileRequestParamDto);
 
     @POST("api/mobile/techorevalidatetoken")

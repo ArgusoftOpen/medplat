@@ -1372,7 +1372,7 @@ public class FormMetaDataUtil {
     }
 
     public void setMetaDataForNCDForms(MemberDataBean memberDataBean, FamilyDataBean familyDataBean, SharedPreferences sharedPref) {
-
+        SimpleDateFormat sdf = new SimpleDateFormat(GlobalTypes.DATE_DD_MM_YYYY_FORMAT, Locale.getDefault());
         SharedStructureData.relatedPropertyHashTable.clear();
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.clear().apply();
@@ -1385,6 +1385,10 @@ public class FormMetaDataUtil {
                 MemberAdditionalInfoDataBean memberAdditionalInfo = gson.fromJson(memberBean.getAdditionalInfo(), MemberAdditionalInfoDataBean.class);
                 if (memberAdditionalInfo.getLastServiceLongDate() != null && memberAdditionalInfo.getLastServiceLongDate() > 0) {
                     SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.LAST_SERVICE_DATE, memberAdditionalInfo.getLastServiceLongDate().toString());
+                }
+                if (memberAdditionalInfo.getBmi() != null) {
+                    String bmiStatus = UtilBean.getBmiCategoryFromValue(memberAdditionalInfo.getBmi());
+                    SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.BMI_CATEGORY, bmiStatus);
                 }
             }
 
@@ -1430,7 +1434,9 @@ public class FormMetaDataUtil {
                     SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.AGE_DISPLAY, tmpDataObj);
                 }
             }
-
+            if (memberBean.getDob() != null) {
+                SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.DOB_DISPLAY, sdf.format(memberBean.getDob()));
+            }
             if (memberDataBean.getCbacDate() != null && new Date(memberDataBean.getCbacDate()).after(UtilBean.getStartOfFinancialYear(null))) {
                 SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.CBAC_DONE, "1");
             }
@@ -1446,7 +1452,9 @@ public class FormMetaDataUtil {
             if (memberDataBean.getLmpDate() != null) {
                 SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.LMP_DATE, String.valueOf(memberBean.getLmpDate().getTime()));
             }
-
+            if (memberBean.getHmisId() != null) {
+                SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.HMIS_ID, memberBean.getHmisId().toString());
+            }
             if (memberBean.getCbacScore() != null) {
                 SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.CBAC_SCORE, memberBean.getCbacScore().toString());
             }
@@ -1541,6 +1549,15 @@ public class FormMetaDataUtil {
 
             if (familyDataBean.getAnnualIncome() != null) {
                 SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.ANNUAL_INCOME, familyDataBean.getAnnualIncome());
+            }
+            if (familyDataBean.getHouseNumber() != null) {
+                SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.HOUSE_NUMBER, familyDataBean.getHouseNumber());
+            }
+            if (familyDataBean.getHouseNumber() != null) {
+                SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.ADDRESS_1, familyDataBean.getAddress1());
+            }
+            if (familyDataBean.getHouseNumber() != null) {
+                SharedStructureData.relatedPropertyHashTable.put(RelatedPropertyNameConstants.ADDRESS_2, familyDataBean.getAddress2());
             }
         }
     }

@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
  * <p>
  * Implementation of methods define in techo notification master dao.
  * </p>
@@ -206,4 +205,63 @@ public class TechoNotificationMasterDaoImpl extends GenericDaoImpl<TechoNotifica
         criteriaQuery.select(root).where(criteriaBuilder.and(memberIdEqual, stateEqual, notificationIdIn));
         return session.createQuery(criteriaQuery).getResultList();
     }
+
+    @Override
+    public void markOlderNotificationAsMissed(Integer memberId, Integer notificationTypeId) {
+        String query = "update techo_notification_master \n" +
+                "set modified_on = now(), state = 'MISSED'\n" +
+                "where notification_type_id = :notificationTypeId\n" +
+                "and member_id = :memberId and state = 'PENDING';";
+
+        NativeQuery<Integer> nativeQuery = getCurrentSession().createNativeQuery(query);
+        nativeQuery.setParameter("memberId", memberId);
+        nativeQuery.setParameter("notificationTypeId", notificationTypeId);
+        nativeQuery.executeUpdate();
+    }
+
+    public String getNotificationTypeCodeFromTypeId(Integer notificationTypeId) {
+        String query = "select code from notification_type_master where id = :notificationTypeId";
+
+        NativeQuery<String> nativeQuery = getCurrentSession().createNativeQuery(query);
+        nativeQuery.setParameter("notificationTypeId", notificationTypeId);
+        return nativeQuery.uniqueResult();
+    }
+
+    @Override
+    public void markOlderNotificationStateAsAdmitted(Integer memberId, Integer userId) {
+        String query = "update techo_notification_master \n " +
+                "set modified_on = now() , state = 'MARK_AS_ADMITTED', action_by = :userId, modified_by = :userId \n" +
+                "where member_id = :memberId and state = 'PENDING' ;";
+
+        NativeQuery<Integer> nativeQuery = getCurrentSession().createNativeQuery(query);
+        nativeQuery.setParameter("memberId", memberId);
+        nativeQuery.setParameter("userId", userId);
+        nativeQuery.executeUpdate();
+    }
+
+    @Override
+    public void markNotificationStateAsDischarged(Integer memberId, Integer userId) {
+        String query = "update techo_notification_master \n " +
+                "set modified_on = now() , state = 'DISCHARGED', action_by = :userId, modified_by = :userId \n" +
+                "where member_id = :memberId and state = 'MARK_AS_ADMITTED' ;";
+
+        NativeQuery<Integer> nativeQuery = getCurrentSession().createNativeQuery(query);
+        nativeQuery.setParameter("memberId", memberId);
+        nativeQuery.setParameter("userId", userId);
+        nativeQuery.executeUpdate();
+    }
+
+    @Override
+    public void markNotificationAsCompletedByType(Integer memberId, Integer notificationTypeId) {
+        String query = "update techo_notification_master \n" +
+                "set modified_on = now(), state = 'COMPLETED'\n" +
+                "where notification_type_id = :notificationTypeId\n" +
+                "and member_id = :memberId and state = 'PENDING';";
+
+        NativeQuery<Integer> nativeQuery = getCurrentSession().createNativeQuery(query);
+        nativeQuery.setParameter("memberId", memberId);
+        nativeQuery.setParameter("notificationTypeId", notificationTypeId);
+        nativeQuery.executeUpdate();
+    }
+
 }

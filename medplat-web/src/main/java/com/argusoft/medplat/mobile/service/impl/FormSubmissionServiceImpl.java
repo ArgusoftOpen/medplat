@@ -23,6 +23,7 @@ import com.argusoft.medplat.mobile.service.FormSubmissionService;
 import com.argusoft.medplat.mobile.service.GenericSessionUtilService;
 import com.argusoft.medplat.mobile.service.MobileFhsService;
 import com.argusoft.medplat.mobile.service.MobileUtilService;
+import com.argusoft.medplat.ncddnhdd.service.NcdDnhddService;
 import com.argusoft.medplat.notification.model.TechoNotificationMaster;
 import com.argusoft.medplat.notification.service.TechoNotificationService;
 import com.argusoft.medplat.nutrition.service.ChildCmtcNrcScreeningService;
@@ -64,6 +65,8 @@ public class FormSubmissionServiceImpl extends GenericSessionUtilService impleme
     private UserTokenDao userTokenDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private NcdDnhddService ncdDnhddService;
     @Autowired
     private EmailUtil emailUtil;
     @Autowired
@@ -562,11 +565,11 @@ public class FormSubmissionServiceImpl extends GenericSessionUtilService impleme
                     parsedRecordBean.setMessage(returnMap.get(message));
                 }
                 return createdInstanceId;
-            case MobileConstantUtil.AADHAR_UPDATION:
-                AadharUpdationBean aadharUpdationBean = new GsonBuilder()
-                        .registerTypeAdapter(Date.class, MobileConstantUtil.jsonDateDeserializerStringFormat)
-                        .create().fromJson(parsedRecordBean.getAnswerRecord(), AadharUpdationBean.class);
-                return mobileFhsService.saveAadharUpdateDetails(aadharUpdationBean);
+//            case MobileConstantUtil.AADHAR_UPDATION:
+//                AadharUpdationBean aadharUpdationBean = new GsonBuilder()
+//                        .registerTypeAdapter(Date.class, MobileConstantUtil.jsonDateDeserializerStringFormat)
+//                        .create().fromJson(parsedRecordBean.getAnswerRecord(), AadharUpdationBean.class);
+//                return mobileFhsService.saveAadharUpdateDetails(aadharUpdationBean);
             case MobileConstantUtil.FHSR_PHONE_UPDATE:
                 return rchOtherFormsService.storeFhsrPhoneVerificationForm(user, keyAndAnswerMap);
 
@@ -718,6 +721,13 @@ public class FormSubmissionServiceImpl extends GenericSessionUtilService impleme
 //                        .create().fromJson(parsedRecordBean.getAnswerRecord(), MemberEcgDto.class);
 //                return ncdService.storeEcgDetails(ecgDto);
 
+            //DNHDD NCD forms
+            case SystemConstantUtil.DNHDD_NCD_CBAC_AND_NUTRITION:
+                return ncdDnhddService.storeCbacAndNutritionForm(parsedRecordBean, keyAndAnswerMap, user);
+            case MobileConstantUtil.DNHDD_NCD_HYPERTENSION_DIABETES_AND_MENTAL_HEALTH:
+                return ncdDnhddService.storeHypertensionDiabetesAndMentalHealthForm(parsedRecordBean, keyAndAnswerMap, user);
+            case MobileConstantUtil.CANCER_SCREENING:
+                return ncdDnhddService.storeCancerForm(parsedRecordBean, keyAndAnswerMap, user);
 
 //            //NPCB Forms
 //            case MobileConstantUtil.ASHA_NPCB_VISIT:

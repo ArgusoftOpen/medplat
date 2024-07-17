@@ -17,11 +17,11 @@ public interface LocationMasterService {
 
     LocationBean getLocationBeanByActualId(String actualId);
 
-    LocationMasterBean getLocationMasterBeanByActualId(String actualId);
-
     String getLocationTypeNameByType(String type);
 
     List<LocationMasterBean> retrieveLocationMastersAssignedToUser();
-
+    List<Integer> getLocationIdsInsideDistrictOfUser();
     List<LocationMasterBean> getLocationWithNoParent();
+    LocationMasterBean getLocationMasterBeanByActualId(Integer actualId);
+
 }

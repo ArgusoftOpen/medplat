@@ -1,0 +1,871 @@
+<style>
+    .outer-tabset>.nav.nav-tabs {
+        background: #ffffff;
+        border: 1px solid #dfdfdf;
+        padding-bottom: 1px;
+    }
+
+    .table-heading {
+        background-color: rgb(241, 241, 241);
+        position: relative;
+        top: -1px;
+    }
+
+    .mb-8 {
+        margin-bottom: 8px;
+    }
+
+    .no-data-placeholder {
+        padding: 25px 0px;
+    }
+    .information {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    margin-top: 80px;
+    color: black;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    z-index: 1000;
+}
+
+.fa-info-circle:hover + .information {
+    display: inline;
+   
+}
+
+</style>
+<script>
+    $(".header-fixed").tableHeadFixer();
+</script>
+<!-- All member listing tabs -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="float-right">
+                <button class="btn btn-success" ng-if="mlisting.canRegister" ng-click="mlisting.onRegister()">Register
+                    New Patient</button>
+                <button class="btn btn-primary" ng-click="mlisting.downloadExcel()">Download Excel</button>
+            </div>
+            <div class="cst-tab">
+                <uib-tabset active='mlisting.selectedTab'>
+                    <!-- Referred Cases -->
+                    <uib-tab  index=0 ng-click="mlisting.retrieveMembers(false, true)">
+                        <uib-tab-heading>
+                            <span style="display: flex; align-items: center;">
+                                <span>Referred Cases</span>
+                                <i   class="fa fa-info-circle" style="margin-left: 15px;"
+                              
+
+                                ></i>
+                                <div class="information">              
+                                    Referred Cases contains the list of members who have been referred by the ANM/CHO/MPW during NCD Screening.
+                              </div>
+                            </span>
+                        </uib-tab-heading>
+                      
+                        <div class="cst-table table-responsive table-set-height" id="member-scroll">
+                            <table aria-describedby="Referred Cases"
+                                class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="serial-no" class="table-heading">Sr. No.</th>
+                                        <th id="patient-name" class="table-heading">
+                                            Patient Name
+                                        </th>
+                                        <th id="family-id" class="table-heading">
+                                            Family Id
+                                        </th>
+                                        <th id="location" class="table-heading">Address</th>
+                                        <th id="mobileNumber">Contact Number</th>
+                                        <th id="diseaseSummary">Field findings</th>
+                                        <th id="hmisId">HMIS ID</th>
+                                        <th id="actions" ng-if="mlisting.rights.canExamine" class="table-heading">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody infinite-scroll-distance="0"
+                                    infinite-scroll='mlisting.retrieveMembersOnScroll(true, true)'
+                                    infinite-scroll-container='"#member-scroll"'
+                                    infinite-scroll-immediate-check="false">
+                                    <tr ng-repeat="member in mlisting.members">
+                                        <td class="text-center">{{ $index + 1 }}</td>
+                                        <td>{{ member.name + ' ('+ member.uniqueHealthId +')' | emptylabel }}</td>
+                                        <td ng-bind="member.familyId | emptylabel"></td>
+                                        <td ng-bind="member.locationName | emptylabel"></td>
+                                        <td ng-bind-html="member.mobileNumber | emptylabel"></td>
+                                        <td ng-bind-html="member.diseaseSummary | emptylabel"></td>
+                                        <td ng-bind-html="member.hmisId | emptylabel"></td>
+                                        <td class="action-cell" ng-if="mlisting.rights.canExamine">
+                                            <button
+                                                ng-click="mlisting.openInNewTab(member.id, mlisting.type)"
+                                                class="btn btn-primary">Examine</button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="!mlisting.members || mlisting.members.length==0">
+                                        <td colspan="8">No Members Referred </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <!-- Confirmed and initiated on treatment -->
+                    <uib-tab  index=1 ng-click="mlisting.retrieveMembersForFollowup(false, ['TREATMENT_STARTED'])">
+                        <uib-tab-heading>
+                            <span style="display: flex; align-items: center;">
+                                <span>Confirmed and initiated on treatment</span>
+                                <i   class="fa fa-info-circle" style="margin-left: 15px;" ></i>
+                                <div class="information">              
+                                    Confirmed and Initiated Treatment contains the list of patients examined by the PHC Medical Officer, confirmed for a specific condition, and started on treatment
+                              </div>
+                            </span>
+                        </uib-tab-heading>
+                        <div class="cst-table table-responsive table-set-height" id="member-scroll1">
+                            <table aria-describedby="Confirmed and initiated on treatment"
+                                class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="serial-no" class="table-heading">Sr. No.</th>
+                                        <th id="patient-name" class="table-heading">
+                                            Patient Name
+                                        </th>
+                                        <th id="family-id" class="table-heading">
+                                            Family Id
+                                        </th>
+                                        <th id="location" class="table-heading">Address</th>
+                                        <th id="mobileNumber">Contact No.</th>
+                                        <th id="diseaseSummary">Field findings</th>
+                                        <th id="actions" ng-if="mlisting.rights.canExamine" class="table-heading">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody infinite-scroll-distance="0"
+                                    infinite-scroll="mlisting.retrieveMembersForFollowup(true, ['TREATMENT_STARTED'])"
+                                    infinite-scroll-container='"#member-scroll1"'
+                                    infinite-scroll-immediate-check="false">
+                                    <tr ng-repeat="member in mlisting.membersForFollowup">
+                                        <td class="text-center">{{ $index + 1 }}</td>
+                                        <td>{{ member.name + ' ('+ member.uniqueHealthId +')' | emptylabel }}</td>
+                                        <td ng-bind="member.famId | emptylabel"></td>
+                                        <td ng-bind="member.locationName | emptylabel"></td>
+                                        <td ng-bind-html="member.mobileNumber | emptylabel"></td>
+                                        <td ng-bind-html="member.diseaseSummary | emptylabel"></td>
+                                        <td class="action-cell" ng-if="mlisting.rights.canExamine">
+                                            <button
+                                                ng-click="mlisting.openInNewTab(member.id, mlisting.type)"
+                                                class="btn btn-primary">Examine</button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="!mlisting.membersForFollowup || mlisting.membersForFollowup.length==0">
+                                        <td colspan="8">No Members Referred </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <!-- Follow Up Case -->
+                    <uib-tab  index=2 ng-click="mlisting.retrieveMembersForFollowup(false, ['CONFIRMED'])">
+                        <uib-tab-heading>
+                            <span style="display: flex; align-items: center;">
+                                <span>Follow Up Case</span>
+                                <i   class="fa fa-info-circle" style="margin-left: 15px;" ></i>
+                                <div class="information">              
+                                    Follow-Up Cases contains the list of patients confirmed for a condition, started on treatment, and flagged for follow-up by the PHC Medical Officer                              </div>
+                            </span>
+                        </uib-tab-heading>
+                        <div class="cst-table table-responsive table-set-height" id="member-scroll2">
+                            <table aria-describedby="member list"
+                                class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="serial-no" class="table-heading">Sr. No.</th>
+                                        <th id="patient-name" class="table-heading">
+                                            Patient Name
+                                        </th>
+                                        <th id="family-id" class="table-heading">
+                                            Family Id
+                                        </th>
+                                        <th id="location" class="table-heading">Address</th>
+                                        <th id="mobileNumber" class="table-heading">Contact No.</th>
+                                        <th id="followUpDate" class="table-heading">Follow Up Date</th>
+                                        <th id="diseaseSummary">Field findings</th>
+                                        <th id="lastScreeningDate">Last Screening Date</th>
+                                        <th id="actions" class="table-heading">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody infinite-scroll-distance="0"
+                                    infinite-scroll="mlisting.retrieveMembersForFollowupOnScroll(true, ['CONFIRMED'])"
+                                    infinite-scroll-container='"#member-scroll2"'
+                                    infinite-scroll-immediate-check="false">
+                                    <tr ng-repeat="member in mlisting.membersForFollowup">
+                                        <td class="text-center">{{ $index + 1 }}</td>
+                                        <td> {{member.name + '(' + member.uniqueHealthId + ')' | emptylabel }} </td>
+                                        <td ng-bind="member.famId | emptylabel"></td>
+                                        <td ng-bind="member.locationName | emptylabel"></td>
+                                        <td ng-bind="member.mobileNumber | emptylabel"></td>
+                                        <td ng-bind="member.followUpDate | emptylabel"></td>
+                                        <td ng-bind-html="member.diseaseSummary|emptylabel"></td>
+                                        <td ng-bind="member.lastScreeningDate"></td>
+                                        <td class="action-cell">
+                                            <button
+                                                ng-click="mlisting.openInNewTab(member.id, mlisting.type)"
+                                                class="btn btn-primary" ng-disabled="!member.examineAllowed">
+                                                Examine
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        ng-if="!mlisting.membersForFollowup || mlisting.membersForFollowup.length==0">
+                                        <td colspan="8">No Members Available</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <!-- Secondary Referral -->
+                    <uib-tab  index=3 ng-click="mlisting.retrieveMembersForFollowup(false, ['REFERRED'])">
+                        <uib-tab-heading>
+                            <span style="display: flex; align-items: center;">
+                                <span>Secondary Referral</span>
+                                <i   class="fa fa-info-circle" style="margin-left: 15px;" ></i>
+                                <div class="information">              
+                                    Secondary Referral contains the list of patients examined by the PHC Medical Officer who require further management and are referred to a tertiary or higher center.
+                                                               </div>
+                            
+                            </span>
+                        </uib-tab-heading>
+                        <div class="cst-table table-responsive table-set-height" id="member-scroll3">
+                            <table aria-describedby="member list"
+                                class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="serial-no" class="table-heading">Sr. No.</th>
+                                        <th id="patient-name" class="table-heading">
+                                            Patient Name
+                                        </th>
+                                        <th id="family-id" class="table-heading">
+                                            Family Id
+                                        </th>
+                                        <th id="location" class="table-heading">Address</th>
+                                        <th id="mobileNumber">Contact Number</th>
+                                        <th id="diseaseSummary">Field findings</th>
+                                        <th id="actions" ng-if="mlisting.rights.canExamine" class="table-heading">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody infinite-scroll-distance="0"
+                                    infinite-scroll="mlisting.retrieveMembersForFollowupOnScroll(true, ['REFERRED'])"
+                                    infinite-scroll-container='"#member-scroll3"'
+                                    infinite-scroll-immediate-check="false">
+                                    <tr ng-repeat="member in mlisting.membersForFollowup">
+                                        <td class="text-center">{{ $index + 1 }}</td>
+                                        <td>{{ member.name + ' ('+ member.uniqueHealthId +')' | emptylabel }}</td>
+                                        <td ng-bind="member.famId | emptylabel"></td>
+                                        <td ng-bind="member.locationName | emptylabel"></td>
+                                        <td ng-bind-html="member.mobileNumber | emptylabel"></td>
+                                        <td ng-bind-html="member.diseaseSummary | emptylabel"></td>
+                                        <td class="action-cell" ng-if="mlisting.rights.canExamine">
+                                            <button
+                                                ng-click="mlisting.openInNewTab(member.id, mlisting.type)"
+                                                class="btn btn-primary">Examine</button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="!mlisting.membersForFollowup || mlisting.membersForFollowup.length==0">
+                                        <td colspan="8">No Members Referred </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <!-- Examined and found normal -->
+                    <uib-tab index=4 ng-click="mlisting.retrieveMembers(false, false)">
+                        <uib-tab-heading>
+                            <span style="display: flex; align-items: center;">
+                                <span>Examined and found normal</span>
+                                <i   class="fa fa-info-circle" style="margin-left: 15px;" ></i>
+                                <div class="information">              
+                                     Examined and Found Normal contains the list of patients examined by the PHC Medical Officer and confirmed to be healthy.                                                               </div>
+                            </span>
+                        </uib-tab-heading>
+                        <div class="cst-table table-responsive table-set-height" id="member-scroll4">
+                            <table aria-describedby="member list"
+                                class="table table-sm  header-fixed table-striped table-bordered header-fixed vertical-middle">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="serial-no" class="table-heading">Sr. No.</th>
+                                        <th id="patient-name" class="table-heading">
+                                            Patient Name
+                                        </th>
+                                        <th id="family-id" class="table-heading">
+                                            Family Id
+                                        </th>
+                                        <th id="location" class="table-heading">Address</th>
+                                        <th id="mobileNumber">Contact Number</th>
+                                        <th id="hmisId">HMIS ID</th>
+                                        <th id="actions" ng-if="mlisting.rights.canExamine" class="table-heading">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody infinite-scroll-distance="0"
+                                    infinite-scroll='mlisting.retrieveMembersOnScroll(true, false)'
+                                    infinite-scroll-container='"#member-scroll4"'
+                                    infinite-scroll-immediate-check="false">
+                                    <tr ng-repeat="member in mlisting.members">
+                                        <td class="text-center">{{ $index + 1 }}</td>
+                                        <td>{{ member.name + ' ('+ member.uniqueHealthId +')' | emptylabel }}</td>
+                                        <td ng-bind="member.familyId | emptylabel"></td>
+                                        <td ng-bind="member.locationName | emptylabel"></td>
+                                        <td ng-bind-html="member.mobileNumber | emptylabel"></td>
+                                        <td ng-bind-html="member.hmisId | emptylabel"></td>
+                                        <td class="action-cell" ng-if="mlisting.rights.canExamine">
+                                            <button
+                                                ng-click="mlisting.openInNewTab(member.id, mlisting.type)"
+                                                class="btn btn-primary">Examine</button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="!mlisting.members || mlisting.members.length==0">
+                                        <td colspan="8">No Members Referred </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Register New Patient -->
+<div class="modal fade" id="memberRegistration" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Register New Patient</h5>
+            </div>
+            <div class="row px-3 pt-2">
+                <div class="col-12">
+                    <form ng-if="mlisting.userHealthInfraList.length > 1" role="form" aria-labelledby="healthInfraForm"
+                        name="mlisting.healthInfraForm" id="healthInfraForm" novalidate>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <div class="form-group mb-0">
+                                    <validate for='healthInfrastructure' required-msg="Select Health Infrastructure">
+                                        <label control-label class="ml-1 mt-1">
+                                            Health Infrastructure
+                                        </label>
+                                        <label class="mt-1"
+                                            ng-if="!mlisting.hasSessionStorage && mlisting.userHealthInfraList.length > 1"
+                                            style="width: 150px !important;">
+                                            <select class="form-control cst-form-control" form-control chosen-directive
+                                                name="healthInfrastructure" id="healthInfrastructure"
+                                                ng-options="healthInfrastructure.id as healthInfrastructure.name for healthInfrastructure in mlisting.userHealthInfraList"
+                                                ng-change="mlisting.onChange('HEALTH_INFRA')"
+                                                ng-model="mlisting.userHealthInfra" required>
+                                                <option value="" selected>--Select--</option>
+                                            </select>
+                                        </label>
+                                        <label class="mt-1" ng-if="mlisting.hasSessionStorage">
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                name="healthInfrastructureSingle" id="healthInfrastructureSingle"
+                                                ng-model="mlisting.userHealthInfraName" disabled="true" required>
+                                        </label>
+                                        <placeholder style="position:relative;"></placeholder>
+                                        <label class="ml-1" ng-if="mlisting.hasSessionStorage">
+                                            <button class="btn btn-info btn-xs"
+                                                ng-click="mlisting.switchHealthInfrastructure()">
+                                                <small>
+                                                    Switch Health Infrastructure
+                                                </small>
+                                            </button>
+                                        </label>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row px-3 pt-2">
+                <div class="col-12">
+                    <form role="form" name="mlisting.newMemberForm" id="form" aria-labelledby="form" novalidate>
+                        <!-- Family Location Block -->
+                        <div class="card cst-card">
+                            <div class="card-title">
+                                <div class="float-left">
+                                    <h4 class="text">Family Location</h4>
+                                </div>
+                            </div>
+                            <div class="card-body mlisting-form inline-form">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-12">
+                                        <location-directive ng-model="mlisting.formData.areaId"
+                                            selected-location="mlisting.selectedFamLocation"
+                                            required-upto-level="mlisting.requiredLocationLevel"
+                                            fetch-upto-level="mlisting.fetchLocationLevelUpto" template-type="'twoPart'"
+                                            fetch-according-to-user-aoi="false">
+                                        </location-directive>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inline-form">
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-12 ml-2">
+                                        <div class="form-group">
+                                            <validate for='address' required-msg="Enter address">
+                                                <label style="vertical-align: middle;white-space: initial" for="address"
+                                                    control-label>Address</label>
+                                                <input type="text" maxlength="500" class="form-control cst-form-control"
+                                                    form-control name="address" id="address"
+                                                    ng-model="mlisting.formData.address" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Member Details -->
+                        <div class="card cst-card">
+                            <div class="card-title">
+                                <div class="float-left">
+                                    <h4 class="text">Member Details</h4>
+                                </div>
+                            </div>
+                            <div class="card-body mlisting-form inline-form">
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div>
+                                                    <div class="form-group">
+                                                        <validate for='firstName' required-msg="Enter First Name">
+                                                            <label style="vertical-align: middle;white-space: initial"
+                                                                for='firstName' uib-tooltip="First Name"
+                                                                control-label>First Name</label>
+                                                            <input type="text" maxlength="50"
+                                                                class="form-control cst-form-control" form-control
+                                                                name="firstName" id="firstName"
+                                                                ng-model="mlisting.formData.member.firstName" required>
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label style="vertical-align: middle;white-space: initial"
+                                                            for="middleName" uib-tooltip="Middle Name"
+                                                            control-label>Middle Name</label>
+                                                        <input type="text" maxlength="50"
+                                                            class="form-control cst-form-control" form-control
+                                                            name="middleName" id="middleName"
+                                                            ng-model="mlisting.formData.member.middleName">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <validate for='lastName' required-msg="Enter Last Name">
+                                                            <label style="vertical-align: middle;white-space: initial"
+                                                                for='lastName' uib-tooltip="Last Name"
+                                                                control-label>Last Name</label>
+                                                            <input type="text" maxlength="50"
+                                                                class="form-control cst-form-control" form-control
+                                                                name="lastName" id="lastName"
+                                                                ng-model="mlisting.formData.member.lastName" required>
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <validate for="dob" required-msg="Select Date of Birth">
+                                                            <label style="vertical-align: middle;white-space: initial"
+                                                                for="dob" control-label>Date of birth</label>
+                                                            <input type="text" style="float: inherit;" datepicker
+                                                                tabindex="8" name="dob" form-control
+                                                                ng-model="mlisting.formData.member.dob"
+                                                                ng-change="mlisting.onChange('DOB')"
+                                                                max-date="mlisting.maxDob" required>
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <validate for="mobileNumber"
+                                                            pattern-msg="Invalid mobile number"
+                                                            required-msg="Enter Mobile Number">
+                                                            <label style="vertical-align: middle;white-space: initial"
+                                                                for="mobileNumber" uib-tooltip="Mobile Number"
+                                                                control-label>Mobile
+                                                                Number</label>
+                                                            <input type="text" maxlength="10" class="form-control cst-form-control"
+                                                                form-control name="mobileNumber" id="mobileNumber"
+                                                                ng-model="mlisting.formData.member.mobileNumber"
+                                                                ng-pattern="/[6789]\d{9}/"
+                                                                required>
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <validate for="gender" required-msg="Select gender">
+                                                            <label for="gender"
+                                                                style="vertical-align: middle;white-space: initial"
+                                                                class="control-label" control-label>Gender</label>
+                                                            <label class="control control-radio" style="margin-top: 1%">
+                                                                Male
+                                                                <input value="M" name="gender" type="radio"
+                                                                    ng-model="mlisting.formData.member.gender"
+                                                                    ng-change="mlisting.onChange('GENDER')" form-control
+                                                                    required>
+                                                                    <div class="control_indicator"></div>
+                                                            </label>
+                                                            <label class="control control-radio mr-3"
+                                                                style="margin-top: 1%; display: inline-flex">
+                                                                Female
+                                                                <input value="F" name="gender" type="radio"
+                                                                    ng-model="mlisting.formData.member.gender"
+                                                                    form-control required>
+                                                                <div class="control_indicator"></div>
+                                                            </label>
+                                                            <label class="control control-radio"
+                                                                style="margin-top: 1%; display: inline-flex">
+                                                                Transgender
+                                                                <input value="T" name="gender" type="radio"
+                                                                    ng-model="mlisting.formData.member.gender"
+                                                                    ng-change="mlisting.onChange('GENDER')" form-control
+                                                                    required>
+                                                                <div class="control_indicator"></div>
+                                                            </label>
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                            <validate for='isHof' required-msg="Please select an answer">
+                                                <label style="vertical-align: middle;white-space: initial" for="isHof"
+                                                    uib-tooltip="Is member HOF?" control-label>Is this member Head of
+                                                    Family?</label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="isHof" id="isHof" type="radio"
+                                                        ng-model="mlisting.formData.isHof"
+                                                        ng-change="mlisting.onChange('IS_HOF')" form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="dka" id="dka" type="radio"
+                                                        ng-model="mlisting.formData.isHof"
+                                                        ng-change="mlisting.onChange('IS_HOF')" form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div ng-if="mlisting.formData.isHof === false">
+                                            <div class="form-group">
+                                                <validate for="hofName" required-msg="Enter HOF Name">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="firstName" uib-tooltip="HOF Name" control-label>Head of
+                                                        Family Name</label>
+                                                    <input type="text" maxlength="50"
+                                                        class="form-control cst-form-control" form-control
+                                                        name="hofName" id="firstName"
+                                                        ng-model="mlisting.formData.hof.firstName" required>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for="relationWithHof" required-msg="Enter HOF Name">
+                                                    <label class="mt-1">Relation with HOF</label>
+                                                        <select class="form-control cst-form-control" form-control
+                                                            chosen-directive name="relationWithHof" id="relationWithHof"
+                                                            ng-options="relation for relation in mlisting.relations"
+                                                            ng-model="mlisting.formData.hof.relationWithHof" required>
+                                                            <option value="" selected>--Select--</option>
+                                                        </select>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for="hofGender" required-msg="Select gender">
+                                                    <label for="hofGender"
+                                                        style="vertical-align: middle;white-space: initial"
+                                                        class="control-label" control-label>HOF's Gender</label>
+                                                    <label class="control control-radio" style="margin-top: 1%">
+                                                        Male
+                                                        <input value="M" name="hofGender" type="radio"
+                                                            ng-model="mlisting.formData.hof.gender" form-control
+                                                            required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <label class="control control-radio mr-3"
+                                                        style="margin-top: 1%; display: inline-flex">
+                                                        Female
+                                                        <input value="F" name="hofGender" type="radio"
+                                                            ng-model="mlisting.formData.hof.gender" form-control
+                                                            required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <label class="control control-radio"
+                                                        style="margin-top: 1%; display: inline-flex">
+                                                        Transgender
+                                                        <input value="T" name="hofGender" type="radio"
+                                                            ng-model="mlisting.formData.hof.gender" form-control
+                                                            required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for="hofMobileNumber" maxlength-msg="Invalid mobile number"
+                                                    pattern-msg="Invalid mobile number"
+                                                    required-msg="Enter Mobile Number">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="hofMobileNumber" uib-tooltip="HOF's Mobile Number"
+                                                        control-label>HOF's Mobile
+                                                        Number</label>
+                                                    <input type="text" maxlength="10"
+                                                        class="form-control cst-form-control" form-control
+                                                        name="hofMobileNumber" id="hofMobileNumber"
+                                                        ng-model="mlisting.formData.hof.mobileNumber" 
+                                                        ng-pattern="/[6789]\d{9}/" required>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for="hofDob" required-msg="Select Date of Birth">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="hofDob" control-label>HOF's DOB</label>
+                                                    <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                        name="hofDob" form-control ng-model="mlisting.formData.hof.dob"
+                                                        max-date="mlisting.maxDob" required>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                    <div class="col-md-6 col-sm-12" ng-if="mlisting.formData.member.gender === 'F' && mlisting.formData.member.age >= 18">
+                                        <div class="form-group">
+                                            <validate for="isPregnantFlag" required-msg="Select a value">
+                                                <label style="vertical-align: middle;white-space: initial" class="control-label" for="isPregnantFlag" control-label>Is Member Pregnant?</label>
+                                                <label class="control control-radio">
+                                                    Yes
+                                                    <input value="true" name="isPregnantFlag" type="radio" ng-model="mlisting.formData.member.isPregnantFlag" ng-change="mlisting.onChange('PREGNANT')" form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">
+                                                    No
+                                                    <input value="false" name="isPregnantFlag" type="radio" ng-model="mlisting.formData.member.isPregnantFlag" ng-change="mlisting.onChange('PREGNANT')" form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="maritalStatus" required-msg="Select Marital Status">
+                                                <label style="vertical-align: middle;white-space: initial" for="maritalStatus"
+                                                    uib-tooltip="Marital Status" control-label>Marital Status</label>
+                                                <select id="maritalStatus" name="maritalStatus" class="form-control cst-form-control"
+                                                        ng-model="mlisting.formData.member.maritalStatus" required
+                                                        ng-options="key as value for (key, value) in mlisting.maritalStatusMapper" form-control>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group" ng-if="mlisting.formData.member.isPregnantFlag == 'true'">
+                                            <validate for="lmpDate" required-msg="Select LMP Date">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="lmpDate" control-label>LMP Date</label>
+                                                <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                    name="lmpDate" form-control ng-model="mlisting.formData.member.lmpDate"
+                                                    min-date="mlisting.lmpMinDate"
+                                                    max-date="mlisting.lmpMaxDate" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-sm-6 text-center" style="padding: 0%;">
+                                    <button type="button" class="btn btn-primary px-1"
+                                        ng-click="mlisting.registerNewMember()">
+                                        <em class="fa fa-floppy-o"></em> Save
+                                    </button>
+                                </div>
+                                <div class="col-sm-6 text-center px-2" style="padding: 0%;">
+                                    <button class="btn btn-secondary px-1" data-dismiss="modal"
+                                        ng-click="mlisting.onChange('FORM')">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search tab -->
+<div class="mid-div filter-div" ng-if="mlisting.selectedTab===0">
+    <span style="left:-66px" class="filter-toggle" ng-click="mlisting.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="mlisting.searchForm" novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>Search By: </label>
+                        <label class="control control-radio"> Member ID
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
+                                value="memberId" ng-change="mlisting.search.searchString = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Family ID
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
+                                value="familyId" ng-change="mlisting.search.searchString = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Mobile Number
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
+                                value="mobileNumber" ng-change="mlisting.search.searchString = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <br>
+                        <label style="margin-left: 14%" class="control control-radio"> Location
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy" value="orgUnit"
+                                ng-change="mlisting.search.searchString = null; mlisting.selectedLocation = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Village Name
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
+                                ng-change="mlisting.resetSearchString()" value="villageName"
+                                ng-change="mlisting.search.searchString = null; mlisting.selectedLocationId = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio" style="min-width: auto;"> Name
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy" value="name"
+                                ng-change="mlisting.search.searchString = null; mlisting.selectedLocation = null; mlisting.search.locationToSearchByName = null;" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <br>
+                        <label style="margin-left: 14%" class="control control-radio mt-2"> Disease
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy" value="disease"
+                                ng-change="mlisting.search.searchString = 'All';" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <!-- <label class="control control-radio"> ABHA Number
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
+                                ng-change="mlisting.search.searchString = null;" value="abhaNumber" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> ABHA Address
+                            <input type="radio" name="search" icheck ng-model="mlisting.search.searchBy"
+                                ng-change="mlisting.search.searchString = null;" value="abhaAddress" />
+                            <div class="control_indicator"></div>
+                        </label> -->
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'disease'">
+                            <label for="disease" control-label>
+                                Select Disease
+                            </label>
+                            <select class="form-control cst-form-control" form-control
+                                ng-model="mlisting.search.searchString" name="disease" id="disease">
+                                <option value="All" selected>All</option>
+                                <option value="HT">Hypertension</option>
+                                <option value="D">Diabetes</option>
+                                <option value="O">Oral</option>
+                                <option value="B">Breast</option>
+                                <option value="C">Cervical</option>
+                            </select>
+                        </div>
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'name'">
+                            <location-directive template-type="'twoPart'"
+                                ng-model="mlisting.search.locationToSearchByName"
+                                selected-location="mlisting.selectedLocation" required-upto-level="3"
+                                template-type="'inline'" fetch-according-to-user-aoi="false">
+                            </location-directive>
+                        </div>
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'orgUnit'">
+                            <location-directive template-type="'twoPart'" ng-model="mlisting.search.searchString"
+                                selected-location="mlisting.selectedLocation" required-upto-level="3"
+                                template-type="'inline'" fetch-according-to-user-aoi="true"> </location-directive>
+                        </div>
+                        <div class="form-group" ng-if="mlisting.search.searchBy === 'villageName'">
+                            <label>Search Village</label>
+                            <selectize class="form-control cst-form-control disabled-input"
+                                ng-model='mlisting.selectedLocationId' config='mlisting.locationSelectizeWpd'>
+                                <option value=''>Select</option>
+                            </selectize>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid Number'
+                                ng-if="mlisting.search.searchBy === 'mobileNumber'">
+                                <input type="number" name="searchString" form-control
+                                    ng-model="mlisting.search.searchString" placeholder='Enter contact number'
+                                    class="form-control" maxlength="10" minlength="10" required />
+                            </validate>
+                            <label style="margin-top:2%" class="form-group control control-checkbox"
+                                ng-if="mlisting.search.searchBy === 'mobileNumber'">
+                                <input ng-model="mlisting.search.familyMobileNumber" type="checkbox">
+                                <div class="control_indicator checkbox-success"></div>
+                                Search mobile number in family
+                            </label>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="mlisting.search.searchBy === 'memberId' || mlisting.search.searchBy === 'familyId'">
+                                <input type="text" name="searchString" form-control
+                                    ng-model="mlisting.search.searchString"
+                                    ng-change="mlisting.handleChangeEvent(mlisting.search.searchString)"
+                                    placeholder="Enter {{mlisting.search.searchBy}}" class="form-control" required />
+                            </validate>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="mlisting.search.searchBy === 'name'">
+                                <input style="width:30%;float:left;margin:4px" type="text" name="firstName" form-control
+                                    ng-model="mlisting.search.firstName" placeholder="Enter first Name"
+                                    class="form-control" required />
+                            </validate>
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="mlisting.search.searchBy === 'name'">
+                                <input style="width:30%;float:left;margin:4px" type="text" name="middleName"
+                                    form-control ng-model="mlisting.search.middleName" placeholder="Enter middle Name"
+                                    class="form-control" />
+                            </validate>
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="mlisting.search.searchBy === 'name'">
+                                <input style="width:30%;float:left;margin:4px" type="text" name="lastName" form-control
+                                    ng-model="mlisting.search.lastName" placeholder="Enter last Name"
+                                    class="form-control"/>
+                            </validate>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter" ng-click="mlisting.toggleFilter()">Close</button>
+                        <button type="submit" class="btn btn-primary search-filter"
+                            ng-click="mlisting.searchMembers(false)">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

@@ -34,6 +34,7 @@ import com.argusoft.sewa.android.app.model.LocationMasterBean;
 import com.argusoft.sewa.android.app.model.LoggerBean;
 import com.argusoft.sewa.android.app.util.DynamicUtils;
 import com.argusoft.sewa.android.app.util.GlobalTypes;
+import com.argusoft.sewa.android.app.util.Log;
 import com.argusoft.sewa.android.app.util.SewaUtil;
 import com.argusoft.sewa.android.app.util.UtilBean;
 import com.google.android.material.textview.MaterialTextView;
@@ -44,6 +45,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.ormlite.annotations.OrmLiteDao;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,6 +66,7 @@ public class WorkStatusActivity extends MenuActivity implements View.OnClickList
     LocationMasterServiceImpl locationMasterService;
     @OrmLiteDao(helper = DBConnection.class)
     Dao<LocationBean, Integer> locationBeanDao;
+
 
     private List<LocationMasterBean> locationBeans = new ArrayList<>();
     private Map<String, Long> mapOfStatistics = new LinkedHashMap<>();
@@ -172,13 +175,17 @@ public class WorkStatusActivity extends MenuActivity implements View.OnClickList
     }
 
     private void addTable(Long locationId) {
-        LocationMasterBean locationBean = new LocationMasterBean();
+        LocationBean locationBean = new LocationBean();
         List<FhwServiceDetailBean> fhwServiceDetailBeans;
         if (locationId != null) {
-            locationBean = locationMasterService.getLocationMasterBeanByActualId(locationId.toString());
-            addVillageHeading(locationBean);
-            addStatisticTypeHeading();
-            fhwServiceDetailBeans = fhsService.retrieveFhwServiceDetailBeansByVillageId(locationBean.getActualID().intValue());
+            try {
+                locationBean = locationBeanDao.queryBuilder().where().eq("actualID", Integer.valueOf(locationId.toString())).query().get(0);
+                addVillageHeading(locationBean);
+                addStatisticTypeHeading();
+            } catch (SQLException e) {
+                Log.e(getClass().getName(), null, e);
+            }
+            fhwServiceDetailBeans = fhsService.retrieveFhwServiceDetailBeansByVillageId(locationBean.getActualID());
         } else {
             addVillageHeading(null);
             addStatisticTypeHeading();
@@ -226,7 +233,7 @@ public class WorkStatusActivity extends MenuActivity implements View.OnClickList
 
         for (Map.Entry<String, Long> aStatistic : mapOfStatistics.entrySet()) {
             countForStatistics++;
-            if ((pageCounter == 1 && countForStatistics > 7)
+            if ((pageCounter == 1 && (countForStatistics == 1 || countForStatistics > 7))
                     || (pageCounter == 2 && (countForStatistics < 8 || countForStatistics > 10))
                     || (pageCounter == 3 && (countForStatistics < 11 || countForStatistics > 14))
                     || (pageCounter == 4 && (countForStatistics < 15))) {
@@ -295,7 +302,7 @@ public class WorkStatusActivity extends MenuActivity implements View.OnClickList
         hideProcessDialog();
     }
 
-    private void addVillageHeading(LocationMasterBean locationBean) {
+    private void addVillageHeading(LocationBean locationBean) {
         String labelValue;
         if (locationBean != null) {
             labelValue = UtilBean.getMyLabel(LabelConstants.VILLAGE) + ":" + UtilBean.getMyLabel(locationBean.getName());
