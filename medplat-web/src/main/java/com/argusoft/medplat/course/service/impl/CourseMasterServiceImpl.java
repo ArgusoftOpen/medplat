@@ -29,6 +29,7 @@ import com.argusoft.medplat.mobile.dto.*;
 import com.argusoft.medplat.training.util.TrainingUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,13 +38,14 @@ import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.hibernate.bytecode.BytecodeLogger.LOGGER;
+//import static org.hibernate.bytecode.BytecodeLogger.LOGGER;
 
 /**
  * @author akshar
  */
 @Service("courseMasterService")
 @Transactional
+@Slf4j
 public class CourseMasterServiceImpl implements CourseMasterService {
 
     @Autowired
@@ -396,7 +398,7 @@ public class CourseMasterServiceImpl implements CourseMasterService {
                             }
                         }
                     } catch (Exception e) {
-                        LOGGER.error(e.getMessage());
+                        log.error(e.getMessage());
                     }
                 });
             }

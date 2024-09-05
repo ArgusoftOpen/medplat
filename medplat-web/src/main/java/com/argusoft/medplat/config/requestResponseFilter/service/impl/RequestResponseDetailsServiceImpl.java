@@ -10,8 +10,8 @@ import com.argusoft.medplat.config.requestResponseFilter.dao.RequestResponseDeta
 import com.argusoft.medplat.config.requestResponseFilter.dto.RequestResponseDetailsDto;
 import com.argusoft.medplat.config.requestResponseFilter.service.RequestResponseDetailsService;
 import com.argusoft.medplat.web.users.controller.UserUsageAnalyticsController;
+import com.argusoft.medplat.web.users.dao.UserUsageAnalyticsDao;
 import com.argusoft.medplat.web.users.dto.UserUsageAnalyticsDto;
-import com.argusoft.medplat.web.users.service.UserUsageAnalyticsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class RequestResponseDetailsServiceImpl implements RequestResponseDetails
     RequestResponseDetailsDao requestResponseDetailsDao;
 
     @Autowired
-    private UserUsageAnalyticsService userUsageAnalyticsService;
+    private UserUsageAnalyticsDao userUsageAnalyticsDao;
 
     @Override
     public void checkRequestResponse() {
@@ -172,12 +172,26 @@ public class RequestResponseDetailsServiceImpl implements RequestResponseDetails
         while (userUsageItr.hasNext()) {
             UserUsageAnalyticsDto userUsageAnalyticsDto = userUsageItr.next();
             try {
-                userUsageAnalyticsService.insertUserUsageDetails(userUsageAnalyticsDto.getCurrStateId(), userUsageAnalyticsDto.getPageTitle(), userUsageAnalyticsDto.getUserId(), userUsageAnalyticsDto.getActiveTabTime(), userUsageAnalyticsDto.getTotalTime(), userUsageAnalyticsDto.getNextStateId(), userUsageAnalyticsDto.getPrevStateId(), userUsageAnalyticsDto.isBrowserCloseDet());
+                insertUserUsageDetails(userUsageAnalyticsDto.getCurrStateId(), userUsageAnalyticsDto.getPageTitle(), userUsageAnalyticsDto.getUserId(), userUsageAnalyticsDto.getActiveTabTime(), userUsageAnalyticsDto.getTotalTime(), userUsageAnalyticsDto.getNextStateId(), userUsageAnalyticsDto.getPrevStateId(), userUsageAnalyticsDto.isBrowserCloseDet());
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 userUsageItr.remove();
             }
         }
+    }
+    private Integer insertUserUsageDetails(String id, String pageTitle, Integer userId, Long activeTabTime, Long totalTime, String nextStateId, String prevStateId, Boolean isBrowserCloseDet) {
+        Integer pageTitleId = getPageTitleId(pageTitle);
+        return userUsageAnalyticsDao.insertOrUpdateUserUsageDetails(id, pageTitleId, userId, activeTabTime, totalTime, nextStateId, prevStateId, isBrowserCloseDet);
+    }
+    private Integer getPageTitleId(String pageTitle) {
+        if (pageTitle == null) {
+            return -1;
+        }
+        Integer pageTitleId = getPageTitleId(pageTitle);
+        if (pageTitleId == null) {
+            pageTitleId = insertPageTitle(pageTitle);
+        }
+        return pageTitleId;
     }
 }

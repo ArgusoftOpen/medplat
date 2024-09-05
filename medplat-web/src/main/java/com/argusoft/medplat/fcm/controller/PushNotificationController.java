@@ -6,7 +6,6 @@ import com.argusoft.medplat.fcm.dto.TechoPushNotificationDisplayDto;
 import com.argusoft.medplat.fcm.model.TechoPushNotificationType;
 import com.argusoft.medplat.fcm.service.TechoPushNotificationConfigService;
 import com.argusoft.medplat.fcm.service.TechoPushNotificationTypeService;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,10 +44,10 @@ public class PushNotificationController {
 
     @GetMapping(value = "getnotifications")
     public List<TechoPushNotificationDisplayDto> getPushNotificationConfigs(
-            @ApiParam(name = "offset", value = "It will accept the offset") Integer offset,
+            @RequestParam("offset") Integer offset,
             @RequestParam("limit") BigInteger limit
     ) {
-        return techoPushNotificationConfigService.getPushNotificationConfigs(limit, offset);
+        return techoPushNotificationConfigService.getPushNotificationConfigs(limit,offset);
     }
 
     @GetMapping(value = "/getconfigbyid/{id}")

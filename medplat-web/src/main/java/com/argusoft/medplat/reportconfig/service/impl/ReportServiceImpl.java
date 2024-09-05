@@ -7,9 +7,11 @@ package com.argusoft.medplat.reportconfig.service.impl;
 
 import com.argusoft.medplat.common.dao.MenuConfigDao;
 import com.argusoft.medplat.common.dao.MenuGroupDao;
+import com.argusoft.medplat.common.dao.ServerManagementDao;
+import com.argusoft.medplat.common.dao.SystemConfigSyncDao;
+import com.argusoft.medplat.common.mapper.SystemConfigSyncMapper;
 import com.argusoft.medplat.common.model.MenuConfig;
 import com.argusoft.medplat.common.model.MenuGroup;
-import com.argusoft.medplat.common.service.SystemConfigSyncService;
 import com.argusoft.medplat.common.util.ConstantUtil;
 import com.argusoft.medplat.common.util.ImtechoUtil;
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
@@ -30,6 +32,7 @@ import com.argusoft.medplat.reportconfig.model.ReportOfflineDetails;
 import com.argusoft.medplat.reportconfig.service.ReportService;
 import com.argusoft.medplat.web.users.dao.UserDao;
 import com.argusoft.medplat.web.users.model.UserMaster;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -104,19 +107,19 @@ public class ReportServiceImpl implements ReportService {
 
     @Autowired
     TableService tableService;
-
+    @Autowired
+    private ServerManagementDao serverManagementDao;
     @Autowired
     ReportQueryMasterService reportQueryService;
 
-    @Autowired
-    private SystemConfigSyncService systemConfigSyncService;
 
 //    @Autowired
 //    private GujaratiToEnglishTranslateService translate;
 
     @Autowired
     private MenuGroupDao menuGroupDao;
-
+    @Autowired
+    private SystemConfigSyncDao systemConfigSyncDao;
     @Autowired
     private ReportOfflineDetailsDao reportOfflineDetailsDao;
 
@@ -219,7 +222,25 @@ public class ReportServiceImpl implements ReportService {
         }
 
         if (!isMetodCallBySyncFunction) {
-            systemConfigSyncService.createOrUpdate(reportConfigForSysDto, ConstantUtil.SYNC_REPORT_MASTER);
+            Integer id = null;
+            String jsonObject;
+            UUID featureUUID = null;
+
+            ReportConfigDto reportConfigDto = (ReportConfigDto) reportConfigForSysDto;
+
+            try {
+                jsonObject = ImtechoUtil.convertObjectToJson(reportConfigDto);
+                featureUUID = reportConfigDto.getUuid();
+                id = systemConfigSyncDao.create(SystemConfigSyncMapper.convertDtoToMaster(ConstantUtil.SYNC_REPORT_MASTER, reportConfigDto.getUuid(), reportConfigDto.getName(), jsonObject, reportConfigDto.getCreatedBy()));
+
+            } catch (JsonProcessingException e) {
+                throw new ImtechoUserException("JSON parsing from Report Configuration Object Exception: ", e);
+            }
+
+            List<Integer> serverIds = serverManagementDao.getActiveServerIdFromFeature(featureUUID);
+            for (Integer serverId : serverIds) {
+                serverManagementDao.insertSystemSyncWith(serverId, id);
+            }
         }
     }
 

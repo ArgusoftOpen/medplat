@@ -8,8 +8,11 @@ package com.argusoft.medplat.query.service.impl;
 import com.argusoft.medplat.event.dto.EventConfigTypeDto;
 import com.argusoft.medplat.event.dto.QueryMasterParamterDto;
 import com.argusoft.medplat.event.util.EventFunctionUtil;
+import com.argusoft.medplat.query.dao.QueryMasterDao;
 import com.argusoft.medplat.query.dao.TableDao;
 import com.argusoft.medplat.query.dto.QueryMasterDto;
+import com.argusoft.medplat.query.mapper.QueryMasterMapper;
+import com.argusoft.medplat.query.model.QueryMaster;
 import com.argusoft.medplat.query.service.QueryMasterService;
 import com.argusoft.medplat.query.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +34,9 @@ public class TableServiceImpl implements TableService {
 
     @Autowired
     private TableDao tableDao;
-
     @Autowired
-    private QueryMasterService queryMasterService;
+    private QueryMasterDao queryMasterDao;
+
 
     /**
      * 
@@ -99,7 +102,8 @@ public class TableServiceImpl implements TableService {
 
     private void handleQueryWithCode(EventConfigTypeDto notificationConfigTypeDto, List<LinkedHashMap<String, Object>> queryDataLists) {
         for (LinkedHashMap<String, Object> queryDataList : queryDataLists) {
-            QueryMasterDto queryMasterDto = queryMasterService.retrieveByCode(notificationConfigTypeDto.getQueryCode());
+            QueryMaster queryMaster = queryMasterDao.retrieveByCode(notificationConfigTypeDto.getQueryCode());
+            QueryMasterDto queryMasterDto = QueryMasterMapper.convertMasterToDto(queryMaster);
             String query = queryMasterDto.getQuery();
                 for (QueryMasterParamterDto queryMasterParamterDto : notificationConfigTypeDto.getQueryMasterParamJson()) {
                     if (Boolean.FALSE.equals(queryMasterParamterDto.getIsFixed())) {

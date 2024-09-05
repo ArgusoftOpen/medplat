@@ -4,7 +4,6 @@ cd /usr/ui/medplat-ui
 
 npm install --force
 bower install
-grunt medplat
 
 cd /usr/web
 mvn clean install -P docker -Dmaven.test.skip=true
