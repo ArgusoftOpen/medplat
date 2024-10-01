@@ -20,7 +20,6 @@
         <locale>en_US</locale>
         <timeZone>Asia/Kolkata</timeZone>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <elasticsearch.version>7.4.0</elasticsearch.version>
     </properties>
 
     <dependencies>
