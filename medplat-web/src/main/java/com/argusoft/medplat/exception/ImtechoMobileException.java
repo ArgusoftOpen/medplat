@@ -28,6 +28,11 @@ public class ImtechoMobileException extends RuntimeException {
         this.agdRes = new ImtechoResponseEntity(message, errorCode, data);
     }
 
+    public ImtechoMobileException(String message, int errorCode, Throwable cause) {
+        super(message, cause);
+        this.agdRes = new ImtechoResponseEntity(message, errorCode);
+    }
+
     /**
      * Retrieves response.
      * @return Returns response details.
