@@ -42,7 +42,7 @@ RUN sdkmanager "platforms;android-32" "build-tools;34.0.0" "extras;google;m2repo
 COPY /medplat-android/ /usr/android 
 
 RUN echo "sdk.dir=$ANDROID_HOME" > local.properties
-RUN sed -i 's#http://dpg.argusoft.com/#http://dpg.argusoft.com/#' gradle.properties
+RUN sed -i 's#https://dpg.argusoft.com/#https://dpg.argusoft.com/#' gradle.properties
 RUN chmod +x gradlew 
 RUN gradle wrapper --gradle-version 7.2
 RUN ./gradlew assembleDebug --stacktrace
