@@ -2,7 +2,7 @@
 
 cd /usr/ui/medplat-ui
 
-npm install --force
+npm install --legacy-peer-deps
 bower install
 
 cd /usr/web
