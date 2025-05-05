@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.dashboard.task.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
 import com.argusoft.medplat.dashboard.basketpreference.dto.UserBasketPreferenceDto;
@@ -25,6 +26,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/webtasks")
+@Tag(name = "Task Dashboard Controller", description = "")
 public class TaskDashboardController {
 
     @Autowired

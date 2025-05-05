@@ -1,4 +1,5 @@
 package com.argusoft.medplat.common.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.common.dto.FieldValueMasterDto;
 import com.argusoft.medplat.common.service.FieldMasterService;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/constants")
+@Tag(name = "Field Value Controller", description = "")
 public class FieldValueController {
     
     @Autowired

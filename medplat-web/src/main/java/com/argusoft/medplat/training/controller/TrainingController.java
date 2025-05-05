@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.training.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.web.users.dto.UserMasterDto;
 import com.argusoft.medplat.training.dto.TrainingDto;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/training")
+@Tag(name = "Training Controller", description = "")
 public class TrainingController {
 
     @Autowired

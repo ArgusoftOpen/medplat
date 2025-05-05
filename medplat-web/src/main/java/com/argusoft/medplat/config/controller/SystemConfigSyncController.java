@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.config.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 import com.argusoft.medplat.common.dto.SystemConfigSyncDto;
@@ -24,6 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/systemconfigsync")
+@Tag(name = "System Config Sync Controller", description = "")
 public class SystemConfigSyncController {
 
     @Autowired

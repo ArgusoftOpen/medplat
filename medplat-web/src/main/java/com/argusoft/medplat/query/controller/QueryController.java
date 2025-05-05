@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.query.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.exception.ImtechoSystemException;
 import com.argusoft.medplat.query.dto.QueryDto;
@@ -23,6 +24,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/api/resource")
+@Tag(name = "Query Controller", description = "")
 public class QueryController {
 
     @Autowired

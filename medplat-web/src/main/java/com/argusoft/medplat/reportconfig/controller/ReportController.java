@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.reportconfig.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.common.util.ImtechoUtil;
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
@@ -45,6 +46,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/report")
+@Tag(name = "Report Controller", description = "")
 public class ReportController {
 
     @Autowired

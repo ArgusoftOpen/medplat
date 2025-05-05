@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.document.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.document.dto.DocumentDto;
 import com.argusoft.medplat.document.service.DocumentService;
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
  */
 @RestController
 @RequestMapping("/api/document/")
+@Tag(name = "Document Controller", description = "")
 public class DocumentController {
 
     @Autowired

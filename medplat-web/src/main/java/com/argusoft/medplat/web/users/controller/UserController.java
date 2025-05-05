@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.web.users.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
 import com.argusoft.medplat.exception.ImtechoResponseEntity;
@@ -27,6 +28,7 @@ import java.util.Set;
  */
 @RestController
 @RequestMapping("/api/user")
+@Tag(name = "User Controller", description = "")
 public class UserController {
 
     @Autowired

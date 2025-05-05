@@ -1,4 +1,5 @@
 package com.argusoft.medplat.common.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.common.dto.MenuGroupDto;
 import com.argusoft.medplat.common.mapper.MenuGroupMapper;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/menugroup")
+@Tag(name = "Menu Group Controller", description = "")
 public class MenuGroupController {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MenuGroupController.class);

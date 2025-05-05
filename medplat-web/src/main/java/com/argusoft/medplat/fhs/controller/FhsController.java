@@ -1,4 +1,5 @@
 package com.argusoft.medplat.fhs.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.fhs.dto.AnganwadiDto;
 import com.argusoft.medplat.fhs.dto.MemberDto;
@@ -22,6 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/fhs")
+@Tag(name = "Fhs Controller", description = "")
 public class FhsController {
 
     @Autowired

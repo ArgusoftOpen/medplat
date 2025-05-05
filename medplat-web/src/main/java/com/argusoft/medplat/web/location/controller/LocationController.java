@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.web.location.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
 import com.argusoft.medplat.web.location.dto.LocationDetailDto;
@@ -30,6 +31,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/location")
+@Tag(name = "Location Controller", description = "")
 public class LocationController {
 
     @Autowired

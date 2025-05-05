@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.common.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.common.service.DatabaseBackupService;
 import com.argusoft.medplat.common.service.SmsService;
@@ -33,6 +34,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api/database")
+@Tag(name = "Database Controller", description = "")
 public class DatabaseController {
 
     @Autowired

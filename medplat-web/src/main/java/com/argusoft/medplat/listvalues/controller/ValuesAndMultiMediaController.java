@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.listvalues.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.listvalues.service.UploadMultimediaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import java.io.FileNotFoundException;
  */
 @RestController
 @RequestMapping(value = "/api/values_and_multimedia/")
+@Tag(name = "Values And Multi Media Controller", description = "")
 public class ValuesAndMultiMediaController {
 
     @Autowired

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.training.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.training.dto.TopicCoverageDto;
 import com.argusoft.medplat.training.service.TopicCoverageService;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/topiccoverage")
+@Tag(name = "Topic Coverage Controller", description = "")
 public class TopicCoverageController {
 
     @Autowired

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.course.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.web.users.dto.RoleMasterDto;
 import com.argusoft.medplat.course.dto.CourseMasterDto;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/course")
+@Tag(name = "Course Master Controller", description = "")
 public class CourseMasterController {
     
     @Autowired
