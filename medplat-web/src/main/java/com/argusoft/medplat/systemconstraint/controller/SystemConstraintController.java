@@ -1,4 +1,5 @@
 package com.argusoft.medplat.systemconstraint.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
 import com.argusoft.medplat.mobile.dto.ComponentTagDto;
@@ -17,6 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/systemConstraint")
+@Tag(name = "System Constraint Controller", description = "")
 public class SystemConstraintController {
 
     @Autowired

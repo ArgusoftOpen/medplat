@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.common.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.common.dto.AnnouncementMasterDto;
 import com.argusoft.medplat.common.service.AnnouncementService;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/announcement")
+@Tag(name = "Announcement Controller", description = "")
 public class AnnouncementController {
 
     @Autowired

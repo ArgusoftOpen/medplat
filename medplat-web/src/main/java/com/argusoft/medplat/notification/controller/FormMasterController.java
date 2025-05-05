@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.notification.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.notification.dto.FormMasterDto;
 import com.argusoft.medplat.notification.service.FormMasterService;
@@ -26,6 +27,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/form")
+@Tag(name = "Form Master Controller", description = "")
 public class FormMasterController {
 
     @Autowired

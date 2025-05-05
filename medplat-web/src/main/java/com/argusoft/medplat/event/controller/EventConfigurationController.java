@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.event.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.common.util.SystemConstantUtil;
 import com.argusoft.medplat.event.dto.EventConfigurationDto;
@@ -27,6 +28,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/eventconfig")
+@Tag(name = "Event Configuration Controller", description = "")
 public class EventConfigurationController {
 
     @Autowired

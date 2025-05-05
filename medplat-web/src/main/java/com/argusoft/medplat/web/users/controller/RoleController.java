@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.web.users.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
 import com.argusoft.medplat.web.users.dto.RoleMasterDto;
@@ -21,6 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/role")
+@Tag(name = "Role Controller", description = "")
 public class RoleController {
 
     @Autowired

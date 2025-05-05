@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.upload.location.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.common.util.ConstantUtil;
 import com.argusoft.medplat.upload.location.dto.MobileLibraryDto;
@@ -40,6 +41,7 @@ import java.util.logging.Logger;
  */
 @RestController
 @RequestMapping("/api/upload/document")
+@Tag(name = "Upload Document Controller", description = "")
 public class UploadDocumentController {
 
     @Autowired

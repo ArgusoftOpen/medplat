@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.common.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.common.service.NicSmsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/nicsms")
+@Tag(name = "Nic Sms Controller", description = "")
 public class NicSmsController {
 
     @Autowired
@@ -53,5 +55,4 @@ public class NicSmsController {
         return "Ok";
     }
 }
-
 

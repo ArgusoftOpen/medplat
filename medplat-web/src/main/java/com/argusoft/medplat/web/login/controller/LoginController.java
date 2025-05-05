@@ -1,4 +1,5 @@
 package com.argusoft.medplat.web.login.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.common.dto.EncryptionKeyAndIVDto;
 import com.argusoft.medplat.common.dto.MenuConfigDto;
@@ -49,6 +50,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/login")
+@Tag(name = "Login Controller", description = "")
 public class LoginController {
 
     @Autowired

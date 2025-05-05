@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.notification.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.notification.dto.NotificationTypeMasterDto;
 import com.argusoft.medplat.notification.service.NotificationMasterService;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/notificationtype")
+@Tag(name = "Notification Type Master Controller", description = "")
 public class NotificationTypeMasterController {
 
     @Autowired

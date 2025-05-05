@@ -1,4 +1,5 @@
 package com.argusoft.medplat.web.users.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.web.users.dto.UserUsageAnalyticsDto;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/insert_user_analytics_details")
+@Tag(name = "User Usage Analytics Controller", description = "")
 public class UserUsageAnalyticsController {
 
 //    @Autowired

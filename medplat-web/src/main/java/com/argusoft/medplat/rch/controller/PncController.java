@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.rch.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
 import com.argusoft.medplat.exception.ImtechoSystemException;
@@ -34,6 +35,7 @@ import java.util.Set;
  */
 @RestController
 @RequestMapping("/api/managepnc")
+@Tag(name = "Pnc Controller", description = "")
 public class PncController {
 
     @Autowired

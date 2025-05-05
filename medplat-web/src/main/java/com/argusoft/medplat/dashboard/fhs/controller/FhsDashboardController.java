@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.dashboard.fhs.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
 import com.argusoft.medplat.dashboard.fhs.service.FhsDashboardService;
@@ -26,6 +27,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/familyhealthsurvey")
+@Tag(name = "Fhs Dashboard Controller", description = "")
 public class FhsDashboardController {
 
     @Autowired

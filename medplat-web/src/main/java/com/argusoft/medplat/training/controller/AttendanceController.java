@@ -1,4 +1,5 @@
 package com.argusoft.medplat.training.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.training.dto.AttendanceDto;
 import com.argusoft.medplat.training.service.AttendanceService;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/attendance")
+@Tag(name = "Attendance Controller", description = "")
 public class AttendanceController {
 
     @Autowired

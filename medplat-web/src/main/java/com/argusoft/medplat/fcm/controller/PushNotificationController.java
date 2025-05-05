@@ -1,4 +1,5 @@
 package com.argusoft.medplat.fcm.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 import com.argusoft.medplat.fcm.dto.TechoPushNotificationConfigDto;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/push")
+@Tag(name = "Push Notification Controller", description = "")
 public class PushNotificationController {
     @Autowired
     private TechoPushNotificationTypeService techoPushNotificationTypeService;

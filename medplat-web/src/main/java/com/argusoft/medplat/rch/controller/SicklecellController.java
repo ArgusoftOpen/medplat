@@ -1,4 +1,5 @@
 package com.argusoft.medplat.rch.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.rch.dto.SicklecellScreeningDto;
 import com.argusoft.medplat.rch.service.SicklecellService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/sicklecell")
+@Tag(name = "Sicklecell Controller", description = "")
 public class SicklecellController {
 
     @Autowired

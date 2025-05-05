@@ -1,4 +1,5 @@
 package com.argusoft.medplat.code.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.code.dto.SystemCodeDto;
 import com.argusoft.medplat.code.dto.SystemCodeListDto;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/api/systemcode")
+@Tag(name = "System Code Controller", description = "")
 public class SystemCodeController {
 
     @Autowired

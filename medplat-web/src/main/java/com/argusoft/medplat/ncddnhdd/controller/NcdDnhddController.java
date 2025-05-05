@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.ncddnhdd.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.ncddnhdd.dto.*;
 import com.argusoft.medplat.ncddnhdd.model.*;
@@ -26,6 +27,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/api/ncd-dnhdd")
+@Tag(name = "Ncd Dnhdd Controller", description = "")
 public class NcdDnhddController {
 
     @Autowired

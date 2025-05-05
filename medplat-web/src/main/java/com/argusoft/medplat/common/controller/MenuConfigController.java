@@ -1,4 +1,5 @@
 package com.argusoft.medplat.common.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.common.dto.MenuConfigDto;
 import com.argusoft.medplat.common.service.MenuConfigService;
@@ -22,6 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/menuconfig")
+@Tag(name = "Menu Config Controller", description = "")
 public class MenuConfigController {
 
     @Autowired

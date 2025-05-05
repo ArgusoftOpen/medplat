@@ -1,4 +1,5 @@
 package com.argusoft.medplat.rch.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
 import com.argusoft.medplat.exception.ImtechoSystemException;
@@ -28,6 +29,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/manageanc")
+@Tag(name = "Anc Controller", description = "")
 public class AncController {
 
     @Autowired

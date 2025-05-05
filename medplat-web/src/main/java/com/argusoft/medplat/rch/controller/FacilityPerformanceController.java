@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.rch.controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.exception.ImtechoUserException;
 import com.argusoft.medplat.rch.dto.FacilityPerformanceMasterDto;
@@ -23,6 +24,7 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping("/api/facilitydata")
+@Tag(name = "Facility Performance Controller", description = "")
 public class FacilityPerformanceController {
 
     @Autowired
