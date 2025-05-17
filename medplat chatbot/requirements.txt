@@ -1,0 +1,5 @@
+Flask==2.0.1
+Flask-SQLAlchemy==2.5.1
+translate==3.6.1
+requests==2.28.1
+Werkzeug==2.0.3

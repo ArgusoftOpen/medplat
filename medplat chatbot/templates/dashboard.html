@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedPlat Support Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <style>
+        body {
+            background-color: #f5f8fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .dashboard-container {
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .status-badge {
+            padding: 8px 12px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        
+        .status-pending {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .status-in-progress {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .status-resolved {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .stats-card {
+            border-radius: 10px;
+            padding: 20px;
+            height: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stats-card p {
+            color: #7f8c8d;
+            margin-bottom: 0;
+        }
+        
+        .language-indicator {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-weight: bold;
+            color: white;
+            margin-right: 5px;
+        }
+        
+        .language-en {
+            background-color: #3498db;
+        }
+        
+        .language-hi {
+            background-color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-container">
+            <h2 class="mb-4">MedPlat Support Dashboard</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="stats-card bg-light">
+                        <p>Total Tickets</p>
+                        <h3 id="totalTickets">0</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card bg-light">
+                        <p>Pending</p>
+                        <h3 id="pendingTickets">0</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card bg-light">
+                        <p>In Progress</p>
+                        <h3 id="inProgressTickets">0</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card bg-light">
+                        <p>Resolved</p>
+                        <h3 id="resolvedTickets">0</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Support Tickets</h5>
+                </div>
+                <div class="card-body">
+                    <table id="ticketsTable" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Ticket ID</th>
+                                <th>User</th>
+                                <th>Issue</th>
+                                <th>Language</th>
+                                <th>Device</th>
+                                <th>Created At</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ticketsTableBody">
+                            <!-- Tickets will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Ticket Details Modal -->
+    <div class="modal fade" id="ticketDetailsModal" tabindex="-1" aria-labelledby="ticketDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ticketDetailsModalLabel">Ticket Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Ticket ID:</strong> <span id="modalTicketId"></span></p>
+                            <p><strong>User:</strong> <span id="modalUserName"></span></p>
+                            <p><strong>Device:</strong> <span id="modalDeviceType"></span></p>
+                            <p><strong>Language:</strong> <span id="modalLanguage"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+                            <p><strong>Created At:</strong> <span id="modalCreatedAt"></span></p>
+                            <p><strong>Updated At:</strong> <span id="modalUpdatedAt"></span></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <h6>Issue</h6>
+                            <p id="modalIssue" class="p-2 bg-light rounded"></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <h6>Description</h6>
+                            <p id="modalDescription" class="p-2 bg-light rounded"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h6>Update Status</h6>
+                            <div class="btn-group w-100" role="group">
+                                <button type="button" class="btn btn-outline-warning" onclick="updateTicketStatus('Pending')">Pending</button>
+                                <button type="button" class="btn btn-outline-primary" onclick="updateTicketStatus('In Progress')">In Progress</button>
+                                <button type="button" class="btn btn-outline-success" onclick="updateTicketStatus('Resolved')">Resolved</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        let ticketsTable;
+        let currentTicketId = null;
+        
+        // Initialize DataTable
+        $(document).ready(function() {
+            ticketsTable = $('#ticketsTable').DataTable({
+                order: [[5, 'desc']], // Sort by created date descending
+                columnDefs: [
+                    { width: '10%', targets: 0 }, // Ticket ID
+                    { width: '15%', targets: 1 }, // User
+                    { width: '20%', targets: 2 }, // Issue
+                    { width: '10%', targets: 3 }, // Language
+                    { width: '10%', targets: 4 }, // Device
+                    { width: '15%', targets: 5 }, // Created At
+                    { width: '10%', targets: 6 }, // Status
+                    { width: '10%', targets: 7 }  // Actions
+                ]
+            });
+            
+            // Load tickets
+            loadTickets();
+            
+            // Refresh tickets every 30 seconds
+            setInterval(loadTickets, 30000);
+        });
+        
+        // Load tickets from API
+        function loadTickets() {
+            fetch('/api/tickets')
+                .then(response => response.json())
+                .then(tickets => {
+                    // Clear table
+                    ticketsTable.clear();
+                    
+                    // Add tickets to table
+                    tickets.forEach(ticket => {
+                        const languageLabel = ticket.language === 'hi' ? 
+                            '<span class="language-indicator language-hi">हि</span> Hindi' : 
+                            '<span class="language-indicator language-en">EN</span> English';
+                        
+                        let statusBadge = '';
+                        switch(ticket.status) {
+                            case 'Pending':
+                                statusBadge = '<span class="status-badge status-pending">Pending</span>';
+                                break;
+                            case 'In Progress':
+                                statusBadge = '<span class="status-badge status-in-progress">In Progress</span>';
+                                break;
+                            case 'Resolved':
+                                statusBadge = '<span class="status-badge status-resolved">Resolved</span>';
+                                break;
+                            default:
+                                statusBadge = '<span class="status-badge status-pending">Pending</span>';
+                        }
+                        
+                        ticketsTable.row.add([
+                            ticket.ticket_id,
+                            ticket.user_name,
+                            ticket.issue.length > 30 ? ticket.issue.substring(0, 30) + '...' : ticket.issue,
+                            languageLabel,
+                            ticket.device_type,
+                            ticket.created_at,
+                            statusBadge,
+                            `<button class="btn btn-sm btn-primary" onclick="openTicketDetails('${ticket.ticket_id}')">View</button>`
+                        ]).draw(false);
+                    });
+                    
+                    // Update stats
+                    updateStats(tickets);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to load tickets. Please refresh the page.');
+                });
+        }
+        
+        // Update dashboard stats
+        function updateStats(tickets) {
+            const totalTickets = tickets.length;
+            const pendingTickets = tickets.filter(ticket => ticket.status === 'Pending').length;
+            const inProgressTickets = tickets.filter(ticket => ticket.status === 'In Progress').length;
+            const resolvedTickets = tickets.filter(ticket => ticket.status === 'Resolved').length;
+            
+            document.getElementById('totalTickets').textContent = totalTickets;
+            document.getElementById('pendingTickets').textContent = pendingTickets;
+            document.getElementById('inProgressTickets').textContent = inProgressTickets;
+            document.getElementById('resolvedTickets').textContent = resolvedTickets;
+        }
+        
+        // Open ticket details modal
+        function openTicketDetails(ticketId) {
+            currentTicketId = ticketId;
+            
+            fetch(`/api/ticket/${ticketId}`)
+                .then(response => response.json())
+                .then(ticket => {
+                    document.getElementById('modalTicketId').textContent = ticket.ticket_id;
+                    document.getElementById('modalUserName').textContent = ticket.user_name;
+                    document.getElementById('modalDeviceType').textContent = ticket.device_type;
+                    document.getElementById('modalLanguage').textContent = ticket.language === 'hi' ? 'Hindi' : 'English';
+                    document.getElementById('modalStatus').textContent = ticket.status;
+                    document.getElementById('modalCreatedAt').textContent = ticket.created_at;
+                    document.getElementById('modalUpdatedAt').textContent = ticket.updated_at;
+                    document.getElementById('modalIssue').textContent = ticket.issue;
+                    document.getElementById('modalDescription').textContent = ticket.description;
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('ticketDetailsModal'));
+                    modal.show();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to load ticket details.');
+                });
+        }
+        
+        // Update ticket status
+        function updateTicketStatus(status) {
+            if (!currentTicketId) {
+                return;
+            }
+            
+            fetch(`/api/ticket/${currentTicketId}/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    status: status
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('modalStatus').textContent = data.ticket.status;
+                    loadTickets(); // Refresh the tickets table
+                    alert(`Ticket ${currentTicketId} status updated to ${status}.`);
+                } else {
+                    alert('Failed to update ticket status.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to update ticket status.');
+            });
+        }
+    </script>
+</body>
+</html>
