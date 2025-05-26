@@ -175,4 +175,6 @@ public interface UserDao extends GenericDao<UserMaster, Integer> {
     List<UserMaster> retrieveEmergencyRespondersForChardhamByRoleAndDiscardedUsers(Integer roleId, List<Integer> discardedUsers);
 
     List<OptionTagDto> getListValuesFromFieldKey(String key);
+
+    boolean hasLocationAccess(int loggedInUserId, int userToBeAccessedId);
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.argusoft.medplat.web.users.controller;
+import com.argusoft.medplat.exception.ImtechoUserException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.argusoft.medplat.config.security.ImtechoSecurityUser;
@@ -99,11 +100,11 @@ public class UserController {
      * @param isActive A boolean value for state of user
      * @return A list of UserMasterDto
      */
-    @GetMapping(value = "")
-    public List<UserMasterDto> retrieveAll(@RequestParam(name = "is_active", required = false) Boolean isActive) {
-        return userService.retrieveAll(isActive);
-
-    }
+//    @GetMapping(value = "")
+//    public List<UserMasterDto> retrieveAll(@RequestParam(name = "is_active", required = false) Boolean isActive) {
+//        return userService.retrieveAll(isActive);
+//
+//    }
 
     /**
      * Remove all token and logout user from system
@@ -113,6 +114,10 @@ public class UserController {
     @GetMapping(value = "/logout")
     public void logout(@RequestParam("userName")String userName,@RequestParam("clientId")String clientId){
         Collection<OAuth2AccessToken> tokens = tokenStore.findTokensByClientIdAndUserName(clientId, userName);
+        if(!userName.equals(user.getUserName())){
+            throw new ImtechoUserException("You are not authorized to log out another user.", 403);
+        }
+
         if (tokens != null) {
             for (OAuth2AccessToken token : tokens) {
                 tokenStore.removeRefreshToken(token.getRefreshToken());
@@ -258,10 +263,10 @@ public class UserController {
      * Returns all active users
      * @return A list of UserMasterDto
      */
-    @GetMapping(value = "/all")
-    public List<UserMasterDto> getAllActiveUsers() {
-        return userService.getAllActiveUsers();
-    }
+//    @GetMapping(value = "/all")
+//    public List<UserMasterDto> getAllActiveUsers() {
+//        return userService.getAllActiveUsers();
+//    }
 
     /**
      * Validates health infrastructure for user
