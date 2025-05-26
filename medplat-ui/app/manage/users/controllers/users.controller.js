@@ -17,15 +17,15 @@
         ctrl.statuses=['BOTH','ACTIVE','INACTIVE']
 
         // method to  show users list
-        ctrl.getUsers = function () {
-            Mask.show();
-            UserDAO.retrieveAllUsers().then(function (res) {
-                ctrl.usersList = res;
-            }).finally(function () {
-                Mask.hide();
-            });
+        // ctrl.getUsers = function () {
+        //     Mask.show();
+        //     UserDAO.retrieveAllUsers().then(function (res) {
+        //         ctrl.usersList = res;
+        //     }).finally(function () {
+        //         Mask.hide();
+        //     });
 
-        };
+        // };
         var statusDefault='BOTH';
         ctrl.getUsersByCriteria = function (reset) {
             ctrl.criteria = { roleid: null, locationId: null, searchString: null, orderby: null, order: ctrl.order, limit: ctrl.pagingService.limit, offset: ctrl.pagingService.offSet ,status: statusDefault};

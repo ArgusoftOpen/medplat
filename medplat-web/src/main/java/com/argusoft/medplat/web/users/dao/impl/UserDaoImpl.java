@@ -16,7 +16,7 @@ import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-
+import java.math.BigInteger;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -521,4 +521,28 @@ public class UserDaoImpl extends GenericDaoImpl<UserMaster, Integer> implements 
 
         return q.setResultTransformer(Transformers.aliasToBean(OptionTagDto.class)).list();
     }
+
+    @Override
+    public boolean hasLocationAccess(int loggedInUserId, int userToBeAccessedId) {
+        String query = "SELECT COUNT(*) " +
+                "FROM um_user_location uul1 " +
+                "JOIN location_hierchy_closer_det lcloser ON uul1.loc_id = lcloser.parent_id " +
+                "JOIN um_user_location uul2 ON uul2.loc_id = lcloser.child_id " +
+                "WHERE uul1.user_id = :loggedInUserId " +
+                "AND uul2.user_id = :userToBeAccessedId";
+
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery<Long> q = session.createNativeQuery(query);
+        q.setParameter("loggedInUserId", loggedInUserId);
+        q.setParameter("userToBeAccessedId", userToBeAccessedId);
+
+        Object result = q.uniqueResult();
+        if (result instanceof BigInteger) {
+            return ((BigInteger) result).longValue() > 0;
+        } else if (result instanceof Number) {
+            return ((Number) result).longValue() > 0;
+        }
+        return false;
+    }
+
 }

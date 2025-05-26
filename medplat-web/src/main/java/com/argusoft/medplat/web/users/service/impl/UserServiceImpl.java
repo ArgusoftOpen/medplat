@@ -127,13 +127,56 @@ public class UserServiceImpl implements UserService {
     Random rand = new Random();
 
     /**
+     * A util method to check if a user is authorised to access a user or perform an update operation
+     *
+     * @param userId UserId
+     */
+    public boolean isAuthorizedToAccessUser(Integer userId){
+        if(!isAnonymous()){
+            UserMaster user = userDao.retrieveById(userId);
+            List<Integer> roles = new ArrayList<>();
+            List<RoleMasterDto> retrieveRolesManagedByRoleId = roleManagementService.retrieveRolesManagedByRoleId(imtechoSecurityUser.getRoleId());
+            for (RoleMasterDto role : retrieveRolesManagedByRoleId) {
+                roles.add(role.getId());
+            }
+            if(!imtechoSecurityUser.getId().equals(user.getId()) && (!roles.contains(user.getRoleId()) || !userDao.hasLocationAccess(imtechoSecurityUser.getId(), user.getId())) ){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public Map<String, Integer> createOrUpdate(UserMasterDto userDto) {
+        userDto.setNoOfAttempts(0);
         Map<String, Integer> ids = new LinkedHashMap<>();
         String roleName = roleDao.retrieveById(userDto.getRoleId()).getName();
         UserMaster user = UserMapper.convertUserDtoToMaster(userDto,roleName);
+
+        if(user.getId()!=null && !isAuthorizedToAccessUser(user.getId())){
+            throw new ImtechoUserException("You don't have acess to update this user", 403);
+        }
+
+        UserMaster originalUser = userDao.retrieveById(user.getId());
+        if (Objects.equals(imtechoSecurityUser.getId(), user.getId()) && !Objects.equals(imtechoSecurityUser.getRoleId(), user.getRoleId())) {
+            throw new ImtechoUserException("User is not allowed to modify it's own role", 403);
+        }
+        if (originalUser != null) {
+            List<Integer> roles = new ArrayList<>();
+            List<RoleMasterDto> retrieveRolesManagedByRoleId = roleManagementService.retrieveRolesManagedByRoleId(imtechoSecurityUser.getRoleId());
+            for (RoleMasterDto role : retrieveRolesManagedByRoleId) {
+                roles.add(role.getId());
+            }
+            if (!roles.contains(user.getRoleId()) && !Objects.equals(originalUser.getRoleId(), user.getRoleId())){
+                throw new ImtechoUserException("You don't have access to Modify the Role", 403);
+            }
+        }
+
+
         UserMaster userRetrieved = userDao.retrieveByUserName(userDto.getUserName());
         handleException(userRetrieved, user);
 
@@ -427,6 +470,9 @@ public class UserServiceImpl implements UserService {
     public UserMasterDto retrieveById(Integer id) {
         UserMaster user = userDao.retrieveById(id);
         if (user != null) {
+            if(!isAuthorizedToAccessUser(id)){
+                throw new ImtechoUserException("You don't have access to this user", 403);
+            }
             UserMasterDto userDto = UserMapper.convertUserMasterToDto(user);
             List<UserLocation> retrieveLocationsByUserId = userLocationDao.retrieveLocationsByUserId(id);
             List<UserLocation> usersLocations = userLocationDao.retrieveLocationsByUserId(id);
@@ -483,6 +529,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void toggleActive(UserMasterDto userDto, Boolean isActive) {
         UserMaster userMaster = userDao.retrieveById(userDto.getId());
+        if(userDto.getId()!=null && !isAuthorizedToAccessUser(userDto.getId())){
+            throw new ImtechoUserException("you are not allowed to change the state of the user", 403);
+        }
+
         if (Boolean.TRUE.equals(isActive)) {
             if (userDto.getContactNumber() != null) {
                 List<UserMasterDto> conflictContactUserInfo = userDao.conflictUserOfContactNumber(userDto.getContactNumber(), userDto.getId());
@@ -556,7 +606,17 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<UserMasterDto> getUsersByIds(Set<Integer> userIds) {
-        return UserMapper.convertUserMasterListToDtoList(userDao.getUsersByIds(userIds));
+        Set<Integer> filteredUserIds = new HashSet<>();
+        for (Integer userId : userIds) {
+            if (isAuthorizedToAccessUser(userId)) {
+                filteredUserIds.add(userId);
+            }else{
+                Logger.getLogger(UserServiceImpl.class.getName())
+                        .log(Level.WARNING, "User access check failed for userId: {0} — filtered out from result", userId);
+            }
+        }
+
+        return UserMapper.convertUserMasterListToDtoList(userDao.getUsersByIds(filteredUserIds));
     }
 
     /**
@@ -656,6 +716,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void changePassword(String newEncryptedPassword, Integer userId) {
+        if(userId!=null && !isAuthorizedToAccessUser(userId)){
+            throw new ImtechoUserException("You don't have access to change the password of the given user", 403);
+        }
         String newPassword = LoginAESEncryptionUtil.decrypt(newEncryptedPassword,true);
         if (Objects.isNull(newPassword)) {
             throw new ImtechoUserException("Something went wrong, Please try again", 0);
@@ -1268,7 +1331,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public String generateLoginCode(Integer userId) {
-
+        if(userId!=null && !isAuthorizedToAccessUser(userId)){
+            throw new ImtechoUserException("You are not authorized to generate a login code for this user.", 403);
+        }
         UserMaster userMaster = userDao.retrieveById(userId);
         if (userMaster != null && userMaster.getLoginCode() != null) {
             throw new ImtechoUserException("Login code is already Exist", 1);
