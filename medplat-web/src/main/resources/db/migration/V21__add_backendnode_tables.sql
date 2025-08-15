@@ -1,11 +1,15 @@
+-- Updated schema with all audit columns as NOT NULL and proper timestamp types
+
 CREATE TABLE IF NOT EXISTS indicator_master (
   id SERIAL PRIMARY KEY,
   indicator_name TEXT NOT NULL,
   description TEXT,
   sql_query TEXT NOT NULL,
   query_result INTEGER,
-  created_by INTEGER,
-  created_on TIMESTAMP DEFAULT NOW()
+  created_by INTEGER NOT NULL,
+  created_on TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+  modified_by INTEGER NOT NULL,
+  modified_on TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS derived_attributes (
@@ -13,13 +17,60 @@ CREATE TABLE IF NOT EXISTS derived_attributes (
   derived_name TEXT NOT NULL,
   formula TEXT NOT NULL,
   result DOUBLE PRECISION,
-  created_on TIMESTAMP DEFAULT NOW()
+  created_by INTEGER NOT NULL,
+  created_on TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+  modified_by INTEGER NOT NULL,
+  modified_on TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS dataset_master (
   id SERIAL PRIMARY KEY,
   dataset_name TEXT NOT NULL,
   sql_query TEXT NOT NULL,
-  created_on TIMESTAMP DEFAULT NOW(),
-  created_by INTEGER
+  created_by INTEGER NOT NULL,
+  created_on TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+  modified_by INTEGER NOT NULL,
+  modified_on TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );
+
+-- If you have existing tables, use these ALTER statements to update them:
+
+-- For indicator_master
+ALTER TABLE indicator_master
+ADD COLUMN IF NOT EXISTS modified_by INTEGER,
+ADD COLUMN IF NOT EXISTS modified_on TIMESTAMP WITHOUT TIME ZONE;
+
+ALTER TABLE indicator_master
+ALTER COLUMN created_by SET NOT NULL,
+ALTER COLUMN created_on TYPE TIMESTAMP WITHOUT TIME ZONE,
+ALTER COLUMN created_on SET NOT NULL,
+ALTER COLUMN modified_by SET NOT NULL,
+ALTER COLUMN modified_on TYPE TIMESTAMP WITHOUT TIME ZONE,
+ALTER COLUMN modified_on SET NOT NULL;
+
+-- For derived_attributes
+ALTER TABLE derived_attributes
+ADD COLUMN IF NOT EXISTS created_by INTEGER,
+ADD COLUMN IF NOT EXISTS modified_by INTEGER,
+ADD COLUMN IF NOT EXISTS modified_on TIMESTAMP WITHOUT TIME ZONE;
+
+ALTER TABLE derived_attributes
+ALTER COLUMN created_by SET NOT NULL,
+ALTER COLUMN created_on TYPE TIMESTAMP WITHOUT TIME ZONE,
+ALTER COLUMN created_on SET NOT NULL,
+ALTER COLUMN modified_by SET NOT NULL,
+ALTER COLUMN modified_on TYPE TIMESTAMP WITHOUT TIME ZONE,
+ALTER COLUMN modified_on SET NOT NULL;
+
+-- For dataset_master
+ALTER TABLE dataset_master
+ADD COLUMN IF NOT EXISTS modified_by INTEGER,
+ADD COLUMN IF NOT EXISTS modified_on TIMESTAMP WITHOUT TIME ZONE;
+
+ALTER TABLE dataset_master
+ALTER COLUMN created_by SET NOT NULL,
+ALTER COLUMN created_on TYPE TIMESTAMP WITHOUT TIME ZONE,
+ALTER COLUMN created_on SET NOT NULL,
+ALTER COLUMN modified_by SET NOT NULL,
+ALTER COLUMN modified_on TYPE TIMESTAMP WITHOUT TIME ZONE,
+ALTER COLUMN modified_on SET NOT NULL;
