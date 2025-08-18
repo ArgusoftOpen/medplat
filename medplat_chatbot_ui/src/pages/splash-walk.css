@@ -1,0 +1,276 @@
+/* Fullscreen overlay with enhanced gradient */
+.walk-overlay {
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 800px 400px at 30% 20%, rgba(99, 102, 241, 0.15), transparent 70%),
+    radial-gradient(ellipse 600px 300px at 70% 80%, rgba(147, 197, 253, 0.12), transparent 70%),
+    linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #94a3b8 100%);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  z-index: 9999;
+  animation: overlay-fade 1.2s ease-in-out forwards;
+  animation-delay: 5.4s;
+}
+
+/* Walker wrapper with improved scaling and positioning */
+.walker {
+  animation: walk-across 5.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform: scale(1.15);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+  will-change: transform, opacity;
+}
+
+/* Enhanced arm animations */
+.arm {
+  transform-origin: 50% 0%;
+  transform-box: fill-box;
+  will-change: transform;
+}
+
+.arm-left { 
+  animation: swing-left 0.8s ease-in-out infinite;
+}
+
+.arm-right { 
+  animation: swing-right 0.8s ease-in-out infinite;
+}
+
+/* Enhanced leg animations */
+.leg {
+  transform-origin: 50% 0%;
+  transform-box: fill-box;
+  will-change: transform;
+}
+
+.leg-left { 
+  animation: step-left 0.8s ease-in-out infinite;
+}
+
+.leg-right { 
+  animation: step-right 0.8s ease-in-out infinite;
+}
+
+/* Improved walking animations with better timing */
+@keyframes swing-left {
+  0%   { transform: rotate(-25deg); }
+  50%  { transform: rotate(20deg); }
+  100% { transform: rotate(-25deg); }
+}
+
+@keyframes swing-right {
+  0%   { transform: rotate(25deg); }
+  50%  { transform: rotate(-20deg); }
+  100% { transform: rotate(25deg); }
+}
+
+@keyframes step-left {
+  0%   { transform: rotate(-15deg); }
+  25%  { transform: rotate(-8deg); }
+  50%  { transform: rotate(12deg); }
+  75%  { transform: rotate(8deg); }
+  100% { transform: rotate(-15deg); }
+}
+
+@keyframes step-right {
+  0%   { transform: rotate(15deg); }
+  25%  { transform: rotate(8deg); }
+  50%  { transform: rotate(-12deg); }
+  75%  { transform: rotate(-8deg); }
+  100% { transform: rotate(15deg); }
+}
+
+/* Enhanced slide across screen with better easing */
+@keyframes walk-across {
+  0%   { 
+    transform: translateX(-60vw) scale(1.15); 
+    opacity: 0; 
+  }
+  8%   { 
+    opacity: 1; 
+    transform: translateX(-45vw) scale(1.15); 
+  }
+  15%  { 
+    transform: translateX(-20vw) scale(1.15); 
+  }
+  65%  { 
+    transform: translateX(5vw) scale(1.15); 
+  }
+  85%  { 
+    transform: translateX(25vw) scale(1.15); 
+  }
+  100% { 
+    transform: translateX(45vw) scale(1.15); 
+    opacity: 1; 
+  }
+}
+
+/* Enhanced shutters with smoother reveal */
+.shutter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50vh;
+  background: 
+    linear-gradient(180deg, 
+      rgba(15, 23, 42, 0.85) 0%,
+      rgba(30, 41, 59, 0.75) 20%,
+      rgba(51, 65, 85, 0.45) 60%,
+      rgba(71, 85, 105, 0.25) 80%,
+      rgba(100, 116, 139, 0.1) 100%
+    );
+  backdrop-filter: blur(1.2px) saturate(1.1);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.shutter-top {
+  top: 0;
+  background: 
+    linear-gradient(180deg, 
+      rgba(15, 23, 42, 0.9) 0%,
+      rgba(30, 41, 59, 0.8) 30%,
+      rgba(51, 65, 85, 0.5) 70%,
+      rgba(71, 85, 105, 0.2) 100%
+    );
+  animation: shutter-up 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 3.4s;
+}
+
+.shutter-bottom {
+  bottom: 0;
+  background: 
+    linear-gradient(0deg, 
+      rgba(15, 23, 42, 0.9) 0%,
+      rgba(30, 41, 59, 0.8) 30%,
+      rgba(51, 65, 85, 0.5) 70%,
+      rgba(71, 85, 105, 0.2) 100%
+    );
+  animation: shutter-down 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 3.4s;
+}
+
+/* Improved shutter animations */
+@keyframes shutter-up { 
+  0%   { 
+    transform: translateY(0%); 
+    opacity: 1; 
+  }
+  80%  { 
+    transform: translateY(-95%); 
+    opacity: 0.3; 
+  }
+  100% { 
+    transform: translateY(-100%); 
+    opacity: 0; 
+  } 
+}
+
+@keyframes shutter-down { 
+  0%   { 
+    transform: translateY(0%); 
+    opacity: 1; 
+  }
+  80%  { 
+    transform: translateY(95%); 
+    opacity: 0.3; 
+  }
+  100% { 
+    transform: translateY(100%); 
+    opacity: 0; 
+  } 
+}
+
+/* Enhanced overlay fade out */
+@keyframes overlay-fade { 
+  0%   { 
+    opacity: 1; 
+    visibility: visible;
+    backdrop-filter: blur(0px);
+  }
+  70%  { 
+    opacity: 0.7; 
+    backdrop-filter: blur(2px);
+  }
+  100% { 
+    opacity: 0; 
+    visibility: hidden;
+    backdrop-filter: blur(4px);
+  } 
+}
+
+/* Performance optimizations */
+.walker-wrapper {
+  will-change: auto;
+}
+
+.walker-wrapper * {
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .walker {
+    transform: scale(0.9);
+    animation: walk-across-mobile 5.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  
+  @keyframes walk-across-mobile {
+    0%   { transform: translateX(-80vw) scale(0.9); opacity: 0; }
+    8%   { opacity: 1; transform: translateX(-60vw) scale(0.9); }
+    15%  { transform: translateX(-30vw) scale(0.9); }
+    65%  { transform: translateX(10vw) scale(0.9); }
+    85%  { transform: translateX(40vw) scale(0.9); }
+    100% { transform: translateX(70vw) scale(0.9); opacity: 1; }
+  }
+}
+
+@media (max-width: 480px) {
+  .walker {
+    transform: scale(0.75);
+  }
+  
+  .arm-left, .arm-right {
+    animation-duration: 0.9s;
+  }
+  
+  .leg-left, .leg-right {
+    animation-duration: 0.9s;
+  }
+}
+.cap {
+  position: absolute;
+  top: 50%;            /* adjust this if you want it higher/lower */
+  left: 0;
+  animation: ballAcross 6s ease-in-out forwards;
+  transform-origin: center bottom;
+}
+
+@keyframes ballAcross {
+  0% {
+    transform: translate(0, 0);
+  }
+  15% {
+    transform: translate(15vw, -120px); /* big arc */
+  }
+  30% {
+    transform: translate(30vw, 0);      /* land */
+  }
+  45% {
+    transform: translate(45vw, -100px); /* slightly smaller arc */
+  }
+  60% {
+    transform: translate(60vw, 0);
+  }
+  75% {
+    transform: translate(75vw, -80px);  /* even smaller arc */
+  }
+  90% {
+    transform: translate(90vw, 0);
+  }
+  100% {
+    transform: translate(100vw, 0);     /* exit screen */
+  }
+}
