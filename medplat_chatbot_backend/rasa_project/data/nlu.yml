@@ -1,0 +1,151 @@
+version: "3.1"
+
+nlu:
+
+- intent: login_issue
+  examples: |
+    - Unable to login to the app
+    - I can't log in
+    - Login not working
+    - I have login issues
+    - App is not letting me log in
+    - Login karne mein dikkat ho rahi hai
+    - I’m having trouble signing in
+    - I cannot access my account
+    - Getting login error
+    - App won’t accept my password
+    - Application not letting me in
+    - Access denied while logging in
+    - Log in fail हो रहा है
+    - Login stuck on loading
+    - I keep getting an error while logging in
+    - My login credentials are not working
+    - The login page doesn’t load
+    - मैं लॉग इन नहीं कर पा रही हूँ।
+
+- intent: password_reset
+  examples: |
+    - I want to reset my password
+    - How do I reset my password?
+    - Forgot my password
+    - Need help with password reset
+    - Mera password reset karna hai
+    - How can I change my password?
+    - I lost my password
+    - Please send me a reset link
+    - Can't remember my password
+    - Forgot the login credentials
+    - Reset password option is not working
+    - I need a new password
+    - Reset my login details
+    - Password reset kaise karun?
+    - I need to update my password
+    - Can you help me with resetting password?
+    - I don’t know my password anymore
+    - I need assistance with my password
+
+- intent: login_issue_still
+  examples: |
+    - Still not able to log in
+    - Tried resetting password, still can't log in
+    - Login issue not resolved
+
+- intent: login_followup_device
+  examples: |
+    - I'm using an Android phone
+    - I am on iPhone
+    - It's a Samsung device
+    - My device is a Vivo phone
+    - I use a tablet
+    - It's a desktop
+    - I am on PC
+
+- intent: login_followup_error
+  examples: |
+    - It shows "invalid credentials"
+    - I'm getting a timeout error
+    - The error says user not found
+    - App says wrong password
+    - Keeps loading and nothing happens
+    - I get a white screen
+
+- intent: password_reset_not_working
+  examples: |
+    - I didn't get the reset link
+    - The link is expired
+    - Reset option is broken
+    - I clicked reset but nothing happened
+    - Still waiting for reset mail
+    - Reset button not responding
+
+- intent: escalate_to_support
+  examples: |
+    - I need to talk to someone
+    - Can you escalate this?
+    - Please connect me to support
+    - I want human help
+    - Talk to agent
+    - Escalate the ticket
+
+- intent: share_additional_details
+  examples: |
+    - This started after the last update
+    - It was working yesterday
+    - I think the app version is old
+    - Happened after I changed phone
+    - I updated recently
+    - It works fine on another phone
+
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - hey
+    - good morning
+    - good evening
+    - namaste
+
+- intent: goodbye
+  examples: |
+    - bye
+    - see you
+    - take care
+    - goodbye
+    - talk to you later
+    - see you
+    - take care
+    - goodbye
+    - talk to you later
+    
+- intent: how_are_you
+  examples: |
+    - how are you?
+    - how's it going?
+    - how are you doing?
+
+- intent: affirm
+  examples: |
+    - yes
+    - of course
+    - sure
+    - definitely
+
+- intent: deny
+  examples: |
+    - no
+    - not now
+    - I don't think so
+    - never
+
+- intent: thank_you
+  examples: |
+    - thanks
+    - thank you
+    - much appreciated
+    - thx
+
+- intent: provide_email
+  examples: |
+    - My email is [abc@gmail.com](user_email)
+    - [jane.doe@yahoo.com](user_email)
+    - It's [user@example.com](user_email)
