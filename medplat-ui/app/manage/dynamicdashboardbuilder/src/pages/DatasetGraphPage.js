@@ -34,7 +34,7 @@ export default function DatasetGraphPage() {
   const [chartType, setChartType] = useState("bar");
 
   useEffect(() => {
-    axios.get(`/api/dataset-master/${id}`)
+    axios.get(`/api/ddb/dataset-master/${id}`)
       .then(res => setDataset(res.data))
       .catch(err => setError("Dataset not found"));
   }, [id]);
@@ -42,7 +42,7 @@ export default function DatasetGraphPage() {
   useEffect(() => {
     if (dataset && dataset.sql_query) {
       setLoading(true);
-      axios.post("/api/run-sql", { query: dataset.sql_query })
+      axios.post("/api/ddb/run-sql", { query: dataset.sql_query })
         .then(res => setData(res.data))
         .catch(err => setError("Error running SQL: " + (err.response?.data?.error || err.message)))
         .finally(() => setLoading(false));

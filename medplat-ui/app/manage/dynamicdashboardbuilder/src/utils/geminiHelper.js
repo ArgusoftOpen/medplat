@@ -168,5 +168,3 @@ export function getAutomaticChartRecommendation(data, columns) {
   // Default to bar chart for categorical comparisons
   return "bar";
 }
-
-// If you have any axios/fetch calls to localhost:5000, update to localhost:8181

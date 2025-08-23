@@ -15,7 +15,7 @@ export default function VisualizePage() {
 
   const fetchTables = () => {
     axios
-      .get("http://localhost:8181/api/tables")
+      .get("http://localhost:8181/api/ddb/tables")
       .then((res) => setTables(res.data))
       .catch(() => setTables([]));
   };
@@ -24,7 +24,7 @@ export default function VisualizePage() {
   useEffect(() => {
     if (selectedTable) {
       axios
-        .get(`http://localhost:8181/api/columns/${selectedTable}`)
+        .get(`http://localhost:8181/api/ddb/columns/${selectedTable}`)
         .then((res) => setColumns(res.data))
         .catch(() => setColumns([]));
       setXAxis("");
@@ -40,7 +40,7 @@ export default function VisualizePage() {
           ? { table: selectedTable, xAxis, chartType }
           : { table: selectedTable, xAxis, indicator: yAxis, chartType };
       axios
-        .post("http://localhost:8181/api/grouped-count", body)
+        .post("http://localhost:8181/api/ddb/grouped-count", body)
         .then((res) => setData(res.data))
         .catch(() => setData([]));
     }

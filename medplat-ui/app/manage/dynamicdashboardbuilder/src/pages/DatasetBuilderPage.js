@@ -149,7 +149,7 @@ export default function DatasetBuilderPage() {
     try {
       const sql = generateSQL();
       setSqlPreview(sql);
-      const res = await axios.post("/api/preview-sql", { sql });
+      const res = await axios.post("/api/ddb/preview-sql", { sql });
       setPreviewData(res.data.rows || []);
     } catch (err) {
       setPreviewError(err.response?.data?.error || err.message);
@@ -164,7 +164,7 @@ export default function DatasetBuilderPage() {
       .toISOString()
       .replace(/[:.]/g, "_")}`;
     try {
-      const res = await axios.post("/api/save-dataset", {
+      const res = await axios.post("http://localhost:8181/api/ddb/save-dataset", {
         sql: sqlPreview,
         tableName,
       });
@@ -181,7 +181,7 @@ export default function DatasetBuilderPage() {
   // Fetch all tables on mount
   useEffect(() => {
     axios
-      .get("/api/tables")
+      .get("/api/ddb/tables")
       .then((res) => setTables(res.data))
       .catch(() => setTables([]));
   }, []);
@@ -191,12 +191,12 @@ export default function DatasetBuilderPage() {
     selectedTables.forEach((table) => {
       if (!metadata[table]) {
         axios
-          .get(`/api/table-metadata/${table}`)
+          .get(`/api/ddb/table-metadata/${table}`)
           .then((res) => setMetadata((m) => ({ ...m, [table]: res.data })));
       }
       if (!sampleData[table]) {
         axios
-          .get(`/api/sample-data/${table}?limit=10`)
+          .get(`/api/ddb/sample-data/${table}?limit=10`)
           .then((res) => setSampleData((d) => ({ ...d, [table]: res.data })));
       }
     });

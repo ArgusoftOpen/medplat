@@ -29,11 +29,11 @@ export default function DerivedAttributePage() {
   // Fetch tables and derived attributes
   useEffect(() => {
     axios
-      .get("/api/tables")
+      .get("/api/ddb/tables")
       .then((res) => setTables(res.data))
       .catch(() => setTables([]));
     axios
-      .get("/api/indicator-master")
+      .get("/api/ddb/indicator-master")
       .then((res) => setIndicators(res.data))
       .catch(() => setIndicators([]));
     fetchDerived();
@@ -41,7 +41,7 @@ export default function DerivedAttributePage() {
 
   const fetchDerived = async () => {
     try {
-      const res = await axios.get("/api/derived-attributes");
+      const res = await axios.get("/api/ddb/derived-attributes");
       setDerivedList(res.data);
     } catch {
       setDerivedList([]);
@@ -52,7 +52,7 @@ export default function DerivedAttributePage() {
   useEffect(() => {
     if (selectedTable) {
       axios
-        .get(`/api/columns/${selectedTable}`)
+        .get(`/api/ddb/columns/${selectedTable}`)
         .then((res) => setColumns(res.data))
         .catch(() => setColumns([]));
     } else {
@@ -81,7 +81,7 @@ export default function DerivedAttributePage() {
       if (found.type === "column") {
         if (!selectedTable) return setter(null);
         try {
-          const res = await axios.post("/api/attribute-value", {
+          const res = await axios.post("/api/ddb/attribute-value", {
             table: selectedTable,
             column: attr,
           });
@@ -91,7 +91,7 @@ export default function DerivedAttributePage() {
         }
       } else if (found.type === "indicator") {
         try {
-          const res = await axios.post("/api/attribute-value", {
+          const res = await axios.post("/api/ddb/attribute-value", {
             indicator: attr,
           });
           setter(res.data.value);
@@ -154,7 +154,7 @@ export default function DerivedAttributePage() {
       return;
     }
     try {
-      await axios.post("/api/derived-attribute", {
+      await axios.post("/api/ddb/derived-attribute", {
         derived_name: derivedName,
         formula,
         result,

@@ -13,7 +13,7 @@ export default function SqlQueryPage() {
     setError("");
     setResult(null);
     try {
-      const res = await axios.post("http://localhost:8181/api/run-sql", {
+      const res = await axios.post("http://localhost:8181/api/ddb/run-sql", {
         query,
       });
       setResult(res.data);

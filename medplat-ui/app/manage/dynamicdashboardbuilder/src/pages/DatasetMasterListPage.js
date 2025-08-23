@@ -23,14 +23,14 @@ import {
 /*
  * Expected API Endpoints:
  *
- * 1. GET /api/dataset-master
+ * 1. GET /api/ddb/dataset-master
  *    Returns: Array of dataset objects with fields: id, dataset_name, sql_query, created_on, created_by
  *
- * 2. POST /api/dataset-chart (optional)
+ * 2. POST /api/ddb/dataset-chart (optional)
  *    Body: { sql: "SELECT column, COUNT(*) as count FROM table GROUP BY column", datasetId: 123 }
  *    Returns: Array of objects in format: [{ label: "category1", count: 5 }, { label: "category2", count: 3 }]
  *
- * 3. POST /api/preview-sql (fallback)
+ * 3. POST /api/ddb/preview-sql (fallback)
  *    Body: { sql: "SELECT column, COUNT(*) as count FROM table GROUP BY column" }
  *    Returns: { rows: [{ column: "value1", count: 5 }, { column: "value2", count: 3 }] }
  *    This is used as fallback if /api/dataset-chart is not available
@@ -239,25 +239,55 @@ export default function DatasetMasterListPage() {
     // Build filter conditions
     const filterConditions = filters
       .map((filter, idx) => {
-        let condition = `${filter.column} `;
+        // Properly handle column names with table prefixes and quotes
+        let columnName = filter.column;
 
-        if (
-          filter.operator === "IS NULL" ||
-          filter.operator === "IS NOT NULL"
-        ) {
+        // Handle table.column format
+        if (columnName.includes('.')) {
+          const parts = columnName.split('.');
+          if (parts.length === 2) {
+            const [table, column] = parts;
+            // Clean and properly format: table."column"
+            const cleanTable = table.replace(/["`]/g, '').trim();
+            const cleanColumn = column.replace(/["`]/g, '').trim();
+            columnName = `${cleanTable}."${cleanColumn}"`;
+          }
+        } else {
+          // Single column name - add quotes if it contains special characters or spaces
+          const cleanColumn = columnName.replace(/["`]/g, '').trim();
+          if (cleanColumn.includes(' ') || cleanColumn.includes('-') || cleanColumn.toLowerCase() !== cleanColumn) {
+            columnName = `"${cleanColumn}"`;
+          } else {
+            columnName = cleanColumn;
+          }
+        }
+
+        let condition = `${columnName} `;
+
+        if (filter.operator === "IS NULL" || filter.operator === "IS NOT NULL") {
           condition += filter.operator;
         } else if (filter.operator === "IN" || filter.operator === "NOT IN") {
-          condition += `${filter.operator} (${filter.value})`;
+          // Handle IN operator - ensure values are properly quoted
+          const values = filter.value
+            .split(',')
+            .map(v => `'${v.trim().replace(/'/g, "''")}'`)
+            .join(', ');
+          condition += `${filter.operator} (${values})`;
         } else if (filter.operator === "LIKE" || filter.operator === "ILIKE") {
-          condition += `${filter.operator} '%${filter.value}%'`;
+          const escapedValue = filter.value.replace(/'/g, "''");
+          condition += `${filter.operator} '%${escapedValue}%'`;
         } else if (filter.operator === "BETWEEN") {
           if (Array.isArray(filter.value) && filter.value.length === 2) {
-            condition += `BETWEEN '${filter.value[0]}' AND '${filter.value[1]}'`;
+            const val1 = filter.value[0].replace(/'/g, "''");
+            const val2 = filter.value[1].replace(/'/g, "''");
+            condition += `BETWEEN '${val1}' AND '${val2}'`;
           } else {
             condition += "BETWEEN '' AND ''";
           }
         } else {
-          condition += `${filter.operator} '${filter.value}'`;
+          // Standard operators (=, !=, >, <, etc.)
+          const escapedValue = filter.value.replace(/'/g, "''");
+          condition += `${filter.operator} '${escapedValue}'`;
         }
 
         const logic = idx > 0 ? ` ${filter.logic || "AND"} ` : "";
@@ -267,23 +297,27 @@ export default function DatasetMasterListPage() {
 
     // Add filters to SQL
     if (hasWhere) {
-      // Find the WHERE clause and add our conditions with AND
-      sql = sql.replace(
-        /\s+(GROUP\s+BY|ORDER\s+BY|HAVING|LIMIT)/i,
-        ` AND ${filterConditions} $1`
-      );
-      if (!sql.includes(filterConditions)) {
-        // If no GROUP BY, ORDER BY etc., just append
+      // Find common SQL clauses that come after WHERE
+      const afterWherePattern = /\s+(GROUP\s+BY|ORDER\s+BY|HAVING|LIMIT|OFFSET)/i;
+      const match = sql.match(afterWherePattern);
+
+      if (match) {
+        // Insert filter conditions before the matched clause
+        sql = sql.replace(afterWherePattern, ` AND ${filterConditions} $1`);
+      } else {
+        // No GROUP BY, ORDER BY etc., just append to end
         sql += ` AND ${filterConditions}`;
       }
     } else {
-      // Add WHERE clause before GROUP BY, ORDER BY, etc.
-      sql = sql.replace(
-        /\s+(GROUP\s+BY|ORDER\s+BY|HAVING|LIMIT)/i,
-        ` WHERE ${filterConditions} $1`
-      );
-      if (!sql.includes(filterConditions)) {
-        // If no GROUP BY, ORDER BY etc., just append
+      // Add WHERE clause
+      const afterWherePattern = /\s+(GROUP\s+BY|ORDER\s+BY|HAVING|LIMIT|OFFSET)/i;
+      const match = sql.match(afterWherePattern);
+
+      if (match) {
+        // Insert WHERE clause before the matched clause
+        sql = sql.replace(afterWherePattern, ` WHERE ${filterConditions} $1`);
+      } else {
+        // No GROUP BY, ORDER BY etc., just append to end
         sql += ` WHERE ${filterConditions}`;
       }
     }
@@ -303,7 +337,7 @@ export default function DatasetMasterListPage() {
       console.log("Filtered SQL:", filteredSQL);
 
       // Use the /api/run-sql endpoint to get SQL results
-      const response = await axios.post("/api/run-sql", {
+      const response = await axios.post("/api/ddb/run-sql", {
         query: filteredSQL,
       });
 
@@ -576,7 +610,7 @@ export default function DatasetMasterListPage() {
   useEffect(() => {
     // Fetch datasets list
     axios
-      .get("/api/dataset-master")
+      .get("/api/ddb/dataset-master")
       .then((res) => {
         setDatasets(res.data);
       })

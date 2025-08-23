@@ -7,7 +7,7 @@ export default function UploadPage() {
 
   const fetchTables = () => {
     axios
-      .get("http://localhost:8181/api/tables")
+      .get("http://localhost:8181/api/ddb/tables")
       .then((res) => setTables(res.data))
       .catch(() => setTables([]));
   };

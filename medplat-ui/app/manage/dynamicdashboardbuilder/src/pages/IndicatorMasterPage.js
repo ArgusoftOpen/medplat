@@ -17,7 +17,7 @@ export default function IndicatorMasterPage() {
     setResult(null);
     setLoading(true);
     try {
-      const res = await axios.post("/api/indicator-master", {
+      const res = await axios.post("/api/ddb/indicator-master", {
         indicator_name: indicatorName,
         description,
         sql_query: sqlQuery,
@@ -34,7 +34,7 @@ export default function IndicatorMasterPage() {
 
   const fetchHistory = async () => {
     try {
-      const res = await axios.get("/api/indicator-master");
+      const res = await axios.get("/api/ddb/indicator-master");
       setHistory(res.data);
     } catch {
       setHistory([]);
