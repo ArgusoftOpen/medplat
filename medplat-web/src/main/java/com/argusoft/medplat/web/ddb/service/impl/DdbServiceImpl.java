@@ -84,6 +84,11 @@ public class DdbServiceImpl implements DdbService {
             throw new IllegalArgumentException("Only SELECT queries are allowed.");
         }
 
+        // Additional security check
+        if (containsForbiddenKeywords(sql.trim().toLowerCase())) {
+            throw new IllegalArgumentException("Query contains forbidden operations or keywords.");
+        }
+
         String previewSql = sql.trim().replaceAll(";*$", "");
         if (!previewSql.toLowerCase().contains("limit")) {
             previewSql += " LIMIT 20";
@@ -92,6 +97,7 @@ public class DdbServiceImpl implements DdbService {
         List<Map<String, Object>> rows = ddbDao.executeNativeQuery(previewSql);
         return Collections.singletonMap("rows", rows);
     }
+
 
     @Override
     @Transactional
@@ -188,6 +194,17 @@ public class DdbServiceImpl implements DdbService {
             throw new IllegalArgumentException("Missing SQL query");
         }
 
+        // SECURITY: Validate that only SELECT queries are allowed
+        String trimmedQuery = query.trim().toLowerCase();
+        if (!trimmedQuery.startsWith("select")) {
+            throw new IllegalArgumentException("Only SELECT queries are allowed. DELETE, INSERT, UPDATE, DROP, ALTER operations are forbidden.");
+        }
+
+        // Additional security checks
+        if (containsForbiddenKeywords(trimmedQuery)) {
+            throw new IllegalArgumentException("Query contains forbidden operations or keywords.");
+        }
+
         List<Map<String, Object>> rows = ddbDao.executeNativeQuery(query);
         List<String> fields = CollectionUtils.isEmpty(rows) ?
                 new ArrayList<>() : new ArrayList<>(rows.get(0).keySet());
@@ -197,6 +214,27 @@ public class DdbServiceImpl implements DdbService {
         response.put("fields", fields);
         return response;
     }
+
+    /**
+     * Additional security method to check for forbidden SQL keywords
+     * @param query The SQL query to validate
+     * @return true if query contains forbidden keywords
+     */
+    private boolean containsForbiddenKeywords(String query) {
+        String[] forbiddenKeywords = {
+                "delete", "insert", "update", "drop", "alter", "create", "truncate",
+                "grant", "revoke", "commit", "rollback", "savepoint", "exec", "execute",
+                "sp_", "xp_", "into outfile", "load_file", "dumpfile"
+        };
+
+        for (String keyword : forbiddenKeywords) {
+            if (query.contains(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public Map<String, Object> getDatasetMasterById(Integer id) {

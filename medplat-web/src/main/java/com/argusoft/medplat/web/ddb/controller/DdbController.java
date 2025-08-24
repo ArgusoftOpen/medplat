@@ -72,13 +72,15 @@ public class DdbController {
     }
 
     @PostMapping("/preview-sql")
-    @ApiOperation(value = "Preview SQL query results with limit")
+    @ApiOperation(
+            value = "Preview SELECT SQL query",
+            notes = "Preview SQL query results with automatic limit. SECURITY: Only SELECT queries are allowed."
+    )
     public Map<String, Object> previewSql(
-            @ApiParam(value = "Request body containing SQL query")
+            @ApiParam(value = "Request body containing SELECT SQL query only")
             @RequestBody Map<String, Object> body) {
         return ddbService.previewSql(body);
     }
-
     @PostMapping("/derived-attribute")
     @ApiOperation(value = "Save a new derived attribute")
     public Map<String, Object> saveDerivedAttribute(
@@ -116,9 +118,13 @@ public class DdbController {
     }
 
     @PostMapping("/run-sql")
-    @ApiOperation(value = "Execute SQL query and return results")
+    @ApiOperation(
+            value = "Execute SELECT SQL query",
+            notes = "Executes SQL query and returns results. SECURITY: Only SELECT queries are allowed. " +
+                    "DELETE, INSERT, UPDATE, DROP, ALTER and other modification operations are forbidden."
+    )
     public Map<String, Object> runSql(
-            @ApiParam(value = "Request body containing SQL query")
+            @ApiParam(value = "Request body containing SELECT SQL query only")
             @RequestBody Map<String, Object> body) {
         return ddbService.runSql(body);
     }
