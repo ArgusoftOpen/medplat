@@ -359,16 +359,40 @@ export default function DatasetMasterListPage() {
       // Transform the data into chart format
       let transformedChartData = [];
 
-      // If we have exactly 2 columns, use them as label and count
+      // FIXED: Enhanced logic to properly identify label and count columns
       if (columns.length === 2) {
-        const labelCol = columns[0];
-        const countCol = columns[1];
+        // Identify which column is likely the category (label) and which is the count/metric
+        const countColumnPattern = /^(count|total|sum|cnt|avg|quantity|number|frequency)$/i;
+        let labelCol = columns[0];
+        let countCol = columns[1];
+
+        if (countColumnPattern.test(columns[0]) || columns[0].toLowerCase().includes('count') ||
+            columns[0].toLowerCase().includes('total') || columns[0].toLowerCase().includes('sum')) {
+          // If first column looks like count, swap
+          labelCol = columns[1];
+          countCol = columns[0];
+        } else if (countColumnPattern.test(columns[1]) || columns[1].toLowerCase().includes('count') ||
+            columns[1].toLowerCase().includes('total') || columns[1].toLowerCase().includes('sum')) {
+          // Otherwise if second column looks like count, leave as is
+          // (labelCol and countCol already set above)
+        } else {
+          // Fallback: if both are ambiguous, use type check on first row
+          const row = sqlResultData[0];
+          const col0Numeric = typeof row[columns[0]] === 'number' || !isNaN(Number(row[columns[0]]));
+          const col1Numeric = typeof row[columns[1]] === 'number' || !isNaN(Number(row[columns[1]]));
+          if (col0Numeric && !col1Numeric) {
+            labelCol = columns[1];
+            countCol = columns[0];
+          } else if (!col0Numeric && col1Numeric) {
+            // already correct
+          }
+          // if both same type leave as is (positional fallback)
+        }
 
         transformedChartData = sqlResultData.map((row) => ({
           label: String(row[labelCol]),
           count: Number(row[countCol]) || 0,
         }));
-
         console.log("Chart data (2 columns):", transformedChartData);
       }
       // If we have more than 2 columns, try to find a count column

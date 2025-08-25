@@ -1,170 +1,192 @@
-// Gemini API helper for generative Q&A and chart suggestion with auto-chart creation
+// Gemini API helper for generative Q&A and chart suggestion with auto-chart creation for Healthcare Domain
 
 export async function askGemini({ apiKey, question, columns, sql, data }) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-  // Enhanced prompt for structured responses
-  let prompt = `You are a professional data analyst assistant specializing in business intelligence and data visualization.
+    // Enhanced prompt for healthcare domain with structured responses
+    let prompt = `You are a professional healthcare data analyst assistant specializing in medical informatics, public health analytics, and healthcare business intelligence.
 
-CONTEXT:
-- You are analyzing a dataset from a SQL query
-- Your role is to provide accurate, insightful analysis based ONLY on the provided data
-- When recommending visualizations, you can ONLY suggest: Bar Chart, Line Chart, or Pie Chart
+DOMAIN CONTEXT:
+- You are analyzing HEALTHCARE DATA from a medical information system
+- This data may include patient records, clinical indicators, treatment outcomes, hospital operations, or public health metrics
+- Your analysis should consider healthcare-specific patterns, seasonal trends, and medical significance
+- Be mindful of healthcare privacy and present insights in aggregate form only
+- Consider clinical relevance and public health implications in your analysis
 
 DATASET INFORMATION:
 `;
 
-  if (sql) {
-    prompt += `SQL Query: ${sql}\n`;
-  }
-
-  if (columns && columns.length > 0) {
-    prompt += `Available Columns: ${columns.join(", ")}\n`;
-  }
-
-  if (data && data.length > 0) {
-    const dataCount = data.length;
-    const sampleData = data.slice(0, 3);
-    prompt += `Dataset Size: ${dataCount} rows\n`;
-    prompt += `Sample Data (first 3 rows): ${JSON.stringify(
-      sampleData,
-      null,
-      2
-    )}\n`;
-
-    if (data.length > 0) {
-      const firstRow = data[0];
-      const columnTypes = Object.keys(firstRow).map((col) => {
-        const sampleValue = firstRow[col];
-        const type =
-          typeof sampleValue === "number"
-            ? "numeric"
-            : typeof sampleValue === "string"
-            ? "text"
-            : "unknown";
-        return `${col} (${type})`;
-      });
-      prompt += `Column Types: ${columnTypes.join(", ")}\n`;
+    if (sql) {
+        prompt += `SQL Query: ${sql}\n`;
     }
-  }
 
-  if (question) {
-    prompt += `\nUSER QUESTION: ${question}\n`;
-  }
+    if (columns && columns.length > 0) {
+        prompt += `Available Healthcare Data Columns: ${columns.join(", ")}\n`;
+    }
 
-  prompt += `\nINSTRUCTIONS:
-1. Analyze the data thoroughly and provide accurate insights
-2. ALWAYS end your response with a chart recommendation in this EXACT format:
-   [CHART_RECOMMENDATION: chart_type]
-   Where chart_type is one of: bar, line, pie
-3. Choose chart types based on these rules:
-   - Bar Chart (bar): Best for comparing categories, showing frequency distributions, discrete data
-   - Line Chart (line): Best for showing trends over time, continuous data, sequential data
-   - Pie Chart (pie): Best for showing proportions/percentages of a whole (max 6-8 categories)
-4. Provide specific insights about the data patterns, trends, or anomalies
-5. If asked for statistics, calculate them from the provided data
-6. Base your answers ONLY on the data provided - do not make assumptions
-7. Be concise but informative in your responses
-8. If the question cannot be answered from the available data, clearly state this
+    if (data && data.length > 0) {
+        const dataCount = data.length;
+        const sampleData = data.slice(0, 3);
+        prompt += `Healthcare Dataset Size: ${dataCount} records\n`;
+        prompt += `Sample Healthcare Data (first 3 records): ${JSON.stringify(
+            sampleData,
+            null,
+            2
+        )}\n`;
 
-RESPONSE FORMAT:
-- Start with a direct answer to the question
-- Provide supporting data insights with specific numbers when possible
-- Explain why the recommended chart type is most appropriate
+        if (data.length > 0) {
+            const firstRow = data[0];
+            const columnTypes = Object.keys(firstRow).map((col) => {
+                const sampleValue = firstRow[col];
+                const type =
+                    typeof sampleValue === "number"
+                        ? "numeric"
+                        : typeof sampleValue === "string"
+                        ? "categorical/text"
+                        : "unknown";
+                return `${col} (${type})`;
+            });
+            prompt += `Healthcare Data Column Types: ${columnTypes.join(", ")}\n`;
+        }
+    }
+
+    if (question) {
+        prompt += `\nHEALTHCARE ANALYSIS QUESTION: ${question}\n`;
+    }
+
+    prompt += `\nHEALTHCARE DATA ANALYSIS INSTRUCTIONS:
+
+1. Analyze the healthcare data with medical and public health perspective
+2. Provide insights relevant to healthcare outcomes, patient care, or operational efficiency
+3. Consider clinical significance and statistical relevance in healthcare context
+4. Look for patterns that might indicate:
+   - Patient care trends
+   - Treatment effectiveness
+   - Seasonal health patterns
+   - Resource utilization
+   - Quality indicators
+   - Population health metrics
+
+5. ALWAYS end your response with a chart recommendation in this EXACT format:
+[CHART_RECOMMENDATION: chart_type]
+
+Where chart_type is one of: bar, line, pie
+
+6. Choose chart types based on healthcare visualization best practices:
+   - Bar Chart (bar): Best for comparing clinical categories, patient demographics, treatment types, facility comparisons
+   - Line Chart (line): Best for showing health trends over time, patient monitoring data, epidemic curves, seasonal patterns
+   - Pie Chart (pie): Best for showing healthcare resource distribution, patient demographics (max 6-8 categories)
+
+7. Provide specific healthcare insights about data patterns, clinical trends, or operational metrics
+8. If asked for healthcare statistics, calculate them from the provided data
+9. Base your medical analysis ONLY on the data provided - do not make clinical assumptions
+10. Be precise and professional, suitable for healthcare stakeholders
+11. If the question cannot be answered from available healthcare data, clearly state this
+
+HEALTHCARE RESPONSE FORMAT:
+- Start with a direct answer to the healthcare question
+- Provide supporting clinical/operational insights with specific numbers
+- Explain the medical or public health significance of findings
+- Recommend appropriate visualization for healthcare stakeholders
 - ALWAYS end with: [CHART_RECOMMENDATION: chart_type]
 
-Example response:
-"Based on the data analysis, there are 5 distinct categories with varying frequencies. Category A has the highest count at 45, followed by Category B at 32. This shows a clear distribution pattern across categories. A bar chart would be most effective for comparing these categorical frequencies. [CHART_RECOMMENDATION: bar]"
+Example healthcare response:
+"Based on the patient admission data analysis, there are 5 different admission types with varying frequencies. Emergency admissions have the highest count at 145 cases, followed by scheduled surgeries at 89 cases. This indicates high emergency department utilization. The peak admission months show seasonal patterns typical in healthcare settings. A bar chart would be most effective for comparing these admission categories for healthcare administrators and clinical staff. [CHART_RECOMMENDATION: bar]"
 
-Please provide your analysis:`;
+Please provide your healthcare data analysis:`;
 
-  const body = {
-    contents: [
-      {
-        parts: [{ text: prompt }],
-      },
-    ],
-    generationConfig: {
-      temperature: 0.2, // Lower temperature for more consistent responses
-      maxOutputTokens: 600,
-      topP: 0.8,
-      topK: 40,
-    },
-  };
-
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-
-    if (!res.ok) throw new Error("Gemini API error: " + res.statusText);
-
-    const json = await res.json();
-    const fullResponse =
-      json.candidates?.[0]?.content?.parts?.[0]?.text || "No answer.";
-
-    // Parse the response to extract chart recommendation
-    const chartRecommendationMatch = fullResponse.match(
-      /\[CHART_RECOMMENDATION:\s*(bar|line|pie)\]/i
-    );
-    const recommendedChart = chartRecommendationMatch
-      ? chartRecommendationMatch[1].toLowerCase()
-      : null;
-
-    // Clean the response text by removing the chart recommendation tag
-    const cleanResponse = fullResponse
-      .replace(/\[CHART_RECOMMENDATION:\s*(bar|line|pie)\]/i, "")
-      .trim();
-
-    return {
-      text: cleanResponse,
-      recommendedChart: recommendedChart,
-      hasRecommendation: !!recommendedChart,
+    const body = {
+        contents: [
+            {
+                parts: [{ text: prompt }],
+            },
+        ],
+        generationConfig: {
+            temperature: 0.2, // Lower temperature for more consistent clinical responses
+            maxOutputTokens: 800, // Increased for detailed healthcare analysis
+            topP: 0.8,
+            topK: 40,
+        },
     };
-  } catch (error) {
-    console.error("Gemini API Error:", error);
-    return {
-      text: "Error getting answer from Gemini: " + error.message,
-      recommendedChart: null,
-      hasRecommendation: false,
-    };
-  }
+
+    try {
+        const res = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        });
+
+        if (!res.ok) throw new Error("Gemini API error: " + res.statusText);
+
+        const json = await res.json();
+        const fullResponse =
+            json.candidates?.[0]?.content?.parts?.[0]?.text || "No healthcare analysis available.";
+
+        // Parse the response to extract chart recommendation
+        const chartRecommendationMatch = fullResponse.match(
+            /\[CHART_RECOMMENDATION:\s*(bar|line|pie)\]/i
+        );
+
+        const recommendedChart = chartRecommendationMatch
+            ? chartRecommendationMatch[1].toLowerCase()
+            : null;
+
+        // Clean the response text by removing the chart recommendation tag
+        const cleanResponse = fullResponse
+            .replace(/\[CHART_RECOMMENDATION:\s*(bar|line|pie)\]/i, "")
+            .trim();
+
+        return {
+            text: cleanResponse,
+            recommendedChart: recommendedChart,
+            hasRecommendation: !!recommendedChart,
+        };
+    } catch (error) {
+        console.error("Healthcare Data Analysis - Gemini API Error:", error);
+        return {
+            text: "Error getting healthcare analysis from Gemini: " + error.message,
+            recommendedChart: null,
+            hasRecommendation: false,
+        };
+    }
 }
 
-// Helper function to get chart recommendation based on data analysis
+// Helper function to get automatic chart recommendation for healthcare data
 export function getAutomaticChartRecommendation(data, columns) {
-  if (!data || data.length === 0) return "bar";
+    if (!data || data.length === 0) return "bar";
 
-  const firstRow = data[0];
-  const columnKeys = Object.keys(firstRow);
+    const firstRow = data[0];
+    const columnKeys = Object.keys(firstRow);
 
-  // Check if data has time-based columns
-  const timeColumns = columnKeys.filter(
-    (col) =>
-      col.toLowerCase().includes("date") ||
-      col.toLowerCase().includes("time") ||
-      col.toLowerCase().includes("year") ||
-      col.toLowerCase().includes("month") ||
-      col.toLowerCase().includes("day")
-  );
+    // Check if data has healthcare time-based columns (common in medical data)
+    const timeColumns = columnKeys.filter(
+        (col) =>
+            col.toLowerCase().includes("date") ||
+            col.toLowerCase().includes("time") ||
+            col.toLowerCase().includes("year") ||
+            col.toLowerCase().includes("month") ||
+            col.toLowerCase().includes("day") ||
+            col.toLowerCase().includes("admission") ||
+            col.toLowerCase().includes("discharge") ||
+            col.toLowerCase().includes("treatment") ||
+            col.toLowerCase().includes("visit")
+    );
 
-  if (timeColumns.length > 0) {
-    return "line"; // Time series data works best with line charts
-  }
-
-  // Check if suitable for pie chart (limited categories)
-  if (columnKeys.length === 2 && data.length <= 8) {
-    const firstCol = columnKeys[0];
-    const uniqueValues = [...new Set(data.map((row) => row[firstCol]))];
-    if (uniqueValues.length <= 6) {
-      return "pie"; // Small number of categories work well with pie charts
+    if (timeColumns.length > 0) {
+        return "line"; // Healthcare time series data (patient monitoring, trends)
     }
-  }
 
-  // Default to bar chart for categorical comparisons
-  return "bar";
+    // Check if suitable for pie chart (healthcare categories like patient demographics)
+    if (columnKeys.length === 2 && data.length <= 8) {
+        const firstCol = columnKeys[0];
+        const uniqueValues = [...new Set(data.map((row) => row[firstCol]))];
+        if (uniqueValues.length <= 6) {
+            return "pie"; // Healthcare categories (gender, age groups, departments)
+        }
+    }
+
+    // Default to bar chart for healthcare categorical comparisons (treatments, facilities, outcomes)
+    return "bar";
 }
