@@ -1,6 +1,9 @@
 package com.argusoft.medplat.web.ddb.service.impl;
 
 import com.argusoft.medplat.web.ddb.dao.DdbDao;
+import com.argusoft.medplat.web.ddb.dao.DerivedAttributeDao;
+import com.argusoft.medplat.web.ddb.dao.IndicatorMasterDao;
+import com.argusoft.medplat.web.ddb.dao.DatasetMasterDao;
 import com.argusoft.medplat.web.ddb.mapper.DdbMapper;
 import com.argusoft.medplat.web.ddb.model.DerivedAttribute;
 import com.argusoft.medplat.web.ddb.model.IndicatorMaster;
@@ -16,8 +19,8 @@ import javax.transaction.Transactional;
 import java.util.*;
 
 /**
- * Implements methods of DdbService
- * @author ashwin
+ * Implements methods of DdbService for healthcare data analysis
+ * @author argusoft
  * @since 23/08/2025 15:30
  */
 @Service("DdbService")
@@ -27,6 +30,15 @@ public class DdbServiceImpl implements DdbService {
 
     @Autowired
     private DdbDao ddbDao;
+
+    @Autowired
+    private DerivedAttributeDao derivedAttributeDao;
+
+    @Autowired
+    private IndicatorMasterDao indicatorMasterDao;
+
+    @Autowired
+    private DatasetMasterDao datasetMasterDao;
 
     @Override
     public Map<String, Object> getAttributeValue(Map<String, Object> requestBody) {
@@ -80,14 +92,12 @@ public class DdbServiceImpl implements DdbService {
     @Override
     public Map<String, Object> previewSql(Map<String, Object> requestBody) {
         String sql = (String) requestBody.get("sql");
-        if (sql == null || !sql.trim().toLowerCase().startsWith("select")) {
-            throw new IllegalArgumentException("Only SELECT queries are allowed.");
+        if (sql == null) {
+            throw new IllegalArgumentException("Missing SQL query");
         }
 
-        // Additional security check
-        if (containsForbiddenKeywords(sql.trim().toLowerCase())) {
-            throw new IllegalArgumentException("Query contains forbidden operations or keywords.");
-        }
+        // Security validation for healthcare data
+        validateSqlSecurity(sql);
 
         String previewSql = sql.trim().replaceAll(";*$", "");
         if (!previewSql.toLowerCase().contains("limit")) {
@@ -97,7 +107,6 @@ public class DdbServiceImpl implements DdbService {
         List<Map<String, Object>> rows = ddbDao.executeNativeQuery(previewSql);
         return Collections.singletonMap("rows", rows);
     }
-
 
     @Override
     @Transactional
@@ -123,13 +132,13 @@ public class DdbServiceImpl implements DdbService {
         derivedAttribute.setCreatedBy(createdBy);
         derivedAttribute.setModifiedBy(modifiedBy);
 
-        ddbDao.createOrUpdate(derivedAttribute);
+        derivedAttributeDao.createOrUpdate(derivedAttribute);
         return Collections.singletonMap("success", true);
     }
 
     @Override
     public List<Map<String, Object>> getDerivedAttributes() {
-        List<DerivedAttribute> entities = ddbDao.getAllDerivedAttributes();
+        List<DerivedAttribute> entities = derivedAttributeDao.getAllDerivedAttributes();
         return DdbMapper.convertDerivedAttributesToMaps(entities);
     }
 
@@ -146,6 +155,9 @@ public class DdbServiceImpl implements DdbService {
             throw new IllegalArgumentException("Missing indicator_name or sql_query");
         }
 
+        // Security validation for healthcare data
+        validateSqlSecurity(sqlQuery);
+
         // Execute the SQL query to get result
         List<Map<String, Object>> rows = ddbDao.executeNativeQuery(sqlQuery);
         Integer queryResult = extractQueryResult(rows);
@@ -161,7 +173,7 @@ public class DdbServiceImpl implements DdbService {
         indicatorMaster.setCreatedBy(createdBy);
         indicatorMaster.setModifiedBy(modifiedBy);
 
-        ddbDao.saveIndicatorMaster(indicatorMaster);
+        indicatorMasterDao.createOrUpdate(indicatorMaster);
 
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
@@ -171,7 +183,7 @@ public class DdbServiceImpl implements DdbService {
 
     @Override
     public List<Map<String, Object>> getIndicatorMaster() {
-        List<IndicatorMaster> entities = ddbDao.getAllIndicatorMaster();
+        List<IndicatorMaster> entities = indicatorMasterDao.getAllIndicatorMaster();
         return DdbMapper.convertIndicatorMastersToMaps(entities);
     }
 
@@ -194,16 +206,8 @@ public class DdbServiceImpl implements DdbService {
             throw new IllegalArgumentException("Missing SQL query");
         }
 
-        // SECURITY: Validate that only SELECT queries are allowed
-        String trimmedQuery = query.trim().toLowerCase();
-        if (!trimmedQuery.startsWith("select")) {
-            throw new IllegalArgumentException("Only SELECT queries are allowed. DELETE, INSERT, UPDATE, DROP, ALTER operations are forbidden.");
-        }
-
-        // Additional security checks
-        if (containsForbiddenKeywords(trimmedQuery)) {
-            throw new IllegalArgumentException("Query contains forbidden operations or keywords.");
-        }
+        // Enhanced security validation for healthcare data
+        validateSqlSecurity(query);
 
         List<Map<String, Object>> rows = ddbDao.executeNativeQuery(query);
         List<String> fields = CollectionUtils.isEmpty(rows) ?
@@ -215,30 +219,9 @@ public class DdbServiceImpl implements DdbService {
         return response;
     }
 
-    /**
-     * Additional security method to check for forbidden SQL keywords
-     * @param query The SQL query to validate
-     * @return true if query contains forbidden keywords
-     */
-    private boolean containsForbiddenKeywords(String query) {
-        String[] forbiddenKeywords = {
-                "delete", "insert", "update", "drop", "alter", "create", "truncate",
-                "grant", "revoke", "commit", "rollback", "savepoint", "exec", "execute",
-                "sp_", "xp_", "into outfile", "load_file", "dumpfile"
-        };
-
-        for (String keyword : forbiddenKeywords) {
-            if (query.contains(keyword)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     @Override
     public Map<String, Object> getDatasetMasterById(Integer id) {
-        DatasetMaster entity = ddbDao.getDatasetMasterById(id);
+        DatasetMaster entity = datasetMasterDao.retrieveById(id);
         if (entity == null) {
             throw new NoSuchElementException("Dataset not found");
         }
@@ -247,7 +230,7 @@ public class DdbServiceImpl implements DdbService {
 
     @Override
     public List<Map<String, Object>> getDatasetMaster() {
-        List<DatasetMaster> entities = ddbDao.getAllDatasetMaster();
+        List<DatasetMaster> entities = datasetMasterDao.getAllDatasetMaster();
         return DdbMapper.convertDatasetMastersToMaps(entities);
     }
 
@@ -258,9 +241,12 @@ public class DdbServiceImpl implements DdbService {
         String sql = (String) requestBody.get("sql");
         Integer userId = (Integer) requestBody.getOrDefault("userId", 1);
 
-        if (tableName == null || sql == null || !sql.trim().toLowerCase().startsWith("select")) {
-            throw new IllegalArgumentException("Invalid tableName or only SELECT queries are allowed.");
+        if (tableName == null || sql == null) {
+            throw new IllegalArgumentException("Invalid tableName or sql");
         }
+
+        // Security validation for healthcare data
+        validateSqlSecurity(sql);
 
         DatasetMaster datasetMaster = new DatasetMaster();
         datasetMaster.setDatasetName(tableName);
@@ -268,7 +254,7 @@ public class DdbServiceImpl implements DdbService {
         datasetMaster.setCreatedBy(userId);
         datasetMaster.setModifiedBy(userId);
 
-        ddbDao.saveDatasetMaster(datasetMaster);
+        datasetMasterDao.createOrUpdate(datasetMaster);
 
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
@@ -283,6 +269,9 @@ public class DdbServiceImpl implements DdbService {
             throw new IllegalArgumentException("Invalid SQL query");
         }
 
+        // Security validation for healthcare data
+        validateSqlSecurity(sql);
+
         List<Map<String, Object>> rows = ddbDao.executeNativeQuery(sql);
         if (CollectionUtils.isEmpty(rows)) {
             return new ArrayList<>();
@@ -291,7 +280,73 @@ public class DdbServiceImpl implements DdbService {
         return processChartData(rows);
     }
 
-    // Helper methods
+    // Security and Helper Methods
+
+    /**
+     * Comprehensive SQL validation for healthcare data security
+     */
+    private void validateSqlSecurity(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            throw new IllegalArgumentException("SQL query cannot be empty");
+        }
+
+        String sanitizedQuery = sanitizeSqlInput(query).toLowerCase();
+
+        // Must start with SELECT for healthcare data protection
+        if (!sanitizedQuery.startsWith("select")) {
+            throw new IllegalArgumentException("Only SELECT queries are allowed for healthcare data access");
+        }
+
+        // Check for forbidden keywords that could compromise healthcare data
+        if (containsForbiddenKeywords(sanitizedQuery)) {
+            throw new IllegalArgumentException("Query contains forbidden operations for healthcare data protection");
+        }
+
+        // Prevent multiple statements for healthcare security
+        if (sanitizedQuery.split(";").length > 1) {
+            throw new IllegalArgumentException("Multiple SQL statements are not allowed for healthcare data security");
+        }
+
+        // Length validation for healthcare queries
+        if (query.length() > 10000) {
+            throw new IllegalArgumentException("Query is too long. Maximum 10000 characters allowed for healthcare data queries");
+        }
+    }
+
+    /**
+     * Sanitize SQL input for healthcare data protection
+     */
+    private String sanitizeSqlInput(String query) {
+        if (query == null) return null;
+
+        // Remove multiple spaces, tabs, newlines
+        query = query.replaceAll("\\s+", " ").trim();
+
+        // Remove SQL comments for security
+        query = query.replaceAll("--.*", "").replaceAll("/\\*.*?\\*/", "");
+
+        return query;
+    }
+
+    /**
+     * Check for forbidden SQL keywords in healthcare context
+     */
+    private boolean containsForbiddenKeywords(String query) {
+        String[] forbiddenKeywords = {
+                "delete", "insert", "update", "drop", "alter", "create", "truncate",
+                "grant", "revoke", "commit", "rollback", "savepoint", "exec", "execute",
+                "sp_", "xp_", "into outfile", "load_file", "dumpfile", "merge", "replace"
+        };
+
+        for (String keyword : forbiddenKeywords) {
+            if (query.contains(keyword)) {
+                log.warn("Forbidden keyword '{}' detected in healthcare data query", keyword);
+                return true;
+            }
+        }
+        return false;
+    }
+
     private Double parseDoubleValue(Object value) {
         if (value instanceof Number) {
             return ((Number) value).doubleValue();

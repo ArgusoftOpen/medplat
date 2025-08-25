@@ -7,6 +7,11 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Defines fields for dataset master
+ * @author ashwin
+ * @since 23/08/2025 15:30
+ */
 @Entity
 @Table(name = "dataset_master")
 @Getter
@@ -26,24 +31,12 @@ public class DatasetMaster extends EntityAuditInfo implements Serializable {
     @Column(name = "sql_query", columnDefinition = "TEXT")
     private String sqlQuery;
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof DatasetMaster)) {
-            return false;
-        }
-        DatasetMaster other = (DatasetMaster) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
-    }
-
+    /**
+     * An util class for string constants of dataset master
+     */
     public static class DatasetMasterFields {
         private DatasetMasterFields() {}
+
         public static final String ID = "id";
         public static final String DATASET_NAME = "datasetName";
         public static final String SQL_QUERY = "sqlQuery";

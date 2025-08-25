@@ -7,6 +7,11 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Defines fields for indicator master
+ * @author ashwin
+ * @since 23/08/2025 15:30
+ */
 @Entity
 @Table(name = "indicator_master")
 @Getter
@@ -32,24 +37,12 @@ public class IndicatorMaster extends EntityAuditInfo implements Serializable {
     @Column(name = "query_result")
     private Integer queryResult;
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof IndicatorMaster)) {
-            return false;
-        }
-        IndicatorMaster other = (IndicatorMaster) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
-    }
-
+    /**
+     * An util class for string constants of indicator master
+     */
     public static class IndicatorMasterFields {
         private IndicatorMasterFields() {}
+
         public static final String ID = "id";
         public static final String INDICATOR_NAME = "indicatorName";
         public static final String DESCRIPTION = "description";

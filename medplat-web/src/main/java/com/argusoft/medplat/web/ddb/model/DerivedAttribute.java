@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * Defines fields for derived attributes
- * @author argusoft
+ * @author ashwin
  * @since 23/08/2025 15:30
  */
 @Entity
@@ -34,25 +34,12 @@ public class DerivedAttribute extends EntityAuditInfo implements Serializable {
     @Column(name = "result", columnDefinition = "DOUBLE PRECISION")
     private Double result;
 
-    // equals and hashCode...
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof DerivedAttribute)) {
-            return false;
-        }
-        DerivedAttribute other = (DerivedAttribute) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
-    }
-
+    /**
+     * An util class for string constants of derived attributes
+     */
     public static class DerivedAttributeFields {
         private DerivedAttributeFields() {}
+
         public static final String ID = "id";
         public static final String DERIVED_NAME = "derivedName";
         public static final String FORMULA = "formula";
