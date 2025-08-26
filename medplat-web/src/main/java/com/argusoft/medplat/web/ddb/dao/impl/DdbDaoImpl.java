@@ -2,13 +2,11 @@ package com.argusoft.medplat.web.ddb.dao.impl;
 
 import com.argusoft.medplat.web.ddb.dao.DdbDao;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import com.argusoft.medplat.database.common.impl.GenericDaoImpl;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -21,16 +19,9 @@ import java.util.Map;
 
 @Repository
 @Transactional
-public class DdbDaoImpl implements DdbDao {
+public class DdbDaoImpl extends GenericDaoImpl<Object, Long> implements DdbDao {
 
     private static final Logger log = LoggerFactory.getLogger(DdbDaoImpl.class);
-
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    private Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
-    }
 
     @Override
     public List<String> getAllTables() {
