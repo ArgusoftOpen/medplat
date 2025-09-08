@@ -2,42 +2,52 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import logging
+import os
+from dotenv import load_dotenv
+
+# Load variables from ai.env
+load_dotenv(dotenv_path="ai.env")
+
+SMTP_SERVER = os.getenv("SMTP_SERVER")
+SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
+SMTP_USERNAME = os.getenv("SMTP_USERNAME")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")
+RESET_PASSWORD_URL = os.getenv("RESET_PASSWORD_URL")
+
 
 def send_reset_email(recipient_email: str) -> bool:
+    """
+    Sends a password reset email to the specified recipient.
+    Returns True if successful, False otherwise.
+    """
     try:
-        smtp_server = "smtp-relay.brevo.com"
-        smtp_port = 587
-        smtp_username = "904c84001@smtp-brevo.com"
-        smtp_password = "c4s2WPR91tbAXaKv"  # 🔴 ROTATE THIS IMMEDIATELY after testing
-
-        sender_email ="prishamedplat@gmail.com"
         subject = "Password Reset Request"
         body = f"""
-        Hi,
+Hi,
 
-        We received a request to reset your password.
-        Please click the link below to reset it:
-        https://yourdomain.com/reset-password?email={recipient_email}
+We received a request to reset your password.
+Please click the link below to reset it:
+{RESET_PASSWORD_URL}?email={recipient_email}
 
-        If you did not request this, you can ignore this email.
+If you did not request this, you can ignore this email.
 
-        Thanks,
-        Support Team
+Thanks,
+Support Team
         """
 
         # Prepare email
         message = MIMEMultipart()
-        message["From"] = sender_email
+        message["From"] = SENDER_EMAIL
         message["To"] = recipient_email
         message["Subject"] = subject
         message.attach(MIMEText(body, "plain"))
 
         # Send via SMTP
-        server = smtplib.SMTP(smtp_server, smtp_port)
-        server.starttls()
-        server.login(smtp_username, smtp_password)
-        server.send_message(message)
-        server.quit()
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SMTP_USERNAME, SMTP_PASSWORD)
+            server.send_message(message)
 
         logging.info(f"Reset email sent to {recipient_email}")
         return True
