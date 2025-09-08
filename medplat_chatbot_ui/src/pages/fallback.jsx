@@ -1,47 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import "./fallback.css";
 import "../App.css";
+import "./assets/fallback.css";
 
 const FallbackClusters = () => {
+  // ------------------- State -------------------
   const [clusters, setClusters] = useState([]);
   const [error, setError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
 
+  // ------------------- Fetch fallback clusters -------------------
   const fetchClusters = async () => {
     try {
-      const res = await axios.get('http://localhost:5001/get_fallbacks');
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:5001'}/get_fallbacks`);
       const sortedClusters = (res.data.fallbacks || []).sort((a, b) => b.freq - a.freq);
       setClusters(sortedClusters);
     } catch (err) {
       console.error(err);
-      setError('Failed to load fallback clusters');
+      setError('❌ Failed to load fallback clusters');
+      setTimeout(() => setError(''), 5000); // auto-clear after 5s
     }
   };
 
+  // ------------------- Handle training a single cluster as intent -------------------
   const handleTrainIntent = async (cluster) => {
     const intentPayload = {
-      intent: `intent_${cluster.cluster_id}`,
+      intent: `auto_intent_${cluster.cluster_id}`,
       examples: [cluster.text],
       response: cluster.gpt_reply || `Response for ${cluster.text}`
     };
 
     try {
-      const res = await axios.post('http://localhost:5000/add_intent', intentPayload);
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000'}/add_intent`, intentPayload);
       if (res.status === 200) {
-        setSuccessMsg(`✅ Intent ${intentPayload.intent} trained successfully!`);
+        setSuccessMsg(`✅ Intent "${intentPayload.intent}" trained successfully!`);
         setTimeout(() => setSuccessMsg(''), 3000);
       }
     } catch (err) {
-      setError('❌ Failed to train intent');
       console.error(err);
+      setError('❌ Failed to train intent');
+      setTimeout(() => setError(''), 5000);
     }
   };
 
+  // ------------------- Load clusters on mount -------------------
   useEffect(() => {
     fetchClusters();
   }, []);
 
+  // ------------------- Render -------------------
   return (
     <div className="fallback-container">
       <h2 className="fallback-title">🤖 Fallback Intents Summary</h2>
@@ -64,16 +71,16 @@ const FallbackClusters = () => {
               </tr>
             </thead>
             <tbody>
-              {clusters.map((item) => (
-                <tr key={item.cluster_id}>
-                  <td>{item.cluster_id}</td>
-                  <td>{item.text}</td>
-                  <td>{item.freq}</td>
-                  <td>{item.gpt_reply}</td>
+              {clusters.map((cluster) => (
+                <tr key={cluster.cluster_id}>
+                  <td>{cluster.cluster_id}</td>
+                  <td>{cluster.text}</td>
+                  <td>{cluster.freq}</td>
+                  <td>{cluster.gpt_reply}</td>
                   <td>
                     <button
                       className="train-button"
-                      onClick={() => handleTrainIntent(item)}
+                      onClick={() => handleTrainIntent(cluster)}
                     >
                       Train Intent
                     </button>

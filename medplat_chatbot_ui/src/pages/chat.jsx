@@ -1,23 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Mic, Send, Camera } from "lucide-react";
-import "./ChatApp.css"; // Ensure your styles are correctly defined
+import "./assets/ChatApp.css"; 
 
 export default function ChatApp() {
+  // ------------------- State -------------------
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [buttons, setButtons] = useState([]);
   const [selectedLang, setSelectedLang] = useState("en-US");
+
   const chatRef = useRef(null);
   const fileInputRef = useRef();
 
-  const speakText = (text) => {
-    if (!text) return;
-    speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = selectedLang;
-    speechSynthesis.speak(utterance);
-  };
+  const API_BASE = import.meta.env.VITE_CHAT_API || "http://localhost:3000";
 
+  // ------------------- Utilities -------------------
+  const addMessage = (msg) => setMessages((prev) => [...prev, msg]);
+  const scrollToBottom = () => chatRef.current?.scrollIntoView({ behavior: "smooth" });
+
+  // ------------------- Send Message -------------------
   const handleSend = async () => {
     if (!message.trim()) return;
 
@@ -27,30 +28,28 @@ export default function ChatApp() {
       content: message,
       timestamp: new Date().toLocaleTimeString(),
     };
-    setMessages((prev) => [...prev, userMsg]);
+    addMessage(userMsg);
     setMessage("");
     setButtons([]);
 
     try {
-      const res = await fetch("http://localhost:3000/send_message", {
+      const res = await fetch(`${API_BASE}/send_message`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
       });
 
-      const data = await res.json();
+      const botData = await res.json();
 
-      data.forEach((botMsg, index) => {
-        const msg = {
+      botData.forEach((botMsg, index) => {
+        const aiMsg = {
           id: Date.now() + index + 1,
           type: "ai",
           content: botMsg.text || "",
           timestamp: new Date().toLocaleTimeString(),
         };
-        setMessages((prev) => [...prev, msg]);
-
+        addMessage(aiMsg);
         if (botMsg.buttons) setButtons(botMsg.buttons);
-        if (botMsg.text) speakText(botMsg.text);
       });
     } catch (err) {
       const errorMsg = {
@@ -59,14 +58,12 @@ export default function ChatApp() {
         content: "⚠️ Failed to connect to the bot server.",
         timestamp: new Date().toLocaleTimeString(),
       };
-      setMessages((prev) => [...prev, errorMsg]);
-      speakText(errorMsg.content);
+      addMessage(errorMsg);
     }
   };
 
-  const handleImageCapture = () => {
-    fileInputRef.current.click();
-  };
+  // ------------------- OCR Handling -------------------
+  const handleImageCapture = () => fileInputRef.current.click();
 
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
@@ -76,16 +73,15 @@ export default function ChatApp() {
     reader.onloadend = async () => {
       const base64Image = reader.result.split(",")[1];
 
-      const loadingMsg = {
+      addMessage({
         id: Date.now(),
         type: "ai",
         content: "Reading the image... Please wait.",
         timestamp: new Date().toLocaleTimeString(),
-      };
-      setMessages((prev) => [...prev, loadingMsg]);
+      });
 
       try {
-        const res = await fetch("http://localhost:3000/process_ocr", {
+        const res = await fetch(`${API_BASE}/process_ocr`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ image: base64Image }),
@@ -100,85 +96,50 @@ export default function ChatApp() {
             content: data.text,
             timestamp: new Date().toLocaleTimeString(),
           };
-          setMessages((prev) => [...prev, ocrMsg]);
-          setMessage("");
+          addMessage(ocrMsg);
+
+          // Automatically send OCR text to bot
+          setMessage(data.text);
           setButtons([]);
-
-          const rasaRes = await fetch("http://localhost:3000/send_message", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: data.text }),
-          });
-
-          const botData = await rasaRes.json();
-
-          botData.forEach((botMsg, index) => {
-            const msg = {
-              id: Date.now() + index + 1,
-              type: "ai",
-              content: botMsg.text || "",
-              timestamp: new Date().toLocaleTimeString(),
-            };
-            setMessages((prev) => [...prev, msg]);
-            if (botMsg.buttons) setButtons(botMsg.buttons);
-            if (botMsg.text) speakText(botMsg.text);
-          });
+          await handleSend();
         }
-      } catch (err) {
+      } catch {
         const errorMsg = {
           id: Date.now(),
           type: "ai",
           content: "⚠️ Unable to reach the bot server.",
           timestamp: new Date().toLocaleTimeString(),
         };
-        setMessages((prev) => [...prev, errorMsg]);
-        speakText(errorMsg.content);
+        addMessage(errorMsg);
       }
     };
 
     reader.readAsDataURL(file);
   };
 
+  // ------------------- Voice Input -------------------
   const handleMic = () => {
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      alert("Speech Recognition is not supported in this browser.");
-      return;
-    }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) return alert("Speech Recognition not supported.");
 
     const recognition = new SpeechRecognition();
     recognition.lang = selectedLang;
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
-    recognition.onstart = () => {
-      console.log("🎙️ Voice recognition started.");
-    };
-
-    recognition.onerror = (event) => {
-      console.error("Speech recognition error:", event.error);
-      alert("Speech recognition error: " + event.error);
-    };
-
     recognition.onresult = (event) => {
       const voiceMessage = event.results[0][0].transcript;
-      console.log("🎤 Voice input:", voiceMessage);
       setMessage(voiceMessage);
-      setTimeout(() => handleSend(), 300); // Optional: auto-send
-    };
-
-    recognition.onend = () => {
-      console.log("🎙️ Voice recognition ended.");
+      setTimeout(() => handleSend(), 300); // auto-send after recognition
     };
 
     recognition.start();
   };
 
-  useEffect(() => {
-    chatRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  // ------------------- Auto-scroll -------------------
+  useEffect(scrollToBottom, [messages]);
 
+  // ------------------- Render -------------------
   return (
     <div className="chat-container">
       {/* Header */}
@@ -201,6 +162,7 @@ export default function ChatApp() {
           </div>
         ))}
 
+        {/* Suggestion Buttons */}
         {buttons.length > 0 && (
           <div className="button-group">
             {buttons.map((btn, idx) => (
@@ -217,7 +179,6 @@ export default function ChatApp() {
             ))}
           </div>
         )}
-
         <div ref={chatRef}></div>
       </div>
 
@@ -228,19 +189,12 @@ export default function ChatApp() {
           placeholder="Type your message..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleSend();
-          }}
+          onKeyDown={(e) => e.key === "Enter" && handleSend()}
         />
-        <button className="send-btn" onClick={handleSend}>
-          <Send size={18} />
-        </button>
-        <button className="mic-btn" onClick={handleMic}>
-          <Mic size={18} />
-        </button>
-        <button className="camera-btn" onClick={handleImageCapture}>
-          <Camera size={18} />
-        </button>
+
+        <button className="send-btn" onClick={handleSend}><Send size={18} /></button>
+        <button className="mic-btn" onClick={handleMic}><Mic size={18} /></button>
+        <button className="camera-btn" onClick={handleImageCapture}><Camera size={18} /></button>
 
         <input
           type="file"
