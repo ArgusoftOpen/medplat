@@ -32,3 +32,4 @@ replay_pid*
 /medplat_chatbot_ui/node_modules/
 /medplat_chatbot_backend/rasa_project/.rasa
 /medplat_chatbot_backend/models
+/medplat_chatbot_backend/rasa_project/actions/ai.env
