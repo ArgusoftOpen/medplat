@@ -51,6 +51,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/api/ndhm/healthid/create/generateotp/**").permitAll()
                 .antMatchers("/api/ndhm/healthid/create/get-health-id-card-by-ndhm-user-id/**").permitAll()
                 .antMatchers("/api/ndhm/healthid/create/getfile/**").permitAll()
+                .antMatchers("/api/ddb/**").permitAll()
                 .antMatchers("/api/cmdashboard/**").access("#oauth2.hasScope('cm-dashboard')")
                 .antMatchers("/api/**").access("#oauth2.hasScope('write')");
         http.headers().frameOptions().sameOrigin();
