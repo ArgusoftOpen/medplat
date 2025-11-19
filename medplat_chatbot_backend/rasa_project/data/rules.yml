@@ -1,0 +1,75 @@
+version: "3.1"
+
+rules:
+
+# Greetings & Small Talk
+  - rule: Respond to greetings
+    steps:
+      - intent: greet
+      - action: action_multilingual_response
+
+  - rule: Respond to farewell
+    steps:
+      - intent: goodbye
+      - action: action_multilingual_response
+
+  - rule: Respond to gratitude
+    steps:
+      - intent: thank_you
+      - action: action_multilingual_response
+
+  - rule: Respond to how are you
+    steps:
+      - intent: how_are_you
+      - action: action_multilingual_response
+
+
+# Issue Handling
+  - rule: Handle login issues
+    steps:
+      - intent: login_issue
+      - action: action_multilingual_response
+
+  - rule: Handle password reset request
+    steps:
+      - intent: password_reset
+      - action: action_multilingual_response
+
+  - rule: Handle ongoing issue
+    steps:
+      - intent: still_issue
+      - action: action_multilingual_response
+
+# Confirmation/Denial
+  - rule: Handle user confirmation
+    steps:
+      - intent: affirm
+      - action: action_multilingual_response
+
+  - rule: Handle user denial
+    steps:
+      - intent: deny
+      - action: action_multilingual_response
+
+# Fallbacks & Escalation
+  - rule: Handle fallback intent
+    steps:
+      - intent: fallback
+      - action: action_multilingual_response
+
+  - rule: Escalate to support
+    steps:
+      - intent: escalate_to_support
+      - action: action_multilingual_response
+
+# Email-based Reset
+  - rule: Handle email submission
+    steps:
+      - intent: provide_email
+      - action: action_send_reset_email
+
+# Email-based Reset
+  - rule: will it work
+    steps:
+      - intent: work
+      - action: action_multilingual_response

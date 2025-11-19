@@ -19,6 +19,9 @@
 *.tar.gz
 *.rar
 
+# Ignore environment files
+.env
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
@@ -26,3 +29,7 @@ replay_pid*
 /medplat-ui/nbproject/private/
 /medplat-ui/bower_components/
 /medplat-ui/node_modules/
+/medplat_chatbot_ui/node_modules/
+/medplat_chatbot_backend/rasa_project/.rasa
+/medplat_chatbot_backend/models
+/medplat_chatbot_backend/rasa_project/actions/ai.env

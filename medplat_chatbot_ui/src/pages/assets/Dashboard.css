@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #f2f4f8, #e0e7ff);
+}
+
+.dashboard-container {
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.dashboard-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-2px);
+}
+
+.dashboard-title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
+}
+
+/* Buttons */
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.tab-button {
+  padding: 10px 22px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  border-radius: 25px;
+  background-color: #e4e6eb;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  background-color: #d1d5db;
+}
+
+.tab-button.active-add {
+  background-color: #2563eb;
+  color: white;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+.tab-button.active-view {
+  background-color: #16a34a;
+  color: white;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.3);
+}
+
+.tab-button.active-fallback {
+  background-color: #7c3aed;
+  color: white;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .dashboard-title {
+    font-size: 24px;
+  }
+
+  .tab-button {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+}
+
