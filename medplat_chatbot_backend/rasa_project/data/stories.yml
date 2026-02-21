@@ -1,0 +1,55 @@
+version: "3.1"
+stories:
+
+- story: User faces login issue and resets password
+  steps:
+    - intent: greet
+    - action: action_multilingual_response
+    - intent: login_issue
+    - action: action_multilingual_response
+    - intent: affirm
+    - action: action_multilingual_response
+    - intent: password_reset
+    - action: action_multilingual_response
+    - intent: provide_email
+    - action: action_send_reset_email
+    - intent: affirm
+    - action: action_multilingual_response
+    - intent: thank_you
+    - action: action_multilingual_response
+
+- story: User faces login issue but denies help
+  steps:
+    - intent: login_issue
+    - action: action_multilingual_response
+    - intent: deny
+    - action: action_multilingual_response
+
+- story: User resets password but still has issue
+  steps:
+    - intent: password_reset
+    - action: action_multilingual_response
+    - intent: provide_email
+    - action: action_send_reset_email
+    - intent: still_issue
+    - action: action_multilingual_response
+    - intent: escalate_to_support
+    - action: action_multilingual_response
+
+- story: Fallback conversation
+  steps:
+    - intent: fallback
+    - action: action_multilingual_response
+    - intent: affirm
+    - action: action_multilingual_response
+    - intent: deny
+    - action: action_multilingual_response
+
+- story: User greets and asks how bot is
+  steps:
+    - intent: greet
+    - action: action_multilingual_response
+    - intent: how_are_you
+    - action: action_multilingual_response
+    - intent: thank_you
+    - action: action_multilingual_response

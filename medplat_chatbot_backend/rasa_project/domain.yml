@@ -1,0 +1,50 @@
+version: '3.1'
+actions:
+- action_multilingual_response
+- action_send_reset_email
+entities:
+- user_email
+intents:
+- login_issue
+- password_reset
+- still_issue
+- fallback
+- thank_you
+- goodbye
+- greet
+- how_are_you
+- login_followup_device
+- affirm
+- deny
+- escalate_to_support
+- password_reset_not_working
+- share_additional_details
+- login_followup_error
+- provide_email
+- work
+- say_fine
+
+slots:
+  user_lang:
+    type: text
+    initial_value: "en-IN"
+    influence_conversation: false
+    mappings:
+      - type: from_text
+
+  user_email:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: user_email
+      - type: from_text
+
+  conversation_type:
+    type: text
+    mappings:
+      - type: from_text
+
+  is_influencing:
+    type: bool
+    mappings:
+      - type: from_text
