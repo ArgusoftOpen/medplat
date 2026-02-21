@@ -27,7 +27,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin(ConstantUtil.ALLOW_ORIGIN);
+//        config.addAllowedOrigin(ConstantUtil.ALLOW_ORIGIN);
+        config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod(HttpMethod.GET);
         config.addAllowedMethod(HttpMethod.POST);
