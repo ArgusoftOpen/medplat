@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedPlat Support Chatbot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f8fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .chat-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        
+        .chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+        
+        .chat-footer {
+            padding: 15px;
+            border-top: 1px solid #e6ecf0;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+        }
+        
+        .message-content {
+            padding: 10px 15px;
+            border-radius: 18px;
+        }
+        
+        .user-message {
+            margin-left: auto;
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .bot-message {
+            margin-right: auto;
+            background-color: #f1f1f1;
+            color: #333;
+        }
+        
+        .ticket-form {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .typing-indicator {
+            display: none;
+            margin-bottom: 15px;
+        }
+        
+        .typing-indicator span {
+            height: 10px;
+            width: 10px;
+            float: left;
+            margin: 0 1px;
+            background-color: #9E9EA1;
+            display: block;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: typing 1s infinite;
+        }
+        
+        @keyframes typing {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4 mb-4">
+        <div class="chat-container">
+            <div class="chat-header">
+                <h3 class="mb-0"><i class="fas fa-robot me-2"></i> MedPlat Support Assistant</h3>
+                <p class="mb-0 small">We are here to help you with MedPlat issues</p>
+            </div>
+            
+            <div class="chat-body" id="chatBody">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        Hello! I'm your MedPlat support assistant. How can I help you today?
+                    </div>
+                </div>
+                
+                <div class="typing-indicator" id="typingIndicator">
+                    <span></span>
+                    <span style="animation-delay: 0.2s"></span>
+                    <span style="animation-delay: 0.4s"></span>
+                </div>
+                
+                <div id="ticketFormContainer" style="display:none;">
+                    <div class="ticket-form">
+                        <h5>Create Support Ticket</h5>
+                        <div class="mb-3">
+                            <label for="userName" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="userName" placeholder="Enter your name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="deviceType" class="form-label">Device Type</label>
+                            <select class="form-select" id="deviceType">
+                                <option value="Android">Android</option>
+                                <option value="iOS">iOS</option>
+                                <option value="Desktop">Desktop</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="issueDescription" class="form-label">Detailed Description</label>
+                            <textarea class="form-control" id="issueDescription" rows="3" placeholder="Please provide more details about your issue"></textarea>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-secondary me-2" onclick="cancelTicket()">Cancel</button>
+                            <button class="btn btn-primary" onclick="submitTicket()">Submit Ticket</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-footer">
+                <div class="input-group">
+                    <input type="text" id="userInput" class="form-control" placeholder="Type your message here...">
+                    <button class="btn btn-primary" id="sendButton" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+                <div id="actionButtons" class="action-buttons mt-2" style="display:none;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/5f87358fe2.js" crossorigin="anonymous"></script>
+    <script>
+        // User data (in a real app, this would come from authentication)
+        const userData = {
+            user_id: "user_" + Math.floor(Math.random() * 10000),
+            user_name: "",
+            device_type: "Android"
+        };
+        
+        const chatBody = document.getElementById('chatBody');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const actionButtons = document.getElementById('actionButtons');
+        const ticketFormContainer = document.getElementById('ticketFormContainer');
+        
+        // Common quick actions
+        const quickActions = {
+            "login_issues": {
+                "en": "Reset Password",
+                "hi": "पासवर्ड रीसेट करें"
+            },
+            "still_issue": {
+                "en": "Still Facing Issue",
+                "hi": "समस्या अभी भी है"
+            },
+            "data_sync": {
+                "en": "Check Connection",
+                "hi": "कनेक्शन जांचें"
+            }
+        };
+        
+        // Add a bot message to the chat
+        function addBotMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot-message';
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.innerHTML = message;
+            
+            messageDiv.appendChild(messageContent);
+            chatBody.insertBefore(messageDiv, typingIndicator);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+        
+        // Add a user message to the chat
+        function addUserMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user-message';
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.textContent = message;
+            
+            messageDiv.appendChild(messageContent);
+            chatBody.insertBefore(messageDiv, typingIndicator);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+        
+        // Show typing indicator
+        function showTypingIndicator() {
+            typingIndicator.style.display = 'block';
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+        
+        // Hide typing indicator
+        function hideTypingIndicator() {
+            typingIndicator.style.display = 'none';
+        }
+        
+        // Show action buttons
+        function showActionButtons(language = 'en') {
+            actionButtons.innerHTML = '';
+            
+            // Reset Password button
+            const resetPasswordBtn = document.createElement('button');
+            resetPasswordBtn.className = 'btn btn-sm btn-outline-primary';
+            resetPasswordBtn.textContent = quickActions.login_issues[language];
+            resetPasswordBtn.onclick = function() {
+                handleQuickAction('reset_password', language);
+            };
+            
+            // Still Facing Issue button
+            const stillIssueBtn = document.createElement('button');
+            stillIssueBtn.className = 'btn btn-sm btn-outline-danger';
+            stillIssueBtn.textContent = quickActions.still_issue[language];
+            stillIssueBtn.onclick = function() {
+                showTicketForm();
+            };
+            
+            actionButtons.appendChild(resetPasswordBtn);
+            actionButtons.appendChild(stillIssueBtn);
+            actionButtons.style.display = 'flex';
+        }
+        
+        // Hide action buttons
+        function hideActionButtons() {
+            actionButtons.style.display = 'none';
+        }
+        
+        // Handle quick action button clicks
+        function handleQuickAction(action, language) {
+            switch(action) {
+                case 'reset_password':
+                    if (language === 'hi') {
+                        addBotMessage("पासवर्ड रीसेट करने के लिए निम्न चरणों का पालन करें:<br>1. लॉगिन स्क्रीन पर 'पासवर्ड भूल गए?' पर क्लिक करें<br>2. अपना पंजीकृत मोबाइल नंबर या ईमेल दर्ज करें<br>3. आपको भेजे गए OTP का उपयोग करके अपना पासवर्ड रीसेट करें");
+                    } else {
+                        addBotMessage("Please follow these steps to reset your password:<br>1. Click on 'Forgot Password?' on the login screen<br>2. Enter your registered mobile number or email<br>3. Reset your password using the OTP sent to you");
+                    }
+                    hideActionButtons();
+                    break;
+            }
+        }
+        
+        // Show ticket creation form
+        function showTicketForm() {
+            ticketFormContainer.style.display = 'block';
+            hideActionButtons();
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+        
+        // Cancel ticket creation
+        function cancelTicket() {
+            ticketFormContainer.style.display = 'none';
+            document.getElementById('issueDescription').value = '';
+        }
+        
+        // Submit ticket
+        function submitTicket() {
+            const userName = document.getElementById('userName').value || "Anonymous User";
+            const deviceType = document.getElementById('deviceType').value;
+            const issueDescription = document.getElementById('issueDescription').value;
+            
+            if (!issueDescription) {
+                alert("Please provide a description of your issue");
+                return;
+            }
+            
+            userData.user_name = userName;
+            userData.device_type = deviceType;
+            
+            // Make API call to create ticket
+            fetch('/api/create_ticket', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: userData.user_id,
+                    user_name: userData.user_name,
+                    issue: currentIssue,
+                    description: issueDescription,
+                    language: currentLanguage,
+                    device_type: userData.device_type
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const ticket = data.ticket;
+                    let message;
+                    
+                    if (currentLanguage === 'hi') {
+                        message = `आपका समस्या टिकट #${ticket.ticket_id} सफलतापूर्वक बना दिया गया है। हम शीघ्र ही इसका समाधान करेंगे।`;
+                    } else {
+                        message = `Your issue ticket #${ticket.ticket_id} has been created successfully. We will resolve it soon.`;
+                    }
+                    
+                    addBotMessage(message);
+                    
+                    // Show some helpful video or guide
+                    setTimeout(() => {
+                        if (currentLanguage === 'hi') {
+                            addBotMessage("इस बीच, यहां एक उपयोगी ट्यूटोरियल है जो आपकी मदद कर सकता है:<br><a href='#' target='_blank'>MedPlat लॉगिन गाइड देखें</a>");
+                        } else {
+                            addBotMessage("Meanwhile, here's a helpful tutorial that might help you:<br><a href='#' target='_blank'>Watch MedPlat Login Guide</a>");
+                        }
+                    }, 1500);
+                    
+                    ticketFormContainer.style.display = 'none';
+                    document.getElementById('issueDescription').value = '';
+                } else {
+                    alert("There was an error creating your ticket. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("There was an error creating your ticket. Please try again.");
+            });
+        }
+        
+        // Variables to store current context
+        let currentIssue = "";
+        let currentLanguage = "en";
+        
+        // Send a message to the chatbot
+        function sendMessage() {
+            const message = userInput.value.trim();
+            
+            if (!message) {
+                return;
+            }
+            
+            // Add user message to chat
+            addUserMessage(message);
+            userInput.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Make API call to get response
+            fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: message,
+                    user_id: userData.user_id,
+                    user_name: userData.user_name,
+                    device_type: userData.device_type
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide typing indicator
+                hideTypingIndicator();
+                
+                // Add bot response to chat
+                addBotMessage(data.response);
+                
+                // Update current language
+                currentLanguage = data.language;
+                
+                // Store current issue
+                currentIssue = message;
+                
+                // Check if this needs a ticket
+                if (data.needs_ticket) {
+                    showActionButtons(currentLanguage);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                hideTypingIndicator();
+                addBotMessage("Sorry, I'm having trouble processing your request. Please try again later.");
+            });
+        }
+        
+        // Event listener for Enter key
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
