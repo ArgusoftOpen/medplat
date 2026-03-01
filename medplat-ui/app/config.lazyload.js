@@ -16,6 +16,7 @@
             'chosen': ['third_party/chosen/chosen.jquery.js', 'styles/css/chosen.css', 'app/common/directives/chosen.directive.js'],
             'titlecase.filter': ['app/common/filters/titlecase.filter.js'],
             'languagename.filter': ['app/common/filters/languagename.filter.js'],
+            'language-switcher.directive': ['app/common/directives/language-switcher.directive.js'],
             'statecapitalize.filter': ['app/common/filters/statecapitalize.filter.js'],
             'emptylabel.filter': ['app/common/filters/emptylabel.filter.js'],
             'datesuffix.filter': ['app/common/filters/datesuffix.filter.js'],

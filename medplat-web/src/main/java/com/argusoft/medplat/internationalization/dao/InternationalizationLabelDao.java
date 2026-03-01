@@ -32,4 +32,13 @@ public interface InternationalizationLabelDao extends GenericDao<Internationaliz
     InternationalizationLabel getLabelByKeyLanguageAndCountry(String key, String language, String country, String appName);
 
     void createOrUpdateLabel(String key, String value, String language, String country, String appName);
+
+    /**
+     * Retrieves all labels for a given language and app name.
+     *
+     * @param language Language code (e.g., EN, HI, GU).
+     * @param appName Application name (e.g., WEB).
+     * @return Returns list of labels for the specified language.
+     */
+    List<InternationalizationLabel> getLabelsByLanguageAndAppName(String language, String appName);
 }

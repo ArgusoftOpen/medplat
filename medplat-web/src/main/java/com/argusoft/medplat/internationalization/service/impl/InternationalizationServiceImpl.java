@@ -12,7 +12,9 @@ import javax.annotation.PostConstruct;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -88,6 +90,21 @@ public class InternationalizationServiceImpl implements InternationalizationServ
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         labelsMapLastUpdatedAt = df.format(new Date());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<String, String> getLabelsByLanguageAndAppName(String language, String appName) {
+        List<InternationalizationLabel> labels = internationalizationLabelDao.getLabelsByLanguageAndAppName(language, appName);
+        Map<String, String> result = new LinkedHashMap<>();
+        if (!CollectionUtils.isEmpty(labels)) {
+            for (InternationalizationLabel label : labels) {
+                result.put(label.getKey(), label.getText());
+            }
+        }
+        return result;
     }
 
     /**

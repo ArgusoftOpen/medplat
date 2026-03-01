@@ -10,7 +10,7 @@
     <ul class="nav navbar-nav ml-auto custom-navbar">
         <li ng-if="!!layout.showSearch" class="menu-search user dropdown" ng-mouseleave="layout.showMenus = false;">
             <div id="demo-2" class="search-icon">
-                <input type="text" placeholder="Search Menu" ng-model="layout.search"
+                <input type="text" placeholder="{{ 'NAV.SEARCH_MENU' | translate }}" ng-model="layout.search"
                     ng-focus="layout.showMenus = true;layout.search='';" ng-keydown="layout.showMenus = true;">
             </div>
             <div id="search-data" class="user-data dropdown-menu dropdown-menu-right user-profile-dropdown"
@@ -26,10 +26,13 @@
                         </a>
                     </li>
                     <li ng-if="layout.search && (layout.allMenu| filter : {name : layout.search} :false).length === 0 ">
-                        No data found
+                        {{ 'NAV.NO_DATA_FOUND' | translate }}
                     </li>
                 </ul>
             </div>
+        </li>
+        <li class="nav-item">
+            <language-switcher></language-switcher>
         </li>
         <li class="user  dropdown" uib-dropdown dropdown-append-to-body uib-dropdown-toggle>
             <a type="" data-test="user-dropdown">
@@ -44,26 +47,26 @@
                     {{layout.userDetail.name ? layout.userDetail.name : layout.userDetail.principalId}}
                 </label>
                 <span class="postion">{{layout.userDetail.roleName}}</span>
-                <span class="postion mt-1" ng-if="layout.userDetail.userLastLogin">( Last Login :
+                <span class="postion mt-1" ng-if="layout.userDetail.userLastLogin">( {{ 'NAV.LAST_LOGIN' | translate }} :
                     {{layout.userDetail.userLastLogin | date:'dd/MM/yyyy h:mm a'}} )</span>
                 <ul>
-                    <li class="header">Actions</li>
+                    <li class="header">{{ 'NAV.ACTIONS' | translate }}</li>
                     <li ng-click="layout.updateProfile()">
                         <a href="javascript:void(0)">
                             <em class="fa fa-edit"></em>
-                            Update Profile
+                            {{ 'NAV.UPDATE_PROFILE' | translate }}
                         </a>
                     </li>
                     <li ng-click="layout.changePassword()">
                         <a href="javascript:void(0)">
                             <em class="fa fa-eye"></em>
-                            Change Password
+                            {{ 'NAV.CHANGE_PASSWORD' | translate }}
                         </a>
                     </li>
                     <li ng-click="logOut()">
                         <a href="javascript:void(0)" data-test="logout">
                             <em class="fa fa-lock"></em>
-                            Logout
+                            {{ 'NAV.LOGOUT' | translate }}
                         </a>
                     </li>
                 </ul>
@@ -76,7 +79,7 @@
         <li ng-if="layout.menuList.fhs.length" class="has-sub " ng-mouseover="layout.parentHover()" ng-mouseleave="">
             <a href="javascript:void(0)" data-test="menu-fhs">
                 <span class="icon"><img alt="image" src="img/fhs-icon.png"></span>
-                <span class="text">FHS</span>
+                <span class="text">{{ 'NAV.FHS' | translate }}</span>
             </a>
             <div class="position-wrapper">
                 <ul ng-if="layout.menuList.fhs.length > 0" class="cst-scrollbar sub-menu">
@@ -106,7 +109,7 @@
         <li ng-if="layout.menuList.ncd.length" class="has-sub " ng-mouseover="layout.parentHover()" ng-mouseleave="">
             <a href="javascript:void(0)" data-test="menu-ncd">
                 <span class="icon"><img alt="image" src="img/ncd_mobile.png"></span>
-                <span class="text">NCD</span>
+                <span class="text">{{ 'NAV.NCD' | translate }}</span>
             </a>
             <div class="position-wrapper">
                 <ul ng-if="layout.menuList.ncd.length > 0" class="cst-scrollbar sub-menu">
@@ -136,7 +139,7 @@
             ng-mouseleave="">
             <a href="javascript:void(0)" data-test="menu-training">
                 <span class="icon"><img alt="image" src="img/training_icon.png"></span>
-                <span class="text">Training</span>
+                <span class="text">{{ 'NAV.TRAINING' | translate }}</span>
             </a>
             <div class="position-wrapper">
                 <ul ng-if="layout.menuList.training.length > 0" class="cst-scrollbar sub-menu">
@@ -166,7 +169,7 @@
             ng-mouseleave="">
             <a href="javascript:void(0)" data-test="menu-manage">
                 <span class="icon"><em class="fa fa-cogs"></em></span>
-                <span class="text">Manage</span>
+                <span class="text">{{ 'NAV.MANAGE' | translate }}</span>
             </a>
             <div class="position-wrapper">
                 <ul ng-if="layout.menuList.manage.length > 0" class="cst-scrollbar sub-menu">
@@ -195,7 +198,7 @@
         <li ng-if="layout.menuList.admin.length" class="has-sub " ng-mouseover="layout.parentHover()" ng-mouseleave="">
             <a href="javascript:void(0)" data-test="menu-admin">
                 <span class="icon"><img alt="image" src="img/admin-icon.png"></span>
-                <span class="text">Admin</span>
+                <span class="text">{{ 'NAV.ADMIN' | translate }}</span>
             </a>
             <div class="position-wrapper">
                 <ul ng-if="layout.menuList.admin.length > 0" class="cst-scrollbar sub-menu">
@@ -237,7 +240,7 @@
         </li>
     </ul> -->
     <p style="text-align: justify;">
-        <i>A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators especially in a public health context</i>
+        <i>{{ 'LOGIN.TAGLINE' | translate }}</i>
     </p>
         <!-- <a href="http://www.argusoft.com/" target="_blank" border="0">
         <img alt="image" class="argus-logo" src="img/medplat.png" style="height: 50px;">

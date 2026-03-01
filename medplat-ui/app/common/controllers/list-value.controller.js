@@ -1,5 +1,5 @@
 (function (angular) {
-    let listValueModalController = function ($scope, $uibModalInstance, listFieldKey, title, QueryDAO, Mask, GeneralUtil, toaster) {
+    let listValueModalController = function ($scope, $uibModalInstance, listFieldKey, title, QueryDAO, Mask, GeneralUtil, toaster, $translate) {
         $scope.listFieldKey = listFieldKey;
         $scope.title = title;
         $scope.listValues = [];
@@ -84,7 +84,7 @@
                 QueryDAO.executeAll(queryDto).then(() => {
                     return QueryDAO.executeAll(statusChangedDto);
                 }).then(() => {
-                    toaster.pop('success', 'Data updated successfully');
+                    toaster.pop('success', $translate.instant('TOAST.DATA_UPDATED'));
                 }).catch((error) => {
                     GeneralUtil.showMessageOnApiCallFailure(error);
                 }).finally(() => {

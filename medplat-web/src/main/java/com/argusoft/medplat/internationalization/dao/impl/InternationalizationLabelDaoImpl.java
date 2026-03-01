@@ -99,4 +99,19 @@ public class InternationalizationLabelDaoImpl extends GenericDaoImpl<Internation
                 .setParameter("createdBy", imtechoSecurityUser.getId())
                 .executeUpdate();
     }
+
+    @Override
+    public List<InternationalizationLabel> getLabelsByLanguageAndAppName(String language, String appName) {
+        String query = "select key, language, text from internationalization_label_master " +
+                "where \"language\" = :language and app_name = :appName";
+
+        NativeQuery<InternationalizationLabel> q = getCurrentSession().createNativeQuery(query)
+                .addScalar("key", StandardBasicTypes.STRING)
+                .addScalar("language", StandardBasicTypes.STRING)
+                .addScalar("text", StandardBasicTypes.STRING)
+                .setParameter("language", language)
+                .setParameter("appName", appName);
+
+        return q.setResultTransformer(Transformers.aliasToBean(InternationalizationLabel.class)).list();
+    }
 }

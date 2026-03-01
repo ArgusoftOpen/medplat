@@ -1,5 +1,5 @@
 (function (angular) {
-    angular.module('imtecho.service').service('syncWithServerService', function (QueryDAO, $uibModal, toaster,Mask) {
+    angular.module('imtecho.service').service('syncWithServerService', function (QueryDAO, $uibModal, toaster, Mask, $translate) {
         this.serverList = [];
         var dto = {
             code: 'get_active_server_list',
@@ -15,7 +15,7 @@
         this.syncWithServer = async function (featureUUID) {
             // when FeatureUUID is not available that means respective feature item is not saved Properly 
             if (featureUUID === null) {
-                toaster.pop('info', "No configuration Found.\n Please open respective feature item and save it.");
+                toaster.pop('info', $translate.instant('TOAST.NO_CONFIG'));
                 return;
             }
 
@@ -78,13 +78,13 @@
                         $http.post(APP_CONFIG.apiPath + '/server/save/sync-with-server', bodyData).then((response) => {
                             mdCtrl.isProcessing = false;                            
                             $uibModalInstance.dismiss('cancel');
-                            toaster.pop('success', "updated Successfully ");
+                            toaster.pop('success', $translate.instant('TOAST.SYNC_UPDATED'));
                             Mask.hide();
                         })
                         .catch((err) => {
                             mdCtrl.isProcessing = false;
                             $uibModalInstance.dismiss('cancel');
-                            toaster.pop('danger', "Insertion failed");
+                            toaster.pop('danger', $translate.instant('TOAST.SYNC_FAILED'));
                             Mask.hide();
                         });                        
                     }
