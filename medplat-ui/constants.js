@@ -1,12 +1,12 @@
 angular.module('imtecho').constant('States', {
-    states: [{stateKey: "trainingDashboard", stateName: 'imtecho.trainerdashboard', label: 'Training Dashboard', icon: 'fa fa-tachometer'},
-        {stateKey: "trainingSchedule", stateName: 'imtecho.scheduletraining', label: 'Training Schedule', icon: 'fa fa-calendar'},
-        {stateKey: "traineeStatus", stateName: 'imtecho.traineestatus', label: 'Trainee Status', icon: 'fa fa-address-card-o'},
-        {stateKey: "fhsDashboard", stateName: 'imtecho.fhsdashboard', label: 'FHS Dashboard', icon: 'fa fa-tachometer'},
-        {stateKey: "manageUsers", stateName: 'imtecho.manage.user', label: 'Manage Users', icon: 'fa fa-users'},
-        {stateKey: "fhsReverification", stateName: 'imtecho.familymembers', label: 'FHS Re-Verification', icon: 'fa fa-check-square-o'},
-        {stateKey: "fhsSupervisorReverification", stateName: 'imtecho.fhsrverification', label: 'Supervisor Re-Verification', icon: 'fa fa-check-square-o'},
-        {stateKey: "createCourse", stateName: 'imtecho.createcourse', label: 'Create Course', icon: 'fa fa-book'}
+    states: [{stateKey: "trainingDashboard", stateName: 'imtecho.trainerdashboard', label: 'Training Dashboard', labelKey: 'STATES.TRAINING_DASHBOARD', icon: 'fa fa-tachometer'},
+        {stateKey: "trainingSchedule", stateName: 'imtecho.scheduletraining', label: 'Training Schedule', labelKey: 'STATES.TRAINING_SCHEDULE', icon: 'fa fa-calendar'},
+        {stateKey: "traineeStatus", stateName: 'imtecho.traineestatus', label: 'Trainee Status', labelKey: 'STATES.TRAINEE_STATUS', icon: 'fa fa-address-card-o'},
+        {stateKey: "fhsDashboard", stateName: 'imtecho.fhsdashboard', label: 'FHS Dashboard', labelKey: 'STATES.FHS_DASHBOARD', icon: 'fa fa-tachometer'},
+        {stateKey: "manageUsers", stateName: 'imtecho.manage.user', label: 'Manage Users', labelKey: 'STATES.MANAGE_USERS', icon: 'fa fa-users'},
+        {stateKey: "fhsReverification", stateName: 'imtecho.familymembers', label: 'FHS Re-Verification', labelKey: 'STATES.FHS_REVERIFICATION', icon: 'fa fa-check-square-o'},
+        {stateKey: "fhsSupervisorReverification", stateName: 'imtecho.fhsrverification', label: 'Supervisor Re-Verification', labelKey: 'STATES.SUPERVISOR_REVERIFICATION', icon: 'fa fa-check-square-o'},
+        {stateKey: "createCourse", stateName: 'imtecho.createcourse', label: 'Create Course', labelKey: 'STATES.CREATE_COURSE', icon: 'fa fa-book'}
     ]
 });
 

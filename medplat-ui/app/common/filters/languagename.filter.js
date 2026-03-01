@@ -8,6 +8,8 @@
                 out = "English";
             } else if (input === USER.prefferedLanguage.gujarati) {
                 out = "Gujarati";
+            } else if (input === USER.prefferedLanguage.hindi) {
+                out = "Hindi";
             }
             return out;
         };

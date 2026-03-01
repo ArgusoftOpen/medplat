@@ -1,5 +1,5 @@
 (function () {
-    function UpdateUserProfileController(AuthenticateService, UserDAO, toaster, Mask, updateUserObj, RoleDAO, $uibModalInstance, GeneralUtil) {
+    function UpdateUserProfileController(AuthenticateService, UserDAO, toaster, Mask, updateUserObj, RoleDAO, $uibModalInstance, GeneralUtil, $translate) {
         var updateProfile = this;
 
         var initPage = function () {
@@ -24,7 +24,7 @@
             Mask.show();
             UserDAO.createOrUpdate(userDto).then(function (res) {
                 if (!!res) {
-                    toaster.pop('success', 'Your Profile Updated Successfully!');
+                    toaster.pop('success', $translate.instant('TOAST.PROFILE_UPDATED'));
                     $uibModalInstance.close();
                 }
             }).catch((err) => {

@@ -1,7 +1,8 @@
 angular.module('imtecho').constant("USER", {
     prefferedLanguage: {
         gujarati: 'GU',
-        english: "EN"
+        english: "EN",
+        hindi: "HI"
     },
     state: {
         "active": "ACTIVE",

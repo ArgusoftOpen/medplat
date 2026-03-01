@@ -2,15 +2,15 @@
     <div class="row">
         <div class="col-12 mb-15">
             <div class="section-title">
-                <h4 class="text">Users </h4>
+                <h4 class="text">{{ 'USERS.TITLE' | translate }} </h4>
                 <div class="float-right">
                     <button ng-if="!userscontroller.noRolesAssignedToShow && userscontroller.rights.canAdd"
-                        class="btn btn-primary " ui-sref="techo.manage.user"> Add </button>
-                    <em class="fa fa-print " uib-tooltip="Print pdf" style="cursor: pointer;font-size: 20px"
-                        title="Print PDF" ng-click="userscontroller.printReport()"></em>
+                        class="btn btn-primary " ui-sref="techo.manage.user"> {{ 'COMMON.ADD' | translate }} </button>
+                    <em class="fa fa-print " uib-tooltip="{{ 'COMMON.PRINT_PDF' | translate }}" style="cursor: pointer;font-size: 20px"
+                        title="{{ 'COMMON.PRINT_PDF' | translate }}" ng-click="userscontroller.printReport()"></em>
                     <i ng-click="userscontroller.saveExcel()" style="cursor: pointer;font-size: 20px"
-                        uib-tooltip="Download excel" class="fa fa-file-excel-o  excelglyphicon font-size-20"
-                        aria-hidden="true" title="Download excel"></i>
+                        uib-tooltip="{{ 'COMMON.DOWNLOAD_EXCEL' | translate }}" class="fa fa-file-excel-o  excelglyphicon font-size-20"
+                        aria-hidden="true" title="{{ 'COMMON.DOWNLOAD_EXCEL' | translate }}"></i>
                 </div>
 
                 <div class="col-2 inline-form float-right" ng-if="!userscontroller.noRolesAssignedToShow">
@@ -18,7 +18,7 @@
                         <input type="text" class="form-control cst-form-control" id="search"
                             ng-model="userscontroller.searchText"
                             ng-change="userscontroller.fetchUsers('search', 'search')"
-                            ng-model-options="{debounce: 1000}" placeholder="Search text">
+                            ng-model-options="{debounce: 1000}" placeholder="{{ 'COMMON.SEARCH_TEXT' | translate }}">
                     </div>
 
 
@@ -27,8 +27,8 @@
         </div>
         <div class="col-12 mb-15" ng-if="userscontroller.noRolesAssignedToShow">
             <div class="no-data-placeholder">
-                <h5>Sorry No Data Here!</h5>
-                <p>No Roles to manage by logged in user!</p>
+                <h5>{{ 'USERS.NO_DATA' | translate }}</h5>
+                <p>{{ 'USERS.NO_ROLES' | translate }}</p>
             </div>
         </div>
         <div class="col-12 mb-15" ng-if="!userscontroller.noRolesAssignedToShow">
@@ -57,35 +57,35 @@
                             <th>
                                 #
                             </th>
-                            <th class="filter-col">Username<span class="pull-right sort"
+                            <th class="filter-col">{{ 'USERS.USERNAME' | translate }}<span class="pull-right sort"
                                     ng-click="userscontroller.fetchUsers('userName', 'sort')">
                                     <em class="fa fa-sort-amount-asc"
                                         ng-class="{'fa-sort-amount-asc': (userscontroller.order === 'asc' && userscontroller.orderBy === 'userName') || userscontroller.orderBy !== 'userName', 'fa-sort-amount-desc': userscontroller.order === 'desc' && userscontroller.orderBy === 'userName'}"></em>
                                 </span>
                             </th>
-                            <th class="filter-col"> Name<span class="pull-right sort"
+                            <th class="filter-col">{{ 'USERS.NAME' | translate }}<span class="pull-right sort"
                                     ng-click="userscontroller.fetchUsers('firstName', 'sort')">
                                     <em class="fa fa-sort-amount-asc"
                                         ng-class="{'fa-sort-amount-asc': (userscontroller.order === 'asc' && userscontroller.orderBy === 'firstName') || userscontroller.orderBy !== 'firstName', 'fa-sort-amount-desc': userscontroller.order === 'desc' && userscontroller.orderBy === 'firstName'}"></em>
                                 </span>
                             </th>
-                            <th class="filter-col">Role<span class="pull-right sort"
+                            <th class="filter-col">{{ 'COMMON.ROLE' | translate }}<span class="pull-right sort"
                                     ng-click="userscontroller.fetchUsers('roleName', 'sort')">
                                     <em class="fa fa-sort-amount-asc"
                                         ng-class="{'fa-sort-amount-asc': (userscontroller.order === 'asc' && userscontroller.orderBy === 'roleName') || userscontroller.orderBy !== 'roleName', 'fa-sort-amount-desc': userscontroller.order === 'desc' && userscontroller.orderBy === 'roleName'}"></em>
                                 </span>
                             </th>
-                            <th class="filter-col">Phone No<span class="pull-right sort"
+                            <th class="filter-col">{{ 'USERS.PHONE_NO' | translate }}<span class="pull-right sort"
                                     ng-click="userscontroller.fetchUsers('contactNumber', 'sort')">
                                     <em class="fa fa-sort-amount-asc"
                                         ng-class="{'fa-sort-amount-asc': (userscontroller.order === 'asc' && userscontroller.orderBy === 'contactNumber') || userscontroller.orderBy !== 'contactNumber', 'fa-sort-amount-desc': userscontroller.order === 'desc' && userscontroller.orderBy === 'contactNumber'}"></em>
                                 </span>
                             </th>
-                            <th>Area of Intervention</th>
-                            <th>Health Infrastructure</th>
-                            <th>Device ID</th>
-                            <th> User Status</th>
-                            <th ng-if="userscontroller.rights.canEdit" class="no-print">Action</th>
+                            <th>{{ 'USERS.AREA_OF_INTERVENTION' | translate }}</th>
+                            <th>{{ 'USERS.HEALTH_INFRASTRUCTURE' | translate }}</th>
+                            <th>{{ 'USERS.DEVICE_ID' | translate }}</th>
+                            <th>{{ 'USERS.USER_STATUS' | translate }}</th>
+                            <th ng-if="userscontroller.rights.canEdit" class="no-print">{{ 'USERS.ACTION' | translate }}</th>
                         </tr>
                     </thead>
                     <tbody class="cst-tbody" infinite-scroll-distance="0"
@@ -116,13 +116,13 @@
                                                 ng-if="user.displayState === 'ACTIVE' ? userscontroller.toggle = 'Inactive' : userscontroller.toggle = 'Active'">
                                                 <a href="javascript:void(0)"
                                                     ng-click="userscontroller.deleteUser(user)">
-                                                    <strong>Mark as </strong> {{::userscontroller.toggle}}</a>
+                                                    <strong>{{ 'COMMON.MARK_AS' | translate }} </strong> {{::userscontroller.toggle}}</a>
                                             </li>
 
                                             <li ng-if="userscontroller.env!=='uttarakhand'">
                                                 <a ng-if="!user.loginCode" href="javascript:void(0)"
                                                     ng-click="userscontroller.createLoginCode(user)">
-                                                    Generate SOH code</a>
+                                                    {{ 'USERS.GENERATE_SOH_CODE' | translate }}</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -131,7 +131,7 @@
                             </td>
                         </tr>
                         <tr ng-if="(!userscontroller.usersList || userscontroller.usersList.length === 0)">
-                            <td colspan="10">No users available</td>
+                            <td colspan="10">{{ 'USERS.NO_USERS' | translate }}</td>
                         </tr>
                     </tbody>
                     <tfoot class="print-footer">
@@ -146,10 +146,10 @@
         </div>
     </div>
     <div class="filter-div" ng-if="!userscontroller.noRolesAssignedToShow">
-        <span class="filter-toggle" ng-click="userscontroller.toggleFilter()">Filter</span>
+        <span class="filter-toggle" ng-click="userscontroller.toggleFilter()">{{ 'COMMON.FILTER' | translate }}</span>
         <div class="row">
             <div class="col-12">
-                <h5 class="filter-div-title">Filter</h5>
+                <h5 class="filter-div-title">{{ 'COMMON.FILTER' | translate }}</h5>
             </div>
         </div>
         <div class="filter-div-body">
@@ -164,19 +164,19 @@
                 <div class="col-12">
                     <div class="form-group">
                         <label>
-                            Role
+                            {{ 'COMMON.ROLE' | translate }}
                         </label>
                         <select class="form-control cst-form-control"
                             ng-options="option as option.name for option in userscontroller.roles track by option.id"
                             ng-model="userscontroller.selectedRole">
-                            <option value="">Select</option>
+                            <option value="">{{ 'COMMON.SELECT' | translate }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-12 pt-3" >
                     <div class="form-group">
                         <label>
-                            Status
+                            {{ 'COMMON.STATUS' | translate }}
                         </label>
                         <select class="form-control cst-form-control"
                             ng-init="userscontroller.selectedStatus = userscontroller.statuses[0]" 
@@ -190,9 +190,9 @@
                     <hr>
                     <div class="form-group text-right">
                         <button class="btn btn-secondary close-filter"
-                            ng-click="userscontroller.toggleFilter()">Close</button>
+                            ng-click="userscontroller.toggleFilter()">{{ 'COMMON.CLOSE' | translate }}</button>
                         <button class="btn btn-primary search-filter"
-                            ng-click="userscontroller.fetchUsers('click')">Search</button>
+                            ng-click="userscontroller.fetchUsers('click')">{{ 'COMMON.SEARCH' | translate }}</button>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 (function () {
-    function ForgetPasswordController(UserDAO, toaster, $state, $timeout, GeneralUtil) {
+    function ForgetPasswordController(UserDAO, toaster, $state, $timeout, GeneralUtil, $translate) {
         var forgetpassword = this;
         forgetpassword.generateOtpFlag = true;
         forgetpassword.verifyOtpFlag = false;
@@ -55,10 +55,10 @@
             if (password !== undefined) {
                 if (password == confirmPassword) {
                     UserDAO.resetPassword(username, otp, password).then(function (res) {
-                        toaster.pop('success', 'Password Reset Successfull!');
+                        toaster.pop('success', $translate.instant('TOAST.PASSWORD_RESET_SUCCESS'));
                         $state.go('login');
                     }, function (error) {
-                        toaster.pop('warning', 'Oops! Something Went Wrong! Please Retry.');
+                        toaster.pop('warning', $translate.instant('TOAST.PASSWORD_RESET_ERROR'));
                     });
                 }
             } else {

@@ -1,5 +1,5 @@
 (function () {
-    var mainController = function ($scope, $rootScope, APP_CONFIG, ENV) {
+    var mainController = function ($scope, $rootScope, APP_CONFIG, ENV, $translate) {
         $scope.setAppName = () => {
             switch (ENV.implementation) {
                 case 'sewa_rural':
@@ -28,6 +28,11 @@
         $scope.$on('invalid_auth', function () {
             $rootScope.logOut();
         });
+        $rootScope.currentLanguage = $translate.use() || 'en';
+        $rootScope.changeLanguage = function (langKey) {
+            $translate.use(langKey);
+            $rootScope.currentLanguage = langKey;
+        };
         $scope.setAppName();
     };
     angular.module('imtecho.controllers').controller('MainController', mainController);

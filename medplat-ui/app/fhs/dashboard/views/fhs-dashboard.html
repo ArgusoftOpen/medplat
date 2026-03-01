@@ -7,21 +7,21 @@
                         <a id="card1" class="collapse-link d-block" data-toggle="collapse" href="#collapse1"
                             ng-click="toggle7 = !toggle7">
                             <span data-toggle="tooltip">
-                                FHS families detail report
+                                {{ 'FHS.FAMILIES_DETAIL_REPORT' | translate }}
                             </span>
                         </a>
                         <ul class="control-list">
                             <li ng-if="fhsdashboard.lastUpdateDate != null">
-                                Last Updated at {{fhsdashboard.lastUpdateDate| date : "dd-MM-yyyy HH:mm:ss"}}
+                                {{ 'FHS.LAST_UPDATED_AT' | translate }} {{fhsdashboard.lastUpdateDate| date : "dd-MM-yyyy HH:mm:ss"}}
                             </li>
                             <li ng-if="toggle7 && fhsdashboard.showDetailViewFlag" ng-click="fhsdashboard.saveExcel()">
                                 <span>
-                                    <em class="fa fa-file-excel-o" uib-tooltip="Download excel"></em>
+                                    <em class="fa fa-file-excel-o" uib-tooltip="{{ 'COMMON.DOWNLOAD_EXCEL' | translate }}"></em>
                                 </span>
                             </li>
                             <li ng-if="toggle7 && fhsdashboard.showDetailViewFlag" ng-click="fhsdashboard.printPdf()">
                                 <span>
-                                    <em class="fa fa-print" uib-tooltip="Print pdf"></em>
+                                    <em class="fa fa-print" uib-tooltip="{{ 'COMMON.PRINT_PDF' | translate }}"></em>
                                 </span>
                             </li>
                             <li ng-if="toggle7"
@@ -74,43 +74,39 @@
                                             <thead class="cst-thead">
                                                 <tr>
                                                     <th data-toggle="tooltip">
-                                                        Location</th>
+                                                        {{ 'FHS.LOCATION' | translate }}</th>
                                                     <th ng-if="!fhsdashboard.isDistrict" data-toggle="tooltip">
-                                                        Sub Location</th>
+                                                        {{ 'FHS.SUB_LOCATION' | translate }}</th>
                                                     <!-- <th data-toggle="tooltip">
                                                         Imported From eMamta</th> -->
                                                     <!-- <th data-toggle="tooltip">
                                                         Imported eMamta Member</th> -->
                                                     <th data-toggle="tooltip">
-                                                        To be
-                                                        processed</th>
+                                                        {{ 'FHS.TO_BE_PROCESSED' | translate }}</th>
                                                     <th data-toggle="tooltip">
-                                                        In Reverification</th>
+                                                        {{ 'FHS.IN_REVERIFICATION' | translate }}</th>
                                                     <th data-toggle="tooltip">
-                                                        Verified</th>
+                                                        {{ 'FHS.VERIFIED' | translate }}</th>
                                                     <th data-toggle="tooltip">
-                                                        Archived
+                                                        {{ 'FHS.ARCHIVED' | translate }}
                                                     </th>
                                                     <th data-toggle="tooltip">
-                                                        New Families Added
-                                                    </th>
-                                                    <th data-toggle="tooltip"
-                                                        ng-bind-template="Total Families in {{fhsdashboard.appName}}">
+                                                        {{ 'FHS.NEW_FAMILIES_ADDED' | translate }}
                                                     </th>
                                                     <th data-toggle="tooltip"
-                                                        ng-bind-template="Total Members in {{fhsdashboard.appName}}">
+                                                        ng-bind-template="{{ 'FHS.TOTAL_FAMILIES_IN' | translate }} {{fhsdashboard.appName}}">
+                                                    </th>
+                                                    <th data-toggle="tooltip"
+                                                        ng-bind-template="{{ 'FHS.TOTAL_MEMBERS_IN' | translate }} {{fhsdashboard.appName}}">
                                                     </th>
                                                     <th data-toggle="tooltip">
-                                                        Total
-                                                        Children Under 1 Year</th>
+                                                        {{ 'FHS.TOTAL_CHILDREN_UNDER_1' | translate }}</th>
                                                     <th data-toggle="tooltip">
-                                                        Total
-                                                        Children Under 5 Years</th>
+                                                        {{ 'FHS.TOTAL_CHILDREN_UNDER_5' | translate }}</th>
                                                     <!-- <th data-toggle="tooltip"
                                                         title="Percetage Completion = ((Verified + Archived) * 100) / Imported from emamta ">
                                                         Percentage Completion</th> -->
-                                                    <th data-toggle="tooltip">No. of
-                                                        Field Workers</th>
+                                                    <th data-toggle="tooltip">{{ 'FHS.NUM_FIELD_WORKERS' | translate }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody ng-if="!fhsdashboard.isDistrict" class="cst-tbody">
@@ -184,7 +180,7 @@
                                                             href="javascript:void(0);">0</a></td>
                                                 </tr>
                                                 <tr ng-repeat-end>
-                                                    <th>Total</th>
+                                                    <th>{{ 'COMMON.TOTAL' | translate }}</th>
                                                     <!-- <td>{{memberDetails.importedFromEmamta}}</td>
                                                     <td>{{!memberDetails.importedFromEmamtaMember ? 0 : memberDetails.importedFromEmamtaMember}}
                                                     </td> -->
@@ -218,7 +214,7 @@
                                                 <tr
                                                     ng-if="fhsdashboard.familiesAndMemberDetails.length < 1 && !fhsdashboard.isFamiliesAndMembers">
                                                     <td colspan="10">
-                                                        <p class="card-text">No records found...</p>
+                                                        <p class="card-text">{{ 'COMMON.NO_RECORDS' | translate }}</p>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -302,7 +298,7 @@
                                                 <tr
                                                     ng-if="fhsdashboard.familiesAndMemberDetails.length < 1 && !fhsdashboard.isFamiliesAndMembers">
                                                     <td colspan="10">
-                                                        <p class="card-text">No records found...</p>
+                                                        <p class="card-text">{{ 'COMMON.NO_RECORDS' | translate }}</p>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -316,10 +312,10 @@
                                         </table>
                                     </div>
                                     <ul class="legend">
-                                        <li><span class="p1"></span>Below 25 percentage</li>
-                                        <li><span class="p2"></span>25 percentage to 35 percentage</li>
-                                        <li><span class="p3"></span>35 percentage to 50 percentage</li>
-                                        <li><span class="p4"></span>Above 50 percentage</li>
+                                        <li><span class="p1"></span>{{ 'FHS.BELOW_25' | translate }}</li>
+                                        <li><span class="p2"></span>{{ 'FHS.BETWEEN_25_35' | translate }}</li>
+                                        <li><span class="p3"></span>{{ 'FHS.BETWEEN_35_50' | translate }}</li>
+                                        <li><span class="p4"></span>{{ 'FHS.ABOVE_50' | translate }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -343,10 +339,10 @@
                 </div>
             </div>
             <div class="filter-div">
-                <span class="filter-toggle" ng-click="fhsdashboard.toggleFilter()">Select Location</span>
+                <span class="filter-toggle" ng-click="fhsdashboard.toggleFilter()">{{ 'COMMON.SELECT_LOCATION' | translate }}</span>
                 <div class="row">
                     <div class="col-12">
-                        <h5 class="filter-div-title">Select Location</h5>
+                        <h5 class="filter-div-title">{{ 'COMMON.SELECT_LOCATION' | translate }}</h5>
                     </div>
                 </div>
                 <div class="filter-div-body">
@@ -364,9 +360,9 @@
                             <hr>
                             <div class="form-group text-right">
                                 <button class="btn btn-secondary close-filter"
-                                    ng-click="fhsdashboard.toggleFilter()">Close</button>
+                                    ng-click="fhsdashboard.toggleFilter()">{{ 'COMMON.CLOSE' | translate }}</button>
                                 <button class="btn btn-primary search-filter"
-                                    ng-click="fhsdashboard.submit()">Search</button>
+                                    ng-click="fhsdashboard.submit()">{{ 'COMMON.SEARCH' | translate }}</button>
                             </div>
                         </div>
                     </div>
@@ -386,8 +382,7 @@
                         <a class="collapse-link d-block" data-toggle="collapse" onclick="return false;"
                             href="#collapsesix" ng-click="toggle6 = !!!toggle6;
                                     fhsdashboard.getstarperformers()">
-                            <span data-toggle="tooltip">Star
-                                Performers of the day</span>
+                            <span data-toggle="tooltip">{{ 'FHS.STAR_PERFORMERS' | translate }}</span>
                             <em class="pull-right" ng-class="{'ion-plus':!toggle6,'ion-minus':toggle6}"></em>
                         </a>
                     </h4>
@@ -395,7 +390,7 @@
                 <div class="collapse" id="collapsesix" aria-labelledby="headingsix">
                     <div class="card-body"
                         ng-if="fhsdashboard.starperformers.length < 1 && fhsdashboard.performerloaded">
-                        <p class="card-text text-center">No records found...</p>
+                        <p class="card-text text-center">{{ 'COMMON.NO_RECORDS' | translate }}</p>
                     </div>
                     <div class="card-body" ng-if="fhsdashboard.starperformers.length > 0">
                         <div class="cst-table table-responsive  mCustomScrollbar max-height-300">
@@ -403,8 +398,8 @@
                                 ng-if="fhsdashboard.performerloaded">
                                 <thead class="cst-thead">
                                     <tr>
-                                        <th>Person Name</th>
-                                        <th>Records Submitted</th>
+                                        <th>{{ 'FHS.PERSON_NAME' | translate }}</th>
+                                        <th>{{ 'FHS.RECORDS_SUBMITTED' | translate }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="cst-tbody">
