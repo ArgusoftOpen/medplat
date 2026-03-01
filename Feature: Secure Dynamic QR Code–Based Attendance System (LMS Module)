@@ -1,0 +1,7 @@
+This PR enhances the existing LMS module in MEDPlat by implementing a **secure, dynamic QR code–based attendance marking system**.
+
+The system enables instructors to generate a session-specific QR code that refreshes automatically every 2 minutes. Each refresh generates a new secure, time-bound token to prevent misuse (e.g., screenshot sharing or link forwarding).
+
+Learners must be authenticated before marking attendance. The system enforces geo-fencing validation and IP-based restrictions to reduce malpractice.
+
+The implementation is modular, scalable, and fully integrated into the existing LMS architecture.
