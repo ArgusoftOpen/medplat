@@ -226,4 +226,14 @@ public class WebTaskDashboardServiceImpl implements WebTaskDashboardService {
         }
     }
 
+    @Override
+    public void markAsEscalated(Integer taskId) {
+        TechoWebNotificationMaster task = webNotificationMasterDao.retrieveById(taskId);
+        if (task == null) {
+            throw new ImtechoSystemException("Task not found with id: " + taskId, 404);
+        }
+        task.setIsEscalated(true);
+        webNotificationMasterDao.update(task);
+    }
+
 }

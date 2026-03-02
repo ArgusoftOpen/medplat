@@ -62,6 +62,8 @@ public class TechoWebNotificationMaster extends EntityAuditInfo implements Seria
     private Integer refCode;
     @Column(name = "notification_type_escalation_id")
     private String notificationTypeEscalationId;
+    @Column(name = "is_escalated")
+    private Boolean isEscalated = false;
     @JoinColumn(name = "notification_type_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private NotificationTypeMaster notificationTypeMaster;
@@ -212,7 +214,15 @@ public class TechoWebNotificationMaster extends EntityAuditInfo implements Seria
     public void setActionTaken(String actionTaken) {
         this.actionTaken = actionTaken;
     }
-    
+
+    public Boolean getIsEscalated() {
+        return isEscalated;
+    }
+
+    public void setIsEscalated(Boolean isEscalated) {
+        this.isEscalated = isEscalated;
+    }
+
     public enum State {
         PENDING,
         COMPLETED,
