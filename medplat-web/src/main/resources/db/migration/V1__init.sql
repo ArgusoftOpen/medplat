@@ -8846,7 +8846,6 @@ ALTER TABLE IF EXISTS public.escalation_level_user_rel OWNER TO postgres;
 -- TOC entry 366 (class 1259 OID 222120)
 -- Name: event_configuration; Type: TABLE; Schema: public; Owner: postgres
 --
-
 CREATE TABLE IF NOT EXISTS public.event_configuration (
     id integer NOT NULL,
     created_by integer NOT NULL,
