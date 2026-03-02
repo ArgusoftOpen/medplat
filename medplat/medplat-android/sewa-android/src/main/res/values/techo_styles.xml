@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Theme.Techo" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="CustomMenuActionButton" parent="Theme.MaterialComponents.Light">
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="CustomTitleView" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/labelColor</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="CustomSubtitleView" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/labelColor</item>
+    </style>
+
+    <style name="CustomSubtitleViewCheckBoxText" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/labelColor</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+
+    <style name="AlertDialogLabel" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="CustomInstructionView" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/roboto_bold_italic</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/labelColor</item>
+    </style>
+
+    <style name="CustomQuestionView" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="CustomLabelView" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/labelTextColor</item>
+    </style>
+
+    <style name="CustomAnswerView" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/listTextColor</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="CustomBoldAnswerView" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/listTextColor</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="CustomDateView" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="android:editTextStyle">@style/CustomTextInputEditText</item>
+        <item name="boxBackgroundColor">@color/bodyBackground</item>
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="boxCollapsedPaddingTop">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <style name="TrainingCustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="android:editTextStyle">@style/CustomTextInputEditText</item>
+        <item name="boxBackgroundColor">@color/training</item>
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="boxCollapsedPaddingTop">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <style name="CustomTextInputEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@null</item>
+        <item name="android:textAppearance">@style/CustomAnswerView</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
+    <style name="TrainingCustomTextInputEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@color/training</item>
+        <item name="android:textAppearance">@style/CustomAnswerView</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
+    <style name="CustomEditText" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+    </style>
+
+    <style name="CustomAutoCompleteTextView" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:editable">false</item>
+        <item name="android:textAppearance">@style/CustomAnswerView</item>
+    </style>
+
+    <style name="CustomCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/listTextColor</item>
+        <item name="android:buttonTint">@color/checkbox_selector</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="CustomRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:paddingRight">50dp</item>
+        <item name="android:buttonTint">@color/checkbox_selector</item>
+        <item name="buttonTint">@color/checkbox_selector</item>
+    </style>
+
+    <style name="CustomButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/buttonBackground</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="CustomSpinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner_background_selector</item>
+        <item name="android:spinnerStyle">?android:attr/spinnerStyle</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingEnd">3dp</item>
+    </style>
+
+    <style name="TrainingCustomSpinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner_training_background_selector</item>
+        <item name="android:spinnerStyle">?android:attr/spinnerStyle</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingEnd">3dp</item>
+    </style>
+
+    <style name="ToolbarTitle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/toolbarTitleColor</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="ToolbarSubtitle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/toolbarTitleColor</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="LastUpdateLabel" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/lastUpdateLabelTextColor</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="ListTitleView" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/listTitleColor</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="ListTextView" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/listTextColor</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="OrTextView" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/orTextColor</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TabLayoutText" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="ExpandedToolbarTitle" parent="TextAppearance.AppCompat">
+        <item name="android:shadowColor">@color/black</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">@color/toolbarTitleColor</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="CustomLightButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/buttonTextColor</item>
+        <item name="android:textColor">@color/buttonBackground</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="CustomDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+    </style>
+
+    <style name="CustomConsentView" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TimePicker" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/DatePickerTheme.ButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/DatePickerTheme.ButtonStyle</item>
+    </style>
+
+    <style name="DatePickerTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+</resources>

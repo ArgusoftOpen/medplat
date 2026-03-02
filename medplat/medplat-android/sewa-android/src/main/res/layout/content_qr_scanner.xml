@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.argusoft.sewa.android.app.qrscanner.QRScannerActivity"
+    tools:showIn="@layout/activity_qr_scanner">
+
+    <!--  set custom layout for scanner-->
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/zxing_barcode_scanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:zxing_scanner_layout="@layout/custom_qr_scanner" />
+
+    <!--  FlashLight Button-->
+    <Button
+        android:id="@+id/switch_flashlight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_selector"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/turn_on_flashlight"
+        android:textAlignment="center" />
+
+
+</RelativeLayout>

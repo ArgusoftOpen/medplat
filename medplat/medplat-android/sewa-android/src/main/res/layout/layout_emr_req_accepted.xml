@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/notification_due_selector"
+    android:orientation="vertical">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvRequestedFor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="start"
+        tools:text="SDRF"
+        android:layout_marginVertical="8dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvSupporterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular"
+        tools:text="Utkarsh Paresh Jadav" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:text="@string/request_status"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/roboto_regular" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvRequestStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/roboto_regular"
+            tools:text="Accepted" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="12dp"
+        android:background="@color/video_view_light_gray" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lblReason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/request_reason"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvReqReason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_regular"
+        tools:text="Wait at least 24 hours at a lower altitude before attempting to ascend further \n\nStay hydrated. Add electrolyte mix to your water to supplement \n\nEat light but full. Consume less spicy foods and foods which are easy to digest" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lblFeedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_completion_feedback_if_you_want_to_mark_this_request_as_completed"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="18dp"
+        android:visibility="gone"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
+        app:boxBackgroundMode="none"
+        android:visibility="gone"
+        android:layout_marginTop="4dp"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextFeedback"
+            android:layout_width="match_parent"
+            android:background="@drawable/chardham_edit_text_background"
+            android:layout_height="60dp"
+            android:gravity="top"
+            android:padding="12dp"
+            android:hint="@string/enter_feedback"
+            android:paddingHorizontal="0dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="section-title">
+                <h4 class="text">{{ctrl.headerText}}
+                </h4>
+                <button class="pull-right btn btn-primary" ng-click="ctrl.onAddEditClick()" ng-if="ctrl.canAdd">
+                    Add
+                </button>
+                <div class="col-2 inline-form float-right mb-15">
+                    <div class="form-group">
+                        <input type="text" ng-model="search" class="form-control cst-form-control" id="search"
+                            placeholder="Search text" style="width:100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-15">
+            <div class="cst-table table-responsive" style="overflow: auto">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <colgroup>
+                        <col class="extralarge-col">
+                        <col class="medium-col">
+                        <col class="medium-col">
+                        <col style="width:38px">
+                    </colgroup>
+                    <thead class="cst-thead">
+                        <tr>
+                            <th id="name" class="filter-col">Key
+                                <span class="pull-right sort">
+                                    <i aria-hidden="true" class="fa fa-sort-amount-asc"
+                                        ng-click="ctrl.orderByNameFlag = !ctrl.orderByNameFlag; ctrl.orderField('key');"
+                                        ng-class="{'fa-sort-amount-asc': ctrl.orderByNameFlag, 'fa-sort-amount-desc': !ctrl.orderByNameFlag}">
+                                    </i>
+                                </span>
+                            </th>
+                            <th id="smsTemplate" class="filter-col">Value
+                                <span class="pull-right sort"></span>
+                            </th>
+                            <th id="description" class="filter-col">State
+                                <span class="pull-right sort"></span>
+                            </th>
+                            <th id="actions"> Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr ng-repeat="config in ctrl.configs | filter : search  |
+                            orderBy : ctrl.orderByField : ctrl.reverseOrder " ng-if="(ctrl.configs.length > 0)">
+                            <td data-test="{{config.key}}" style="word-wrap: break-word;"> {{config.key}}</td>
+                            <td data-test="{{config.value}}" style="word-wrap: break-word;"> {{config.value}} </td>
+                            <td data-test="{{config.state}}"> {{config.state == true ? 'ACTIVE' : 'INACTIVE'}}</td>
+                            <td class="action-cell"
+                                title="{{config.state==true ? '' : 'This System Config is INACTIVE'}}">
+                                <ul class="action-item">
+                                    <li ng-if="config.state == true"><a href="#" class="action-icon edit-icon"
+                                            ng-click="ctrl.onAddEditClick(config.key)" data-test="edit-card"></a></li>
+                                    <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" class="action-icon more-icon"></a>
+                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                            aria-labelledby="moreDropdown">
+                                            <li
+                                                ng-if="config.state==false ? ctrl.toggle = 'ACTIVE' : ctrl.toggle = 'INACTIVE'">
+                                                <a href="#" ng-click="ctrl.toggleState(config)"
+                                                    data-test="Inactive-Btn">
+                                                    Mark as {{(config.state==false? 'ACTIVE' : 'INACTIVE')}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr ng-if="(!ctrl.configs || (ctrl.configs | filter : search).length == 0)"
+                            data-test="noTimeline">
+                            <td colspan="4">
+                                No System Configurations are available
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

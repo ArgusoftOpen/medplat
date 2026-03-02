@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <form name="form" novalidate>
+                    <div ng-repeat="(elementIndex, element) in templateConfig">
+                        <generate-repeatable-template-directive sibling-elements="templateConfig"
+                            element-index="elementIndex" element="element" constraint-config="constraintConfig">
+                        </generate-repeatable-template-directive>
+                    </div>
+                    <div class="card-footer mb-5" style="border-top: none;">
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-primary" ng-click="submit()">
+                                <em class="fa fa-floppy-o"></em> {{submitBtnTxt}}
+                            </button>
+                            <button ng-if="backButtonReq" type="button" class="btn btn-secondary"
+                                ng-click="goBack()">Back
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

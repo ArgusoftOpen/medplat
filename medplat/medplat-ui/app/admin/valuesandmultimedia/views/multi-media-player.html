@@ -1,0 +1,25 @@
+<form name="resetPassword.passwordForm" novalidate="">
+    <div class="modal-header">
+        <h4 class="text">Multimedia Player -{{mmplayer.object.value}}
+        </h4>
+        <button type="button" class="close" ng-click="mmplayer.cancel()">
+            <span aria-hidden="true">×</span>
+        </button>
+
+    </div>
+    <div class="modal-body">
+
+        <video controls="" width="100%" ng-if="mmplayer.object.multimedia_type==='video'">
+            <source
+                ng-src="{{mmplayer.apiPath + '/values_and_multimedia/file?fileName='+mmplayer.object.value + '&access_token=' + mmplayer.accessToken}}">
+        </video>
+        <audio controls="" width="100%" ng-if="mmplayer.object.multimedia_type==='audio'">
+            <source
+                ng-src="{{mmplayer.apiPath + '/values_and_multimedia/file?fileName='+mmplayer.object.value + '&access_token=' + mmplayer.accessToken}}">
+        </audio>
+        <img width="100%" alt="{{mmplayer.object.value}}"
+            ng-src="{{mmplayer.apiPath + '/values_and_multimedia/file?fileName='+mmplayer.object.value + '&access_token=' + mmplayer.accessToken}}"
+            class="img-responsive" ng-if="mmplayer.object.multimedia_type==='image'">
+
+    </div>
+</form>

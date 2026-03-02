@@ -1,0 +1,12 @@
+<div class="input-group">
+    <input type="text" class="form-control cst-form-control datepicker readonly-date" ng-model="ngModel"
+        ng-required="ngRequired" ng-disabled="ngDisabled" ng-change="onChange()" ng-focus="open()"
+        ng-model-options='{allowInvalid: true}' on-open-focus="false" show-button-bar="false"
+        datepicker-options="datePickerOptions" uib-datepicker-popup="{{dateFormat}}" is-open="popup.opened"
+        close-text="Close" initDate="ngModel" data-test="date-picker" readonly />
+    <div class="input-group-btn" ng-click="open()">
+        <button class="btn btn-primary" type="button">
+            <em class="ion-android-calendar" style="font-size: 22px"></em>
+        </button>
+    </div>
+</div>

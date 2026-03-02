@@ -1,0 +1,112 @@
+<style>
+    .display {
+        width: auto !important;
+    }
+
+    .mb-8 {
+        margin-bottom: 8px !important;
+    }
+</style>
+<div class="modal-header">
+    <h4 class="text" style="line-height: 1.5;">
+        Update Area of Family
+    </h4>
+</div>
+<div class="modal-body" style="overflow: inherit; overflow-y: auto;">
+    <div class="card cst-card">
+        <div class="card-title">
+            <div class="float-left">
+                <h4 class="text">Family Detail</h4>
+            </div>
+        </div>
+        <div class="card-body inline-form">
+            <div class="row">
+                <div class="col-6" style="margin-bottom: 1rem;">
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Family ID :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.family.family_id | emptylabel}}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Contact Person Name :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.family.contactPersonName | emptylabel}}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Contact Person Unique Health ID :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.family.contactPersonUniqueHealthId | emptylabel}}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Address 1 :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.family.address1 | emptylabel}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-6" style="margin-bottom: 1rem;">
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Location Hierarchy :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.family.locationHierarchy | emptylabel}}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Head of Family Name :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.family.hofName | emptylabel}}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Head of Family Unique Health ID :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.family.hofUniqueHealthId | emptylabel}}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="display">
+                            <strong>Address 2 :</strong>
+                        </label>
+                        <label class="display">
+                            {{ctrl.family.address2 | emptylabel}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-form name="ctrl.updateFamilyAreaForm">
+        <div class="form-group">
+            <validate for='searchArea' required-msg="Select Area/Asha Area">
+                <label control-label for='searchArea'>Select Area/Asha Area</label>
+                <selectize class="form-control cst-form-control disabled-input" form-control name="searchArea"
+                    id="searchArea" ng-model='ctrl.updateAreaId' config='ctrl.locationSelectizeConfig' required>
+                    <option value=''>Select</option>
+                </selectize>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </ng-form>
+</div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="ctrl.submit()">Submit</button>
+    <button type="button" class="btn btn-secondary" ng-click="ctrl.cancel()">Cancel</button>
+</div>

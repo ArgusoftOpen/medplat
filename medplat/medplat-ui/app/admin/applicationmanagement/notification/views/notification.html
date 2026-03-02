@@ -1,0 +1,381 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="section-title">
+                <h4 class="text">Notification configuration
+                </h4>
+                <button class="pull-right btn btn-primary" ng-click="notificationcontroller.toggleFilter()">Add</button>
+                <div class="col-2 inline-form float-right">
+                    <div class="form-group">
+                        <input type="text" ng-model="search" class="form-control cst-form-control" id="search"
+                            placeholder="Search text" style="width:100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-15">
+            <div class="cst-table table-responsive" style="overflow: auto">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <colgroup>
+                        <col class="medium-col">
+                        <col class="medium-col">
+                        <col class="medium-col">
+                        <col style="width:38px">
+                    </colgroup>
+                    <thead class="cst-thead">
+                        <tr>
+                            <th class="filter-col">Name<span class="pull-right sort">
+                                    <em class="fa fa-sort-amount-asc"
+                                        ng-click="orderByField = 'notificationName'; reverseSort = !reverseSort; notificationcontroller.orderByName();"
+                                        ng-class="{'fa-sort-amount-asc': notificationcontroller.orderByNameFlag, 'fa-sort-amount-desc': !notificationcontroller.orderByNameFlag}">
+                                    </em>
+                                </span>
+                            </th>
+                            <th class="filter-col">Code<span class="pull-right sort">
+                                    <em class="fa fa-sort-amount-asc"
+                                        ng-click="orderByField = 'code'; reverseSort = !reverseSort; notificationcontroller.orderByCode();"
+                                        ng-class="{'fa-sort-amount-asc': notificationcontroller.orderByCodeFlag, 'fa-sort-amount-desc': !notificationcontroller.orderByCodeFlag }">
+                                    </em>
+                                </span>
+                            </th>
+                            <th class="filter-col">State<span class="pull-right sort">
+                                    <em class="fa fa-sort-amount-asc"
+                                        ng-click="orderByField = 'state'; reverseSort = !reverseSort; notificationcontroller.orderByState();"
+                                        ng-class="{'fa-sort-amount-asc': notificationcontroller.orderByStateFlag, 'fa-sort-amount-desc': !notificationcontroller.orderByStateFlag}">
+                                    </em>
+                                </span>
+                            </th>
+                            <th> Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr ng-repeat="notification in notificationcontroller.notificationList| filter : search  | orderBy : orderByField : reverseSort "
+                            ng-if="notificationcontroller.notificationList.length > 0">
+                            <td> {{notification.notificationName}}</td>
+                            <td> {{notification.code}} </td>
+                            <td> {{notification.state| statecapitalize}} </td>
+                            <td class="action-cell">
+                                <ul class="action-item">
+                                    <li><a href="#" class="action-icon edit-icon"
+                                            ng-click="notificationcontroller.toggleFilter(true, notification)"></a></li>
+                                    <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"><a href="#"
+                                            class="action-icon more-icon"></a>
+                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                            aria-labelledby="moreDropdown">
+                                            <li
+                                                ng-if="notification.state === 'ACTIVE' ? notificationcontroller.toggle = 'Inactive' : notificationcontroller.toggle = 'Active'">
+                                                <a href="#"
+                                                    ng-click="notificationcontroller.toggleNotification(notification)">
+                                                    <strong>Mark as </strong> {{notificationcontroller.toggle}}</a>
+                                            </li>
+                                            <!-- <li ng-click="notificationcontroller.syncWithServer(notification)">
+                                                <a>Sync with Server</a>
+                                            </li> -->
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr
+                            ng-if="(!notificationcontroller.notificationList || (notificationcontroller.notificationList | filter : search).length == 0)">
+                            <td colspan="4"> No notifications are available </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <hr>
+    <div ng-style="notificationcontroller.isFilterOpen?{'width':'700px'}:{}"
+        ng-class="notificationcontroller.isFilterOpen ? 'filter-div active no-print' : 'filter-div no-print'">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Add Notification</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <form role="form" name="notificationcontroller.notificationUpdateForm" novalidate>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <validate for='type' required-msg="Enter Notification Type">
+                                <label for="type" control-label>Type</label>
+                                <select class="form-control cst-form-control" form-control name="type" id="type"
+                                    ng-change="notificationcontroller.changeFiledsOnTypeChange()"
+                                    ng-model="notificationcontroller.notificationObject.notificationType" required>
+                                    <option value="">--Select--</option>
+                                    <option value="MO">Mobile </option>
+                                    <option value="WEB">Web </option>
+                                </select>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <validate for='name' required-msg="Enter Notification Name">
+                                <label for="name" control-label> Name</label>
+                                <input type="text" class="form-control cst-form-control" form-control
+                                    placeholder="Enter name" maxlength="300" name="name" id="name"
+                                    ng-model="notificationcontroller.notificationObject.notificationName" required>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <validate for='code' required-msg="Enter code">
+                                <label for="code" control-label>Code</label>
+                                <input type="text" class="form-control cst-form-control" form-control name="code"
+                                    id="code" placeholder="Enter code"
+                                    ng-model="notificationcontroller.notificationObject.code" required>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group">
+                            <validate for='notificationFor' required-msg="Select Notification For">
+                                <label for="notificationFor" control-label>Action For</label>
+                                <select class="form-control cst-form-control" form-control name="notificationFor"
+                                    id="notificationFor"
+                                    ng-model="notificationcontroller.notificationObject.notificationFor" required>
+                                    <option value="">--Select--</option>
+                                    <option value="USER">User </option>
+                                    <option value="MEMBER">Member </option>
+                                </select>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group"
+                            ng-if="notificationcontroller.notificationObject.notificationType === 'WEB'">
+                            <validate for='dataFor' required-msg="Select Data For">
+                                <label for="dataFor" control-label>Data For</label>
+                                <select class="form-control cst-form-control" form-control name="dataFor" id="dataFor"
+                                    ng-model="notificationcontroller.notificationObject.dataFor" required>
+                                    <option value="">--Select--</option>
+                                    <option value="USER">User </option>
+                                    <option value="MEMBER">Member </option>
+                                </select>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div ng-if="notificationcontroller.notificationObject.notificationType === 'WEB'"
+                            class="form-group">
+                            <validate for='actionBy' required-msg="Enter action by">
+                                <label for="actionBy" control-label>Action By</label>
+                                <select id="actionBy" name="actionBy" class="form-control"
+                                    chosen-directive="notificationcontroller.roleList" data-placeholder='Select Role'
+                                    multiple form-control
+                                    ng-change="notificationcontroller.generateEscalationRoleList()"
+                                    ng-model="notificationcontroller.notificationObject.roles"
+                                    ng-options="role.id as role.name for role in notificationcontroller.roleList">
+                                </select>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div ng-if="notificationcontroller.notificationObject.notificationType === 'WEB'"
+                            class="form-group">
+                            <label for="orderNo" control-label>Order No</label>
+                            <input type="number" class="form-control cst-form-control" form-control name="orderNo"
+                                id="orderNo" placeholder="Enter order no"
+                                ng-model="notificationcontroller.notificationObject.orderNo">
+                        </div>
+                        <div ng-if="notificationcontroller.notificationObject.notificationType === 'WEB'"
+                            class="form-group">
+                            <label for="colorCode" control-label>Color code</label>
+                            <input style="height:30px" type="color" class="form-control cst-form-control" form-control
+                                name="colorCode" id="colorCode" placeholder="Enter color code"
+                                ng-model="notificationcontroller.notificationObject.colorCode">
+                        </div>
+                        <div class="form-group"
+                            ng-if="notificationcontroller.notificationObject.notificationType === 'WEB'">
+                            <label class="control control-checkbox">
+                                Do you want location based filter?
+                                <input checked="checked" type="checkbox"
+                                    ng-model="notificationcontroller.notificationObject.isLocationFilterRequired">
+                                <div class="control_indicator"></div>
+                            </label>
+                        </div>
+                        <div class="form-group"
+                            ng-if="notificationcontroller.notificationObject.isLocationFilterRequired">
+                            <validate for='displayName' required-msg="Enter fetch up to level">
+                                <label for="displayName" control-label>Fetch Up to Level</label>
+                                <input type="text" form-control maxlength="100" required
+                                    class="form-control cst-form-control" name="maxLevel"
+                                    ng-model="notificationcontroller.notificationObject.fetchUptoLevel">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group"
+                            ng-if="notificationcontroller.notificationObject.isLocationFilterRequired">
+                            <validate for='displayName' required-msg="Enter required up to level">
+                                <label for="displayName" control-label>Required Up to Level</label>
+                                <input type="text" form-control maxlength="100" required
+                                    class="form-control cst-form-control" name="requiredUptoLevel"
+                                    ng-model="notificationcontroller.notificationObject.requiredUptoLevel">
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group"
+                            ng-if="notificationcontroller.notificationObject.isLocationFilterRequired">
+                            <label class="control control-checkbox">
+                                fetch according to user aoi
+                                <input checked="checked" type="checkbox"
+                                    ng-model="notificationcontroller.notificationObject.isFetchAccordingAOI">
+                                <div class="control_indicator"></div>
+                            </label>
+                        </div>
+                        <div ng-if="notificationcontroller.notificationObject.notificationType === 'WEB'"
+                            class="form-group">
+                            <validate for='dataQuery' required-msg="Enter data query">
+                                <label for="dataQuery" control-label>Data query</label>
+                                <textarea class="form-control cst-form-control" form-control rows="4" cols="50"
+                                    ng-model="notificationcontroller.notificationObject.dataQuery" name="dataQuery"
+                                    id="dataQuery" required></textarea>
+                                <placeholder></placeholder>
+                            </validate>
+                            <p>
+                                <strong>
+                                    #taskTypeId# #limit# #offset# #userId# #memberId# #loggedInUserId#
+                                    {{notificationcontroller.notificationObject.isLocationFilterRequired ? '#locationId#':''}}
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="form-group"
+                            ng-if="notificationcontroller.notificationObject.notificationType === 'WEB'">
+                            <validate for='actionBase' required-msg=" Select a value">
+                                <label for="actionBase" name="actionBase" id="urlBasedAction" class="long control-label"
+                                    control-label><span class="info_type">Type of Action</span></label>
+                                <label style='margin-top: 0%' class="control control-radio mt-10">URL Based
+                                    <input value="URL" name="actionBase" form-control type="radio"
+                                        ng-model="notificationcontroller.notificationObject.actionBase" required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label style='margin-top: 0%' class="control control-radio mt-10">Modal Based
+                                    <input value="MODAL" name="actionBase" form-control type="radio"
+                                        ng-model="notificationcontroller.notificationObject.actionBase" required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label style='margin-top: 0%' class="control control-radio mt-10">Action Based
+                                    <input value="ACTION" name="actionBase" form-control type="radio"
+                                        ng-model="notificationcontroller.notificationObject.actionBase" required>
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div ng-if="notificationcontroller.notificationObject.notificationType === 'WEB' && notificationcontroller.notificationObject.actionBase === 'ACTION'"
+                            class="form-group">
+                            <validate for='actionQuery' required-msg="Enter option query">
+                                <label for="actionQuery" control-label>Action query</label>
+                                <textarea class="form-control cst-form-control" form-control rows="4" cols="50"
+                                    ng-model="notificationcontroller.notificationObject.actionQuery" name="actionQuery"
+                                    id="actionQuery"
+                                    ng-required="!notificationcontroller.notificationObject.urlBasedAction"></textarea>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div ng-if="notificationcontroller.notificationObject.notificationType === 'WEB' && notificationcontroller.notificationObject.actionBase === 'URL'"
+                            class="form-group">
+                            <validate for='url' required-msg="Enter url">
+                                <label for="url" control-label>URL</label>
+                                <input type="text" class="form-control cst-form-control" form-control name="url"
+                                    id="url" placeholder="Enter url"
+                                    ng-model="notificationcontroller.notificationObject.url" required>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div ng-if="notificationcontroller.notificationObject.notificationType === 'WEB' && notificationcontroller.notificationObject.actionBase === 'MODAL'"
+                            class="form-group">
+                            <validate for='modalName' required-msg="Enter url">
+                                <label for="modalName" control-label>Modal Name</label>
+                                <input type="text" class="form-control cst-form-control" form-control name="modalName"
+                                    id="modalName" placeholder="Enter modal name"
+                                    ng-model="notificationcontroller.notificationObject.modalName" required>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <div class="form-group"
+                            ng-if="notificationcontroller.notificationObject.notificationType === 'MO'">
+                            <validate for='role' required-msg="Enter Role">
+                                <label for="role" control-label> Role</label>
+                                <select class="form-control cst-form-control" form-control
+                                    ng-model="notificationcontroller.notificationObject.roleId" id="role" name="role"
+                                    required
+                                    ng-options="role.id as role.name for role in notificationcontroller.roleList">
+                                </select>
+                                <placeholder></placeholder>
+                            </validate>
+                        </div>
+                        <a style="margin-top: 2%;color:white"
+                            ng-if="notificationcontroller.notificationObject.notificationType === 'WEB'"
+                            class="btn btn-primary" ng-click="notificationcontroller.addLevel()">Add Escalation
+                            Level</a>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px"
+                    ng-if="notificationcontroller.notificationObject.notificationType === 'WEB'">
+                    <div class="col-12 mb-15">
+                        <div class="cst-table table-responsive" style="overflow: visible">
+                            <table
+                                class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                <colgroup>
+                                    <col class="large-col">
+                                    <col class="extralarge-col">
+                                    <col class="small-col">
+                                </colgroup>
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th class="filter-col">Name</th>
+                                        <th class="filter-col">Performer</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr ng-repeat="level in notificationcontroller.notificationObject.escalationLevels">
+                                        <td>
+                                            <validate for='levelName' required-msg="Enter name">
+                                                <input required name="{{$index}}levelName" id="{{$index}}levelName"
+                                                    form-control class="form-control abc" type="text"
+                                                    ng-model="level.name">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </td>
+                                        <td>
+                                            <validate for='escalatedBy' required-msg="Enter roles">
+                                                <select id="escalatedBy" name="escalatedBy" class="form-control"
+                                                    chosen-directive="notificationcontroller.escalationRoleList"
+                                                    data-placeholder='Select Role' multiple ng-model="level.roles"
+                                                    form-control
+                                                    ng-options="role.id as role.name for role in notificationcontroller.escalationRoleList">
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </td>
+                                        <td ng-if="level.name != 'Default'">
+                                            <em style="cursor:pointer" class="fa fa-trash"
+                                                ng-click="notificationcontroller.removeEscalationLevel(level)"></em>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr>
+                        <div class="form-group text-right">
+                            <button class="btn btn-secondary close-filter"
+                                ng-click="notificationcontroller.toggleFilter()">Close</button>
+                            <button type="submit" ng-if="!notificationcontroller.updateMode"
+                                class="btn btn-primary search-filter"
+                                ng-click="notificationcontroller.saveOrUpdateNotification()">Add</button>
+                            <button type="submit" ng-if="notificationcontroller.updateMode"
+                                class="btn btn-primary search-filter"
+                                ng-click="notificationcontroller.saveOrUpdateNotification()">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

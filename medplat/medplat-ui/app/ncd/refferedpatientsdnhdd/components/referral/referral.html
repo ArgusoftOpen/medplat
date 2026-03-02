@@ -1,0 +1,58 @@
+<div class="form-group col-xl-5">
+    <label for="isReferred" class="control-label required" control-label>
+        Would you like to refer the patient?
+    </label>
+    <validate for='isReferred' required-msg="Please select a value">
+        
+        <label class="control control-radio">Yes
+            <input ng-value="true" name="isReferred" id="isReferred" type="radio"
+                ng-change="referral.fetchHealthInfra()"
+                ng-model="referral.referralDto.isReferred" form-control required ng-disabled="!referral.institutionType">
+            <div class="control_indicator"></div>
+        </label>
+        <label class="control control-radio">No
+            <input ng-value="false" name="isReferred" id="isReferred" type="radio"
+                ng-model="referral.referralDto.isReferred" form-control required ng-disabled="!referral.institutionType">
+            <div class="control_indicator"></div>
+        </label>
+        <placeholder></placeholder>
+        <small class="text-danger" ng-if="!referral.institutionType">*Please select health infrastructure</small>
+    </validate>
+</div>
+<div ng-if="referral.referralDto.isReferred">  
+    <div class="form-group" ng-class="referral.singleComponentForm ? 'col-xl-12':'col-xl-6'">
+        <validate for='healthInfraType' required-msg="Please select a value">
+            <label for="healthInfraType" class="control-label">Health Infrastructure Type</label>
+            <select required class="form-control cst-form-control" name="healthInfraType" 
+            id="healthInfraType" ng-model="referral.referralDto.healthInfraType">
+                <option value="">Select</option>
+                <option value="GOVERNMENT">GOVERNMENT</option>
+                <option value="PRIVATE">PRIVATE</option>
+            </select>
+            <placeholder></placeholder>
+        </validate>
+    </div>
+    <div class="form-group" ng-class="referral.singleComponentForm ? 'col-xl-12':'col-xl-6'"
+        ng-if="referral.referralDto.healthInfraType == 'GOVERNMENT'">
+        <validate for='healthInfraId' required-msg="Please select a value">
+            <label for="healthInfraId" class="control-label" control-label>Health Infrastructure</label>
+            <select class="form-control cst-form-control" form-control chosen-directive="referral.healthInfras"
+                ng-options="infra.id as infra.name for infra in referral.healthInfras" name="healthInfraId"
+                id="healthInfraId" ng-model="referral.referralDto.healthInfraId" required>
+                <option value="">Select</option>
+            </select>
+            <placeholder></placeholder>
+        </validate>
+    </div>
+    <div class="form-group" ng-class="referral.singleComponentForm ? 'col-xl-12':'col-xl-6'"
+        ng-if="referral.referralDto.healthInfraType">
+        <validate for='reason' required-msg="Please enter the reason">
+            <label for="reason" class="control-label" control-label>Reason for
+                Referral</label>
+            <textarea class="form-control cst-form-control" ng-model="referral.referralDto.reason" rows="4"
+                name='reason' id='reason' form-control maxlength="99" required></textarea>
+            <placeholder></placeholder>
+        </validate>
+    </div>
+
+</div>

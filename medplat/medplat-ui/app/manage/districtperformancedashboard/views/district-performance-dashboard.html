@@ -1,0 +1,203 @@
+<style>
+    .align-center-h {
+        text-align: center;
+    }
+
+    .state-details {
+        background-color: #f1f1f1;
+    }
+
+    .note {
+        padding-left: 10px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .text-align-right {
+        text-align: right;
+    }
+</style>
+<div class="container-fluid fhsr-verification">
+    <div class="row" ng-if="districtPerformanceDashboardCtrl.isSubmitted">
+        <div class="col-12">
+            <div class="card cst-card" id="printableBlock">
+                <div class="card-title">
+                    <div>
+                        <h4 class="text align-center-h fs-18">
+                            <span>
+                                DISTRICT FACT SHEET
+                            </span>
+                            <div class="pull-right " style="margin-right: 10px;font-size: 20px;">
+                                <em uib-tooltip="Print pdf" class="fa fa-print" style="cursor: pointer;"
+                                    ng-click="districtPerformanceDashboardCtrl.printPdf()"></em>
+                                <em uib-tooltip="Download excel" class="fa fa-file-excel-o" style="cursor: pointer;"
+                                    ng-click="districtPerformanceDashboardCtrl.printExcel()"></em>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <div class="row">
+                        <div class="col-12 md-15">
+                            <div class="mb-15">
+                                <label class="control control-checkbox" control-label
+                                    ng-repeat="location in districtPerformanceDashboardCtrl.locationList track by $index">
+                                    {{location.name}} (<strong>{{location.locType ? location.locType :
+                                        'State'}}</strong>)
+                                    <input type="checkbox" ng-model="location.isChecked"
+                                        ng-disabled="$index === 0 || $index === 1"
+                                        ng-change="districtPerformanceDashboardCtrl.initializeSheet(location, true)"
+                                        id="{{$index}}">
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                            <div class="cst-table table-responsive"
+                                style="overflow: auto;max-height: calc(100vh - 169px);"
+                                ng-if="districtPerformanceDashboardCtrl.performanceData.length > 0">
+                                <table class="table table-sm filter-table table-fixed table-bordered header-fixed">
+                                    <tbody class="cst-tbody">
+                                        <colgroup>
+                                            <col style="width: 25%">
+                                        </colgroup>
+                                        <tr>
+                                            <td colspan="2">
+                                                <strong>{{districtPerformanceDashboardCtrl.selectedLocationDetails.locType}}
+                                                    Name:</strong>
+                                                <span>{{districtPerformanceDashboardCtrl.selectedLocationDetails.name}}</span>
+                                            </td>
+                                            <td
+                                                colspan="{{2 + (districtPerformanceDashboardCtrl.count > 0 && districtPerformanceDashboardCtrl.count-2)}}">
+                                                <strong>Total Population:</strong>
+                                                <span>{{districtPerformanceDashboardCtrl.selectedLocationPerformanceData.fhs_total_member}}</span>
+                                            </td>
+                                            <td
+                                                colspan="{{2 + (districtPerformanceDashboardCtrl.count > 0 && districtPerformanceDashboardCtrl.count-2)}}">
+                                                <strong>Report Date:</strong>
+                                                <span>{{districtPerformanceDashboardCtrl.today |
+                                                    date:'dd/MM/yyyy'}}</span>
+                                            </td>
+                                            <td
+                                                colspan="{{2 + (districtPerformanceDashboardCtrl.count > 0 && districtPerformanceDashboardCtrl.count-2)}}">
+                                                <strong>Financial Year:</strong>
+                                                <span>{{districtPerformanceDashboardCtrl.selectedLocationPerformanceData.financial_year}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <!--
+                                                Pro rata is the term used to describe a proportionate allocation
+                                            -->
+                                            <td colspan="2"><strong>Pro-rata Target
+                                                    ({{districtPerformanceDashboardCtrl.selectedLocationPerformanceData.days}}
+                                                    days)</strong></td>
+                                            <td colspan="{{2 + (districtPerformanceDashboardCtrl.count > 0 && districtPerformanceDashboardCtrl.count-2)}}"
+                                                style="background-color: #83c5be;"><strong>Pregnant Women:</strong>
+                                                <span>
+                                                    {{districtPerformanceDashboardCtrl.selectedLocationPerformanceData.expected_mother_reg
+                                                    | numberFormat}}
+                                                </span>
+                                            </td>
+                                            <td colspan="{{2 + (districtPerformanceDashboardCtrl.count > 0 && districtPerformanceDashboardCtrl.count-2)}}"
+                                                style="background-color: #f4a261;"><strong>Delivery
+                                                    Registration:</strong>
+                                                <span>
+                                                    {{districtPerformanceDashboardCtrl.selectedLocationPerformanceData.expected_delivery_reg
+                                                    | numberFormat}}
+                                                </span>
+                                            </td>
+                                            <td colspan="{{2 + (districtPerformanceDashboardCtrl.count > 0 && districtPerformanceDashboardCtrl.count-2)}}"
+                                                style="background-color: #b7b7a4;"><strong>Fully Immunized:</strong>
+                                                <span>
+                                                    {{districtPerformanceDashboardCtrl.selectedLocationPerformanceData.expected_fully_immu
+                                                    | numberFormat}}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th ng-repeat="mainHeader in districtPerformanceDashboardCtrl.mainHeaders track by $index"
+                                                rowspan="{{$index === 0 ? 2 : ''}}" class="align-center-h"
+                                                ng-class="{'state-details': $index % 2 == 0}"
+                                                colspan="{{$index === 1 ? 4 : $index > 1 ? 3 : 0}}">
+                                                {{mainHeader}}</th>
+                                        </tr>
+
+                                        <tr>
+                                            <th ng-repeat="header in districtPerformanceDashboardCtrl.headers track by $index"
+                                                class="align-center-h"
+                                                ng-class="{'state-details': header.index % 2 === 0 }">
+                                                {{header.value}}
+                                            </th>
+                                        </tr>
+                                        <!-- Pregnant Women Registration -->
+                                        <tr
+                                            ng-repeat="factSheet in districtPerformanceDashboardCtrl.performanceData track by $index">
+                                            <td class="state-details">{{factSheet.name}}</td>
+                                            <td ng-repeat="label in districtPerformanceDashboardCtrl.dynamicLocationLabels track by $index"
+                                                ng-class="{'state-details': label.index % 2 === 0, 'bg-danger': label.totalNumberOfLocations && (((label.totalNumberOfLocations * 73) / 100) < factSheet[label.value])}"
+                                                class="text-align-right">
+                                                <div ng-if="label.value"
+                                                    uib-tooltip="{{label.value && districtPerformanceDashboardCtrl.checkForTooltip(factSheet, label.value) | showtooltip: factSheet[label.value]}}">
+                                                    {{factSheet[label.value] | numberFormat}}</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="note">
+                    <p>ELA : Estimated Level of Achievement</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Right side location panel for selecting district and financial year -->
+    <div class="filter-div active">
+        <span class="filter-toggle" ng-click="districtPerformanceDashboardCtrl.toggleFilter()">Select District</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Select District</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <form name="districtPerformanceDashboardCtrl.locationForm" novalidate>
+                <div class="row">
+                    <!-- Location hierarchy up to distrcit level -->
+                    <div class="col-12">
+                        <location-directive ng-model="districtPerformanceDashboardCtrl.locationId"
+                            selected-location="districtPerformanceDashboardCtrl.selectedLocation"
+                            required-upto-level="districtPerformanceDashboardCtrl.requiredLevel" fetch-upto-level="4"
+                            template-type="'inline'" fetch-according-to-user-aoi="true"> </location-directive>
+                        <br>
+                    </div>
+                    <!-- list of year range from 2013-2014 to 2020-2021 -->
+                    <div class="col-12">
+                        <validate for='financialyear' required-msg="Select a financial year">
+                            <label for="financialyear" control-label>Select
+                                Financial Year</label>
+                            <select class="form-control cst-form-control" form-control
+                                ng-model="districtPerformanceDashboardCtrl.financialYear" name="financialyear"
+                                id="financialyear" required>
+                                <option value=""> Select</option>
+                                <option value="{{range.year}}"
+                                    ng-repeat="range in districtPerformanceDashboardCtrl.financialYearRanges">
+                                    {{range.year}}
+                                </option>
+                            </select>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                    <div class="col-12">
+                        <hr>
+                        <div class="form-group text-right">
+                            <button class="btn btn-secondary close-filter"
+                                ng-click="districtPerformanceDashboardCtrl.toggleFilter()">Close</button>
+                            <button class="btn btn-primary search-filter"
+                                ng-click="districtPerformanceDashboardCtrl.submit()">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<div>
+    <div class="modal-header">
+        <h4 class="text">Add Server Details</h4>
+        <button type="button" class="close" ng-click="mdCtrl.cancel()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <br>
+    <div>
+        <form role="form" name="mdCtrl.addServerForm" id="addServer" novalidate>
+            <div class="inline-form col-12">
+                <div class="form-group">
+                    <validate for='serverName' required-msg="Enter server Name">
+                        <label for="serverName" control-label> server Name</label>
+                        <input type="text" class="form-control cst-form-control" form-control
+                            placeholder="Enter Server Name" name="serverName" id="serverName"
+                            ng-model-options="{ debounce: 200 }" ng-change="mdCtrl.checkServerNameAVailability()"
+                            ng-model="mdCtrl.enteredServerDetails.serverName" required>
+                        <placeholder></placeholder>
+                        <p style="color:red;" ng-if="mdCtrl.invalidServerName">This Server Name is not available,Please
+                            Enter different Name </p>
+                    </validate>
+                </div>
+
+                
+                <div class="form-group">
+                    <validate for='userName' required-msg="Enter user name" minlength-msg="Username length should be atleast 6 ">
+                        <label for="userName" control-label> Username : </label>
+                        <input type="text" class="form-control cst-form-control" form-control minlength="5"
+                            placeholder="Enter user name" name="userName" id="userName" ng-model="mdCtrl.enteredServerDetails.userName"
+                            required>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group" ng-if="!mdCtrl.isEdit">
+                    <validate for='password' required-msg="Enter password" minlength-msg="Password length should be atleast 6 ">
+                        <label for="password" control-label> Password :</label>
+                        <input type="text" class="form-control cst-form-control" form-control minlength="5"
+                            placeholder="Enter password" name="password" id="password" ng-model="mdCtrl.enteredServerDetails.password"
+                            required>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+
+
+                <div class="form-group">
+                    <validate for='host' required-msg="Enter Host">
+                        <label for="host" control-label> Host</label>
+                        <input type="text" class="form-control cst-form-control" form-control placeholder="Enter host"
+                            name="host" id="host" ng-model="mdCtrl.enteredServerDetails.host" required>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label control-label class="control control-checkbox"> Is Active
+                        <input checked="checked" name="fieldName" form-control type="checkbox"
+                            ng-model="mdCtrl.enteredServerDetails.isActive">
+                        <div class="control_indicator"></div>
+                    </label>
+                </div>
+                
+
+                <div>
+                    <button type="submit" class="btn btn-primary" style="float: right;"
+                        ng-disabled="mdCtrl.invalidServerName || mdCtrl.addServerForm.$invalid"
+                        ng-click="mdCtrl.save()">Submit</button>
+                </div>
+                <br>
+                <br>
+            </div>
+        </form>
+    </div>
+</div>

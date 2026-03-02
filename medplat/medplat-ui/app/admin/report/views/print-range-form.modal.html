@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h4 class="text">Range For Print </h4>
+    <button type="button" class="close" ng-click="prf.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form name="prf.form" novalidate>
+        <div class="">
+            <div class="form-group">
+                <validate for="from" required-msg="Enter from row number">
+                    <label control-label>From Rows Number</label>
+                    <input name="from" form-control type="number" required="" ng-model="prf.print.rangeFrom"
+                        class="cst-form-control form-control">
+                    <placeholder></placeholder>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group">
+                <validate for="to" required-msg="Enter to row number">
+                    <label control-label>
+                        To Rows Number
+                    </label>
+                    <input form-control name="to" type="number" required="" ng-model="prf.print.rangeTo"
+                        class="cst-form-control form-control">
+                    <placeholder></placeholder>
+                </validate>
+                <div><small><em>Difference between from and to rows cannot be more than 5000</em></small></div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="prf.ok()">Print</button>
+    <button type="button" class="btn btn-secondary" ng-click="prf.cancel()">Close</button>
+</div>

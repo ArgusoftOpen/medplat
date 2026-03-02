@@ -1,0 +1,263 @@
+<span class="input-element" ng-init="addHasElementClass()" ng-switch="::config.fieldType"
+    ng-if='!config.displayWhen || (config.displayWhen && ((data[config.displayWhen.fieldName].id && (data[config.displayWhen.fieldName].id === config.displayWhenValue.id)) || data[config.displayWhen.fieldName] == config.displayWhenValue))'>
+    <span ng-switch-default>
+        <div class="form-group">
+            <validate for="{{config.fieldName}}" required-msg='Enter The {{config.displayName}}'
+                minlength-msg='Minimum Length To Be Entered {{config.minLength}}'
+                maxlength-msg='Maximum Length can be entered {{config.maxLength}}'>
+                <label for="{{config.fieldName}}" class="{{::labelClass}}" ng-bind="::config.displayName"
+                    control-label></label>
+                <div class="{{::inputClass}} form-group">
+                    <input name="{{config.fieldName}}" type="text" class="form-control cst-form-control disabled-input"
+                        ng-model='data[config.fieldName]' ng-required="config.isMandatory"
+                        maxlength='{{config.maxLength}}' minlength='{{config.minLength}}' ng-pattern="config.pattern"
+                        form-control data-test="query-input" ng-disabled="isDisabledFromConfiguration"
+                        ng-change="fieldValueChanged(config.fieldName, data[config.fieldName])" />
+                    <placeholder></placeholder>
+                </div>
+            </validate>
+        </div>
+    </span>
+    <span ng-switch-when="number">
+        <validate for="{{config.fieldName}}" required-msg='Enter The {{config.displayName}}'>
+            <label for="{{config.fieldName}}" class="{{::labelClass}}" ng-bind="::config.displayName"
+                control-label></label>
+            <div class="{{::inputClass}} form-group">
+                <input name='{{config.fieldName}}' type="text" numbers-only
+                    class="form-control cst-form-control  disabled-input"
+                    ng-disabled="config.formula || isDisabledFromConfiguration" ng-model='data[config.fieldName]'
+                    ng-required="config.isMandatory" decimalallowed='{{config.decimalAllowed}}'
+                    negativeallowed='{{config.negativeAllowed}}' maxlength='{{config.maxLength}}' form-control
+                    cst-form-control minlength='{{config.minLength}}'
+                    ng-change="fieldValueChanged(config.fieldName, data[config.fieldName])" />
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when="boolean">
+        <validate for="{{config.fieldName}}" required-msg='Enter The {{config.displayName}}'>
+            <label class="{{::labelClass}}" ng-bind="::config.displayName" control-label></label>
+            <div class="{{::inputClass}} form-group">
+                <select class="form-control cst-form-control disabled-input" name="{{config.fieldName}}"
+                    ng-model='data[config.fieldName]'
+                    ng-options="((item?config.yesValue:config.noValue) ||item) for item in [true, false]"
+                    ng-required="config.isMandatory" form-control data-test="query-input"
+                    ng-disabled="isDisabledFromConfiguration"
+                    ng-change="fieldValueChanged(config.fieldName, data[config.fieldName])">
+                    <option value="">Select</option>
+                </select>
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when="comboForReport">
+        <validate for="{{config.fieldName}}" required-msg='Select The {{config.displayName}}'>
+
+            <label for="{{config.fieldName}}" class="{{::labelClass}}" ng-bind="::config.displayName"
+                control-label></label>
+            <div class="{{::inputClass}} form-group">
+                <select class="form-control cst-form-control disabled-input" name='{{config.fieldName}}'
+                    ng-model='data[config.fieldName]' data-test="query-input" ng-required="config.isMandatory"
+                    form-control ng-disabled="isDisabledFromConfiguration"
+                    ng-change="fieldValueChanged(config.fieldName, data[config.fieldName])">
+                    <option value=''>Select</option>
+                    <option ng-init="option.selected? data[config.fieldName]=option.key:data[config.fieldName]=''"
+                        ng-value="option.key" ng-repeat="option in config.optionsByQuery ">{{option.value}}</option>
+                </select>
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when="multiselectForReport">
+        <validate for="{{config.fieldName}}" required-msg='Select The {{config.displayName}}'>
+            <label for="{{config.fieldName}}" class="{{::labelClass}}" ng-bind="::config.displayName"
+                control-label></label>
+            <div class="{{::inputClass}} form-group">
+                <select class="form-control cst-form-control disabled-input" name='{{config.fieldName}}'
+                    ng-model='data[config.fieldName]' multiple
+                    chosen-directive="config.resourceCategoryItemFieldOptionList"
+                    ng-options="option.key as option.value for option in config.optionsByQuery"
+                    ng-required="config.isMandatory" data-test="query-input" ng-disabled="isDisabledFromConfiguration"
+                    form-control ng-change="fieldValueChanged(config.fieldName, data[config.fieldName])">
+                    <option value=''>Select</option>
+                </select>
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when='date'>
+        <validate for="{{config.fieldName}}" required-msg="Enter the {{config.displayName}}">
+            <label for="{{config.fieldName}}" class="{{::labelClass}}" ng-bind="::config.displayName"
+                control-label></label>
+            <div class="{{::inputClass}} form-group">
+                <input name="{{config.fieldName}}" type="text" datepicker class="disabled-input"
+                    id="{{config.fieldName}}" ng-model="data[config.fieldName]"
+                    min-date="fixedMinDate" max-date="fixedMaxDate"
+                    ng-required="config.isMandatory" form-control
+                    ng-disabled="isDisabledFromConfiguration || config.isDisabled"
+                    ng-change="fieldValueChanged(config.fieldName, data[config.fieldName])">
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when='dateFromTo'>
+        <validate for="from_{{config.displayName}}" required-msg="Enter from {{config.displayName}}">
+            <label style="margin-top: 4%" for="data[dateFrom]" class="{{::labelClass}}" control-label>From
+                {{config.displayName}}</label>
+            <div class="{{::inputClass}} form-group" style="margin-bottom: 0px">
+                <input name="from_{{config.displayName}}" type="text" datepicker class="disabled-input"
+                    id="from_{{config.displayName}}" ng-model="data[dateFrom]" min-date="fixedMinDate" max-date="maxDate"
+                    ng-required="maxDateSelected || config.isMandatory" form-control
+                    ng-disabled="isDisabledFromConfiguration || config.isDisabled"
+                    ng-change="minDateFieldValidation(config.fieldName, data[dateFrom])">
+                <placeholder></placeholder>
+            </div>
+        </validate>
+        <div class="clearfix"></div>
+        <validate for="to_{{config.displayName}}" required-msg="Enter to {{config.displayName}}">
+            <label style="margin-top: 4%" for="data[dateTo]" class="{{::labelClass}}" control-label>To
+                {{config.displayName}}</label>
+            <div class="{{::inputClass}} form-group">
+                <input name="to_{{config.displayName}}" type="text" datepicker class="disabled-input"
+                    id="to_{{config.displayName}}" ng-model="data[dateTo]" max-date="fixedMaxDate" min-date="minDate"
+                    ng-required="minDateSelected || config.isMandatory" form-control
+                    ng-disabled="isDisabledFromConfiguration || config.isDisabled"
+                    ng-change="maxDateFieldValidation(config.fieldName, data[dateTo])">
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when='onlyMonthFromTo'>
+        <validate for="data[onlyMonthFrom]" required-msg="Enter from {{config.displayName}}">
+            <label style="margin-top: 4%" for="data[onlyMonthFrom]" class="{{::labelClass}}" control-label>From
+                {{config.displayName}}</label>
+            <div class="{{::inputClass}} form-group" style="margin-bottom: 0px">
+                <input name="data[onlyMonthFrom]" type="text" datepicker class="disabled-input"
+                    id="{{data[onlyMonthFrom]}}" ng-model="data[onlyMonthFrom]"
+                    max-date-month="maxMonth" min-date-month="fixedMinMonth"
+                    date-options="{minMode: 'month'}" datepicker-mode="'month'" date-month-format="true"
+                    ng-required="maxDateSelected || config.isMandatory" form-control
+                    ng-disabled="isDisabledFromConfiguration || config.isDisabled"
+                    ng-change="minMonthFieldValidation(config.fieldName, data[onlyMonthFrom])">
+                <placeholder></placeholder>
+            </div>
+        </validate>
+        <div class="clearfix"></div>
+        <validate for="data[onlyMonthTo]" required-msg="Enter to {{config.displayName}}">
+            <label style="margin-top: 4%" for="data[onlyMonthTo]" class="{{::labelClass}}" control-label>To
+                {{config.displayName}}</label>
+            <div class="{{::inputClass}} form-group">
+                <input name="data[onlyMonthTo]" type="text" datepicker class="disabled-input" id="{{data[onlyMonthTo]}}"
+                    ng-model="data[onlyMonthTo]"
+                    min-date-month="minMonth" max-date-month="fixedMaxMonth"
+                    date-options="{minMode: 'month'}"
+                    datepicker-mode="'month'" date-month-format="true"
+                    ng-required="minDateSelected || config.isMandatory" form-control
+                    ng-disabled="isDisabledFromConfiguration || config.isDisabled"
+                    ng-change="maxMonthFieldValidation(config.fieldName, data[onlyMonthTo])">
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when='onlyMonth'>
+        <validate for="config.fieldName" required-msg="Enter the {{config.displayName}}">
+            <label for="config.fieldName" class="{{::labelClass}}" ng-bind="::config.displayName" control-label></label>
+            <div class="{{::inputClass}} form-group">
+                <input name="config.fieldName" type="text" datepicker class="disabled-input" id="{{config.displayName}}"
+                    ng-model="data[config.fieldName]" date-options="{minMode: 'month'}" datepicker-mode="'month'"
+                    date-month-format="true" ng-required="config.isMandatory" form-control
+                    ng-disabled="isDisabledFromConfiguration || config.isDisabled"
+                    max-date-month="maxMonth" min-date-month="minMonth"
+                    ng-change="fieldValueChanged(config.fieldName, data[config.fieldName])">
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when="email">
+        <validate for="{{config.fieldName}}" required-msg='Enter The {{config.displayName}}'>
+            <label for="{{config.fieldName}}" class="{{::labelClass}}" ng-bind="::config.displayName"
+                control-label></label>
+            <div class="{{::inputClass}} form-group">
+                <input name="{{config.fieldName}}" type="email" class="disabled-input form-control cst-form-control"
+                    ng-model='data[config.fieldName]' ng-required="config.isMandatory" form-control
+                    data-test="query-input" ng-disabled="isDisabledFromConfiguration"
+                    ng-change="fieldValueChanged(config.fieldName, data[config.fieldName])">
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when="location">
+        <location-directive selected-location="config.selectedLocation" ng-model="data[config.fieldName]"
+            fetch-according-to-user-aoi="config.fetchAccordingToUserAoi" required-upto-level="config.requiredUptoLevel"
+            fetch-upto-level="config.fetchUptoLevel" no-reset="true" preset="config.preset" on-change="locationChange()"
+            demographic-filter-required="config.demographicFilterRequired" all-district-req="true" all-block-req="true"
+            selected-demographic="data['demographic_'+config.fieldName]"></location-directive>
+    </span>
+    <span ng-switch-when="selectizeForCombo">
+        <validate for="{{config.fieldName}}" required-msg='Select The {{config.displayName}}'>
+            <label for="{{config.fieldName}}" class="{{::labelClass}}" ng-bind="::config.displayName"
+                control-label></label>
+            <div class="{{::inputClass}} form-group">
+                <selectize class="form-control cst-form-control disabled-input" name='{{config.fieldName}}'
+                    ng-model='data[config.fieldName]' config='selectizeReportComboConfig'
+                    options='config.optionsByQuery' ng-required="config.isMandatory" form-control
+                    data-test="query-input" ng-disabled="isDisabledFromConfiguration">
+                    <option value=''>Select</option>
+                </selectize>
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when="selectizeForMulti">
+        <validate for="{{config.fieldName}}" required-msg='Select The {{config.displayName}}'>
+            <label for="{{config.fieldName}}" class="{{::labelClass}}" ng-bind="::config.displayName"
+                control-label></label>
+            <div class="{{::inputClass}} form-group">
+                <selectize class="form-control cst-form-control disabled-input" name='{{config.fieldName}}'
+                    ng-model='data[config.fieldName]' config='selectizeForMulti' options='config.optionsByQuery'
+                    ng-required="config.isMandatory" form-control data-test="query-input"
+                    ng-disabled="isDisabledFromConfiguration">
+                    <option value=''>Select</option>
+                </selectize>
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when="dateNTime">
+        <label for="{{config.fieldName}}" class="{{::labelClass}}" ng-bind="::config.displayName" control-label></label>
+        <div class="{{::inputClass}} form-group">
+            <div class="row col-xl-12">
+                <input class="col-xl-8" style="margin: 0px;padding: 0px" type="text" datepicker
+                    ng-model="data[config.fieldName]" ng-required="config.isMandatory" form-control
+                    min-date="fixedMinDate" max-date="fixedMaxDate"
+                    data-test="query-input" ng-disabled="isDisabledFromConfiguration">
+                <div class="col-xl-2" name='{{config.fieldName}}' uib-timepicker ng-model="data[config.fieldName]"
+                    form-control show-spinners="false" show-meridian="false"></div>
+            </div>
+        </div>
+    </span>
+    <span ng-switch-when='dateRangePicker'>
+        <validate for="config.fieldName" required-msg="Enter the {{config.displayName}}">
+            <label for="config.fieldName" class="{{::labelClass}}" ng-bind="::config.displayName" control-label></label>
+            <div class="{{::inputClass}} form-group">
+                <input name="config.fieldName" type="text" daterangepicker class="disabled-input"
+                    ng-model="data[config.fieldName]" ng-required="config.isMandatory" form-control
+                    ng-disabled="isDisabledFromConfiguration || config.isDisabled"
+                    max="fixedMaxDate" min="fixedMinDate"
+                    date-range-options="{minDate: today}">
+                <placeholder></placeholder>
+            </div>
+        </validate>
+    </span>
+    <span ng-switch-when='singleCheckbox'>
+        <label class="control control-checkbox" control-label>{{config.displayName}}
+            <input type="checkbox" ng-model="data[config.fieldName]"
+                ng-change="fieldValueChanged(config.fieldName, data[config.fieldName])">
+            <div class="control_indicator"></div>
+        </label>
+    </span>
+    <div class="clearfix"></div>
+</span>
+<span ng-init="removeHasElementClass()"
+    ng-if='!(!config.displayWhen || (config.displayWhen && ((data[config.displayWhen.fieldName].id && (data[config.displayWhen.fieldName].id === config.displayWhenValue.id)) || data[config.displayWhen.fieldName] == config.displayWhenValue)))'>
+</span>

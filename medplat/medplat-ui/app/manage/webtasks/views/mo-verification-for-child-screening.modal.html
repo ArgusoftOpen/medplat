@@ -1,0 +1,146 @@
+<div class="modal-header">
+    <h4 class="text">Perform action</h4>
+</div>
+<div class="modal-body">
+    <h3>{{moVerificationForChildScreening.childName}}</h3>
+    <div class="row">
+        <div class="col-6">
+            <h6 ng-if="moVerificationForChildScreening.areaName != null">
+                Area Name :
+                {{moVerificationForChildScreening.areaName}}
+            </h6>
+            <h6 ng-if="moVerificationForChildScreening.villageName != null">
+                Village Name :
+                {{moVerificationForChildScreening.villageName}}
+            </h6>
+            <h6 ng-if="moVerificationForChildScreening.motherName != null">
+                Mother Name :
+                {{moVerificationForChildScreening.motherName}}
+            </h6>
+        </div>
+        <div class="col-6">
+            <h6 ng-if="moVerificationForChildScreening.fhwName != null">
+                FHW Name :
+                {{moVerificationForChildScreening.fhwName}}
+            </h6>
+            <h6 ng-if="moVerificationForChildScreening.fhwContactNumber != null">
+                FHW Contact No :
+                {{moVerificationForChildScreening.fhwContactNumber}}
+            </h6>
+            <h6 ng-if="moVerificationForChildScreening.motherContact != null">
+                Mother Contact No :
+                {{moVerificationForChildScreening.motherContact}}
+            </h6>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <h6>Weight : {{rchChildServicedetails.weight==null?'Not available':rchChildServicedetails.weight + ' kgs'}}
+            </h6>
+            <h6>Height : {{rchChildServicedetails.height==null?'Not available':rchChildServicedetails.height + ' cms'}}
+            </h6>
+        </div>
+        <div class="col-6">
+            <h6>Oedema : {{rchChildServicedetails.havePedalEdema?'Yes':'No'}}</h6>
+            <h6>MUAC :
+                {{rchChildServicedetails.midArmCircumference==null?'Not available':rchChildServicedetails.midArmCircumference+' cms'}}
+            </h6>
+        </div>
+        <div class="col-6">
+            <h6>SD score : {{rchChildServicedetails.sdScore}}</h6>
+            <h6>
+                Medical Complications :
+                <span ng-bind-html="rchChildServicedetails.medicalComplications | trustAsHtml"></span>
+            </h6>
+        </div>
+    </div>
+    <hr>
+    <form class="inline-form" role="form" name="moVerificationForChildScreeningForm"
+        id="moVerificationForChildScreeningForm" novalidate>
+        <div class="form-group">
+            <validate for='weight' required-msg="Enter weight">
+                <label><span class="info_type" control-label>Weight (in Kg)</span></label>
+                <input type="number" max="23" min="0.1" class="form-control cst-form-control" form-control name="weight"
+                    id="weight" ng-change="calculateSdScore()"
+                    ng-model="moVerificationForChildScreening.childScreeningObject.weight">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group">
+            <validate for='height' required-msg="Enter height">
+                <label><span class="info_type" control-label>Height (in cm)</label>
+                <input type="number" max="120" min="45" class="form-control cst-form-control" form-control name="height"
+                    id="height" ng-change="calculateSdScore()"
+                    ng-model="moVerificationForChildScreening.childScreeningObject.height">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group">
+            <validate for='midUpperArmCircumference' required-msg="Enter MUAC">
+                <label><span class="info_type" control-label>MUAC (in cm)</span></label>
+                <input type="number" max="26" min="6" class="form-control cst-form-control" form-control
+                    name="midUpperArmCircumference" id="midUpperArmCircumference" ng-change="validateSamChild()"
+                    ng-model="moVerificationForChildScreening.childScreeningObject.midUpperArmCircumference">
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group">
+            <label class="long"><span class="info_type" control-label>SD score</span></label>
+            <label class="long" ng-if="moVerificationForChildScreening.childScreeningObject.sdScore != null"><span
+                    class="info_type"
+                    control-label>{{moVerificationForChildScreening.childScreeningObject.sdScoreDisplay}}</span></label>
+            <label class="long" ng-if="moVerificationForChildScreening.childScreeningObject.sdScore == null"><span
+                    class="info_type" control-label>--</span></label>
+        </div>
+        <div class="form-group">
+            <validate for='bilateralPittingOedema' required-msg="Select a value">
+                <label><span class="info_type" control-label>Bilateral Pitting Oedema</span></label>
+                <select class="form-control cst-form-control" form-control ng-change="validateSamChild()"
+                    ng-model="moVerificationForChildScreening.childScreeningObject.bilateralPittingOedema"
+                    name="bilateralPittingOedema" id="bilateralPittingOedema">
+                    <option value="">--Select--</option>
+                    <option value="+">+</option>
+                    <option value="++">++</option>
+                    <option value="+++">+++</option>
+                    <option value="NOTPRESENT">Not present</option>
+                </select>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group" ng-if="showApetiteTest">
+            <validate for='apetiteTest' required-msg=" Select a value">
+                <label for="apetiteTest" name="apetiteTest" id="apetiteTest" class="long control-label"
+                    control-label><span class="info_type">Appetite Test</span></label>
+                <label class="control control-radio mt-10">Pass
+                    <input ng-value="true" name="apetiteTest" form-control type="radio"
+                        ng-model="moVerificationForChildScreening.apetiteTest" required>
+                    <div class="control_indicator"></div>
+                </label>
+                <label class="control control-radio mt-10">Fail
+                    <input ng-value="false" name="apetiteTest" form-control type="radio"
+                        ng-model="moVerificationForChildScreening.apetiteTest" required>
+                    <div class="control_indicator"></div>
+                </label>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group" ng-if="moVerificationForChildScreening.apetiteTest == false">
+            <validate for='screeningCenter' required-msg="Select a value">
+                <label for="screeningCenter" control-label>Screening Center</label>
+                <select style="width:30%!important;overflow: initial" chosen-directive="screeningCenters"
+                    class="form-control cst-form-control" form-control
+                    ng-model="moVerificationForChildScreening.screeningCenter" name="screeningCenter"
+                    id="screeningCenter" required>
+                    <option value="{{screeningCenter.id}}" ng-repeat="screeningCenter in screeningCenters">
+                        {{screeningCenter.name}}</option>
+                </select>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Save</button>
+    <button class="btn btn-secondary" ng-click="cancel()">Cancel</button>
+</div>

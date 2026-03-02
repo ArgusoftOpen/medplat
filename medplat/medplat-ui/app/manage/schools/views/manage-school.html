@@ -1,0 +1,208 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{ manageSchoolCtrl.editMode ? 'Edit School' : 'Add School' }}</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form name="manageSchoolCtrl.manageSchoolForm" id="manageSchoolForm" novalidate>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <validate for="name" required-msg="Enter School Name">
+                                        <label uib-tooltip="School Name" for="name" control-label>School Name</label>
+                                        <input type="text" id="name" required form-control
+                                            class="form-control cst-form-control" name="name"
+                                            ng-model="manageSchoolCtrl.school.name" maxlength="255">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="englishName" required-msg="Enter School English Name">
+                                        <label uib-tooltip="School English Name" for="englishName" control-label>School
+                                            English Name</label>
+                                        <input type="text" id="englishName" required form-control
+                                            class="form-control cst-form-control" name="englishName"
+                                            ng-model="manageSchoolCtrl.school.englishName" maxlength="255">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="code" required-msg="Enter School Code">
+                                        <label uib-tooltip="School Code" for="code" control-label>School Code</label>
+                                        <input type="text" id="code" required form-control
+                                            class="form-control cst-form-control" name="code"
+                                            ng-model="manageSchoolCtrl.school.code" maxlength="255">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+
+                                <div ng-if="manageSchoolCtrl.schoolByCode" class="card cst-card">
+                                    <div class="col-12 text-danger" style="line-height: 29px;">
+                                        Details of school with same code
+                                    </div>
+                                    <div class="row col-12">
+                                        <div class="form-group col-6" style="margin-top: 1rem;">
+                                            <div class="row">
+                                                <div class="col-3"><strong>School Name (English Name)</strong></div>
+                                                <div class="col-9">
+                                                    {{manageSchoolCtrl.schoolByCode.name + (manageSchoolCtrl.schoolByCode.englishName ? ' (' + manageSchoolCtrl.schoolByCode.englishName + ')' : '')}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-6" style="margin-top: 1rem;">
+                                            <div class="row">
+                                                <div class="col-3"><strong>School Location</strong></div>
+                                                <div class="col-9">{{manageSchoolCtrl.schoolByCode.locationHierarchy}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label uib-tooltip="School Type" class="required" for="schoolType" control-label>
+                                        School Type
+                                    </label>
+                                    <label style="line-height: 29px;" class="control control-checkbox" control-label>Pre
+                                        Primary School
+                                        <input type="checkbox" ng-model="manageSchoolCtrl.school.isPrePrimarySchool"
+                                            ng-change="manageSchoolCtrl.schoolTypeChanged()"
+                                            ng-disabled="manageSchoolCtrl.disablePrePrimarySchool">
+                                        <div style="top: 6px;" class="control_indicator"></div>
+                                    </label>
+                                    <label style="line-height: 29px;" class="control control-checkbox"
+                                        control-label>Primary School
+                                        <input type="checkbox" ng-model="manageSchoolCtrl.school.isPrimarySchool"
+                                            ng-change="manageSchoolCtrl.schoolTypeChanged()"
+                                            ng-disabled="manageSchoolCtrl.disablePrimarySchool">
+                                        <div style="top: 6px;" class="control_indicator"></div>
+                                    </label>
+                                    <label style="line-height: 29px;" class="control control-checkbox"
+                                        control-label>Higher Secondary School
+                                        <input type="checkbox"
+                                            ng-model="manageSchoolCtrl.school.isHigherSecondarySchool"
+                                            ng-change="manageSchoolCtrl.schoolTypeChanged()"
+                                            ng-disabled="manageSchoolCtrl.disableHigherSecondarySchool">
+                                        <div style="top: 6px;" class="control_indicator"></div>
+                                    </label>
+                                    <label style="line-height: 29px;" class="control control-checkbox"
+                                        control-label>Madresa
+                                        <input type="checkbox" ng-model="manageSchoolCtrl.school.isMadresa"
+                                            ng-change="manageSchoolCtrl.schoolTypeChanged()"
+                                            ng-disabled="manageSchoolCtrl.disableMadresa">
+                                        <div style="top: 6px;" class="control_indicator"></div>
+                                    </label>
+                                    <label style="line-height: 29px;" class="control control-checkbox"
+                                        control-label>Gurukul
+                                        <input type="checkbox" ng-model="manageSchoolCtrl.school.isGurukul"
+                                            ng-change="manageSchoolCtrl.schoolTypeChanged()"
+                                            ng-disabled="manageSchoolCtrl.disableGurukul">
+                                        <div style="top: 6px;" class="control_indicator"></div>
+                                    </label>
+                                    <label style="line-height: 29px;" class="control control-checkbox"
+                                        control-label>Other
+                                        <input type="checkbox" ng-model="manageSchoolCtrl.school.isOther"
+                                            ng-change="manageSchoolCtrl.schoolTypeChanged()"
+                                            ng-disabled="manageSchoolCtrl.disableOther">
+                                        <div style="top: 6px;" class="control_indicator"></div>
+                                    </label>
+                                    <span class="alert alert-danger valid-feedback"
+                                        ng-if="manageSchoolCtrl.schoolTypeInvalid">
+                                        Select School Type
+                                    </span>
+                                </div>
+                                <div class="form-group" ng-if="manageSchoolCtrl.school.isOther">
+                                    <validate for="otherSchoolType" required-msg="Select Other School Type">
+                                        <label uib-tooltip="Other School Type" for="otherSchoolType" control-label>
+                                            Other School Type
+                                        </label>
+                                        <select form-control required class="form-control cst-form-control"
+                                            name="otherSchoolType" id="otherSchoolType"
+                                            ng-model="manageSchoolCtrl.school.otherSchoolType"
+                                            ng-options="type.id as type.value for type in manageSchoolCtrl.otherSchoolTypes">
+                                            <option value=''>--Select--</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="grantType" required-msg="Select Grant Type">
+                                        <label uib-tooltip="Grant Type" for="grantType" control-label>
+                                            Grant Type
+                                        </label>
+                                        <select form-control required class="form-control cst-form-control"
+                                            name="grantType" id="grantType" ng-model="manageSchoolCtrl.school.grantType"
+                                            ng-options="type.id as type.value for type in manageSchoolCtrl.schoolGrantTypes">
+                                            <option value=''>--Select--</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="contactPersonName" required-msg="Enter Contact Person Name">
+                                        <label uib-tooltip="Principal Name" for="contactPersonName" control-label>
+                                            Contact Person Name
+                                        </label>
+                                        <input type="text" id="contactPersonName" required form-control
+                                            class="form-control cst-form-control" name="contactPersonName"
+                                            ng-model="manageSchoolCtrl.school.contactPersonName" maxlength="255">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="contactNumber" required-msg="Enter Contact Number"
+                                        minlength-msg="Invalid Contact number"
+                                    >
+                                        <label uib-tooltip="Contact Number" for="contactNumber" control-label>
+                                            Contact Number
+                                        </label>
+                                        <input form-control ng-trim="false" limit-to="10" numbers-only type="text"
+                                            min-length="10"
+                                            name="contactNumber" id="contactNumber"
+                                            class="form-control cst-form-control"
+                                            ng-model="manageSchoolCtrl.school.contactNumber" required>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group row" style="margin-left: 0; margin-right: 0;">
+                                    <label uib-tooltip="Location" control-label
+                                        ng-class="{'required': manageSchoolCtrl.updateLocation || !manageSchoolCtrl.editMode}"
+                                        style="font-size: 15px;">Location</label>
+                                    <div style="line-height: 29px;">{{manageSchoolCtrl.school.locationHierarchy}}</div>
+                                </div>
+                                <div class="form-group" ng-if="manageSchoolCtrl.editMode">
+                                    <label style="line-height: 29px;" class="control control-checkbox"
+                                        control-label>Update Location
+                                        <input type="checkbox" ng-model="manageSchoolCtrl.updateLocation">
+                                        <div style="top: 6px;" class="control_indicator"></div>
+                                    </label>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="manageSchoolCtrl.updateLocation || !manageSchoolCtrl.editMode">
+                                    <location-directive ng-model="manageSchoolCtrl.selectedLocation"
+                                        template-type="'twoPart'" fetch-upto-level="7"
+                                        fetch-according-to-user-aoi="false" required-upto-level="7">
+                                    </location-directive>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                        </div>
+                        <div class="card-footer mt-5">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary" ng-click="manageSchoolCtrl.save()">
+                                    <em class="fa fa-floppy-o"></em> Save</button>
+                                <button class="btn btn-secondary" ui-sref="techo.manage.schools">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

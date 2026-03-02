@@ -1,0 +1,312 @@
+﻿<div class="dashboard-builder-container" ng-controller="DashboardBuilderController">
+    <div class="builder-header">
+        <h3><i class="fa fa-pencil"></i> Dashboard Builder</h3>
+        <div class="builder-actions">
+            <button class="btn btn-success" ng-click="saveDashboard()">
+                <i class="fa fa-save"></i> Save Dashboard
+            </button>
+            <button class="btn btn-warning" ng-click="previewDashboard()">
+                <i class="fa fa-eye"></i> Preview
+            </button>
+            <button class="btn btn-secondary" ng-click="goBack()">
+                <i class="fa fa-times"></i> Cancel
+            </button>
+        </div>
+    </div>
+    <div class="builder-content">
+        <div class="config-panel">
+            <h5>Dashboard Configuration</h5>
+            <div class="form-group">
+                <label>Dashboard Name</label>
+                <input type="text" class="form-control" ng-model="dashboard.dashboardName" />
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" ng-model="dashboard.description" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Dashboard Type</label>
+                <select class="form-control" ng-model="dashboard.dashboardType">
+                    <option value="EXECUTIVE">Executive/Management</option>
+                    <option value="OPERATIONAL">Operational</option>
+                    <option value="CLINICAL">Clinical</option>
+                    <option value="ANALYTICS">Analytics</option>
+                    <option value="CUSTOM">Custom</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Refresh Interval (seconds)</label>
+                <input type="number" class="form-control" ng-model="dashboard.refreshIntervalSeconds" />
+            </div>
+            <div class="ai-features-section">
+                <h6><i class="fa fa-magic"></i> AI Features</h6>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="dashboard.aiEnabled" />
+                        Enable AI Insights
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="dashboard.nlpEnabled" />
+                        Enable NLP Queries
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="dashboard.anomalyDetectionEnabled" />
+                        Anomaly Detection
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="dashboard.predictiveAnalyticsEnabled" />
+                        Predictive Analytics
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="dashboard.recommendationEnabled" />
+                        Personalized Recommendations
+                    </label>
+                </div>
+            </div>
+            <div class="access-control-section">
+                <h6><i class="fa fa-lock"></i> Access Control</h6>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="dashboard.isPublic" />
+                        Public Dashboard
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Allowed Roles (comma-separated)</label>
+                    <input type="text" class="form-control" ng-model="dashboard.roleBasedAccess" 
+                           placeholder="E.g., DOCTOR, MANAGER, NURSE" />
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" ng-click="addWidget()">
+                <i class="fa fa-plus"></i> Add Widget
+            </button>
+        </div>
+        <div class="widgets-panel">
+            <h5>Dashboard Widgets</h5>
+            <div class="widgets-list">
+                <div class="widget-item" ng-repeat="widget in widgets" ng-click="configureWidget(widget)">
+                    <div class="widget-preview">
+                        <i class="fa fa-bar-chart"></i>
+                        <div class="widget-name">{{ widget.title || widget.widgetName }}</div>
+                        <div class="widget-type">{{ widget.widgetType }}</div>
+                    </div>
+                    <button class="btn btn-sm btn-danger" ng-click="removeWidget($index); $event.stopPropagation()">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+                <div class="alert alert-info" ng-if="!widgets || widgets.length === 0">
+                    <i class="fa fa-info-circle"></i> No widgets added. Click "Add Widget" to begin.
+                </div>
+            </div>
+        </div>
+        <div class="widget-config-panel" ng-if="selectedWidget">
+            <h5>Widget Configuration</h5>
+            <div class="form-group">
+                <label>Widget Name</label>
+                <input type="text" class="form-control" ng-model="selectedWidget.widgetName" />
+            </div>
+            <div class="form-group">
+                <label>Widget Title</label>
+                <input type="text" class="form-control" ng-model="selectedWidget.title" />
+            </div>
+            <div class="form-group">
+                <label>Widget Type</label>
+                <select class="form-control" ng-model="selectedWidget.widgetType">
+                    <option ng-repeat="type in widgetTypes" value="{{ type }}">{{ type }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Data Source</label>
+                <select class="form-control" ng-model="selectedWidget.dataSourceId">
+                    <option value="">-- Select Data Source --</option>
+                    <option ng-repeat="source in availableDataSources" value="{{ source.id }}">
+                        {{ source.sourceName }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Grid Width (1-12)</label>
+                    <input type="number" class="form-control" ng-model="selectedWidget.gridWidth" min="1" max="12" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Min Height (pixels)</label>
+                    <input type="number" class="form-control" ng-model="selectedWidget.gridHeight" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Refresh Interval (seconds)</label>
+                <input type="number" class="form-control" ng-model="selectedWidget.refreshIntervalSeconds" />
+            </div>
+            <div class="widget-ai-features">
+                <h6><i class="fa fa-magic"></i> Widget AI Features</h6>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="selectedWidget.aiInsights" />
+                        Show AI Insights
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="selectedWidget.aiAnomalyDetection" />
+                        Anomaly Detection
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="selectedWidget.aiForecast" />
+                        Forecast/Prediction
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" ng-click="selectedWidget = null">
+                <i class="fa fa-close"></i> Done Configuring
+            </button>
+        </div>
+    </div>
+</div>
+<style>
+.dashboard-builder-container {
+    padding: 20px;
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+.builder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.builder-header h3 {
+    margin: 0;
+}
+.builder-actions {
+    display: flex;
+    gap: 10px;
+}
+.builder-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+}
+.config-panel,
+.widgets-panel,
+.widget-config-panel {
+    background: white;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.config-panel h5,
+.widgets-panel h5,
+.widget-config-panel h5 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+.ai-features-section,
+.access-control-section,
+.widget-ai-features {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+.ai-features-section h6,
+.access-control-section h6,
+.widget-ai-features h6 {
+    margin: 0 0 10px 0;
+    color: #2196F3;
+    font-size: 13px;
+}
+.checkbox {
+    margin-bottom: 10px;
+}
+.checkbox label {
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: 400;
+}
+.checkbox input {
+    margin: 0 5px 0 0;
+}
+.widgets-list {
+    margin-top: 15px;
+}
+.widget-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+.widget-item:hover {
+    border-color: #2196F3;
+    background: #f0f7ff;
+}
+.widget-preview {
+    flex: 1;
+    text-align: center;
+}
+.widget-preview i {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #2196F3;
+}
+.widget-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: #333;
+}
+.widget-type {
+    font-size: 11px;
+    color: #999;
+    margin-top: 3px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 13px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+    font-size: 13px;
+}
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+.form-row .form-group {
+    flex: 1;
+}
+.widget-config-panel {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+@media (max-width: 1200px) {
+    .builder-content {
+        grid-template-columns: 1fr;
+    }
+}
+</style>

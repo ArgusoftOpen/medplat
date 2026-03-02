@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.android
+
+    volumes:
+        - $HOME/medplat-temp/apk-package:/apk_package
+
+networks:
+  medplat_net:
+

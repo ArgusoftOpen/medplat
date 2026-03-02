@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="start"
+        android:text="@string/health_advisory_for"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTouristName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        app:fontFamily="@font/roboto_regular"
+        tools:text="Utkarsh Paresh Jadav" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:weightSum="3"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvHealthCondition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_weight="1.5"
+            app:fontFamily="@font/roboto_regular"
+            tools:text="Deteriorating Health detected" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvHealthStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:layout_weight="1.5"
+            android:textStyle="bold"
+            app:fontFamily="@font/roboto_regular"
+            tools:text="At risk" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/screening_report"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="#EEEEEE"
+            android:padding="22dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_blood_pressure"
+                android:drawablePadding="8dp"
+                android:text="@string/blood_npressure"
+                android:textSize="15sp"
+                app:fontFamily="@font/roboto_medium" />
+
+            <View
+                android:id="@+id/indicatorBloodPressure"
+                android:layout_width="48dp"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvBPValues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                app:fontFamily="@font/roboto_medium"
+                tools:text="165/125 mmHg" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginStart="3dp"
+            android:background="#EEEEEE"
+            android:padding="22dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_blood_oxygen"
+                android:drawablePadding="8dp"
+                android:text="@string/spo2_nlevel"
+                android:textSize="15sp"
+                app:fontFamily="@font/roboto_medium" />
+
+            <View
+                android:id="@+id/indicatorOxygen"
+                android:layout_width="48dp"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvOxygenValues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                app:fontFamily="@font/roboto_medium"
+                tools:text="93 %" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:layout_marginTop="3dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="#EEEEEE"
+            android:padding="22dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_blood_sugar"
+                android:drawablePadding="8dp"
+                android:text="@string/blood_nsugar"
+                android:textSize="15sp"
+                app:fontFamily="@font/roboto_medium" />
+
+            <View
+                android:id="@+id/indicatorBloodSugar"
+                android:layout_width="48dp"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvBloodSugarValues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                app:fontFamily="@font/roboto_medium"
+                tools:text="160 mg/dL" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="#EEEEEE"
+            android:padding="22dp"
+            android:layout_marginStart="3dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_thermometer"
+                android:drawablePadding="8dp"
+                android:text="@string/temperature_n_in_farenheit"
+                android:textSize="15sp"
+                app:fontFamily="@font/roboto_medium" />
+
+            <View
+                android:id="@+id/indicatorTemperature"
+                android:layout_width="48dp"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTemperatureValues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                app:fontFamily="@font/roboto_medium"
+                tools:text="160 mg/dL" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/advisory"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginTop="12dp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvHealthAdvisoryDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="12dp"
+        android:textSize="16sp"
+        app:fontFamily="@font/roboto_regular"
+        tools:text="Wait at least 24 hours at a lower altitude before attempting to ascend further \n\nStay hydrated. Add electrolyte mix to your water to supplement \n\nEat light but full. Consume less spicy foods and foods which are easy to digest" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/downloadPdfBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_marginVertical="12dp"
+            android:layout_weight="0.5"
+            android:letterSpacing="0"
+            android:text="@string/download_pdf"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:fontFamily="@font/roboto_medium"
+            app:icon="@drawable/ic_pdf" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/treatment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_marginVertical="12dp"
+            android:layout_weight="0.5"
+            android:text="@string/proceed_for_treatment"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:fontFamily="@font/roboto_medium"
+            app:icon="@drawable/ic_baseline_healing" />
+
+    </LinearLayout>
+
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/consentCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/consent_checkbox"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+

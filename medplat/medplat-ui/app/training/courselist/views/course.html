@@ -1,0 +1,716 @@
+<style>
+    .order-style {
+        font-size: 2.3em;
+        vertical-align: 10%
+    }
+
+    a.order-style:hover {
+        text-decoration: none;
+    }
+
+    .new-label-style {
+        width: 400px !important;
+    }
+
+    .new-input-style {
+        width: calc(100% - 412px) !important;
+    }
+
+
+    .btn-light:not(:disabled):not(.disabled).active,
+    .btn-light:not(:disabled):not(.disabled):active,
+    .show>.btn-light.dropdown-toggle {
+        color: white;
+        background-color: #002060;
+        border-color: #002060;
+    }
+
+    .toggle-button {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 50px !important;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{coursecontroller.isUpdateForm ? 'Edit Course' : 'Add Course'}}</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="coursecontroller.courseForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <validate for="courseName" required-msg="Enter course name">
+                                        <label for="courseName" class="control-label" control-label>Course Name</label>
+                                        <input type="text" auto-focus="true" class="form-control cst-form-control"
+                                            form-control name="courseName"
+                                            ng-model="coursecontroller.courseObj.courseName" 
+                                            ng-change = "coursecontroller.checkCourseName(coursecontroller.courseObj.courseName)"
+                                            ng-class = "{ 'is-invalid': coursecontroller.validCourseName === false && coursecontroller.courseObj.courseName != coursecontroller.tempCourseName }"
+                                            maxlength="250" required>
+                                        <small class="alert alert-danger checkbox-padding valid-feedback" ng-if="coursecontroller.validCourseName === false && coursecontroller.courseObj.courseName">
+                                            Course name already exists</small>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="courseDescription" required-msg="Enter course description">
+                                        <label for="courseDescription" class="control-lable" control-label>Course
+                                            Description</label>
+                                        <textarea class="form-control cst-form-control" rows="6"
+                                            name="courseDescription"
+                                            ng-model="coursecontroller.courseObj.courseDescription" maxlength="1000"
+                                            form-control>
+                                        </textarea>
+                                        <small class="placeholder">{{1000 -
+                                            coursecontroller.courseObj.courseDescription.length}} characters
+                                            available
+                                        </small>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='courseType' required-msg="Select course type">
+                                        <label for="courseType" name='courseType' class="control-label"
+                                            control-label>Course Type</label>
+                                        <label class="control control-radio">Online
+                                            <input value="ONLINE" name="courseType" type="radio"
+                                                ng-model="coursecontroller.courseObj.courseType" form-control required
+                                                ng-change="coursecontroller.courseTypeChanged()"
+                                                ng-disabled="coursecontroller.isUpdateForm">
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio">Offline
+                                            <input value="OFFLINE" name="courseType" type="radio"
+                                                ng-model="coursecontroller.courseObj.courseType" form-control required
+                                                ng-change="coursecontroller.courseTypeChanged()"
+                                                ng-disabled="coursecontroller.isUpdateForm">
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="coursecontroller.courseObj.courseType === 'ONLINE'">
+                                    <validate for='isAllowedToSkipLessons' required-msg="Select a value">
+                                        <label for="isAllowedToSkipLessons" class="control-label" control-label
+                                            style="white-space: initial;">
+                                            Is allowed to watch the next lesson without completing the previous lesson?
+                                        </label>
+                                        <label class="control control-radio">Yes
+                                            <input ng-value="true" name="isAllowedToSkipLessons" type="radio"
+                                                ng-model="coursecontroller.courseObj.isAllowedToSkipLessons"
+                                                form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio">No
+                                            <input ng-value="false" name="isAllowedToSkipLessons" type="radio"
+                                                ng-model="coursecontroller.courseObj.isAllowedToSkipLessons"
+                                                form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="coursecontroller.courseObj.courseType === 'ONLINE'">
+                                    <validate for='estimatedTimeInHrs'>
+                                        <label for="estimatedTimeInHrs" class="control-label" control-label
+                                            style="white-space: initial;">
+                                            Estimated time to complete the course (in hours)
+                                        </label>
+                                        <input type="text" numbers-only class="form-control cst-form-control" max="1000"
+                                            min="1" form-control decimalallowed="false" negativeallowed="false"
+                                            name="estimatedTimeInHrs"
+                                            ng-model="coursecontroller.courseObj.estimatedTimeInHrs">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="coursecontroller.courseObj.courseType === 'ONLINE'">
+                                    <label class="control-label">Course Image</label>
+                                    <div style="display: inline;" class="form-group"
+                                        flow-init="coursecontroller.fileUploadOptions"
+                                        flow-file-added="coursecontroller.onFileAdded($file, $event, $flow, 'COURSE')"
+                                        flow-files-submitted="coursecontroller.onFileSubmitted($files, $event, $flow, 'COURSE')"
+                                        flow-file-success="coursecontroller.onFileSuccess($file, $message, $flow, 'COURSE')"
+                                        flow-file-error="coursecontroller.onFileError($file, $message, 'COURSE');">
+                                        <div style="display: inline-flex;">
+                                            <button style="height: 33px;" type="button" flow-attrs="{accept:'image/*'}"
+                                                flow-btn class="btn btn-primary"
+                                                ng-disabled="coursecontroller.isFileUploading['COURSE']">
+                                                Upload Image
+                                            </button>
+                                            <span class="text-danger p-1" ng-if="coursecontroller.courseObj.courseType === 'ONLINE'">
+                                                <small class="text-info">[File size: Less than {{coursecontroller.maxImageSize/1000000}}MB]</small>
+                                            </span>
+                                            <a href="javascript:void(0)" style="margin: 5px;"
+                                                ng-if="!coursecontroller.courseImageConfig.mediaId"
+                                                ng-click="coursecontroller.viewDefaultImageModal('img/lms_my_courses.jpg')"
+                                                class="text-center">
+                                                View default image
+                                            </a>
+                                        </div>
+                                        <span class="text-danger"
+                                            ng-if="coursecontroller.filePayload['COURSE'].isError">
+                                            {{coursecontroller.filePayload['COURSE'].errorMessage}}
+                                        </span>
+                                        <div style="display: inline-flex;"
+                                            ng-repeat="file in coursecontroller.filePayload['COURSE'].flow.files">
+                                            <div ng-if="coursecontroller.isFileUploadProcessing['COURSE'][file.name]"
+                                                style="margin-bottom: 0; width: max-content;"
+                                                class="mt-2 alert alert-success ">
+                                                <span class="text-center">{{file.name}}
+                                                    Uploading...
+                                                    <i aria-hidden="true" class="fa fa-cog fa-spin fa-1x"></i>
+                                                </span>
+                                            </div>
+                                            <div ng-if="!coursecontroller.isFileUploadProcessing['COURSE'][file.name]"
+                                                style="margin-bottom: 0; width: max-content;" class="mt-2"
+                                                style="float:left">
+                                                <a href="javascript:void(0)"
+                                                    ng-click="coursecontroller.viewImageModal(coursecontroller.courseImageConfig)"
+                                                    class="text-center alert alert-success">
+                                                    {{file.name}}
+                                                    Uploaded
+                                                    Successfully
+                                                    <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                                                </a>
+                                                <button class="btn btn-danger" type="button"
+                                                    style="cursor: pointer; margin-left: 6px;"
+                                                    ng-click="coursecontroller.onRemoveFile('COURSE', file.name)">
+                                                    Remove <i aria-hidden="true"
+                                                        ng-if="coursecontroller.isFileRemoving['COURSE'][file.name]"
+                                                        class="fa fa-cog fa-spin fa-1x"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <span
+                                            ng-if="!coursecontroller.filePayload['COURSE'].flow && coursecontroller.courseImageConfig.mediaName">
+                                            <a href="javascript:void(0)"
+                                                ng-click="coursecontroller.viewImageModal(coursecontroller.courseImageConfig)"
+                                                class="text-center alert alert-info">
+                                                {{coursecontroller.courseImageConfig.mediaName}}
+                                                <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                                            </a>
+                                            <button class="btn btn-danger" type="button"
+                                                style="cursor: pointer; margin-left: 6px;"
+                                                ng-click="coursecontroller.onRemoveFile('COURSE', file.name)">
+                                                Remove
+                                                <i aria-hidden="true"
+                                                    ng-if="coursecontroller.isFileRemoving['COURSE'][file.name]"
+                                                    class="fa fa-cog fa-spin fa-1x"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="roleIds" required-msg="Select target roles">
+                                        <label for="roleIds" class="control-label" control-label>Target Roles</label>
+                                        <select chosen-directive="coursecontroller.roles"
+                                            class="form-control cst-form-control" form-control
+                                            ng-model="coursecontroller.courseObj.roleIds" multiple="true" id="roleIds"
+                                            name="roleIds"
+                                            ng-options="role.id as role.name for role in coursecontroller.roles| orderBy :'name'"
+                                            required>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="coursecontroller.courseObj.courseType==='OFFLINE'">
+                                    <validate for="trainerRoleIds" required-msg="Select trainer roles">
+                                        <label for="trainerRoleIds" class="control-label" control-label>Trainer
+                                            Roles</label>
+                                        <select chosen-directive="coursecontroller.roles"
+                                            class="form-control cst-form-control" form-control
+                                            ng-model="coursecontroller.courseObj.trainerRoleIds" multiple="true"
+                                            id="trainerRoleIds" name="trainerRoleIds"
+                                            ng-options="role.id as role.name for role in coursecontroller.roles| orderBy :'name'"
+                                            required>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="coursecontroller.courseObj.courseType==='ONLINE'">
+                                    <label for="role" control-label>Trainer Roles</label>
+                                    <input type="text" class="form-control cst-form-control" disabled
+                                        value="Self paced training"></input>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='courseModuleId' required-msg="Select module">
+                                        <label for="courseModuleId" class="control-label" control-label>Select
+                                            Module</label>
+                                        <select class="form-control cst-form-control" form-control
+                                            chosen-directive="coursecontroller.moduleConstants" name="courseModuleId"
+                                            ng-model="coursecontroller.courseObj.courseModuleId"
+                                            ng-options="value.id as value.fieldValue for value in coursecontroller.moduleConstants"></select>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                            <div class="col-6" style="border-left: 1px solid #e5e5e5;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="card-sub-title">
+                                            <span ng-if="coursecontroller.courseObj.courseType === 'OFFLINE'">Topics
+                                                List</span>
+                                            <span ng-if="coursecontroller.courseObj.courseType === 'ONLINE'">Modules
+                                                List</span>
+                                            <button ng-if="coursecontroller.courseObj.courseType"
+                                                class="btn btn-primary float-right"
+                                                ng-click="coursecontroller.addTopic()">{{coursecontroller.courseObj.courseType
+                                                === 'OFFLINE' ? 'Add Topic' : 'Add Module'}}
+                                            </button>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div ng-if="coursecontroller.topics.length > 0" class="mt-15">
+                                            <div class="cst-table table-responsive" style="overflow: auto;">
+                                                <table aria-describedby="topicsList"
+                                                    class="table table-sm table-fixed table-striped table-bordered header-fixed">
+                                                    <thead class="cst-thead">
+                                                        <tr>
+                                                            <th id="day"
+                                                                ng-if="coursecontroller.courseObj.courseType==='OFFLINE'">
+                                                                Day</th>
+                                                            <th id="Sr.No.">Sr. No.</th>
+                                                            <th id="name">Name</th>
+                                                            <th id="action">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="cst-tbody"
+                                                        ng-if="coursecontroller.courseObj.courseType==='OFFLINE'"
+                                                        ng-repeat="(key,value) in coursecontroller.count track by $index">
+                                                        <tr ng-repeat="val in value track by $index">
+                                                            <td rowspan="{{value.length}}" ng-if="$index === 0">{{key}}
+                                                            </td>
+                                                            <td>{{val.topicOrder}}</td>
+                                                            <td>{{val.topicName}}</td>
+                                                            <td class="action-cell">
+                                                                <ul class="action-item">
+                                                                    <li><a href="#" class="action-icon edit-icon"
+                                                                            ng-click="coursecontroller.editTopic(val)"></a>
+                                                                    </li>
+                                                                    <li><a href="#" class="action-icon delete-icon"
+                                                                            ng-click="coursecontroller.deleteTopic(val)"></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tbody class="cst-tbody"
+                                                        ng-if="coursecontroller.courseObj.courseType==='ONLINE'">
+                                                        <tr ng-repeat="(topicIdx ,topic) in coursecontroller.topics"
+                                                            ng-style="(coursecontroller.duplicateTopicArr.includes(topicIdx) ||
+                                                                coursecontroller.duplicateMediaArr.includes(topicIdx) ) ?
+                                                                {'border-color': '#dc3545', 'border-style': 'solid', 'border-left': '0', 'border-right': '0'} : {}">
+                                                            <td>{{topic.topicOrder}}</td>
+                                                            <td>{{topic.topicName}}</td>
+                                                            <td class="action-cell">
+                                                                <ul class="action-item">
+                                                                    <li><a href="#" class="action-icon edit-icon"
+                                                                            ng-click="coursecontroller.editTopic(topic)"></a>
+                                                                    </li>
+                                                                    <li><a href="#" class="action-icon delete-icon"
+                                                                            ng-click="coursecontroller.deleteTopic(topic)"></a>
+                                                                    </li>
+                                                                    <li ng-if="$index!==0"><a href="#"
+                                                                            class="fa fa-arrow-circle-up fa-lg order-style"
+                                                                            ng-click="coursecontroller.incrementTopic(topic)"></a>
+                                                                    </li>
+                                                                    <li
+                                                                        ng-if="$index!==coursecontroller.topics.length-1">
+                                                                        <a href="#"
+                                                                            class="fa fa-arrow-circle-down fa-lg order-style"
+                                                                            ng-click="coursecontroller.decrementTopic(topic)"></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12"
+                                ng-if="coursecontroller.courseObj.courseType === 'ONLINE' && coursecontroller.questionSetTypes.length">
+                                <hr>
+                                <div class="card cst-card">
+                                    <div class="card-title">
+                                        <div class="float-left">
+                                            <h4 class="text">Test Configuration</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body inline-form">
+                                        <div class="form-group">
+                                            <label for="questionSetTypes" class="control-label new-label-style"
+                                                control-label>Select Question Set Type</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                style="width: calc(100% - 670px);"
+                                                ng-model="coursecontroller.testTypeId" id="questionSetTypes"
+                                                name="questionSetTypes"
+                                                ng-options="type.id as type.value for type in coursecontroller.questionSetTypes | orderBy :'id'"
+                                                ng-change="coursecontroller.setTestTypeValue()">
+                                                <option value="">--Select--</option>
+                                            </select>
+                                            <div class="btn btn-success float-right"
+                                                ng-click="coursecontroller.manageQuestionSetType()">
+                                                Manage Question Set Configuration
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div ng-if="coursecontroller.testTypeId">
+                                            <div class="form-group" ng-if="coursecontroller.testTypeValue != 'Scenario Based Quiz'">
+                                                <label style="white-space: initial; line-height: 17px;"
+                                                    class="new-label-style">
+                                                    Is this question set type of "Case Study"?
+                                                </label>
+                                                <div class="btn-group btn-group-toggle p-0" data-toggle="buttons">
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].isCaseStudyQuestionSetType === true}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].isCaseStudyQuestionSetType = true">
+                                                        <input type="radio"
+                                                            name="isCaseStudyQuestionSetType{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        Yes
+                                                    </label>
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].isCaseStudyQuestionSetType === false}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].isCaseStudyQuestionSetType = false">
+                                                        <input type="radio"
+                                                            name="isCaseStudyQuestionSetType{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="coursecontroller.testTypeValue != 'Scenario Based Quiz'">
+                                                <label style="white-space: initial; line-height: 17px;"
+                                                    class="new-label-style">
+                                                    Do you want a quiz to be marked?
+                                                </label>
+                                                <div class="btn-group btn-group-toggle p-0" data-toggle="buttons">
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].doYouWantAQuizToBeMarked === true}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].doYouWantAQuizToBeMarked = true">
+                                                        <input type="radio"
+                                                            name="doYouWantAQuizToBeMarked{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        Yes
+                                                    </label>
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].doYouWantAQuizToBeMarked === false}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].doYouWantAQuizToBeMarked = false">
+                                                        <input type="radio"
+                                                            name="doYouWantAQuizToBeMarked{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="coursecontroller.testTypeValue != 'Scenario Based Quiz'">
+                                                <label style="white-space: initial; line-height: 17px;"
+                                                    class="new-label-style">
+                                                    Allow review of questions before submission?
+                                                </label>
+                                                <div class="btn-group btn-group-toggle p-0" data-toggle="buttons">
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].allowReviewBeforeSubmission === true}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].allowReviewBeforeSubmission = true; coursecontroller.onChangeAllowReviewBeforeSubmission(coursecontroller.testConfig[coursecontroller.testTypeId]);">
+                                                        <input type="radio"
+                                                            name="allowReviewBeforeSubmission{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        Yes
+                                                    </label>
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].allowReviewBeforeSubmission === false}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].allowReviewBeforeSubmission = false">
+                                                        <input type="radio"
+                                                            name="allowReviewBeforeSubmission{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="coursecontroller.testTypeValue != 'Scenario Based Quiz'">
+                                                <label style="white-space: initial;" class="new-label-style">
+                                                    Quiz completion message <em popover-placement="'auto'"
+                                                        data-html="true"
+                                                        uib-popover="Multiple language's message will be manage from the Manage Translation feature"
+                                                        popover-trigger="'mouseenter'" class="fa fa-question-circle">
+                                                    </em>
+                                                </label>
+                                                <input type="text" class="form-control cst-form-control new-input-style"
+                                                    form-control
+                                                    name="quizCompletionMessage{{coursecontroller.testTypeId}}"
+                                                    ng-model="coursecontroller.testConfig[coursecontroller.testTypeId].quizCompletionMessage.message" />
+                                            </div>
+                                            <div class="form-group" ng-if="coursecontroller.testTypeValue != 'Scenario Based Quiz'">
+                                                <label class="new-label-style">Quiz completion image</label>
+                                                <div style="display: inline;" class="form-group"
+                                                    flow-init="coursecontroller.fileUploadOptions"
+                                                    flow-file-added="coursecontroller.onFileAdded($file, $event, $flow, coursecontroller.testTypeId)"
+                                                    flow-files-submitted="coursecontroller.onFileSubmitted($files, $event, $flow, coursecontroller.testTypeId)"
+                                                    flow-file-success="coursecontroller.onFileSuccess($file, $message, $flow, coursecontroller.testTypeId)"
+                                                    flow-file-error="coursecontroller.onFileError($file, $message, coursecontroller.testTypeId);">
+                                                    <div style="display: inline-flex;">
+                                                        <button style="height: 33px;" type="button"
+                                                            flow-attrs="{accept:'image/*'}" flow-btn
+                                                            class="btn btn-primary"
+                                                            ng-disabled="coursecontroller.isFileUploading[coursecontroller.testTypeId]">
+                                                            Upload Image
+                                                        </button>
+                                                        <span class="text-danger p-1">
+                                                            <small class="text-info">[File size: Less than {{coursecontroller.maxImageSize/1000000}}MB]</small>
+                                                        </span>
+                                                        <a href="javascript:void(0)" style="margin: 5px;"
+                                                            ng-click="coursecontroller.viewDefaultImageModal('img/well_done.png')"
+                                                            ng-if="!coursecontroller.testConfig[coursecontroller.testTypeId].quizCompletionMessage.mediaId"
+                                                            class="text-center">
+                                                            View default image
+                                                        </a>
+                                                    </div>
+                                                    <span class="text-danger"
+                                                        ng-if="coursecontroller.filePayload[coursecontroller.testTypeId].isError">
+                                                        {{coursecontroller.filePayload[coursecontroller.testTypeId].errorMessage}}
+                                                    </span>
+                                                    <div style="display: inline-flex;"
+                                                        ng-repeat="file in coursecontroller.filePayload[coursecontroller.testTypeId].flow.files">
+                                                        <div ng-if="coursecontroller.isFileUploadProcessing[coursecontroller.testTypeId][file.name]"
+                                                            style="margin-bottom: 0; width: max-content;"
+                                                            class="mt-2 alert alert-success ">
+                                                            <span class="text-center">{{file.name}}
+                                                                Uploading...
+                                                                <i aria-hidden="true"
+                                                                    class="fa fa-cog fa-spin fa-1x"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div ng-if="!coursecontroller.isFileUploadProcessing[coursecontroller.testTypeId][file.name]"
+                                                            style="margin-bottom: 0; width: max-content;" class="mt-2"
+                                                            style="float:left">
+                                                            <a href="javascript:void(0)"
+                                                                ng-click="coursecontroller.viewImageModal(coursecontroller.testConfig[coursecontroller.testTypeId].quizCompletionMessage)"
+                                                                class="text-center alert alert-success">
+                                                                {{file.name}}
+                                                                Uploaded
+                                                                Successfully
+                                                                <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                                                            </a>
+                                                            <button class="btn btn-danger" type="button"
+                                                                style="cursor: pointer; margin-left: 6px;"
+                                                                ng-click="coursecontroller.onRemoveFile(coursecontroller.testTypeId, file.name)">
+                                                                Remove <i aria-hidden="true"
+                                                                    ng-if="coursecontroller.isFileRemoving[coursecontroller.testTypeId][file.name]"
+                                                                    class="fa fa-cog fa-spin fa-1x"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <span
+                                                        ng-if="!coursecontroller.filePayload[coursecontroller.testTypeId].flow && coursecontroller.testConfig[coursecontroller.testTypeId].quizCompletionMessage.mediaName">
+                                                        <a href="javascript:void(0)"
+                                                            ng-click="coursecontroller.viewImageModal(coursecontroller.testConfig[coursecontroller.testTypeId].quizCompletionMessage)"
+                                                            class="text-center alert alert-info">
+                                                            {{coursecontroller.testConfig[coursecontroller.testTypeId].quizCompletionMessage.mediaName}}
+                                                            <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                                                        </a>
+                                                        <button class="btn btn-danger" type="button"
+                                                            style="cursor: pointer; margin-left: 6px;"
+                                                            ng-click="coursecontroller.onRemoveFile(coursecontroller.testTypeId, file.name)">
+                                                            Remove
+                                                            <i aria-hidden="true"
+                                                                ng-if="coursecontroller.isFileRemoving[coursecontroller.testTypeId][file.name]"
+                                                                class="fa fa-cog fa-spin fa-1x"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="coursecontroller.testConfig[coursecontroller.testTypeId].doYouWantAQuizToBeMarked && coursecontroller.testTypeValue != 'Scenario Based Quiz'">
+                                                <label style="white-space: initial; line-height: 17px;"
+                                                    class="new-label-style">
+                                                    Show quiz score on completion of quiz?
+                                                </label>
+                                                <div class="btn-group btn-group-toggle p-0" data-toggle="buttons">
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].showQuizScoreQuizCompletion === true}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].showQuizScoreQuizCompletion = true">
+                                                        <input type="radio"
+                                                            name="showQuizScoreQuizCompletion{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        Yes
+                                                    </label>
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].showQuizScoreQuizCompletion === false}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].showQuizScoreQuizCompletion = false">
+                                                        <input type="radio"
+                                                            name="showQuizScoreQuizCompletion{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="coursecontroller.testTypeValue != 'Scenario Based Quiz'">
+                                                <validate for='noOfMaximumAttempts{{coursecontroller.testTypeId}}'>
+                                                    <label for="noOfMaximumAttempts{{coursecontroller.testTypeId}}"
+                                                        class="control-label new-label-style" control-label
+                                                        style="white-space: initial;">
+                                                        No of maximum attempts
+                                                    </label>
+                                                    <input type="number"
+                                                        class="form-control cst-form-control new-input-style"
+                                                        form-control
+                                                        name="noOfMaximumAttempts{{coursecontroller.testTypeId}}"
+                                                        ng-model="coursecontroller.testConfig[coursecontroller.testTypeId].noOfMaximumAttempts" />
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group" ng-if="coursecontroller.testTypeValue != 'Scenario Based Quiz'">
+                                                <label style="white-space: initial; line-height: 17px;"
+                                                    class="new-label-style">
+                                                    Do you want to provide option to lock the quiz?
+                                                </label>
+                                                <div class="btn-group btn-group-toggle p-0" data-toggle="buttons">
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToLockTheQuiz === true}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToLockTheQuiz = true;
+                                                            coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToRestartTestFromCompletionScreen = false;
+                                                            coursecontroller.testConfig[coursecontroller.testTypeId].provideInteractiveFeedbackAfterEachQuestion = false;">
+                                                        <input type="radio"
+                                                            name="provideOptionToLockTheQuiz{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        Yes
+                                                    </label>
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToLockTheQuiz === false}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToLockTheQuiz = false">
+                                                        <input type="radio"
+                                                            name="provideOptionToLockTheQuiz{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="coursecontroller.testTypeValue != 'Scenario Based Quiz' && !coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToLockTheQuiz">
+                                                <label style="white-space: initial; line-height: 17px;"
+                                                    class="new-label-style">
+                                                    Provide option to restart test from completion screen?
+                                                </label>
+                                                <div class="btn-group btn-group-toggle p-0" data-toggle="buttons">
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToRestartTestFromCompletionScreen === true}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToRestartTestFromCompletionScreen = true">
+                                                        <input type="radio"
+                                                            name="provideOptionToRestartTestFromCompletionScreen{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        Yes
+                                                    </label>
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToRestartTestFromCompletionScreen === false}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToRestartTestFromCompletionScreen = false">
+                                                        <input type="radio"
+                                                            name="provideOptionToRestartTestFromCompletionScreen{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label style="white-space: initial; line-height: 17px;"
+                                                    class="new-label-style">
+                                                    Show time taken to complete the quiz?
+                                                </label>
+                                                <div class="btn-group btn-group-toggle p-0" data-toggle="buttons">
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].showTimeTakenToCompleteTheQuiz === true}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].showTimeTakenToCompleteTheQuiz = true">
+                                                        <input type="radio"
+                                                            name="showTimeTakenToCompleteTheQuiz{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        Yes
+                                                    </label>
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].showTimeTakenToCompleteTheQuiz === false}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].showTimeTakenToCompleteTheQuiz = false">
+                                                        <input type="radio"
+                                                            name="showTimeTakenToCompleteTheQuiz{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="!coursecontroller.testConfig[coursecontroller.testTypeId].provideOptionToLockTheQuiz && coursecontroller.testTypeValue != 'Scenario Based Quiz'">
+                                                <label style="white-space: initial; line-height: 17px;"
+                                                    class="new-label-style">
+                                                    Provide interactive feedback after each question?
+                                                </label>
+                                                <div class="btn-group btn-group-toggle p-0" data-toggle="buttons">
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].provideInteractiveFeedbackAfterEachQuestion === true}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].provideInteractiveFeedbackAfterEachQuestion = true; coursecontroller.onChangeProvideInteractiveFeedbackAfterEachQuestion(coursecontroller.testConfig[coursecontroller.testTypeId]);">
+                                                        <input type="radio"
+                                                            name="provideInteractiveFeedbackAfterEachQuestion{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        Yes
+                                                    </label>
+                                                    <label class="btn btn-md btn-light toggle-button"
+                                                        ng-class="{'active': coursecontroller.testConfig[coursecontroller.testTypeId].provideInteractiveFeedbackAfterEachQuestion === false}"
+                                                        ng-click="coursecontroller.testConfig[coursecontroller.testTypeId].provideInteractiveFeedbackAfterEachQuestion = false">
+                                                        <input type="radio"
+                                                            name="provideInteractiveFeedbackAfterEachQuestion{{coursecontroller.testTypeId}}"
+                                                            autocomplete="off">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="alert alert-info" ng-if="coursecontroller.testTypeValue != 'Scenario Based Quiz'">
+                                                <strong>Note:</strong> Both <strong>Allow review of questions before
+                                                    submission?</strong> and
+                                                <strong>Provide interactive feedback after each question?</strong>
+                                                fields can't be <strong>Yes</strong> at the same time for any question
+                                                set type config.
+                                            </div>
+                                            <div class="alert alert-danger"
+                                                ng-if="coursecontroller.showTestConfigQuestionValidationMessage"
+                                                ng-bind-html="coursecontroller.testConfigQuestionValidationMessage">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card-footer mt-5">
+                        <div class="float-right">
+                            <div ng-if="!coursecontroller.isUpdateForm">
+                                <button class="btn btn-secondary" ui-sref="techo.manage.courselist">Back</button>
+                                <button class="btn btn-secondary" ng-click="coursecontroller.cancel()"><em
+                                        class="fa fa-remove"></em> Clear</button>
+                                <button class="btn btn-primary" ng-click="coursecontroller.createCourse()"><em
+                                        class="fa fa-floppy-o"></em> Save</button>
+                                <button ng-if="coursecontroller.courseObj.courseType==='ONLINE'" class="btn btn-primary"
+                                    ng-click="coursecontroller.previewOverview(coursecontroller.courseObj,coursecontroller.courseImageConfig)">Preview
+                                </button>
+                            </div>
+                            <div ng-if="coursecontroller.isUpdateForm">
+                                <button class="btn btn-secondary" ui-sref="techo.manage.courselist">Back</button>
+                                <button class="btn btn-primary"
+                                    ng-click="coursecontroller.updateCourse()">Update</button>
+                                <button ng-if="coursecontroller.courseObj.courseType==='ONLINE'" class="btn btn-primary"
+                                    ng-click="coursecontroller.previewOverview(coursecontroller.courseObj,coursecontroller.courseImageConfig)">Preview
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

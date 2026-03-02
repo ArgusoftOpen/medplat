@@ -1,0 +1,221 @@
+﻿<div class="ai-widget-view">
+    <div class="widget-header">
+        <h4 class="widget-title">{{ widget.title || widget.widgetName }}</h4>
+        <div class="widget-controls">
+            <button class="btn btn-sm btn-info" ng-click="toggleInsights()" ng-if="widget.aiInsights && insights">
+                <i class="fa fa-lightbulb-o"></i> Insights
+            </button>
+            <button class="btn btn-sm btn-secondary" title="Widget Type: {{ widget.widgetType }}">
+                <i class="fa fa-bar-chart"></i>
+            </button>
+        </div>
+    </div>
+    <div class="widget-content">
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="LINE_CHART">
+                <canvas class="chart chart-line" 
+                        chart-data="widget.chartData" 
+                        chart-options="widget.chartOptions"
+                        chart-series="widget.chartSeries">
+                </canvas>
+            </div>
+            <div ng-switch-when="BAR_CHART">
+                <canvas class="chart chart-bar" 
+                        chart-data="widget.chartData" 
+                        chart-options="widget.chartOptions"
+                        chart-series="widget.chartSeries">
+                </canvas>
+            </div>
+            <div ng-switch-when="PIE_CHART">
+                <canvas class="chart chart-pie" 
+                        chart-data="widget.chartData" 
+                        chart-options="widget.chartOptions"
+                        chart-series="widget.chartSeries">
+                </canvas>
+            </div>
+            <div ng-switch-when="KPI">
+                <div class="kpi-display">
+                    <div class="kpi-value">{{ widget.kpiValue | number }}</div>
+                    <div class="kpi-label">{{ widget.kpiLabel }}</div>
+                    <div class="kpi-change" ng-class="widget.kpiChange > 0 ? 'positive' : 'negative'">
+                        <i class="fa" ng-class="widget.kpiChange > 0 ? 'fa-arrow-up' : 'fa-arrow-down'"></i>
+                        {{ widget.kpiChange | number:2 }}%
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="TABLE">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th ng-repeat="col in widget.columns">{{ col }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in widget.tableData | limitTo:10">
+                                <td ng-repeat="col in widget.columns">{{ row[col] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div ng-switch-when="GAUGE">
+                <div class="gauge-display">
+                    <div class="gauge-meter" ng-style="{ 'background': 'conic-gradient(#4CAF50 ' + widget.gaugeValue + '%, #ddd 0%)' }">
+                        <div class="gauge-label">{{ widget.gaugeValue }}%</div>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-default>
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle"></i> Widget type not rendered: {{ widget.widgetType }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widget-insights" ng-if="showInsights && insights && insights.length > 0">
+        <div class="insights-header">
+            <h6><i class="fa fa-lightbulb-o"></i> AI Insights</h6>
+        </div>
+        <div class="insights-content">
+            <div class="insight-badge" ng-repeat="insight in insights" 
+                 ng-class="'severity-' + insight.severity">
+                <strong>{{ insight.insightType }}:</strong> {{ insight.title }}
+            </div>
+        </div>
+    </div>
+    <div class="widget-footer">
+        <small class="text-muted">
+            <i class="fa fa-clock-o"></i> 
+            Last updated: {{ widget.lastUpdated | date:'medium' }}
+        </small>
+    </div>
+</div>
+<style>
+.ai-widget-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    background: #f9f9f9;
+}
+.widget-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+.widget-controls {
+    display: flex;
+    gap: 5px;
+}
+.widget-content {
+    flex: 1;
+    padding: 15px;
+    overflow: auto;
+}
+.kpi-display {
+    text-align: center;
+    padding: 30px 0;
+}
+.kpi-value {
+    font-size: 48px;
+    font-weight: bold;
+    color: #2196F3;
+    margin-bottom: 10px;
+}
+.kpi-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+.kpi-change {
+    font-size: 16px;
+    font-weight: 600;
+}
+.kpi-change.positive {
+    color: #4CAF50;
+}
+.kpi-change.negative {
+    color: #f44336;
+}
+.gauge-display {
+    text-align: center;
+    padding: 20px 0;
+}
+.gauge-meter {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+}
+.gauge-label {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    position: absolute;
+}
+.widget-insights {
+    border-top: 1px solid #eee;
+    padding: 10px 12px;
+    background: #fff9e6;
+}
+.insights-header {
+    margin-bottom: 8px;
+}
+.insights-header h6 {
+    margin: 0;
+    font-size: 12px;
+    color: #ff9800;
+}
+.insight-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 2px;
+    border-radius: 3px;
+    font-size: 11px;
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+}
+.insight-badge.severity-HIGH {
+    background: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+.insight-badge.severity-CRITICAL {
+    background: #d32f2f;
+    border-color: #b71c1c;
+    color: white;
+}
+.widget-footer {
+    padding: 8px 12px;
+    border-top: 1px solid #eee;
+    background: #f9f9f9;
+    font-size: 12px;
+}
+.table-responsive {
+    max-height: 300px;
+    overflow-y: auto;
+}
+.table {
+    margin: 0;
+}
+.chart {
+    position: relative;
+    width: 100%;
+    height: 250px;
+}
+</style>
