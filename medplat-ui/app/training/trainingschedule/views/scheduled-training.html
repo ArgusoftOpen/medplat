@@ -123,6 +123,13 @@
                                             ng-click="scheduledTraining.rescheduleTraining(training)">
                                         </a>
                                     </li>
+                                    <li ng-if="scheduledTraining.canMarkAttendance && scheduledTraining.getStatus(training) == 4 && training.courseType === 'OFFLINE'">
+                                        <button type="button"
+                                                class="btn btn-sm btn-outline-primary"
+                                                ng-click="scheduledTraining.generateQrForTraining(training)">
+                                            QR
+                                        </button>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>

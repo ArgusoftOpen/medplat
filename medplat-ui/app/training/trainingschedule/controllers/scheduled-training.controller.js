@@ -1,5 +1,5 @@
 (function () {
-    function ScheduledTrainingCtrl(ConstantService, AuthenticateService, $filter, $uibModal, Mask, $timeout, QueryDAO, $state, CourseService, PagingForQueryBuilderService, GeneralUtil, $sessionStorage) {
+    function ScheduledTrainingCtrl(ConstantService, AuthenticateService, $filter, $uibModal, Mask, $timeout, QueryDAO, $state, CourseService, PagingForQueryBuilderService, GeneralUtil, $sessionStorage, APP_CONFIG, $http, toaster) {
         $('.search').on('click', function () {
             $(this).parent().find('.text').toggleClass('active');
             $(this).parent().find('.search-box').toggleClass('active');
@@ -275,6 +275,47 @@
             $sessionStorage.$apply()
             const url = $state.href('techo.report.view', reportJson, { inherit: false, absolute: false })
             window.open(url, '_blank');
+        }
+
+        ctrl.generateQrForTraining = function (training) {
+            if (!training || !training.trainingId) {
+                return;
+            }
+            if (ctrl.getStatus(training) !== 4) {
+                return;
+            }
+            Mask.show();
+            var params = {
+                trainingId: training.trainingId,
+                sessionId: 'session-' + training.trainingId + '-' + new Date().getTime()
+            };
+            $http.post(APP_CONFIG.apiPath + '/lms/qr-attendance/generate', null, { params: params })
+                .then(function (response) {
+                    var tokenDto = response.data;
+                    $uibModal.open({
+                        templateUrl: 'app/training/trainingschedule/views/qr-attendance.modal.html',
+                        controllerAs: '$ctrl',
+                        controller: function ($uibModalInstance) {
+                            var $ctrl = this;
+                            $ctrl.qrToken = tokenDto.token;
+                            $ctrl.expiresAt = tokenDto.expiresAt;
+                            $ctrl.qrImageBase64 = tokenDto.qrImageBase64;
+
+                            $ctrl.close = function () {
+                                $uibModalInstance.dismiss('cancel');
+                            }
+                        },
+                        windowClass: 'cst-modal',
+                        size: 'med'
+                    });
+                })
+                .catch(function (error) {
+                    GeneralUtil.showMessageOnApiCallFailure(error);
+                    toaster.pop('error', 'Unable to generate QR attendance token');
+                })
+                .finally(function () {
+                    Mask.hide();
+                });
         }
 
         ctrl.initPage();
