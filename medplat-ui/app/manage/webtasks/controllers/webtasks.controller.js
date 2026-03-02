@@ -9,6 +9,7 @@
         webtasks.innerTotalCount = 0;
         webtasks.innerDueCount = 0;
         webtasks.colorCodeFlag = false;
+        webtasks.isLoadingTasks = false;
         webtasks.colors = ['#dd4b39', '#00a65a', '#f39c12', '#00c0ef', '#333333', '#ffc90e'];
 
         webtasks.getLoggedInUser = function () {
@@ -110,14 +111,17 @@
             }
             var taskDetailList = webtasks.taskDetailList;
             Mask.show();
+            webtasks.isLoadingTasks = true;
             PagingService.getNextPage(WebTasksService.getWebTaskDetailByType, webtasks.criteria, taskDetailList, null).then(function (response) {
                 Mask.hide();
+                webtasks.isLoadingTasks = false;
                 webtasks.taskDetailList = response;
                 if (webtasks.taskDetailList != null && webtasks.taskDetailList.length > 0) {
                     webtasks.taskheaders = Object.keys(webtasks.taskDetailList[0].details);
                 }
             }, function (error) {
                 Mask.hide();
+                webtasks.isLoadingTasks = false;
                 toaster.pop('error', 'Unable to retrieve task details');
             });
         }
@@ -167,8 +171,10 @@
 
         webtasks.getWebTaskCount = function () {
             Mask.show();
+            webtasks.isLoadingTasks = true;
             WebTasksService.getWebTaskCount().then(function (response) {
                 Mask.hide();
+                webtasks.isLoadingTasks = false;
                 response.forEach(function (basket) {
                     if (webtasks.hiddenBaskets.length > 0) {
                         if (webtasks.hiddenBaskets.includes(basket.id)) {

@@ -3,7 +3,7 @@
 cd /usr/ui/medplat-ui
 
 npm install --legacy-peer-deps
-bower install
+bower install --allow-root
 
 cd /usr/web
 mvn clean install -P docker -Dmaven.test.skip=true

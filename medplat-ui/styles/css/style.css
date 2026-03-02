@@ -1,6 +1,25 @@
-/*Your Custom CSS*/
-
 @charset "utf-8";
+
+/* Medplat Modern Design Tokens */
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --secondary: #64748b;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --background: #f8fafc;
+    --surface: rgba(255, 255, 255, 0.8);
+    --glass-background: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/*Your Custom CSS*/
 
 a {
     color: #2b7dce;
@@ -16,10 +35,11 @@ body {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Outfit', 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 400;
-    background: #f7f7f7;
+    color: var(--text-main);
+    background: var(--background);
 }
 
 /*Custom utility classes*/
@@ -27,9 +47,11 @@ body {
 .p-7 {
     padding: 7px;
 }
-.pl-15{
+
+.pl-15 {
     padding-left: 15px;
 }
+
 .pr-30 {
     padding-right: 30px;
 }
@@ -81,6 +103,36 @@ body {
 
 .mt-7 {
     margin-top: 7px;
+}
+
+/* Glassmorphism & Premium Utilities */
+.glass-effect {
+    background: var(--glass-background);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+}
+
+.premium-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+}
+
+.premium-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary), #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /*Login css*/
@@ -226,11 +278,14 @@ header .navbar-brand {
 }
 
 .cst-navbar {
-    background: #ffffff;
-    height: 60px;
-    padding: 0 10px;
-    -webkit-box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.12);
-    box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.12);
+    background: var(--surface);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    height: 70px;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
+    z-index: 1040;
 }
 
 ul.custom-navbar li.user span.user-image {
@@ -379,20 +434,68 @@ ul.custom-navbar li.user span.user-name::after {
 .cst-sidebar {
     width: 80px;
     padding: 0;
-    padding-top: 60px;
+    padding-top: 70px;
     position: fixed;
-    height: auto;
-    min-height: 100vh;
-    background: #243a50;
-    z-index: 31;
-    -webkit-transition: all .3s;
-    transition: all .3s;
+    height: 100vh;
+    background: #1e293b;
+    /* Dark slate */
+    z-index: 1030;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cst-sidebar:hover {
+    width: 240px;
 }
 
 .cst-sidebar ul {
     list-style: none;
-    padding: 0;
+    padding: 12px 0;
     margin: 0;
+}
+
+.cst-sidebar-nav li {
+    margin: 4px 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.cst-sidebar-nav li:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.cst-sidebar-nav li.active {
+    background: var(--primary);
+}
+
+.cst-sidebar-nav li a {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    color: #cbd5e1;
+    text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.cst-sidebar-nav li a .icon {
+    min-width: 48px;
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #f8fafc;
+}
+
+.cst-sidebar-nav li a .text {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-left: 12px;
+}
+
+.cst-sidebar:hover .cst-sidebar-nav li a .text {
+    opacity: 1;
 }
 
 .cst-sidebar>ul>li {
@@ -2927,17 +3030,19 @@ transform-origin: 50% 50%;
     /*opacity: 0.9;*/
     position: absolute;
 }
+
 /* Menu -search */
-.menu-search .search-icon{
+.menu-search .search-icon {
     margin-top: 10px;
 }
+
 .menu-search input[type=text] {
     outline: none;
     -webkit-appearance: textfield;
     -webkit-box-sizing: content-box;
     font-family: inherit;
     font-size: 100%;
-     background: white url(../../img/search-icon.png) no-repeat 9px center;
+    background: white url(../../img/search-icon.png) no-repeat 9px center;
     border: solid 1px #ccc;
     padding: 9px 10px 9px 32px;
     width: 55px;
@@ -2955,6 +3060,7 @@ transform-origin: 50% 50%;
     color: transparent;
     cursor: pointer;
 }
+
 .menu-search input[type=text]:focus {
     width: 200px;
     background-color: #fff;
@@ -2963,31 +3069,37 @@ transform-origin: 50% 50%;
     color: #000;
     cursor: auto;
 }
+
 .menu-search input:focus::-moz-placeholder {
     color: #ddd;
 }
+
 .menu-search input:focus::-webkit-input-placeholder {
     color: #ddd;
 }
+
 .menu-search input:-moz-placeholder {
     color: transparent;
 }
+
 .menu-search input::-webkit-input-placeholder {
     color: transparent;
 }
-#search-data.dropdown-menu a:hover{
-    color:#2b7dce !important;
+
+#search-data.dropdown-menu a:hover {
+    color: #2b7dce !important;
 }
-#search-data.user-data{
-    top:63px !important;
+
+#search-data.user-data {
+    top: 63px !important;
     padding: 5px !important;
     overflow: auto;
     max-height: 200px;
     display: block;
 }
 
-.menu-search input[type=text]:focus > .dropdown-menu {
-  display: block;
+.menu-search input[type=text]:focus>.dropdown-menu {
+    display: block;
 }
 
 .mobile-config-search input[type=text] {
@@ -3011,6 +3123,7 @@ transform-origin: 50% 50%;
     color: #000;
     cursor: auto;
 }
+
 /* OPD Consent Request Starts */
 .mt-20 {
     margin-top: 20px;
@@ -3055,9 +3168,9 @@ transform-origin: 50% 50%;
 }
 
 .resend-otp {
-    color: #2167ad !important; 
-    float: right; 
-    margin-top: 2px; 
+    color: #2167ad !important;
+    float: right;
+    margin-top: 2px;
 }
 
 .is-agree-checkbox {
@@ -3067,7 +3180,7 @@ transform-origin: 50% 50%;
     margin-right: 7px;
 }
 
-.download-health-id-card-title{
+.download-health-id-card-title {
     margin-bottom: 20px;
     margin-top: 20px;
     text-align: center;
@@ -3082,24 +3195,25 @@ transform-origin: 50% 50%;
 
 /* OPD Consent Request Ends */
 
-.health-id-dialog .modal-dialog{
-    width: 73%!important;
+.health-id-dialog .modal-dialog {
+    width: 73% !important;
 }
 
-.ndhm-hiu-modal .modal-content{
-    height: 480px!important;
+.ndhm-hiu-modal .modal-content {
+    height: 480px !important;
 }
-.field-config-group label.control{
+
+.field-config-group label.control {
     min-width: unset !important;
 }
 
-.health-record-back-button{
+.health-record-back-button {
     text-decoration: underline;
     margin: 10px;
     float: right;
 }
 
-.section-header{
+.section-header {
     color: #054697;
     font-weight: 600;
     font-size: 15px;
@@ -3112,17 +3226,28 @@ meter {
     width: 100%;
     height: 25px;
 }
-  
+
 meter::-webkit-meter-bar {
     background: none;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
-meter[value="1"]::-webkit-meter-optimum-value { background: red; }
-meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
-meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
-meter[value="4"]::-webkit-meter-optimum-value { background: green; }
-  
+meter[value="1"]::-webkit-meter-optimum-value {
+    background: red;
+}
+
+meter[value="2"]::-webkit-meter-optimum-value {
+    background: yellow;
+}
+
+meter[value="3"]::-webkit-meter-optimum-value {
+    background: orange;
+}
+
+meter[value="4"]::-webkit-meter-optimum-value {
+    background: green;
+}
+
 
 .feedback {
     color: #245613;
@@ -3130,4 +3255,4 @@ meter[value="4"]::-webkit-meter-optimum-value { background: green; }
     padding: 0 .25em;
     font-family: Courgette, cursive;
     margin-top: 1em;
-  }
+}
