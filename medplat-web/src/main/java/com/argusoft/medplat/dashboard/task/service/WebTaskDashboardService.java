@@ -51,5 +51,11 @@ public interface WebTaskDashboardService {
      * @param taskDetailDtos list of task actions
      */
     void saveActions(List<WebTaskDetailDto> taskDetailDtos);
-    
+
+    /**
+     * Mark task/issue as escalated
+     * @param taskId task id
+     */
+    void markAsEscalated(Integer taskId);
+
 }

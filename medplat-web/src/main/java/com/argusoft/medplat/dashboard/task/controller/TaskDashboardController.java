@@ -103,4 +103,13 @@ public class TaskDashboardController {
         return userBasketPreferenceService.retrievePreferenceByUserId(userId);
     }
 
+    /**
+     * Mark task/issue as escalated
+     * @param id task id
+     */
+    @PutMapping(value = "/{id}/escalate")
+    public void markAsEscalated(@PathVariable Integer id) {
+        webTaskDashboardService.markAsEscalated(id);
+    }
+
 }
