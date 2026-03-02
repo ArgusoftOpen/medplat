@@ -304,8 +304,8 @@
                 <email.isSecure>true</email.isSecure>
 
                 <!--                <ssl.keystore.enable>true</ssl.keystore.enable>
-                                <ssl.keystore.file>classpath:ssl-certs/imtstaging.jks</ssl.keystore.file>
-                                <ssl.keystore.password>q1w2e3R$</ssl.keystore.password>-->
+                <ssl.keystore.file>classpath:ssl-certs/imtstaging.jks</ssl.keystore.file>
+                <ssl.keystore.password>q1w2e3R$</ssl.keystore.password>-->
                 <allow.origin>*</allow.origin>
             </properties>
             <activation>

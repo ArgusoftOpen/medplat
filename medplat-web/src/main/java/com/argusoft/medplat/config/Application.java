@@ -57,7 +57,7 @@ public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         try {
-            SpringApplication.run(Application.class, args);
+    SpringApplication.run(Application.class, args);
         } catch (PortInUseException e) {
             System.exit(1);
         }
