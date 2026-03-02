@@ -5,10 +5,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RuleBasedQueryParser implements QueryParser {
-
     @Override
     public QueryPlan parse(String input) {
-
         String normalized = input.toLowerCase();
 
         QueryPlan plan = new QueryPlan();
@@ -23,11 +21,27 @@ public class RuleBasedQueryParser implements QueryParser {
             plan.setEntity("users");
         }
 
-        //  location filter
-        if (normalized.contains("gujarat")) {
-            plan.addFilter("state", "Gujarat");
+        // Dynamic location filter
+        if (normalized.contains(" in ")) {
+
+            String[] parts = normalized.split(" in ");
+
+            if (parts.length > 1) {
+                String stateRaw = parts[1].trim();
+                String[] words = stateRaw.split(" ");
+                StringBuilder properCase = new StringBuilder();
+                for (String word : words) {
+                    if (!word.isEmpty()) {
+                        properCase.append(Character.toUpperCase(word.charAt(0)))
+                                .append(word.substring(1))
+                                .append(" ");
+                    }
+                }
+                plan.addFilter("state", properCase.toString().trim());
+            }
         }
 
         return plan;
+
     }
 }
