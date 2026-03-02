@@ -73,63 +73,39 @@
 </nav>
 <nav aria-labelledby="nav" class="sidebar cst-sidebar">
     <ul class="cst-sidebar-nav">
-        <li ng-if="layout.menuList.fhs.length" class="has-sub " ng-mouseover="layout.parentHover()" ng-mouseleave="">
-            <a href="javascript:void(0)" data-test="menu-fhs">
-                <span class="icon"><img alt="image" src="img/fhs-icon.png"></span>
-                <span class="text">FHS</span>
+        <li ng-if="layout.menuList.fhs.length" class="has-sub"
+            ng-class="{'active': layout.currentState.current.name.includes('techo.dashboard')}">
+            <a href="javascript:void(0)" ui-sref="techo.dashboard.webtasks" data-test="menu-fhs">
+                <span class="icon"><i class="fa fa-dashboard"></i></span>
+                <span class="text">Dashboard</span>
             </a>
-            <div class="position-wrapper">
-                <ul ng-if="layout.menuList.fhs.length > 0" class="cst-scrollbar sub-menu">
-                    <li ng-repeat="menu in layout.menuList.fhs" ng-class="{'has-sub':menu.isGroup}">
-                        <a ng-if='menu.isGroup || menu.isSubGroup' data-test="sub-menu-{{menu.name}}">
-                            {{menu.name}}
-                        </a>
-                        <a href="javascript:void(0)" ng-if='!menu.isGroup && !menu.isSubGroup'
-                            ui-sref="{{menu.navigationState}}" data-test="sub-menu-{{menu.name}}"
-                            ui-sref-opts="{clearSessionStorage:true}">
-                            {{menu.name}}
-                        </a>
-                        <div class="position-wrapper child">
-                            <ul ng-if="menu.isGroup" class="cst-scrollbar sub-menu">
-                                <li ng-repeat="group in menu.subGroups">
-                                    <a ng-if='!group.isGroup && !group.isSubGroup' ui-sref="{{group.navigationState}}"
-                                        ui-sref-opts="{clearSessionStorage:true}">
-                                        {{group.name}}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
         </li>
-        <li ng-if="layout.menuList.ncd.length" class="has-sub " ng-mouseover="layout.parentHover()" ng-mouseleave="">
+        <li ng-if="layout.menuList.ncd.length" class="has-sub">
             <a href="javascript:void(0)" data-test="menu-ncd">
-                <span class="icon"><img alt="image" src="img/ncd_mobile.png"></span>
+                <span class="icon"><i class="fa fa-heartbeat"></i></span>
                 <span class="text">NCD</span>
             </a>
-            <div class="position-wrapper">
-                <ul ng-if="layout.menuList.ncd.length > 0" class="cst-scrollbar sub-menu">
-                    <li ng-repeat="menu in layout.menuList.ncd" ng-class="{'has-sub':menu.isGroup}">
-                        <a ng-if='menu.isGroup || menu.isSubGroup' data-test="sub-menu-{{menu.name}}">
-                            {{menu.name}}
-                        </a>
-                        <a href="javascript:void(0)" ng-if='!menu.isGroup && !menu.isSubGroup'
-                            ui-sref="{{menu.navigationState}}" ui-sref-opts="{clearSessionStorage:true}">
-                            {{menu.name}}
-                        </a>
-                        <div class="position-wrapper child">
-                            <ul ng-if="menu.isGroup" class="cst-scrollbar sub-menu">
-                                <li ng-repeat="group in menu.subGroups">
-                                    <a ng-if='!group.isGroup && !group.isSubGroup' ui-sref="{{group.navigationState}}"
-                                        ui-sref-opts="{clearSessionStorage:true}">
-                                        {{group.name}}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
+            <ul ng-if="layout.menuList.ncd.length > 0" class="cst-scrollbar sub-menu">
+                <li ng-repeat="menu in layout.menuList.ncd" ng-class="{'has-sub':menu.isGroup}">
+                    <a ng-if='menu.isGroup || menu.isSubGroup' data-test="sub-menu-{{menu.name}}">
+                        {{menu.name}}
+                    </a>
+                    <a href="javascript:void(0)" ng-if='!menu.isGroup && !menu.isSubGroup'
+                        ui-sref="{{menu.navigationState}}" ui-sref-opts="{clearSessionStorage:true}">
+                        {{menu.name}}
+                    </a>
+                    <div class="position-wrapper child">
+                        <ul ng-if="menu.isGroup" class="cst-scrollbar sub-menu">
+                            <li ng-repeat="group in menu.subGroups">
+                                <a ng-if='!group.isGroup && !group.isSubGroup' ui-sref="{{group.navigationState}}"
+                                    ui-sref-opts="{clearSessionStorage:true}">
+                                    {{group.name}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
             </div>
         </li>
         <li ng-if="layout.menuList.training.length" class="has-sub  " ng-mouseover="layout.parentHover()"
@@ -237,9 +213,10 @@
         </li>
     </ul> -->
     <p style="text-align: justify;">
-        <i>A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators especially in a public health context</i>
+        <i>A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators
+            especially in a public health context</i>
     </p>
-        <!-- <a href="http://www.argusoft.com/" target="_blank" border="0">
+    <!-- <a href="http://www.argusoft.com/" target="_blank" border="0">
         <img alt="image" class="argus-logo" src="img/medplat.png" style="height: 50px;">
     </a> -->
 </footer>

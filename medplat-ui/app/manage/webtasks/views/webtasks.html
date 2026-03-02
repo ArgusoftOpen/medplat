@@ -12,29 +12,52 @@
             <!-- Small boxes on home page (Stat box) -->
             <div class="row top-spacer-50" style="margin-right: 0px">
                 <div class="col-md-11 no-padding">
-                    <div ng-repeat="basket in webtasks.taskBarBaskets.baskets" style="display: inline-block"
-                        class="col-md-2 col-sm-6 col-xs-12" ng-if="basket.showInTaskBar">
-                        <div class="info-box" ng-class="{'info-box-active':webtasks.selectedBasketIndex == $index}">
-                            <span
-                                ng-click="webtasks.clearPreviousTaskList(basket); webtasks.selectedBasketIndex = $index"
-                                class="info-box-icon info-box-value"
-                                style="color:white;background-color: {{basket.colorCode}}">
-                                <div style="font-size: 15px" ng-bind="basket.count > 9999?'9999+':basket.count"></div>
-                                <span class="basket_label">Total</span>
-                            </span>
-                            <div ng-click="webtasks.clearPreviousTaskList(basket); webtasks.selectedBasketIndex = $index"
-                                class="info-box-content">
-                                <span class="info-box-text" ng-bind="basket.name"></span>
+                    <div ng-repeat="basket in webtasks.taskBarBaskets.baskets" class="col-lg-3 col-md-4 col-sm-6 mb-4"
+                        ng-if="basket.showInTaskBar">
+                        <div class="premium-card h-100"
+                            ng-class="{'info-box-active':webtasks.selectedBasketIndex == $index}"
+                            ng-click="webtasks.clearPreviousTaskList(basket); webtasks.selectedBasketIndex = $index"
+                            ng-style="{'cursor': 'pointer', 'border-left': '5px solid ' + basket.colorCode}">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="h3 font-weight-bold mb-0 text-gradient"
+                                    ng-bind="basket.count > 9999?'9999+':basket.count"></div>
+                                <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                    ng-style="{'width': '40px', 'height': '40px', 'background': basket.colorCode + '22', 'color': basket.colorCode}">
+                                    <i class="fa fa-briefcase"></i>
+                                </div>
                             </div>
-                            <span class="red_notification_circle" ng-if="basket.dueCount != null && basket.dueCount > 0"
-                                ng-class="{'basket_morethan99UnReadTask-fontsize':basket.dueCount > 99}"
-                                ng-bind="basket.dueCount > 99?'99+':basket.dueCount"></span>
-                            <span>
-                                <i ng-if="basket.showInTaskBar" class="fa fa-arrow-circle-right switchtohide"
-                                    ng-click="webtasks.changeBasketPreference(basket, 'hide')" aria-hidden="true">
+                            <div class="h6 text-muted mb-0" ng-bind="basket.name"></div>
+                            <div class="mt-2 d-flex align-items-center" ng-if="basket.dueCount > 0">
+                                <span class="badge badge-pill badge-danger mr-2"
+                                    ng-bind="basket.dueCount > 99?'99+':basket.dueCount"></span>
+                                <small class="text-danger font-weight-bold">Urgent Tasks</small>
+                            </div>
+                            <div class="position-absolute" style="top: 10px; right: 10px;">
+                                <i class="fa fa-times-circle text-muted" style="font-size: 1.2em;"
+                                    ng-click="webtasks.changeBasketPreference(basket, 'hide'); $event.stopPropagation()"
+                                    aria-hidden="true">
                                 </i>
-                            </span>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Modern Empty State -->
+                <div class="col-12 mt-5 text-center"
+                    ng-if="!webtasks.isLoadingTasks && webtasks.taskBarBaskets.baskets.length === 0">
+                    <div class="glass-effect p-5 d-inline-block" style="border-radius: 24px; max-width: 600px;">
+                        <div class="mb-4">
+                            <div class="rounded-circle glass-effect d-inline-flex align-items-center justify-content-center"
+                                ng-style="{'width': '120px', 'height': '120px', 'font-size': '3em', 'color': 'var(--primary)'}">
+                                <i class="fa fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <h2 class="text-gradient mb-3">All Caught Up!</h2>
+                        <p class="text-muted lead">You have no pending tasks at the moment. Enjoy your productive day!
+                        </p>
+                        <button class="btn btn-primary btn-lg mt-3" ng-click="webtasks.getWebTaskCount()">
+                            <i class="fa fa-refresh mr-2"></i> Refresh Tasks
+                        </button>
                     </div>
                 </div>
                 <div class="col-md-1 dropdown" style="height:100%" ng-if="webtasks.taskBarBaskets.baskets.length > 0">
@@ -229,8 +252,8 @@
                                         <div ng-if="webtasks.selectedTaskForAction.isOtherDetailsRequired">
                                             <form role="form" name="webtasks.otherDetails" novalidate>
                                                 <validate for="otherDetails" required-msg=" other Details">
-                                                    <textarea class="form-control cst-form-control" maxlength="99" form-control
-                                                        form-control rows="2" cols="40" name="otherDetails"
+                                                    <textarea class="form-control cst-form-control" maxlength="99"
+                                                        form-control form-control rows="2" cols="40" name="otherDetails"
                                                         id="otherDetails"
                                                         ng-model="webtasks.selectedTaskForAction.otherDetail"
                                                         ng-required="webtasks.selectedTaskForAction.isOtherDetails"></textarea>
