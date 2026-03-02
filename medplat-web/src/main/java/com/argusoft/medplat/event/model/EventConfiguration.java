@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.argusoft.medplat.event.model;
 
 import com.argusoft.medplat.common.model.EntityAuditInfo;
@@ -10,16 +5,8 @@ import com.argusoft.medplat.common.model.EntityAuditInfo;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
+import java.time.LocalDateTime;
 
-/**
- *
- * <p>
- *     Define event_configuration entity and its fields.
- * </p>
- * @author vaishali
- * @since 26/08/20 11:00 AM
- *
- */
 @Entity
 @Table(name = "event_configuration")
 public class EventConfiguration extends EntityAuditInfo implements Serializable {
@@ -28,46 +15,81 @@ public class EventConfiguration extends EntityAuditInfo implements Serializable 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer id;
+
     @Column(name = "UUID")
     @org.hibernate.annotations.Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID uuid;
+
     @Column(name = "name", nullable = false, length = 500)
     private String name;
+
     @Column(name = "description", nullable = true, length = 1000)
     private String description;
+
     @Column(name = "event_type", length = 100)
     private String eventType;
+
     @Column(name = "event_type_detail_id")
     private Integer eventTypeDetailId;
+
     @Column(name = "event_type_detail_code")
     private String eventTypeDetailCode;
+
     @Column(name = "form_type_id")
-//    @ManyToOne()
     private Integer formTypeId;
-    // miniute/hourly/daily/monthly/yearly/immidetly 
+
     @Enumerated(EnumType.STRING)
     @Column(name = "trigger_when", length = 50)
     private TriggerWhen triggerWhen;
 
-    @Column(name = "day", nullable = true)
+    @Column(name = "day")
     private Short day;
+
     @Column(name = "hour")
     private Short hour;
+
     @Column(name = "minute")
     private Short minute;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private State state;
 
-    public enum State {
+    @Column(name = "config_json")
+    private String notificationConfigurationDetailJson;
 
+    /* ================= Recurrence Support ================= */
+
+    @Column(name = "recurrence_type", length = 50)
+    private String recurrenceType;
+
+    @Column(name = "recurrence_end_date")
+    private LocalDateTime recurrenceEndDate;
+
+    @Column(name = "recurrence_count")
+    private Integer recurrenceCount;
+
+    @Column(name = "week_day")
+    private Integer weekDay;
+
+    /* ================= ENUMS ================= */
+
+    public enum State {
         ACTIVE,
         INACTIVE,
         ARCHIVED
     }
 
-    @Column(name = "config_json")
-    private String notificationConfigurationDetailJson;
+    public enum TriggerWhen {
+        IMMEDIATELY,
+        AFTER,
+        DAILY,
+        MONTHLY,
+        HOURLY,
+        MINUTE
+    }
+
+    /* ================= GETTERS & SETTERS ================= */
 
     public Integer getId() {
         return id;
@@ -84,7 +106,7 @@ public class EventConfiguration extends EntityAuditInfo implements Serializable 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -115,6 +137,14 @@ public class EventConfiguration extends EntityAuditInfo implements Serializable 
 
     public void setEventTypeDetailId(Integer eventTypeDetailId) {
         this.eventTypeDetailId = eventTypeDetailId;
+    }
+
+    public String getEventTypeDetailCode() {
+        return eventTypeDetailCode;
+    }
+
+    public void setEventTypeDetailCode(String eventTypeDetailCode) {
+        this.eventTypeDetailCode = eventTypeDetailCode;
     }
 
     public Integer getFormTypeId() {
@@ -173,27 +203,45 @@ public class EventConfiguration extends EntityAuditInfo implements Serializable 
         this.state = state;
     }
 
-    public String getEventTypeDetailCode() {
-        return eventTypeDetailCode;
+    /* ===== Recurrence Getters & Setters ===== */
+
+    public String getRecurrenceType() {
+        return recurrenceType;
     }
 
-    public void setEventTypeDetailCode(String eventTypeDetailCode) {
-        this.eventTypeDetailCode = eventTypeDetailCode;
+    public void setRecurrenceType(String recurrenceType) {
+        this.recurrenceType = recurrenceType;
     }
 
-    public enum TriggerWhen {
-
-        IMMEDIATELY, AFTER, DAILY, MONTHLY, HOURLY, MINUTE
+    public LocalDateTime getRecurrenceEndDate() {
+        return recurrenceEndDate;
     }
 
-    /**
-     * Define fields name for event_configuration entity.
-     */
+    public void setRecurrenceEndDate(LocalDateTime recurrenceEndDate) {
+        this.recurrenceEndDate = recurrenceEndDate;
+    }
+
+    public Integer getRecurrenceCount() {
+        return recurrenceCount;
+    }
+
+    public void setRecurrenceCount(Integer recurrenceCount) {
+        this.recurrenceCount = recurrenceCount;
+    }
+
+    public Integer getWeekDay() {
+        return weekDay;
+    }
+
+    public void setWeekDay(Integer weekDay) {
+        this.weekDay = weekDay;
+    }
+
+    /* ================= FIELDS CONSTANTS ================= */
+
     public static class Fields {
 
-        private Fields() {
-            
-        }
+        private Fields() {}
 
         public static final String ID = "id";
         public static final String UUID = "uuid";
@@ -207,7 +255,9 @@ public class EventConfiguration extends EntityAuditInfo implements Serializable 
         public static final String DAY = "day";
         public static final String HOUR = "hour";
         public static final String MINUTE = "minute";
-        public static final String NOTIFICATION_CONFIGURATION_DETAIL_JSON = "notificationConfigurationDetailJson";
+        public static final String RECURRENCE_TYPE = "recurrenceType";
+        public static final String RECURRENCE_END_DATE = "recurrenceEndDate";
+        public static final String RECURRENCE_COUNT = "recurrenceCount";
+        public static final String WEEK_DAY = "weekDay";
     }
-
 }

@@ -40,7 +40,7 @@ RUN apt-get install -y fonts-indic
 # Install Node.js and npm
 RUN mkdir -p /usr/local/nvm
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION v16.16.0
+ENV NODE_VERSION v20.19.0
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 RUN /bin/bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION"
 ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/bin
