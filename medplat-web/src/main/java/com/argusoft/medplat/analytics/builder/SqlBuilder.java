@@ -14,6 +14,7 @@ public class SqlBuilder {
 
         StringBuilder sql = new StringBuilder();
 
+        // Aggregation
         if ("COUNT".equals(plan.getAggregation())) {
             sql.append("SELECT COUNT(*) ");
         } else {
@@ -22,13 +23,35 @@ public class SqlBuilder {
 
         sql.append("FROM users");
 
+        // Filters
         if (!plan.getFilters().isEmpty()) {
             sql.append(" WHERE ");
-            plan.getFilters().forEach((k, v) -> {
-                if ("state".equals(k)) {
-                    sql.append("state = '").append(v).append("' ");
+            boolean first = true;
+            for (var entry : plan.getFilters().entrySet()) {
+                if (!first) sql.append(" AND ");
+                first = false;
+
+                String column = entry.getKey();
+                Object value = entry.getValue();
+
+                switch (column) {
+                    case "state":
+                        sql.append(column).append(" = '").append(value).append("'");
+                        break;
+                    case "age":
+                        
+                        sql.append("age ").append(value);
+                        break;
+                    case "date":
+                       
+                        sql.append("date ").append(value);
+                        break;
+                    default:
+                        // fallback for any future 
+                        sql.append(column).append(" = '").append(value).append("'");
+                        break;
                 }
-            });
+            }
         }
 
         return sql.toString().trim();
