@@ -1,13 +1,31 @@
+<!-- confirmation.modal.html -->
+
 <div class="modal-header">
-    <h4 class="text">{{title|| 'Confirm Action'}}</h4>
+    <h4 class="text">
+        {{title || ('CONFIRM_ACTION' | translate)}}
+    </h4>
+
     <button type="button" class="close" ng-click="cancel()">
         <span aria-hidden="true">×</span>
     </button>
 </div>
+
 <div class="modal-body">
     <span ng-bind-html="message"></span>
 </div>
+
 <div class="modal-footer">
-    <button class="btn btn-secondary" ng-click="cancel()" data-test="confimation-modal-no-btn">No</button>
-    <button class="btn btn-primary" ng-click="ok()" data-test="confimation-modal-yes-btn">Yes</button>
+
+    <button class="btn btn-secondary"
+            ng-click="cancel()"
+            data-test="confimation-modal-no-btn">
+        {{ 'NO' | translate }}
+    </button>
+
+    <button class="btn btn-primary"
+            ng-click="ok()"
+            data-test="confimation-modal-yes-btn">
+        {{ 'YES' | translate }}
+    </button>
+
 </div>

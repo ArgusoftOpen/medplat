@@ -5,13 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="Content-Security-Policy" content="
-  font-src 'self';
-  object-src 'none';
-  media-src 'none';
-  frame-src 'none';
-  worker-src 'self';
-  manifest-src 'self';
-">
+default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;
+style-src * 'unsafe-inline';
+script-src * 'unsafe-inline' 'unsafe-eval';
+img-src * data:;
+font-src * data:;
+connect-src *;">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Permissions-Policy"
     content="geolocation=(), midi=(), camera=(), usb=(), magnetometer=(), accelerometer=(), vr=(), xr=(), sync-xhr=(), microphone=(), payment=(), fullscreen=(), unsized-media=(), autoplay=(), speaker=(), ambient-light-sensor=(), encrypted-media=(), usb=()">
@@ -50,7 +49,9 @@
   <link href="styles/css/responsive.css" rel="stylesheet" type="text/css" />
   <link href="bower_components/AngularJS-Toaster/toaster.min.css" rel="stylesheet" type="text/css" />
   <!--SCRIPTS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.19.0/angular-translate.min.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-static-files/2.19.0/angular-translate-loader-static-files.min.js"></script>
 </head>
 
 <body mask isdefault="true">
@@ -118,7 +119,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
-
+  <select ng-model="lang" ng-change="changeLanguage(lang)">
+  <option value="en">English</option>
+  <option value="hi">Hindi</option>
+  </select>
 
   <!-- Date Range Picker -->
   <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
