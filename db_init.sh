@@ -13,6 +13,3 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     ALTER DATABASE $POSTGRES_DB SET search_path TO public,analytics,archive ;
   COMMIT;
 EOSQL
-
-cd /usr/lib/postgresql/15/bin
-pg_ctl restart

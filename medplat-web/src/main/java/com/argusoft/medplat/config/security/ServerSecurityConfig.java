@@ -19,7 +19,7 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/v0.5/**");
+        web.ignoring().antMatchers("/v0.5/**", "/api/nlp-query/**");
     }
 
     @Bean
