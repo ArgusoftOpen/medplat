@@ -1,0 +1,22 @@
+<div class="language-switcher" ng-controller="LanguageSwitcherController as langSwitcher">
+    <div class="language-selector">
+        <div class="current-language" uib-dropdown dropdown-append-to-body>
+            <a href="javascript:void(0)" class="language-toggle" uib-dropdown-toggle>
+                <span class="flag">{{ langSwitcher.languageInfo.flag }}</span>
+                <span class="name">{{ langSwitcher.languageInfo.name }}</span>
+                <!-- arrow icon added via CSS pseudo-element -->
+            </a>
+            <ul class="dropdown-menu language-menu" uib-dropdown-menu>
+                <li ng-repeat="language in langSwitcher.supportedLanguages" 
+                    ng-class="{active: langSwitcher.isSelected(language.code)}">
+                    <a href="javascript:void(0)" 
+                       ng-click="langSwitcher.switchLanguage(language.code)"
+                       title="{{ language.name }}">
+                        <span class="flag">{{ langSwitcher.getLanguageFlag(language) }}</span>
+                        <span class="name">{{ language.name }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

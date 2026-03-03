@@ -1,0 +1,225 @@
+{
+  "APP": {
+    "NAME": "MEDplat",
+    "DESCRIPTION": "एक कम कोड वाला व्यापक प्राथमिक स्वास्थ्य सेवा प्रबंधन मंच जो SDG 3 संकेतकों को ट्रैक, प्रबंधित और सुधारने के लिए है"
+  },
+  "LOGIN": {
+    "TITLE": "लॉगिन",
+    "USERNAME_PLACEHOLDER": "उपयोगकर्ता नाम",
+    "PASSWORD_PLACEHOLDER": "पासवर्ड",
+    "LOGIN_BUTTON": "लॉगिन",
+    "LOST_PASSWORD": "पासवर्ड भूल गए?",
+    "USERNAME_REQUIRED": "*उपयोगकर्ता नाम आवश्यक है",
+    "PASSWORD_REQUIRED": "*पासवर्ड आवश्यक है",
+    "PLEASE_NOTE": "कृपया ध्यान दें:"
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "पासवर्ड भूल गए",
+    "NEW_PASSWORD": "नया पासवर्ड",
+    "CONFIRM_PASSWORD": "पासवर्ड की पुष्टि करें",
+    "PASSWORD_REQUIRED": "*पासवर्ड आवश्यक है",
+    "PASSWORD_INVALID": "पासवर्ड अमान्य है",
+    "GET_OTP": "OTP प्राप्त करें",
+    "SUBMIT": "जमा करें"
+  },
+  "APP_INFO": {
+    "THANK_YOU": "धन्यवाद",
+    "NAME_PLACEHOLDER": "नाम",
+    "DESIGNATION_PLACEHOLDER": "पद",
+    "EMAIL_PLACEHOLDER": "ईमेल",
+    "CONTACT_PLACEHOLDER": "संपर्क",
+    "HEADLINE": "अभिनव mHealth हस्तक्षेप",
+    "SUBMIT_BUTTON": "जमा करें",
+    "PROGRAM": "कार्यक्रम",
+    "SUPPORT": "समर्थन",
+    "DOMAIN": "डोमेन",
+    "TECHNOLOGY": "तकनीक",
+    "GOVT_ORG": "स्वास्थ्य विभाग GoG",
+    "ORG_NAME": "SEWA Rural"
+  },
+  "NAVIGATION": {
+    "SEARCH_MENU": "मेनू खोजें",
+    "NO_DATA_FOUND": "कोई डेटा नहीं मिला",
+    "ACTIONS": "कार्य",
+    "UPDATE_PROFILE": "प्रोफाइल अपडेट करें",
+    "CHANGE_PASSWORD": "पासवर्ड बदलें",
+    "LOGOUT": "लॉग आउट",
+    "LAST_LOGIN": "अंतिम लॉगिन",
+    "FHS": "FHS",
+    "NCD": "NCD",
+    "TRAINING": "प्रशिक्षण",
+    "DASHBOARD": "डैशबोर्ड",
+    "MANAGE": "प्रबंधित करें"
+  },
+  "PROFILE": {
+    "PREFERRED_LANGUAGE": "पसंदीदा भाषा",
+    "REPORT_LANGUAGE": "रिपोर्ट की पसंदीदा भाषा",
+    "LOGIN_CODE": "लॉगिन कोड",
+    "NOT_AVAILABLE": "उपलब्ध नहीं",
+    "ENGLISH": "अंग्रेजी",
+    "HINDI": "हिंदी",
+    "SELECT_LANGUAGE": "पसंदीदा भाषा चुनें",
+    "UPDATE_SUCCESS": "आपकी प्रोफाइल सफलतापूर्वक अपडेट की गई!"
+  },
+  "USER_MANAGEMENT": {
+    "TITLE": "उपयोगकर्ता प्रबंधन",
+    "CREATE_USER": "उपयोगकर्ता बनाएं",
+    "EDIT_USER": "उपयोगकर्ता संपादित करें",
+    "DELETE_USER": "उपयोगकर्ता हटाएं",
+    "FIRST_NAME": "पहला नाम",
+    "LAST_NAME": "अंतिम नाम",
+    "MIDDLE_NAME": "मध्य नाम",
+    "EMAIL": "ईमेल",
+    "CONTACT": "संपर्क",
+    "ROLE": "भूमिका",
+    "LOCATION": "स्थान",
+    "STATUS": "स्थिति",
+    "ACTIVE": "सक्रिय",
+    "INACTIVE": "निष्क्रिय",
+    "SAVE": "सहेजें",
+    "CANCEL": "रद्द करें",
+    "DELETE": "हटाएं"
+  },
+  "COURSE": {
+    "TITLE": "पाठ्यक्रम",
+    "COURSE_NAME": "पाठ्यक्रम का नाम",
+    "COURSE_TYPE": "पाठ्यक्रम का प्रकार",
+    "COURSE_IMAGE": "पाठ्यक्रम छवि",
+    "TARGET_ROLES": "लक्ष्य भूमिकाएं",
+    "TRAINER_ROLES": "प्रशिक्षक भूमिकाएं",
+    "DESCRIPTION": "विवरण",
+    "DURATION": "अवधि",
+    "MY_COURSES": "मेरे पाठ्यक्रम",
+    "PREVIEW": "पूर्वावलोकन",
+    "ENROLL": "नामांकन",
+    "NO_BOOKMARKS": "कोई बुकमार्क उपलब्ध नहीं"
+    ,
+    "CONFIRM_STATE_CHANGE": "क्या आप सुनिश्चित हैं कि आप स्थिति बदलना चाहते हैं {{from}} से {{to}}?",
+    "STATE_CHANGED": "स्थिति सफलतापूर्वक बदल दी गई है {{from}} से {{to}}"
+  },
+  "TRAINING": {
+    "FILE_FORMAT_NOT_SUPPORTED": "{{ext}} फ़ॉर्मेट समर्थित नहीं है। कृपया {{exts}} एक्सटेंशन वाला फ़ाइल अपलोड करें",
+    "MEDIA_SIZE_LIMIT": "{{mediaType}} फ़ाइल का आकार {{maxMB}}MB से कम या उसके बराबर होना चाहिए",
+    "FILE_UPLOAD_ERROR": "फ़ाइल अपलोड में त्रुटि।",
+    "DUPLICATE_MODULE_LESSON": "एक ही नाम वाले मॉड्यूल या पाठ्यांश की अनुमति नहीं है।",
+    "DUPLICATE_MODULE": "एक ही नाम वाले मॉड्यूल की अनुमति नहीं है।",
+    "DUPLICATE_LESSON": "एक ही नाम वाले पाठ्यांश की अनुमति नहीं है।",
+    "MODULE_SAVED": "मॉड्यूल सफलतापूर्वक सहेजा गया",
+    "PLEASE_ADD_LESSON": "मॉड्यूल सहेजने के लिए कृपया कम से कम एक पाठ्यांश जोड़ें",
+    "PLEASE_UPLOAD_MEDIA": "कृपया {{mediaType}} अपलोड करें",
+    "CONFIRM_REMOVE_LESSON": "क्या आप वाकई इस पाठ्यांश को हटाना चाहते हैं?",
+    "NO_ATTENDEES_SELECTED": "प्रशिक्षण के लिए कोई प्रतिभागी चयनित नहीं हैं",
+    "SCHEDULE_SAVED": "प्रशिक्षण का शेड्यूल सहेजा गया!",
+    "LOCATION_ALREADY_INCLUDED": "स्थान पहले से शामिल है",
+    "CHILD_LOCATION_ALREADY_INCLUDED": "चाइल्ड स्थान पहले से शामिल है"
+  },
+  "LOCATION": {
+    "NO_LOCATION_UNDER_HIERARCHY": "चुनी गई पदानुक्रम के अंतर्गत कोई स्थान नहीं मिला"
+  },
+  "INFRASTRUCTURE": {
+    "NO_HEALTH_INFRA_ASSIGNED": "कोई स्वास्थ्य अवसंरचना नियुक्त नहीं की गई है!"
+  },
+  "SYNC": {
+    "NO_CONFIGURATION_FOUND": "कोई विन्यास नहीं मिला। कृपया संबंधित फीचर आइटम खोलें और सहेजें।",
+    "UPDATED_SUCCESS": "सफलतापूर्वक अपडेट किया गया",
+    "INSERTION_FAILED": "इन्सर्शन विफल"
+  },
+  "FAMILY_MOVING": {
+    "LOCATION_FAMILIES_ALREADY_ADDED": "इस स्थान के परिवार पहले से ही जोड़े जा चुके हैं!",
+    "NO_FAMILIES_FOUND": "कोई परिवार नहीं मिला",
+    "CONFIRM_FAMILY_MOVE_DETAIL": "यह परिवार विवरण है। क्या आप सुनिश्चित हैं कि आप इस परिवार सूची को स्थानांतरित करना चाहते हैं?",
+    "FAMILY_MOVED_SUCCESS": "परिवार सफलतापूर्वक स्थानांतरित किया गया",
+    "CURRENT_AND_TARGET_SAME_TITLE": "इस परिवार का वर्तमान स्थान और लक्षित स्थान समान है!",
+    "FAMILY_MARKED_UNVERIFIED": "परिवार को अनसत्यापित के रूप में चिह्नित किया गया"
+  },
+  "VALUES": {
+    "FILE_FORMAT_ERROR": "कृपया अपलोड करने के लिए सही फ़ाइल चुनें!",
+    "VALUE_UPDATED_SUCCESS": "मान सफलतापूर्वक अपडेट किया गया",
+    "VALUE_ADDED_SUCCESS": "मान सफलतापूर्वक जोड़ा गया",
+    "PLEASE_UPLOAD_FILE": "कृपया फ़ाइल अपलोड करें"
+  },
+  "TRAINING": {
+    "NO_ATTENDEES_SELECTED": "प्रशिक्षण के लिए कोई प्रतिभागी चयनित नहीं हैं",
+    "SCHEDULE_SAVED": "प्रशिक्षण का शेड्यूल सहेजा गया!",
+    "LOCATION_ALREADY_INCLUDED": "स्थान पहले से शामिल है",
+    "CHILD_LOCATION_ALREADY_INCLUDED": "चाइल्ड स्थान पहले से शामिल है"
+  },
+  "WEBTASKS": {
+    "UNABLE_GET_USER_DETAILS": "उपयोगकर्ता विवरण प्राप्त करने में असमर्थ",
+    "UNABLE_RETRIEVE_BASKET_PREFERENCE": "बास्केट प्राथमिकता पुनः प्राप्त करने में असमर्थ",
+    "UNABLE_RETRIEVE_TASK_DETAILS": "कार्य विवरण पुनः प्राप्त करने में असमर्थ",
+    "UNABLE_TO_DOWNLOAD": "डाउनलोड करने में असमर्थ",
+    "UNABLE_SAVE_TASK_ACTIONS": "कार्य क्रियाओं को सहेजने में असमर्थ",
+    "UNABLE_SAVE_BASKET_PREFERENCE": "बास्केट प्राथमिकता सहेजने में असमर्थ",
+    "PLEASE_SELECT_ACTION_ON_CHILD": "कृपया इस बच्चे पर करने के लिए क्रिया चुनें",
+    "PLEASE_SELECT_ACTION": "कृपया क्रिया चुनें"
+    ,
+    "CHILD_NOT_SAM_ENTRY_REMOVED": "बच्चा SAM नहीं है। प्रविष्टि हटाई जाएगी",
+    "DETAILS_SAVED": "विवरण सफलतापूर्वक सहेजा गया",
+    "CHILD_ALREADY_ADDED": "बच्चा पहले से जोड़ा जा चुका है",
+    "HEIGHT_NOT_ALLOW_DECIMAL": "ऊंचाई दशमलव मान में अनुमति नहीं है",
+    "GENDER_NOT_FOUND": "लिंग नहीं मिला"
+  },
+  "REPORT": {
+    "ENTER_VALID_RANGE": "मान्य रेंज दर्ज करें",
+    "RANGE_DIFF_TOO_LARGE": "from और to पंक्तियों के बीच का अंतर 5000 से अधिक नहीं हो सकता",
+    "OFFLINE_REQUESTED_SUCCESS": "रिपोर्ट ऑफ़लाइन अनुरोध सफलतापूर्वक किया गया।",
+    "SEARCH_TERM_OR_OPTION_EMPTY": "खोज शब्द या खोज विकल्प खाली नहीं हो सकता",
+    "PLEASE_ENTER_SEARCH_KEY": "कृपया एक खोज कुंजी दर्ज करें"
+  },
+  "WIDGETS": {
+    "CONFIRM_DELETE_ROLE_AND_ESCALATION": "क्या आप वाकई इस भूमिका को हटाना चाहते हैं? यह प्रत्येक एस्केलेशन स्तर से भूमिका को भी हटा देगा।",
+    "CONFIRM_DELETE_ROLE": "क्या आप वाकई इस भूमिका को हटाना चाहते हैं?",
+    "UPDATED_SUCCESS": "विजेट सफलतापूर्वक अपडेट किया गया"
+  },
+  "FORM_COMMON": {
+    "SELECT": "चुनें",
+    "ALL_DISTRICT": "सभी जिला",
+    "ALL_BLOCK": "सभी ब्लॉक",
+    "REQUIRED": "यह फील्ड आवश्यक है",
+    "INVALID": "अमान्य इनपुट",
+    "SAVE": "सहेजें",
+    "CANCEL": "रद्द करें",
+    "DELETE": "हटाएं",
+    "EDIT": "संपादित करें",
+    "ADD": "जोड़ें",
+    "UPDATE": "अपडेट करें",
+    "CLOSE": "बंद करें",
+    "OK": "ठीक है",
+    "YES": "हाँ",
+    "NO": "नहीं",
+    "SEARCH": "खोजें",
+    "FILTER": "फ़िल्टर करें",
+    "EXPORT": "निर्यात करें",
+    "IMPORT": "आयात करें"
+  },
+  "MESSAGES": {
+    "SUCCESS": "ऑपरेशन सफल रहा",
+    "MULTIPLE_ACTIONS_DETECTED": "कई क्रियाएँ पहचानी गईं",
+    "CLICKED_TWICE": "आपने संभवतः एक ही बटन दो बार क्लिक किया होगा।",
+    "SESSION_EXPIRED": "आपका सत्र समाप्त हो गया है!",
+    "ERROR": "एक त्रुटि हुई",
+    "WARNING": "चेतावनी",
+    "INFO": "जानकारी",
+    "LOADING": "लोड हो रहा है...",
+    "PLEASE_WAIT": "कृपया प्रतीक्षा करें",
+    "CONFIRM_DELETE": "क्या आप वाकई हटाना चाहते हैं?",
+    "SAVE_SUCCESS": "सफलतापूर्वक सहेजा गया",
+    "UPDATE_SUCCESS": "सफलतापूर्वक अपडेट किया गया",
+    "DELETE_SUCCESS": "सफलतापूर्वक हटाया गया"
+  }
+
+  ,
+  "PASSWORD": {
+    "TOO_SHORT": "बहुत छोटा",
+    "MIN_LENGTH_DESC": "पासवर्ड कम से कम 8 अक्षरों का होना चाहिए",
+    "WEAK": "कमज़ोर",
+    "WEAK_DESC": "पासवर्ड में कम से कम एक लोअरकेस, एक अपरकेस, एक संख्या और एक विशेष चर होना चाहिए।",
+    "FAIR": "ठीक",
+    "FAIR_DESC": "पासवर्ड में तीन या अधिक लगातार समान वर्ण नहीं होने चाहिए",
+    "GOOD": "अच्छा",
+    "GOOD_DESC": "पासवर्ड में उपयोगकर्ता नाम या एप्लिकेशन नाम नहीं होना चाहिए",
+    "STRONG": "मजबूत",
+    "STRONG_DESC": "पासवर्ड पर्याप्त मजबूत है"
+  }
+}
