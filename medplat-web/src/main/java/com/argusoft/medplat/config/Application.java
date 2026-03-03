@@ -18,6 +18,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.PortInUseException;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -184,4 +185,17 @@ public class Application extends SpringBootServletInitializer {
 //        }
 //        return null;
 //    }
+@Bean
+public FilterRegistrationBean<RateLimitingFilter> rateLimitFilter(
+        RateLimitingFilter filter) {
+
+    FilterRegistrationBean<RateLimitingFilter> registration =
+            new FilterRegistrationBean<>();
+
+    registration.setFilter(filter);
+    registration.addUrlPatterns("/*");
+    registration.setOrder(1);
+
+    return registration;
+}
 }
