@@ -2,19 +2,36 @@
     <div class="panel panel-default">
         <div class="panel-heading"><strong>Tickets</strong></div>
         <div class="panel-body">
-            <div class="form-inline" style="margin-bottom:10px;">
-                <label>Filter:</label>
-                <select class="form-control" ng-model="tickets.filter">
-                    <option value="all">All</option>
-                    <option value="open">Open</option>
-                    <option value="inprogress">In Progress</option>
-                    <option value="closed">Closed</option>
-                </select>
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-sm-3 form-group">
+                    <label>Filter:</label>
+                    <select class="form-control" ng-model="tickets.filter" ng-change="tickets.searchChanged()">
+                        <option value="all">All</option>
+                        <option value="open">Open</option>
+                        <option value="inprogress">In Progress</option>
+                        <option value="closed">Closed</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 form-group">
+                    <label>Search:</label>
+                    <input class="form-control" ng-model="tickets.search" ng-change="tickets.searchChanged()" placeholder="title, id or description" />
+                </div>
+                <div class="col-sm-2 form-group">
+                    <label>Page size:</label>
+                    <select class="form-control" ng-model="tickets.pageSize" ng-change="tickets.setPageSize(tickets.pageSize)">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                    </select>
+                </div>
+                <div class="col-sm-3 text-right" style="padding-top:24px;">
+                    <small>Total: {{tickets.total || 0}}</small>
+                </div>
             </div>
             <table class="table table-striped">
                 <thead><tr><th>ID</th><th>Title</th><th>Status</th><th>Created</th><th>Action</th></tr></thead>
                 <tbody>
-                    <tr ng-repeat="t in tickets.filtered()">
+                    <tr ng-repeat="t in tickets.tickets">
                         <td>{{t.id}}</td>
                         <td>{{t.title}}</td>
                         <td>{{t.status}}</td>
@@ -26,6 +43,15 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="text-center">
+                <ul class="pagination" ng-if="tickets.total > tickets.pageSize">
+                    <li ng-class="{disabled: tickets.page===1}"><a href="" ng-click="tickets.setPage(1)">«</a></li>
+                    <li ng-class="{disabled: tickets.page===1}"><a href="" ng-click="tickets.setPage(tickets.page-1)">‹</a></li>
+                    <li ng-repeat="p in [].constructor(Math.ceil((tickets.total||0)/tickets.pageSize)) track by $index" ng-class="{active: tickets.page===$index+1}"><a href="" ng-click="tickets.setPage($index+1)">{{$index+1}}</a></li>
+                    <li ng-class="{disabled: tickets.page==Math.ceil((tickets.total||0)/tickets.pageSize)}"><a href="" ng-click="tickets.setPage(tickets.page+1)">›</a></li>
+                    <li ng-class="{disabled: tickets.page==Math.ceil((tickets.total||0)/tickets.pageSize)}"><a href="" ng-click="tickets.setPage(Math.ceil((tickets.total||0)/tickets.pageSize))">»</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
