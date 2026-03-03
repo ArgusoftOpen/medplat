@@ -1,0 +1,33 @@
+{
+  "name": "angular-all-ordinal",
+  "version": "1.0.1",
+  "ignore": [
+    "app/src",
+    ".bowerrc",
+    ".gitignore",
+    ".jshintrc",
+    ".travis.yml",
+    "bower.json",
+    "gulpfile.js",
+    "karma-unit.conf.js",
+    "package.json",
+    "README.md"
+  ],
+  "main": "app/package/js/ordinal.min.js",
+  "devDependencies": {
+    "angular-mocks": "~1.2.0"
+  },
+  "dependencies": {
+    "angular": "~1.2.0"
+  },
+  "homepage": "https://github.com/chrisiconolly/angular-all-ordinal-filters",
+  "_release": "1.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.1",
+    "commit": "eb064f244616ba91ca38b33bd91b9993ded0fe7c"
+  },
+  "_source": "https://github.com/chrisiconolly/angular-all-ordinal-filters.git",
+  "_target": "1.0.1",
+  "_originalSource": "angular-all-ordinal"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "angular-selectize2",
+  "version": "3.0.1",
+  "main": [
+    "./dist/angular-selectize.js"
+  ],
+  "dependencies": {
+    "selectize": ">=0.12.1"
+  },
+  "homepage": "https://github.com/machineboy2045/angular-selectize",
+  "_release": "3.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.0.1",
+    "commit": "1a4c8eb9009d5e04e3e02a2dbd6b16a54642aaff"
+  },
+  "_source": "https://github.com/machineboy2045/angular-selectize.git",
+  "_target": "^3.0.1",
+  "_originalSource": "angular-selectize2"
+}

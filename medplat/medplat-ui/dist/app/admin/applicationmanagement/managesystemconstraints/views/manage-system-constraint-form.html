@@ -1,0 +1,1400 @@
+<style>
+    .mt-6 {
+        margin-top: 6px;
+    }
+
+    .override-value-checkbox {
+        line-height: 28px !important;
+        width: 150px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text" ng-if="ctrl.manageSingleFormConfig">
+                            {{ ctrl.editMode ? 'Edit Form' : 'Add Form' }}
+                        </h4>
+                        <h4 class="text" ng-if="!ctrl.manageSingleFormConfig">
+                            Manage Forms
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form name="ctrl.manageSystemConstraintForm" id="manageSystemConstraintForm" novalidate>
+                        <div class="row" ng-if="!ctrl.manageSingleFormConfig" style="margin-bottom: 1rem;">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <validate for="featureMenu" required-msg="Select Feature Menu">
+                                        <label uib-tooltip="Feature Menu" for="featureMenu" control-label>
+                                            Select Feature Menu
+                                        </label>
+                                        <select form-control class="form-control cst-form-control" name="featureMenu"
+                                            id="featureMenu" ng-model="ctrl.menuConfigId"
+                                            chosen-directive="ctrl.menuItems" ng-change="ctrl.onFeatureMenuSelection();"
+                                            ng-options="menuItem.id as menuItem.menuDisplayName for menuItem in ctrl.menuItems"
+                                            ng-required="true">
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <validate for="selectForm" required-msg="Select Form">
+                                        <label uib-tooltip="Form*" for="selectForm" control-label>
+                                            Select Form
+                                        </label>
+                                        <select form-control class="form-control cst-form-control" name="selectForm"
+                                            id="selectForm" ng-model="ctrl.selectedFormUuid"
+                                            ng-options="form.uuid as form.formName for form in ctrl.systemConstraintForms"
+                                            ng-change="ctrl.onFormSelection();" ng-required="true">
+                                            <option value="">--Select--</option>
+                                            <option value="NEW">--Add New Form--</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="ctrl.manageSingleFormConfig || ctrl.selectedFormUuid"
+                            style="margin-bottom: 1rem;">
+                            <div class="col-6" style="margin-bottom: 1rem;">
+                                <div class="form-group">
+                                    <validate for="formName" required-msg="Enter Form Name">
+                                        <label uib-tooltip="Form Name" for="formName" control-label>
+                                            Form Name
+                                        </label>
+                                        <input type="text" id="formName" name="formName" form-control
+                                            ng-model="ctrl.systemConstraintFormConfig.systemConstraintFormMasterDto.formName"
+                                            class="form-control cst-form-control" placeholder="Enter Form Name"
+                                            ng-required="true" maxlength="255">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="formCode" required-msg="Enter Form Code">
+                                        <label uib-tooltip="Form Code" for="formCode" control-label>
+                                            Form Code
+                                        </label>
+                                        <input type="text" id="formCode" form-control
+                                            ng-model="ctrl.systemConstraintFormConfig.systemConstraintFormMasterDto.formCode"
+                                            class="form-control cst-form-control" name="formCode"
+                                            placeholder="Enter Form Code" ng-required="!ctrl.editMode"
+                                            ng-disabled="ctrl.editMode" maxlength="50">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group" ng-if="ctrl.manageSingleFormConfig">
+                                    <validate for="featureMenu" required-msg="Select Feature Menu">
+                                        <label uib-tooltip="Feature Menu" for="featureMenu" control-label>
+                                            Feature Menu
+                                        </label>
+                                        <select form-control class="form-control cst-form-control" name="featureMenu"
+                                            id="featureMenu"
+                                            ng-model="ctrl.systemConstraintFormConfig.systemConstraintFormMasterDto.menuConfigId"
+                                            chosen-directive="ctrl.menuItems"
+                                            ng-options="menuItem.id as menuItem.menuDisplayName for menuItem in ctrl.menuItems"
+                                            ng-required="true">
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='state' required-msg="Select Web State">
+                                        <label for='state' control-label>
+                                           Web State
+                                        </label>
+                                        <select class="form-control cst-form-control" form-control name="state"
+                                            id="state"
+                                            ng-model="ctrl.systemConstraintFormConfig.systemConstraintFormMasterDto.webState"
+                                            ng-required="true">
+                                            <option value="">--Select--</option>
+                                            <option value="ACTIVE">Active</option>
+                                            <option value="INACTIVE">Inactive</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='state' required-msg="Select Mobile State">
+                                        <label for='state' control-label>
+                                           Mobile State
+                                        </label>
+                                        <select class="form-control cst-form-control" form-control name="state"
+                                            id="state"
+                                            ng-model="ctrl.systemConstraintFormConfig.systemConstraintFormMasterDto.mobileState"
+                                            ng-required="true">
+                                            <option value="">--Select--</option>
+                                            <option value="ACTIVE">Active</option>
+                                            <option value="INACTIVE">Inactive</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="margin-bottom: 2rem;">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary" ng-click="ctrl.saveFormConfig()">
+                                    <em class="fa fa-floppy-o"></em>
+                                    Save Form Config
+                                </button>
+                                <button class="btn btn-secondary" ng-click="ctrl.goBack()">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form name="ctrl.manageSystemConstraintField" id="manageSystemConstraintField" novalidate
+                        ng-if="ctrl.systemConstraintFormConfig.systemConstraintFormMasterDto.uuid">
+                        <div class="row">
+                            <!-- Configuration -->
+                            <div class="col-12 ">
+                                <div class="form-group field-config-group">
+                                    <label style="font-size: 15px;width:8%;">
+                                        <strong>Field Configs:</strong>
+                                    </label>
+                                    <label class="control control-radio mt-7">Mobile
+                                        <input value="MOBILE" name="isRepeatable" form-control type="radio"
+                                            ng-model="ctrl.fieldConfigPlatform">
+                                        <div class="control_indicator"></div>
+                                    </label>
+                                    <label class="control control-radio mt-7">Web
+                                        <input value="WEB" name="isRepeatable" form-control type="radio"
+                                            ng-model="ctrl.fieldConfigPlatform">
+                                        <div class="control_indicator"></div>
+                                    </label>
+                                    <label class="control control-radio mt-7">All
+                                        <input value="BOTH" name="isRepeatable" form-control type="radio"
+                                            ng-model="ctrl.fieldConfigPlatform">
+                                        <div class="control_indicator"></div>
+                                    </label>
+                                    <button type="button" class="btn btn-primary" ng-click="ctrl.addFieldConfig()">
+                                        Add Field Config
+                                    </button>
+                                </div>
+                                <div class="accordion" id="configurationsAccordion">
+                                    <div
+                                        ng-repeat="(index, fieldConfig) in ctrl.systemConstraintFormConfig.systemConstraintFieldMasterDtos | filter:ctrl.fieldConfigsFilter">
+                                        <div class="card">
+                                            <div class="card-header pl-0" style="cursor: pointer;"
+                                                data-toggle="collapse" data-target="#collapseConfiguration{{index}}"
+                                                aria-expanded="false" aria-controls="collapseConfiguration{{index}}"
+                                                id="configurationHeading{{index}}"
+                                                ng-click="ctrl.onClickOfCollapsibleHeader(index, fieldConfig); ctrl.onFieldNameChanged(index, fieldConfig.fieldName)">
+                                                <h5 class="mb-0">
+                                                    <button class="btn btn-link" style="text-decoration: none;"
+                                                        type="button">
+                                                         #{{index + 1}}
+                                                        {{fieldConfig.fieldName ? fieldConfig.fieldName +
+                                                        (fieldConfig.fieldType ? ' ( ' + ctrl.getFieldTypeName(fieldConfig.fieldType) +' )': '') 
+                                                         : '[fieldname]'}}
+                                                         <i class="fa fa-eye-slash" style="color: red;" ng-if="ctrl.isHiddenFieldAvailable(fieldConfig)" uib-tooltip="Hidden Field"> </i>
+                                                    </button>
+                                                </h5>
+                                            </div>
+                                            <div id="collapseConfiguration{{index}}" class="collapse"
+                                                aria-labelledby="configurationHeading{{index}}"
+                                                data-parent="#configurationsAccordion">
+                                                <div class="card-body" ng-if="fieldConfig.showContent">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label control-label uib-tooltip="Configurations">
+                                                                    Configurations
+                                                                </label>
+                                                                <label style="margin-top: 5px;"
+                                                                    class="control control-checkbox" control-label>Web
+                                                                    <input type="checkbox"
+                                                                        class="form-control cst-form-control"
+                                                                        id="webConfiguration{{index}}"
+                                                                        name="webConfiguration{{index}}"
+                                                                        ng-model="fieldConfig.webConfiguration"
+                                                                        ng-change="ctrl.webConfigurationChanged(fieldConfig)"
+                                                                        ng-disabled="fieldConfig.bothConfiguration || ctrl.configurationSelectionDisabled">
+                                                                    <div class="control_indicator">
+                                                                    </div>
+                                                                </label>
+                                                                <label style="margin-top: 5px;"
+                                                                    class="control control-checkbox"
+                                                                    control-label>Mobile
+                                                                    <input type="checkbox"
+                                                                        class="form-control cst-form-control"
+                                                                        id="mobileConfiguration{{index}}"
+                                                                        name="mobileConfiguration{{index}}"
+                                                                        ng-model="fieldConfig.mobileConfiguration"
+                                                                        ng-change="ctrl.mobileConfigurationChanged(fieldConfig)"
+                                                                        ng-disabled="fieldConfig.bothConfiguration || ctrl.configurationSelectionDisabled">
+                                                                    <div class="control_indicator">
+                                                                    </div>
+                                                                </label>
+                                                                <label style="margin-top: 5px;"
+                                                                    class="control control-checkbox" control-label>Both
+                                                                    <input type="checkbox"
+                                                                        class="form-control cst-form-control"
+                                                                        id="bothConfiguration{{index}}"
+                                                                        name="bothConfiguration{{index}}"
+                                                                        ng-model="fieldConfig.bothConfiguration"
+                                                                        ng-change="ctrl.bothConfigurationChanged(fieldConfig)"
+                                                                        ng-disabled="ctrl.configurationSelectionDisabled">
+                                                                    <div class="control_indicator">
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <validate for='fieldType{{index}}'
+                                                                    required-msg="Select Field Type">
+                                                                    <label for='fieldType{{index}}' control-label>
+                                                                        Field Type
+                                                                    </label>
+                                                                    <select class="form-control cst-form-control"
+                                                                        form-control name="fieldType{{index}}"
+                                                                        id="fieldType{{index}}"
+                                                                        ng-model="fieldConfig.fieldType"
+                                                                        ng-required="true"
+                                                                        chosen-directive="ctrl.fieldTypes"
+                                                                        ng-change="ctrl.onFieldTypeChange(index, fieldConfig.fieldType)"
+                                                                        ng-options="component.key as component.value for component in ctrl.fieldTypes">
+                                                                    </select>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <validate for='fieldName{{index}}'
+                                                                    required-msg="Enter Field Name">
+                                                                    <label for='fieldName{{index}}' control-label
+                                                                        uib-tooltip="Field Name">
+                                                                        Field Name
+                                                                    </label>
+                                                                    <input type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="fieldName{{index}}"
+                                                                        ng-required="true" id="fieldName{{index}}"
+                                                                        ng-change="ctrl.onFieldNameChanged(index, fieldConfig.fieldName)"
+                                                                        ng-model="fieldConfig.fieldName">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldConfig.fieldType && !['CUSTOM_HTML','CUSTOM_COMPONENT', 'TABLE'].includes(fieldConfig.fieldType) && (fieldConfig.webConfiguration || fieldConfig.bothConfiguration)">
+                                                                <validate for='ngModel{{index}}'
+                                                                    required-msg="Enter ngModel Object">
+                                                                    <label for='ngModel{{index}}' control-label
+                                                                        uib-tooltip="Field Name">
+                                                                        ngModel Object
+                                                                    </label>
+                                                                    <input type="text" ng-pattern="/$/"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="ngModel{{index}}"
+                                                                        ng-required="true" id="ngModel{{index}}"
+                                                                        ng-model="fieldConfig.ngModel">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <validate for='fieldKey{{index}}'
+                                                                    required-msg="Enter Field Key">
+                                                                    <label for='fieldKey{{index}}' control-label
+                                                                        uib-tooltip="Field Key">
+                                                                        Field Key
+                                                                    </label>
+                                                                    <input type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="fieldKey{{index}}"
+                                                                        ng-required="true" id="fieldKey{{index}}"
+                                                                        ng-model="fieldConfig.fieldKey">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <validate for="standardField{{index}}"
+                                                                    required-msg="Select Standard Field">
+                                                                    <label uib-tooltip="Standard Field"
+                                                                        for="standardField{{index}}" control-label>
+                                                                        Standard Field
+                                                                    </label>
+                                                                    <select form-control
+                                                                        class="form-control cst-form-control"
+                                                                        name="standardField{{index}}"
+                                                                        id="standardField{{index}}"
+                                                                        ng-model="fieldConfig.standardFieldMasterUuid"
+                                                                        ng-options="standardField.uuid as (standardField.fieldName + (standardField.categoryName ? ' (' + standardField.categoryName + ')' : ''))  for standardField in ctrl.SystemConstraintStandardFields | filter: { fieldType: fieldConfig.fieldType }"
+                                                                        ng-required="false">
+                                                                        <option value="">--Select--</option>
+                                                                    </select>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div ng-repeat="(fieldValueConfigIndex, fieldValueConfig) in fieldConfig.systemConstraintFieldValueMasterDtos"
+                                                        class="row" ng-if="fieldValueConfig.valueType">
+                                                        <div class="col-12"
+                                                            ng-if="fieldValueConfig.key === 'label' && fieldValueConfig.showInUI">
+                                                            <div class="alert alert-info"
+                                                                style="text-align: center; margin-bottom: 1rem;">
+                                                                Translation Label will be created if not exists
+                                                                otherwise updated. It is recommended to keep prefix as
+                                                                Form Code to manage Translation Label later conveniently
+                                                                from Manage Translations feature. And please provide
+                                                                English translation of Label here.
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            ng-class="fieldValueConfig.valueType === 'LONG_TEXT' ? 'col-12' : 'col-6'">
+                                                            <div class="form-group"
+                                                                ng-if="['TEXT', 'DATE'].includes(fieldValueConfig.valueType) && fieldValueConfig.showInUI">
+                                                                <validate
+                                                                    for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}">
+                                                                    <label
+                                                                        for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                        control-label
+                                                                        uib-tooltip="{{ctrl.keyNameMap[fieldValueConfig.key]}}{{(fieldValueConfig.required || fieldValueConfig.value) ? '*' : ''}}">
+                                                                        {{ctrl.keyNameMap[fieldValueConfig.key]}}
+                                                                    </label>
+                                                                    <input type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control
+                                                                        ng-if="fieldValueConfig.key !== 'pattern'"
+                                                                        ng-required="ctrl.checkFieldCondition(fieldValueConfig.key,fieldConfig.systemConstraintFieldValueMasterDtos) && (fieldValueConfig.required || fieldValueConfig.value)"
+                                                                        ng-disabled="fieldValueConfig.key==='label'"
+                                                                        placeholder="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}"
+                                                                        name="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        id="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.defaultValue"
+                                                                        ng-pattern="/$/">
+                                                                    <input type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control
+                                                                        ng-if="fieldValueConfig.key === 'pattern'"
+                                                                        ng-required="fieldValueConfig.required || fieldValueConfig.value"
+                                                                        ng-disabled="fieldValueConfig.key==='label'"
+                                                                        placeholder="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}"
+                                                                        name="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        id="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.defaultValue"
+                                                                        ng-pattern="/$/">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.valueType === 'JSON' && fieldValueConfig.showInUI">
+                                                                <label
+                                                                    for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                    control-label
+                                                                    uib-tooltip="{{ctrl.keyNameMap[fieldValueConfig.key]}}{{(fieldValueConfig.required || fieldValueConfig.value) ? '*' : ''}}">
+                                                                    {{ctrl.keyNameMap[fieldValueConfig.key]}}
+                                                                </label>
+                                                                <div class="btn btn-primary"
+                                                                    ng-click="ctrl.configureJson(fieldConfig,fieldValueConfig,'default')">
+                                                                    Configure
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.valueType === 'DROPDOWN' && fieldValueConfig.showInUI">
+                                                                <validate
+                                                                    for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Select {{ctrl.keyNameMap[fieldValueConfig.key]}}">
+                                                                    <label
+                                                                        for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                        control-label
+                                                                        uib-tooltip="{{ctrl.keyNameMap[fieldValueConfig.key]}}{{(fieldValueConfig.required || fieldValueConfig.value) ? '*' : ''}}">
+                                                                        {{ctrl.keyNameMap[fieldValueConfig.key]}}
+                                                                    </label>
+                                                                    <select class="form-control cst-form-control"
+                                                                        form-control
+                                                                        ng-required="fieldValueConfig.required || fieldValueConfig.value"
+                                                                        name="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        id="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.defaultValue"
+                                                                        ng-change="ctrl.onFieldValueDropdownOptionChange(index, fieldValueConfig)"
+                                                                        ng-options="option.key as option.value for option in ctrl.fieldValueDropdownOptionsByKey[fieldValueConfig.key]">
+                                                                        <option value="">--Select
+                                                                            {{ctrl.keyNameMap[fieldValueConfig.key]}}--
+                                                                        </option>
+                                                                    </select>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.valueType === 'NUMBER' && fieldValueConfig.showInUI">
+                                                                <validate
+                                                                    for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}">
+                                                                    <label
+                                                                        for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                        control-label
+                                                                        uib-tooltip="{{ctrl.keyNameMap[fieldValueConfig.key]}}{{(fieldValueConfig.required || fieldValueConfig.value) ? '*' : ''}}">
+                                                                        {{ctrl.keyNameMap[fieldValueConfig.key]}}
+                                                                    </label>
+                                                                    <input type="text" numbers-only
+                                                                        decimalallowed="true"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control
+                                                                        ng-required="fieldValueConfig.required || fieldValueConfig.value"
+                                                                        placeholder="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}"
+                                                                        name="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        id="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.defaultValue">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.valueType === 'BOOLEAN' && fieldValueConfig.showInUI">
+                                                                <validate
+                                                                    for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Select {{ctrl.keyNameMap[fieldValueConfig.key]}}">
+                                                                    <label
+                                                                        for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                        control-label
+                                                                        uib-tooltip="{{ctrl.keyNameMap[fieldValueConfig.key]}}{{(fieldValueConfig.required || fieldValueConfig.value) ? '*' : ''}}">
+                                                                        {{ctrl.keyNameMap[fieldValueConfig.key]}}
+                                                                    </label>
+                                                                    <label class="control control-radio mt-6">Yes
+                                                                        <input value="true"
+                                                                            name="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                            form-control type="radio"
+                                                                            ng-required="fieldValueConfig.required || fieldValueConfig.value"
+                                                                            ng-change="ctrl.onFieldValueRadioOptionChanged(index, fieldValueConfig)"
+                                                                            ng-model="fieldValueConfig.defaultValue">
+                                                                        <div class="control_indicator"></div>
+                                                                    </label>
+                                                                    <label class="control control-radio mt-6">No
+                                                                        <input value="false"
+                                                                            name="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                            form-control type="radio"
+                                                                            ng-required="fieldValueConfig.required || fieldValueConfig.value"
+                                                                            ng-change="ctrl.onFieldValueRadioOptionChanged(index, fieldValueConfig)"
+                                                                            ng-model="fieldValueConfig.defaultValue">
+                                                                        <div class="control_indicator"></div>
+                                                                    </label>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.valueType === 'LONG_TEXT' && fieldValueConfig.showInUI">
+                                                                <validate
+                                                                    for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}">
+                                                                    <label
+                                                                        for='defaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                        control-label
+                                                                        uib-tooltip="{{ctrl.keyNameMap[fieldValueConfig.key]}}{{(fieldValueConfig.required || fieldValueConfig.value) ? '*' : ''}}">
+                                                                        {{ctrl.keyNameMap[fieldValueConfig.key]}}
+                                                                    </label>
+                                                                    <textarea type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control
+                                                                        ng-required="fieldValueConfig.required || fieldValueConfig.value"
+                                                                        rows="10"
+                                                                        placeholder="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}"
+                                                                        name="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        id="defaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.defaultValue">
+                                                                    </textarea>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.key === 'label' && fieldValueConfig.showInUI">
+                                                                <validate
+                                                                    for='enDefaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Enter English Translation of Label">
+                                                                    <label
+                                                                        for='enDefaultValue{{fieldValueConfig.key}}{{index}}'
+                                                                        control-label
+                                                                        uib-tooltip="English Translation of Label*">
+                                                                        English Translation of Label
+                                                                    </label>
+                                                                    <input type="text" ng-pattern="/$/"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control ng-required="true"
+                                                                        placeholder="Enter English Translation of Label"
+                                                                        name="enDefaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        id="enDefaultValue{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.enTranslationOfDefaultLabel">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            ng-class="fieldValueConfig.valueType === 'LONG_TEXT' ? 'col-12' : 'col-6'">
+                                                            <div class="form-group"
+                                                                ng-if="['TEXT', 'DATE'].includes(fieldValueConfig.valueType) && fieldValueConfig.showInUI">
+                                                                <validate for='value{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}">
+                                                                    <label
+                                                                        class="control control-checkbox override-value-checkbox"
+                                                                        for="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                        uib-tooltip="Want to override value?"
+                                                                        control-label>Override Value
+                                                                        <input type="checkbox" form-control
+                                                                            class="form-control cst-form-control"
+                                                                            id="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                            name="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                            ng-model="fieldValueConfig.overrideValue"
+                                                                            ng-change="ctrl.onOverrideValueSelection(fieldValueConfig, fieldConfig);">
+                                                                        <div style="top: 6px;"
+                                                                            class="control_indicator">
+                                                                        </div>
+                                                                    </label>
+                                                                    <input
+                                                                        ng-if="fieldValueConfig.overrideValue && fieldValueConfig.key !== 'pattern'"
+                                                                        type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        placeholder="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}"
+                                                                        form-control ng-required="false"
+                                                                        name="value{{fieldValueConfig.key}}{{index}}"
+                                                                        id="value{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.value"
+                                                                        ng-disabled="fieldValueConfig.key==='label'"
+                                                                        ng-pattern="/$/">
+                                                                    <input
+                                                                        ng-if="fieldValueConfig.overrideValue && fieldValueConfig.key === 'pattern'"
+                                                                        type="text"
+                                                                        class="form-control cst-form-control"
+                                                                        placeholder="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}"
+                                                                        form-control ng-required="false"
+                                                                        name="value{{fieldValueConfig.key}}{{index}}"
+                                                                        id="value{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.value"
+                                                                        ng-disabled="fieldValueConfig.key==='label'"
+                                                                        ng-pattern="/$/">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.valueType === 'JSON' && fieldValueConfig.showInUI">
+                                                                <label
+                                                                    class="control control-checkbox override-value-checkbox"
+                                                                    for="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                    uib-tooltip="Want to override value?"
+                                                                    control-label>Override Value
+                                                                    <input type="checkbox" form-control
+                                                                        class="form-control cst-form-control"
+                                                                        id="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                        name="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.overrideValue"
+                                                                        ng-change="ctrl.onOverrideValueSelection(fieldValueConfig, fieldConfig);">
+                                                                    <div style="top: 6px;" class="control_indicator">
+                                                                    </div>
+                                                                </label>
+                                                                <div ng-if="fieldValueConfig.overrideValue"
+                                                                    class="btn btn-primary"
+                                                                    ng-click="ctrl.configureJson(fieldConfig,fieldValueConfig,'override')">
+                                                                    Configure
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.valueType === 'DROPDOWN' && fieldValueConfig.showInUI">
+                                                                <validate for='value{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Select {{ctrl.keyNameMap[fieldValueConfig.key]}}">
+                                                                    <label
+                                                                        class="control control-checkbox override-value-checkbox"
+                                                                        for="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                        uib-tooltip="Want to override value?"
+                                                                        control-label>Override Value
+                                                                        <input type="checkbox" form-control
+                                                                            class="form-control cst-form-control"
+                                                                            id="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                            name="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                            ng-model="fieldValueConfig.overrideValue"
+                                                                            ng-change="ctrl.onOverrideValueSelection(fieldValueConfig, fieldConfig);">
+                                                                        <div style="top: 6px;"
+                                                                            class="control_indicator">
+                                                                        </div>
+                                                                    </label>
+                                                                    <select ng-if="fieldValueConfig.overrideValue"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control
+                                                                        name="value{{fieldValueConfig.key}}{{index}}"
+                                                                        id="value{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.value"
+                                                                        ng-change="ctrl.onFieldValueDropdownOptionChange(index, fieldValueConfig)"
+                                                                        ng-options="option.key as option.value for option in ctrl.fieldValueDropdownOptionsByKey[fieldValueConfig.key]"
+                                                                        ng-required="false">
+                                                                        <option value="">--Select
+                                                                            {{ctrl.keyNameMap[fieldValueConfig.key]}}--
+                                                                        </option>
+                                                                    </select>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.valueType === 'NUMBER' && fieldValueConfig.showInUI">
+                                                                <validate for='value{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}">
+                                                                    <label
+                                                                        class="control control-checkbox override-value-checkbox"
+                                                                        for="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                        uib-tooltip="Want to override value?"
+                                                                        control-label>Override Value
+                                                                        <input type="checkbox" form-control
+                                                                            class="form-control cst-form-control"
+                                                                            id="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                            name="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                            ng-model="fieldValueConfig.overrideValue"
+                                                                            ng-change="ctrl.onOverrideValueSelection(fieldValueConfig, fieldConfig);">
+                                                                        <div style="top: 6px;"
+                                                                            class="control_indicator">
+                                                                        </div>
+                                                                    </label>
+                                                                    <input ng-if="fieldValueConfig.overrideValue"
+                                                                        type="text" numbers-only decimalallowed="true"
+                                                                        class="form-control cst-form-control"
+                                                                        placeholder="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}"
+                                                                        form-control ng-required="false"
+                                                                        name="value{{fieldValueConfig.key}}{{index}}"
+                                                                        id="value{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.value">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.valueType === 'BOOLEAN' && fieldValueConfig.showInUI">
+                                                                <validate for='value{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Select {{ctrl.keyNameMap[fieldValueConfig.key]}}">
+                                                                    <label
+                                                                        class="control control-checkbox override-value-checkbox"
+                                                                        for="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                        uib-tooltip="Want to override value?"
+                                                                        control-label>Override Value
+                                                                        <input type="checkbox" form-control
+                                                                            class="form-control cst-form-control"
+                                                                            id="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                            name="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                            ng-model="fieldValueConfig.overrideValue"
+                                                                            ng-change="ctrl.onOverrideValueSelection(fieldValueConfig, fieldConfig);">
+                                                                        <div style="top: 6px;"
+                                                                            class="control_indicator">
+                                                                        </div>
+                                                                    </label>
+                                                                    <label class="control control-radio mt-6"
+                                                                        ng-if="fieldValueConfig.overrideValue">Yes
+                                                                        <input value="true"
+                                                                            name="value{{fieldValueConfig.key}}{{index}}"
+                                                                            form-control type="radio"
+                                                                            ng-required="false"
+                                                                            ng-change="ctrl.onFieldValueRadioOptionChanged(index, fieldValueConfig)"
+                                                                            ng-model="fieldValueConfig.value">
+                                                                        <div class="control_indicator"></div>
+                                                                    </label>
+                                                                    <label class="control control-radio mt-6"
+                                                                        ng-if="fieldValueConfig.overrideValue">No
+                                                                        <input value="false"
+                                                                            name="value{{fieldValueConfig.key}}{{index}}"
+                                                                            form-control type="radio"
+                                                                            ng-required="false"
+                                                                            ng-change="ctrl.onFieldValueRadioOptionChanged(index, fieldValueConfig)"
+                                                                            ng-model="fieldValueConfig.value">
+                                                                        <div class="control_indicator"></div>
+                                                                    </label>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.valueType === 'LONG_TEXT' && fieldValueConfig.showInUI">
+                                                                <validate for='value{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}">
+                                                                    <label
+                                                                        class="control control-checkbox override-value-checkbox"
+                                                                        for="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                        uib-tooltip="Want to override value?"
+                                                                        control-label>Override Value
+                                                                        <input type="checkbox" form-control
+                                                                            class="form-control cst-form-control"
+                                                                            id="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                            name="valueCheckBox{{fieldValueConfig.key}}{{index}}"
+                                                                            ng-model="fieldValueConfig.overrideValue"
+                                                                            ng-change="ctrl.onOverrideValueSelection(fieldValueConfig, fieldConfig);">
+                                                                        <div style="top: 6px;"
+                                                                            class="control_indicator">
+                                                                        </div>
+                                                                    </label>
+                                                                    <textarea ng-if="fieldValueConfig.overrideValue"
+                                                                        type="text" rows="10"
+                                                                        class="form-control cst-form-control"
+                                                                        placeholder="Enter {{ctrl.keyNameMap[fieldValueConfig.key]}}"
+                                                                        form-control ng-required="false"
+                                                                        name="value{{fieldValueConfig.key}}{{index}}"
+                                                                        id="value{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.value">
+                                                                    </textarea>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="fieldValueConfig.key === 'label' && fieldValueConfig.showInUI && fieldValueConfig.overrideValue">
+                                                                <validate for='enValue{{fieldValueConfig.key}}{{index}}'
+                                                                    required-msg="Enter English Translation of Label">
+                                                                    <label></label>
+                                                                    <input type="text" ng-pattern="/$/"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control
+                                                                        placeholder="Enter English Translation of Label"
+                                                                        ng-required="fieldValueConfig.value"
+                                                                        name="enValue{{fieldValueConfig.key}}{{index}}"
+                                                                        id="enValue{{fieldValueConfig.key}}{{index}}"
+                                                                        ng-model="fieldValueConfig.enTranslationOfLabel">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        ng-if="fieldConfig.fieldType && (fieldConfig.webConfiguration || fieldConfig.bothConfiguration)">
+                                                        <div
+                                                            ng-if="!['CUSTOM_HTML','CUSTOM_COMPONENT', 'TABLE', 'INFORMATION_DISPLAY','FILE_UPLOAD'].includes(fieldConfig.fieldType)">
+                                                            <div style="text-align: center; margin-bottom: 1rem;"
+                                                                class="alert alert-info">
+                                                                Events Configuration
+                                                            </div>
+                                                            <div class="btn btn-primary mb-15"
+                                                                ng-click="ctrl.addEvent(fieldConfig)">
+                                                                Add Event
+                                                            </div>
+                                                            <div class="mb-15" ng-repeat="event in fieldConfig.events">
+                                                                <div class="row">
+                                                                    <div class="col-5">
+                                                                        <div class="form-group">
+                                                                            <validate for='type{{index}}'
+                                                                                required-msg="Select Event Type">
+                                                                                <label for='type{{index}}'
+                                                                                    control-label>Event
+                                                                                    Type</label>
+                                                                                <select
+                                                                                    class="form-control cst-form-control"
+                                                                                    form-control name="type{{index}}"
+                                                                                    id="type{{index}}"
+                                                                                    ng-model="event.type"
+                                                                                    ng-required="true">
+                                                                                    <option value="">--Select--</option>
+                                                                                    <option value="Click">On click
+                                                                                    </option>
+                                                                                    <option value="DoubleClick"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On double click
+                                                                                    </option>
+                                                                                    <option value="MouseDown"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On mouse down
+                                                                                    </option>
+                                                                                    <option value="MouseUp"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On mouse up
+                                                                                    </option>
+                                                                                    <option value="MouseEnter"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On mouse enter
+                                                                                    </option>
+                                                                                    <option value="MouseLeave"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On mouse leave
+                                                                                    </option>
+                                                                                    <option value="MouseMove"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On mouse move
+                                                                                    </option>
+                                                                                    <option value="MouseOver"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On mouse over
+                                                                                    </option>
+                                                                                    <option value="KeyDown"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On key down
+                                                                                    </option>
+                                                                                    <option value="KeyUp"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On key up
+                                                                                    </option>
+                                                                                    <option value="KeyPress"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On key press
+                                                                                    </option>
+                                                                                    <option value="Change"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On Change
+                                                                                    </option>
+                                                                                    <option value="Blur"
+                                                                                        ng-if="!['BUTTON','ADDED_LOCATIONS'].includes(fieldConfig.fieldType)">
+                                                                                        On Blur
+                                                                                    </option>
+                                                                                </select>
+                                                                                <placeholder></placeholder>
+                                                                            </validate>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="form-group">
+                                                                            <validate for='value{{index}}'
+                                                                                required-msg="Enter function name">
+                                                                                <label for='value{{index}}'
+                                                                                    control-label
+                                                                                    uib-tooltip="Field Name">
+                                                                                    Function name
+                                                                                </label>
+                                                                                <input type="text"
+                                                                                    class="form-control cst-form-control"
+                                                                                    form-control name="value{{index}}"
+                                                                                    ng-required="true"
+                                                                                    id="value{{index}}"
+                                                                                    ng-model="event.value">
+                                                                                <placeholder></placeholder>
+                                                                            </validate>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <button class="btn btn-danger"
+                                                                            ng-click="ctrl.deleteEvent(fieldConfig,$index)">Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            ng-if="!['CUSTOM_HTML','CUSTOM_COMPONENT'].includes(fieldConfig.fieldType)">
+                                                            <div style="text-align: center; margin-bottom: 1rem;"
+                                                                class="alert alert-info">
+                                                                Visibility Configurations
+                                                            </div>
+                                                            <div class="dropdown mb-15" ng-if="!fieldConfig.visibility">
+                                                                <button class="btn btn-secondary dropdown-toggle"
+                                                                    type="button" id="dropdownMenuButton"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">Add visibility
+                                                                    configurations</button>
+                                                                <div class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                                        ng-click="ctrl.addGroup('visibility',fieldConfig,'AND')">Add
+                                                                        "AND" Group</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                                        ng-click="ctrl.addGroup('visibility',fieldConfig,'OR')">Add
+                                                                        "OR" Group</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card cst-card" ng-if="fieldConfig.visibility">
+                                                                <div class="card-title">
+                                                                    <h4 class="text" style="float: left;">
+                                                                        {{fieldConfig.visibility.conditions.rule}}</h4>
+                                                                    <div class="dropdown pull-right">
+                                                                        <button
+                                                                            class="btn btn-secondary dropdown-toggle"
+                                                                            type="button" id="dropdownMenuButton"
+                                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                                            aria-expanded="false">Actions</button>
+                                                                        <div class="dropdown-menu"
+                                                                            aria-labelledby="dropdownMenuButton">
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.addCondition('visibility',fieldConfig)">Add
+                                                                                Condition</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.addGroup('visibility',fieldConfig,'AND')">Add
+                                                                                "AND" Group</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.addGroup('visibility',fieldConfig,'OR')">Add
+                                                                                "OR" Group</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.invertGroup('visibility',fieldConfig)">Invert
+                                                                                group</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.deleteGroup('visibility',fieldConfig)">Delete
+                                                                                Group</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body inline-form">
+                                                                    <div class="row"
+                                                                        ng-repeat="(index,op) in fieldConfig.visibility.conditions.options track by $index">
+                                                                        <div class="col-12">
+                                                                            <condition-render-directive index="index"
+                                                                                option="op" level="'1'"
+                                                                                options="fieldConfig.visibility.conditions.options"
+                                                                                field-master-dtos="ctrl.systemConstraintFormConfig.systemConstraintFieldMasterDtos"
+                                                                                array="'visibility'">
+                                                                            </condition-render-directive>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            ng-if="!['CUSTOM_HTML','CUSTOM_COMPONENT', 'TABLE', 'INFORMATION_DISPLAY', 'BUTTON','ADDED_LOCATIONS','FILE_UPLOAD'].includes(fieldConfig.fieldType)">
+                                                            <div style="text-align: center; margin-bottom: 1rem;"
+                                                                class="alert alert-info">
+                                                                Requirable Configurations
+                                                            </div>
+                                                            <div class="dropdown mb-15" ng-if="!fieldConfig.requirable">
+                                                                <button class="btn btn-secondary dropdown-toggle"
+                                                                    type="button" id="dropdownMenuButton"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">Add requirable
+                                                                    configurations</button>
+                                                                <div class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                                        ng-click="ctrl.addGroup('requirable',fieldConfig,'AND')">Add
+                                                                        "AND" Group</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                                        ng-click="ctrl.addGroup('requirable',fieldConfig,'OR')">Add
+                                                                        "OR" Group</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card cst-card" ng-if="fieldConfig.requirable">
+                                                                <div class="card-title">
+                                                                    <h4 class="text" style="float: left;">
+                                                                        {{fieldConfig.requirable.conditions.rule}}</h4>
+                                                                    <div class="dropdown pull-right">
+                                                                        <button
+                                                                            class="btn btn-secondary dropdown-toggle"
+                                                                            type="button" id="dropdownMenuButton"
+                                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                                            aria-expanded="false">Actions</button>
+                                                                        <div class="dropdown-menu"
+                                                                            aria-labelledby="dropdownMenuButton">
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.addCondition('requirable',fieldConfig)">Add
+                                                                                Condition</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.addGroup('requirable',fieldConfig,'AND')">Add
+                                                                                "AND" Group</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.addGroup('requirable',fieldConfig,'OR')">Add
+                                                                                "OR" Group</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.invertGroup('requirable',fieldConfig)">Invert
+                                                                                group</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.deleteGroup('requirable',fieldConfig)">Delete
+                                                                                Group</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body inline-form">
+                                                                    <div class="row"
+                                                                        ng-repeat="(index,op) in fieldConfig.requirable.conditions.options track by $index">
+                                                                        <div class="col-12">
+                                                                            <condition-render-directive index="index"
+                                                                                option="op" level="'1'"
+                                                                                options="fieldConfig.requirable.conditions.options"
+                                                                                field-master-dtos="ctrl.systemConstraintFormConfig.systemConstraintFieldMasterDtos"
+                                                                                array="'requirable'">
+                                                                            </condition-render-directive>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            ng-if="!['CUSTOM_HTML','CUSTOM_COMPONENT', 'TABLE', 'INFORMATION_DISPLAY'].includes(fieldConfig.fieldType)">
+                                                            <div style="text-align: center; margin-bottom: 1rem;"
+                                                                class="alert alert-info">
+                                                                Disability Configurations
+                                                            </div>
+                                                            <div class="dropdown mb-15" ng-if="!fieldConfig.disability">
+                                                                <button class="btn btn-secondary dropdown-toggle"
+                                                                    type="button" id="dropdownMenuButton"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">Add disability
+                                                                    configurations</button>
+                                                                <div class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                                        ng-click="ctrl.addGroup('disability',fieldConfig,'AND')">Add
+                                                                        "AND" Group</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                                        ng-click="ctrl.addGroup('disability',fieldConfig,'OR')">Add
+                                                                        "OR" Group</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card cst-card" ng-if="fieldConfig.disability">
+                                                                <div class="card-title">
+                                                                    <h4 class="text" style="float: left;">
+                                                                        {{fieldConfig.disability.conditions.rule}}</h4>
+                                                                    <div class="dropdown pull-right">
+                                                                        <button
+                                                                            class="btn btn-secondary dropdown-toggle"
+                                                                            type="button" id="dropdownMenuButton"
+                                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                                            aria-expanded="false">Actions</button>
+                                                                        <div class="dropdown-menu"
+                                                                            aria-labelledby="dropdownMenuButton">
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.addCondition('disability',fieldConfig)">Add
+                                                                                Condition</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.addGroup('disability',fieldConfig,'AND')">Add
+                                                                                "AND" Group</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.addGroup('disability',fieldConfig,'OR')">Add
+                                                                                "OR" Group</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.invertGroup('disability',fieldConfig)">Invert
+                                                                                group</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0)"
+                                                                                ng-click="ctrl.deleteGroup('disability',fieldConfig)">Delete
+                                                                                Group</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body inline-form">
+                                                                    <div class="row"
+                                                                        ng-repeat="(index,op) in fieldConfig.disability.conditions.options track by $index">
+                                                                        <div class="col-12">
+                                                                            <condition-render-directive index="index"
+                                                                                option="op" level="'1'"
+                                                                                options="fieldConfig.disability.conditions.options"
+                                                                                field-master-dtos="ctrl.systemConstraintFormConfig.systemConstraintFieldMasterDtos"
+                                                                                array="'disability'">
+                                                                            </condition-render-directive>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer mt-3 mb-3">
+                                                        <div class="float-right">
+                                                            <button type="submit" class="btn btn-primary"
+                                                                ng-click="ctrl.saveFieldConfig(index, fieldConfig)">
+                                                                <em class="fa fa-floppy-o"></em>
+                                                                Save Field Config
+                                                            </button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                ng-click="ctrl.removeFieldConfig(index, fieldConfig.uuid)">
+                                                                Remove Field Config
+                                                            </button>
+                                                            <button class="btn btn-secondary" ng-click="ctrl.goBack()">
+                                                                Back
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-if="ctrl.systemConstraintFormConfig.systemConstraintFieldMasterDtos.length === 0">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                No Fields are available!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="configureStaticOptions" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="text">Configure Static Options for
+                        {{ctrl.currentField.fieldName}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-15">
+                        <div class="col-12">
+                            <div class="float-right">
+                                <button class="btn btn-primary"
+                                    ng-click="ctrl.addJsonOption(ctrl.currentFieldValue.staticOptions)">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <form role="form" name="ctrl.staticConfigurationForm" aria-label="staticConfigurationForm"
+                                id="staticConfigurationForm" novalidate>
+                                <div class="cst-table table-responsive table-set-height" id="staticConfiguration">
+                                    <table aria-describedby="table"
+                                        class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                        style="table-layout: auto">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th class="white-space-unset" id="srNo">#</th>
+                                                <th class="white-space-unset" id="key">Key</th>
+                                                <th class="white-space-unset" id="value">English Value</th>
+                                                <th class="white-space-unset" id="actions">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="option in ctrl.currentFieldValue.staticOptions">
+                                                <td>{{$index+1}}</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <validate for="key{{$index}}" required-msg="Please enter key">
+                                                            <input type="text" class="form-control cst-form-control"
+                                                                form-control required name="key{{$index}}"
+                                                                id="key{{$index}}" ng-model="option.key">
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <validate for="value{{$index}}"
+                                                            required-msg="Please enter english value">
+                                                            <input type="text" class="form-control cst-form-control"
+                                                                form-control required name="value{{$index}}"
+                                                                id="value{{$index}}" ng-model="option.value">
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <em style="cursor: pointer;color: red;"
+                                                        class="fa fa-lg fa-times-circle"
+                                                        ng-click="ctrl.removeJsonOption(ctrl.currentFieldValue.staticOptions,$index)"></em>
+                                                    <em ng-if="$index!==0" style="cursor: pointer;color: blue;"
+                                                        class="fa fa-lg fa-arrow-circle-up"
+                                                        ng-click="ctrl.shiftOptionUp(ctrl.currentFieldValue.staticOptions,$index)"></em>
+                                                    <em ng-if="$index!==ctrl.currentFieldValue.staticOptions.length-1"
+                                                        style="cursor: pointer;color: blue;"
+                                                        class="fa fa-lg fa-arrow-circle-down"
+                                                        ng-click="ctrl.shiftOptionDown(ctrl.currentFieldValue.staticOptions,$index)"></em>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary"
+                        ng-click="ctrl.saveJsonConfiguration(ctrl.currentFieldValue)">Save</button>
+                    <button class="btn btn-secondary" ng-click="ctrl.cancelJsonConfiguration()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="configureTable" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="text">Configure Table for
+                        {{ctrl.currentField.fieldName}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-15">
+                        <div class="col-12">
+                            <div class="float-right">
+                                <button class="btn btn-primary"
+                                    ng-click="ctrl.addJsonOption(ctrl.currentFieldValue.staticOptions)">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <form role="form" name="ctrl.tableConfigurationForm" aria-label="tableConfigurationForm"
+                                id="tableConfigurationForm" novalidate>
+                                <div class="cst-table table-responsive table-set-height" id="staticConfiguration">
+                                    <table aria-describedby="table"
+                                        class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                        style="table-layout: auto">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th class="white-space-unset" id="srNo">#</th>
+                                                <th class="white-space-unset" id="key">Key</th>
+                                                <th class="white-space-unset" id="label">Label</th>
+                                                <th class="white-space-unset" id="type">Type</th>
+                                                <th class="white-space-unset" id="actions">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="option in ctrl.currentFieldValue.staticOptions">
+                                                <td>{{$index+1}}</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <validate for="key{{$index}}" required-msg="Please enter key">
+                                                            <input type="text" class="form-control cst-form-control"
+                                                                form-control required name="key{{$index}}"
+                                                                id="key{{$index}}" ng-model="option.key">
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <validate for="label{{$index}}"
+                                                            required-msg="Please enter label">
+                                                            <input type="text" class="form-control cst-form-control"
+                                                                form-control required name="label{{$index}}"
+                                                                id="label{{$index}}" ng-model="option.label">
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <validate for="type{{$index}}">
+                                                            <select class="form-control cst-form-control" form-control
+                                                                ng-model="option.type" name="type{{$index}}"
+                                                                id="type{{$index}}" required>
+                                                                <option value="" selected>--Select--</option>
+                                                                <option value="text">Text</option>
+                                                                <option value="boolean">Boolean</option>
+                                                                <option value="date">Date</option>
+                                                                <option value="dateAndTime">Date & Time</option>
+                                                                <option value="gender">Gender</option>
+                                                            </select>
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <em style="cursor: pointer;color: red;"
+                                                        class="fa fa-lg fa-times-circle"
+                                                        ng-click="ctrl.removeJsonOption(ctrl.currentFieldValue.staticOptions,$index)"></em>
+                                                    <em ng-if="$index!==0" style="cursor: pointer;color: blue;"
+                                                        class="fa fa-lg fa-arrow-circle-up"
+                                                        ng-click="ctrl.shiftOptionUp(ctrl.currentFieldValue.staticOptions,$index)"></em>
+                                                    <em ng-if="$index!==ctrl.currentFieldValue.staticOptions.length-1"
+                                                        style="cursor: pointer;color: blue;"
+                                                        class="fa fa-lg fa-arrow-circle-down"
+                                                        ng-click="ctrl.shiftOptionDown(ctrl.currentFieldValue.staticOptions,$index)"></em>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary"
+                        ng-click="ctrl.saveJsonConfiguration(ctrl.currentFieldValue)">Save</button>
+                    <button class="btn btn-secondary" ng-click="ctrl.cancelJsonConfiguration()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- this is for creating multiple validation and formulas for mobile app -->
+     <div class="modal fade" id="configureMobileValidationsAndFormulas" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="text">Configure {{ctrl.mobileValidationJson?"Validations":"Formulas"}} for
+                        {{ctrl.currentField.fieldName}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-15">
+                        <div class="col-12">
+                            <div class="float-right">
+                                <button class="btn btn-primary"
+                                    ng-click="ctrl.addJsonOption(ctrl.currentFieldValue.staticOptions)">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <form role="form" name="ctrl.configureMobileValidationsForm" aria-label="configureMobileValidationsForm"
+                                id="configureMobileValidationsForm" novalidate>
+                                <div class="cst-table table-responsive table-set-height" id="staticConfiguration">
+                                    <table aria-describedby="table"
+                                        class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                                        style="table-layout: auto">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th class="white-space-unset" id="srNo">#</th>
+                                                <th class="white-space-unset" id="key" >Formula</th>
+                                                <th class="white-space-unset" id="value" ng-if="ctrl.mobileValidationJson">Message</th>
+                                                <th class="white-space-unset" id="actions">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="option in ctrl.currentFieldValue.staticOptions">
+                                                <td>{{$index+1}}</td>
+                                                <td ng-if="!ctrl.mobileValidationJson">
+                                                    <div class="form-group">
+                                                        <validate for="key{{$index}}" required-msg="Please enter formula">
+                                                            <input type="text" class="form-control cst-form-control"
+                                                                form-control required name="key{{$index}}"
+                                                                id="key{{$index}}" ng-model="option.formulavalue">
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td ng-if="ctrl.mobileValidationJson">
+                                                    <div class="form-group">
+                                                        <validate for="key{{$index}}" required-msg="Please enter formula">
+                                                            <input type="text" class="form-control cst-form-control"
+                                                                form-control required name="key{{$index}}"
+                                                                id="key{{$index}}" ng-model="option.method">
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td ng-if="ctrl.mobileValidationJson">
+                                                    <div class="form-group">
+                                                        <validate for="value{{$index}}"
+                                                            required-msg="Please enter validation message">
+                                                            <input type="text" class="form-control cst-form-control"
+                                                                form-control required name="value{{$index}}"
+                                                                id="value{{$index}}" ng-model="option.message">
+                                                            <placeholder></placeholder>
+                                                        </validate>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <em style="cursor: pointer;color: red;"
+                                                        class="fa fa-lg fa-times-circle"
+                                                        ng-click="ctrl.removeJsonOption(ctrl.currentFieldValue.staticOptions,$index)"></em>
+                                                    <em ng-if="$index!==0" style="cursor: pointer;color: blue;"
+                                                        class="fa fa-lg fa-arrow-circle-up"
+                                                        ng-click="ctrl.shiftOptionUp(ctrl.currentFieldValue.staticOptions,$index)"></em>
+                                                    <em ng-if="$index!==ctrl.currentFieldValue.staticOptions.length-1"
+                                                        style="cursor: pointer;color: blue;"
+                                                        class="fa fa-lg fa-arrow-circle-down"
+                                                        ng-click="ctrl.shiftOptionDown(ctrl.currentFieldValue.staticOptions,$index)"></em>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary"
+                        ng-click="ctrl.saveJsonConfiguration(ctrl.currentFieldValue)">Save</button>
+                    <button class="btn btn-secondary" ng-click="ctrl.cancelJsonConfiguration()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

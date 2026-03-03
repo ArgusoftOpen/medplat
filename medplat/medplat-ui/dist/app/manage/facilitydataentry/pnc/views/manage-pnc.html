@@ -1,0 +1,739 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Record Details</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="card-sub-title">
+                            </h5>
+                            <div>
+                                <div class="form-group">
+                                    <label for="memberId" control-label>Mother ID(Family ID)</label>
+                                    <label
+                                        style="width:auto">{{managepnccontroller.managePncObject.uniqueHealthId}}({{managepnccontroller.managePncObject.familyUniqueId}})</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberName" control-label>Mother Name</label>
+                                    <label style="width:auto">{{managepnccontroller.managePncObject.memberName}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberLocation" control-label>Location</label>
+                                    <label
+                                        style="width:auto;white-space: inherit">{{managepnccontroller.managePncObject.locationHierarchy}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberBpl" control-label>BPL</label>
+                                    <label>{{managepnccontroller.managePncObject.bplFlag}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberCaste" control-label>Caste</label>
+                                    <label>{{managepnccontroller.managePncObject.caste}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberBenefits" control-label>Benefits</label>
+                                    <label>{{managepnccontroller.managePncObject.benefits}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <div class="form-group">
+                                    <label for="memberBenefits" control-label>Delivery Date</label>
+                                    <label>{{managepnccontroller.managePncObject.motherDetails.dateOfDeliveryDisplay}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberBenefits" control-label>PNC Visit No.</label>
+                                    <label>{{managepnccontroller.managePncObject.pncNo}}</label>
+                                </div>
+                                <div class="form-group" ng-if="managepnccontroller.managePncObject.fhwName != null">
+                                    <label style="vertical-align: middle;white-space: initial" for="memberAnm"
+                                        control-label>FHW Name and Phone Number</label>
+                                    <label style="vertical-align: middle;white-space: initial">
+                                        {{managepnccontroller.managePncObject.fhwName}}
+                                        <span ng-if="managepnccontroller.managePncObject.fhwNumber != null">
+                                            ({{managepnccontroller.managePncObject.fhwNumber}})
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-group" ng-if="managepnccontroller.managePncObject.ashaName != null">
+                                    <label style="vertical-align: middle;white-space: initial" for="memberAsha"
+                                        control-label>
+                                        ASHA Name and Phone Number
+                                    </label>
+                                    <label style="vertical-align: middle;white-space: initial">
+                                        {{managepnccontroller.managePncObject.ashaName}}
+                                        <span ng-if="managepnccontroller.managePncObject.ashaNumber != null">
+                                            ({{managepnccontroller.managePncObject.ashaNumber}})
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">PNC Registration</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="managepnccontroller.managepncForm" id="managepncForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-sub-title">
+                                    PNC mother details
+                                </h5>
+                                <div class="form-group" ng-if="!managepnccontroller.managePncObject.motherMobileNumber">
+                                    <validate for='contactNumber' maxlength-msg="Invalid mobile number"
+                                        minlength-msg="Invalid mobile number">
+                                        <label style="vertical-align: middle;white-space: initial" for="contactNumber"
+                                            control-label>Contact Number</label>
+                                        <input type="text" numbers-only max-length="10" min-length="10"
+                                            class="form-control cst-form-control" form-control name="contactNumber"
+                                            id="contactNumber"
+                                            ng-model="managepnccontroller.managePncObject.contactNumber">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" style="margin-top: 2%">
+                                    <validate for='serviceDate' required-msg="Select Date">
+                                        <label style="vertical-align: middle;white-space: initial" for="serviceDate"
+                                            control-label>Service
+                                            Date</label>
+                                        <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                            name="serviceDate" form-control
+                                            ng-model="managepnccontroller.managePncObject.motherDetails.serviceDate"
+                                            min-date="managepnccontroller.minServiceDate"
+                                            max-date="managepnccontroller.todayDate"
+                                            ng-change="managepnccontroller.serviceDateChanged()" required>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" style="margin-top: 3%">
+                                    <validate for='deliveryPlace' required-msg="Select a value">
+                                        <label for="deliveryPlace" control-label>Place of Visit</label>
+                                        <select class="form-control cst-form-control" form-control
+                                            ng-model="managepnccontroller.managePncObject.deliveryPlace"
+                                            ng-change="managepnccontroller.deliveryPlaceChanged()" name="deliveryPlace"
+                                            id="deliveryPlace" required>
+                                            <option value="" selected>--Select--</option>
+                                            <option value="THISHOSP">This Hospital</option>
+                                            <option value="HOSP">Another Institution</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="managepnccontroller.managePncObject.deliveryPlace === 'HOSP'">
+                                    <validate for='institutionType' required-msg="Select a value">
+                                        <label for="institutionType" control-label>Institution Type</label>
+                                        <select class="form-control cst-form-control" form-control
+                                            ng-model="managepnccontroller.managePncObject.institutionType"
+                                            ng-change="managepnccontroller.retrieveHospitalsByInstitutionType()"
+                                            name="institutionType" id="institutionType" required>
+                                            <option value="" selected>--Select--</option>
+                                            <option value="{{institutionType.id}}"
+                                                ng-repeat="institutionType in managepnccontroller.institutionTypes">
+                                                {{institutionType.value}}
+                                            </option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group selectize-wpd-input"
+                                    ng-if="managepnccontroller.managePncObject.deliveryPlace === 'HOSP' && managepnccontroller.showOtherInstitutes">
+                                    <validate for='hospital' required-msg="Select a value">
+                                        <label style="white-space: initial" control-label>Hospital</label>
+                                        <selectize name="hospital" class="form-control cst-form-control" form-control
+                                            ng-model='managepnccontroller.managePncObject.institute'
+                                            ng-change="managepnccontroller.retrieveRolesForInstitute()"
+                                            config='managepnccontroller.selectizeObjectForOtherInstitute' required>
+                                            <option value=''>--Select--</option>
+                                        </selectize>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="managepnccontroller.managePncObject.deliveryPlace === 'THISHOSP'">
+                                    <validate for='hospital' required-msg="Select a value">
+                                        <label style="vertical-align: middle;white-space: initial"
+                                            control-label>Hospital</label>
+                                        <select class="form-control cst-form-control" form-control chosen-directive
+                                            name="hospital"
+                                            ng-options="institute as institute.name for institute in managepnccontroller.institutes"
+                                            ng-model="managepnccontroller.managePncObject.institute"
+                                            ng-change="managepnccontroller.retrieveRolesForInstitute()"
+                                            ng-disabled="managepnccontroller.institutes.length == 1" required>
+                                            <option value="" selected>--Select--</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='isAlive' required-msg=" Select a value">
+                                        <label style="vertical-align: middle;white-space: initial" for="isAlive"
+                                            name="isAlive" class="control-label" control-label>Is Mother Alive?</label>
+                                        <label style="margin-top:2%" class="control control-radio">Yes
+                                            <input ng-value="true" name="isAlive" type="radio"
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.isAlive"
+                                                form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label style="margin-top:2%" class="control control-radio">No
+                                            <input ng-value="false" name="isAlive" type="radio"
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.isAlive"
+                                                form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div ng-if="managepnccontroller.managePncObject.motherDetails.isAlive == false">
+                                    <div class="form-group">
+                                        <validate for='deathDate' required-msg="Select Date">
+                                            <label style="vertical-align: middle;white-space: initial" for="deathDate"
+                                                control-label>Death
+                                                Date</label>
+                                            <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                name="deathDate" form-control
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.deathDate"
+                                                max-date="managepnccontroller.managePncObject.motherDetails.serviceDate"
+                                                min-date="managepnccontroller.minDeathDate" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='placeOfDeath' required-msg="Select a value">
+                                            <label for="placeOfDeath" control-label>Death Place</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.placeOfDeath"
+                                                name="placeOfDeath" id="placeOfDeath" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="HOME">Home</option>
+                                                <option value="ON_THE_WAY">On the way</option>
+                                                <option value="HOSP">Hospital</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managepnccontroller.managePncObject.motherDetails.placeOfDeath === 'HOSP'">
+                                        <validate for='institutionType' required-msg="Select a value">
+                                            <label for="institutionType" control-label>Institution Type</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.deathInfrastructureType"
+                                                ng-change="managepnccontroller.retrieveDeathHospitalsByInstitutionType()"
+                                                name="institutionType" id="institutionType" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="{{institutionType.id}}"
+                                                    ng-repeat="institutionType in managepnccontroller.institutionTypes">
+                                                    {{institutionType.value}}</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managepnccontroller.managePncObject.motherDetails.placeOfDeath === 'HOSP' && managepnccontroller.showDeathInstitutes">
+                                        <validate for='hospital' required-msg="Select a value">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                control-label>Hospital</label>
+                                            <select class="form-control cst-form-control" form-control chosen-directive
+                                                name="hospital"
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.deathInfrastructureId"
+                                                required>
+                                                <option value="" selected>--Select--</option>
+                                                <option ng-repeat="institute in managepnccontroller.deathInstitutes"
+                                                    value="{{institute.id}}">{{institute.name}}</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='deathReason' required-msg="Select a value">
+                                            <label for="deathReason" control-label>Death Reason</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.deathReason"
+                                                name="deathReason" id="deathReason" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="{{motherDeathReason.id}}"
+                                                    ng-repeat="motherDeathReason in managepnccontroller.motherDeathReasons">
+                                                    {{motherDeathReason.value}}</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managepnccontroller.managePncObject.motherDetails.deathReason == '793'">
+                                        <validate for='otherDeathReason' required-msg="Please enter other death reason">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="otherDeathReason" control-label>Other Death Reason</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                name="otherDeathReason" id="otherDeathReason"
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.otherDeathReason">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                                <div ng-if="managepnccontroller.managePncObject.motherDetails.isAlive">
+                                    <div class="form-group">
+                                        <validate for='isIfaGiven' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial" for="isIfaGiven"
+                                                class="control-label" control-label>Is IFA Given?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="isIfaGiven" type="radio"
+                                                    ng-model="managepnccontroller.managePncObject.motherDetails.isIfaGiven"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="isIfaGiven" type="radio"
+                                                    ng-model="managepnccontroller.managePncObject.motherDetails.isIfaGiven"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managepnccontroller.managePncObject.motherDetails.isIfaGiven">
+                                        <validate for="ifaTabletsGiven" required-msg=" Enter number of IFA tablets"
+                                            max-msg="Enter value between 1-360" min-msg="Enter value between 1-360">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="ifaTabletsGiven" control-label>Number of IFA Tablets Given</label>
+                                            <input type="text" numbers-only class="form-control cst-form-control"
+                                                form-control name="ifaTabletsGiven" id="ifaTabletsGiven" min="1"
+                                                max="360"
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.ifaTabletsGiven"
+                                                required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='isCalciumGiven' required-msg="Select Value">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="isCalciumGiven" class="control-label" control-label>Calcium tablets
+                                                given?
+                                            </label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="isCalciumGiven" type="radio"
+                                                    ng-model="managepnccontroller.managePncObject.motherDetails.isCalciumGiven"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="isCalciumGiven" type="radio"
+                                                    ng-model="managepnccontroller.managePncObject.motherDetails.isCalciumGiven"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managepnccontroller.managePncObject.motherDetails.isCalciumGiven">
+                                        <validate for="calciumGiven" required-msg=" Enter number of Calcium tablets"
+                                            max-msg="Enter value between 1-360" min-msg="Enter value between 1-360">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="calciumGiven" control-label>Number of Calcium Tablets Given</label>
+                                            <input type="text" numbers-only class="form-control cst-form-control"
+                                                form-control name="calciumGiven" id="calciumGiven" max="360" min="1"
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.calciumGiven">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 inline-form" style="border-left: 1px solid #e5e5e5;">
+                                <div ng-if="managepnccontroller.managePncObject.motherDetails.isAlive">
+                                    <div class="form-group">
+                                        <label style="vertical-align: middle;white-space: initial"
+                                            for="motherDangerSigns" control-label>Danger Signs for Mother</label>
+                                        <select chosen-directive="managepnccontroller.motherDangerSigns"
+                                            class="form-control cst-form-control" form-control
+                                            ng-model="managepnccontroller.managePncObject.motherDetails.motherDangerSigns"
+                                            multiple="true" ng-change="managepnccontroller.isMotherDangerSignOther()"
+                                            name="motherDangerSigns" id="motherDangerSigns">
+                                            <option
+                                                ng-if="!managepnccontroller.managePncObject.motherDetails.motherDangerSigns.includes('NONE')"
+                                                value="{{motherDangerSign.id}}"
+                                                ng-repeat="motherDangerSign in managepnccontroller.motherDangerSigns">
+                                                {{motherDangerSign.value}}</option>
+                                            <option value="-1"
+                                                ng-if="!managepnccontroller.managePncObject.motherDetails.motherDangerSigns.includes('NONE')">
+                                                Other</option>
+                                            <option value="NONE">None</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" ng-if="managepnccontroller.showOtherMotherDangerSign">
+                                        <validate for='otherDangerSign' required-msg="Please enter other danger sign">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="otherDangerSign" control-label>Please
+                                                mention other danger sign during delivery</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                name="otherDangerSign" id="otherDangerSign"
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.otherDangerSign">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managepnccontroller.managePncObject.motherDetails.motherDangerSigns.length > 1 || (managepnccontroller.managePncObject.motherDetails.motherDangerSigns.length == 1 && !managepnccontroller.managePncObject.motherDetails.motherDangerSigns.includes('NONE'))">
+                                        <validate for='motherReferralDone' required-msg="Please select value">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="motherReferralDone" name="motherReferralDone"
+                                                id="motherReferralDone" class="control-label" control-label>Is mother
+                                                Referral Done?</label>
+                                            <label style="margin-top:3%" class="control control-radio">Yes
+                                                <input form-control value="YES" name="motherReferralDone" type="radio"
+                                                    ng-model="managepnccontroller.managePncObject.motherDetails.motherReferralDone"
+                                                    required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label style="margin-top:3%" class="control control-radio">No
+                                                <input form-control value="NO" name="motherReferralDone" type="radio"
+                                                    ng-model="managepnccontroller.managePncObject.motherDetails.motherReferralDone"
+                                                    required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managepnccontroller.managePncObject.motherDetails.motherReferralDone == 'YES'">
+                                        <label style="vertical-align: middle;white-space: initial" for="referralPlace">
+                                            <strong>Referral place</strong>
+                                        </label>
+                                        <infrastructure-directive
+                                            ng-model="managepnccontroller.motherReferralInfraDetails" disabled="false"
+                                            show-delivery-place="false" type-of-delivery=""
+                                            institutes-to-fetch="'ANOTHER'">
+                                        </infrastructure-directive>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for="familyPlanningMethod"
+                                            required-msg=" Select family planning method">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="familyPlanningMethod" control-label>Family Planning Method
+                                                Used</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.familyPlanningMethod"
+                                                name="familyPlanningMethod" id="familyPlanningMethod" required>
+                                                <option value="">--Select--</option>
+                                                <option value="FMLSTR">FEMALE STERILIZATION</option>
+                                                <option value="MLSTR">MALE STERILIZATION</option>
+                                                <option value="IUCD5">IUCD- 5 YEARS</option>
+                                                <option value="IUCD10">IUCD- 10 YEARS</option>
+                                                <option value="CONDOM">CONDOM</option>
+                                                <option value="ORALPILLS">ORAL PILLS</option>
+                                                <option value="CHHAYA">CHHAYA</option>
+                                                <option value="ANTARA">ANTARA</option>
+                                                <option value="CONTRA">EMERGENCY CONTRACEPTIVE PILLS</option>
+                                                <option value="PPIUCD">PPIUCD</option>
+                                                <option value="PAIUCD">PAIUCD</option>
+                                                <option value="NONE">None</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managepnccontroller.managePncObject.motherDetails.familyPlanningMethod === 'IUCD5' ||
+                                            managepnccontroller.managePncObject.motherDetails.familyPlanningMethod === 'IUCD10' ||
+                                            managepnccontroller.managePncObject.motherDetails.familyPlanningMethod === 'CHHAYA' ||
+                                            managepnccontroller.managePncObject.motherDetails.familyPlanningMethod === 'ANTARA' ||
+                                            managepnccontroller.managePncObject.motherDetails.familyPlanningMethod === 'PPIUCD' ||
+                                            managepnccontroller.managePncObject.motherDetails.familyPlanningMethod === 'PAIUCD'">
+                                        <validate for='fpInsertOperateDate' required-msg="Select Date">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="fpInsertOperateDate" control-label>Select date of
+                                                insertion/operation</label>
+                                            <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                name="fpInsertOperateDate" form-control
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.fpInsertOperateDate"
+                                                min-date="managepnccontroller.minServiceDate"
+                                                max-date="managepnccontroller.todayDate" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='bloodTransfusion' required-msg="Select a value">
+                                            <label for="bloodTransfusion" control-label
+                                                uib-tooltip="Is Blood Transfusion Done?*">
+                                                Is Blood Transfusion Done?
+                                            </label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="bloodTransfusion" type="radio"
+                                                    ng-model="managepnccontroller.managePncObject.motherDetails.bloodTransfusion"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="bloodTransfusion" type="radio"
+                                                    ng-model="managepnccontroller.managePncObject.motherDetails.bloodTransfusion"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for="ironDefAnemiaInj"
+                                            required-msg="Please Select Iron Deficiency Anemia Injection">
+                                            <label for="ironDefAnemiaInj" control-label
+                                                uib-tooltip="Iron Deficiency Anemia Injection*">
+                                                Iron Deficiency Anemia Injection
+                                            </label>
+                                            <select name="ironDefAnemiaInj" form-control
+                                                class="form-control cst-form-control"
+                                                ng-change="managepnccontroller.ironDefAnemiaInjChanged()"
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.ironDefAnemiaInj"
+                                                required>
+                                                <option value="">Select Iron Deficiency Anemia Injection</option>
+                                                <option value="IRON_SUCROSE">Iron Sucrose</option>
+                                                <option value="FCM">FCM</option>
+                                                <option value="NONE">None</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" style="margin-top: 2%"
+                                        ng-if="managepnccontroller.managePncObject.motherDetails.ironDefAnemiaInj === 'IRON_SUCROSE'">
+                                        <validate for='ironDefAnemiaInjDueDate' required-msg="Select Date">
+                                            <label for="ironDefAnemiaInjDueDate" control-label
+                                                uib-tooltip="Due date of Iron Deficiency Anemia Injection*">
+                                                Due date of Iron Deficiency Anemia Injection
+                                            </label>
+                                            <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                name="ironDefAnemiaInjDueDate" form-control
+                                                ng-model="managepnccontroller.managePncObject.motherDetails.ironDefAnemiaInjDueDate"
+                                                min-date="managepnccontroller.minInjDate"
+                                                max-date="managepnccontroller.maxInjDate" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-repeat="(childIndex,childDetail) in managepnccontroller.managePncObject.childDetails">
+                            <hr>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 class="card-sub-title">
+                                        PNC child details of
+                                        {{childDetail.first_name}}({{childDetail.unique_health_id}})
+                                    </h5>
+                                    <div class="form-group">
+                                        <validate for='isAlive' required-msg=" Select a value">
+                                            <label style="vertical-align: middle;white-space: initial;margin-top: 2%"
+                                                for="isAlive" name="isAlive" class="control-label" control-label>Is
+                                                Child Alive?</label>
+                                            <label class="control control-radio" style="margin-top: 3%">Yes
+                                                <input ng-value="true" name="{{$index}}isAlive" type="radio"
+                                                    ng-model="childDetail.isAlive" form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio" style="margin-top: 3%">No
+                                                <input ng-value="false" name="{{$index}}isAlive" type="radio"
+                                                    ng-model="childDetail.isAlive" form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div ng-if="childDetail.isAlive == false">
+                                        <div class="form-group">
+                                            <validate for='deathDate' required-msg="Select Date">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="deathDate" control-label>Death
+                                                    Date</label>
+                                                <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                    name="deathDate" form-control ng-model="childDetail.deathDate"
+                                                    max-date="managepnccontroller.managePncObject.motherDetails.serviceDate" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for='placeOfDeath' required-msg="Select a value">
+                                                <label for="placeOfDeath" control-label>Death Place</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="childDetail.placeOfDeath" name="placeOfDeath"
+                                                    id="placeOfDeath" required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option value="HOME">Home</option>
+                                                    <option value="ON_THE_WAY">On the way</option>
+                                                    <option value="HOSP">Hospital</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for='deathReason' required-msg="Select a value">
+                                                <label for="deathReason" control-label>Death Reason</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="childDetail.deathReason" name="deathReason"
+                                                    id="deathReason" required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option value="{{childDeathReason.id}}"
+                                                        ng-repeat="childDeathReason in managepnccontroller.childDeathReasons">
+                                                        {{childDeathReason.value}}</option>
+                                                    <option value="-1">Other</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group" ng-if="childDetail.deathReason == '-1'">
+                                            <validate for='otherDeathReason'
+                                                required-msg="Please enter other death reason">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="otherDeathReason" control-label>Other Death Reason</label>
+                                                <input type="text" class="form-control cst-form-control" form-control
+                                                    name="otherDeathReason" id="otherDeathReason"
+                                                    ng-model="childDetail.otherDeathReason">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                    <div ng-if="childDetail.isAlive">
+                                        <div class="form-group">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="childDangerSigns" control-label>Danger Signs for Child</label>
+                                            <select chosen-directive="managepnccontroller.childDangerSigns"
+                                                class="form-control cst-form-control" form-control
+                                                ng-model="childDetail.childDangerSigns" multiple="true"
+                                                ng-change="managepnccontroller.isChildDangerSignOther(childDetail)"
+                                                name="childDangerSigns" id="childDangerSigns">
+                                                <option ng-if="!childDetail.childDangerSigns.includes('NONE')"
+                                                    value="{{childDangerSign.id}}"
+                                                    ng-repeat="childDangerSign in managepnccontroller.childDangerSigns">
+                                                    {{childDangerSign.value}}</option>
+                                                <option ng-if="!childDetail.childDangerSigns.includes('NONE')"
+                                                    value="-1">Other</option>
+                                                <option value="NONE">None</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" ng-if="childDetail.showOtherChildDangerSign">
+                                            <validate for='otherDangerSign'
+                                                required-msg="Please enter other danger sign">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="otherDangerSign" control-label>Please
+                                                    mention other danger sign during delivery</label>
+                                                <input type="text" class="form-control cst-form-control" form-control
+                                                    name="otherDangerSign" id="otherDangerSign"
+                                                    ng-model="childDetail.otherDangerSign">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="childDetail.childDangerSigns.length > 1 || (childDetail.childDangerSigns.length == 1 && !childDetail.childDangerSigns.includes('NONE'))">
+                                            <validate for='childReferralDone' required-msg="Please select value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="childReferralDone" name="childReferralDone"
+                                                    id="childReferralDone" class="control-label" control-label>Is child
+                                                    referral done?</label>
+                                                <label style="margin-top:3%" class="control control-radio">Yes
+                                                    <input form-control value="YES" name="{{$index}}childReferralDone"
+                                                        type="radio" ng-model="childDetail.childReferralDone" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label style="margin-top:3%" class="control control-radio">No
+                                                    <input form-control value="NO" name="{{$index}}childReferralDone"
+                                                        type="radio" ng-model="childDetail.childReferralDone" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group" ng-if="childDetail.childReferralDone == 'YES'">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="referralPlace">
+                                                <strong>Referral place</strong>
+                                            </label>
+                                            <infrastructure-directive ng-model="childDetail.childReferralInfraDetails"
+                                                disabled="false" show-delivery-place="false" type-of-delivery=""
+                                                institutes-to-fetch="'ANOTHER'">
+                                            </infrastructure-directive>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="childWeight" required-msg=" Enter child weight"
+                                                min-msg="Enter valid weight(Between 0.1-25)"
+                                                max-msg=" Enter valid weight(Between 0.1-25)">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="childWeight" control-label>Weight of child</label>
+                                                <input type="text" numbers-only decimalallowed="true"
+                                                    class="form-control cst-form-control" form-control
+                                                    name="childWeight" id="childWeight" min="0.1" max="25"
+                                                    ng-model="childDetail.childWeight" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6"
+                                    ng-if="childDetail.dueImmunisations != null && childDetail.dueImmunisations.length > 0 && childDetail.isAlive">
+                                    <h5 class="card-sub-title">
+                                        Vaccinations
+                                    </h5>
+                                    <div ng-repeat="immunisation in childDetail.dueImmunisations">
+                                        <div class="form-group">
+                                            <validate for='{{immunisation}}' required-msg="Select Value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="{{immunisation}}" class="control-label" control-label>Is
+                                                    {{immunisation}} given?</label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="{{childIndex}}{{immunisation}}Yes"
+                                                        type="radio"
+                                                        ng-change="managepnccontroller.immunisationGivenChanged(childDetail, immunisation, childDetail.dob, childIndex)"
+                                                        ng-model="childDetail.immunisation[immunisation].given"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="{{childIndex}}{{immunisation}}No"
+                                                        type="radio"
+                                                        ng-change="managepnccontroller.immunisationGivenChanged(childDetail, immunisation, childDetail.dob, childIndex)"
+                                                        ng-model="childDetail.immunisation[immunisation].given"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group" ng-if="childDetail.immunisation[immunisation].given">
+                                            <validate for='{{immunisation}}date' required-msg="Select Date"
+                                                vaccine-msg="Invalid Vaccination Date">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="{{immunisation}}date" control-label>Date
+                                                    of giving {{immunisation}}</label>
+                                                <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                    name="{{childIndex}}{{immunisation}}date" form-control
+                                                    ng-model="childDetail.immunisation[immunisation].date"
+                                                    ng-change="managepnccontroller.checkImmunisationValidation(childDetail.dob, childDetail.immunisation[immunisation].date, immunisation, childDetail.immunisationGiven, childDetail, childIndex)"
+                                                    min-date="childDetail.dob" max-date="managepnccontroller.todayDate"
+                                                    required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-1">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary"
+                                    ng-click="managepnccontroller.savePnc()"><span class="fa fa-floppy-o"></i> Save &
+                                        Continue</button>
+                                <button class="btn btn-secondary" ng-click="managepnccontroller.goBack()">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

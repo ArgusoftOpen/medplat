@@ -1,0 +1,64 @@
+<style>
+    .list-value {
+        width: calc(100% - 162px) !important;
+        margin: 0 !important;
+        white-space: inherit !important;
+    }
+</style>
+<div class="modal-header">
+    <h4 class="text">Download Report PDF</h4>
+    <button type="button" class="close" ng-click="downloadPdf.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form name="downloadPdf.form" novalidate>
+        <div class="inline-form col-12">
+            <div class="form-group">
+                <label control-label style="white-space: initial;">
+                    Repeated Columns ({{downloadPdf.referenceColumns.length}})
+                </label>
+                <label class="list-value">
+                    <ol type="1" style="margin-bottom: 0;">
+                        <li style="padding-left: 8px;" ng-repeat="referenceColumn in downloadPdf.referenceColumns">
+                            {{referenceColumn}}
+                        </li>
+                    </ol>
+                </label>
+            </div>
+            <hr>
+            <div class="form-group">
+                <validate for='numberOfColumnPerPage' required-msg="Enter Value">
+                    <label for='numberOfColumnPerPage' control-label style="white-space: initial; line-height: 1.5;">
+                        Number of Column Per Page?
+                    </label>
+                    <input type="number" form-control class="form-control cst-form-control" name="numberOfColumnPerPage"
+                        id="numberOfColumnPerPage" ng-model="downloadPdf.pdfOptions.numberOfColumnPerPage"
+                        max="{{downloadPdf.tableColumns.length}}" min="{{downloadPdf.referenceColumns.length + 1}}"
+                        required>
+                    <placeholder>
+                    </placeholder>
+                </validate>
+            </div>
+            <div class="form-group">
+                <validate for="isLandscape">
+                    <label style="white-space: initial; line-height: 1.5;">
+                        Download PDF in landscape orientation?
+                    </label>
+                    <label style="line-height: 29px;" class="control control-checkbox" for="isLandscape" control-label>
+                        <input type="checkbox" form-control class="form-control cst-form-control" id="isLandscape"
+                            name="isLandscape" ng-model="downloadPdf.pdfOptions.isLandscape">
+                        <div style="top: 6px;" class="control_indicator">
+                        </div>
+                    </label>
+                    <placeholder>
+                    </placeholder>
+                </validate>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="downloadPdf.ok()">Download</button>
+    <button type="button" class="btn btn-secondary" ng-click="downloadPdf.cancel()">Cancel</button>
+</div>

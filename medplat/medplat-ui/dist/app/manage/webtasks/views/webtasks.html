@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div class="content-wrapper" ng-if='webtasks.showTaskBar'>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Small boxes on home page (Stat box) -->
+            <div class="row top-spacer-50" style="margin-right: 0px">
+                <div class="col-md-11 no-padding">
+                    <div ng-repeat="basket in webtasks.taskBarBaskets.baskets" style="display: inline-block"
+                        class="col-md-2 col-sm-6 col-xs-12" ng-if="basket.showInTaskBar">
+                        <div class="info-box" ng-class="{'info-box-active':webtasks.selectedBasketIndex == $index}">
+                            <span
+                                ng-click="webtasks.clearPreviousTaskList(basket); webtasks.selectedBasketIndex = $index"
+                                class="info-box-icon info-box-value"
+                                style="color:white;background-color: {{basket.colorCode}}">
+                                <div style="font-size: 15px" ng-bind="basket.count > 9999?'9999+':basket.count"></div>
+                                <span class="basket_label">Total</span>
+                            </span>
+                            <div ng-click="webtasks.clearPreviousTaskList(basket); webtasks.selectedBasketIndex = $index"
+                                class="info-box-content">
+                                <span class="info-box-text" ng-bind="basket.name"></span>
+                            </div>
+                            <span class="red_notification_circle" ng-if="basket.dueCount != null && basket.dueCount > 0"
+                                ng-class="{'basket_morethan99UnReadTask-fontsize':basket.dueCount > 99}"
+                                ng-bind="basket.dueCount > 99?'99+':basket.dueCount"></span>
+                            <span>
+                                <i ng-if="basket.showInTaskBar" class="fa fa-arrow-circle-right switchtohide"
+                                    ng-click="webtasks.changeBasketPreference(basket, 'hide')" aria-hidden="true">
+                                </i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 dropdown" style="height:100%" ng-if="webtasks.taskBarBaskets.baskets.length > 0">
+                    <div class="info-box-r">
+                        <div data-toggle="dropdown">
+                            <div class="info-box-content-r" ng-click="webtasks.removeStyles()">
+                                <span class="info-box-text-r">
+                                    <span class="big-text">{{webtasks.innerTotalCount}}</span>
+                                </span>
+                            </div>
+                            <span ng-click="webtasks.removeStyles()" class="info-box-icon-r bg-gray">
+                                <em class="ion-android-more-vertical"></em>
+                            </span>
+                        </div>
+                        <ul class="dropdown-menu more-infobox" aria-labelledby="dLabel">
+                            <li>
+                                <ul class="list-unstyled no-margin" style="max-height:350px;overflow-y: auto">
+                                    <li>
+                                        <div class="row" style="margin:0px">
+                                            <div class="col-md-6" ng-repeat="basket in webtasks.taskBarBaskets.baskets"
+                                                ng-if="!basket.showInTaskBar">
+                                                <div ng-init="webtasks.selectedBasketIndex >= 0?webtasks.selectedBasketIndex = webtasks.selectedBasketIndex:webtasks.selectedBasketIndex = - 1"
+                                                    class="info-box"
+                                                    ng-class="{'info-box-active':webtasks.selectedBasketIndex == $index}">
+                                                    <span
+                                                        ng-click="webtasks.clearPreviousTaskList(basket); webtasks.selectedBasketIndex = $index"
+                                                        class="info-box-icon info-box-value"
+                                                        style="color:white; background-color: {{basket.colorCode}};">
+                                                        <div ng-class="{'basket_morethan999task-fontsize':basket.count > 9999}"
+                                                            style='font-size:15px'
+                                                            ng-bind="basket.count > 9999?'9999+':basket.count"></div>
+                                                        <span class="basket_label">Total</span>
+                                                    </span>
+                                                    <div ng-click="webtasks.clearPreviousTaskList(basket); webtasks.selectedBasketIndex = $index"
+                                                        class="info-box-content">
+                                                        <span class="info-box-text" ng-bind="basket.name"></span>
+                                                    </div>
+                                                    <span>
+                                                        <i class="fa fa-arrow-circle-left switchtohide"
+                                                            ng-click="webtasks.changeBasketPreference(basket, 'show')"
+                                                            aria-hidden="true">
+                                                        </i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-md-6"
+                                        ng-if="(layout.taskBarBaskets.baskets | filter:{showInTaskBar:false}).length == 0">
+                                        No more tasks available.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="text-right">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <button class="btn btn-success btn-sm" ng-click="webtasks.changeShowTaskbar(false)">
+                                        Hide Taskbar
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <main ui-view></main>
+        </section>
+        <div class="clearfix"></div>
+    </div>
+    <div class="col-12 mb-15" ng-if="webtasks.taskDetailList.length > 0">
+        <div class="pull-right " style="margin-right: 25px;font-size: 20px;">
+            <em class="fa fa-file-excel-o" uib-tooltip="Download excel" style="cursor: pointer;"
+                ng-click="webtasks.saveExcel()">
+            </em>
+        </div>
+        <div style="overflow: auto" class="cst-table table-responsive" id="user-scroll">
+            <table class="table table-sm table-striped filter-table table-auto table-bordered header-fixed">
+                <thead class="cst-thead">
+                    <tr>
+                        <th>#</th>
+                        <th ng-repeat="header in webtasks.taskheaders" ng-bind="header"
+                            ng-if="header !== 'modal_name' && header !== 'url_name' && header !== 'id'"></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="cst-tbody" infinite-scroll-distance="0"
+                    infinite-scroll='webtasks.getWebTaskDetailByType(webtasks.currentBasket.id)'
+                    infinite-scroll-container='"#user-scroll"' infinite-scroll-immediate-check="false">
+                    <tr ng-repeat="task in webtasks.taskDetailList">
+                        <td>{{$index + 1}}</td>
+                        <td ng-repeat="detail in task.details" ng-bind-html="detail | trustAsHtml"
+                            ng-if="webtasks.taskheaders[$index] !== 'modal_name' && webtasks.taskheaders[$index] !== 'url_name' && webtasks.taskheaders[$index] !== 'id'">
+                        </td>
+                        <td class="action-cell no-print">
+                            <ul class="action-item"
+                                ng-if="webtasks.taskheaders.includes('url_name') && task.isActionRequired">
+                                <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <a href="#" class="action-icon more-icon"></a>
+                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                        aria-labelledby="moreDropdown">
+                                        <li>
+                                            <a href="javascript:void(0)"
+                                                ng-click="webtasks.navigateToUrl(task.details.url_name)">
+                                                <strong>Fill the form</strong>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="action-item"
+                                ng-if="webtasks.taskheaders.includes('modal_name') && task.isActionRequired">
+                                <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <a href="#" class="action-icon more-icon"></a>
+                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                        aria-labelledby="moreDropdown">
+                                        <li>
+                                            <a href="javascript:void(0)" ng-click="webtasks.openModal(task)">
+                                                <strong>Perform Action</strong>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul ng-if="task.isActionRequired && !webtasks.taskheaders.includes('url_name') && !webtasks.taskheaders.includes('modal_name')"
+                                class="action-item">
+                                <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <a href="#" class="action-icon more-icon"></a>
+                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                        aria-labelledby="moreDropdown">
+                                        <li>
+                                            <a href="javascript:void(0)"
+                                                ng-click="webtasks.getTaskDetailWithAction(task)">
+                                                <strong>Action</strong>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="actionModal" role="dialog">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="text">Perform action</h4>
+                </div>
+                <div class="modal-body">
+                    <h6>{{webtasks.currentBasket.name}}</h6>
+                    <div style="overflow: auto" class="cst-table table-responsive">
+                        <table class="table table-sm table-striped filter-table table-auto table-bordered header-fixed">
+                            <thead class="cst-thead">
+                                <tr>
+                                    <th>#</th>
+                                    <th ng-repeat="header in webtasks.taskheaders" ng-bind="header"></th>
+                                    <th>Action</th>
+                                    <th>Other details</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cst-tbody">
+                                <tr>
+                                    <td>{{$index + 1}}</td>
+                                    <td ng-repeat="detail in webtasks.selectedTaskForAction.details" ng-bind="detail">
+                                    </td>
+                                    <td class="large-col">
+                                        <div ng-if="webtasks.selectedTaskForAction.isActionRequired">
+                                            <form role="form" name="webtasks.selectedTaskActionForm" novalidate>
+                                                <validate for="selectedAction" required-msg=" Select Action">
+                                                    <select class="form-control cst-form-control" form-control
+                                                        ng-model="webtasks.selectedTaskForAction.action"
+                                                        ng-change="webtasks.actionChange(webtasks.selectedTaskForAction)"
+                                                        name="selectedAction" id="selectedAction" required>
+                                                        <option value="">--Select--</option>
+                                                        <option
+                                                            ng-repeat="action in webtasks.actionOptionsForSelectedTask"
+                                                            ng-value="action">{{action.displayText}}</option>
+                                                    </select>
+                                                </validate>
+                                            </form>
+                                        </div>
+                                        <div ng-if="!webtasks.selectedTaskForAction.isActionRequired">
+                                            No action required
+                                        </div>
+                                    </td>
+                                    <td class="large-col">
+                                        <div ng-if="webtasks.selectedTaskForAction.isOtherDetailsRequired">
+                                            <form role="form" name="webtasks.otherDetails" novalidate>
+                                                <validate for="otherDetails" required-msg=" other Details">
+                                                    <textarea class="form-control cst-form-control" maxlength="99" form-control
+                                                        form-control rows="2" cols="40" name="otherDetails"
+                                                        id="otherDetails"
+                                                        ng-model="webtasks.selectedTaskForAction.otherDetail"
+                                                        ng-required="webtasks.selectedTaskForAction.isOtherDetails"></textarea>
+                                                </validate>
+                                            </form>
+                                        </div>
+                                        <div ng-if="!webtasks.selectedTaskForAction.isOtherDetailsRequired">
+                                            Not required
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-if="webtasks.otherTasksForUser.length > 0">
+                        <hr>
+                        <div style="overflow: auto;margin-top: 2%" class="cst-table table-responsive"
+                            ng-repeat="taskType in webtasks.otherTasksForUser">
+                            <h6>{{taskType.name}}(Other)</h6>
+                            <table
+                                class="table table-sm table-striped filter-table table-auto table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th>#</th>
+                                        <th ng-repeat="(headerKey,headerVal) in taskType.webTasks[0].details">
+                                            {{headerKey}}</th>
+                                        <th>Action</th>
+                                        <th>Other details</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr ng-repeat="task in taskType.webTasks">
+                                        <td>{{$index + 1}}</td>
+                                        <td ng-repeat="detail in task.details" ng-bind="detail"></td>
+                                        <td class="large-col">
+                                            <div ng-if="task.isActionRequired">
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="task.action" ng-change="webtasks.actionChange(task)"
+                                                    name="selectedAction" id="selectedAction">
+                                                    <option value="">--Select--</option>
+                                                    <option ng-repeat="action in task.actions" ng-value="action">
+                                                        {{action.displayText}}</option>
+                                                </select>
+                                            </div>
+                                            <div ng-if="!task.isActionRequired">
+                                                No action required
+                                            </div>
+                                        </td>
+                                        <td class="large-col">
+                                            <div ng-if="task.isOtherDetailsRequired">
+                                                <textarea ng-model="task.otherDetail" form-control rows="2" cols="40"
+                                                    name="otherDetails" id="otherDetails">
+                                                </textarea>
+                                            </div>
+                                            <div ng-if="!task.isOtherDetailsRequired">
+                                                Not required
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="webtasks.cancelActions()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" ng-click="webtasks.saveActions()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div" ng-if="webtasks.currentBasket.isLocationBasedFilterRequired">
+        <span class="filter-toggle" ng-click="webtasks.toggleFilter()">Filter</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Search</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12" ng-form="webtasks.searchForm">
+                    <div class="form-group">
+                        <location-directive ng-model="webtasks.locationId"
+                            fetch-according-to-user-aoi="webtasks.currentBasket.isFetchAccordingAOI"
+                            fetch-upto-level="webtasks.currentBasket.fetchUptoLevel"
+                            required-upto-level="webtasks.currentBasket.requiredUptoLevel">
+                        </location-directive>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr>
+                <div class="form-group text-right">
+                    <button class="btn btn-secondary close-filter" ng-click="webtasks.toggleFilter()">Close</button>
+                    <button class="btn btn-primary search-filter"
+                        ng-click="webtasks.clearPreviousTaskList(webtasks.currentBasket, true); webtasks.toggleFilter();">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

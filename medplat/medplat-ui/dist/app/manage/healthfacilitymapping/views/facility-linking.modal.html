@@ -1,0 +1,142 @@
+<style>
+    .card-sub-title {
+        font-size: 15px;
+        color: black;
+    }
+</style>
+<div class="modal-header">
+    <h4 class="text">Link Facility with HFR</h4>
+</div>
+
+<div class="modal-body inline-form">
+    <form role="form" name="ctrl.facilityForm" novalidate id="facilityForm">
+        <div class="row col-12">
+            <div class="form-group">
+                <p>is your facility registered with Health Facility Registry (HFR)</p>
+                <label class="control control-radio">Yes
+                    <input value="y" name="yLink" type="radio" ng-model="ctrl.wayToLinkRecord" ng-click="ctrl.reset()"
+                        required>
+                    <div class="control_indicator"></div>
+                </label>
+
+                <label class="control control-radio">No
+                    <input value="n" name="nLink" type="radio" ng-model="ctrl.wayToLinkRecord"
+                        ng-click="ctrl.navigateToHFR()" required>
+                    <div class="control_indicator"></div>
+                </label>
+            </div>
+        </div>
+    </form>
+
+    <hr ng-if="ctrl.wayToLinkRecord == 'y'">
+
+    <form role="form" name="ctrl.linkFacilityForm" novalidate id="linkFacilityForm" ng-if="ctrl.wayToLinkRecord == 'y'">
+
+        <p>Please, enter the Facility-ID that you want to link</p>
+        <div class="row col-12">
+            <div class="form-group col-6">
+                <validate for='facilityId' required-msg="Please, Enter Facility Id">
+                    <label style="white-space: normal;" for='facilityId' control-label>
+                        HFR Facility ID
+                    </label>
+                    <input type="text" class="form-control cst-form-control" form-control name="facilityId"
+                        id="facilityId" ng-model="ctrl.facilityId" required>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+        </div>
+
+        <hr ng-if="ctrl.isAlreadyLinked">
+        <div ng-if="ctrl.isAlreadyLinked">
+            <div class="row col-12 form-group">
+                <small class="alert alert-danger">
+                    The Facility Id is already linked with below facility detail</small>
+            </div>
+
+            <div class="card-sub-title card-body">Linked Facility Details</div>
+            <div class="row col-12">
+                <div class="form-group col-6 col-md-6" ng-if="ctrl.infrastructure.name">
+                    <validate for="name">
+                        <label for="name" control-label class="">Name</label>
+                        <input type="text" id="name" form-control class="form-control cst-form-control" name="name"
+                            readonly="true"  ng-model="ctrl.infrastructure.name">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group col-6 col-md-6" ng-if="ctrl.infrastructure.nameInEnglish">
+                    <validate for="nameG">
+                        <label for="nameG" control-label class="">Name(in English)</label>
+                        <input type="text" form-control class="form-control cst-form-control" name="nameG"
+                        readonly="true"  ng-model="ctrl.infrastructure.nameInEnglish" ng-pattern="/^[^']*$/">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group col-6 col-md-6" ng-if="ctrl.infrastructure.hfrFacilityId">
+                    <validate for="facilityId">
+                        <label for="facilityId" control-label class="">Facility Id</label>
+                        <input type="text" id="facilityId" form-control class="form-control cst-form-control" name="facilityId"
+                            readonly="true"  ng-model="ctrl.infrastructure.hfrFacilityId">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group col-6 col-md-6" ng-if="ctrl.infrastructure.type">
+                    <validate for="locationType">
+                        <label for="locationType" control-label> Type</label>
+                        <select form-control class="form-control cst-form-control"
+                            ng-change="ctrl.infrastructureTypeChanged()" name="locationType"
+                            ng-model="ctrl.infrastructure.type" disabled="true"
+                            ng-options="type.id as  type.value for type in ctrl.types">
+                            <option value=''>Please Select.....</option>
+                        </select>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group col-6 col-md-6" ng-if="ctrl.infrastructure.address">
+                    <validate for="address" required-msg="Select Type" pattern-msg="Special Characters not allowed">
+                        <label for="address" control-label class="">Address</label>
+                        <textarea form-control type="text" name="address" id="address" readonly="true"
+                            class="form-control cst-form-control" ng-model="ctrl.infrastructure.address"
+                            ng-pattern="/^[^']*$/"></textarea>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group col-6 col-md-6" ng-if="ctrl.infrastructure.locationName">
+                    <label>Location</label>
+                    <span>{{ctrl.infrastructure.locationName}}</span>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <hr ng-if="ctrl.wayToLinkRecord == 'n' && (!ctrl.hpIdResponse.isRegister || !ctrl.hpIdResponse.isLogin )">
+    <form role="form" name="ctrl.processFacilityForm" novalidate id="processFacilityForm"
+        ng-if="ctrl.wayToLinkRecord == 'n'">
+        <div class="row col-12">
+            <div class="form-group"
+                ng-if="ctrl.hpIdResponse && (!ctrl.hpIdResponse.isRegister || !ctrl.hpIdResponse.isLogin )">
+                <p>Please select appropriate option to link facility with HFR</p>
+                <label class="control control-radio" ng-if="!ctrl.hpIdResponse.isRegister">Create Health Professional Id
+                    <input value="create" name="createFacility" type="radio" ng-model="ctrl.selectedOption" required>
+                    <div class="control_indicator"></div>
+                </label>
+
+                <label class="control control-radio"
+                    ng-if="!ctrl.hpIdResponse.isRegister || !ctrl.hpIdResponse.isLogin">Login Health Professional Id
+                    <input value="login" name="linkFacility" type="radio" ng-model="ctrl.selectedOption" required>
+                    <div class="control_indicator"></div>
+                </label>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer mt-3">
+    <div ng-if="ctrl.wayToLinkRecord && ctrl.wayToLinkRecord == 'y'">
+        <button class="btn btn-primary" ng-click="ctrl.onNextAction()"
+            ng-disabled="ctrl.linkFacilityForm.$invalid">Next</button>
+    </div>
+    <div ng-if="ctrl.selectedOption && ctrl.wayToLinkRecord == 'n'">
+        <button class="btn btn-primary" ng-click="ctrl.onNextAction()">Next</button>
+    </div>
+    <button type="button" class="btn btn-secondary" ng-click="ctrl.cancel()">Close</button>
+</div>

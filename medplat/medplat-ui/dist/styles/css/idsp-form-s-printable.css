@@ -1,0 +1,60 @@
+th,
+td {
+    border: 1px solid #e6e6e6 !important;
+    padding: 4px;
+}
+
+table {
+    width: 100%;
+}
+
+thead,
+tbody {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+}
+
+.col-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+
+.align-center-h {
+    text-align: center;
+}
+
+.align-center-v {
+    vertical-align: middle !important;
+}
+
+.mb-8 {
+    margin-bottom: 8px;
+}
+
+.mb-12 {
+    margin-bottom: 12px;
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.dark-background {
+    background-color: rgba(0, 0, 0, .10);
+}
+
+.container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}

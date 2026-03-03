@@ -1,0 +1,31 @@
+<div class="container" style="max-width:1000px;margin-top:20px;">
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Tickets</strong></div>
+        <div class="panel-body">
+            <div class="form-inline" style="margin-bottom:10px;">
+                <label>Filter:</label>
+                <select class="form-control" ng-model="tickets.filter">
+                    <option value="all">All</option>
+                    <option value="open">Open</option>
+                    <option value="inprogress">In Progress</option>
+                    <option value="closed">Closed</option>
+                </select>
+            </div>
+            <table class="table table-striped">
+                <thead><tr><th>ID</th><th>Title</th><th>Status</th><th>Created</th><th>Action</th></tr></thead>
+                <tbody>
+                    <tr ng-repeat="t in tickets.filtered()">
+                        <td>{{t.id}}</td>
+                        <td>{{t.title}}</td>
+                        <td>{{t.status}}</td>
+                        <td>{{t.createdAt | date:'short'}}</td>
+                        <td>
+                            <button class="btn btn-xs btn-primary" ng-click="tickets.changeStatus(t,'inprogress')">Start</button>
+                            <button class="btn btn-xs btn-success" ng-click="tickets.changeStatus(t,'closed')">Close</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

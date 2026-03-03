@@ -1,0 +1,208 @@
+<div class="container-fluid" ng-if="migrations.pageLoaded">
+    <div class="row">
+        <div class="col-12">
+            <div class="cst-tab">
+                <uib-tabset active="migrations.selectedIndex">
+                    <uib-tab index=0 active heading="Unresolved Migrated Out Members"
+                        ng-click="migrations.searchData(true)">
+                        <div class="cst-table table-responsive" id="label-scroll" ng-if="migrations.selectedIndex == 0">
+                            <table aria-describedby="table"
+                                class="table table-sm table-striped table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="name" style="width: 10%;">Name (Contact Number)</th>
+                                        <th id="uniqueHealthId" style="width: 7%;">Unique Health Id</th>
+                                        <th id="familyId" style="width: 7%;">Family Id</th>
+                                        <th id="locationMigratedFrom" style="width: 15%;">Location Migrated From</th>
+                                        <th id="actions" style="width: 5%;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                    infinite-scroll='migrations.searchData()'
+                                    infinite-scroll-disabled='migrations.pagingService.pagingRetrivalOn'
+                                    infinite-scroll-container='"#label-scroll"'>
+                                    <tr ng-repeat="migration in migrations.listOfUsers">
+                                        <td> {{migration.fullname|emptylabel}} ( {{migration.contactnumber|emptylabel}})
+                                            <span class="badge badge-pill pull-right badge-dark">
+                                                {{migration.count}}
+                                            </span>
+                                        </td>
+                                        <td>{{migration.uniquehealthid|emptylabel}} </td>
+                                        <td>{{migration.familymigratedfrom|emptylabel}}</td>
+                                        <td ng-bind="migration.locationfromname | emptylabel"></td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li style="cursor: pointer; font-size: 20px;"
+                                                    ui-sref="techo.manage.migrationInfomation({memberId:migration.memberid, migrationId:migration.migrationid, locationId:migrations.search.locationId})">
+                                                    <span class="badge badge-primary">View</span>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="(!migrations.listOfUsers || migrations.listOfUsers.length === 0)">
+                                        <td colspan="5">No LFU Members Found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index=3 heading="Unresolved Migrated In Members"
+                        ng-click="migrations.retrieveMigrationIn(true)">
+                        <div class="cst-table table-responsive" id="label-scroll3"
+                            ng-if="migrations.selectedIndex == 3">
+                            <table aria-describedby="table"
+                                class="table table-sm table-striped table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="name" style="width: 10%;">Name (Contact Number)</th>
+                                        <th id="uniqueHealthId" style="width: 7%;">Unique Health Id</th>
+                                        <th id="familyId" style="width: 7%;">Family Id</th>
+                                        <th id="villageName" style="width: 15%;">Village Name</th>
+                                        <th id="nearestLocation" style="width: 15%;">Nearest Location</th>
+                                        <th id="reportedBy">Reported by</th>
+                                        <th id="sourceFhw/AshaDetails">Source Fhw/ASHA Details</th>
+                                        <th id="actions" style="width: 5%;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                    infinite-scroll='migrations.retrieveMigrationIn()'
+                                    infinite-scroll-disabled='migrations.pagingService.pagingRetrivalOn'
+                                    infinite-scroll-container='"#label-scroll3"'>
+                                    <tr ng-repeat="migration in migrations.migrationIn">
+                                        <td>{{migration.mobile_data.firstname}} {{migration.mobile_data.lastName}}
+                                            ({{migration.mobile_data.phoneNumber|emptylabel}})</td>
+                                        <td>{{migration.mobile_data.healthId|emptylabel}}</td>
+                                        <td>{{migration.family_migrated_to|emptylabel}}</td>
+                                        <td ng-bind="migration.mobile_data.villageName | emptylabel"></td>
+                                        <td>{{migration.dist_block}}</td>
+                                        <td>{{migration.fhwname}} ({{migration.fhwmobile}})</td>
+                                        <td>Name : {{migration.mobile_data.fhwOrAshaName|emptylabel}} - Phone :
+                                            {{migration.mobile_data.fhwOrAshaPhone|emptylabel}}</td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <a href="#" class="action-icon more-icon"></a>
+                                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                        aria-labelledby="moreDropdown">
+                                                        <li ng-click="migrations.searchMembers(migration.id)">
+                                                            Search For Member
+                                                        </li>
+                                                        <li ng-click="migrations.createNewTemp(migration)">
+                                                            Create Temporary Member
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="(!migrations.migrationIn || migrations.migrationIn.length === 0)">
+                                        <td colspan="10">No Members Found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index=1 heading="Lost To Follow Up Members" ng-click="migrations.lfumembers(true)">
+                        <div class="cst-table table-responsive" id="lfu-scroll" ng-if="migrations.selectedIndex == 1">
+                            <table aria-describedby="table"
+                                class="table table-sm table-striped table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="name" style="width: 10%;">Name (Contact Number)</th>
+                                        <th id="uniqueHealthIdFamilyId" style="width: 10%;">
+                                            Unique Health Id - Family Id
+                                        </th>
+                                        <th id="locationMigratedFrom" style="width: 15%;">Location Migrated From
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                    infinite-scroll='migrations.lfumembers()'
+                                    infinite-scroll-disabled='migrations.pagingService.pagingRetrivalOn'
+                                    infinite-scroll-container='"#lfu-scroll"'>
+                                    <tr ng-repeat="migration in migrations.listOfLFU">
+                                        <td> {{migration.fullname|emptylabel}} (
+                                            {{migration.contactnumber|emptylabel}})
+                                        </td>
+                                        <td>{{migration.uniquehealthid|emptylabel}} <strong>-</strong>
+                                            {{migration.familymigratedfrom|emptylabel}}</td>
+                                        <td ng-bind="migration.locationfromname | emptylabel"></td>
+                                    </tr>
+                                    <tr ng-if="(!migrations.listOfLFU || migrations.listOfLFU.length === 0)">
+                                        <td colspan="10">No LFU Members Found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index=2 heading="Resolved Members" ng-click="migrations.retrievedResolvedMembers(true)">
+                        <div class="cst-table table-responsive" id="label-scroll3" ng-if="migrations.selectedIndex == 2"
+                            style="overflow: auto">
+                            <table aria-describedby="table"
+                                class="table table-sm table-striped table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th id="name" class="small-col">Name (Contact Number)</th>
+                                        <th id="uniqueHealthId" class="small-col">Unique Health Id - Family
+                                            Id</th>
+                                        <th id="locationMigratedFrom" class="medium-col">Location Migrated
+                                            From</th>
+                                        <th id="locationMigratedTo" class="medium-col">Location Migrated To
+                                        </th>
+                                        <th id="status" class="small-col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody" infinite-scroll-distance="0"
+                                    infinite-scroll='migrations.retrievedResolvedMembers()'
+                                    infinite-scroll-disabled='migrations.pagingService.pagingRetrivalOn'
+                                    infinite-scroll-container='"#label-scroll3"'>
+                                    <tr ng-repeat="migration in migrations.resolvedMembers">
+                                        <td> {{migration.fullname|emptylabel}}
+                                            ({{migration.contactnumber|emptylabel}})
+                                        </td>
+                                        <td>{{migration.uniquehealthid|emptylabel}} <strong>-</strong>
+                                            {{migration.familymigratedfrom|emptylabel}}
+                                        </td>
+                                        <td style="word-wrap: break-word"
+                                            ng-bind="migration.locationfromname | emptylabel"></td>
+                                        <td ng-bind="migration.locationtoname | emptylabel"></td>
+                                        <td ng-bind="migration.status | titlecase"></td>
+                                    </tr>
+                                    <tr
+                                        ng-if="(!migrations.resolvedMembers || migrations.resolvedMembers.length === 0)">
+                                        <td colspan="10">No Members Resolved</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" filter-div">
+    <span style="left:-66px" class="filter-toggle" ng-click="migrations.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="queform.searchForm" novalidate>
+            <location-directive ng-model="migrations.search.locationId" fetch-according-to-user-aoi="true">
+            </location-directive>
+            <div class="col-12">
+                <hr>
+                <div class="form-group text-right">
+                    <button class="btn btn-secondary close-filter" ng-click="migrations.toggleFilter()">Close</button>
+                    <button type="submit" class="btn btn-primary search-filter"
+                        ng-click="migrations.retrieveFilteredMembers(true)">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

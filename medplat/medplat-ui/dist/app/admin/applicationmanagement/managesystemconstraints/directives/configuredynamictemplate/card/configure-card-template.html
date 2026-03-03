@@ -1,0 +1,52 @@
+<style>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .fa-1-6x {
+        font-size: 1.6em;
+        line-height: 29px;
+    }
+</style>
+<div class="card cst-card">
+    <div class="card-title mb-0">
+        <div class="float-left form-group m-0 p-0">
+            <label style="width: max-content; max-width: 500px;">
+                <strong class="text">&#60;&#60; Card &#62;&#62; </strong>
+                <span uib-tooltip="{{config.title}}" tooltip-placement="top-left">{{config.title}}</span>
+            </label>
+            <em ng-if="config.isRepeatable" uib-tooltip="Repeatable Component" class="fa fa-refresh fa-1-6x mr-2"
+                aria-hidden="true">
+            </em>
+            <img ng-if="config.isConditional" height="30px" width="30px" style="vertical-align: bottom;"
+                uib-tooltip="Conditional Component" alt="Conditional Component" ng-src="img/condition.png" />
+        </div>
+        <div class="float-right p-0" style="display: inline-flex;">
+            <select class="form-control cst-form-control" ng-model="childWebComponent"
+                ng-change="onChildWebComponentChangedDir(childWebComponent, elements, element, 'CARD'); childWebComponent = null;"
+                ng-options="cmp as cmp.name for cmp in childWebComponentList" style="margin-right: 10px;">
+                <option value="">--Select Component--</option>
+            </select>
+            <em class="cursor-pointer fa fa-arrow-up fa-1-6x text-secondary mr-2" uib-tooltip="Move Up"
+                aria-hidden="true" ng-click="moveUp()">
+            </em>
+            <em class="cursor-pointer fa fa-arrow-down fa-1-6x text-secondary mr-2" uib-tooltip="Move Down"
+                aria-hidden="true" ng-click="moveDown()">
+            </em>
+            <em class="cursor-pointer fa fa-edit fa-2x text-info mr-2" uib-tooltip="Edit Web Component Config"
+                ng-click="manageCardConfig(config)">
+            </em>
+            <em class="cursor-pointer fa fa-trash-o fa-2x text-danger" uib-tooltip="Delete Web Component"
+                ng-click="onRemoveWebComponent()">
+            </em>
+        </div>
+    </div>
+    <div class="card-body inline-form mb-0">
+        <div ng-repeat="(elementIndex, element) in elements">
+            <configure-element-template-directive sibling-elements="elements" element-index="elementIndex"
+                element="element" form-field-list="formFieldList"
+                on-child-web-component-changed="onChildWebComponentChangedDir(childWebComponent, elements, element, parentComponentType)">
+            </configure-element-template-directive>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,202 @@
+<div class="container-fluid users">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="section-title">
+                <h4 class="text">Users </h4>
+                <div class="float-right">
+                    <button ng-if="!userscontroller.noRolesAssignedToShow && userscontroller.rights.canAdd"
+                        class="btn btn-primary " ui-sref="techo.manage.user"> Add </button>
+                    <em class="fa fa-print " uib-tooltip="Print pdf" style="cursor: pointer;font-size: 20px"
+                        title="Print PDF" ng-click="userscontroller.printReport()"></em>
+                    <i ng-click="userscontroller.saveExcel()" style="cursor: pointer;font-size: 20px"
+                        uib-tooltip="Download excel" class="fa fa-file-excel-o  excelglyphicon font-size-20"
+                        aria-hidden="true" title="Download excel"></i>
+                </div>
+
+                <div class="col-2 inline-form float-right" ng-if="!userscontroller.noRolesAssignedToShow">
+                    <div class="form-group">
+                        <input type="text" class="form-control cst-form-control" id="search"
+                            ng-model="userscontroller.searchText"
+                            ng-change="userscontroller.fetchUsers('search', 'search')"
+                            ng-model-options="{debounce: 1000}" placeholder="Search text">
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-15" ng-if="userscontroller.noRolesAssignedToShow">
+            <div class="no-data-placeholder">
+                <h5>Sorry No Data Here!</h5>
+                <p>No Roles to manage by logged in user!</p>
+            </div>
+        </div>
+        <div class="col-12 mb-15" ng-if="!userscontroller.noRolesAssignedToShow">
+            <div class="cst-table table-responsive" style="overflow: auto;max-height: calc(100vh - 192px);"
+                id="user-scroll">
+                <table class="table table-sm table-striped filter-table table-auto table-bordered header-fixed"
+                    id="printableDiv">
+                    <colgroup>
+                        <col class="" style="
+                             width: 50px;
+                             ">
+                        <col class="" style="
+                             width: 140px;
+                             ">
+                        <col class="large-col">
+                        <col style="width: 100px; ">
+                        <col class="medium-col">
+                        <col style="width:400px">
+                        <col style="width:200px">
+                        <col style="width: 133px;">
+
+                        <col class="medium-col">
+                    </colgroup>
+                    <thead class="cst-thead">
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th class="filter-col">Username<span class="pull-right sort"
+                                    ng-click="userscontroller.fetchUsers('userName', 'sort')">
+                                    <em class="fa fa-sort-amount-asc"
+                                        ng-class="{'fa-sort-amount-asc': (userscontroller.order === 'asc' && userscontroller.orderBy === 'userName') || userscontroller.orderBy !== 'userName', 'fa-sort-amount-desc': userscontroller.order === 'desc' && userscontroller.orderBy === 'userName'}"></em>
+                                </span>
+                            </th>
+                            <th class="filter-col"> Name<span class="pull-right sort"
+                                    ng-click="userscontroller.fetchUsers('firstName', 'sort')">
+                                    <em class="fa fa-sort-amount-asc"
+                                        ng-class="{'fa-sort-amount-asc': (userscontroller.order === 'asc' && userscontroller.orderBy === 'firstName') || userscontroller.orderBy !== 'firstName', 'fa-sort-amount-desc': userscontroller.order === 'desc' && userscontroller.orderBy === 'firstName'}"></em>
+                                </span>
+                            </th>
+                            <th class="filter-col">Role<span class="pull-right sort"
+                                    ng-click="userscontroller.fetchUsers('roleName', 'sort')">
+                                    <em class="fa fa-sort-amount-asc"
+                                        ng-class="{'fa-sort-amount-asc': (userscontroller.order === 'asc' && userscontroller.orderBy === 'roleName') || userscontroller.orderBy !== 'roleName', 'fa-sort-amount-desc': userscontroller.order === 'desc' && userscontroller.orderBy === 'roleName'}"></em>
+                                </span>
+                            </th>
+                            <th class="filter-col">Phone No<span class="pull-right sort"
+                                    ng-click="userscontroller.fetchUsers('contactNumber', 'sort')">
+                                    <em class="fa fa-sort-amount-asc"
+                                        ng-class="{'fa-sort-amount-asc': (userscontroller.order === 'asc' && userscontroller.orderBy === 'contactNumber') || userscontroller.orderBy !== 'contactNumber', 'fa-sort-amount-desc': userscontroller.order === 'desc' && userscontroller.orderBy === 'contactNumber'}"></em>
+                                </span>
+                            </th>
+                            <th>Area of Intervention</th>
+                            <th>Health Infrastructure</th>
+                            <th>Device ID</th>
+                            <th> User Status</th>
+                            <th ng-if="userscontroller.rights.canEdit" class="no-print">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody" infinite-scroll-distance="0"
+                        infinite-scroll='userscontroller.getUsersByCriteria(true)'
+                        infinite-scroll-container='"#user-scroll"' infinite-scroll-immediate-check="false">
+                        <tr ng-repeat="user in userscontroller.usersList" ng-if="userscontroller.usersList.length > 0">
+                            <td>{{$index + 1}}</td>
+                            <td> {{::user.userName}}</td>
+                            <td> {{::(user.fullName)|emptylabel }} </td>
+                            <td> {{::user.roleName|emptylabel}}</td>
+                            <td> {{::user.contactNumber| emptylabel}} </td>
+                            <td ng-bind-html="user.areaOfInterventionToDisplay | emptylabel" class="text-overflow">
+                            </td>
+                            <td ng-bind-html="user.healthFacilityName| emptylabel" class="text-overflow"></td>
+                            <td>{{::user.imeiNumber|emptylabel}}</td>
+                            <td>{{::user.displayState}}</td>
+
+                            <td class="action-cell no-print" ng-if="userscontroller.rights.canEdit">
+                                <ul class="action-item">
+                                    <li ng-click="userscontroller.navigateToEdit(user.id)"><a href="javascript:void(0)"
+                                            class="action-icon edit-icon"></a></li>
+                                    <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" class="action-icon more-icon"></a>
+                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                            aria-labelledby="moreDropdown">
+                                            <li
+                                                ng-if="user.displayState === 'ACTIVE' ? userscontroller.toggle = 'Inactive' : userscontroller.toggle = 'Active'">
+                                                <a href="javascript:void(0)"
+                                                    ng-click="userscontroller.deleteUser(user)">
+                                                    <strong>Mark as </strong> {{::userscontroller.toggle}}</a>
+                                            </li>
+
+                                            <li ng-if="userscontroller.env!=='uttarakhand'">
+                                                <a ng-if="!user.loginCode" href="javascript:void(0)"
+                                                    ng-click="userscontroller.createLoginCode(user)">
+                                                    Generate SOH code</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr ng-if="(!userscontroller.usersList || userscontroller.usersList.length === 0)">
+                            <td colspan="10">No users available</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="print-footer">
+                        <tr>
+                            <td colspan="10">
+                                {{userscontroller.footer}}
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div" ng-if="!userscontroller.noRolesAssignedToShow">
+        <span class="filter-toggle" ng-click="userscontroller.toggleFilter()">Filter</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Filter</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12">
+                    <ng-form name="userscontroller.locationForm">
+                        <location-directive selected-location="userscontroller.selectedLocation"
+                            template-type="'inline'" fetch-according-to-user-aoi="true"> </location-directive>
+                        <br>
+                    </ng-form>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>
+                            Role
+                        </label>
+                        <select class="form-control cst-form-control"
+                            ng-options="option as option.name for option in userscontroller.roles track by option.id"
+                            ng-model="userscontroller.selectedRole">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 pt-3" >
+                    <div class="form-group">
+                        <label>
+                            Status
+                        </label>
+                        <select class="form-control cst-form-control"
+                            ng-init="userscontroller.selectedStatus = userscontroller.statuses[0]" 
+                            ng-options="option as option for option in userscontroller.statuses track by option"
+                            ng-model="userscontroller.selectedStatus">
+                           
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter"
+                            ng-click="userscontroller.toggleFilter()">Close</button>
+                        <button class="btn btn-primary search-filter"
+                            ng-click="userscontroller.fetchUsers('click')">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

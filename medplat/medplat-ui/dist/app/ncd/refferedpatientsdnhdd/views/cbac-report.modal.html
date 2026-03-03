@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h4>CBAC REPORT</h4>
+    <button type="button" class="close" ng-click="$ctrl.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body" style="overflow: visible">
+    <div class="cst-table table-responsive" style="overflow: auto;">
+        <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+            <colgroup>
+                <col class="large-col">
+                <col class="large-col">
+                <col class="large-col">
+            </colgroup>
+            <thead class="cst-thead">
+                <tr>
+                    <th class="filter-col" style="background-color: rgb(241, 241, 241); position: relative; top: 11px;">
+                        <span class="text active" title="First Name">Question</span>
+                    </th>
+                    <th class="filter-col" style="background-color: rgb(241, 241, 241); position: relative; top: 11px;">
+                        <span class="text active">Range</span>
+                    </th>
+                    <th class="filter-col" style="background-color: rgb(241, 241, 241); position: relative; top: 11px;">
+                        <span class="text active">Score</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="cst-tbody">
+                <tr>
+                    <td>question1 </td>
+                    <td>question1 </td>
+                    <td>question1 </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-if="$ctrl.updateRoleFlag"
+        ng-click="$ctrl.ok($ctrl.roleForUpdate)">Update
+        Role
+    </button>
+    <button type="submit" class="btn btn-primary" ng-if="$ctrl.createRoleFlag"
+        ng-click="$ctrl.ok($ctrl.roleForUpdate)">Add
+        Role
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="$ctrl.cancel()">Close</button>
+</div>

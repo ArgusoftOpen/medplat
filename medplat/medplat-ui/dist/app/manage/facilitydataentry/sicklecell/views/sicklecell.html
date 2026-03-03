@@ -1,0 +1,176 @@
+<style>
+    label {
+        vertical-align: middle !important;
+    }
+
+    .display {
+        width: 100px !important;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{sicklecell.constants.sicklecellFormDisplayTitle}}</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="display" for="memberId" control-label><strong>Member ID :</strong></label>
+                                <label>{{sicklecell.sickleObject.uniqueHealthId|emptylabel}}</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="display" for="memberId" control-label><strong>Name :</strong></label>
+                                <label style="width: auto;">{{sicklecell.sickleObject.name|emptylabel}}</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="display" for="memberId" control-label><strong>Location :</strong></label>
+                                <label
+                                    style="width: auto;">{{sicklecell.sickleObject.locationHierarchy|emptylabel}}</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="display" for="memberId" control-label><strong>Family ID :</strong></label>
+                                <label>{{sicklecell.sickleObject.familyId|emptylabel}}</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="display" for="memberId" control-label><strong>Religion :</strong></label>
+                                <label>{{sicklecell.sickleObject.religion|emptylabel}}</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="display" for="memberId" control-label><strong>DOB :</strong></label>
+                                <label>{{sicklecell.sickleObject.dob| date:'dd/MM/yyyy'|emptylabel}}</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="display" for="memberId" control-label><strong>Gender :</strong></label>
+                                <label>{{sicklecell.sickleObject.gender|gender|emptylabel}}</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="display" for="memberId" control-label><strong>Caste :</strong></label>
+                                <label>{{sicklecell.sickleObject.caste|emptylabel}}</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="display" for="memberId" control-label><strong>Age :</strong></label>
+                                <label
+                                    style="width: auto;">{{sicklecell.sickleObject.age.replace("mons","months")|emptylabel}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{sicklecell.constants.sicklecellFormTitle}}</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="sicklecell.sicklecellForm" id="sicklecellForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <validate for='anemiaTestDone' required-msg=" Select a value">
+                                        <label style="width: 220px;" for="anemiaTestDone" name="anemiaTestDone"
+                                            id="anemiaTestDone" class="control-label"
+                                            control-label>{{sicklecell.constants.formFieldIsSickleCellAnemiaTestDone}}</label>
+                                        <label class="control control-radio">{{sicklecell.constants.YES}}
+                                            <input ng-value="true" name="anemiaTestDone" type="radio"
+                                                ng-model="sicklecell.sickleObject.anemiaTestDone"
+                                                ng-change="sicklecell.anemiaTestDoneChanged()" form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio">{{sicklecell.constants.NO}}
+                                            <input ng-value="false" name="anemiaTestDone" type="radio"
+                                                ng-model="sicklecell.sickleObject.anemiaTestDone"
+                                                ng-change="sicklecell.anemiaTestDoneChanged()" form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                            <div class="col-6" ng-if="sicklecell.sickleObject.anemiaTestDone">
+                                <div class="form-group">
+                                    <validate for='dttTestResult' required-msg=" Select a value">
+                                        <label style="width: 150px;" for="dttTestResult" name="dttTestResult"
+                                            id="dttTestResult" class="control-label"
+                                            control-label>{{sicklecell.constants.formFieldDttTestResult}}</label>
+                                        <label
+                                            class="control control-radio">{{sicklecell.constants.formValueDisplayPositive}}
+                                            <input value="{{sicklecell.constants.formValuePositive}}"
+                                                name="dttTestResult" type="radio"
+                                                ng-model="sicklecell.sickleObject.dttTestResult"
+                                                ng-change="sicklecell.dttTestResultChanged()" form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label
+                                            class="control control-radio">{{sicklecell.constants.formValueDisplayNegative}}
+                                            <input value="{{sicklecell.constants.formValueNegative}}"
+                                                name="dttTestResult" type="radio"
+                                                ng-model="sicklecell.sickleObject.dttTestResult"
+                                                ng-change="sicklecell.dttTestResultChanged()" form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                            <div class="col-6"
+                                ng-if="sicklecell.sickleObject.dttTestResult === sicklecell.constants.formValuePositive">
+                                <div class="form-group">
+                                    <validate for='hplcTestDone' required-msg=" Select a value">
+                                        <label style="width: 220px;" for="hplcTestDone" name="hplcTestDone"
+                                            id="hplcTestDone" class="control-label"
+                                            control-label>{{sicklecell.constants.formFieldIsHplcTestDone}}</label>
+                                        <label class="control control-radio">{{sicklecell.constants.YES}}
+                                            <input ng-value="true" name="hplcTestDone" type="radio"
+                                                ng-model="sicklecell.sickleObject.hplcTestDone"
+                                                ng-change="sicklecell.hplcTestDoneChanged()" form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio">{{sicklecell.constants.NO}}
+                                            <input ng-value="false" name="hplcTestDone" type="radio"
+                                                ng-model="sicklecell.sickleObject.hplcTestDone"
+                                                ng-change="sicklecell.hplcTestDoneChanged()" form-control required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                            <div class="col-6" ng-if="sicklecell.sickleObject.hplcTestDone">
+                                <div class="form-group">
+                                    <validate for='hplcTestResult' required-msg="Please select a value">
+                                        <label for="hplcTestResult"
+                                            control-label>{{sicklecell.constants.formFieldHplcTestResult}}</label>
+                                        <select class="form-control cst-form-control" form-control
+                                            ng-model="sicklecell.sickleObject.hplcTestResult" name="hplcTestResult"
+                                            ng-options="key as value for (key,value) in sicklecell.hplcTestValues"
+                                            id="hplcTestResult" required>
+                                            <option value="" selected>--Select--</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer mt-3">
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary" ng-click="sicklecell.saveScreening()"><span
+                                class="fa fa-floppy-o"></i> Save & Continue</button>
+                        <button class="btn btn-secondary" ng-click="sicklecell.goBack()">Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

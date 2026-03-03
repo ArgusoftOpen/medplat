@@ -1,0 +1,161 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="pull-right">
+                <button class="btn btn-primary m-1"
+                    ng-if="['manage-form-configs', 'manage-standard-field-configs'].includes(ctrl.selectedTab)"
+                    ng-click="ctrl.navigateToAdd()">
+                    Add
+                </button>
+            </div>
+            <div class="cst-tab">
+                <uib-tabset active='ctrl.selectedTab'>
+                    <!-- Manage Form Configs tab -->
+                    <uib-tab heading="Form Configs" index="'manage-form-configs'"
+                        ng-click="ctrl.getSystemConstraintForms()">
+                        <div class="no-data-placeholder"
+                            ng-if="!ctrl.systemConstraintForms || ctrl.systemConstraintForms.length === 0">
+                            <h5>No Record Found!</h5>
+                        </div>
+                        <div class="cst-table table-responsive table-set-height-less" id="label-scroll"
+                            ng-if="ctrl.systemConstraintForms.length">
+                            <table aria-describedby="table"
+                                class="table table-sm table-striped table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Form Name</th>
+                                        <th>Form Code</th>
+                                        <th>Menu Name</th>
+                                        <th>State</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr ng-repeat="form in ctrl.systemConstraintForms">
+                                        <td ng-bind="$index + 1"></td>
+                                        <td ng-bind="form.formName | emptylabel"></td>
+                                        <td ng-bind="form.formCode | emptylabel"></td>
+                                        <td ng-bind="form.menuName | emptylabel"></td>
+                                        <td ng-bind="form.state | statecapitalize | emptylabel"></td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li ng-click="ctrl.navigateToEdit(form.uuid)" title="Edit Form Config">
+                                                    <a class="action-icon edit-icon"></a>
+                                                </li>
+                                                <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <a class="action-icon more-icon"></a>
+                                                    <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                        aria-labelledby="moreDropdown" x-placement="bottom-end">
+                                                        <li ng-click="ctrl.navigateToEditDynamicTemplate(form.uuid)">
+                                                            <a>Configure Dynamic Template</a>
+                                                        </li>
+                                                        <li ng-click="ctrl.navigateToEditMobileTemplate(form.uuid)">
+                                                            <a>Configure Mobile Template</a>
+                                                        </li>
+                                                        <li ng-click="ctrl.downloadFieldConfigurations(form)">
+                                                            <a>Download Flyway of Field Configurations</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <!-- Manage Standard Configs tab 
+                    <uib-tab heading="Manage Standard Configs" index="'manage-standard-configs'"
+                        ng-click="ctrl.getSystemConstraintStandards()">
+                        <div class="no-data-placeholder"
+                            ng-if="!ctrl.systemConstraintStandards || ctrl.systemConstraintStandards.length === 0">
+                            <h5>No Record Found!</h5>
+                        </div>
+                        <div class="cst-table table-responsive table-set-height-less" id="label-scroll"
+                            ng-if="ctrl.systemConstraintStandards.length">
+                            <table aria-describedby="table"
+                                class="table table-sm table-striped table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Standard Name</th>
+                                        <th>Is Active?</th>
+                                        <th style="white-space: unset;">Is System's Active Standard?</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr ng-repeat="standard in ctrl.systemConstraintStandards">
+                                        <td ng-bind="$index + 1"></td>
+                                        <td ng-bind="standard.value | emptylabel"></td>
+                                        <td ng-bind="standard.is_active ? 'Yes' : 'No'"></td>
+                                        <td>
+                                            <em ng-if="ctrl.systemsActiveStandard.value == standard.id"
+                                                class="fa fa-check-circle fa-2x text-success">
+                                            </em>
+                                        </td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li ng-click="ctrl.navigateToEdit(standard.id)"
+                                                    title="Edit Standard Config">
+                                                    <a class="action-icon edit-icon"></a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    -->
+                    <!-- Manage Standard Field Configs tab -->
+                    
+                    <uib-tab heading="Common Field Configs" index="'manage-standard-field-configs'"
+                        ng-click="ctrl.getSystemConstraintStandardFields()">
+                        <div class="no-data-placeholder"
+                            ng-if="!ctrl.systemConstraintStandardFields || ctrl.systemConstraintStandardFields.length === 0">
+                            <h5>No Record Found!</h5>
+                        </div>
+                        <div class="cst-table table-responsive table-set-height-less" id="label-scroll"
+                            ng-if="ctrl.systemConstraintStandardFields.length">
+                            <table aria-describedby="table"
+                                class="table table-sm table-striped table-bordered header-fixed">
+                                <thead class="cst-thead">
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Field Key</th>
+                                        <th>Field Name</th>
+                                        <th>Field Type</th>
+                                        <!-- <th>Category Name</th> -->
+                                        <th>State</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="cst-tbody">
+                                    <tr ng-repeat="field in ctrl.systemConstraintStandardFields">
+                                        <td ng-bind="$index + 1"></td>
+                                        <td ng-bind="field.fieldKey | emptylabel"></td>
+                                        <td ng-bind="field.fieldName | emptylabel"></td>
+                                        <td ng-bind="field.fieldType | emptylabel"></td>
+                                        <!-- <td ng-bind="field.categoryName | emptylabel"></td> -->
+                                        <td ng-bind="field.state | statecapitalize | emptylabel"></td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+                                                <li ng-click="ctrl.navigateToEdit(field.uuid)"
+                                                    title="Edit Standard Field Config">
+                                                    <a class="action-icon edit-icon"></a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>

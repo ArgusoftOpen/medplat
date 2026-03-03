@@ -1,0 +1,170 @@
+<style>
+    .no-link, .no-link:hover{
+        color: rgb(33, 37, 41);
+        cursor: default;
+        text-decoration: none !important;
+    }
+</style>
+<div class="row mb-15 display-none" id="myDiv" ng-if="config.isPrintOn">
+    <div class="col-12 ">
+        <div class="row-filter display-none">
+            <div class="col-filter-12">
+                <div class="row-filter" style="margin-bottom: 15px">
+                    <div class="" ng-repeat="obj in config.searchArray">
+                        <div class="form-group">
+                            <label class="col-filter-12 control-label" style="font-weight: bold">{{obj.label}}
+                            </label><br>
+                            <label class="col-filter-12 ">{{obj.value|emptylabel}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FOR DRILL DOWN FILTER LIST -->
+            <div class="col-filter-12">
+                <div class="row-filter display-none" style="margin-bottom: 15px">
+                    <div class="" ng-repeat="obj in config.filterDisplay">
+                        <div class="form-group" ng-if="obj.value">
+                            <label class="col-filter-12 control-label" style="font-weight: bold">{{obj.displayName}}
+                            </label>
+                            <br>
+                            <label class="col-filter-12 ">{{obj.value|emptylabel}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <div class="page-footer">
+                {{data.footer}}
+            </div>
+            <table aria-describedby="table" class="table table-sm table-striped table-bordered"
+                ng-if='data.printableTable.body.length > 0'>
+                <tr>
+                    <th id="id" ng-repeat="header in ::data.printableTable.header"
+                        ng-if="::!header.fieldName.includes('hidden_')">
+                        {{::header.startsWith('percent_col') ? "%": header.fieldName}}
+                    </th>
+                </tr>
+                <tbody>
+                    <tr ng-repeat="row in data.printableTable.body">
+                        <td ng-repeat='header in ::data.tableToDisplay.header'
+                            ng-style="{{::row[header.fieldName].customStyle}}"
+                            ng-if="::!header.fieldName.includes('hidden_')">
+                            <a ng-if="::row[header.fieldName].isLink &&
+                                (!row[header.fieldName].locationLevelForLink || row[header.fieldName].locationLevelForLink == '' || (config.locationLevelSelected && config.locationLevelSelected >= row[header.fieldName].locationLevelForLink)) && canDrillDown"
+                                href='javascript:void(0)' oncontextmenu="return false;"
+                                ng-click="navigateToState(row, header)">
+                                <span ng-bind-html="::(row[header.fieldName].displayValue | trustAsHtml)"></span>
+                            </a>
+                            <span ng-bind-html="::(row[header.fieldName].displayValue | trustAsHtml)"
+                                ng-if="::!row[header.fieldName].isLink || (row[header.fieldName].isLink && (row[header.fieldName].locationLevelForLink && row[header.fieldName].locationLevelForLink != '' && row[header.fieldName].locationLevelForLink > config.locationLevelSelected)) ||
+                                    (row[header.fieldName].isLink && row[header.fieldName].locationLevelForLink && row[header.fieldName].locationLevelForLink != '' && !config.locationLevelSelected) || !canDrillDown">
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <!--place holder for the fixed-position footer-->
+                            <div class="page-footer-space"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="row mb-15 no-print">
+    <div class="col-12 ">
+        <div class="row-filter display-none">
+            <div class="col-filter-12">
+                <div class="row-filter" style="margin-bottom: 15px">
+                    <div class="col-filter-3" ng-repeat="obj in config.searchArray">
+                        <div class="form-group">
+                            <label class="col-filter-12 control-label" style="font-weight: bold">{{obj.label}}
+
+                            </label>
+                            <label class="col-filter-12 ">{{obj.value|emptylabel}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive header-fixed" id="report-scroll" style="max-height: calc(100vh - 230px)">
+            <table aria-describedby="table" class="table table-sm table-striped table-bordered header-fixed"
+                ng-if='data.tableToDisplay.body.length > 0' ng-init="fixHeader()">
+                <thead>
+                    <tr ng-if="config.colspanData && colSpan && data.tableToDisplay.body.length > 0" ng-bind-html="colSpan | trustAsHtml">
+                    </tr>
+                    <tr>
+                        <th id="id" class="white-space-unset" ng-repeat="header in ::data.tableToDisplay.header"
+                            ng-if="::!header.fieldName.includes('hidden_')">
+                            {{::header.fieldName.startsWith('percent_col') ? "%": header.fieldName}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody infinite-scroll-distance="0" infinite-scroll='filterSearch()'
+                    infinite-scroll-disabled='pagingService.allRetrieved' infinite-scroll-container='"#report-scroll"'>
+                    <tr ng-repeat="row in data.tableToDisplay.body">
+                        <td ng-repeat='header in ::data.tableToDisplay.header'
+                            ng-style="{{::row[header.fieldName].customStyle}}"
+                            ng-if="::!header.fieldName.includes('hidden_')">
+                            <a ng-if="::row[header.fieldName].isLink &&( !row[header.fieldName].locationLevelForLink ||  row[header.fieldName].locationLevelForLink=='' || (config.locationLevelSelected && config.locationLevelSelected>=row[header.fieldName].locationLevelForLink)) && canDrillDown"
+                                ng-class="row[header.fieldName].displayValue == 0 ? 'no-link':''"
+                                href='javascript:void(0)' ng-click="row[header.fieldName].displayValue!==0 && navigateToState(row, header)">
+                                <span ng-bind-html="::(row[header.fieldName].displayValue | trustAsHtml)"></span>
+                            </a>
+                            <span ng-bind-html="::(row[header.fieldName].displayValue | trustAsHtml)"
+                                ng-if="::!row[header.fieldName].isLink  || (row[header.fieldName].isLink && (row[header.fieldName].locationLevelForLink && row[header.fieldName].locationLevelForLink!='' && row[header.fieldName].locationLevelForLink>config.locationLevelSelected)) ||   (row[header.fieldName].isLink && !config.locationLevelSelected) || !canDrillDown">
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="print-footer">
+                    <tr>
+                        <td>
+                            {{data.footer}}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="isFilterToBeShown">
+    <div
+        ng-class="(config.isFilterOpen && config.isFilterOpen == true) ? 'filter-div active no-print' : 'filter-div no-print'">
+        <span class="filter-toggle" ng-click="toggleFilter()">Filter</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Filter</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="" ng-repeat="detail in config.containers.fieldsContainer|orderBy:'sequence'">
+                        <div class="form-group">
+                            <inputcomponent config='detail' data='data' label-class="" input-class=""
+                                ng-if="!detail.isHidden">
+                            </inputcomponent>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter" ng-click="toggleFilter()">Close</button>
+                        <button class="btn btn-primary search-filter"
+                            ng-click="filterSearch({reset:true,isSearch:true})">Search</button>
+                        <button class="btn btn-primary search-filter" ng-if="!!config.isSupportOffline"
+                            ng-click="filterSearch({reset:true,isSearch:true, isDownloadOffline:true})">Download Offline</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

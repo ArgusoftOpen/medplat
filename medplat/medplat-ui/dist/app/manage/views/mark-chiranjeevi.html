@@ -1,0 +1,79 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-12 ">
+            <div ng-if="markchiranjeevi.memberDetails.length === 0">
+                <div class="no-data-placeholder">
+                    <h5>No Record Found!</h5>
+                </div>
+            </div>
+            <div class="cst-table table-responsive" style="overflow: auto;" id="member-scroll"
+                ng-if="markchiranjeevi.memberDetails.length > 0">
+
+                <table class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                    style="table-layout: auto">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th style="width: 50px; white-space: pre-line;">#
+                            </th>
+                            <th>Unique Health Id</th>
+                            <th>Member Name</th>
+                            <th>Location</th>
+                            <th>ASHA Details</th>
+                            <th>Delivery Date</th>
+                            <th>Caste</th>
+                            <th>BPL</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody" infinite-scroll-distance="0" infinite-scroll='markchiranjeevi.searchData()'
+                        infinite-scroll-disabled='markchiranjeevi.pagingService.pagingRetrivalOn'
+                        infinite-scroll-container='"#member-scroll"'>
+                        <tr ng-repeat="member in markchiranjeevi.memberDetails">
+                            <td>
+                                {{$index + 1}}
+                            </td>
+                            <td>{{member.uniqueHealthId}}</td>
+                            <td>{{member.memberName}}</td>
+                            <td>{{member.locationHierarchy}}</td>
+                            <td>{{member.ashaDetail}}</td>
+                            <td>{{member.deliveryDate| date:'dd/MM/yyyy'}}</td>
+                            <td>{{member.caste}}</td>
+                            <td>{{member.bplFlag?'Yes':'No'}}</td>
+                            <td>
+                                <button class="btn btn-primary"
+                                    ng-click="markchiranjeevi.markAsChiranjeevi(member.wpdId)">Mark As Chiranjeevi
+                                    Delivery</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="filter-div">
+    <span style="left:-66px" class="filter-toggle" ng-click="markchiranjeevi.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="markchiranjeevi.searchForm" novalidate>
+            <div class="form-group">
+                <location-directive template-type="'inline'" ng-model="markchiranjeevi.selectedLocationId"
+                    selected-location="markchiranjeevi.selectedLocation" required-upto-level="3"
+                    template-type="'inline'" fetch-according-to-user-aoi="false"> </location-directive>
+            </div>
+        </form>
+        <div class="col-12" style="margin-top: 2%">
+            <div class="form-group text-right">
+                <button class="btn btn-secondary close-filter" ng-click="markchiranjeevi.toggleFilter()">Close</button>
+                <button type="submit" class="btn btn-primary search-filter"
+                    ng-click="markchiranjeevi.searchData(true)">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cst-backdrop"></div>
