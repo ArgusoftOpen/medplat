@@ -317,7 +317,7 @@
             <properties>
                 <server.port>8080</server.port>
                 <server.redirect.port>8181</server.redirect.port>
-                <server.is.secure>true</server.is.secure>
+                <server.is.secure>false</server.is.secure>
                 <jdbc.url>db</jdbc.url>
                 <jdbc.database>medplat</jdbc.database>
                 <jdbc.username>postgres</jdbc.username>

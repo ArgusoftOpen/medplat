@@ -1,10 +1,10 @@
 <div class="login-wrapper">
     <div class="login-form text-center">
         <img alt="image" src="img/medplat.png" style="height: 60px;">
-        <h3 class="login-header">Login</h3>
+        <h3 class="login-header">{{ 'LOGIN.HEADER' | translate }}</h3>
         <div class="text-center bottom-spacer-10">
             <div class="list-group-item-text alert alert-danger" ng-show="login.user.hasAuthError">
-                {{login.user.errorMessage}} 
+                {{login.user.errorMessage}}
             </div>
         </div>
         <div class=" inline-form">
@@ -12,8 +12,9 @@
                 <div class="form-group">
                     <validate for='username' required-msg="*Username is required">
                         <input data-test="username" type="text" autocomplete="off" class="form-control cst-form-control"
-                            form-control style="width:calc(100% - 1px)" placeholder="Username" name="username"
-                            id="username" ng-model="login.user.username" required>
+                            form-control style="width:calc(100% - 1px)"
+                            placeholder="{{ 'COMMON.USERNAME' | translate }}" name="username" id="username"
+                            ng-model="login.user.username" required>
                         <placeholder></placeholder>
                     </validate>
                 </div>
@@ -21,15 +22,15 @@
                     <validate for='password' required-msg="*Password is required">
                         <input data-test="password" type="password" autocomplete="new-password"
                             class="form-control cst-form-control" form-control style="width:calc(100% - 1px)"
-                            placeholder="Password" name="password" id="password" ng-model="login.user.password"
-                            required>
+                            placeholder="{{ 'COMMON.PASSWORD' | translate }}" name="password" id="password"
+                            ng-model="login.user.password" required>
                         <placeholder></placeholder>
                     </validate>
                 </div>
                 <div class="form-group text-center">
                     <button data-test="login-btn" type="submit" class="btn btn-primary btn-block btn-login"
-                        ng-click="login.doLogin()">Login</button>
-                    <a ui-sref="resetpassword" class="link">Lost your password?</a>
+                        ng-click="login.doLogin()">{{ 'COMMON.LOGIN' | translate }}</button>
+                    <a ui-sref="resetpassword" class="link">{{ 'LOGIN.LOST_PASSWORD' | translate }}</a>
                     <div ng-if="!login.hideAppLink && login.version != null">
                         <!-- <a class="link" href="{{login.link}}" download>
                             <span style="color: red; padding-right: 5px">
@@ -62,9 +63,9 @@
                     </li>
                 </ul>
                 <p style="text-align: justify;">
-                    <i>A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators especially in a public health context</i>
+                    <i>{{ 'APP.TAGLINE' | translate }}</i>
                 </p>
-                                <hr class="login-hr">
+                <hr class="login-hr">
                 <!-- <a href="http://www.argusoft.com/" target="_blank" border="0"> <img alt="image" src="img/medplat.png"
                         style="height: 50px;" class="mx-auto d-block">
                 </a> -->
@@ -73,6 +74,6 @@
     </div>
 </div>
 <div class='login-notice' ng-if="login.showSystemNotice" style="text-align: center;">
-    <h5>Please Note:</h5>
+    <h5>{{ 'LOGIN.SYSTEM_NOTICE' | translate }}</h5>
     <span ng-bind-html="login.systemNotice"></span>
 </div>
