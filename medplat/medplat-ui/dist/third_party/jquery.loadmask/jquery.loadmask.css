@@ -1,0 +1,44 @@
+.loadmask {
+    z-index: 10000;
+    position: fixed;
+    top:0;
+    left:0;
+    -moz-opacity: 0.6;
+    opacity: .60;
+    filter: alpha(opacity=60);
+    background-color: #fff;
+    width: 100vw;
+    height: 100vh;
+    zoom: 1;
+    cursor:wait;
+}
+.loadmask-msg {
+    z-index: 20001;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*    border:1px solid #6593cf;
+        background: #c3daf9;
+        padding:2px;*/
+}
+.loadmask-msg-default div{
+    padding:5px 10px 5px 25px;
+    /*background-image: url('images/loading110.gif');*/
+    height: 65px;
+    width: 65px;
+    background-repeat: no-repeat;
+    /*    line-height: 16px;
+        border:1px solid #a3bad9;
+        color:#222;
+        font:normal 11px tahoma, arial, helvetica, sans-serif;*/
+    cursor:wait;
+}
+.masked {
+    overflow: hidden !important;
+}
+.masked-relative {
+    position: relative !important;
+}
+.masked-hidden {
+    visibility: hidden !important;
+}

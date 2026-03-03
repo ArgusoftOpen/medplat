@@ -1,0 +1,23 @@
+{
+  "name": "angular-all-ordinal",
+  "version": "1.0.0",
+  "ignore": [
+    "app/src",
+    ".bowerrc",
+    ".gitignore",
+    ".jshintrc",
+    ".travis.yml",
+    "bower.json",
+    "gulpfile.js",
+    "karma-unit.conf.js",
+    "package.json",
+    "README.md"
+  ],
+  "main": "app/package/js/ordinal.min.js",
+  "devDependencies": {
+    "angular-mocks": "~1.2.0"
+  },
+  "dependencies": {
+    "angular": "~1.2.0"
+  }
+}

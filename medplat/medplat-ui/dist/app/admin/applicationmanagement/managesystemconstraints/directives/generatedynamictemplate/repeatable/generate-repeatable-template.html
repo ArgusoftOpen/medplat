@@ -1,0 +1,18 @@
+<style>
+    .mb-10 {
+        margin-bottom: 10px !important;
+    }
+</style>
+<generate-element-template-directive
+    ng-if="element.config.isRepeatable && (!element.config.isConditional || (element.config.isConditional && $eval(element.config.ngIf)))"
+    ng-repeat="(iteratorIndex, iteratorObject) in iterator" sibling-elements="siblingElements"
+    element-index="elementIndex" element="element" constraint-config="constraintConfig" iterator-index="iteratorIndex"
+    iterator-indices-map="iteratorIndicesMap" card-classes="cardClasses" row-classes="rowClasses"
+    col-classes="colClasses">
+</generate-element-template-directive>
+<generate-element-template-directive
+    ng-if="!element.config.isRepeatable && (!element.config.isConditional || (element.config.isConditional && $eval(element.config.ngIf)))"
+    sibling-elements="siblingElements" element-index="elementIndex" element="element"
+    constraint-config="constraintConfig" iterator-indices-map="iteratorIndicesMap" card-classes="cardClasses"
+    row-classes="rowClasses" col-classes="colClasses">
+</generate-element-template-directive>

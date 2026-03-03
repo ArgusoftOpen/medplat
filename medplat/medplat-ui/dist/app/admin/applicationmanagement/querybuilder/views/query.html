@@ -1,0 +1,156 @@
+<style>
+    .overflow-ellipsis {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="section-title">
+                <h4 class="text">Queries </h4>
+                <button class="btn btn-primary float-right" data-test="add-query-btn"
+                    ng-click="querycontroller.openAddEditModal()"> Add </button>
+                <input class="float-right" type="text" ng-model="search" id="search" placeholder="Search code"
+                    style="margin-right:10px ">
+            </div>
+        </div>
+        <div class="col-12 mb-15">
+            <div class="cst-table table-responsive">
+                <table aria-describedby="table"
+                    class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th id="Code">Code</th>
+                            <th id="Description">Description</th>
+                            <th id="Query" style="width: 20%;">Query</th>
+                            <th id="ReturnsResultSet" style="width: 7.5%; white-space: initial;">Returns Result Set</th>
+                            <th id="IsPublic" style="width: 7.5%; white-space: initial;">Is Public</th>
+                            <th id="Actions" style="width: 7.5%;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr ng-repeat="configuredQuery in querycontroller.configuredQueries | filter: { code : search }"
+                            ng-if="querycontroller.configuredQueries.length > 0">
+                            <td style="word-break: break-all;">{{configuredQuery.code}}</td>
+                            <td>{{configuredQuery.description|emptylabel}}</td>
+                            <td class="overflow-ellipsis">
+                                {{configuredQuery.query}}</td>
+                            <td>{{configuredQuery.returnsResultSet | yesOrNo}}</td>
+                            <td>{{configuredQuery.isPublic | yesOrNo}}</td>
+                            <td class="action-cell">
+                                <ul class="action-item">
+                                    <li>
+                                        <a class="action-icon edit-icon"
+                                            ng-click="querycontroller.openAddEditModal(configuredQuery)">
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <a class="action-icon more-icon"></a>
+                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                            aria-labelledby="moreDropdown" x-placement="bottom-end">
+                                            <li ng-if="configuredQuery.state === 'ACTIVE'"
+                                                ng-click="querycontroller.toggleState(configuredQuery)">
+                                                <a><strong>Mark as </strong> Inactive</a>
+                                            </li>
+                                            <li ng-if="configuredQuery.state === 'INACTIVE'"
+                                                ng-click="querycontroller.toggleState(configuredQuery)">
+                                                <a><strong>Mark as </strong> Active</a>
+                                            </li>
+                                            <li ng-click="querycontroller.showFlywayQuery(configuredQuery)">
+                                                <a>Show Flyway Query</a>
+                                            </li>
+                                            <li ng-click="querycontroller.showQueryHistory(configuredQuery)">
+                                                <a>Show Query History</a>
+                                            </li>
+                                            <!-- <li ng-click="querycontroller.syncWithServer(configuredQuery)">
+                                                <a>Sync with Server</a>
+                                            </li> -->
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr
+                            ng-if="(!querycontroller.configuredQueries || querycontroller.configuredQueries.length === 0)">
+                            <td colspan="6">No queries configured</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">{{querycontroller.isEditMode?'Edit Configured':'Configure New'}} Query</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12" ng-form="querycontroller.queryConfigurationForm">
+                    <div class="form-group">
+                        <validate for="fieldName" required-msg="Enter code">
+                            <label control-label>
+                                Code
+                            </label>
+                            <input type="text" class="form-control cst-form-control" name="fieldName" remove-spaces
+                                ng-trim="false" required
+                                ng-change="querycontroller.newQueryConfig.code = querycontroller.newQueryConfig.code.toLowerCase()"
+                                ng-model="querycontroller.newQueryConfig.code" ng-pattern="" form-control>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                    <div class="form-group">
+                        <validate for="Description" required-msg="Enter query">
+                            <label control-label>
+                                Description
+                            </label>
+                            <textarea form-control class="form-control cst-form-control" name="Description"
+                                ng-model="querycontroller.newQueryConfig.description" ng-pattern="" rows="2"></textarea>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                    <div class="form-group">
+                        <validate for="query" required-msg="Enter query">
+                            <label control-label>
+                                Query
+                            </label>
+                            <textarea form-control class="form-control cst-form-control" name="query"
+                                data-test="enter-query-textbox" ng-model="querycontroller.newQueryConfig.query" required
+                                ng-pattern="" rows="10"></textarea>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                    <div class="form-group">
+                        <label class="control control-checkbox" control-label>
+                            Returns Result Set
+                            <input checked="checked" type="checkbox"
+                                ng-model="querycontroller.newQueryConfig.returnsResultSet">
+                            <div class="control_indicator"></div>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control control-checkbox" control-label>
+                            Is Public
+                            <input checked="checked" type="checkbox" ng-model="querycontroller.newQueryConfig.isPublic">
+                            <div class="control_indicator"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr>
+                <div class="form-group text-right">
+                    <button class="btn btn-secondary close-filter" data-test="close-query-tab-btn"
+                        ng-click="querycontroller.close()">Close</button>
+                    <button class="btn btn-primary search-filter" ng-click="querycontroller.saveQuery()">Save</button>
+                    <button class="btn btn-primary search-filter" data-test="run-query-btn"
+                        ng-click="querycontroller.executeQuery()">Run Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

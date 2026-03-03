@@ -1,0 +1,20 @@
+<!-- <div class="modal-header">
+    <h4 class="text">Sync with server</h4>
+    <button type="button" class="close" ng-click="mdCtrl.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div> -->
+<div class="modal-body">
+    <label><h6>Select Server with you want to sync this feature :</h6></label>
+    <div class="form-group"  ng-repeat = "server in mdCtrl.serverList">
+        <label class="control control-checkbox">
+            {{server.server_name}}
+            <input checked="checked" type="checkbox" ng-model="server.Selected" >
+            <div class="control_indicator"></div>
+        </label>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" ng-click="mdCtrl.cancel()" data-test="confimation-modal-no-btn">Cancel</button>
+    <button class="btn btn-primary"  ng-click="mdCtrl.save()" data-test="confimation-modal-yes-btn">Save</button>
+</div>

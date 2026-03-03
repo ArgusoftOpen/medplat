@@ -1,0 +1,201 @@
+<div class="modal-header">
+    <h4 class="text">Search Members</h4>
+</div>
+<div class="modal-body">
+    <form name="searchMembers.searchForm" novalidate>
+        <div class="row">
+            <div class="col-12 col-md-12">
+                <div class="form-group">
+                    <div class="row">
+                        <div style="padding: 0 15px;"><strong>Beneficiary Name:</strong></div>
+                        <div>{{searchMembers.beneficiaryName}}</div>
+                    </div>
+                </div>
+                <div class="card cst-card">
+                    <div id="card1" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                        href="#collapse1" ng-click="toggle1 = !toggle1" style="cursor: pointer">
+                        <h4 class="text">
+                            <span data-toggle="tooltip" title="Search filter">Search Member Filter</span>
+                            <ul class="control-list">
+                                <li>
+                                    <span>
+                                        <em ng-class="{'ion-minus':!toggle1,'ion-plus':toggle1}"></em>
+                                    </span>
+                                </li>
+                            </ul>
+                        </h4>
+                    </div>
+                    <div class="collapse show" id="collapse1">
+                        <div class="card-body inline-form">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Search By: </label>
+                                    <label class="control control-radio"
+                                        data-test="search-member-by-member-id-radio-btn"> Member ID
+                                        <input type="radio" name="search"
+                                            ng-change="searchMembers.search.searchString = ''; searchMembers.resetValidation();"
+                                            icheck ng-model="searchMembers.search.searchBy" value="memberId" />
+                                        <div class="control_indicator"></div>
+                                    </label>
+                                    <label class="control control-radio"
+                                        data-test="search-member-by-family-id-radio-btn"> Family ID
+                                        <input type="radio" name="search" icheck
+                                            ng-model="searchMembers.search.searchBy"
+                                            ng-change="searchMembers.search.searchString = ''; searchMembers.resetValidation();"
+                                            value="familyId" />
+                                        <div class="control_indicator"></div>
+                                    </label>
+                                    <label class="control control-radio"
+                                        data-test="search-member-by-mobile-number-radio-btn"> Mobile Number
+                                        <input type="radio" name="search" icheck
+                                            ng-model="searchMembers.search.searchBy"
+                                            ng-change="searchMembers.search.searchString = ''; searchMembers.resetValidation();"
+                                            value="mobileNumber" />
+                                        <div class="control_indicator"></div>
+                                    </label>
+                                    <label class="control control-radio"
+                                        data-test="search-member-by-organization-unit-radio-btn"> Organization Unit
+                                        <input type="radio" name="search" icheck
+                                            ng-model="searchMembers.search.searchBy"
+                                            ng-change="searchMembers.search.searchString = ''; searchMembers.resetValidation(); searchMembers.selectedLocation = null; searchMembers.villageSelected = false; searchMembers.ashaAreaSelected = false;"
+                                            value="orgUnit" />
+                                        <div class="control_indicator"></div>
+                                    </label>
+                                    <div class="form-group" ng-if="searchMembers.search.searchBy === 'orgUnit'">
+                                        <location-directive template-type="'twoPart'"
+                                            ng-model="searchMembers.search.searchString"
+                                            selected-location="searchMembers.selectedLocation" required-upto-level="4"
+                                            on-change="searchMembers.fetchVillages(); searchMembers.fetchAshaArea();"
+                                            template-type="'inline'" fetch-upto-level="6"
+                                            fetch-according-to-user-aoi="false">
+                                        </location-directive>
+                                    </div>
+                                    <div class="form-group row col-12" style="margin: 0; padding: 0;"
+                                        ng-if="searchMembers.search.searchBy === 'orgUnit' && searchMembers.selectedLocation && searchMembers.selectedLocation.finalSelected.level >= 4">
+                                        <div class="form-group col-6" style="padding-left: 0;">
+                                            <validate for="villageV">
+                                                <label control-label>Village</label>
+                                                <select name="villageV" form-control
+                                                    class="form-control cst-form-control"
+                                                    ng-model="searchMembers.villageId"
+                                                    ng-change="searchMembers.villageId ? searchMembers.villageSelected = true : searchMembers.villageSelected = false; searchMembers.fetchAshaArea();"
+                                                    ng-options="village.id as village.name for village in searchMembers.villages">
+                                                    <option value="">Select</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group col-6" style="padding-right: 0;">
+                                            <validate for="ashaAreaA">
+                                                <label control-label>Area</label>
+                                                <select name="ashaAreaA" form-control
+                                                    class="form-control cst-form-control"
+                                                    ng-model="searchMembers.ashaAreaId"
+                                                    ng-change="searchMembers.ashaAreaId ? searchMembers.ashaAreaSelected = true : searchMembers.ashaAreaSelected = false;"
+                                                    ng-options="ashaArea.id as ashaArea.name for ashaArea in searchMembers.ashaAreas">
+                                                    <option value="">Select</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 10px">
+                                        <validate for="searchString" pattern-msg='Enter Valid Number'
+                                            ng-if="searchMembers.search.searchBy === 'mobileNumber'">
+                                            <input type="number" name="searchString" form-control
+                                                ng-model="searchMembers.search.searchString"
+                                                placeholder='Enter contact number' class="form-control" maxlength="10"
+                                                minlength="10" data-test="{{searchMembers.search.searchBy}}-input"
+                                                required />
+                                        </validate>
+                                        <label style="margin-top:2%" class="form-group control control-checkbox"
+                                            ng-if="searchMembers.search.searchBy === 'mobileNumber'"
+                                            data-test="search-mobile-number-in-family-checkbox">
+                                            <input ng-model="searchMembers.search.familyMobileNumber" type="checkbox">
+                                            <div class="control_indicator checkbox-success"></div>
+                                            Search mobile number in family
+                                        </label>
+                                    </div>
+                                    <div style="margin-top: 10px">
+                                        <validate for="searchString" pattern-msg='Enter Valid details'
+                                            ng-if="searchMembers.search.searchBy === 'memberId' || searchMembers.search.searchBy === 'familyId'">
+                                            <input type="text" name="searchString" form-control
+                                                ng-model="searchMembers.search.searchString"
+                                                placeholder="Enter {{searchMembers.search.searchBy}}"
+                                                class="form-control" data-test="{{searchMembers.search.searchBy}}-input"
+                                                required />
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr>
+                <div class="form-group text-right">
+                    <button class="btn btn-secondary close-filter" data-test="close-btn"
+                        ng-click="searchMembers.cancel()">Close</button>
+                    <button type="submit" data-test="search-btn" class="btn btn-primary search-filter"
+                        ng-click="searchMembers.searchMembersInModalInstance(false)">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="">Member Information</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="cst-table table-responsive">
+                <table aria-describedby="table" class="table table-sm table-striped table-bordered header-fixed ">
+                    <thead class="cst-thead ">
+                        <tr>
+                            <th id="Member Name">Member Name</th>
+                            <th id="Contact Number">Contact Number</th>
+                            <th id="Family Id">Family Id</th>
+                            <th id="Location">Location</th>
+                            <th id="Account Number">Account Number</th>
+                            <th id="Actions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody " infinite-scroll-distance="0"
+                        infinite-scroll='searchMembers.retrieveMembers(true)'
+                        infinite-scroll-disabled='searchMembers.pagingService.pagingRetrivalOn'>
+                        <tr ng-if="!searchMembers.members || searchMembers.members.length == 0">
+                            <td colspan="6 ">
+                                No Member Found
+                            </td>
+                        </tr>
+                        <tr ng-repeat="member in searchMembers.members">
+                            <td>
+                                {{member.firstName}} {{member.lastName}}
+                            </td>
+                            <td>{{member.mobileNumber|emptylabel}}</td>
+                            <td>{{member.familyId|emptylabel}}</td>
+                            <td>{{member.locationHierarchy|emptylabel}}</td>
+                            <td>{{member.accountNumber|emptylabel}}</td>
+                            <td>
+                                <input type="checkbox" data-test="select-member-checkbox"
+                                    ng-model="searchMembers.member" ng-true-value="{{member}}" ng-false-value="">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer mt-2">
+        <div class="float-right">
+            <button type="submit" class="btn btn-primary" data-test="update-btn"
+                ng-click="searchMembers.updateUser(searchMembers.member)"><em class="fa fa-floppy-o"></em>
+                Update</button>
+            <button class="btn btn-secondary" data-test="cancel-btn" ng-click="searchMembers.cancel()">Cancel</button>
+        </div>
+    </div>
+</div>

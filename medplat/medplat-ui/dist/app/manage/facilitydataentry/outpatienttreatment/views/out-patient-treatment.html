@@ -1,0 +1,551 @@
+<style>
+    .display {
+        width: auto !important;
+    }
+
+    .mt-8 {
+        margin-top: 8px;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="row justify-content-end">
+                <div style="padding-right: 15px;">
+                    <button type="button" style="float: right;margin-bottom: 12px;" class="btn btn-primary"
+                        ng-click="outPatientTreatment.showTreatmentHistory(false)">
+                        Last Treatment
+                    </button>
+                </div>
+                <div style="padding-right: 15px;">
+                    <button type="button" style="float: right;margin-bottom: 12px;" class="btn btn-primary"
+                        ng-click="outPatientTreatment.showTreatmentHistory(true)">
+                        Treatment History
+                    </button>
+                </div>
+            </div>
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{outPatientTreatment.constants.outPatientTreatmentBeneficiaryTitle}}</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="display">
+                                    <strong>Member ID (Family ID) :</strong>
+                                </label>
+                                <label class="display">
+                                    {{outPatientTreatment.outPatientObject.uniqueHealthId | emptylabel}}
+                                    ({{outPatientTreatment.outPatientObject.familyId | emptylabel}})
+                                </label>
+                            </div>
+                            <div class="form-group" ng-if="outPatientTreatment.careContextRequest.healthId">
+                                <label class="display">
+                                    <strong>ABHA Address :</strong>
+                                </label>
+                                <label class="display">
+                                    {{outPatientTreatment.careContextRequest.healthId | emptylabel}}
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="display"><strong>Location :</strong></label>
+                                <label class="display">
+                                    {{outPatientTreatment.outPatientObject.locationHierarchy | emptylabel}}
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="display"><strong>ASHA Name (Contact Number) :</strong></label>
+                                <label class="display">
+                                    {{outPatientTreatment.outPatientObject.ashaName | emptylabel}}
+                                    ({{outPatientTreatment.outPatientObject.ashaContactNumber | emptylabel}})
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="display"><strong>Name :</strong></label>
+                                <label
+                                    class="display">{{outPatientTreatment.outPatientObject.name | emptylabel}}</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="display"><strong>DOB (Age) :</strong></label>
+                                <label class="display">
+                                    {{outPatientTreatment.outPatientObject.dob| date:'dd/MM/yyyy' | emptylabel}}
+                                    ({{outPatientTreatment.outPatientObject.age.replace("mons","months") | emptylabel}})
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="display"><strong>ANM Name (Contact Number) :</strong></label>
+                                <label class="display">
+                                    {{outPatientTreatment.outPatientObject.anmName | emptylabel}}
+                                    ({{outPatientTreatment.outPatientObject.anmContactNumber | emptylabel}})
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{outPatientTreatment.constants.outPatientTreatmentHealthDetailsTitle}}</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <div class="row">
+                        <div class="col-12">
+                            <label style="width: 100%;">
+                                <strong>Known Conditions of :</strong>
+                            </label>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="display">
+                                    Diabetes :
+                                </label>
+                                <label class="display">
+                                    {{outPatientTreatment.outPatientObject.diabetesStatus}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="display">
+                                    Hypertension :
+                                </label>
+                                <label class="display">
+                                    {{outPatientTreatment.outPatientObject.hypertensionStatus}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12"
+                            ng-if="outPatientTreatment.outPatientObject.isPregnant || outPatientTreatment.outPatientObject.hasDeliveryHappenedInLast45Days">
+                            <div class="form-group">
+                                <label class="display">
+                                    <strong>Pregnancy Status :</strong>
+                                </label>
+                                <label class="display">
+                                    {{outPatientTreatment.outPatientObject.isPregnant ? 'Currently Pregnant' : 'Lactating Mother, Gestation Week Number - ' + outPatientTreatment.gestationWeekNumber}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">{{outPatientTreatment.constants.outPatientTreatmentFormDisplayTitle}}</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="outPatientTreatment.outPatientTreatmentForm" id="outPatientTreatmentForm"
+                        novalidate>
+                        <fieldset ng-disabled="outPatientTreatment.disableOpdForm">
+                        <legend></legend>
+                        <div class="row" ng-if="outPatientTreatment.isTreatmentForm">
+                            <div class="col-6">
+                                <div class="form-group" ng-if="outPatientTreatment.outPatientObject.healthInfraId">
+                                    <label
+                                        uib-tooltip="{{outPatientTreatment.constants.formFieldHealthInfrastructure}}">
+                                        <strong>
+                                            {{outPatientTreatment.constants.formFieldHealthInfrastructure}} :
+                                        </strong>
+                                    </label>
+                                    <label>
+                                        {{outPatientTreatment.outPatientObject.healthInfraName}}
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='serviceDate' required-msg="Select Date">
+                                        <label for="serviceDate"
+                                            uib-tooltip="{{outPatientTreatment.constants.formFieldServiceDate}}*"
+                                            control-label>{{outPatientTreatment.constants.formFieldServiceDate}}</label>
+                                        <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                            name="serviceDate" form-control
+                                            ng-model="outPatientTreatment.outPatientObject.serviceDate" required>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="!outPatientTreatment.outPatientObject.healthInfraId">
+                                    <validate for='healthInfrastructure' required-msg="Select a value">
+                                        <label for="healthInfrastructure"
+                                            uib-tooltip="{{outPatientTreatment.constants.formFieldHealthInfrastructure}}*"
+                                            control-label>{{outPatientTreatment.constants.formFieldHealthInfrastructure}}</label>
+                                        <select class="form-control cst-form-control" form-control chosen-directive
+                                            name="healthInfrastructure" id="healthInfrastructure"
+                                            ng-change="outPatientTreatment.healthInfrastructureChanged()"
+                                            ng-options="healthInfrastructure as healthInfrastructure.name for healthInfrastructure in outPatientTreatment.healthInfrastructuresList"
+                                            ng-model="outPatientTreatment.outPatientObject.healthInfrastructure">
+                                            <option value="" selected>--Select--</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='provisionalDiagnosis' required-msg="Select a value">
+                                        <label for="provisionalDiagnosis"
+                                            uib-tooltip="{{outPatientTreatment.constants.formFieldProvisionalDiagnosis}}*"
+                                            control-label>{{outPatientTreatment.constants.formFieldProvisionalDiagnosis}}</label>
+                                        <select class="form-control cst-form-control" form-control chosen-directive
+                                            name="provisionalDiagnosis" id="provisionalDiagnosis" multiple="true"
+                                            ng-options="diagnosis.id as diagnosis.value for diagnosis in outPatientTreatment.provisionalDiagnosisList"
+                                            ng-model="outPatientTreatment.outPatientObject.provisionalIds" required
+                                            ng-change="outPatientTreatment.onChangeProvisionalDiagnosis()">
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="outPatientTreatment.showOtherStateSpecificDisease">
+                                    <validate for='otherStateSpecificDisease' required-msg="Fill the value">
+                                        <label style="white-space: normal;" for='otherStateSpecificDisease'
+                                            uib-tooltip="Other State Specific Disease" control-label>
+                                            Other State Specific Disease
+                                        </label>
+                                        <input type="text" class="form-control cst-form-control" form-control
+                                            name="otherStateSpecificDisease" id="otherStateSpecificDisease"
+                                            ng-model="outPatientTreatment.outPatientObject.otherStateSpecificDisease"
+                                            maxlength="50" required>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="outPatientTreatment.showUnusualSyndromes">
+                                    <validate for='unusualSyndromes' required-msg="Fill the value">
+                                        <label style="white-space: normal;" for='unusualSyndromes'
+                                            uib-tooltip="Clinical Diagnosis" control-label>
+                                            Clinical Diagnosis
+                                        </label>
+                                        <input type="text" class="form-control cst-form-control" form-control
+                                            name="unusualSyndromes" id="unusualSyndromes"
+                                            ng-model="outPatientTreatment.outPatientObject.unusualSyndromes"
+                                            maxlength="50" required>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='medicinesGivenOn' required-msg="Select Date">
+                                        <label for="medicinesGivenOn"
+                                            uib-tooltip="{{outPatientTreatment.constants.formFieldMedicinesGivenOn}}*"
+                                            control-label>{{outPatientTreatment.constants.formFieldMedicinesGivenOn}}</label>
+                                        <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                            name="medicinesGivenOn" id="medicinesGivenOn" form-control
+                                            min-date-month="outPatientTreatment.outPatientObject.serviceDate"
+                                            max-date-month="outPatientTreatment.today"
+                                            ng-model="outPatientTreatment.outPatientObject.medicinesGivenOn">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <label for="instructions"
+                                        uib-tooltip="{{outPatientTreatment.constants.formFieldInstructions}}*"
+                                        control-label>{{outPatientTreatment.constants.formFieldInstructions}}</label>
+                                    <textarea rows="4" cols="20" type="text" class="form-control cst-form-control"
+                                        form-control name="instructions" id="instructions"
+                                        ng-model="outPatientTreatment.outPatientObject.instructions">
+                                        </textarea>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <validate for='advisedLabTests'>
+                                        <label for="advisedLabTests" class="control-label" control-label>
+                                            Advised Lab Tests
+                                        </label>
+                                        <label class="control control-radio mt-8">Yes
+                                            <input ng-value="true" name="advisedLabTests" id="advisedLabTests"
+                                                form-control type="radio" ng-model="outPatientTreatment.advisedLabTests"
+                                                ng-change="outPatientTreatment.healthInfrastructureChanged()">
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio mt-8">No
+                                            <input ng-value="false" name="advisedLabTests" id="advisedLabTests"
+                                                form-control type="radio"
+                                                ng-model="outPatientTreatment.advisedLabTests">
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="outPatientTreatment.advisedLabTests">
+                                    <validate for='categories' required-msg="Select a value">
+                                        <label for="categories" style="white-space: normal;"
+                                            uib-tooltip="{{outPatientTreatment.constants.formFieldAdvisedLabTestCategories}}*"
+                                            control-label>{{outPatientTreatment.constants.formFieldAdvisedLabTestCategories}}</label>
+                                        <select style="margin-top: 1%;" class="form-control cst-form-control"
+                                            form-control chosen-directive name="categories" id="categories"
+                                            multiple="true"
+                                            ng-options="category.categoryId as category.categoryName for category in outPatientTreatment.categoriesList"
+                                            ng-change="outPatientTreatment.categoriesChanged()"
+                                            ng-model="outPatientTreatment.outPatientObject.categories" required>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group" ng-if="outPatientTreatment.advisedLabTests">
+                                    <validate for='labTests' required-msg="Select a value">
+                                        <label for="labTests"
+                                            uib-tooltip="{{outPatientTreatment.constants.formFieldAdvisedLabTests}}*"
+                                            control-label>{{outPatientTreatment.constants.formFieldAdvisedLabTests}}</label>
+                                        <select class="form-control cst-form-control" form-control chosen-directive
+                                            name="labTests" id="labTests" multiple="true"
+                                            ng-options="labTest.labTestId as labTest.labTestName for labTest in outPatientTreatment.labTestsList"
+                                            ng-model="outPatientTreatment.outPatientObject.labTestIds" required>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="!outPatientTreatment.isTreatmentForm">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="display"><strong>Service Date :</strong></label>
+                                    <label class="display">
+                                        {{outPatientTreatment.outPatientObject.serviceDate | date:'dd/MM/yyyy' }}
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="display"><strong>Health Infrastructure :</strong></label>
+                                    <label class="display">
+                                        {{outPatientTreatment.outPatientObject.healthInfraName | emptylabel}}
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="display"><strong>Provisional Diagnosis :</strong></label>
+                                    <label class="display">
+                                        {{outPatientTreatment.outPatientObject.provisionalDiagnosis | emptylabel}}
+                                    </label>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="outPatientTreatment.outPatientObject.anyOtherStateSpecificDisease">
+                                    <label class="display"><strong>Other State Specific Disease :</strong></label>
+                                    <label class="display">
+                                        {{outPatientTreatment.outPatientObject.anyOtherStateSpecificDisease | emptylabel}}
+                                    </label>
+                                </div>
+                                <div class="form-group" ng-if="outPatientTreatment.outPatientObject.unusualSyndromes">
+                                    <label class="display"><strong>Clinical Diagnosis :</strong></label>
+                                    <label class="display">
+                                        {{outPatientTreatment.outPatientObject.unusualSyndromes | emptylabel}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="display"><strong>Advised Lab Tests :</strong></label>
+                                    <label
+                                        class="display">{{outPatientTreatment.outPatientObject.labTests | emptylabel}}</label>
+                                </div>
+                                <div class="form-group" ng-if="outPatientTreatment.medicinesGivenOnAvailable">
+                                    <label class="display"><strong>Medicines Given On :</strong></label>
+                                    <label class="display">
+                                        {{outPatientTreatment.outPatientObject.medicinesGivenOn | date:'dd/MM/yyyy'}}
+                                    </label>
+                                </div>
+                                <div class="form-group" ng-if="!outPatientTreatment.medicinesGivenOnAvailable">
+                                    <validate for='medicinesGivenOn' required-msg="Select Date">
+                                        <label for="medicinesGivenOn"
+                                            uib-tooltip="{{outPatientTreatment.constants.formFieldMedicinesGivenOn}}*"
+                                            control-label>{{outPatientTreatment.constants.formFieldMedicinesGivenOn}}</label>
+                                        <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                            name="medicinesGivenOn" id="medicinesGivenOn" form-control
+                                            min-date-month="outPatientTreatment.outPatientObject.serviceDate"
+                                            max-date-month="outPatientTreatment.today"
+                                            ng-model="outPatientTreatment.outPatientObject.medicinesGivenOn" required>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>
+                                        <strong>Treatment Provided :</strong>
+                                    </label>
+                                    <button type="button" class="btn btn-primary"
+                                        ng-click="outPatientTreatment.addMedicineDetail()">
+                                        Add Medicine Detail
+                                    </button>
+                                </div>
+                                <div class="accordion" id="treatmentProvidedAccordion">
+                                    <div ng-repeat="medicineDetail in outPatientTreatment.medicineDetails">
+                                        <div class="card">
+                                            <div class="card-header pl-0" style="cursor: pointer;"
+                                                data-toggle="collapse"
+                                                data-target="#collapseTreatmentProvided{{$index}}" aria-expanded="false"
+                                                aria-controls="collapseTreatmentProvided{{$index}}"
+                                                id="treatmentProvidedHeading{{$index}}">
+                                                <h5 class="mb-0">
+                                                    <button class="btn btn-link" style="text-decoration: none;"
+                                                        type="button">
+                                                        Medicine #{{$index + 1}}
+                                                        {{medicineDetail.edlId ? ' (' + outPatientTreatment.edlMap[medicineDetail.edlId] + ')' : ''}}
+                                                    </button>
+                                                </h5>
+                                            </div>
+
+                                            <div id="collapseTreatmentProvided{{$index}}" class="collapse"
+                                                aria-labelledby="treatmentProvidedHeading{{$index}}"
+                                                data-parent="#treatmentProvidedAccordion">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group"
+                                                                ng-if="!outPatientTreatment.isTreatmentForm && medicineDetail.edlId && !medicineDetail.isEditMode">
+                                                                <label style="white-space: unset;"
+                                                                    uib-tooltip="Essential Drug Name">
+                                                                    Essential Drug Name
+                                                                </label>
+                                                                <label
+                                                                    style="width: calc(100% - 170px); white-space: unset;">
+                                                                    {{outPatientTreatment.edlMap[medicineDetail.edlId]}}
+                                                                    <em class="fa fa-edit fa-lg"
+                                                                        style="cursor: pointer; width: auto; padding: 0 4px;"
+                                                                        ng-click="medicineDetail.isEditMode = true;">
+                                                                    </em>
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-group"
+                                                                ng-if="medicineDetail.isEditMode || outPatientTreatment.isTreatmentForm || !medicineDetail.edlId">
+                                                                <validate for='essentialDrug{{$index}}'
+                                                                    required-msg="Select a value">
+                                                                    <label style="white-space: normal;" control-label
+                                                                        for='essentialDrug{{$index}}'
+                                                                        uib-tooltip="Essential Drug Name*">
+                                                                        Essential Drug Name
+                                                                    </label>
+                                                                    <selectize
+                                                                        class="form-control cst-form-control disabled-input"
+                                                                        form-control id="essentialDrug{{$index}}"
+                                                                        name="essentialDrug{{$index}}" required
+                                                                        ng-model='medicineDetail.edlId'
+                                                                        config='outPatientTreatment.drugsSelectizeConfig'
+                                                                        ng-change="medicineDetail.isEditMode = true">
+                                                                        <option value=''>Select</option>
+                                                                    </selectize>
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <validate for='frequency{{$index}}'>
+                                                                    <label style="white-space: normal;"
+                                                                        for='frequency{{$index}}'
+                                                                        uib-tooltip="Frequency" control-label>
+                                                                        Frequency
+                                                                    </label>
+                                                                    <input type="text" numbers-only
+                                                                        decimalallowed="true"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="frequency{{$index}}"
+                                                                        id="frequency{{$index}}"
+                                                                        ng-model="medicineDetail.frequency"
+                                                                        limit-to="6">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <validate for='numberofDays{{$index}}'>
+                                                                    <label style="white-space: normal;"
+                                                                        for='numberofDays{{$index}}'
+                                                                        uib-tooltip="Number of Days" control-label>
+                                                                        Number of Days
+                                                                    </label>
+                                                                    <input type="text" numbers-only
+                                                                        decimalallowed="true"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="numberofDays{{$index}}"
+                                                                        id="numberofDays{{$index}}"
+                                                                        ng-model="medicineDetail.numberOfDays"
+                                                                        limit-to="6">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label style="white-space: normal; width: 100%;"
+                                                                    uib-tooltip="No of Tablets (or ML in case of Syrups)">
+                                                                    <strong>
+                                                                        No of Tablets (or ML in case of Syrups)
+                                                                    </strong>
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <validate for='quantityBeforeFood{{$index}}'>
+                                                                    <label style="white-space: normal;"
+                                                                        for='quantityBeforeFood{{$index}}'
+                                                                        uib-tooltip="Before Food" control-label>
+                                                                        Before Food
+                                                                    </label>
+                                                                    <input type="text" numbers-only
+                                                                        decimalallowed="true"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="quantityBeforeFood{{$index}}"
+                                                                        id="quantityBeforeFood{{$index}}"
+                                                                        ng-model="medicineDetail.quantityBeforeFood"
+                                                                        limit-to="6">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <validate for='quantityAfterFood{{$index}}'>
+                                                                    <label style="white-space: normal;"
+                                                                        for='quantityAfterFood{{$index}}'
+                                                                        uib-tooltip="After Food" control-label>
+                                                                        After Food
+                                                                    </label>
+                                                                    <input type="text" numbers-only
+                                                                        decimalallowed="true"
+                                                                        class="form-control cst-form-control"
+                                                                        form-control name="quantityAfterFood{{$index}}"
+                                                                        id="quantityAfterFood{{$index}}"
+                                                                        ng-model="medicineDetail.quantityAfterFood"
+                                                                        limit-to="6">
+                                                                    <placeholder></placeholder>
+                                                                </validate>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group" style="margin-top: 16px;">
+                                                            <label></label>
+                                                            <button style="margin-left: 15px;" type="button"
+                                                                class="btn btn-danger"
+                                                                ng-click="outPatientTreatment.removeMedicineDetail($index)">
+                                                                Remove Medicine Detail
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </fieldset>
+                    </form>
+                    <div ng-if="outPatientTreatment.isDataLinked">
+                        Successfully linked your record <strong>( {{outPatientTreatment.registrationDate | date : 'dd-MM-yyyy'}} )</strong>  to ABHA Address <strong>{{outPatientTreatment.healthId}}</strong>
+                    </div>
+                </div>
+                <div class="card-footer mt-3">
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary" ng-disabled="outPatientTreatment.disableOpdForm" ng-click="outPatientTreatment.saveScreening()"><span
+                                class="fa fa-floppy-o"></i> Save &
+                                Continue</button>
+                        <button class="btn btn-primary" ng-if="outPatientTreatment.disableOpdForm" ng-disabled="outPatientTreatment.isDataLinked" ng-click="outPatientTreatment.handleNdhmConsentRequest()"><span
+                                class="fa fa-link"></i> Link Record</button>
+                        <button class="btn btn-secondary" ng-click="outPatientTreatment.goBack()">Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

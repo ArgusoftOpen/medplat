@@ -1,0 +1,519 @@
+<style>
+    .order-style {
+        font-size: 2.3em;
+        vertical-align: 10%
+    }
+
+    a.order-style:hover {
+        text-decoration: none;
+    }
+</style>
+<div class="modal-header">
+    <h4 class="text" ng-if="$ctrl.addFlag">Add Module</h4>
+    <h4 class="text" ng-if="!$ctrl.addFlag">Edit Module: <strong>{{$ctrl.topicForUpdate.topicName}}</strong></h4>
+</div>
+<div class="modal-body">
+    <form role="form" aria-label="topicUpdateForm" name="$ctrl.topicUpdateForm" id="$ctrl.topicUpdateForm" novalidate>
+        <div class="inline-form">
+            <div class="form-group">
+                <label for="topicOrder" class="control-label" control-label>Module No</label>
+                <input type="text" disabled class="form-control cst-form-control" form-control name="topicOrder"
+                    ng-model="$ctrl.topicForUpdate.topicOrder" />
+            </div>
+            <div class="form-group">
+                <validate for='topicName' required-msg="Enter module name">
+                    <label for="topicName" class="control-label" control-label>Module Name</label>
+                    <input type="text" class="form-control cst-form-control" form-control name="topicName"
+                        ng-model="$ctrl.topicForUpdate.topicName" maxlength="250" required
+                        ng-style="$ctrl.isModuleDuplicate ? {'border-color': '#dc3545'} : {}" />
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group">
+                <validate for="moduleDescription" required-msg="Enter module description">
+                    <label for="moduleDescription" class="control-label" control-label>Module Description</label>
+                    <textarea class="form-control cst-form-control" form-control rows="6" name="moduleDescription"
+                        ng-model="$ctrl.topicForUpdate.topicDescription" maxlength="1500"></textarea>
+                    <small class="placeholder">{{1500 - $ctrl.topicForUpdate.topicDescription.length}} characters
+                        available</small>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div ng-if="!!$ctrl.isShowAdd" class="btn btn-primary" style="margin-left: 14%;"
+                ng-click="$ctrl.isShowControls= true;$ctrl.isShowAdd = false;">Add Lesson
+            </div>
+            <div ng-if="$ctrl.isShowControls">
+                <hr>
+                <div class="form-group">
+                    <validate for='title' required-msg="Enter lesson name">
+                        <label for="title" class="control-label" control-label>Lesson Name</label>
+                        <input type="text" class="form-control cst-form-control" form-control name="title"
+                            ng-model="$ctrl.media.title" maxlength="255" required />
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for='description' required-msg="Enter lesson description">
+                        <label for="description" class="control-label" control-label>Lesson
+                            Description</label>
+                        <textarea class="form-control cst-form-control" form-control rows="2" name="description"
+                            ng-model="$ctrl.media.description" maxlength="1000" required></textarea>
+                        <small class="placeholder">{{1000 - $ctrl.media.description.length}} characters
+                            available</small>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for='isUserFeedbackRequired' required-msg="Please select value">
+                        <label for="isUserFeedbackRequired" name='isUserFeedbackRequired' class="control-label"
+                            style="white-space: initial;" control-label>Is User Feedback Required?</label>
+                        <label class="control control-radio">Yes
+                            <input ng-value="true" name="isUserFeedbackRequired" form-control type="radio"
+                                ng-model="$ctrl.media.isUserFeedbackRequired">
+                            <div class="control_indicator">
+                            </div>
+                        </label>
+                        <label class="control control-radio">No
+                            <input ng-value="false" name="isUserFeedbackRequired" form-control type="radio"
+                                ng-model="$ctrl.media.isUserFeedbackRequired">
+                            <div class="control_indicator">
+                            </div>
+                        </label>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for='mediaType' required-msg="Please select media type">
+                        <label for="mediaType" name='mediaType' class="control-label" control-label>Media Type</label>
+                        <label class="control control-radio">PDF
+                            <input value="PDF" name="mediaType" form-control type="radio"
+                                ng-model="$ctrl.media.mediaType" required ng-change="$ctrl.mediaTypeChanged()">
+                            <div class="control_indicator">
+                            </div>
+                        </label>
+                        <label class="control control-radio">Video
+                            <input value="VIDEO" name="mediaType" form-control type="radio"
+                                ng-model="$ctrl.media.mediaType" required ng-change="$ctrl.mediaTypeChanged()">
+                            <div class="control_indicator">
+                            </div>
+                        </label>
+                        <label class="control control-radio">Audio
+                            <input value="AUDIO" name="mediaType" form-control type="radio"
+                                ng-model="$ctrl.media.mediaType" required ng-change="$ctrl.mediaTypeChanged()">
+                            <div class="control_indicator">
+                            </div>
+                        </label>
+                        <label class="control control-radio">Image
+                            <input value="IMAGE" name="mediaType" form-control type="radio"
+                                ng-model="$ctrl.media.mediaType" required ng-change="$ctrl.mediaTypeChanged()">
+                            <div class="control_indicator">
+                            </div>
+                        </label>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <!--pdf section-->
+                <div style="margin-left: 160px;" class="form-group" flow-init="$ctrl.uploadFile"
+                    ng-if="!$ctrl.media.pdfObject.mediaName"
+                    flow-file-added="$ctrl.upload($file, $event, $flow,$ctrl.media.pdfObject,'PDF')"
+                    flow-files-submitted="$ctrl.uploadFn($files, $event, $flow,$ctrl.media.pdfObject,'PDF')"
+                    flow-file-success="$ctrl.getUploadResponse( $file, $message, $flow,$ctrl.media.pdfObject,'PDF')"
+                    flow-file-error="$ctrl.fileError($file, $message,$ctrl.media.pdfObject,'PDF');">
+                    <button class="btn btn-primary" flow-attrs="{accept:'pdf/*'}"
+                        ng-if="$ctrl.media.mediaType === 'PDF' && (!$ctrl.media.pdfObject.flow.files.length > 0)"
+                        flow-btn type="button">Upload PDF
+                    </button>
+                    <span class="text-danger p-1" ng-if="$ctrl.media.mediaType === 'PDF' && (!$ctrl.media.pdfObject.flow.files.length > 0)">
+                        <small class="text-info">[File size: Less than {{$ctrl.maxPdfSize/1000000}}MB]</small>
+                    </span>
+                    <div ng-repeat="file in $ctrl.media.pdfObject.flow.files">
+                        <div class="progress" ng-class="{active: file.isUploading()}" ng-if="file.progress() !== 1">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                            </div>
+                        </div>
+                        <div ng-if="file.progress() !== 1" class="mt-2 alert alert-success ">
+                            <span class="text-center">{{file.name}} Uploading...
+                                <i aria-hidden="true" class="fa fa-cog fa-spin fa-1x"></i>
+                            </span>
+                        </div>
+                        <div ng-if="file.progress() === 1" class="mt-2 alert alert-success" style="float:left">
+                            <span class="text-center"> {{file.name}}
+                                <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                            </span>
+                        </div>
+                        <button class="btn btn-danger mt-2" style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                            ng-click="$ctrl.removeFile($ctrl.media.pdfObject)">
+                            <i aria-hidden="true" ng-if="!!$ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                            <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                        </button>
+                    </div>
+                </div>
+                <div style="margin-left: 160px" class="mb-15" ng-if="!!$ctrl.media.pdfObject.mediaName">
+                    <div class="mt-2 alert alert-success" style="float:left">
+                        <a class="text-center">
+                            {{$ctrl.media.pdfObject.originalMediaName}}
+                            <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-danger mt-2"
+                        style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                        ng-click="$ctrl.removeFile($ctrl.media.pdfObject)">
+                        <i aria-hidden="true" ng-if="!!$ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                        <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                    </button>
+                </div>
+                <!--video section-->
+                <div style="margin-left: 160px;" class="form-group" flow-init="$ctrl.uploadFile"
+                    ng-if="!$ctrl.media.videoObject.video.mediaName"
+                    flow-file-added="$ctrl.upload($file, $event, $flow,$ctrl.media.videoObject.video,'VIDEO')"
+                    flow-files-submitted="$ctrl.uploadFn($files, $event, $flow,$ctrl.media.videoObject.video,'VIDEO')"
+                    flow-file-success="$ctrl.getUploadResponse( $file, $message, $flow,$ctrl.media.videoObject.video,'VIDEO')"
+                    flow-file-error="$ctrl.fileError($file, $message,$ctrl.media.videoObject.video,'VIDEO');">
+                    <button class="btn btn-primary" flow-attrs="{accept:'video/*'}"
+                        ng-if="$ctrl.media.mediaType === 'VIDEO' && (!$ctrl.media.videoObject.video.flow.files.length > 0)"
+                        flow-btn type="button">Upload Video
+                    </button>
+                    <span class="text-danger p-1" ng-if="$ctrl.media.mediaType === 'VIDEO' && (!$ctrl.media.videoObject.video.flow.files.length > 0)">
+                        <small class="text-info">[File size: Less than {{$ctrl.maxVideoSize/1000000}}MB]</small>
+                        <small class="text-danger">(Supported extensions: '.mp4', '.avi', '.mpg', '.3gp', '.mov')</small>
+                    </span>
+                    <div ng-repeat="file in $ctrl.media.videoObject.video.flow.files">
+                        <div class="progress" ng-class="{active: file.isUploading()}" ng-if="file.progress() !== 1">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                            </div>
+                        </div>
+                        <div ng-if="file.progress() !== 1" class="mt-2 alert alert-success ">
+                            <span class="text-center">{{file.name}} Uploading...
+                                <i aria-hidden="true" class="fa fa-cog fa-spin fa-1x"></i>
+                            </span>
+                        </div>
+                        <div ng-if="file.progress() === 1" class="mt-2 alert alert-success" style="float:left">
+                            <span class="text-center"> {{file.name}}
+                                <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                            </span>
+                        </div>
+                        <button class="btn btn-danger mt-2" style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                            ng-click="$ctrl.removeFile(media.videoObject.video)">
+                            <i aria-hidden="true" ng-if="!!$ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                            <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                        </button>
+                    </div>
+                </div>
+                <div style="margin-left: 160px" class="mb-15" ng-if="!!$ctrl.media.videoObject.video.mediaName">
+                    <div class="mt-2 alert alert-success" style="float:left">
+                        <a class="text-center">
+                            {{$ctrl.media.videoObject.video.originalMediaName}}
+                            <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-danger mt-2"
+                        style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                        ng-click="$ctrl.removeFile($ctrl.media.videoObject.video)">
+                        <i aria-hidden="true" ng-if="!!$ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                        <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                    </button>
+                </div>
+                <!--video pdf section-->
+                <div style="margin-left: 160px;" class="form-group" flow-init="$ctrl.uploadFile"
+                    ng-if="!$ctrl.media.videoObject.pdf.mediaName"
+                    flow-file-added="$ctrl.upload($file, $event, $flow,$ctrl.media.videoObject.pdf,'PDF')"
+                    flow-files-submitted="$ctrl.uploadFn($files, $event, $flow,$ctrl.media.videoObject.pdf,'PDF')"
+                    flow-file-success="$ctrl.getUploadResponse( $file, $message, $flow,$ctrl.media.videoObject.pdf,'PDF')"
+                    flow-file-error="$ctrl.fileError($file, $message,$ctrl.media.videoObject.pdf,'PDF');">
+                    <button class="btn btn-primary" flow-attrs="{accept:'pdf/*'}"
+                        ng-if="$ctrl.media.mediaType === 'VIDEO' && (!$ctrl.media.videoObject.pdf.flow.files.length > 0)"
+                        flow-btn type="button">Upload Transcript
+                    </button>
+                    <span class="text-danger p-1" ng-if="$ctrl.media.mediaType === 'VIDEO' && (!$ctrl.media.videoObject.pdf.flow.files.length > 0)">
+                        <small class="text-info">[File size: Less than {{$ctrl.maxPdfSize/1000000}}MB]</small>
+                    </span>
+                    <div ng-repeat="file in $ctrl.media.videoObject.pdf.flow.files">
+                        <div class="progress" ng-class="{active: file.isUploading()}" ng-if="file.progress() !== 1">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                            </div>
+                        </div>
+                        <div ng-if="file.progress() !== 1" class="mt-2 alert alert-success ">
+                            <span class="text-center">{{file.name}} Uploading...
+                                <i aria-hidden="true" class="fa fa-cog fa-spin fa-1x"></i>
+                            </span>
+                        </div>
+                        <div ng-if="file.progress() === 1" class="mt-2 alert alert-success" style="float:left">
+                            <span class="text-center"> {{file.name}}
+                                <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                            </span>
+                        </div>
+                        <button class="btn btn-danger mt-2" style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                            ng-click="$ctrl.removeFile($ctrl.media.videoObject.pdf)">
+                            <i aria-hidden="true" ng-if="!!$ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                            <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                        </button>
+                    </div>
+                </div>
+                <div style="margin-left: 160px" class="mb-15" ng-if="!!$ctrl.media.videoObject.pdf.mediaName">
+                    <div class="mt-2 alert alert-success" style="float:left">
+                        <a class="text-center">
+                            {{$ctrl.media.videoObject.pdf.originalMediaName}}
+                            <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                            <i aria-hidden="true" class="fa fa-cross fa-1x"></i>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-danger mt-2"
+                        style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                        ng-click="$ctrl.removeFile($ctrl.media.videoObject.pdf)">
+                        <i aria-hidden="true" ng-if="!!$ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                        <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                    </button>
+                </div>
+                <!--audio section-->
+                <div style="margin-left: 160px;" class="form-group" flow-init="$ctrl.uploadFile"
+                    ng-if="!$ctrl.media.audioObject.mediaName"
+                    flow-file-added="$ctrl.upload($file, $event, $flow,$ctrl.media.audioObject,'AUDIO')"
+                    flow-files-submitted="$ctrl.uploadFn($files, $event, $flow,$ctrl.media.audioObject,'AUDIO')"
+                    flow-file-success="$ctrl.getUploadResponse( $file, $message, $flow,$ctrl.media.audioObject,'AUDIO')"
+                    flow-file-error="$ctrl.fileError($file, $message,$ctrl.media.audioObject,'AUDIO');">
+                    <button class="btn btn-primary" flow-attrs="{accept:'audio/*'}"
+                        ng-if="$ctrl.media.mediaType === 'AUDIO' && (!$ctrl.media.audioObject.flow.files.length > 0)"
+                        flow-btn type="button">Upload Audio
+                    </button>
+                    <span class="text-danger p-1" ng-if="$ctrl.media.mediaType === 'AUDIO' && (!$ctrl.media.audioObject.flow.files.length > 0)">
+                        <small class="text-info">[File size: Less than {{$ctrl.maxAudioSize/1000000}}MB]</small>
+                    </span>
+                    <div ng-repeat="file in $ctrl.media.audioObject.flow.files">
+                        <div class="progress" ng-class="{active: file.isUploading()}" ng-if="file.progress() !== 1">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                            </div>
+                        </div>
+                        <div ng-if="file.progress() !== 1" class="mt-2 alert alert-success ">
+                            <span class="text-center">{{file.name}} Uploading...
+                                <i aria-hidden="true" class="fa fa-cog fa-spin fa-1x"></i>
+                            </span>
+                        </div>
+                        <div ng-if="file.progress() === 1" class="mt-2 alert alert-success" style="float:left">
+                            <span class="text-center"> {{file.name}}
+                                <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                            </span>
+                        </div>
+                        <button class="btn btn-danger mt-2" style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                            ng-click="$ctrl.removeFile($ctrl.media.audioObject)">
+                            <i aria-hidden="true" ng-if="!!$ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                            <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                        </button>
+                    </div>
+                </div>
+                <div style="margin-left: 160px" class="mb-15" ng-if="!!$ctrl.media.audioObject.mediaName">
+                    <div class="mt-2 alert alert-success" style="float:left">
+                        <a class="text-center">
+                            {{$ctrl.media.audioObject.originalMediaName}}
+                            <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-danger mt-2"
+                        style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                        ng-click="$ctrl.removeFile($ctrl.media.audioObject)">
+                        <i aria-hidden="true" ng-if="!!$ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                        <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                    </button>
+                </div>
+                <!--image section-->
+                <div style="margin-left: 160px;" class="form-group" flow-init="$ctrl.uploadFile"
+                    ng-if="!$ctrl.media.imageObject.mediaName"
+                    flow-file-added="$ctrl.upload($file, $event, $flow,$ctrl.media.imageObject,'IMAGE')"
+                    flow-files-submitted="$ctrl.uploadFn($files, $event, $flow,$ctrl.media.imageObject,'IMAGE')"
+                    flow-file-success="$ctrl.getUploadResponse( $file, $message, $flow,$ctrl.media.imageObject,'IMAGE')"
+                    flow-file-error="$ctrl.fileError($file, $message,$ctrl.media.imageObject,'IMAGE');">
+                    <button class="btn btn-primary" flow-attrs="{accept:'image/*'}"
+                        ng-if="$ctrl.media.mediaType === 'IMAGE' && (!$ctrl.media.imageObject.flow.files.length > 0)"
+                        flow-btn type="button">Upload Image
+                    </button>
+                    <span class="text-danger p-1" ng-if="$ctrl.media.mediaType === 'IMAGE' && (!$ctrl.media.imageObject.flow.files.length > 0)">
+                        <small class="text-info">[File size: Less than {{$ctrl.maxImageSize/1000000}}MB]</small>
+                    </span>
+                    <div ng-repeat="file in $ctrl.media.imageObject.flow.files">
+                        <div class="progress" ng-class="{active: file.isUploading()}" ng-if="file.progress() !== 1">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                            </div>
+                        </div>
+                        <div ng-if="file.progress() !== 1" class="mt-2 alert alert-success ">
+                            <span class="text-center">{{file.name}} Uploading...
+                                <i aria-hidden="true" class="fa fa-cog fa-spin fa-1x"></i>
+                            </span>
+                        </div>
+                        <div ng-if="file.progress() === 1" class="mt-2 alert alert-success" style="float:left">
+                            <span class="text-center"> {{file.name}}
+                                <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                            </span>
+                        </div>
+                        <button class="btn btn-danger mt-2" style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                            ng-click="$ctrl.removeFile($ctrl.media.imageObject)">
+                            <i aria-hidden="true" ng-if="!!$ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                            <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                        </button>
+                    </div>
+                </div>
+                <div style="margin-left: 160px" class="mb-15" ng-if="!!$ctrl.media.imageObject.mediaName">
+                    <div class="mt-2 alert alert-success" style="float:left">
+                        <a class="text-center">
+                            {{$ctrl.media.imageObject.originalMediaName}}
+                            <i aria-hidden="true" class="fa fa-check fa-1x"></i>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-danger mt-2"
+                        style="cursor: pointer; min-width: 30px; margin-left: 5px;"
+                        ng-click="$ctrl.removeFile($ctrl.media.imageObject)">
+                        <i aria-hidden="true" ng-if="!!$ctrl.isRemove" class="fa fa-cog fa-spin fa-1x"></i>
+                        <i aria-hidden="true" class="fa fa-times fa-1x"></i>
+                    </button>
+                </div>
+                <div class="bottom-spacer-20" style="padding-left: 160px;">
+                    <button type="button" class="btn btn-large btn-primary" ng-click="$ctrl.addLesson()"><span
+                            class="fa fa-floppy-o"></span> Save
+                    </button>
+                    <button type="button" class="btn btn-large btn-primary" ng-click="$ctrl.cancelLesson()"><span
+                            class="fa fa-floppy-o"></span> Cancel
+                    </button>
+                </div>
+            </div>
+            <div class="table-section" style="padding-top: 0px;"
+                ng-if="!!$ctrl.topicForUpdate.mediaDataList && $ctrl.topicForUpdate.mediaDataList.length>0">
+                <div class="card-body col-12 col-md-12">
+                    <div class="cst-table-responsive cst-table">
+                        <table aria-describedby="table"
+                            class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                            <colgroup>
+                                <col style="width: 7%;">
+                                <col style="width: 15%;">
+                                <col style="width: 20%;">
+                                <col style="width: 10%;">
+                                <col style="width: 10%;">
+                                <col style="width: 15%;">
+                                <col style="width: 15%;">
+                                <col style="width: 15%;">
+                                <col style="width: 18%;">
+                            </colgroup>
+                            <thead class="cst-thead">
+                                <tr>
+                                    <th class="white-space-unset" id="#">Sr. no</th>
+                                    <th class="white-space-unset" id="lessonName">Lesson Name</th>
+                                    <th class="white-space-unset" id="lessonDescription">Lesson Description</th>
+                                    <th class="white-space-unset" id="lessonDescription">Is User Feedback Required?</th>
+                                    <th class="white-space-unset" id="mediaType">Media Type</th>
+                                    <th class="white-space-unset" id="lessonSize">Lesson Size</th>
+                                    <th class="white-space-unset" id="mediaName">Media Name</th>
+                                    <th class="white-space-unset" id="transcriptFileName">Transcript File Name</th>
+                                    <th class="white-space-unset" id="action">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cst-tbody">
+                                <tr ng-repeat="(mediaIdx, media) in $ctrl.topicForUpdate.mediaDataList"
+                                    ng-style="$ctrl.duplicateMedia.includes(mediaIdx) ? {'border-color': '#dc3545', 'border-style': 'solid', 'border-left': '0', 'border-right': '0'} : {}">
+                                    <td>{{media.mediaOrder}}</td>
+                                    <td ng-if="!media.editMode">
+                                        {{media.title| emptylabel}}
+                                    </td>
+                                    <td ng-if="media.editMode">
+                                        <validate for='title{{$index}}'>
+                                            <textarea type="text" class="form-control cst-form-control" form-control
+                                                rows="3" name="title{{$index}}" ng-model="media.title" maxlength="255"
+                                                required></textarea>
+                                        </validate>
+                                    </td>
+                                    <td ng-if="!media.editMode">
+                                        {{media.description| emptylabel}}
+                                    </td>
+                                    <td ng-if="media.editMode">
+                                        <validate for='description{{$index}}'>
+                                            <textarea class="form-control cst-form-control" form-control rows="3"
+                                                name="description{{$index}}" ng-model="media.description"
+                                                maxlength="1000" required></textarea>
+                                        </validate>
+                                    </td>
+                                    <td ng-if="!media.editMode">
+                                        {{media.isUserFeedbackRequired| yesOrNo}}
+                                    </td>
+                                    <td ng-if="media.editMode">
+                                        <div class="form-group">
+                                            <validate for='isUserFeedbackRequired{{$index}}'>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="isUserFeedbackRequired{{$index}}"
+                                                        form-control type="radio"
+                                                        ng-model="media.isUserFeedbackRequired">
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="isUserFeedbackRequired{{$index}}"
+                                                        form-control type="radio"
+                                                        ng-model="media.isUserFeedbackRequired">
+                                                    <div class="control_indicator">
+                                                    </div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{media.mediaType| emptylabel}}
+                                    </td>
+                                    <td>
+                                        {{ media.size/1000000 | number:'2.2'}} MB
+                                    </td>
+                                    <td>
+                                        {{
+                                        (media.pdfObject.originalMediaName ||
+                                        media.videoObject.video.originalMediaName ||
+                                        media.audioObject.originalMediaName ||
+                                        media.imageObject.originalMediaName)| emptylabel
+                                        }}
+                                    </td>
+                                    <td>
+                                        {{media.videoObject.pdf.originalMediaName| emptylabel}}
+                                    </td>
+                                    <td class="action-cell">
+                                        <ul class="action-item">
+                                            <li ng-if="!media.editMode"><a href="#" class="action-icon edit-icon"
+                                                    ng-click="$ctrl.editLesson($index)"></a>
+                                            </li>
+                                            <li ng-if="!media.editMode"><a href="#" class="action-icon delete-icon"
+                                                    ng-click="$ctrl.deleteLesson(media)"></a>
+                                            </li>
+                                            <li ng-if="$index!==0 && !media.editMode"><a href="#"
+                                                    class="fa fa-arrow-circle-up fa-lg order-style"
+                                                    ng-click="$ctrl.incrementLesson(media)"></a>
+                                            </li>
+                                            <li
+                                                ng-if="$index!==$ctrl.topicForUpdate.mediaDataList.length-1 && !media.editMode">
+                                                <a href="#" class="fa fa-arrow-circle-down fa-lg order-style"
+                                                    ng-click="$ctrl.decrementLesson(media)"></a>
+                                            </li>
+                                            <li ng-if="media.editMode">
+                                                <button class="btn btn-primary"
+                                                    ng-click="$ctrl.updateLesson($index)">Update</button>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-disabled="!!$ctrl.isShowControls" ng-if="$ctrl.addFlag"
+        ng-click="$ctrl.ok()">Save Module</button>
+    <button class="btn btn-primary" ng-disabled="!!$ctrl.isShowControls" ng-if="!$ctrl.addFlag"
+        ng-click="$ctrl.ok()">Update Module</button>
+    <button type="button" class="btn btn-secondary" ng-click="$ctrl.cancel()">Close</button>
+</div>

@@ -1,0 +1,45 @@
+{
+  "name": "angular-fixed-table-header",
+  "version": "0.2.1",
+  "description": "Fixed table header directive.",
+  "main": [
+    "src/fixed-table-header.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/daniel-nagy/fixed-table-header.git"
+  },
+  "authors": [
+    "Daniel Nagy"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "fixed",
+    "table",
+    "header"
+  ],
+  "ignore": [
+    "**/.*",
+    "app",
+    "bower_components",
+    "node_modules",
+    "Gruntfile.js"
+  ],
+  "dependencies": {
+    "angular": "^1.4.0"
+  },
+  "devDependencies": {
+    "angular-material": ">=1.x",
+    "angular-material-data-table": "latest"
+  },
+  "homepage": "https://github.com/daniel-nagy/fixed-table-header",
+  "_release": "0.2.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.1",
+    "commit": "a6e18f52e5cc18d00ff81e1318a9b96eb0cf2555"
+  },
+  "_source": "https://github.com/daniel-nagy/fixed-table-header.git",
+  "_target": "0.2.1",
+  "_originalSource": "angular-fixed-table-header"
+}

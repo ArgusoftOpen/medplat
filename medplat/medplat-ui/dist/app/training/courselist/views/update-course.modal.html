@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h4 class="text" ng-if="$ctrl.addFlag">Add Topic</h4>
+    <h4 class="text" ng-if="!$ctrl.addFlag">Edit Topic: <strong>{{$ctrl.topicForUpdate.topicName}}</strong></h4>
+</div>
+<div class="modal-body">
+    <form role="form" name="$ctrl.topicUpdateForm" id="$ctrl.topicUpdateForm" novalidate>
+        <div class="inline-form">
+            <div class="form-group">
+                <validate for='topicName' required-msg="Enter topic name">
+                    <label for="topicName" class="control-label" control-label>Topic Name</label>
+                    <input type="text" class="form-control cst-form-control" form-control name="topicName"
+                        ng-model="$ctrl.topicForUpdate.topicName" maxlength="250" required />
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group">
+                <validate for="topicDescription" required-msg="Enter topic description">
+                    <label for="topicDescription" class="control-label" control-label>Topic Description</label>
+                    <textarea class="form-control cst-form-control" form-control rows="6" name="topicDescription"
+                        ng-model="$ctrl.topicForUpdate.topicDescription" maxlength="1000"></textarea>
+                    <small class="placeholder">{{1000 - $ctrl.topicForUpdate.topicDescription.length}} characters
+                        available</small>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group">
+                <validate for='topicDay' required-msg="Enter topic day">
+                    <label for="topicDay" class="control-label" control-label>Day</label>
+                    <input type="number" class="form-control cst-form-control" form-control name="topicDay"
+                        ng-model="$ctrl.topicForUpdate.topicDay" max="9999" min="1" required />
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group">
+                <validate for='topicOrder' required-msg="Enter topic order">
+                    <label for="topicOrder" class="control-label" control-label>Topic Order</label>
+                    <input type="number" class="form-control cst-form-control" form-control name="topicOrder"
+                        ng-model="$ctrl.topicForUpdate.topicOrder" max="9999" min="1" required />
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-if="$ctrl.addFlag" ng-click="$ctrl.ok()">Save Topic</button>
+    <button class="btn btn-primary" ng-if="!$ctrl.addFlag" ng-click="$ctrl.ok()">Update Topic</button>
+    <button type="button" class="btn btn-secondary" ng-click="$ctrl.cancel()">Close</button>
+</div>

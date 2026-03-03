@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="card-title">
+                <div class="float-left">
+                    <h4 class="card-sub-title">Mark Completion for Participants of training completed on
+                        {{editTraineeStatusCtrl.trainingStatusList.effectiveDate | date :  "dd/MM/yyyy"}}
+                    </h4>
+                </div>
+            </div>
+            <div class="no-data-placeholder"
+                ng-if="editTraineeStatusCtrl.trainingStatusList.traineeCertificates.length < 1">
+                <h5>No training program found...</h5>
+            </div>
+            <div class="cst-table table-responsive" style="overflow: auto;"
+                ng-if="editTraineeStatusCtrl.trainingStatusList.traineeCertificates.length > 0">
+                <table class="table table-sm table-fixed table-striped table-bordered header-fixed">
+                    <colgroup>
+                        <col style="width:15px">
+                        <col style="width:80px">
+                        <col style="width:50px">
+                        <col style="width:50px">
+                        <col style="width:150px">
+                    </colgroup>
+                    <thead class="cst-thead">
+                        <tr>
+                            <th>#</th>
+                            <th>Participant Name</th>
+                            <th>Days attended (%)</th>
+                            <th>Trained?</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr
+                            ng-repeat="participantAttendance in editTraineeStatusCtrl.trainingStatusList.traineeCertificates track by $index">
+                            <td>{{$index + 1}}</td>
+                            <td>{{participantAttendance.userName}}</td>
+                            <td>{{participantAttendance.daysAttendedInPercentage}}</td>
+                            <td>
+                                <label class="control control-checkbox"
+                                    ng-if="participantAttendance.certificateId == null">
+                                    <input
+                                        ng-disabled="participantAttendance.trained && participantAttendance.certificateId != null"
+                                        type="checkbox" ng-model="participantAttendance.trained"
+                                        ng-checked="participantAttendance.daysAttendedInPercentage == 100" />
+                                    <div class="control_indicator"></div>
+                                </label>
+                                <label class="control control-checkbox"
+                                    ng-if="participantAttendance.certificateId != null">
+                                    <input ng-disabled="participantAttendance.certificateType == 'COURSECOMPLETION' "
+                                        type="checkbox" ng-model="participantAttendance.trained" />
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </td>
+                            <td>
+                                <textarea ng-model="participantAttendance.remark"
+                                    class="form-control cst-form-control"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-12">
+            <div class="row mt-15">
+                <div class="col-12">
+                    <div class="button-footer">
+                        <h5 class="card-sub-title pull-left">Note: Training completion cannot be marked before 3pm on
+                            last day of training.</h5>
+                        <button class="btn btn-primary"
+                            ng-disabled="editTraineeStatusCtrl.submitFlag || editTraineeStatusCtrl.isDisable"
+                            ng-click="editTraineeStatusCtrl.submitTraineeStatus(editTraineeStatusCtrl.trainingStatusList.traineeCertificates)">
+                            <em class="fa fa-hdd-o"></em> Submit</button>
+                        <button class="btn btn-secondary" ui-sref="techo.training.scheduled">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

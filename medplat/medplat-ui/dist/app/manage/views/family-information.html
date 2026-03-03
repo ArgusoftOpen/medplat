@@ -1,0 +1,275 @@
+<div class="container-fluid" ng-if="!familyInfo.familyObj">
+    <h5>Search Family</h5>
+</div>
+<div class="container-fluid" ng-if="familyInfo.familyObj">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div id="card1" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse1" ng-click="toggle1 = !toggle1" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Family Information">Family Information</span>
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-minus':!toggle1,'ion-plus':toggle1}"></em>
+                                </span>
+                            </li>
+                        </ul>
+
+                    </h4>
+
+                </div>
+                <div class="collapse show" id="collapse1">
+                    <div class="card-body inline-form" ng-if="familyInfo.familyObj[0]">
+                        <form role="form" name="familyInformationForm" id="familyInformationForm">
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Address</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <span
+                                                ng-if="familyInfo.familyObj[0].housenumber">{{familyInfo.familyObj[0].housenumber}},
+                                            </span>
+                                            <span
+                                                ng-if="familyInfo.familyObj[0].address2">{{familyInfo.familyObj[0].address2}},
+                                            </span>
+                                            <span
+                                                ng-if="familyInfo.familyObj[0].address1">{{familyInfo.familyObj[0].address1}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Is Verified</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{familyInfo.familyObj[0].verifiedflag == true ? 'Yes' : 'No' }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Bpl Flag</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{familyInfo.familyObj[0].bplflag == true ? 'Yes' : 'No' }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Is Migrated Family</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{ familyInfo.familyObj[0].migratoryflag == true ? 'Yes' : 'No' }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Is Toilet Available</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{familyInfo.familyObj[0].toiletavailableflag == true ? 'Yes' : 'No' }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Vulnerable Flag</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{familyInfo.familyObj[0].vulnerableflag == true ? 'Yes' : 'No' }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Basic State</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{familyInfo.familyObj[0].familybasicstate == null ? 'Not Available': familyInfo.familyObj[0].familybasicstate}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Location Id</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{familyInfo.familyObj[0].locationname == null ? 'Not Available': familyInfo.familyObj[0].locationname}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="form-group col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <strong>Emamta Location Id</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <strong>:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            {{familyInfo.familyObj[0].emamtalocationname == null ? 'Not Available' : familyInfo.familyObj[0].emamtalocationname}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card cst-card" ng-if="familyInfo.familyObj">
+                <div id="card2" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse2" ng-click="toggle2 = !toggle2" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Member Information">Member Information</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':toggle2,'ion-minus':!toggle2}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse show" id="collapse2">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="member_information-form" id="member_information-form">
+                                    <table
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th>Member Id</th>
+                                                <th>Member Name</th>
+                                                <th>Family Head</th>
+                                                <th>Gender</th>
+                                                <th>Mobile Number</th>
+                                                <th>Is Pregnant</th>
+                                                <th>Member Basic State</th>
+                                                <th>View Detail Information</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="memberInfo in familyInfo.familyObj">
+                                                <td>
+                                                    {{memberInfo.memberid}}
+                                                </td>
+                                                <td>
+                                                    {{memberInfo.membername == null ? 'Not Available' : (memberInfo.membername)}}
+                                                </td>
+                                                <td>
+                                                    {{memberInfo.familyhead == null ? 'Not Available' : (memberInfo.familyhead == true ? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{memberInfo.gender}}
+                                                </td>
+                                                <td>
+                                                    {{memberInfo.mobilenumber == null ? 'Not Available' : memberInfo.mobilenumber}}
+                                                </td>
+                                                <td>
+                                                    {{memberInfo.ispregnant == null ? 'Not Available' : (memberInfo.ispregnant == true ? 'Yes' : 'No')}}
+                                                </td>
+                                                <td>
+                                                    {{memberInfo.memberbasicstate == null ? 'Not Available' : memberInfo.memberbasicstate}}
+                                                </td>
+                                                <td>
+                                                    <a style="cursor: pointer"
+                                                        ui-sref="techo.manage.memberinformation({uniqueHealthId:memberInfo.uniquehealthid})">View
+                                                        Details</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="filter-div">
+    <span class="filter-toggle" style="left:-90px" ng-click="familyInfo.toggleFilter()">Search Family</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Family</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="queform.searchForm" novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <div style="margin-top: 10px">
+                        <input type="text" name="familyId" form-control ng-model="familyInfo.familyId"
+                            placeholder="Enter Family Id" class="form-control"
+                            ng-keyup="$event.keyCode == 13 ? familyInfo.enterSubmit() : null" required autofocus />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter"
+                            ng-click="familyInfo.toggleFilter()">Close</button>
+                        <button class="btn btn-primary search-filter" ng-click="familyInfo.submit()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

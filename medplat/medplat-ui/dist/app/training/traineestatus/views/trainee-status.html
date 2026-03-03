@@ -1,0 +1,256 @@
+<div class="container-fluid fhsr-verification">
+    <div class="row mb-15">
+        <div class="col-sm-12 col-xl-12">
+            <div class="cst-tab">
+                <uib-tabset active="traineeStatusCtrl.selectedTab">
+                    <uib-tab index="'offline-tab'" heading="Offline Courses"
+                        select="traineeStatusCtrl.offlineTabSelected()">
+                        <div class="tab-pane fade show" id="offline-tab" role="tabpanel" aria-labelledby="offline-tab"
+                            aria-expanded="true">
+                            <div id="current-scroll" class="cst-table table-responsive"
+                                style="overflow: auto; min-height: 200px; max-height: calc(100vh - 160px);"
+                                ng-if="traineeStatusCtrl.pendingTrainingStatus.length > 0">
+                                <table class="table table-sm table-striped table-fixed table-bordered header-fixed">
+                                    <colgroup>
+                                        <col style="width: 5%">
+                                        <col style="width: 25%">
+                                        <col style="width: 15%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                    </colgroup>
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="filter-col">Course<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('courseName')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'courseName') || traineeStatusCtrl.field !== 'courseName', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'courseName'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Role<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('role')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'role') || traineeStatusCtrl.field !== 'role', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'role'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Total Users<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('total')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'total') || traineeStatusCtrl.field !== 'total', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'total'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Scheduled<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('scheduled')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'scheduled') || traineeStatusCtrl.field !== 'scheduled', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'scheduled'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Practicing<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('practicing')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'practicing') || traineeStatusCtrl.field !== 'practicing', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'practicing'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Production<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('production')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'production') || traineeStatusCtrl.field !== 'production', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'production'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Pending<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('pending')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'pending') || traineeStatusCtrl.field !== 'pending', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'pending'}"></em>
+                                                </span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cst-tbody">
+                                        <tr
+                                            ng-repeat="course in traineeStatusCtrl.pendingTrainingStatus | orderBy:traineeStatusCtrl.field:traineeStatusCtrl.reverse track by $index">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{course.courseName}}</td>
+                                            <td>{{course.role}}</td>
+                                            <td><a ng-class="{disabled: course.total == 0}" href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_total',course)">{{course.total}}</a>
+                                            </td>
+                                            <td><a ng-class="{disabled: course.scheduled == 0}"
+                                                    href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_scheduled',course)">{{course.scheduled}}</a>
+                                            </td>
+                                            <td><a ng-class="{disabled: course.practicing == 0}"
+                                                    href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_practice',course)">{{course.practicing}}</a>
+                                            </td>
+                                            <td><a ng-class="{disabled: course.production == 0}"
+                                                    href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_production',course)">{{course.production}}</a>
+                                            </td>
+                                            <td><a ng-class="{disabled: course.pending == 0}" href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_pending',course)">{{course.pending}}</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="no-data-placeholder" ng-if="traineeStatusCtrl.pendingTrainingStatus.length < 1">
+                                <h5>No Pending status to display</h5>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="'online-tab'" heading="Online Courses"
+                        select="traineeStatusCtrl.onlineTabSelected()">
+                        <div class="tab-pane fade show" id="online-tab" role="tabpanel" aria-labelledby="online-tab"
+                            aria-expanded="true">
+                            <div id="current-scroll" class="cst-table table-responsive"
+                                style="overflow: auto; min-height: 200px; max-height: calc(100vh - 160px);"
+                                ng-if="traineeStatusCtrl.pendingTrainingStatus.length > 0">
+                                <table class="table table-sm table-striped table-fixed table-bordered header-fixed">
+                                    <colgroup>
+                                        <col style="width: 2%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                        <col style="width: 10%">
+                                    </colgroup>
+                                    <thead class="cst-thead">
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="filter-col">Course<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('courseName')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'courseName') || traineeStatusCtrl.field !== 'courseName', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'courseName'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Role<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('role')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'role') || traineeStatusCtrl.field !== 'role', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'role'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Total Users<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('total')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'total') || traineeStatusCtrl.field !== 'total', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'total'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Scheduled<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('scheduled')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'scheduled') || traineeStatusCtrl.field !== 'scheduled', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'scheduled'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">In Progress<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('in_progress')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'in_progress') || traineeStatusCtrl.field !== 'in_progress', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'in_progress'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Completed<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('completed')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'completed') || traineeStatusCtrl.field !== 'completed', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'completed'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Practicing<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('online_practicing_users')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'online_practicing_users') || traineeStatusCtrl.field !== 'online_practicing_users', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'online_practicing_users'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Production<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('production')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'production') || traineeStatusCtrl.field !== 'production', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'production'}"></em>
+                                                </span>
+                                            </th>
+                                            <th class="filter-col">Pending<span class="pull-right sort">
+                                                    <em class="fa fa-sort-amount-asc"
+                                                        ng-click="traineeStatusCtrl.sort('pending')"
+                                                        ng-class="{'fa-sort-amount-asc': (traineeStatusCtrl.reverse === false && traineeStatusCtrl.field === 'pending') || traineeStatusCtrl.field !== 'pending', 'fa-sort-amount-desc': traineeStatusCtrl.reverse === true  && traineeStatusCtrl.field === 'pending'}"></em>
+                                                </span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cst-tbody">
+                                        <tr
+                                            ng-repeat="course in traineeStatusCtrl.pendingTrainingStatus | orderBy:traineeStatusCtrl.field:traineeStatusCtrl.reverse track by $index">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{course.courseName}}</td>
+                                            <td>{{course.role}}</td>
+                                            <td><a ng-class="{disabled: course.total == 0}" href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_total',course)">{{course.total}}</a>
+                                            </td>
+                                            <td><a ng-class="{disabled: course.scheduled == 0}"
+                                                    href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_scheduled_online',course)">{{course.scheduled}}</a>
+                                            </td>
+                                            <td><a ng-class="{disabled: course.in_progress == 0}"
+                                                    href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_in_progress',course)">{{course.in_progress}}</a>
+                                            </td>
+                                            <td><a ng-class="{disabled: course.completed == 0}"
+                                                    href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_completed',course)">{{course.completed}}</a>
+                                            </td>
+                                            <td><a ng-class="{disabled: course.online_practicing_users == 0}"
+                                                    href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_practice_online',course)">{{course.online_practicing_users}}</a>
+                                            </td>
+                                            <td><a ng-class="{disabled: course.production == 0}"
+                                                    href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_production',course)">{{course.production}}</a>
+                                            </td>
+                                            <td><a ng-class="{disabled: course.pending == 0}" href="javascript:void(0)"
+                                                    ng-click="traineeStatusCtrl.drillDown('tr_pending',course)">{{course.pending}}</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="no-data-placeholder" ng-if="traineeStatusCtrl.pendingTrainingStatus.length < 1">
+                                <h5>No Pending status to display</h5>
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div">
+        <span class="filter-toggle" ng-click="traineeStatusCtrl.toggleFilter()">Select Location</span>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="filter-div-title">Select Location</h5>
+            </div>
+        </div>
+        <div class="filter-div-body">
+            <div class="row">
+                <div class="col-12">
+                    <ng-form name="traineeStatusCtrl.locationForm">
+                        <location-directive ng-model="traineeStatusCtrl.selectedLocationId"
+                            selected-location="traineeStatusCtrl.selectedLocation" template-type="'inline'"
+                            fetch-according-to-user-aoi="true" multipal-on-level="2"> </location-directive>
+                    </ng-form>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter"
+                            ng-click="traineeStatusCtrl.toggleFilter()">Close</button>
+                        <button class="btn btn-primary search-filter"
+                            ng-click="traineeStatusCtrl.submit()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

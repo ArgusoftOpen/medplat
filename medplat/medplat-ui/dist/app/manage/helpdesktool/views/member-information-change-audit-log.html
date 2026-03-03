@@ -1,0 +1,59 @@
+<style>
+    .table-style {
+        overflow: auto;
+        height: calc(100vh - 185px) !important;
+        max-height: calc(100vh - 195px) !important;
+    }
+</style>
+
+<div class="row">
+    <div class="col-12 mb-2">
+        <div class="col-2 float-right">
+            <select form-control name="queryMaster" class="form-control cst-form-control" ng-options="column as column.name for column in ctrl.columnName"
+                ng-model="ctrl.filteredColumn" ng-change="ctrl.searchData(true);">
+                <option value="">Select</option>
+            </select>
+        </div>
+        <div class="
+                        float-right mr-5">
+            <div class="form-group">
+                <input type="text" ng-model="ctrl.search" class="form-control cst-form-control" id="search" ng-change="ctrl.searchData(true)"
+                    ng-model-options="{debounce: 500}" placeholder="Search by member health id" style="width:100%">
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mr-5" ng-if="ctrl.filteredColumn">
+        <div class="cst-table table-responsive table-style col-12" id="member-audit-log">
+            <table class="table table-sm table-striped filter-table table-auto table-bordered header-fixed">
+                <thead class="cst-thead">
+                    <tr>
+                        <th class="white-space-unset" scope="col">Sr.No</th>
+                        <th class="white-space-unset" scope="col">Member Details</th>
+                        <th class="white-space-unset" scope="col" ng-if="ctrl.filteredColumn.display">Previous
+                            {{ctrl.filteredColumn.name}}</th>
+                        <th class="white-space-unset" scope="col">Action On</th>
+                        <th class="white-space-unset" scope="col">Action Performed By</th>
+                        <th class="white-space-unset" scope="col" ng-if="ctrl.filteredColumn.column === 'state'">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="cst-tbody" infinite-scroll-distance="0" infinite-scroll='ctrl.searchData()'
+                    infinite-scroll-container='"#member-audit-log"'>
+                    <tr ng-repeat="member in ctrl.listOfMemberAuditLogs" ng-if="ctrl.listOfMemberAuditLogs.length > 0">
+                        <td ng-bind="$index + 1" class="text-center"></td>
+                        <td class="pseudolink" ng-bind-html="member.memberDetail | emptylabel">
+                        </td>
+                        <td ng-if="ctrl.filteredColumn.display" ng-bind-html="member.modifiedField | emptylabel"></td>
+                        <td ng-bind-html="member.createdOn | emptylabel"></td>
+                        <td ng-bind-html="member.userInfo | emptylabel"></td>
+                        <td ng-if="ctrl.filteredColumn.column === 'state'">
+                            <button class="btn btn-success" ng-click="ctrl.downloadFile(member.documentId, member.memberDetail)">Download</button>
+                        </td>
+                    </tr>
+                    <tr class="text-center" ng-if="ctrl.listOfMemberAuditLogs.length == 0">
+                        <td colspan="12">No Member Audit Log Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

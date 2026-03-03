@@ -1,0 +1,73 @@
+<div class="modal-header">
+    <h4 class="text">Update Family Planning Method</h4>
+</div>
+<div class="modal-body" style="overflow: inherit">
+    <form class="inline-form" name="familyPlanningMethodForm" novalidate>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <validate for="familyPlanningMethod" required-msg=" Select family planning method">
+                        <label for="familyPlanningMethod" control-label uib-tooltip="Family Planning Method">Family
+                            Planning Method</label>
+                        <select class="form-control cst-form-control" form-control
+                            ng-model="familyPlanningObject.familyPlanningMethod" name="familyPlanningMethod"
+                            id="familyPlanningMethod" ng-change="familyPlanningMethodChanged()" required>
+                            <option value="">--Select--</option>
+                            <option value="IUCD5">IUCD- 5 YEARS</option>
+                            <option value="IUCD10">IUCD- 10 YEARS</option>
+                            <option value="CONDOM">CONDOM</option>
+                            <option value="ORALPILLS">ORAL PILLS</option>
+                            <option value="CHHAYA">CHHAYA</option>
+                            <option value="ANTARA">ANTARA</option>
+                            <option value="CONTRA">EMERGENCY CONTRACEPTIVE PILLS</option>
+                            <option value="PPIUCD">PPIUCD</option>
+                            <option value="PAIUCD">PAIUCD</option>
+                            <option value="LAPAROSCOPIC_TL">Laparoscopic TL</option>
+                            <option value="ABDOMINAL_TL">Abdominal TL</option>
+                            <option value="VASECTOMY_FOR_HUSBAND">Vasectomy (for Husband)</option>
+                            <option value="PPTL">Post Parterm TL</option>
+                            <option value="PATL">Post Abortion TL</option>
+                            <option value="NONE">None</option>
+                        </select>
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div ng-if="familyPlanningObject.familyPlanningMethod === 'IUCD5' ||
+                    familyPlanningObject.familyPlanningMethod === 'IUCD10' ||
+                    familyPlanningObject.familyPlanningMethod === 'CHHAYA' ||
+                    familyPlanningObject.familyPlanningMethod === 'ANTARA' ||
+                    familyPlanningObject.familyPlanningMethod === 'PPIUCD' ||
+                    familyPlanningObject.familyPlanningMethod === 'PAIUCD'">
+                    <div class="form-group">
+                        <validate for='fpInsertOperateDate' required-msg="Select Date">
+                            <label for="fpInsertOperateDate" control-label
+                                uib-tooltip="Select Date of insertion/operation">Select date of
+                                insertion/operation</label>
+                            <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                name="fpInsertOperateDate" form-control
+                                ng-model="familyPlanningObject.fpInsertOperateDate" max-date="todayDate"
+                                min-date="minDate" required>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                    <div class="form-group">
+                        <validate for='hospital' required-msg="Select a value">
+                            <label style="vertical-align: middle;white-space: initial" control-label
+                                uib-tooltip="Hospital">Hospital</label>
+                            <select class="form-control cst-form-control" form-control chosen-directive name="hospital"
+                                ng-options="institute as institute.name for institute in assignedHealthInfrastructures"
+                                ng-model="familyPlanningObject.healthInfrastructure" required>
+                                <option value="" selected>--Select--</option>
+                            </select>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Save</button>
+    <button class="btn btn-secondary" ng-click="cancel()">Cancel</button>
+</div>

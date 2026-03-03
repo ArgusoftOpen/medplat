@@ -1,0 +1,14 @@
+<div class="container" style="max-width:800px;margin-top:20px;">
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Admin Dashboard</strong></div>
+        <div class="panel-body">
+            <div>
+                <p><strong>Total:</strong> {{admin.summary.total}}</p>
+                <p><strong>Open:</strong> {{admin.summary.open}}</p>
+                <p><strong>In Progress:</strong> {{admin.summary.inprogress}}</p>
+                <p><strong>Closed:</strong> {{admin.summary.closed}}</p>
+                <button class="btn btn-sm btn-default" ng-click="admin.refresh()">Refresh</button>
+            </div>
+        </div>
+    </div>
+</div>

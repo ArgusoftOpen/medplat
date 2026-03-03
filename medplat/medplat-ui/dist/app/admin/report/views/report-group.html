@@ -1,0 +1,63 @@
+<script>
+    $(".header-fixed").tableHeadFixer();
+</script>
+<div class="container-fluid report-view">
+    <div class="row" ng-form="rl.manageTemplateForm">
+        <div class="col-12 mb-15">
+            <div>
+                <div class="row mb-15 ">
+                    <div class="col-12 ">
+                        <button class="btn btn-primary pull-right mb-15" ng-click="reportGroup.addGroup()">Add</button>
+                        <div class="cst-table table-responsive">
+                            <table class="table table-sm table-striped table-bordered header-fixed"
+                                ng-if="reportGroup.allGroups.length > 0">
+                                <thead>
+                                    <tr>
+                                        <th>Menu Type</th>
+                                        <th>Group Name</th>
+                                        <th>Parent Group Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="reportObject in reportGroup.allGroups">
+                                        <td>
+                                            {{reportObject.type|titlecase}}
+                                        </td>
+                                        <td>
+                                            {{reportObject.groupName|emptylabel}}
+                                        </td>
+                                        <td>
+                                            {{reportObject.parentGroupName|emptylabel}}
+                                        </td>
+                                        <td class="action-cell">
+                                            <ul class="action-item">
+
+                                                <li>
+                                                    <a href="#" onclick="return false" class="action-icon edit-icon"
+                                                        ng-click="reportGroup.addGroup(reportObject)">
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" onclick="return false;"
+                                                        ng-click="reportGroup.deleteGroupModal(reportObject.id)"
+                                                        class="action-icon delete-icon">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12 mb-15 no-data-placeholder"
+                            ng-if="!reportGroup.initializing && reportGroup.allGroups.length === 0">
+                            <h4>No Groups found!!</h4>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

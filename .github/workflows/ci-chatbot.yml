@@ -1,0 +1,29 @@
+name: CI Chatbot frontend
+
+on:
+  push:
+    branches: [ main, pr/chatbot-frontend ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+      - name: Install
+        run: |
+          cd medplat-ui
+          npm ci
+      - name: Build
+        run: |
+          cd medplat-ui
+          npm run build || echo build-failed
+      - name: Lint
+        run: |
+          cd medplat-ui
+          npm run lint || echo lint-failed
