@@ -1,0 +1,333 @@
+<div class="nlp-query-builder" style="padding: 20px;">
+    <!-- Header -->
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            <h3 style="color: #2c3e50; font-weight: 600;">
+                <i class="fa fa-magic" style="color: #3498db;"></i>
+                NLP Query Builder
+                <small style="color: #7f8c8d; font-size: 14px;">
+                    Write in plain English, get analytics results
+                </small>
+            </h3>
+            <hr style="border-color: #ecf0f1;">
+        </div>
+    </div>
+
+    <!-- Query Input Section -->
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            <div class="panel panel-primary" style="border-radius: 8px; border-color: #3498db;">
+                <div class="panel-heading" style="background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 8px 8px 0 0;">
+                    <h4 class="panel-title">
+                        <i class="fa fa-pencil"></i> Enter Your Query
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding: 20px;">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" style="background: #f8f9fa; border-color: #3498db;">
+                            <i class="fa fa-search" style="color: #3498db;"></i>
+                        </span>
+                        <input type="text"
+                               class="form-control"
+                               id="nlpQueryInput"
+                               ng-model="ctrl.naturalLanguageQuery"
+                               ng-keypress="ctrl.onKeyPress($event)"
+                               placeholder="e.g., Show all members where gender is female"
+                               style="border-color: #3498db; font-size: 16px; height: 50px;"
+                               ng-disabled="ctrl.isLoading">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary"
+                                    id="parseQueryBtn"
+                                    ng-click="ctrl.parseQuery()"
+                                    ng-disabled="ctrl.isLoading || !ctrl.naturalLanguageQuery"
+                                    style="height: 50px; padding: 0 25px; font-size: 16px; background: #3498db;">
+                                <i class="fa" ng-class="{'fa-spinner fa-spin': ctrl.isParsing, 'fa-bolt': !ctrl.isParsing}"></i>
+                                {{ ctrl.isParsing ? 'Parsing...' : 'Preview SQL' }}
+                            </button>
+                            <button class="btn btn-success"
+                                    id="executeDirectBtn"
+                                    ng-click="ctrl.parseAndExecute()"
+                                    ng-disabled="ctrl.isLoading || !ctrl.naturalLanguageQuery"
+                                    style="height: 50px; padding: 0 25px; font-size: 16px;">
+                                <i class="fa" ng-class="{'fa-spinner fa-spin': ctrl.isExecuting, 'fa-play': !ctrl.isExecuting}"></i>
+                                {{ ctrl.isExecuting ? 'Running...' : 'Run Directly' }}
+                            </button>
+                            <button class="btn btn-default"
+                                    id="clearQueryBtn"
+                                    ng-click="ctrl.clearQuery()"
+                                    style="height: 50px; padding: 0 20px;">
+                                <i class="fa fa-times"></i> Clear
+                            </button>
+                        </span>
+                    </div>
+                    <!-- Quick action buttons -->
+                    <div style="margin-top: 10px;">
+                        <button class="btn btn-xs btn-info" ng-click="ctrl.loadSchema()" style="margin-right: 5px;">
+                            <i class="fa fa-database"></i> {{ ctrl.showSchema ? 'Hide' : 'Show' }} Schema
+                        </button>
+                        <button class="btn btn-xs btn-warning" ng-click="ctrl.showExamples = !ctrl.showExamples" style="margin-right: 5px;">
+                            <i class="fa fa-lightbulb-o"></i> {{ ctrl.showExamples ? 'Hide' : 'Show' }} Examples
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    <div class="row" ng-if="ctrl.errorMessage" style="margin-bottom: 15px;">
+        <div class="col-md-12">
+            <div class="alert alert-danger alert-dismissible" role="alert" style="border-radius: 6px; border-left: 4px solid #c0392b;">
+                <button type="button" class="close" ng-click="ctrl.errorMessage = ''"><span>&times;</span></button>
+                <i class="fa fa-exclamation-triangle"></i>
+                <strong>Oops!</strong> {{ ctrl.errorMessage }}
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="ctrl.successMessage" style="margin-bottom: 15px;">
+        <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible" role="alert" style="border-radius: 6px; border-left: 4px solid #27ae60;">
+                <button type="button" class="close" ng-click="ctrl.successMessage = ''"><span>&times;</span></button>
+                <i class="fa fa-check-circle"></i>
+                <strong>Success!</strong> {{ ctrl.successMessage }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Example Queries -->
+    <div class="row" ng-if="ctrl.showExamples && ctrl.examples.length > 0" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            <div class="panel panel-default" style="border-radius: 8px;">
+                <div class="panel-heading" style="background: #f8f9fa; border-radius: 8px 8px 0 0;">
+                    <h4 class="panel-title" style="color: #2c3e50;">
+                        <i class="fa fa-lightbulb-o" style="color: #f39c12;"></i> Try these example queries
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6" ng-repeat="example in ctrl.examples">
+                            <a href="" ng-click="ctrl.useExample(example)"
+                               style="display: block; padding: 10px 15px; margin: 4px 0; background: #f0f7ff; border-radius: 6px; color: #2980b9; text-decoration: none; border: 1px solid #d6eaf8; transition: all 0.2s;"
+                               onmouseover="this.style.background='#d6eaf8'; this.style.transform='translateX(5px)';"
+                               onmouseout="this.style.background='#f0f7ff'; this.style.transform='translateX(0)';">
+                                <i class="fa fa-chevron-right" style="margin-right: 8px; color: #3498db;"></i>
+                                {{ example }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schema Info -->
+    <div class="row" ng-if="ctrl.showSchema && ctrl.schemaInfo" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            <div class="panel panel-info" style="border-radius: 8px;">
+                <div class="panel-heading" style="border-radius: 8px 8px 0 0;">
+                    <h4 class="panel-title">
+                        <i class="fa fa-database"></i> Available Tables & Columns
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" style="border-radius: 6px;">
+                            <thead style="background: #2c3e50; color: white;">
+                                <tr>
+                                    <th>Table Name</th>
+                                    <th>Columns</th>
+                                    <th>Keywords to Use</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in ctrl.schemaInfo.results">
+                                    <td><code style="color: #c0392b;">{{ item.table_name }}</code></td>
+                                    <td style="font-size: 12px;">{{ item.columns }}</td>
+                                    <td>
+                                        <span ng-repeat="kw in item.keywords.split(', ')" class="label label-primary" style="margin: 2px; display: inline-block;">
+                                            {{ kw }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SQL Preview Section -->
+    <div class="row" ng-if="ctrl.showPreview && ctrl.previewResponse && ctrl.previewResponse.valid" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            <div class="panel panel-warning" style="border-radius: 8px; border-color: #f39c12;">
+                <div class="panel-heading" style="background: linear-gradient(135deg, #f39c12, #e67e22); color: white; border-radius: 8px 8px 0 0;">
+                    <h4 class="panel-title">
+                        <i class="fa fa-eye"></i> Query Preview
+                        <span class="pull-right" style="font-weight: normal; font-size: 13px;">
+                            Review the generated SQL before execution
+                        </span>
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding: 20px;">
+                    <!-- Interpreted Intent -->
+                    <div class="row" style="margin-bottom: 15px;">
+                        <div class="col-md-4">
+                            <div style="background: #f0f7ff; padding: 12px; border-radius: 6px; border-left: 3px solid #3498db;">
+                                <small style="color: #7f8c8d;">Interpreted As</small>
+                                <div style="font-weight: 600; color: #2c3e50;">
+                                    {{ ctrl.previewResponse.interpretedIntent }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="background: #f0fff0; padding: 12px; border-radius: 6px; border-left: 3px solid #27ae60;">
+                                <small style="color: #7f8c8d;">Target Table</small>
+                                <div style="font-weight: 600; color: #2c3e50;">
+                                    {{ ctrl.previewResponse.targetTable }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="background: #fff8f0; padding: 12px; border-radius: 6px; border-left: 3px solid #e67e22;">
+                                <small style="color: #7f8c8d;">Description</small>
+                                <div style="font-weight: 600; color: #2c3e50; font-size: 12px;">
+                                    {{ ctrl.previewResponse.previewDescription }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conditions -->
+                    <div class="row" ng-if="ctrl.previewResponse.conditions && ctrl.previewResponse.conditions.length > 0" style="margin-bottom: 15px;">
+                        <div class="col-md-12">
+                            <strong style="color: #7f8c8d;">Conditions:</strong>
+                            <span ng-repeat="cond in ctrl.previewResponse.conditions" class="label label-info" style="margin: 2px; font-size: 12px;">
+                                {{ cond }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Generated SQL -->
+                    <div style="background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; font-family: 'Consolas', 'Courier New', monospace; font-size: 14px; position: relative; margin-bottom: 15px;">
+                        <div style="position: absolute; top: 8px; right: 10px;">
+                            <span class="label label-success" style="font-size: 11px;">
+                                <i class="fa fa-shield"></i> SAFE / READ-ONLY
+                            </span>
+                        </div>
+                        <div style="color: #569cd6; margin-bottom: 5px;">-- Generated SQL:</div>
+                        <div style="color: #ce9178; word-wrap: break-word; white-space: pre-wrap;">{{ ctrl.previewResponse.generatedSql }}</div>
+                    </div>
+
+                    <!-- Execution Button -->
+                    <div class="text-center">
+                        <button class="btn btn-success btn-lg"
+                                id="executeConfirmedBtn"
+                                ng-click="ctrl.executeQuery()"
+                                ng-disabled="ctrl.isExecuting"
+                                style="padding: 12px 40px; font-size: 16px; border-radius: 6px;">
+                            <i class="fa" ng-class="{'fa-spinner fa-spin': ctrl.isExecuting, 'fa-check-circle': !ctrl.isExecuting}"></i>
+                            {{ ctrl.isExecuting ? 'Executing...' : 'Confirm & Execute Query' }}
+                        </button>
+                        <button class="btn btn-default btn-lg" ng-click="ctrl.clearQuery()" style="margin-left: 10px; padding: 12px 30px;">
+                            <i class="fa fa-undo"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="row" ng-if="ctrl.showResults && ctrl.executionResponse && ctrl.executionResponse.results" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            <div class="panel panel-success" style="border-radius: 8px; border-color: #27ae60;">
+                <div class="panel-heading" style="background: linear-gradient(135deg, #27ae60, #229954); color: white; border-radius: 8px 8px 0 0;">
+                    <h4 class="panel-title">
+                        <i class="fa fa-table"></i> Query Results
+                        <span class="badge" style="background: white; color: #27ae60; margin-left: 10px;">
+                            {{ ctrl.executionResponse.resultCount }} rows
+                        </span>
+                        <span class="pull-right">
+                            <button class="btn btn-xs btn-default" ng-click="ctrl.exportToCsv()" style="color: #27ae60;">
+                                <i class="fa fa-download"></i> Export CSV
+                            </button>
+                        </span>
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding: 0;">
+                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                        <table class="table table-striped table-hover table-condensed" style="margin-bottom: 0;">
+                            <thead style="background: #2c3e50; color: white; position: sticky; top: 0; z-index: 1;">
+                                <tr>
+                                    <th style="padding: 10px; min-width: 40px;">#</th>
+                                    <th ng-repeat="col in ctrl.getResultColumns()" style="padding: 10px; white-space: nowrap;">
+                                        {{ col }}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in ctrl.executionResponse.results track by $index">
+                                    <td style="font-weight: bold; color: #7f8c8d;">{{ $index + 1 }}</td>
+                                    <td ng-repeat="col in ctrl.getResultColumns()" style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ row[col] }}">
+                                        {{ row[col] }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-if="ctrl.executionResponse.results.length === 0" style="padding: 40px; text-align: center; color: #7f8c8d;">
+                        <i class="fa fa-inbox fa-3x" style="margin-bottom: 10px;"></i>
+                        <p>No results found for your query.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Query History -->
+    <div class="row" ng-if="ctrl.queryHistory.length > 0" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            <div class="panel panel-default" style="border-radius: 8px;">
+                <div class="panel-heading" style="background: #f8f9fa; border-radius: 8px 8px 0 0;">
+                    <h4 class="panel-title" style="color: #2c3e50;">
+                        <i class="fa fa-history" style="color: #8e44ad;"></i> Recent Queries
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding: 0;">
+                    <div class="list-group" style="margin-bottom: 0;">
+                        <a href="" class="list-group-item" ng-repeat="item in ctrl.queryHistory"
+                           ng-click="ctrl.reuseHistoryQuery(item)"
+                           style="border-left: 3px solid #8e44ad;"
+                           onmouseover="this.style.background='#f8f0ff';"
+                           onmouseout="this.style.background='white';">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <strong style="color: #2c3e50;">{{ item.naturalLanguageQuery }}</strong>
+                                </div>
+                                <div class="col-md-5">
+                                    <code style="font-size: 11px; color: #7f8c8d;">{{ item.generatedSql }}</code>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <span class="badge" style="background: #8e44ad;">{{ item.resultCount }} rows</span>
+                                    <br>
+                                    <small style="color: #bdc3c7;">{{ item.timestamp | date:'HH:mm:ss' }}</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div ng-if="ctrl.isLoading" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 30px 50px; border-radius: 10px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+            <i class="fa fa-cog fa-spin fa-3x" style="color: #3498db;"></i>
+            <p style="margin-top: 15px; font-size: 16px; color: #2c3e50;">
+                {{ ctrl.isParsing ? 'Analyzing your query...' : 'Executing query...' }}
+            </p>
+        </div>
+    </div>
+</div>
