@@ -38,7 +38,7 @@
     "sonar-scanner": "^3.1.0"
   },
   "dependencies": {
-    "@angular/core": "latest",
+    "@angular/core": "13.0.0",
     "alasql": "^4.2.2",
     "angular-chart.js": "^1.1.1",
     "chart.js": "^2.8.0",

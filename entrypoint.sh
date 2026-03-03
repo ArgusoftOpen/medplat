@@ -1,13 +1,29 @@
 #!/bin/bash
+set -e
 
-cd /usr/ui/medplat-ui
+# Frontend dependencies
+cd /usr/ui
+if [ ! -d "node_modules" ]; then
+    npm install --legacy-peer-deps
+fi
 
-npm install --legacy-peer-deps
-bower install
+# Always check bower if a bower.json exists and we added dependencies
+if [ -f "bower.json" ]; then
+    bower install --allow-root
+fi
 
+# Backend build
 cd /usr/web
-mvn clean install -P docker -Dmaven.test.skip=true
+export MAVEN_OPTS="-Xmx2048m -Xms512m"
 
-mv /usr/web/target /usr/target/
+# Internal build is now always fast due to docker-compose volume changes
+echo "Starting internal build (fast, no volume overhead for target)..."
+mvn install -T 1C -P docker -Dmaven.test.skip=true -Dmaven.wagon.http.pool=false -Dhttp.keepAlive=false
+
+# Final move and run
+mkdir -p /usr/target
+cp /usr/web/target/medplat-web-2.0.jar /usr/target/ || true
 cd /usr/target/
+
+echo "Starting Medplat application..."
 java -jar medplat-web-2.0.jar
