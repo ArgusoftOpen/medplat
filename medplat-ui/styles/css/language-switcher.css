@@ -1,0 +1,184 @@
+/* Language Switcher Styles */
+
+.language-switcher {
+    display: inline-block;
+}
+
+.language-selector {
+    position: relative;
+}
+
+.language-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; /* increased spacing between flag and name */
+    padding: 6px 12px;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* hide caret inserted by uib-dropdown */
+.language-toggle .caret {
+    display: none !important;
+}
+
+/* add arrow via pseudo-element to avoid duplicate icons */
+.language-toggle::after {
+    content: "\f0d7"; /* FontAwesome chevron-down */
+    font-family: FontAwesome;
+    font-size: 12px;
+    margin-left: 5px;
+    /* no rotation - arrow remains fixed */
+}
+
+.language-toggle:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.language-toggle .flag {
+    font-size: 18px;
+    display: inline-block;
+}
+
+.language-toggle .name {
+    font-weight: 500;
+    display: inline-block;
+}
+
+.language-toggle .fa {
+    font-size: 12px;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.language-toggle:hover .fa {
+    transform: rotate(180deg);
+}
+
+.language-menu {
+    min-width: 180px;
+    padding: 8px 0;
+}
+
+.language-menu li {
+    list-style: none;
+}
+
+.language-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.language-menu li a:hover {
+    background-color: #f8f9fa;
+}
+
+.language-menu li.active a {
+    background-color: #e7f3ff;
+    border-left: 3px solid #007bff;
+    padding-left: 13px;
+    font-weight: 600;
+    color: #007bff;
+}
+
+.language-menu li a .flag {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+}
+
+.language-menu li a .name {
+    font-size: 14px;
+    flex-grow: 1;
+}
+
+/* Navbar Language Switcher */
+.language-switcher-nav {
+    align-self: center;
+}
+
+.language-switcher-nav .language-toggle {
+    padding: 5px 10px;
+    font-size: 13px;
+    background-color: transparent;
+    border: none;
+}
+
+.language-switcher-nav .language-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Language Switcher Container (in login page) */
+.language-switcher-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.language-switcher-container .language-toggle {
+    background-color: #fff;
+    border: 2px solid #007bff;
+    color: #007bff;
+}
+
+.language-switcher-container .language-toggle:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Translate cloak (hide untranslated content) */
+[translate-cloak],
+[data-translate-cloak],
+[ng-cloak] {
+    display: none !important;
+}
+
+/* RTL Support */
+[dir="rtl"] .language-toggle .fa {
+    transform: rotate(180deg);
+    margin-right: 5px;
+    margin-left: 0;
+}
+
+[dir="rtl"] .language-menu li.active a {
+    border-left: none;
+    border-right: 3px solid #007bff;
+    padding-left: 16px;
+    padding-right: 13px;
+}
+
+[dir="rtl"] .language-menu li a .name {
+    text-align: right;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .language-toggle .name {
+        display: none;
+    }
+
+    .language-toggle {
+        padding: 4px 8px;
+    }
+
+    .language-menu {
+        min-width: 150px;
+    }
+
+    .language-menu li a {
+        padding: 8px 12px;
+    }
+}

@@ -1,0 +1,224 @@
+{
+  "APP": {
+    "NAME": "MEDplat",
+    "DESCRIPTION": "A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators especially in a public health context"
+  },
+  "LOGIN": {
+    "TITLE": "Login",
+    "USERNAME_PLACEHOLDER": "Username",
+    "PASSWORD_PLACEHOLDER": "Password",
+    "LOGIN_BUTTON": "Login",
+    "LOST_PASSWORD": "Lost your password?",
+    "USERNAME_REQUIRED": "*Username is required",
+    "PASSWORD_REQUIRED": "*Password is required",
+    "PLEASE_NOTE": "Please Note:"
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "Forgot Password",
+    "NEW_PASSWORD": "New Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "PASSWORD_REQUIRED": "*Password is required",
+    "PASSWORD_INVALID": "Password is invalid",
+    "GET_OTP": "GET OTP",
+    "SUBMIT": "Submit"
+  },
+  "APP_INFO": {
+    "THANK_YOU": "Thank You",
+    "NAME_PLACEHOLDER": "Name",
+    "DESIGNATION_PLACEHOLDER": "Designation",
+    "EMAIL_PLACEHOLDER": "Email",
+    "CONTACT_PLACEHOLDER": "Contact",
+    "HEADLINE": "Innovative mHealth intervention",
+    "SUBMIT_BUTTON": "SUBMIT",
+    "PROGRAM": "Program",
+    "SUPPORT": "Support",
+    "DOMAIN": "Domain",
+    "TECHNOLOGY": "Technology",
+    "GOVT_ORG": "Health Department GoG",
+    "ORG_NAME": "SEWA Rural"
+  },
+  "NAVIGATION": {
+    "SEARCH_MENU": "Search Menu",
+    "NO_DATA_FOUND": "No data found",
+    "ACTIONS": "Actions",
+    "UPDATE_PROFILE": "Update Profile",
+    "CHANGE_PASSWORD": "Change Password",
+    "LOGOUT": "Logout",
+    "LAST_LOGIN": "Last Login",
+    "FHS": "FHS",
+    "NCD": "NCD",
+    "TRAINING": "Training",
+    "DASHBOARD": "Dashboard",
+    "MANAGE": "Manage"
+  },
+  "PROFILE": {
+    "PREFERRED_LANGUAGE": "Preferred Language",
+    "REPORT_LANGUAGE": "Report Preferred Language",
+    "LOGIN_CODE": "Login Code",
+    "NOT_AVAILABLE": "Not Available",
+    "ENGLISH": "English",
+    "HINDI": "Hindi",
+    "SELECT_LANGUAGE": "Select Preferred Language",
+    "UPDATE_SUCCESS": "Your Profile Updated Successfully!"
+  },
+  "USER_MANAGEMENT": {
+    "TITLE": "User Management",
+    "CREATE_USER": "Create User",
+    "EDIT_USER": "Edit User",
+    "DELETE_USER": "Delete User",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "MIDDLE_NAME": "Middle Name",
+    "EMAIL": "Email",
+    "CONTACT": "Contact",
+    "ROLE": "Role",
+    "LOCATION": "Location",
+    "STATUS": "Status",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete"
+  },
+  "COURSE": {
+    "TITLE": "Courses",
+    "COURSE_NAME": "Course Name",
+    "COURSE_TYPE": "Course Type",
+    "COURSE_IMAGE": "Course Image",
+    "TARGET_ROLES": "Target Roles",
+    "TRAINER_ROLES": "Trainer Roles",
+    "DESCRIPTION": "Description",
+    "DURATION": "Duration",
+    "MY_COURSES": "My Courses",
+    "PREVIEW": "Preview",
+    "ENROLL": "Enroll",
+    "NO_BOOKMARKS": "No bookmarks available"
+    ,
+    "CONFIRM_STATE_CHANGE": "Are you sure you want to change the state from {{from}} to {{to}}?",
+    "STATE_CHANGED": "State is successfully changed from {{from}} to {{to}}"
+  },
+   "TRAINING": {
+    "FILE_FORMAT_NOT_SUPPORTED": "{{ext}} format is not supported. Please upload file having extension {{exts}}",
+    "MEDIA_SIZE_LIMIT": "{{mediaType}} file size must be less than or equal to {{maxMB}}MB",
+    "FILE_UPLOAD_ERROR": "Error in file upload.",
+    "DUPLICATE_MODULE_LESSON": "Modules or Lessons with same name are not allowed.",
+    "DUPLICATE_MODULE": "Modules with same name are not allowed.",
+    "DUPLICATE_LESSON": "Lessons with same name are not allowed.",
+    "MODULE_SAVED": "Module saved successfully",
+    "PLEASE_ADD_LESSON": "Please add at least one lesson to save the module",
+    "PLEASE_UPLOAD_MEDIA": "Please upload {{mediaType}}",
+    "CONFIRM_REMOVE_LESSON": "Are you sure to remove this lesson?",
+    "NO_ATTENDEES_SELECTED": "No Attendees selected for training",
+    "SCHEDULE_SAVED": "Training schedule saved!",
+    "LOCATION_ALREADY_INCLUDED": "Location already included",
+    "CHILD_LOCATION_ALREADY_INCLUDED": "Child Location already included"
+  },
+  "LOCATION": {
+    "NO_LOCATION_UNDER_HIERARCHY": "Could not find any location under the selected hierarchy"
+  },
+  "INFRASTRUCTURE": {
+    "NO_HEALTH_INFRA_ASSIGNED": "No health infrastructure assigned!"
+  },
+  "SYNC": {
+    "NO_CONFIGURATION_FOUND": "No configuration Found. Please open respective feature item and save it.",
+    "UPDATED_SUCCESS": "Updated Successfully",
+    "INSERTION_FAILED": "Insertion failed"
+  },
+  "FAMILY_MOVING": {
+    "LOCATION_FAMILIES_ALREADY_ADDED": "This Location's Families are already added!",
+    "NO_FAMILIES_FOUND": "No Families Found",
+    "CONFIRM_FAMILY_MOVE_DETAIL": "This is the Family Details. Are you sure you want to move this Family List?",
+    "FAMILY_MOVED_SUCCESS": "Family Moved Successfully",
+    "CURRENT_AND_TARGET_SAME_TITLE": "This Family's current location and moved location is same!",
+    "FAMILY_MARKED_UNVERIFIED": "Family Marked Unverified"
+  },
+  "VALUES": {
+    "FILE_FORMAT_ERROR": "Please select correct file to upload!",
+    "VALUE_UPDATED_SUCCESS": "Value updated successfully",
+    "VALUE_ADDED_SUCCESS": "Value added successfully",
+    "PLEASE_UPLOAD_FILE": "Please upload the file"
+  },
+  "TRAINING": {
+    "NO_ATTENDEES_SELECTED": "No Attendees selected for training",
+    "SCHEDULE_SAVED": "Training schedule saved!",
+    "LOCATION_ALREADY_INCLUDED": "Location already included",
+    "CHILD_LOCATION_ALREADY_INCLUDED": "Child Location already included"
+  },
+  "WEBTASKS": {
+    "UNABLE_GET_USER_DETAILS": "Unable to get user details",
+    "UNABLE_RETRIEVE_BASKET_PREFERENCE": "Unable to retrieve basket preference",
+    "UNABLE_RETRIEVE_TASK_DETAILS": "Unable to retrieve task details",
+    "UNABLE_TO_DOWNLOAD": "Unable to download",
+    "UNABLE_SAVE_TASK_ACTIONS": "Unable to save task actions",
+    "UNABLE_SAVE_BASKET_PREFERENCE": "Unable to save basket preference",
+    "PLEASE_SELECT_ACTION_ON_CHILD": "Please select the action to be performed on this child",
+    "PLEASE_SELECT_ACTION": "Please Select Action",
+    "CHILD_NOT_SAM_ENTRY_REMOVED": "Child is not SAM. Entry will be removed",
+    "DETAILS_SAVED": "Details saved successfully",
+    "CHILD_ALREADY_ADDED": "Child is already added",
+    "HEIGHT_NOT_ALLOW_DECIMAL": "Height not allowed in decimal value",
+    "GENDER_NOT_FOUND": "Gender Not Found"
+  },
+  "REPORT": {
+    "ENTER_VALID_RANGE": "Enter valid range",
+    "RANGE_DIFF_TOO_LARGE": "The difference between from and to rows cannot be more than 5000",
+    "OFFLINE_REQUESTED_SUCCESS": "Report offline requested successfully.",
+    "SEARCH_TERM_OR_OPTION_EMPTY": "Search term or search option cannot be empty",
+    "PLEASE_ENTER_SEARCH_KEY": "Please enter a search key"
+  },
+  "WIDGETS": {
+    "CONFIRM_DELETE_ROLE_AND_ESCALATION": "Are you sure you want to delete this role? It will also delete role from each escalation level.",
+    "CONFIRM_DELETE_ROLE": "Are you sure you want to delete this role?",
+    "UPDATED_SUCCESS": "Widget updated successfully"
+  },
+  "FORM_COMMON": {
+    "SELECT": "Select",
+    "ALL_DISTRICT": "All District",
+    "ALL_BLOCK": "All Block",
+    "REQUIRED": "This field is required",
+    "INVALID": "Invalid input",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "ADD": "Add",
+    "UPDATE": "Update",
+    "CLOSE": "Close",
+    "OK": "OK",
+    "YES": "Yes",
+    "NO": "No",
+    "SEARCH": "Search",
+    "FILTER": "Filter",
+    "EXPORT": "Export",
+    "IMPORT": "Import"
+  },
+  "MESSAGES": {
+    "SUCCESS": "Operation successful",
+    "MULTIPLE_ACTIONS_DETECTED": "Multiple actions detected",
+    "CLICKED_TWICE": "You might have clicked same button twice.",
+    "SESSION_EXPIRED": "Your Session has Expired!",
+    "ERROR": "An error occurred",
+    "WARNING": "Warning",
+    "INFO": "Information",
+    "LOADING": "Loading...",
+    "PLEASE_WAIT": "Please wait",
+    "CONFIRM_DELETE": "Are you sure you want to delete?",
+    "SAVE_SUCCESS": "Saved successfully",
+    "UPDATE_SUCCESS": "Updated successfully",
+    "DELETE_SUCCESS": "Deleted successfully"
+  }
+
+  ,
+  "PASSWORD": {
+    "TOO_SHORT": "Too Short",
+    "MIN_LENGTH_DESC": "Password must be of minimum 8 characters",
+    "WEAK": "Weak",
+    "WEAK_DESC": "Password should contain at least one lowercase letter, one uppercase letter, one number and one special character.",
+    "FAIR": "Fair",
+    "FAIR_DESC": "Password should not contain three or more consecutive same characters",
+    "GOOD": "Good",
+    "GOOD_DESC": "Password should not contain user name or application name",
+    "STRONG": "Strong",
+    "STRONG_DESC": "Password is strong enough"
+  }
+}
