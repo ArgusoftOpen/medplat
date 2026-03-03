@@ -38,14 +38,35 @@
         vm.setPageSize = function (s) { vm.pageSize = s; vm.page = 1; load(); };
         vm.searchChanged = function () { vm.page = 1; load(); };
 
-        // polling for realtime-ish updates; if backend supports websockets, replace with socket logic
-        var poll = $interval(load, 5000);
+        // realtime: prefer websocket if configured, otherwise polling fallback
+        var wsEndpoint = window.TICKET_WS_ENDPOINT || null;
+        var ws = null;
+        if (wsEndpoint && window.WebSocket) {
+            try {
+                ws = new WebSocket(wsEndpoint);
+                ws.onopen = function () { console.log('Ticket WS connected'); };
+                ws.onmessage = function (evt) {
+                    try { var data = JSON.parse(evt.data); vm._all = vm._all || []; /* merge/refresh */ vm._all.unshift(data); vm.tickets = applyFilter(vm._all); } catch (e) { console.log('ws parse', e); }
+                };
+                ws.onclose = function () { console.log('Ticket WS closed'); ws = null; };
+                ws.onerror = function (e) { console.log('Ticket WS error', e); ws = null; }
+            } catch (e) {
+                ws = null;
+            }
+        }
+
+        var poll = null;
+        if (!ws) {
+            poll = $interval(load, 5000);
+        }
 
         load();
 
-        // cleanup interval
-        var dereg = function () { if (poll) $interval.cancel(poll); };
-        // AngularJS: listen for $destroy on scope via $rootScope? Use $scope if available via DI; fallback to window unload
+        // cleanup interval and websocket
+        var dereg = function () {
+            if (poll) $interval.cancel(poll);
+            if (ws) try { ws.close(); } catch (e) { }
+        };
         window.addEventListener('beforeunload', dereg);
     }]);
 }());
