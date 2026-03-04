@@ -1,0 +1,19 @@
+{
+  "tables": {
+    "patients": {
+      "columns": ["id","name","age","gender","registration_date"],
+      "synonyms": ["patient","patients","people","person"]
+    },
+    "visits": {
+      "columns": ["id","patient_id","visit_date","diagnosis","facility_id"],
+      "synonyms": ["visit","visits","appointments","encounters"]
+    }
+  },
+  "column_synonyms": {
+    "name": ["name","full name","patient name"],
+    "age": ["age","years","yrs"],
+    "gender": ["gender","sex"],
+    "registration_date": ["registration date","joined","registered on","signup date"],
+    "diagnosis": ["diagnosis","disease","condition"]
+  }
+}

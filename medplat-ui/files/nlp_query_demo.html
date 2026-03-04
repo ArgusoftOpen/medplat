@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>NLP Query Preview Demo</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:20px}
+    textarea{width:100%;height:80px}
+    pre{background:#f6f6f6;padding:10px}
+    .btn{padding:8px 12px;background:#007bff;color:white;border:none;border-radius:4px}
+  </style>
+  <script src="nlp_query_demo.js"></script>
+</head>
+<body>
+  <h2>NLP Query Preview</h2>
+  <p>Enter a natural-language query (e.g. "show name and age of patients where age &gt; 30")</p>
+  <textarea id="nlq" placeholder="e.g. show name and age of patients where age > 30"></textarea>
+  <div style="margin-top:8px">
+    <button class="btn" id="previewBtn">Preview SQL</button>
+  </div>
+  <h3>Preview</h3>
+  <div id="result">
+    <em>No preview yet.</em>
+  </div>
+</body>
+</html>

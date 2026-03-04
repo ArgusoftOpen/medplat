@@ -54,6 +54,9 @@ RUN npm install --location=global bower -y
 # Copy application code to the working directory
 COPY entrypoint.sh /usr/
 
+# Ensure entrypoint has Unix line endings (fix CRLF produced on Windows hosts)
+RUN sed -i 's/\r$//' /usr/entrypoint.sh || true
+
 EXPOSE 8181
 
 RUN chmod +x /usr/entrypoint.sh
