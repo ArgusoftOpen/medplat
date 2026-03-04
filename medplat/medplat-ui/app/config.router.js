@@ -718,6 +718,41 @@
                     url: "/home",
                     template: '<ui-view></ui-view>'
                 })
+                /* ---- AI Dashboard States ---- */
+                .state('techo.dashboard.aidashboards', {
+                    url: '/aidashboards',
+                    title: 'My Dashboards',
+                    templateUrl: 'app/dashboard/ai/views/dashboard-list.html',
+                    resolve: load([
+                        'ai-dashboard.controller',
+                        'ai-dashboard.styles',
+                        'dndLists',
+                        'chart.js'
+                    ])
+                })
+                .state('techo.dashboard.aidashboard', {
+                    url: '/aidashboard/:dashboardId',
+                    title: 'AI Dashboard',
+                    templateUrl: 'app/dashboard/ai/views/ai-dashboard.html',
+                    resolve: load([
+                        'ai-dashboard.controller',
+                        'ai-dashboard.styles',
+                        'dndLists',
+                        'chart.js'
+                    ])
+                })
+                .state('techo.dashboard.aidashboardbuilder', {
+                    url: '/aidashboardbuilder/:dashboardId',
+                    title: 'Dashboard Builder',
+                    templateUrl: 'app/dashboard/ai/views/dashboard-builder.html',
+                    resolve: load([
+                        'ai-dashboard.controller',
+                        'ai-dashboard.styles',
+                        'dndLists',
+                        'chart.js'
+                    ])
+                })
+                /* ---- End AI Dashboard States ---- */
                 .state('techo.dashboard.fhs', {
                     url: '/fhs',
                     title: 'FHS Dashboard',

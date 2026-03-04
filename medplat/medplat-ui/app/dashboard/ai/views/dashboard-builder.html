@@ -1,312 +1,565 @@
-﻿<div class="dashboard-builder-container" ng-controller="DashboardBuilderController">
-    <div class="builder-header">
-        <h3><i class="fa fa-pencil"></i> Dashboard Builder</h3>
-        <div class="builder-actions">
-            <button class="btn btn-success" ng-click="saveDashboard()">
-                <i class="fa fa-save"></i> Save Dashboard
-            </button>
-            <button class="btn btn-warning" ng-click="previewDashboard()">
-                <i class="fa fa-eye"></i> Preview
-            </button>
-            <button class="btn btn-secondary" ng-click="goBack()">
-                <i class="fa fa-times"></i> Cancel
-            </button>
-        </div>
+<div class="ai-builder-page builder-page" ng-controller="DashboardBuilderController">
+
+  <!-- ========================================================
+       TOP BAR
+       ======================================================== -->
+  <div class="builder-topbar">
+    <div class="bt-left">
+      <button class="btn-builder" ng-click="goBack()" title="Back to dashboards">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <h5><i class="fa fa-pencil-square-o"></i> Dashboard Builder</h5>
+      <input type="text" class="dash-name-input"
+             ng-model="dashboard.dashboardName"
+             placeholder="Dashboard name…">
     </div>
-    <div class="builder-content">
-        <div class="config-panel">
-            <h5>Dashboard Configuration</h5>
-            <div class="form-group">
-                <label>Dashboard Name</label>
-                <input type="text" class="form-control" ng-model="dashboard.dashboardName" />
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <textarea class="form-control" ng-model="dashboard.description" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Dashboard Type</label>
-                <select class="form-control" ng-model="dashboard.dashboardType">
-                    <option value="EXECUTIVE">Executive/Management</option>
-                    <option value="OPERATIONAL">Operational</option>
-                    <option value="CLINICAL">Clinical</option>
-                    <option value="ANALYTICS">Analytics</option>
-                    <option value="CUSTOM">Custom</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Refresh Interval (seconds)</label>
-                <input type="number" class="form-control" ng-model="dashboard.refreshIntervalSeconds" />
-            </div>
-            <div class="ai-features-section">
-                <h6><i class="fa fa-magic"></i> AI Features</h6>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="dashboard.aiEnabled" />
-                        Enable AI Insights
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="dashboard.nlpEnabled" />
-                        Enable NLP Queries
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="dashboard.anomalyDetectionEnabled" />
-                        Anomaly Detection
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="dashboard.predictiveAnalyticsEnabled" />
-                        Predictive Analytics
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="dashboard.recommendationEnabled" />
-                        Personalized Recommendations
-                    </label>
-                </div>
-            </div>
-            <div class="access-control-section">
-                <h6><i class="fa fa-lock"></i> Access Control</h6>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="dashboard.isPublic" />
-                        Public Dashboard
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Allowed Roles (comma-separated)</label>
-                    <input type="text" class="form-control" ng-model="dashboard.roleBasedAccess" 
-                           placeholder="E.g., DOCTOR, MANAGER, NURSE" />
-                </div>
-            </div>
-            <button class="btn btn-primary btn-block" ng-click="addWidget()">
-                <i class="fa fa-plus"></i> Add Widget
-            </button>
-        </div>
-        <div class="widgets-panel">
-            <h5>Dashboard Widgets</h5>
-            <div class="widgets-list">
-                <div class="widget-item" ng-repeat="widget in widgets" ng-click="configureWidget(widget)">
-                    <div class="widget-preview">
-                        <i class="fa fa-bar-chart"></i>
-                        <div class="widget-name">{{ widget.title || widget.widgetName }}</div>
-                        <div class="widget-type">{{ widget.widgetType }}</div>
-                    </div>
-                    <button class="btn btn-sm btn-danger" ng-click="removeWidget($index); $event.stopPropagation()">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </div>
-                <div class="alert alert-info" ng-if="!widgets || widgets.length === 0">
-                    <i class="fa fa-info-circle"></i> No widgets added. Click "Add Widget" to begin.
-                </div>
-            </div>
-        </div>
-        <div class="widget-config-panel" ng-if="selectedWidget">
-            <h5>Widget Configuration</h5>
-            <div class="form-group">
-                <label>Widget Name</label>
-                <input type="text" class="form-control" ng-model="selectedWidget.widgetName" />
-            </div>
-            <div class="form-group">
-                <label>Widget Title</label>
-                <input type="text" class="form-control" ng-model="selectedWidget.title" />
-            </div>
-            <div class="form-group">
-                <label>Widget Type</label>
-                <select class="form-control" ng-model="selectedWidget.widgetType">
-                    <option ng-repeat="type in widgetTypes" value="{{ type }}">{{ type }}</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Data Source</label>
-                <select class="form-control" ng-model="selectedWidget.dataSourceId">
-                    <option value="">-- Select Data Source --</option>
-                    <option ng-repeat="source in availableDataSources" value="{{ source.id }}">
-                        {{ source.sourceName }}
-                    </option>
-                </select>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Grid Width (1-12)</label>
-                    <input type="number" class="form-control" ng-model="selectedWidget.gridWidth" min="1" max="12" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label>Min Height (pixels)</label>
-                    <input type="number" class="form-control" ng-model="selectedWidget.gridHeight" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Refresh Interval (seconds)</label>
-                <input type="number" class="form-control" ng-model="selectedWidget.refreshIntervalSeconds" />
-            </div>
-            <div class="widget-ai-features">
-                <h6><i class="fa fa-magic"></i> Widget AI Features</h6>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="selectedWidget.aiInsights" />
-                        Show AI Insights
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="selectedWidget.aiAnomalyDetection" />
-                        Anomaly Detection
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="selectedWidget.aiForecast" />
-                        Forecast/Prediction
-                    </label>
-                </div>
-            </div>
-            <button class="btn btn-primary btn-block" ng-click="selectedWidget = null">
-                <i class="fa fa-close"></i> Done Configuring
-            </button>
-        </div>
+    <div class="bt-right">
+      <span style="font-size:12px; color:rgba(255,255,255,0.6); margin-right:8px;"
+            ng-if="canvas.length > 0">{{ canvas.length }} widget{{ canvas.length !== 1 ? 's' : '' }}</span>
+      <button class="btn-builder preview" ng-click="previewDashboard()">
+        <i class="fa fa-eye"></i> Preview
+      </button>
+      <button class="btn-builder save" ng-click="saveDashboard()" ng-disabled="saving">
+        <i class="fa" ng-class="saving ? 'fa-spinner fa-spin' : 'fa-save'"></i>
+        {{ saving ? 'Saving…' : 'Save' }}
+      </button>
+      <button class="btn-builder" ng-click="goBack()">
+        <i class="fa fa-times"></i> Cancel
+      </button>
     </div>
+  </div>
+
+  <!-- ========================================================
+       BUILDER 3-PANEL BODY
+       ======================================================== -->
+  <div class="builder-body">
+
+    <!-- --------------------------------------------------------
+         LEFT PANEL: Widget Palette
+         -------------------------------------------------------- -->
+    <div class="builder-palette">
+
+      <!-- Widget Types -->
+      <div class="palette-section-title">Chart & Widget Types</div>
+
+      <div class="palette-widget-item"
+           ng-repeat="wt in widgetPalette"
+           draggable="true"
+           ng-dragstart="onPaletteDragStart($event, wt)"
+           ng-dragend="dragOver = false"
+           title="{{ wt.desc }}">
+        <div class="pwi-icon" ng-class="wt.iconClass">
+          <i class="fa" ng-class="wt.faIcon"></i>
+        </div>
+        <div>
+          <div class="pwi-label">{{ wt.label }}</div>
+          <div class="pwi-desc">{{ wt.desc }}</div>
+        </div>
+      </div>
+
+      <div class="palette-divider"></div>
+
+      <!-- Data Sources -->
+      <div class="palette-section-title">Data Sources</div>
+      <div class="palette-ds-item" ng-repeat="ds in availableDataSources | limitTo: 8" title="{{ ds.sourceName }}">
+        <div class="ds-dot" ng-style="{'background': getDsColor(ds.sourceType)}"></div>
+        <div>
+          <div style="font-size:12px; font-weight:500; color:#212529;">{{ ds.sourceName }}</div>
+          <div style="font-size:11px; color:#6C757D;">{{ ds.sourceType }}</div>
+        </div>
+      </div>
+      <div ng-if="!availableDataSources || availableDataSources.length === 0"
+           style="padding:10px 14px; font-size:12px; color:#9E9E9E;">
+        No data sources configured
+      </div>
+
+      <div class="palette-divider"></div>
+
+      <!-- Dashboard Settings shortcut -->
+      <div class="palette-section-title">Dashboard</div>
+      <div style="padding:8px 14px;">
+        <div class="toggle-row">
+          <span class="toggle-label" style="font-size:12px;">AI Insights</span>
+          <label class="toggle-switch">
+            <input type="checkbox" ng-model="dashboard.aiEnabled">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label" style="font-size:12px;">NLP Queries</span>
+          <label class="toggle-switch">
+            <input type="checkbox" ng-model="dashboard.nlpEnabled">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label" style="font-size:12px;">Auto Refresh</span>
+          <label class="toggle-switch">
+            <input type="checkbox" ng-model="dashboard.autoRefresh">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- --------------------------------------------------------
+         CENTER PANEL: Canvas
+         -------------------------------------------------------- -->
+    <div class="builder-canvas"
+         ng-dragover="onCanvasDragOver($event)"
+         ng-drop="onCanvasDrop($event)"
+         ng-dragleave="dragOver = false">
+
+      <!-- Canvas toolbar -->
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
+        <div style="font-size:13px; font-weight:600; color:#6C757D;">
+          <i class="fa fa-th"></i> Canvas
+        </div>
+        <div style="display:flex; gap:6px; margin-left:auto; flex-wrap:wrap; align-items:center;">
+          <span style="font-size:12px; color:#6C757D;">Columns:</span>
+          <input type="range" min="6" max="12" step="6" ng-model="gridCols"
+                 style="width:80px; accent-color:#1565C0;">
+          <span style="font-size:12px; font-weight:600; color:#1565C0; width:20px;">{{ gridCols }}</span>
+          <button class="btn-clear-filters" ng-click="clearCanvas()"
+                  ng-if="canvas.length > 0" style="font-size:12px; padding:4px 10px;">
+            <i class="fa fa-trash"></i> Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- Drop zone (empty) -->
+      <div class="canvas-drop-zone" ng-if="canvas.length === 0"
+           ng-class="{'drag-over': dragOver}">
+        <i class="fa fa-hand-o-down" style="font-size:28px; opacity:0.4; display:block; margin-bottom:10px;"></i>
+        Drag widget types from the left panel here,<br>or click <strong>Add Widget</strong> to start.
+        <div style="margin-top:16px;">
+          <button class="btn-config-apply" style="width:auto; padding:8px 20px;" ng-click="addWidget('BAR_CHART')">
+            <i class="fa fa-plus"></i> Add Widget
+          </button>
+        </div>
+      </div>
+
+      <!-- Widget grid on canvas -->
+      <div class="canvas-grid"
+           ng-if="canvas.length > 0"
+           ng-style="{'grid-template-columns': 'repeat(' + gridCols + ', 1fr)'}"
+           dnd-list="canvas"
+           dnd-allowed-types="['widget', 'palette']">
+
+        <div ng-repeat="widget in canvas"
+             class="canvas-widget"
+             ng-class="{selected: selectedWidget === widget}"
+             ng-style="{'grid-column': 'span ' + Math.min(widget.gridWidth || 4, gridCols)}"
+             ng-click="selectWidget(widget)"
+             dnd-draggable="widget"
+             dnd-type="'widget'"
+             dnd-moved="canvas.splice($index,1)"
+             dnd-selected="selectWidget(widget)">
+          <!-- Drag handle -->
+          <div class="cw-drag-handle" title="Drag to reorder">
+            <i class="fa fa-grip-horizontal" style="font-size:11px; color:#ccc;">&#9776;</i>
+          </div>
+          <div class="cw-header">
+            <span>
+              <i class="fa" ng-class="getWidgetTypeIcon(widget.widgetType)"
+                 style="margin-right:6px; color:#1565C0;"></i>
+              {{ widget.title || widget.widgetType }}
+            </span>
+            <div style="display:flex; gap:4px;">
+              <button class="btn-wh" ng-click="duplicateWidget(widget, $event)" title="Duplicate">
+                <i class="fa fa-copy"></i>
+              </button>
+              <button class="btn-wh" ng-click="removeFromCanvas($index, $event)" title="Remove"
+                      style="color:#C62828;">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="cw-body">
+            <!-- Tiny chart preview -->
+            <div ng-switch="widget.widgetType">
+              <div ng-switch-when="KPI"
+                   style="text-align:center;">
+                <div style="font-size:28px; font-weight:700; color:#1565C0;">{{ widget.kpiPreview || '—' }}</div>
+                <div style="font-size:11px; color:#6C757D;">{{ widget.kpiLabel || widget.title }}</div>
+              </div>
+              <div ng-switch-when="TABLE"
+                   style="font-size:11px; color:#6C757D;">
+                <i class="fa fa-table" style="font-size:24px; display:block; margin-bottom:6px;"></i>
+                Table · {{ widget.dataSourceId ? 'Data source linked' : 'No data source' }}
+              </div>
+              <div ng-switch-default>
+                <i class="fa" ng-class="getWidgetTypeIcon(widget.widgetType)"
+                   style="font-size:24px; display:block; margin-bottom:6px; color:#1565C0;"></i>
+                {{ widget.widgetType | lowercase | replace:'_':' ' }}
+              </div>
+            </div>
+          </div>
+          <!-- Resize handle -->
+          <div style="display:flex; gap:4px; padding:6px 10px; border-top:1px solid #DEE2E6; background:#FAFAFA;">
+            <span style="font-size:10px; color:#9E9E9E;">W:</span>
+            <input type="range" min="2" max="12" ng-model="widget.gridWidth"
+                   ng-change="selectWidget(widget)"
+                   ng-click="$event.stopPropagation()"
+                   style="flex:1; accent-color:#1565C0;"
+                   title="Grid width: {{ widget.gridWidth }}">
+            <span style="font-size:10px; color:#1565C0; font-weight:600;">{{ widget.gridWidth }}</span>
+          </div>
+        </div>
+
+        <!-- DnD placeholder -->
+        <li style="list-style:none; grid-column:span 4; border:2px dashed #90CAF9; border-radius:10px; min-height:100px; display:flex; align-items:center; justify-content:center; color:#1565C0; font-size:12px;">
+          Drop here
+        </li>
+      </div>
+
+      <!-- Add more widget button (when canvas not empty) -->
+      <div ng-if="canvas.length > 0" style="text-align:center; margin-top:16px;">
+        <button class="btn-clear-filters" ng-click="addWidget('BAR_CHART')" style="padding:8px 20px;">
+          <i class="fa fa-plus"></i> Add Another Widget
+        </button>
+      </div>
+
+    </div>
+
+    <!-- --------------------------------------------------------
+         RIGHT PANEL: Configuration
+         -------------------------------------------------------- -->
+    <div class="builder-config">
+      <!-- Tabs: Widget | Dashboard -->
+      <div class="config-tabs">
+        <div class="config-tab" ng-class="{active: configTab==='widget'}"
+             ng-click="configTab='widget'">
+          <i class="fa fa-th-large"></i> Widget
+        </div>
+        <div class="config-tab" ng-class="{active: configTab==='dashboard'}"
+             ng-click="configTab='dashboard'">
+          <i class="fa fa-cog"></i> Dashboard
+        </div>
+      </div>
+
+      <!-- WIDGET CONFIG TAB -->
+      <div class="config-body" ng-if="configTab==='widget'">
+
+        <div ng-if="!selectedWidget"
+             style="text-align:center; padding:40px 20px; color:#6C757D;">
+          <i class="fa fa-hand-o-left" style="font-size:28px; opacity:0.4; display:block; margin-bottom:10px;"></i>
+          <div style="font-size:13px;">Select a widget on the canvas to configure it</div>
+        </div>
+
+        <div ng-if="selectedWidget">
+
+          <!-- Widget Type -->
+          <div class="config-section">
+            <div class="config-section-title">Widget Type</div>
+            <div class="widget-type-grid">
+              <div ng-repeat="wt in widgetPalette"
+                   class="wt-btn"
+                   ng-class="{active: selectedWidget.widgetType === wt.type}"
+                   ng-click="selectedWidget.widgetType = wt.type"
+                   title="{{ wt.label }}">
+                <i class="fa" ng-class="wt.faIcon"></i>
+                <span>{{ wt.shortLabel }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic Info -->
+          <div class="config-section">
+            <div class="config-section-title">Basic Info</div>
+            <div class="config-field">
+              <label>Widget Title</label>
+              <input type="text" class="config-input" ng-model="selectedWidget.title" placeholder="Enter title">
+            </div>
+            <div class="config-field">
+              <label>Description</label>
+              <textarea class="config-textarea" ng-model="selectedWidget.description" placeholder="Optional description"></textarea>
+            </div>
+          </div>
+
+          <!-- Data Source -->
+          <div class="config-section">
+            <div class="config-section-title">Data Source</div>
+            <div class="config-field">
+              <label>Source</label>
+              <select class="config-select" ng-model="selectedWidget.dataSourceId">
+                <option value="">-- Select Data Source --</option>
+                <option ng-repeat="ds in availableDataSources" value="{{ ds.id }}">
+                  {{ ds.sourceName }} ({{ ds.sourceType }})
+                </option>
+              </select>
+            </div>
+            <div class="config-field" ng-if="selectedWidget.dataSourceId">
+              <label>Query / Filter</label>
+              <textarea class="config-textarea" ng-model="selectedWidget.queryConfig.query"
+                        placeholder="SQL, filter expression, or leave blank for default"></textarea>
+            </div>
+          </div>
+
+          <!-- Chart options (for chart types) -->
+          <div class="config-section"
+               ng-if="['LINE_CHART','BAR_CHART','PIE_CHART','DOUGHNUT_CHART'].indexOf(selectedWidget.widgetType) >= 0">
+            <div class="config-section-title">Chart Options</div>
+            <div class="config-field">
+              <label>X-Axis Field</label>
+              <input type="text" class="config-input" ng-model="selectedWidget.visualizationConfig.xField"
+                     placeholder="e.g. date, department">
+            </div>
+            <div class="config-field">
+              <label>Y-Axis / Value Field</label>
+              <input type="text" class="config-input" ng-model="selectedWidget.visualizationConfig.yField"
+                     placeholder="e.g. count, total">
+            </div>
+            <div class="config-field">
+              <label>Aggregation</label>
+              <select class="config-select" ng-model="selectedWidget.aggregationType">
+                <option value="COUNT">Count</option>
+                <option value="SUM">Sum</option>
+                <option value="AVG">Average</option>
+                <option value="MAX">Maximum</option>
+                <option value="MIN">Minimum</option>
+              </select>
+            </div>
+            <div class="toggle-row">
+              <span class="toggle-label">Show Legend</span>
+              <label class="toggle-switch">
+                <input type="checkbox" ng-model="selectedWidget.visualizationConfig.showLegend">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- KPI options -->
+          <div class="config-section" ng-if="selectedWidget.widgetType === 'KPI'">
+            <div class="config-section-title">KPI Options</div>
+            <div class="config-field">
+              <label>Label</label>
+              <input type="text" class="config-input" ng-model="selectedWidget.kpiLabel" placeholder="e.g. Total Patients">
+            </div>
+            <div class="config-field">
+              <label>Unit</label>
+              <input type="text" class="config-input" ng-model="selectedWidget.kpiUnit" placeholder="e.g. %, K">
+            </div>
+            <div class="config-field">
+              <label>Target Value</label>
+              <input type="number" class="config-input" ng-model="selectedWidget.displayOptions.target">
+            </div>
+          </div>
+
+          <!-- Filter conditions -->
+          <div class="config-section">
+            <div class="config-section-title">Filters</div>
+            <div class="filter-condition-row" ng-repeat="cond in selectedWidget.filterConditions">
+              <select ng-model="cond.field">
+                <option value="">Field</option>
+                <option ng-repeat="f in commonFields">{{ f }}</option>
+              </select>
+              <select ng-model="cond.operator" style="max-width:70px;">
+                <option value="=">=</option>
+                <option value="!=">!=</option>
+                <option value=">">&gt;</option>
+                <option value="<">&lt;</option>
+                <option value="LIKE">contains</option>
+              </select>
+              <input type="text" ng-model="cond.value" placeholder="value">
+              <button class="btn-remove-filter" ng-click="removeFilterCondition($index)">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+            <button class="btn-add-filter" ng-click="addFilterCondition()">
+              <i class="fa fa-plus"></i> Add Filter
+            </button>
+          </div>
+
+          <!-- Layout -->
+          <div class="config-section">
+            <div class="config-section-title">Layout</div>
+            <div class="range-row">
+              <label>Grid Width <span class="range-val">{{ selectedWidget.gridWidth }} / 12</span></label>
+              <input type="range" class="config-range" min="2" max="12" step="1"
+                     ng-model="selectedWidget.gridWidth">
+            </div>
+            <div class="range-row">
+              <label>Min Height <span class="range-val">{{ selectedWidget.gridHeight || 200 }}px</span></label>
+              <input type="range" class="config-range" min="150" max="600" step="50"
+                     ng-model="selectedWidget.gridHeight">
+            </div>
+          </div>
+
+          <!-- Refresh -->
+          <div class="config-section">
+            <div class="config-section-title">Refresh</div>
+            <div class="range-row">
+              <label>Interval <span class="range-val">{{ selectedWidget.refreshIntervalSeconds || 300 }}s</span></label>
+              <input type="range" class="config-range" min="30" max="3600" step="30"
+                     ng-model="selectedWidget.refreshIntervalSeconds">
+            </div>
+          </div>
+
+          <!-- AI Features -->
+          <div class="config-section">
+            <div class="config-section-title">AI Features</div>
+            <div class="toggle-row">
+              <span class="toggle-label">AI Insights</span>
+              <label class="toggle-switch">
+                <input type="checkbox" ng-model="selectedWidget.aiInsights">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <span class="toggle-label">Anomaly Detection</span>
+              <label class="toggle-switch">
+                <input type="checkbox" ng-model="selectedWidget.aiAnomalyDetection">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <span class="toggle-label">Forecast</span>
+              <label class="toggle-switch">
+                <input type="checkbox" ng-model="selectedWidget.aiForecast">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <span class="toggle-label">Time Series</span>
+              <label class="toggle-switch">
+                <input type="checkbox" ng-model="selectedWidget.timeSeriesEnabled">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div ng-if="selectedWidget.timeSeriesEnabled" class="config-field">
+              <label>Granularity</label>
+              <select class="config-select" ng-model="selectedWidget.timeGranularity">
+                <option value="HOURLY">Hourly</option>
+                <option value="DAILY">Daily</option>
+                <option value="WEEKLY">Weekly</option>
+                <option value="MONTHLY">Monthly</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Apply button -->
+          <button class="btn-config-apply" ng-click="applyWidgetConfig()">
+            <i class="fa fa-check"></i> Apply Configuration
+          </button>
+
+        </div>
+      </div>
+
+      <!-- DASHBOARD CONFIG TAB -->
+      <div class="config-body" ng-if="configTab==='dashboard'">
+
+        <div class="config-section">
+          <div class="config-section-title">Basic Settings</div>
+          <div class="config-field">
+            <label>Dashboard Name</label>
+            <input type="text" class="config-input" ng-model="dashboard.dashboardName">
+          </div>
+          <div class="config-field">
+            <label>Description</label>
+            <textarea class="config-textarea" ng-model="dashboard.description" rows="3"></textarea>
+          </div>
+          <div class="config-field">
+            <label>Type</label>
+            <select class="config-select" ng-model="dashboard.dashboardType">
+              <option value="EXECUTIVE">Executive / Management</option>
+              <option value="OPERATIONAL">Operational</option>
+              <option value="CLINICAL">Clinical</option>
+              <option value="ANALYTICS">Analytics</option>
+              <option value="CUSTOM">Custom</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="config-section">
+          <div class="config-section-title">Auto Refresh</div>
+          <div class="range-row">
+            <label>Interval <span class="range-val">{{ dashboard.refreshIntervalSeconds || 300 }}s</span></label>
+            <input type="range" class="config-range" min="30" max="3600" step="30"
+                   ng-model="dashboard.refreshIntervalSeconds">
+          </div>
+        </div>
+
+        <div class="config-section">
+          <div class="config-section-title">AI Features</div>
+          <div class="toggle-row">
+            <span class="toggle-label">Enable AI Insights</span>
+            <label class="toggle-switch">
+              <input type="checkbox" ng-model="dashboard.aiEnabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">NLP Queries</span>
+            <label class="toggle-switch">
+              <input type="checkbox" ng-model="dashboard.nlpEnabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Anomaly Detection</span>
+            <label class="toggle-switch">
+              <input type="checkbox" ng-model="dashboard.anomalyDetectionEnabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Predictive Analytics</span>
+            <label class="toggle-switch">
+              <input type="checkbox" ng-model="dashboard.predictiveAnalyticsEnabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Recommendations</span>
+            <label class="toggle-switch">
+              <input type="checkbox" ng-model="dashboard.recommendationEnabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="config-section">
+          <div class="config-section-title">Access Control</div>
+          <div class="toggle-row">
+            <span class="toggle-label">Public Dashboard</span>
+            <label class="toggle-switch">
+              <input type="checkbox" ng-model="dashboard.isPublic">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="config-field">
+            <label>Allowed Roles</label>
+            <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;">
+              <span ng-repeat="role in availableRoles" class="nlp-chip"
+                    ng-class="{'nlp-chip-active': isRoleSelected(role)}"
+                    ng-style="isRoleSelected(role) ? {'background':'#1565C0','color':'#fff','border-color':'#1565C0'} : {}"
+                    ng-click="toggleRole(role)">
+                {{ role }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-config-apply" ng-click="saveDashboard()">
+          <i class="fa fa-save"></i> Save Dashboard
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================
+       SAVE SUCCESS TOAST
+       ======================================================== -->
+  <div ng-if="saveMessage"
+       style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+              background:#2E7D32; color:#fff; border-radius:8px; padding:12px 24px;
+              box-shadow:0 4px 14px rgba(0,0,0,0.2); font-size:13px; font-weight:500;
+              z-index:2000; display:flex; align-items:center; gap:10px;">
+    <i class="fa fa-check-circle"></i> {{ saveMessage }}
+  </div>
+
 </div>
-<style>
-.dashboard-builder-container {
-    padding: 20px;
-    background: #f5f5f5;
-    min-height: 100vh;
-}
-.builder-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    background: white;
-    padding: 15px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.builder-header h3 {
-    margin: 0;
-}
-.builder-actions {
-    display: flex;
-    gap: 10px;
-}
-.builder-content {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 20px;
-}
-.config-panel,
-.widgets-panel,
-.widget-config-panel {
-    background: white;
-    padding: 15px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.config-panel h5,
-.widgets-panel h5,
-.widget-config-panel h5 {
-    margin-top: 0;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-}
-.ai-features-section,
-.access-control-section,
-.widget-ai-features {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-}
-.ai-features-section h6,
-.access-control-section h6,
-.widget-ai-features h6 {
-    margin: 0 0 10px 0;
-    color: #2196F3;
-    font-size: 13px;
-}
-.checkbox {
-    margin-bottom: 10px;
-}
-.checkbox label {
-    margin-bottom: 0;
-    cursor: pointer;
-    font-weight: 400;
-}
-.checkbox input {
-    margin: 0 5px 0 0;
-}
-.widgets-list {
-    margin-top: 15px;
-}
-.widget-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    background: #f9f9f9;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: border-color 0.3s;
-}
-.widget-item:hover {
-    border-color: #2196F3;
-    background: #f0f7ff;
-}
-.widget-preview {
-    flex: 1;
-    text-align: center;
-}
-.widget-preview i {
-    font-size: 24px;
-    margin-bottom: 5px;
-    color: #2196F3;
-}
-.widget-name {
-    font-weight: 600;
-    font-size: 13px;
-    color: #333;
-}
-.widget-type {
-    font-size: 11px;
-    color: #999;
-    margin-top: 3px;
-}
-.form-group {
-    margin-bottom: 15px;
-}
-.form-group label {
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 13px;
-}
-.form-group input,
-.form-group textarea,
-.form-group select {
-    font-size: 13px;
-}
-.form-row {
-    display: flex;
-    gap: 10px;
-}
-.form-row .form-group {
-    flex: 1;
-}
-.widget-config-panel {
-    max-height: 80vh;
-    overflow-y: auto;
-}
-@media (max-width: 1200px) {
-    .builder-content {
-        grid-template-columns: 1fr;
-    }
-}
-</style>

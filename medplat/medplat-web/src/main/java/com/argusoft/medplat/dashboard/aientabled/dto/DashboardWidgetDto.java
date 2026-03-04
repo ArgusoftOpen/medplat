@@ -1,4 +1,4 @@
-﻿package com.argusoft.medplat.dashboard.aientabled.dto;
+package com.argusoft.medplat.dashboard.aientabled.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

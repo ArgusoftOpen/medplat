@@ -501,6 +501,9 @@
             'sms-type.service': ["app/manage/smstype/services/sms-type.service.js"],
             'sms-type.controller': ["app/manage/smstype/controllers/sms-type-manage.controller.js"],
             'analytics-dashboard.controller': ['app/admin/analyticsdashboard/controllers/analytics-dashboard.controller.js'],
-            'lms-dashboard-v2.controller': ['app/training/dashboard/controllers/lms-dashboard-v2.controller.js']
+            'lms-dashboard-v2.controller': ['app/training/dashboard/controllers/lms-dashboard-v2.controller.js'],
+            'ai-dashboard.controller': ['app/dashboard/ai/controllers/aiDashboard.controller.js'],
+            'ai-dashboard.styles': ['app/dashboard/ai/styles/dashboard-ai.css'],
+            'chart.js': ['bower_components/angular-chart.js/dist/angular-chart.min.js']
         });
 }());
