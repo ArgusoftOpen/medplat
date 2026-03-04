@@ -56,6 +56,7 @@ COPY entrypoint.sh /usr/
 
 EXPOSE 8181
 
-RUN chmod +x /usr/entrypoint.sh
+RUN mkdir -p /usr/target
+RUN chmod +x /usr/entrypoint.sh && sed -i 's/\r$//' /usr/entrypoint.sh
 
 ENTRYPOINT [ "/usr/entrypoint.sh" ]
