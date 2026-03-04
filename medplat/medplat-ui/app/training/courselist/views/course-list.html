@@ -1,0 +1,114 @@
+<style>
+    .inline-form .chosen-container {
+        width: 100% !important;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="float-right">
+                <button class="btn btn-primary" ui-sref="techo.manage.course">Add Course</button>
+            </div>
+            <div class="col-2 inline-form float-right">
+                <div>
+                    <input type="text" class="form-control cst-form-control" id="search"
+                        ng-model="courselistcontroller.searchText" ng-model-options="{debounce: 1000}"
+                        placeholder="Search text">
+                </div>
+            </div>
+            <div class="col-2 inline-form float-right">
+                <select class="form-control cst-form-control" form-control
+                    chosen-directive="courselistcontroller.moduleConstants" name="moduleSearch"
+                    ng-model="courselistcontroller.moduleSearch" multiple
+                    ng-change="courselistcontroller.filterCourseType()"
+                    ng-options="value.fieldValue as value.fieldValue for value in courselistcontroller.moduleConstants"
+                    data-placeholder="Filter by Module">
+                </select>
+            </div>
+            <div class="col-3 inline-form float-right">
+                <label class="form-group control control-checkbox"> Online Course
+                    <input type="checkbox" ng-model="courselistcontroller.onlineSearch"
+                        ng-change="courselistcontroller.filterCourseType()">
+                    <div class="control_indicator checkbox-success"></div>
+                </label>
+                <label class="form-group control control-checkbox"> Offline Course
+                    <input type="checkbox" ng-model="courselistcontroller.offlineSearch"
+                        ng-change="courselistcontroller.filterCourseType()">
+                    <div class="control_indicator checkbox-success"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 md-15">
+            <div class="cst-table table-responsive" style="overflow: auto;max-height: calc(100vh - 169px);">
+                <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <colgroup>
+                        <col style="width: 5%">
+                        <col style="width: 15%">
+                        <col style="width: 12%">
+                        <col style="width: 10%">
+                        <col style="width: 10%" ng-if="courselistcontroller.onlineSearch">
+                        <col style="width: 25%">
+                        <col style="width: 20%">
+                        <col style="width: 10%">
+                        <col style="width: 12%">
+                        <col style="width: 10%">
+                    </colgroup>
+                    <thead class="cst-thead">
+                        <tr>
+                            <th>#</th>
+                            <th>Course Name</th>
+                            <th>Duration(In Days)</th>
+                            <th>Module</th>
+                            <th ng-if="courselistcontroller.onlineSearch">Course Size</th>
+                            <th>Target Group</th>
+                            <th>Trainers</th>
+                            <th>Owner</th>
+                            <th>Course Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr ng-repeat="course in courselistcontroller.filteredCourseList | orderBy : 'courseName' | filter : {courseName:courselistcontroller.searchText} "
+                            ng-if="courselistcontroller.filteredCourseList.length > 0">
+                            <td>{{$index+1}}</td>
+                            <td>{{::course.courseName}}</td>
+                            <td ng-bind="course.courseType==='OFFLINE'?course.duration:'Self-paced'"></td>
+                            <td>{{::course.moduleName == null ? '-' : course.moduleName}}</td>
+                            <td ng-if="courselistcontroller.onlineSearch">{{::course.courseSize }}</td>
+                            <td>{{::course.targetRole}}</td>
+                            <td>{{::course.trainerRole == null ? 'ALL' : course.trainerRole}}</td>
+                            <td>{{::course.createdByUserName}}</td>
+                            <td>{{::course.courseState}}</td>
+                            <td class="action-cell">
+                                <ul class="action-item">
+                                    <li>
+                                        <a href="javascript:void(0)" class="action-icon edit-icon"
+                                            ui-sref="techo.manage.course({id : course.courseId})"></a>
+                                    </li>
+                                    <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" class="action-icon more-icon"></a>
+                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                            aria-labelledby="moreDropdown">
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    ng-click="courselistcontroller.toggleActive(course)">
+                                                    <strong>Mark as </strong> {{::course.courseState == 'ACTIVE'
+                                                    ? 'Inactive'
+                                                    : 'Active'}}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

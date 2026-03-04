@@ -1,0 +1,36 @@
+version: '3'
+services:
+  db:
+    image: postgres:15
+    command: -p 5436
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: argusadmin
+      POSTGRES_DB: medplat
+    ports:
+      - "5436:5436"
+    volumes:
+      - $HOME/medplat-temp/data:/var/lib/postgresql/data
+      - ./db_init.sh:/docker-entrypoint-initdb.d/db_init.sh
+    networks:
+      - medplat_net
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9090:8080"
+      - "8181:8181"
+    volumes:
+      - ./medplat-ui:/usr/ui/medplat-ui
+      - ./medplat-web/:/usr/web
+      - $HOME/medplat-temp/.m2:/root/.m2
+    networks:
+      - medplat_net
+
+
+networks:
+  medplat_net:
+

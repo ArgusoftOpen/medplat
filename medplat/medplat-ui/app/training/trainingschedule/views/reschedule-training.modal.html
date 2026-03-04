@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <h4 class="text">Reschedule Training</h4>
+    <button type="button" class="close" ng-click="$ctrl.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ul class="reschedule-list" ng-repeat="training in $ctrl.selectedTrainingSchedule| orderBy:'day'">
+                    <li>
+                        <span class="title">Day</span>
+                        <span class="data">
+                            <span ng-bind="training.day | ordinal"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="title">Topics</span>
+                        <span class="data">
+                            <span
+                                ng-repeat="topic in training.trainingTopic track by $index">{{topic}}{{$last ? '' : ', '}}</span>
+                        </span></li>
+                    <li>
+                        <span class="title">date</span>
+                        <span class="date-input">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" datepicker icon-prefix="fa" name="trainingDate"
+                                        day-to-disable="0"
+                                        ng-disabled="training.submittedAttendance || training.submittedTopics"
+                                        ng-change="$ctrl.textReschedule($last, training.formattedDate)" id="{{$index}}"
+                                        ng-model="training.formattedDate" required min-date="$ctrl.setDate($index)">
+                                </div>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="text-right">
+                        <button class="btn btn-primary btn-sm"
+                            ng-if="$ctrl.checkForPrevious(training.date) && training.status == 'PENDING'"
+                            ng-click="$ctrl.ok(training.date, training.formattedDate, $index)"
+                            ng-disabled="(training.date | date: 'dd/MM/yyyy')  === (training.formattedDate | date: 'dd/MM/yyyy')">
+                            Reschedule
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" ng-click="$ctrl.cancel()">Close</button>
+</div>

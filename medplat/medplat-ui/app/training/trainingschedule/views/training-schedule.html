@@ -1,0 +1,342 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Schedule Training Session</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form role="form" name="trainingSchedule.trainingScheduleForm" novalidate
+                        ng-if="!trainingSchedule.noOuAssigned">
+                        <location-directive selected-location="trainingSchedule.selectedlocation"
+                            on-change="trainingSchedule.changeFunction()" fetch-according-to-user-aoi="true"
+                            ng-model="trainingSchedule.lastSelected" required-upto-level="1" fetch-upto-level="7"
+                            template-type="'twoPart'"></location-directive>
+                        <br>
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="button" class="btn btn-primary" ng-click="trainingSchedule.addLocation()"
+                                    value="Add Location">
+                            </div>
+                            <div class="col-6" ng-if="trainingSchedule.locationList.length != 0">
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Added Areas </label>
+                                    <div class="form-control cst-form-control min-height-65"
+                                        style="height: max-content;">
+                                        <div ng-repeat="location in trainingSchedule.locationList">
+                                            {{location}} &nbsp;<em class="fa fa-times pointer-cursor red"
+                                                ng-click="trainingSchedule.removeSelectedArea($index)"></em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <validate for='role' required-msg="Select Role">
+                                        <label for="role" control-label>Target Role</label>
+                                        <select tabindex="5" class="form-control cst-form-control" form-control
+                                            chosen-directive="trainingSchedule.roleList" name="role"
+                                            ng-model="trainingSchedule.trainingObj.targetRoles"
+                                            ng-options="role as role.name for role in trainingSchedule.roleList| orderBy:'name'"
+                                            ng-change="trainingSchedule.getCoursesByRole()" multiple
+                                            ng-disabled="trainingSchedule.organizationUnits.length == 0" required>
+                                            <option value="" ng-disabled="true">Please Select...</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="trainingSchedule.trainingObj.course[0].courseType !='ONLINE'">
+                                    <validate for='exampleSelect6'>
+                                        <label for="exampleSelect6">Location</label>
+                                        <input form-control tabindex="7" type="text"
+                                            class="form-control cst-form-control" name="location"
+                                            ng-model="trainingSchedule.trainingObj.location" />
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="trainingSchedule.trainingObj.course[0].courseType !='ONLINE'">
+                                    <validate for='trainerrole' required-msg="Select Role for trainer">
+                                        <label for="trainerrole" control-label>Trainer Role</label>
+                                        <select tabindex="9" class="form-control cst-form-control" form-control
+                                            chosen-directive="trainingSchedule.trainerRoleList" name="trainerrole"
+                                            ng-model="trainingSchedule.trainerRole"
+                                            ng-options="role as role.name for role in trainingSchedule.trainerRoleList| orderBy:'name'"
+                                            ng-change="trainingSchedule.getBigotsList()"
+                                            ng-disabled="trainingSchedule.organizationUnits.length == 0" required>
+                                            <option value="" ng-disabled="true">Please Select...</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="trainingSchedule.trainingObj.course[0].courseType !='ONLINE'">
+                                    <label for="exampleSelect8">Additional Trainers</label>
+                                    <select tabindex="11" class="form-control cst-form-control" multiple
+                                        ng-disabled="!trainingSchedule.trainingObj.bigot" name="addBinot"
+                                        chosen-directive="trainingSchedule.addBinotList"
+                                        ng-model="trainingSchedule.trainingObj.addBinot"
+                                        ng-options="addBinot.id as addBinot.fullName for addBinot in trainingSchedule.addBinotList">
+                                        <option value="" ng-disabled="true">Please Select...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <validate for='courseType'>
+                                        <label for="courseType" uib-tooltip="Select course type" class="control-label"
+                                            control-label>
+                                            Course Type :
+                                        </label>
+                                        <br>
+                                        <label class="control control-radio mt-10">Online
+                                            <input value="Online" name="courseType" form-control type="radio"
+                                                ng-model="trainingSchedule.trainingObj.typeOfCourse"
+                                                ng-change='trainingSchedule.filterCourse()'>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio mt-10">Offline
+                                            <input value="Offline" name="courseType" form-control type="radio"
+                                                ng-model="trainingSchedule.trainingObj.typeOfCourse"
+                                                ng-change='trainingSchedule.filterCourse()'>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='course' required-msg="Select Course">
+                                        <label for="course" control-label>Course</label>
+                                        <select tabindex="6" class="form-control cst-form-control" form-control
+                                            chosen-directive="trainingSchedule.filteredCourses" name="course"
+                                            ng-model="trainingSchedule.trainingObj.course"
+                                            ng-options="course as (course.courseName+(course.courseType ==='ONLINE'?' (Online)':'')) for course in trainingSchedule.filteredCourses| orderBy:'name'"
+                                            ng-change="trainingSchedule.getTrainerRolesByCourse(); trainingSchedule.onRoleChange(trainingSchedule.trainingObj.targetRoles);trainingSchedule.getEligibleAttendees(trainingSchedule.trainingObj.targetRoles, trainingSchedule.trainingObj.course,true); trainingSchedule.getCompletionDate(trainingSchedule.trainingObj.date.startDate, trainingSchedule.trainingObj.course.courseId); trainingSchedule.onCourseChange();"
+                                            ng-disabled="trainingSchedule.organizationUnits.length == 0" multiple
+                                            required>
+                                            <option value="" ng-disabled="true">Please Select...</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='startDate' required-msg="Select Date">
+                                        <label for="startDate" control-label>Start Date</label>
+                                        <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                            name="startDate" form-control day-to-disable="0"
+                                            ng-disabled="!trainingSchedule.trainingObj.course"
+                                            ng-change="trainingSchedule.getCompletionDate(trainingSchedule.trainingObj.date.startDate, trainingSchedule.trainingObj.course.courseId)"
+                                            ng-model="trainingSchedule.trainingObj.date.startDate" required
+                                            min-date="trainingSchedule.todayFormatted">
+                                        <div
+                                            ng-if="(trainingSchedule.trainingObj.date.endDate !== null && trainingSchedule.trainingObj.date.endDate !== '') && trainingSchedule.trainingObj.course[0].courseType !='ONLINE'">
+                                            <span class="pull-right text-info">
+                                                From {{trainingSchedule.trainingObj.date.startDate|dateSuffix}} To
+                                                {{trainingSchedule.trainingObj.date.endDate|dateSuffix}} (excluding
+                                                Sunday)
+                                            </span>
+                                        </div>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="trainingSchedule.trainingObj.course[0].courseType !='ONLINE'">
+                                    <validate for='bigot' required-msg="Select Primary Trainer">
+                                        <label for="bigot" control-label>Primary Trainers</label>
+                                        <select tabindex="10" class="form-control cst-form-control" form-control
+                                            chosen-directive="trainingSchedule.bigotList" name="bigot"
+                                            ng-model="trainingSchedule.trainingObj.bigot"
+                                            ng-options="bigot.id as bigot.fullName for bigot in trainingSchedule.bigotList"
+                                            required
+                                            ng-change="trainingSchedule.primaryBinotSelected(trainingSchedule.trainingObj.bigot)"
+                                            ng-disabled="!trainingSchedule.trainerRole">
+                                            <option value="">Please Select...</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row w-100">
+                                        <div class="col-md-3">
+                                            <label for="exampleSelect9">Total Candidates for the course</label>
+                                            <div class="form-group">
+                                                <h4>
+                                                    <span class="text-info" style="cursor:pointer"
+                                                        ng-click="trainingSchedule.trainingObj.noOfAttendees > 0 && trainingSchedule.getTotalCandidatesList()">
+                                                        {{trainingSchedule.trainingObj.noOfAttendees}}
+                                                    </span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="exampleSelect9">Imported for this training</label>
+                                            <div class="form-group">
+                                                <em class="fa fa-spinner fa-spin fa-2x fa-fw"
+                                                    ng-if="trainingSchedule.isGetTrainees === true"></em>
+                                                <a href="#"
+                                                    ng-click="trainingSchedule.getEligibleAttendees(trainingSchedule.trainingObj.targetRoles,trainingSchedule.trainingObj.course)"
+                                                    ng-if="trainingSchedule.isGetTrainees !== true">
+                                                    <h4 ng-if="trainingSchedule.isGetTrainees !== true">
+                                                        {{trainingSchedule.trainingObj.noOfAttendees
+                                                        -trainingSchedule.noOfAttendeesCompleted-trainingSchedule.excludedAttendees.length}}
+                                                        <span class="pull-right text-info"
+                                                            ng-if="trainingSchedule.noOfAttendeesCompleted > 0">
+                                                        </span>
+                                                    </h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="exampleSelect9">Already Trained for the course</label>
+                                            <div class="form-group">
+                                                <h4>
+                                                    <span class="text-info">
+                                                        {{trainingSchedule.noOfAttendeesCompleted}}
+                                                    </span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" ng-if="trainingSchedule.excludedAttendees.length > 0">
+                                            <label for="exampleSelect9">Pending Candidates</label>
+                                            <div class="form-group">
+                                                <h4>
+                                                    <span class="text-info">
+                                                        {{trainingSchedule.excludedAttendees.length}}
+                                                    </span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div
+                            ng-if="trainingSchedule.trainingObj.noOfAttendees !== 0 && trainingSchedule.filteredLocations.length > 0">
+                            <div class="row mb-15">
+                                <div class="col-6">
+                                    <h4 class="card-sub-title">Add Additional Participants</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="inline-form">
+                                        <div class="form-group">
+                                            <label for="exampleSelect10">{{trainingSchedule.locationLabel}}</label>
+                                            <select tabindex="12" class="form-control cst-form-control"
+                                                chosen-directive="trainingSchedule.filteredLocations" name="phc2"
+                                                ng-change="trainingSchedule.getRoleByPhc(trainingSchedule.selectedPhc.id, trainingSchedule.trainingObj.course.courseId, trainingSchedule.trainingObj.targetRoles)"
+                                                ng-model="trainingSchedule.selectedPhc"
+                                                ng-options="phc as phc.name for phc in trainingSchedule.filteredLocations">
+                                                <option value="" ng-disabled="true">Please Select...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="inline-form">
+                                        <div class="form-group">
+                                            <label for="exampleSelect11">Select Participants
+                                            </label>
+                                            <select tabindex="13" class="form-control cst-form-control"
+                                                ng-change="trainingSchedule.addAdditionalParticipant(trainingSchedule.addPatricipant)"
+                                                multiple name="addPatricipant"
+                                                chosen-directive="trainingSchedule.ashasByPHC"
+                                                ng-model="trainingSchedule.addPatricipant"
+                                                ng-options="addPatricipant as addPatricipant.fullName for addPatricipant in trainingSchedule.ashasByPHC">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <div class="cst-table table-responsive" style="overflow: auto;"
+                        ng-if="trainingSchedule.addPatricipant">
+                        <table
+                            class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                            <colgroup>
+                                <col style="width:10px">
+                                <col style="width:40px">
+                                <col style="width:40px">
+                                <col style="width:10px">
+                            </colgroup>
+                            <thead class="cst-thead">
+                                <tr>
+                                    <th>#</th>
+                                    <th><em class="ion-location"></em> {{trainingSchedule.locationLabel}}</th>
+                                    <th><em class="ion-person-stalker"></em> Participant Name</th>
+                                    <th class="text-center">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cst-tbody">
+                                <tr ng-repeat="training in trainingSchedule.additionalParticipantSelected">
+                                    <td class="text-center">{{$index + 1}}</td>
+                                    <td>{{training.phc}}</td>
+                                    <td>{{training.fullName}}</td>
+                                    <td class="text-center text-muted">
+                                        <em class="fa fa-times" aria-hidden="true"
+                                            ng-click="trainingSchedule.removeAdditionalParticipant(training)">
+                                        </em>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="float-right">
+                        <button class="btn btn-primary" ng-disabled="trainingSchedule.isDisable"
+                            ng-click="trainingSchedule.scheduleTraining(trainingSchedule.trainingScheduleForm)"><em
+                                class="fa fa-floppy-o"></em> Schedule</button>
+                        <button class="btn btn-secondary" ui-sref="techo.training.scheduled">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="totalAttendeesList" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="text">Total Candidates : {{trainingSchedule.trainingObj.noOfAttendees}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="cst-table table-responsive table-style" id="totalCandidatesList">
+                        <table aria-describedby="totalCandidatesList"
+                            class="table table-sm table-striped filter-table table-auto table-bordered header-fixed">
+                            <thead class="cst-thead">
+                                <tr>
+                                    <th id="#" class="white-space-unset">Sr.No</th>
+                                    <th id="name" class="white-space-unset">User Name</th>
+                                    <th id="mobile" class="white-space-unset">Mobile No</th>
+                                    <th id="userLocation" class="white-space-unset">User Location</th>
+                                    <th id="role" class="white-space-unset">Role</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cst-tbody">
+                                <tr ng-repeat="attendee in trainingSchedule.totalAttendeesList">
+                                    <td ng-bind="$index+1"></td>
+                                    <td ng-bind="attendee.name | emptylabel"></td>
+                                    <td ng-bind="attendee.mobileNumber | emptylabel"></td>
+                                    <td ng-bind="attendee.location | emptylabel"></td>
+                                    <td ng-bind="attendee.roleName | emptylabel"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" ng-click="trainingSchedule.closeModal()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

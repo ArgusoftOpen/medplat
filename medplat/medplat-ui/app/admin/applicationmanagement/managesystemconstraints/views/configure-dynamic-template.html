@@ -1,0 +1,171 @@
+<style>
+    .align-center-h {
+        text-align: center;
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Configure Dynamic Template</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form name="ctrl.manageWebDynamicTemplate" id="manageWebDynamicTemplate" novalidate>
+                        <div class="row" style="margin-bottom: 1rem;">
+                            <div class="col-6" style="margin-bottom: 1rem;">
+                                <div class="form-group">
+                                    <validate for="formName" required-msg="Enter Form Name">
+                                        <label uib-tooltip="Form Name" for="formName" control-label>
+                                            Form Name
+                                        </label>
+                                        <input type="text" id="formName" name="formName" form-control
+                                            ng-model="ctrl.systemConstraintFormMasterDto.formName"
+                                            class="form-control cst-form-control" placeholder="Enter Form Name"
+                                            ng-required="true" maxlength="255">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for="formCode" required-msg="Enter Form Code">
+                                        <label uib-tooltip="Form Code" for="formCode" control-label>
+                                            Form Code
+                                        </label>
+                                        <input type="text" id="formCode" form-control
+                                            ng-model="ctrl.systemConstraintFormMasterDto.formCode"
+                                            class="form-control cst-form-control" name="formCode"
+                                            placeholder="Enter Form Code" ng-required="!ctrl.editMode"
+                                            ng-disabled="ctrl.editMode" maxlength="50">
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <validate for="featureMenu" required-msg="Select Feature Menu">
+                                        <label uib-tooltip="Feature Menu" for="featureMenu" control-label>
+                                            Feature Menu
+                                        </label>
+                                        <select form-control class="form-control cst-form-control" name="featureMenu"
+                                            id="featureMenu" ng-model="ctrl.systemConstraintFormMasterDto.menuConfigId"
+                                            chosen-directive="ctrl.menuItems"
+                                            ng-options="menuItem.id as menuItem.menuDisplayName for menuItem in ctrl.menuItems"
+                                            ng-required="true">
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                                <div class="form-group">
+                                    <validate for='state' required-msg="Select State">
+                                        <label for='state' control-label>
+                                            State
+                                        </label>
+                                        <select class="form-control cst-form-control" form-control name="state"
+                                            id="state" ng-model="ctrl.systemConstraintFormMasterDto.webState"
+                                            ng-required="true">
+                                            <option value="">--Select--</option>
+                                            <option value="ACTIVE">Active</option>
+                                            <option value="INACTIVE">Inactive</option>
+                                        </select>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="margin-bottom: 3rem;">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary" ng-click="ctrl.save()">
+                                    <em class="fa fa-floppy-o"></em> Save</button>
+                                <button class="btn btn-secondary" ng-click="ctrl.goBack()">Back</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="cst-table table-responsive">
+                                    <table aria-describedby="table"
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                        <colgroup>
+                                            <col style="width:20%;">
+                                            <col style="width:50%;">
+                                            <col style="width:30%;">
+                                        </colgroup>
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th colspan="3" class="align-center-h">Web Components</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Sr.<br>No.</th>
+                                                <th>Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="component in ['Card', 'Row', 'Column']">
+                                                <td ng-bind="$index + 1"></td>
+                                                <td ng-bind="component | emptylabel"></td>
+                                                <td>
+                                                    <em class="cursor-pointer fa fa-plus-circle fa-2x text-primary"
+                                                        ng-if="['Card', 'Row'].includes(component)"
+                                                        title="Add Child Web Component"
+                                                        ng-click="ctrl.addWebTemplateComponent(component)">
+                                                    </em>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <hr>
+                                <div class="cst-table table-responsive">
+                                    <table aria-describedby="table"
+                                        class="table table-sm table-striped filter-table table-bordered header-fixed">
+                                        <colgroup>
+                                            <col style="width:20%;">
+                                            <col style="width:80%;">
+                                        </colgroup>
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th colspan="2" class="align-center-h">Fields</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Sr.<br>No.</th>
+                                                <th>Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="field in ctrl.formFieldList">
+                                                <td ng-bind="$index + 1"></td>
+                                                <td ng-bind="field.name + ' | ' + field.fieldType"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-10" style="border-left: 1px solid #9a9898;">
+                                <div ng-repeat="(elementIndex, element) in ctrl.webTemplateConfig">
+                                    <configure-element-template-directive sibling-elements="ctrl.webTemplateConfig"
+                                        element-index="elementIndex" element="element"
+                                        form-field-list="ctrl.formFieldList"
+                                        on-child-web-component-changed="ctrl.onChildWebComponentChanged(childWebComponent, elements, element, parentComponentType)">
+                                    </configure-element-template-directive>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-5">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary" ng-click="ctrl.save()">
+                                    <em class="fa fa-floppy-o"></em> Save</button>
+                                <button class="btn btn-secondary" ng-click="ctrl.goBack()">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

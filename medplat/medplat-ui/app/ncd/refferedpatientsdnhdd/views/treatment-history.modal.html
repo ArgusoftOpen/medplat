@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <h4 class="text" style="line-height: 1.5;">
+        {{disease}} Disease Treatment History
+    </h4>
+</div>
+<div class="modal-body" style="overflow: inherit; overflow-y: auto;">
+    <div class="col-12">
+        <table aria-describedby="treatment history" ng-if="treatmentHistory.length"
+            class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed mt-4"
+            style="table-layout: auto;">
+            <thead class="cst-thead">
+                <tr>
+                    <th id="srNo" style="width: 35px; white-space: pre-line;">#</th>
+                    <th id="diagnosedOn">Diagnosed On</th>
+                    <th id="diagnosedBy">Diagnosed By</th>
+                    <th id="status">Status</th>
+                    <th id="medicines">Medicines</th>
+                </tr>
+            </thead>
+            <tbody class="cst-tbody">
+                <tr ng-repeat="treatment in treatmentHistory">
+                    <td>{{$index + 1}}</td>
+                    <td>{{treatment.diagnosedOn || '-'}}</td>
+                    <td>{{treatment.diagnosedBy || '-'}}</td>
+                    <td>{{treatment.status || '-'}}</td>
+                    <td>{{['HT', 'D'].includes(diseaseCode) ? (treatment.medicines || '-') : 'N/A'}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-danger" ng-if="treatmentHistory.length === 0">
+            No treatment history found for the disease!
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Ok</button>
+    <button class="btn btn-secondary" ng-click="cancel()">Cancel</button>
+</div>

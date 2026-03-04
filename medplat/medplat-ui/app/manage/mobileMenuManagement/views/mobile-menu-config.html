@@ -1,0 +1,203 @@
+<style>
+    .mobile-config-search input[type=text]>.dropdown-menu {
+        display: block;
+    }
+
+    #menu-search-data.user-data {
+        padding: 5px !important;
+        overflow: auto;
+        max-height: 200px;
+        display: block;
+        left: 0;
+    }
+
+    #menu-search-data.dropdown-menu a:hover {
+        color: #2b7dce !important;
+    }
+
+    .mobile-config-search input[type=text] {
+        width: 100%;
+    }
+
+    .smartphone {
+        position: relative;
+        max-width: 290px;
+        min-height: 400px;
+        margin: auto;
+        border: 16px black solid;
+        border-top-width: 60px;
+        border-bottom-width: 60px;
+        border-radius: 36px;
+    }
+
+    /* The horizontal line on the top of the device */
+    .smartphone:before {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 5px;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 10px;
+    }
+
+    /* The circle on the bottom of the device */
+    .smartphone:after {
+        content: '';
+        display: block;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        left: 50%;
+        bottom: -65px;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 50%;
+    }
+
+    /* The screen (or content) of the device */
+    .smartphone .content {
+        max-width: 355px;
+        height: 400px;
+        background: white;
+        overflow: auto;
+    }
+
+    .sorting-list ul[dnd-list] {
+        min-height: 42px;
+        padding-left: 0px;
+    }
+
+    .sorting-list ul[dnd-list] .dndDraggingSource {
+        display: none;
+    }
+
+    .sorting-list ul[dnd-list] .dndPlaceholder {
+        background-color: #ddd;
+        display: block;
+        min-height: 42px;
+    }
+
+    .sorting-list ul[dnd-list] li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+        display: block;
+        padding: 10px 15px;
+        margin-bottom: -1px;
+    }
+
+    .sorting-list:hover {
+        cursor: grabbing;
+    }
+
+    .sorting-list ul[dnd-list] li.selected {
+        background-color: #dff0d8;
+        color: #3c763d;
+    }
+</style>
+<div class="container-fluid menu-view mobile-config">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="col-12 mb-15 text-right">
+                <em class="ion-arrow-left-c ng-scope" style="cursor: pointer; font-size: 20px;float: left" onclick="history.back()"></em>
+                <button class="btn btn-primary " ng-click="ctrl.saveMenuConfiguration()">Save</button>
+            </div>
+            <div class="col-12">
+                <div class="row mb-15 ">
+                    <div class="row col-12">
+                        <div class="col-6">
+                            <div class="inline-form col-12" ng-form="ctrl.menuConfigForm">
+                                <div class="row bottom-spacer-10">
+                                    <div class="form-group col-12 p-0">
+                                        <validate for='name' required-msg="Enter Menu Name"  pattern-msg="Alphanumeric are only allowed">
+                                            <label for="name" control-label> Menu Name</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                placeholder="Enter Menu Name" name="name" id="name"
+                                                ng-model="ctrl.menu.name" ng-pattern="/(^[a-zA-Z0-9\s]+$)/" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group col-12 p-0">
+                                        <validate for='designation' required-msg="Enter Role Name">
+                                            <label for="designation" control-label>Role</label>
+                                            <select id="designation" name="designation"
+                                                class="form-control cst-form-control" chosen-directive="ctrl.allDesignation"
+                                                data-placeholder='Select Role' multiple ng-model="ctrl.menu.designationIds"
+                                                ng-options="option.id as option.name for option in ctrl.allDesignation | orderBy:'name'"
+                                                required form-control>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group col-12 p-0 text-right">
+                                        <button class="btn btn-primary col-4"
+                                            ng-click="ctrl.saveFeatureConfiguration()">Add Feature</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mobile-config-search user dropdown col-12">
+                                <div id="demo-2" class="row search-icon">
+                                    <input type="text" placeholder="Search Feature" ng-model="ctrl.search"
+                                        ng-focus="ctrl.showMenus = true;ctrl.search='';"
+                                        ng-keydown="ctrl.showMenus = true;">
+                                </div>
+                                <div id="menu-search-data" class="row user-data dropdown-menu dropdown-menu-right"
+                                    ng-if="ctrl.allFeatures.length > 0 && ctrl.showMenus" ng-mouseleave="ctrl.showMenus = false;">
+                                    <ul>
+                                        <li
+                                            ng-repeat="feature in ctrl.allFeatures | filter : {feature_name : ctrl.search} :false | orderBy : name ">
+                                            <a href="javascript:void(0)" ng-click="ctrl.addFeature(feature)">
+                                                {{feature.feature_name}}
+                                                <em class="fa fa-edit pull-right"
+                                                    ng-click="ctrl.saveFeatureConfiguration(feature)">
+                                                </em>
+                                            </a>
+                                        </li>
+                                        <li
+                                            ng-if="ctrl.search && (ctrl.allFeatures | filter : {feature_name : ctrl.search} :false).length === 0 ">
+                                            No data found
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 p-0 sorting-list pt-5 cst-table">
+                                <ul dnd-list="ctrl.list">
+                                    <li ng-repeat="item in ctrl.list | filter:{'state': 'ACTIVE'}:true"
+                                        dnd-draggable="item" dnd-moved="ctrl.list.splice($index, 1)"
+                                        dnd-effect-allowed="move" dnd-selected="ctrl.selected = item"
+                                        ng-class="{'selected': ctrl.selected === item}" class="icon">
+                                        <span class="badge badge-primary mr-3">{{$index+1}}</span>
+                                        {{item.feature_name}}
+                                        <em style="cursor: pointer;" class="fa fa-trash pull-right"
+                                            ng-click="ctrl.deleteFeature($index, item)"></em>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="smartphone">
+                                <div class="content ">
+                                    <div class="row m-0">
+                                        <div class="col-md-4"
+                                            ng-repeat="item in ctrl.list | filter:{'state': 'ACTIVE'}:true">
+                                            <div class="card mt-3 text-center"
+                                                style="min-height: 60px;min-width: 33%;justify-content: flex-end;">
+                                                <h2 class="card-title" style="font-size: 10px;">{{item.feature_name}}
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

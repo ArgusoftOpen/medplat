@@ -1,0 +1,176 @@
+<div class="ai-list-page" ng-controller="DashboardListController">
+
+  <!-- Header -->
+  <div class="med-dash-header">
+    <div>
+      <p class="dash-title"><i class="fa fa-th-large"></i> My Dashboards</p>
+      <p class="dash-subtitle">MEDPlat Analytics Platform</p>
+    </div>
+    <div class="header-actions">
+      <span class="role-badge">{{ currentRole }}</span>
+      <button class="btn-header btn-header-accent" ng-click="openBuilder(null)">
+        <i class="fa fa-plus"></i> New Dashboard
+      </button>
+    </div>
+  </div>
+
+  <!-- Search + Filter row -->
+  <div style="padding:16px 24px; background:#fff; border-bottom:1px solid #DEE2E6; display:flex; gap:12px; align-items:center;">
+    <div style="flex:1; position:relative;">
+      <i class="fa fa-search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#999;"></i>
+      <input type="text" ng-model="searchQuery" placeholder="Search dashboards..."
+             style="width:100%; border:1px solid #DEE2E6; border-radius:8px; padding:8px 12px 8px 36px; font-size:13px;">
+    </div>
+    <select ng-model="typeFilter" style="border:1px solid #DEE2E6; border-radius:8px; padding:8px 12px; font-size:13px;">
+      <option value="">All Types</option>
+      <option value="EXECUTIVE">Executive</option>
+      <option value="OPERATIONAL">Operational</option>
+      <option value="CLINICAL">Clinical</option>
+      <option value="ANALYTICS">Analytics</option>
+      <option value="CUSTOM">Custom</option>
+    </select>
+    <div style="font-size:13px; color:#6C757D;">{{ filteredDashboards().length }} dashboards</div>
+  </div>
+
+  <!-- Recommended / Recent -->
+  <div ng-if="recommendedDashboards.length > 0" style="padding:20px 24px 8px;">
+    <h5 style="font-size:13px; font-weight:700; color:#6C757D; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">
+      <i class="fa fa-magic" style="color:#7986CB;"></i> Recommended for You
+    </h5>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <div ng-repeat="dash in recommendedDashboards"
+           class="template-card"
+           ng-click="openDashboard(dash.id)"
+           style="width:auto; padding:12px 20px; display:flex; align-items:center; gap:10px; text-align:left;">
+        <i class="fa fa-star" style="color:#F57F17; font-size:18px;"></i>
+        <div>
+          <div style="font-size:13px; font-weight:600; color:#212529;">{{ dash.dashboardName }}</div>
+          <div style="font-size:11px; color:#6C757D;">{{ dash.reason }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page loading -->
+  <div class="page-loading" ng-if="loading">
+    <div class="spinner-ring"></div>
+    <p>Loading dashboards…</p>
+  </div>
+
+  <!-- Dashboard cards grid -->
+  <div class="dash-list-header" ng-if="!loading">
+    <h3 style="font-size:16px; font-weight:700;">All Dashboards</h3>
+    <div style="display:flex; gap:8px;">
+      <button ng-class="viewMode==='grid' ? 'btn-dash-action primary' : 'btn-dash-action'"
+              ng-click="viewMode='grid'" style="padding:6px 12px; border-radius:6px;">
+        <i class="fa fa-th"></i>
+      </button>
+      <button ng-class="viewMode==='list' ? 'btn-dash-action primary' : 'btn-dash-action'"
+              ng-click="viewMode='list'" style="padding:6px 12px; border-radius:6px;">
+        <i class="fa fa-list"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Grid view -->
+  <div class="dash-cards-grid" ng-if="!loading && viewMode==='grid'">
+    <div class="dash-card" ng-repeat="dash in filteredDashboards()"
+         ng-click="openDashboard(dash.id)">
+      <div class="dash-card-thumb" ng-class="'dash-card-thumb ' + dash.dashboardType.toLowerCase()">
+        <i class="fa" ng-class="getDashTypeIcon(dash.dashboardType)"></i>
+      </div>
+      <div class="dash-card-body">
+        <div class="dash-card-title">{{ dash.dashboardName }}</div>
+        <div class="dash-card-desc">{{ dash.description || 'No description' }}</div>
+        <div class="dash-card-meta">
+          <span><i class="fa fa-th-large"></i> {{ dash.widgetCount || 0 }} widgets</span>
+          <span><i class="fa fa-clock-o"></i> {{ dash.modifiedDate | date:'MMM d' }}</span>
+          <span class="dash-card-tag" ng-if="dash.aiEnabled"><i class="fa fa-magic"></i> AI</span>
+          <span class="dash-card-tag" ng-if="dash.nlpEnabled"><i class="fa fa-microphone"></i> NLP</span>
+        </div>
+      </div>
+      <div class="dash-card-actions" ng-click="$event.stopPropagation()">
+        <button class="btn-dash-action primary" ng-click="openDashboard(dash.id)">
+          <i class="fa fa-eye"></i> View
+        </button>
+        <button class="btn-dash-action" ng-click="openBuilder(dash.id)">
+          <i class="fa fa-edit"></i> Edit
+        </button>
+        <button class="btn-dash-action" ng-click="cloneDash(dash, $event)">
+          <i class="fa fa-copy"></i>
+        </button>
+        <button class="btn-dash-action" ng-click="deleteDash(dash, $event)"
+                style="color:#C62828; border-color:#FFCDD2;">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div ng-if="filteredDashboards().length === 0"
+         style="grid-column:1/-1; text-align:center; padding:60px 40px; color:#6C757D;">
+      <i class="fa fa-bar-chart" style="font-size:56px; opacity:0.2; display:block; margin-bottom:16px;"></i>
+      <h4 style="font-size:16px; color:#212529;">No dashboards found</h4>
+      <p style="font-size:14px;">Create your first dashboard to get started.</p>
+      <button class="btn-config-apply" style="width:auto; padding:10px 24px; margin-top:8px;" ng-click="openBuilder(null)">
+        <i class="fa fa-plus"></i> Create Dashboard
+      </button>
+    </div>
+  </div>
+
+  <!-- List view -->
+  <div ng-if="!loading && viewMode==='list'" style="padding:0 24px 32px;">
+    <table style="width:100%; border-collapse:collapse; background:#fff; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); overflow:hidden;">
+      <thead>
+        <tr style="background:#F0F2F5;">
+          <th style="padding:10px 16px; font-size:12px; font-weight:700; color:#6C757D; text-align:left; border-bottom:2px solid #DEE2E6;">Name</th>
+          <th style="padding:10px 16px; font-size:12px; font-weight:700; color:#6C757D; text-align:left; border-bottom:2px solid #DEE2E6;">Type</th>
+          <th style="padding:10px 16px; font-size:12px; font-weight:700; color:#6C757D; text-align:left; border-bottom:2px solid #DEE2E6;">Widgets</th>
+          <th style="padding:10px 16px; font-size:12px; font-weight:700; color:#6C757D; text-align:left; border-bottom:2px solid #DEE2E6;">Features</th>
+          <th style="padding:10px 16px; font-size:12px; font-weight:700; color:#6C757D; text-align:left; border-bottom:2px solid #DEE2E6;">Last Updated</th>
+          <th style="padding:10px 16px; font-size:12px; font-weight:700; color:#6C757D; text-align:left; border-bottom:2px solid #DEE2E6;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="dash in filteredDashboards()"
+            ng-click="openDashboard(dash.id)"
+            style="cursor:pointer; transition:background 0.15s;"
+            onmouseenter="this.style.background='#F5F9FF'" onmouseleave="this.style.background=''">
+          <td style="padding:10px 16px; font-size:13px; font-weight:600; color:#212529; border-bottom:1px solid #DEE2E6;">
+            <i class="fa" ng-class="getDashTypeIcon(dash.dashboardType)" style="color:#1565C0; margin-right:8px;"></i>
+            {{ dash.dashboardName }}
+          </td>
+          <td style="padding:10px 16px; font-size:12px; color:#6C757D; border-bottom:1px solid #DEE2E6;">{{ dash.dashboardType }}</td>
+          <td style="padding:10px 16px; font-size:13px; border-bottom:1px solid #DEE2E6;">{{ dash.widgetCount || 0 }}</td>
+          <td style="padding:10px 16px; border-bottom:1px solid #DEE2E6;">
+            <span class="dash-card-tag" ng-if="dash.aiEnabled">AI</span>
+            <span class="dash-card-tag" ng-if="dash.nlpEnabled">NLP</span>
+          </td>
+          <td style="padding:10px 16px; font-size:12px; color:#6C757D; border-bottom:1px solid #DEE2E6;">{{ dash.modifiedDate | date:'MMM d, y' }}</td>
+          <td style="padding:10px 16px; border-bottom:1px solid #DEE2E6;" ng-click="$event.stopPropagation()">
+            <div style="display:flex; gap:6px;">
+              <button class="btn-dash-action primary" ng-click="openDashboard(dash.id)" style="flex:none; padding:4px 10px; font-size:11px;">View</button>
+              <button class="btn-dash-action" ng-click="openBuilder(dash.id)" style="flex:none; padding:4px 10px; font-size:11px;">Edit</button>
+              <button class="btn-dash-action" ng-click="deleteDash(dash, $event)" style="flex:none; padding:4px 8px; font-size:11px; color:#C62828;">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Templates section -->
+  <div class="template-section">
+    <h5>Quick Start Templates</h5>
+    <div class="template-cards">
+      <div class="template-card" ng-repeat="tpl in templates" ng-click="createFromTemplate(tpl)">
+        <div class="tc-icon"><i class="fa" ng-class="tpl.icon"></i></div>
+        <div class="tc-label">{{ tpl.name }}</div>
+        <div style="font-size:11px; margin-top:4px; color:#9E9E9E;">{{ tpl.desc }}</div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,282 @@
+<div class="med-widget" ng-class="{'widget-editing': editMode}">
+
+  <!-- Widget Header -->
+  <div class="widget-header">
+    <div class="wh-left">
+      <span class="drag-handle" title="Drag to reorder">
+        <i class="fa fa-grip-vertical" style="font-size:11px; letter-spacing:-1px;">&#9776;</i>
+      </span>
+      <div class="wh-type-icon">
+        <i class="fa" ng-class="getWidgetIcon(widget.widgetType)"></i>
+      </div>
+      <div>
+        <div class="wh-title">{{ widget.title || widget.widgetName }}</div>
+        <div class="wh-subtitle">{{ widget.widgetType | lowercase | replace:'_':' ' }}</div>
+      </div>
+    </div>
+    <div class="wh-actions">
+      <!-- AI Insights toggle -->
+      <button class="btn-wh" title="AI Insights"
+              ng-if="insights && insights.length > 0"
+              ng-click="toggleInsights()"
+              ng-style="{'color': showInsights ? '#F57F17' : ''}">
+        <i class="fa fa-magic"></i>
+      </button>
+      <!-- Refresh -->
+      <button class="btn-wh" title="Refresh" ng-click="refreshWidget(widget)"
+              ng-class="{'fa-spin': widget.refreshing}">
+        <i class="fa fa-refresh" ng-class="{'fa-spin': widget.refreshing}"></i>
+      </button>
+      <!-- Fullscreen -->
+      <button class="btn-wh" title="Expand" ng-click="expandWidget(widget)">
+        <i class="fa fa-expand"></i>
+      </button>
+      <!-- Options -->
+      <div style="position:relative;">
+        <button class="btn-wh" title="Options" ng-click="showOptions = !showOptions">
+          <i class="fa fa-ellipsis-v"></i>
+        </button>
+        <div ng-if="showOptions"
+             style="position:absolute; right:0; top:32px; background:#fff; border:1px solid #DEE2E6;
+                    border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.12); z-index:50;
+                    width:160px; padding:6px 0;">
+          <div style="padding:8px 14px; font-size:12px; cursor:pointer; color:#212529;"
+               ng-click="downloadChart(widget); showOptions=false"
+               onmouseenter="this.style.background='#F5F5F5'" onmouseleave="this.style.background=''">
+            <i class="fa fa-download" style="width:16px;"></i> Download PNG
+          </div>
+          <div style="padding:8px 14px; font-size:12px; cursor:pointer; color:#212529;"
+               ng-click="exportWidgetData(widget); showOptions=false"
+               onmouseenter="this.style.background='#F5F5F5'" onmouseleave="this.style.background=''">
+            <i class="fa fa-file-excel-o" style="width:16px;"></i> Export CSV
+          </div>
+          <div style="height:1px; background:#DEE2E6; margin:4px 0;"></div>
+          <div style="padding:8px 14px; font-size:12px; cursor:pointer; color:#C62828;"
+               ng-click="removeWidget(widget); showOptions=false"
+               onmouseenter="this.style.background='#FFF5F5'" onmouseleave="this.style.background=''">
+            <i class="fa fa-trash" style="width:16px;"></i> Remove
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Widget Body -->
+  <div class="widget-body">
+
+    <!-- Loading skeleton -->
+    <div class="widget-skeleton" ng-if="widget.loading">
+      <div class="skeleton-bar" style="height:14px; width:40%;"></div>
+      <div class="skeleton-bar" style="height:120px; margin-top:10px;"></div>
+      <div style="display:flex; gap:8px; margin-top:8px;">
+        <div class="skeleton-bar" style="height:10px; flex:1;"></div>
+        <div class="skeleton-bar" style="height:10px; flex:1;"></div>
+        <div class="skeleton-bar" style="height:10px; flex:1;"></div>
+      </div>
+    </div>
+
+    <!-- Error state -->
+    <div ng-if="widget.error && !widget.loading"
+         style="text-align:center; padding:30px; color:#C62828;">
+      <i class="fa fa-exclamation-triangle" style="font-size:28px; opacity:0.5; display:block; margin-bottom:8px;"></i>
+      <div style="font-size:13px;">Failed to load widget data</div>
+      <button class="btn-insight" style="margin-top:10px;" ng-click="refreshWidget(widget)">
+        <i class="fa fa-refresh"></i> Retry
+      </button>
+    </div>
+
+    <!-- Actual content -->
+    <div ng-if="!widget.loading && !widget.error" ng-switch="widget.widgetType">
+
+      <!-- LINE CHART -->
+      <div ng-switch-when="LINE_CHART" class="widget-canvas">
+        <canvas class="chart chart-line"
+                chart-data="widget.chartData"
+                chart-labels="widget.chartLabels"
+                chart-series="widget.chartSeries"
+                chart-options="widget.chartOptions">
+        </canvas>
+      </div>
+
+      <!-- BAR CHART -->
+      <div ng-switch-when="BAR_CHART" class="widget-canvas">
+        <canvas class="chart chart-bar"
+                chart-data="widget.chartData"
+                chart-labels="widget.chartLabels"
+                chart-series="widget.chartSeries"
+                chart-options="widget.chartOptions">
+        </canvas>
+      </div>
+
+      <!-- PIE CHART -->
+      <div ng-switch-when="PIE_CHART" class="widget-canvas" style="max-height:240px;">
+        <canvas class="chart chart-pie"
+                chart-data="widget.chartData"
+                chart-labels="widget.chartLabels"
+                chart-options="widget.chartOptions">
+        </canvas>
+      </div>
+
+      <!-- DOUGHNUT CHART -->
+      <div ng-switch-when="DOUGHNUT_CHART" class="widget-canvas" style="max-height:240px;">
+        <canvas class="chart chart-doughnut"
+                chart-data="widget.chartData"
+                chart-labels="widget.chartLabels"
+                chart-options="widget.chartOptions">
+        </canvas>
+      </div>
+
+      <!-- KPI -->
+      <div ng-switch-when="KPI" class="kpi-widget-display">
+        <div class="kpi-big-val">
+          {{ widget.kpiValue | number:0 }}<span class="kpi-unit" ng-if="widget.kpiUnit">{{ widget.kpiUnit }}</span>
+        </div>
+        <div class="kpi-lbl">{{ widget.kpiLabel || widget.title }}</div>
+        <div class="kpi-trend-row" ng-class="widget.kpiChange >= 0 ? 'up' : 'down'">
+          <i class="fa" ng-class="widget.kpiChange >= 0 ? 'fa-arrow-up' : 'fa-arrow-down'"></i>
+          {{ (widget.kpiChange || 0) | number:1 }}% vs last period
+        </div>
+        <!-- Sparkline placeholder -->
+        <canvas class="kpi-sparkline chart chart-line"
+                ng-if="widget.sparklineData"
+                chart-data="widget.sparklineData"
+                chart-labels="widget.sparklineLabels"
+                chart-options="{legend:{display:false}, scales:{xAxes:[{display:false}],yAxes:[{display:false}]}, elements:{point:{radius:0}}, tooltips:{enabled:false}}">
+        </canvas>
+      </div>
+
+      <!-- TABLE -->
+      <div ng-switch-when="TABLE" style="overflow:auto; max-height:260px;">
+        <div class="table-widget">
+          <table>
+            <thead>
+              <tr>
+                <th ng-repeat="col in widget.columns"
+                    ng-click="sortTable(widget, col)"
+                    title="Sort by {{ col }}">
+                  {{ col }}
+                  <i class="fa table-sort-icon"
+                     ng-class="widget.sortCol===col ? (widget.sortAsc ? 'fa-sort-asc' : 'fa-sort-desc') : 'fa-sort'"></i>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="row in getSortedRows(widget) | limitTo: widget.pageSize || 10">
+                <td ng-repeat="col in widget.columns">{{ row[col] }}</td>
+              </tr>
+              <tr ng-if="!widget.tableData || widget.tableData.length === 0">
+                <td ng-attr-colspan="{{ widget.columns.length }}"
+                    style="text-align:center; color:#6C757D; padding:24px;">
+                  No data available
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div ng-if="widget.tableData && widget.tableData.length > (widget.pageSize || 10)"
+             style="padding:6px 12px; font-size:12px; color:#6C757D; border-top:1px solid #DEE2E6;">
+          Showing {{ widget.pageSize || 10 }} of {{ widget.tableData.length }} rows
+        </div>
+      </div>
+
+      <!-- GAUGE -->
+      <div ng-switch-when="GAUGE" class="gauge-container">
+        <svg class="gauge-svg" viewBox="0 0 200 120" width="200" height="120">
+          <!-- Background arc -->
+          <path class="gauge-arc-bg"
+                d="M 20 100 A 80 80 0 0 1 180 100"
+                stroke-width="18" fill="none" stroke="#E0E0E0" stroke-linecap="round"/>
+          <!-- Value arc -->
+          <path class="gauge-arc-val"
+                ng-class="getGaugeColor(widget.gaugeValue)"
+                d="M 20 100 A 80 80 0 0 1 180 100"
+                stroke-width="18" fill="none" stroke-linecap="round"
+                ng-attr-stroke-dasharray="{{ getGaugeDash(widget.gaugeValue) }} 251.2"
+                ng-attr-stroke="{{ getGaugeStroke(widget.gaugeValue) }}"/>
+          <!-- Value text -->
+          <text x="100" y="90" text-anchor="middle" class="gauge-value-text">{{ widget.gaugeValue || 0 }}%</text>
+          <text x="100" y="108" text-anchor="middle" class="gauge-label-text">{{ widget.gaugeLabel || 'Progress' }}</text>
+          <!-- Min/Max labels -->
+          <text x="18" y="118" text-anchor="middle" style="font-size:10px; fill:#9E9E9E;">0</text>
+          <text x="182" y="118" text-anchor="middle" style="font-size:10px; fill:#9E9E9E;">100</text>
+        </svg>
+        <div style="text-align:center; margin-top:6px;">
+          <div style="font-size:13px; color:#6C757D;">{{ widget.gaugeLabel }}</div>
+          <div style="display:flex; justify-content:center; gap:16px; margin-top:8px; font-size:11px;">
+            <span style="color:#2E7D32;"><i class="fa fa-circle"></i> Good &lt;70%</span>
+            <span style="color:#F57F17;"><i class="fa fa-circle"></i> Fair 70-85%</span>
+            <span style="color:#C62828;"><i class="fa fa-circle"></i> High &gt;85%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HEATMAP -->
+      <div ng-switch-when="HEATMAP" style="padding:4px;">
+        <div style="font-size:11px; color:#6C757D; margin-bottom:8px; display:flex; justify-content:space-between; padding:0 2px;">
+          <span ng-repeat="label in widget.heatmapXLabels" style="flex:1; text-align:center; overflow:hidden;">{{ label }}</span>
+        </div>
+        <div ng-repeat="row in widget.heatmapData" style="display:flex; gap:3px; margin-bottom:3px; align-items:center;">
+          <span style="font-size:11px; color:#6C757D; width:60px; flex-shrink:0;">{{ widget.heatmapYLabels[$index] }}</span>
+          <div ng-repeat="cell in row" class="heatmap-cell"
+               style="flex:1;"
+               ng-style="{'background': getHeatmapColor(cell, widget.heatmapMax), 'min-height':'22px'}"
+               title="{{ cell }}"></div>
+        </div>
+        <!-- Legend -->
+        <div style="display:flex; align-items:center; gap:6px; margin-top:10px; font-size:11px; color:#6C757D;">
+          <span>Low</span>
+          <div style="flex:1; height:8px; border-radius:4px; background:linear-gradient(90deg, #E3F2FD, #1565C0);"></div>
+          <span>High</span>
+        </div>
+      </div>
+
+      <!-- MAP placeholder -->
+      <div ng-switch-when="MAP"
+           style="text-align:center; padding:40px; color:#6C757D; background:#F5F7FA; border-radius:6px;">
+        <i class="fa fa-map-o" style="font-size:40px; opacity:0.4; display:block; margin-bottom:10px;"></i>
+        <div style="font-size:13px;">Map visualization</div>
+        <div style="font-size:11px; margin-top:4px;">Requires location data source</div>
+      </div>
+
+      <!-- Default fallback -->
+      <div ng-switch-default
+           style="text-align:center; padding:40px; color:#6C757D;">
+        <i class="fa fa-bar-chart" style="font-size:36px; opacity:0.3; display:block; margin-bottom:10px;"></i>
+        <div style="font-size:13px;">{{ widget.widgetType }}</div>
+        <div style="font-size:11px;">Configure this widget to show data</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AI Insights strip -->
+  <div class="widget-insights-strip" ng-if="showInsights && insights && insights.length > 0">
+    <span ng-repeat="insight in insights | limitTo: 3"
+          class="insight-chip"
+          ng-class="getInsightClass(insight.insightType, insight.severity)"
+          title="{{ insight.description }}">
+      <i class="fa" ng-class="getInsightIcon(insight.insightType)"></i>
+      {{ insight.title | limitTo: 30 }}{{ insight.title.length > 30 ? '…' : '' }}
+    </span>
+    <span ng-if="insights.length > 3" style="font-size:11px; color:#6C757D; margin-left:4px;">
+      +{{ insights.length - 3 }} more
+    </span>
+  </div>
+
+  <!-- Widget Footer -->
+  <div class="widget-footer">
+    <span class="wf-time">
+      <i class="fa fa-clock-o"></i>
+      Updated {{ widget.lastUpdated | date:'HH:mm' || 'just now' }}
+    </span>
+    <div style="display:flex; gap:6px; align-items:center;">
+      <span class="ai-badge info" ng-if="widget.aiInsights && insights && insights.length > 0">
+        <i class="fa fa-magic"></i> {{ insights.length }} insights
+      </span>
+      <span class="ai-badge critical" ng-if="hasCriticalInsight(insights)">
+        <i class="fa fa-exclamation-triangle"></i> Critical
+      </span>
+    </div>
+  </div>
+
+</div>

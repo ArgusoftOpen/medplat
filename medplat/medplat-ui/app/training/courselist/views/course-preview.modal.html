@@ -1,0 +1,319 @@
+<style>
+    .accicon:not(.collapsed) .rotate-icon {
+        transform: rotate(180deg);
+    }
+
+    .customScrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .customScrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .modal-xl {
+        width: 80%;
+        margin-top: 10px;
+    }
+
+    .cst-modal .modal-body {
+        max-height: none;
+    }
+
+    .activetab {
+        color: blue;
+        /* Colors the text in black */
+        border-bottom: 3px solid blue;
+        /* Underlines the text with a bold dark border */
+    }
+
+    .arrow {
+        border: solid black;
+        border-width: 0 1px 1px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+
+    .up {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+
+    .row {
+        margin-right: 0;
+    }
+
+    .mobile-config-search input[type=text]>.dropdown-menu {
+        display: block;
+    }
+
+    #menu-search-data.user-data {
+        padding: 5px !important;
+        overflow: auto;
+        max-height: 200px;
+        display: block;
+        left: 0;
+    }
+
+    #menu-search-data.dropdown-menu a:hover {
+        color: #2b7dce !important;
+    }
+
+    .mobile-config-search input[type=text] {
+        width: 100%;
+    }
+
+    .smartphone {
+        position: relative;
+        max-width: 290px;
+        min-height: 400px;
+        margin: auto;
+        border: 16px black solid;
+        border-top-width: 60px;
+        border-bottom-width: 60px;
+        border-radius: 36px;
+    }
+
+    /* The horizontal line on the top of the device */
+    .smartphone:before {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 5px;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 10px;
+    }
+
+    /* The circle on the bottom of the device */
+    .smartphone:after {
+        content: '';
+        display: block;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        left: 50%;
+        bottom: -65px;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 50%;
+    }
+
+    /* The screen (or content) of the device */
+    .smartphone .content {
+        max-width: 355px;
+        height: 400px;
+        background: white;
+        overflow: auto;
+    }
+
+    .sorting-list ul[dnd-list] {
+        min-height: 42px;
+        padding-left: 0px;
+    }
+
+    .sorting-list ul[dnd-list] .dndDraggingSource {
+        display: none;
+    }
+
+    .sorting-list ul[dnd-list] .dndPlaceholder {
+        background-color: #ddd;
+        display: block;
+        min-height: 42px;
+    }
+
+    .sorting-list ul[dnd-list] li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+        display: block;
+        padding: 10px 15px;
+        margin-bottom: -1px;
+    }
+
+    .sorting-list:hover {
+        cursor: grabbing;
+    }
+
+    .sorting-list ul[dnd-list] li.selected {
+        background-color: #dff0d8;
+        color: #3c763d;
+    }
+</style>
+<div class="modal-header">
+    <h4 class="text">Course Preview</h4>
+    <button type="button" class="close" ng-click="coursePreviewModalCtrl.ok()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body" style="text-align: center;">
+    <div class="row">
+        <div class="col-5" style="padding-right: 0;">
+            <div class="smartphone">
+                <div class="content customScrollbar">
+                    <div class="row">
+                        <div class="col-12" style="padding: 0;">
+                            <img style="max-width: 100%; height: 150px;" ng-src="img/lms_my_courses.jpg"
+                                alt="{{coursePreviewModalCtrl.title}}" />
+                        </div>
+                    </div>
+                    <h3 style="
+                        text-align: left;
+                        font-size: 25px;
+                        position: absolute;
+                        top: 100px;
+                        color: white;
+                        left: 20px;
+                        font-weight: 900;
+                        -webkit-text-stroke-width: 0.5px;
+                        -webkit-text-stroke-color: black;
+                    ">My Courses</h3>
+                    <div class="row" style="margin-bottom: 10px; height: 30px;">
+                        <div class="col-6" style="cursor: pointer; padding: 0;"
+                            ng-click="coursePreviewModalCtrl.selectedTab1 = 'Pending'"
+                            ng-class="{'activetab' : coursePreviewModalCtrl.selectedTab1 == 'Pending'}">
+                            <i class="fa fa-history"></i> Pending
+                        </div>
+                        <div class="col-6" style="cursor: pointer; padding: 0;"
+                            ng-click="coursePreviewModalCtrl.selectedTab1 = 'Completed'"
+                            ng-class="{'activetab' : coursePreviewModalCtrl.selectedTab1 == 'Completed'}">
+                            <i class="fa fa-check-circle"></i> Completed
+                        </div>
+                    </div>
+
+                    <div class="row" ng-if="coursePreviewModalCtrl.selectedTab1==='Pending'"
+                        style="height : 100px;border: 1px solid darkblue;margin-left: 5px;margin-right: 5px; border-radius: 5px;">
+                        <div class="col-4" style="padding: 0;">
+                            <img style="max-width: 100%; height : -webkit-fill-available"
+                                ng-src="{{coursePreviewModalCtrl.attachmentImage ? coursePreviewModalCtrl.attachmentImage : 'img/lms_my_courses.jpg'}}"
+                                alt="{{coursePreviewModalCtrl.title}}" />
+                        </div>
+                        <div class="col-8" style="text-align: left;">
+                            <span style="color: blue;">{{coursePreviewModalCtrl.courseName}}</span>
+                            <br>
+                            <span
+                                style="font-size: 11px; color: gray; position: absolute; height: 50px;overflow: hidden;">{{coursePreviewModalCtrl.courseDesc}}</span>
+                            <span style="font-size: 11px; color: gray; position: absolute; bottom: 0;">0%</span>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="coursePreviewModalCtrl.selectedTab1==='Completed'">
+                        <div class="col-12" style="padding-left: 20px; text-align: justify;">
+                            <span style="color: blue; font-weight: bold; font-size: 12px;">No course completed
+                                yet</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <h1 style="color: blue; margin-top:300px;">----></h1>
+        </div>
+        <div class="col-5" style="padding-left: 0;">
+            <div class="smartphone">
+                <div class="content customScrollbar">
+                    <div class="row">
+                        <div class="col-12" style="padding: 0; background-color: lightgray;">
+                            <img ng-if="coursePreviewModalCtrl.mediaType === 'initial'"
+                                style="max-width: 100%; height: 150px;"
+                                ng-src="{{coursePreviewModalCtrl.attachmentImage ? coursePreviewModalCtrl.attachmentImage : 'img/lms_my_courses.jpg'}}"
+                                alt="{{coursePreviewModalCtrl.title}}" />
+                            <img ng-if="coursePreviewModalCtrl.mediaType === 'image'"
+                                style="max-width: 100%; height: 150px;"
+                                ng-src="{{coursePreviewModalCtrl.overviewImage ? coursePreviewModalCtrl.overviewImage : 'img/image.jpg'}}"
+                                alt="{{coursePreviewModalCtrl.title}}" />
+                            <video controls ng-if="coursePreviewModalCtrl.mediaType === 'video'"
+                                style="max-width: 100%; height: 150px;"
+                                ng-src="{{coursePreviewModalCtrl.overviewImage ? coursePreviewModalCtrl.overviewImage : 'img/media.png'}}"
+                                alt="{{coursePreviewModalCtrl.title}}"></video>
+                            <audio controls ng-if="coursePreviewModalCtrl.mediaType === 'audio'"
+                                style="max-width: 100%; height: 150px; background-image: 'img/lms_my_courses.jpg';"
+                                ng-src="{{coursePreviewModalCtrl.overviewImage ? coursePreviewModalCtrl.overviewImage : 'img/audio.png'}}"
+                                alt="{{coursePreviewModalCtrl.title}}"></audio>
+                            <embed ng-if="coursePreviewModalCtrl.mediaType === 'pdf'"
+                                ng-src="{{coursePreviewModalCtrl.overviewImage ? coursePreviewModalCtrl.overviewImage : 'img/pdf.png'}}"
+                                type="application/pdf" style="max-width: 100%; height: 150px;">
+                            </embed>
+
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 10px; height: 30px;">
+                        <div class="col-4" style="cursor: pointer; padding: 0;"
+                            ng-click="coursePreviewModalCtrl.selectedTab = 'content'"
+                            ng-class="{'activetab' : coursePreviewModalCtrl.selectedTab == 'content'}">
+                            <i class="fa fa-book"></i> Content
+                        </div>
+                        <div class="col-4" style="cursor: pointer; padding: 0;"
+                            ng-click="coursePreviewModalCtrl.selectedTab = 'overview'"
+                            ng-class="{'activetab' : coursePreviewModalCtrl.selectedTab == 'overview'}">
+                            <i class="fa fa-info-circle"></i> Overview
+                        </div>
+                        <div class="col-4" style="cursor: pointer; padding: 0;"
+                            ng-click="coursePreviewModalCtrl.selectedTab = 'bookmarks'"
+                            ng-class="{'activetab' : coursePreviewModalCtrl.selectedTab == 'bookmarks'}">
+                            <i class="fa fa-bookmark"></i> Bookmarks
+                        </div>
+                    </div>
+
+                    <div class="row"
+                        ng-if="coursePreviewModalCtrl.topics.length > 0 && coursePreviewModalCtrl.selectedTab==='content'">
+                        <div class="col-12" style="padding: 0;" id="sectionsAccordion">
+                            <div ng-repeat="(sectionIndex ,topic) in coursePreviewModalCtrl.topics">
+                                <div class="accicon collapsed" style="text-align: left; margin-left: 20px;font-size: 13px; cursor: pointer;"
+                                    data-toggle="collapse" data-target="#collapseTabSec{{sectionIndex}}"
+                                    aria-expanded="false" aria-controls="collapseTabSec{{sectionIndex}}"
+                                    id="headingSec{{sectionIndex}}">
+                                    <span>{{sectionIndex+1}}. {{topic.topicName}}</span>
+                                    <span class=""><i class="fa fa-angle-down rotate-icon" style="margin-right: 5px;float: right; margin-top: 5px;"></i></span>
+                                </div>
+                                <div id="collapseTabSec{{sectionIndex}}" class="collapse"
+                                    aria-labelledby="headingSec{{sectionIndex}}" data-parent="#sectionsAccordion">
+                                    <ul style="padding: 10px; text-align: left;margin-left: 40px;font-size: 13px;">
+                                        <li ng-repeat="item in topic.mediaDataList">
+                                            <a style="cursor: pointer;"
+                                                ng-click="coursePreviewModalCtrl.setImageOverview(item)">{{item.title}}</a>
+                                            <br>
+                                            <span style="font-size: 10px; padding: 0; margin: 0; color: gray;">
+                                                <i class="fa fa-image" ng-if="item.mediaType === 'IMAGE'"></i>
+                                                <i class="fa fa-video-camera" ng-if="item.mediaType === 'VIDEO'"></i>
+                                                <i class="fa fa-file-pdf-o" ng-if="item.mediaType === 'PDF'"></i>
+                                                <i class="fa fa-volume-up" ng-if="item.mediaType === 'AUDIO'"></i>
+                                                {{item.mediaType}}
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" ng-if="coursePreviewModalCtrl.selectedTab==='overview'">
+                        <div class="col-12" style="padding-left: 20px; text-align: justify;">
+                            <span style="color: blue; font-weight: bold; font-size: 12px;"
+                                ng-if="coursePreviewModalCtrl.mediaType === 'initial'">COURSE -
+                                {{coursePreviewModalCtrl.overviewName}}</span>
+                            <span style="color: blue; font-weight: bold; font-size: 12px;"
+                                ng-if="coursePreviewModalCtrl.mediaType !== 'initial'">LESSON -
+                                {{coursePreviewModalCtrl.overviewName}}</span>
+                            <br>
+                            <p style="font-size: 11px; color: darkslategray;">{{coursePreviewModalCtrl.overviewDesc}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="coursePreviewModalCtrl.selectedTab==='bookmarks'">
+                        <div class="col-12" style="padding-left: 20px; text-align: justify;">
+                            <span style="color: blue; font-weight: bold; font-size: 12px;">No bookmarks available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="coursePreviewModalCtrl.ok()">OK</button>
+</div>

@@ -1,0 +1,72 @@
+<div class="modal-header">
+    <h4 class="text">{{title}}</h4>
+</div>
+<div class="modal-body" style="overflow: auto;">
+    <form role="form" aria-label="listValueForm" name="listValueForm" id="listValueForm" novalidate>
+        <div class="container-fluid">
+            <div class="row mb-15">
+                <div class="col-12">
+                    <div class="float-right">
+                        <div class="btn btn-primary" ng-click="addNew()">Add New</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="cst-table table-responsive">
+                        <table aria-describedby="table"
+                            class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed">
+                            <thead class="cst-thead">
+                                <tr>
+                                    <th style="width: 10%;" id="srno">#</th>
+                                    <th id="value">Value</th>
+                                    <th style="width: 20%;" id="status">Status</th>
+                                    <th style="width: 20%;" id="actions">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cst-tbody">
+                                <tr ng-repeat="listValue in listValues">
+                                    <td>{{$index + 1}}</td>
+                                    <td ng-if="!listValue.editMode">{{listValue.value|emptylabel}}</td>
+                                    <td ng-if="listValue.editMode">
+                                        <validate for='value{{$index}}'>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                name="value{{$index}}" ng-model="listValue.value" maxlength="50"
+                                                required></input>
+                                        </validate>
+                                    </td>
+                                    <td>{{listValue.is_active?'Active':'Inactive'|emptylabel}}</td>
+                                    <td class="action-cell">
+                                        <ul class="action-item" ng-if="!listValue.is_new">
+                                            <li>
+                                                <a href="#" class="action-icon edit-icon"
+                                                    ng-click="editListValue(listValue)"></a>
+                                            </li>
+                                            <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <a href="#" class="action-icon more-icon"></a>
+                                                <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                                    aria-labelledby="moreDropdown">
+                                                    <li ng-click="toggleStatus(listValue)" ng-if="listValue.is_active">
+                                                        <a href="javascript:void(0)">Mark as Inactive</a>
+                                                    </li>
+                                                    <li ng-click="toggleStatus(listValue)" ng-if="!listValue.is_active">
+                                                        <a href="javascript:void(0)">Mark as Active</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-success" ng-click="ok()">Save</button>
+</div>

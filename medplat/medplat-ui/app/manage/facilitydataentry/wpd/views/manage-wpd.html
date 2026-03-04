@@ -1,0 +1,1325 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Record Details</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="card-sub-title">
+                                Pregnancy Outcome Registration
+                            </h5>
+                            <div>
+                                <div class="form-group">
+                                    <label for="memberId" control-label>Member ID(Family ID)</label>
+                                    <label style="width:auto">
+                                        {{managewpdcontroller.manageWpdObject.uniqueHealthId}}({{managewpdcontroller.manageWpdObject.familyUniqueId}})
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberName" control-label>Member Name</label>
+                                    <label style="width:auto">{{managewpdcontroller.manageWpdObject.memberName}}
+                                        <span ng-if="managewpdcontroller.manageWpdObject.motherMobileNumber">
+                                            ({{managewpdcontroller.manageWpdObject.motherMobileNumber}})
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberLocation" control-label>Location</label>
+                                    <label style="width:auto;white-space: inherit">
+                                        {{managewpdcontroller.manageWpdObject.hierarchy}}
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberBpl" control-label>BPL</label>
+                                    <label>{{managewpdcontroller.manageWpdObject.bplFlag}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberCaste" control-label>Caste</label>
+                                    <label>{{managewpdcontroller.manageWpdObject.caste}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberBenefits" control-label>Benefits</label>
+                                    <label>{{managewpdcontroller.manageWpdObject.benefits|emptylabel}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <div class="form-group">
+                                    <label for="memberLmp" control-label>LMP</label>
+                                    <label>{{managewpdcontroller.manageWpdObject.lmpDate}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberEdd" control-label>EDD</label>
+                                    <label>{{managewpdcontroller.manageWpdObject.edd}}</label>
+                                </div>
+                                <div class="form-group"
+                                    ng-if="managewpdcontroller.manageWpdObject.isAccountNumberAvailable">
+                                    <label for="memberAccountNumber" control-label>Account Number</label>
+                                    <label>Available</label>
+                                </div>
+                                <div class="form-group" ng-if="managewpdcontroller.manageWpdObject.isIfscAvailable">
+                                    <label for="memberIfsc" control-label>IFSC</label>
+                                    <label>Available</label>
+                                </div>
+                                <div class="form-group" ng-if="managewpdcontroller.manageWpdObject.fhwName != null">
+                                    <label style="vertical-align: middle;white-space: initial" for="memberAnm"
+                                        control-label>FHW Name and Phone Number</label>
+                                    <label style="vertical-align: middle;white-space: initial">
+                                        {{managewpdcontroller.manageWpdObject.fhwName}}
+                                        <span ng-if="managewpdcontroller.manageWpdObject.fhwNumber != null">
+                                            ({{managewpdcontroller.manageWpdObject.fhwNumber}})
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-group" ng-if="managewpdcontroller.manageWpdObject.ashaName != null">
+                                    <label style="vertical-align: middle;white-space: initial" for="memberAsha"
+                                        control-label>ASHA Name and Phone Number</label>
+                                    <label style="vertical-align: middle;white-space: initial">
+                                        {{managewpdcontroller.manageWpdObject.ashaName}}
+                                        <span ng-if="managewpdcontroller.manageWpdObject.ashaNumber != null">
+                                            ({{managewpdcontroller.manageWpdObject.ashaNumber}})
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">WPD Registration</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <form role="form" name="managewpdcontroller.managewpdForm" id="managewpdForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-sub-title">
+                                    Mother Details
+                                </h5>
+                                <div>
+                                    <div class="form-group"
+                                        ng-if="!managewpdcontroller.manageWpdObject.isAccountNumberAvailable">
+                                        <label style="vertical-align: middle;white-space: initial" for="accountNumber"
+                                            control-label>Account
+                                            Number</label>
+                                        <input type="text" maxlength="20" class="form-control cst-form-control"
+                                            form-control name="accountNumber" id="accountNumber"
+                                            ng-model="managewpdcontroller.manageWpdObject.accountNumber">
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="!managewpdcontroller.manageWpdObject.isIfscAvailable">
+                                        <label style="vertical-align: middle;white-space: initial" for="ifsc"
+                                            control-label>IFSC</label>
+                                        <input type="text" class="form-control cst-form-control" form-control
+                                            name="ifsc" id="ifsc" maxlength="11" minlength="11"
+                                            ng-model="managewpdcontroller.manageWpdObject.ifsc">
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="!managewpdcontroller.manageWpdObject.motherMobileNumber">
+                                        <validate for='contactNumber' maxlength-msg="Invalid mobile number"
+                                            minlength-msg="Invalid mobile number">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="contactNumber" control-label>Contact Number</label>
+                                            <input type="text" numbers-only min-length="10" max-length="10"
+                                                class="form-control cst-form-control" form-control name="contactNumber"
+                                                id="contactNumber"
+                                                ng-model="managewpdcontroller.manageWpdObject.contactNumber">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='deliveryDate' required-msg="Select Date">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="deliveryDate" control-label>Delivery
+                                                Date</label>
+                                            <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                name="deliveryDate" form-control
+                                                ng-model="managewpdcontroller.manageWpdObject.deliveryDate" required
+                                                ng-change="managewpdcontroller.calculateVaccinesToBeGiven();managewpdcontroller.validateDeliveryDate();"
+                                                max-date='managewpdcontroller.maxDeliveryDate'
+                                                min-date="managewpdcontroller.manageWpdObject.lmpDateCalculation">
+                                            <placeholder></placeholder>
+                                            <span ng-if="!!managewpdcontroller.invalidDeliveryDate &&  managewpdcontroller.invalidDeliveryDate == true" class="alert alert-danger valid-feedback">
+                                                Delivery Date cannot be more than 10 months from the LMP date</span>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='deliveryTime' required-msg="Select Time"
+                                            time-msg="Invalid Delivery Time">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="deliveryTime" control-label>
+                                                Delivery Time
+                                            </label>
+                                            <input class="form-control cst-form-control" type="time" form-control
+                                                id="deliveryTime" name="deliveryTime"
+                                                ng-model="managewpdcontroller.manageWpdObject.deliveryTime"
+                                                ng-change="managewpdcontroller.checkTimeValidity()"
+                                                placeholder="HH:mm:ss" required />
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='typeOfDelivery' required-msg="Please select a value">
+                                            <label for="typeOfDelivery" control-label>Type of Delivery</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managewpdcontroller.manageWpdObject.typeOfDelivery"
+                                                name="typeOfDelivery" id="typeOfDelivery" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="NORMAL">Normal</option>
+                                                <option value="CAESAREAN">Caesarean</option>
+                                                <option value="ASSIST">Assist</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" style="margin-top: 3%">
+                                        <validate for='deliveryPlace' required-msg="Select a value">
+                                            <label for="deliveryPlace" control-label>Delivery Place</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managewpdcontroller.manageWpdObject.deliveryPlace"
+                                                ng-change="managewpdcontroller.deliveryPlaceChanged()"
+                                                name="deliveryPlace" id="deliveryPlace" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="THISHOSP">This Hospital</option>
+                                                <option value="ON_THE_WAY"
+                                                    ng-if="managewpdcontroller.manageWpdObject.typeOfDelivery != 'CAESAREAN'">
+                                                    On the way</option>
+                                                <option value="108_AMBULANCE">108 Ambulance</option>
+                                                <option value="HOSP">Another Institution</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managewpdcontroller.manageWpdObject.deliveryPlace === 'HOSP'">
+                                        <validate for='institutionType' required-msg="Select a value">
+                                            <label for="institutionType" control-label>Institution Type</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="managewpdcontroller.manageWpdObject.institutionType"
+                                                ng-change="managewpdcontroller.retrieveHospitalsByInstitutionType()"
+                                                name="institutionType" id="institutionType" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="{{institutionType.id}}"
+                                                    ng-repeat="institutionType in managewpdcontroller.institutionTypes">
+                                                    {{institutionType.value}}</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group selectize-wpd-input"
+                                        ng-if="managewpdcontroller.manageWpdObject.deliveryPlace === 'HOSP' && managewpdcontroller.showOtherInstitutes">
+                                        <validate for='hospital' required-msg="Select a value">
+                                            <label style="white-space: initial" control-label>Hospital</label>
+                                            <selectize name="hospital" class="form-control cst-form-control"
+                                                form-control ng-model='managewpdcontroller.manageWpdObject.institute'
+                                                ng-change="managewpdcontroller.instituteChanged()"
+                                                config='managewpdcontroller.selectizeObjectForOtherInstitute' required>
+                                                <option value=''>--Select--</option>
+                                            </selectize>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managewpdcontroller.manageWpdObject.deliveryPlace === 'THISHOSP' || managewpdcontroller.manageWpdObject.deliveryPlace === 'ON_THE_WAY'">
+                                        <validate for='hospital' required-msg="Select a value">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                control-label>Hospital</label>
+                                            <select class="form-control cst-form-control" form-control chosen-directive
+                                                name="hospital"
+                                                ng-options="institute as institute.name for institute in managewpdcontroller.institutes"
+                                                ng-model="managewpdcontroller.manageWpdObject.institute"
+                                                ng-change="managewpdcontroller.instituteChanged()"
+                                                ng-disabled="managewpdcontroller.institutes.length == 1" required>
+                                                <option value="" selected>--Select--</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managewpdcontroller.manageWpdObject.institute && managewpdcontroller.showDeliveryDoneBy">
+                                        <validate for='deliveryDoneBy' required-msg="Select a value">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="deliveryDoneBy" control-label>Who
+                                                performed the delivery?</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-change="managewpdcontroller.setUsersForInstitute()"
+                                                ng-model="managewpdcontroller.manageWpdObject.deliveryDoneBy"
+                                                name="deliveryDoneBy" id="deliveryDoneBy" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="DOCTOR">Doctor</option>
+                                                <option value="ANM"
+                                                    ng-if="managewpdcontroller.manageWpdObject.typeOfDelivery != 'CAESAREAN'">
+                                                    ANM</option>
+                                                <option value="STAFF_NURSE"
+                                                    ng-if="managewpdcontroller.manageWpdObject.typeOfDelivery != 'CAESAREAN'">
+                                                    Staff Nurse</option>
+                                                <option value="TBA"
+                                                    ng-if="managewpdcontroller.manageWpdObject.typeOfDelivery != 'CAESAREAN'">
+                                                    TBA</option>
+                                                <option value="NON_TBA"
+                                                    ng-if="managewpdcontroller.manageWpdObject.typeOfDelivery != 'CAESAREAN'">
+                                                    Non-TBA</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+
+                                    <div class="form-group" ng-if="managewpdcontroller.showDeliveryPerson">
+                                        <validate for='deliveryPerson' required-msg="Select a value">
+                                            <label for="deliveryPerson"
+                                                style="vertical-align: middle;white-space: initial"
+                                                control-label>Delivery
+                                                Done By</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                name="deliveryPerson"
+                                                ng-model="managewpdcontroller.manageWpdObject.deliveryPerson" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option ng-repeat="user in managewpdcontroller.usersForInstitute"
+                                                    ng-value="user.id"
+                                                    ng-bind="user.first_name + ' ' + user.last_name + ' (' + user.user_name + ')'">
+                                                </option>
+                                                <option value="-1">Other</option>
+                                            </select>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group"
+                                        ng-if="managewpdcontroller.manageWpdObject.deliveryPerson === '-1'">
+                                        <validate for='deliveryPersonName' required-msg="Please select a value">
+                                            <label for="deliveryPersonName" control-label>Delivery Person Name</label>
+                                            <input type="text" class="form-control cst-form-control" form-control
+                                                name="deliveryPersonName" id="deliveryPersonName"
+                                                ng-model="managewpdcontroller.manageWpdObject.deliveryPersonName"
+                                                required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='isCorticoSteroidGiven' required-msg=" Select a value"
+                                            ng-if="managewpdcontroller.showCorticoSteroid">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="isCorticoSteroidGiven" name="isCorticoSteroidGiven"
+                                                id="isCorticoSteroidGiven" class="control-label" control-label>Is
+                                                Cortico Steroid injection given?</label>
+                                            <label style="margin-top:3%" class="control control-radio">Yes
+                                                <input ng-value="true" name="isCorticoSteroidGiven" type="radio"
+                                                    ng-model="managewpdcontroller.manageWpdObject.isCorticoSteroidGiven"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label style="margin-top:3%" class="control control-radio">No
+                                                <input ng-value="false" name="isCorticoSteroidGiven" type="radio"
+                                                    ng-model="managewpdcontroller.manageWpdObject.isCorticoSteroidGiven"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='wasMisoprostolGiven' required-msg=" Select a value" ng-if="(managewpdcontroller.manageWpdObject.deliveryPlace === 'HOSP' && managewpdcontroller.manageWpdObject.institutionType == '1062') ||
+                                                ((managewpdcontroller.manageWpdObject.deliveryPlace === 'THISHOSP' || managewpdcontroller.manageWpdObject.deliveryPlace === 'ON_THE_WAY')
+                                                && managewpdcontroller.manageWpdObject.institute.type == '1062')">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="wasMisoprostolGiven" name="wasMisoprostolGiven"
+                                                class="control-label" control-label>Misoprostol administered?</label>
+                                            <label style="margin-top:3%" class="control control-radio">Yes
+                                                <input ng-value="true" name="wasMisoprostolGiven" type="radio"
+                                                    ng-model="managewpdcontroller.manageWpdObject.wasMisoProstolGiven"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label style="margin-top:3%" class="control control-radio">No
+                                                <input ng-value="false" name="wasMisoprostolGiven" type="radio"
+                                                    ng-model="managewpdcontroller.manageWpdObject.wasMisoProstolGiven"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div ng-if="managewpdcontroller.showDischargeSection">
+                                        <div class="form-group">
+                                            <validate for='isDischarged' required-msg=" Select a value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="isDischarged" name="isDischarged" class="control-label"
+                                                    control-label>Is Discharge Done?</label>
+                                                <label style="margin-top:1%" class="control control-radio">Yes
+                                                    <input ng-value="true" name="isDischarged" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.isDischarged"
+                                                        ng-change="managewpdcontroller.dischargeChanged()" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label style="margin-top:1%" class="control control-radio">No
+                                                    <input ng-value="false" name="isDischarged" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.isDischarged"
+                                                        ng-change="managewpdcontroller.dischargeChanged()" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.isDischarged">
+                                            <validate for='dischargeDate' required-msg="Select Date">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="dischargeDate" control-label>Discharge
+                                                    Date</label>
+                                                <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                    name="dischargeDate" form-control
+                                                    min-date='managewpdcontroller.minVaccinationDate'
+                                                    max-date="managewpdcontroller.maxDischargeDate"
+                                                    ng-model="managewpdcontroller.manageWpdObject.dischargeDate"
+                                                    required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.isDischarged">
+                                            <validate for='dischargeTime' required-msg="Select Time"
+                                                time-msg="Invalid Discharge Time">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="dischargeTime" control-label>
+                                                    Discharge Time
+                                                </label>
+                                                <input class="form-control cst-form-control" type="time" form-control
+                                                    id="dischargeTime" name="dischargeTime"
+                                                    ng-model="managewpdcontroller.manageWpdObject.dischargeTime"
+                                                    ng-change="managewpdcontroller.checkDischargeTimeValidity()"
+                                                    placeholder="HH:mm:ss" required />
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.isDischarged">
+                                            <validate for='freeMedicines' required-msg=" Select a value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="freeMedicines" name="freeMedicines" class="control-label"
+                                                    control-label>Free medicines dispensed?</label>
+                                                <label style="margin-top:3%" class="control control-radio">Yes
+                                                    <input ng-value="true" name="freeMedicines" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.freeMedicines"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label style="margin-top:3%" class="control control-radio">No
+                                                    <input ng-value="false" name="freeMedicines" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.freeMedicines"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.isDischarged">
+                                            <validate for='freeDiet' required-msg=" Select a value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="freeDiet" name="freeDiet" class="control-label"
+                                                    control-label>Free diet
+                                                    provided?</label>
+                                                <label style="margin-top:1%" class="control control-radio">Yes
+                                                    <input ng-value="true" name="freeDiet" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.freeDiet"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label style="margin-top:1%" class="control control-radio">No
+                                                    <input ng-value="false" name="freeDiet" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.freeDiet"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.isDischarged">
+                                            <validate for='freeLabTest' required-msg=" Select a value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="freeLabTest" name="freeLabTest" class="control-label"
+                                                    control-label>Free Lab Tests
+                                                    done?</label>
+                                                <label style="margin-top:1%" class="control control-radio">Yes
+                                                    <input ng-value="true" name="freeLabTest" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.freeLabTest"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label style="margin-top:1%" class="control control-radio">No
+                                                    <input ng-value="false" name="freeLabTest" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.freeLabTest"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.isDischarged">
+                                            <validate for='freeBloodTransfusion' required-msg=" Select a value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="freeBloodTransfusion" name="freeBloodTransfusion"
+                                                    class="control-label" control-label>Free Blood Transfusion
+                                                    done?</label>
+                                                <label style="margin-top:3%" class="control control-radio">Yes
+                                                    <input ng-value="true" name="freeBloodTransfusion" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.freeBloodTransfusion"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label style="margin-top:3%" class="control control-radio">No
+                                                    <input ng-value="false" name="freeBloodTransfusion" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.freeBloodTransfusion"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.isDischarged">
+                                            <validate for='freeDropTransport' required-msg=" Select a value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="freeDropTransport" name="freeDropTransport"
+                                                    class="control-label" control-label>Free drop back/ referral
+                                                    transport provided?</label>
+                                                <label style="margin-top:3%" class="control control-radio">Yes
+                                                    <input ng-value="true" name="freeDropTransport" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.freeDropTransport"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label style="margin-top:3%" class="control control-radio">No
+                                                    <input ng-value="false" name="freeDropTransport" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.freeDropTransport"
+                                                        form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <div class="form-group">
+                                        <label style="vertical-align: middle;white-space: initial" for="isMotherAlive"
+                                            class="control-label" control-label>Is mother Alive? <br>(Intra-Partum Death
+                                            Only)<span class="required-asterisk">*</span></label>
+                                        <label style="margin-top:3%" class="control control-radio">Yes
+                                            <input ng-value="true" name="yes" type="radio"
+                                                ng-model="managewpdcontroller.manageWpdObject.isMotherAlive"
+                                                ng-change="managewpdcontroller.motherAliveChanged()" required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label style="margin-top:3%" class="control control-radio">No
+                                            <input ng-value="false" name="no" type="radio"
+                                                ng-model="managewpdcontroller.manageWpdObject.isMotherAlive"
+                                                ng-change="managewpdcontroller.motherAliveChanged()" required>
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                    </div>
+                                    <div ng-if="!managewpdcontroller.manageWpdObject.isMotherAlive">
+                                        <div class="form-group">
+                                            <validate for='motherDeathDate' required-msg="Select Date">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="motherDeathDate" control-label>Death
+                                                    Date</label>
+                                                <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                    name="motherDeathDate" form-control
+                                                    ng-model="managewpdcontroller.manageWpdObject.deathDate"
+                                                    ng-change="managewpdcontroller.deathDateChanged()" required
+                                                    max-date='managewpdcontroller.manageWpdObject.deliveryDate'
+                                                    min-date="managewpdcontroller.minDeathDate">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for='motherDeathPlace' required-msg="Select a value">
+                                                <label for="motherDeathPlace" control-label>Death Place</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="managewpdcontroller.manageWpdObject.deathPlace"
+                                                    name="motherDeathPlace"
+                                                    ng-change="managewpdcontroller.deathPlaceChanged()"
+                                                    id="motherDeathPlace" required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option value="HOME">Home</option>
+                                                    <option value="ON_THE_WAY">On the way</option>
+                                                    <option value="HOSP">Hospital</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.deathPlace === 'HOSP'">
+                                            <validate for='institutionType' required-msg="Select a value">
+                                                <label for="institutionType" control-label>Institution Type</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="managewpdcontroller.manageWpdObject.deathInfrastructureType"
+                                                    ng-change="managewpdcontroller.retrieveDeathHospitalsByInstitutionType()"
+                                                    name="institutionType" id="institutionType" required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option value="{{institutionType.id}}"
+                                                        ng-repeat="institutionType in managewpdcontroller.institutionTypes">
+                                                        {{institutionType.value}}</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.deathPlace === 'HOSP' && managewpdcontroller.showDeathInstitutes">
+                                            <validate for='hospital' required-msg="Select a value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    control-label>Hospital</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    chosen-directive name="hospital"
+                                                    ng-model="managewpdcontroller.manageWpdObject.deathInfrastructureId"
+                                                    required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option ng-repeat="institute in managewpdcontroller.deathInstitutes"
+                                                        value="{{institute.id}}">{{institute.name}}</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for='motherDeathReason' required-msg="Select a value">
+                                                <label for="motherDeathReason" control-label>Death Reason</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="managewpdcontroller.manageWpdObject.deathReason"
+                                                    name="motherDeathReason" id="motherDeathReason" required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option value="{{motherDeathReason.id}}"
+                                                        ng-repeat="motherDeathReason in managewpdcontroller.motherDeathReasons">
+                                                        {{motherDeathReason.value}}</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for='fbmdsr' required-msg="Please enter fbmdsr">
+                                                <label style="vertical-align: middle;white-space: initial" for="fbmdsr"
+                                                    control-label>FBMDSR</label>
+                                                <label style="margin-top:1%" class="control control-radio">Yes
+                                                    <input form-control ng-value="true" name="fbmdsr" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.fbmdsr" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label style="margin-top:1%" class="control control-radio">No
+                                                    <input form-control ng-value="false" name="fbmdsr" type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.fbmdsr" required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                    <div ng-if="managewpdcontroller.manageWpdObject.isMotherAlive">
+                                        <div class="form-group">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="highRiskSymptomsDuringDelivery" control-label>High
+                                                Risk Symptoms during delivery</label>
+                                            <select
+                                                chosen-directive="managewpdcontroller.highRiskSymptomsDuringDelivery"
+                                                class="form-control cst-form-control" form-control
+                                                ng-model="managewpdcontroller.manageWpdObject.highRiskSymptomsDuringDelivery"
+                                                multiple="true" name="highRiskSymptomsDuringDelivery"
+                                                id="highRiskSymptomsDuringDelivery">
+                                                <option
+                                                    ng-if="!managewpdcontroller.manageWpdObject.highRiskSymptomsDuringDelivery.includes('NONE')"
+                                                    value="{{highRisk.id}}"
+                                                    ng-repeat="highRisk in managewpdcontroller.highRiskSymptomsDuringDelivery">
+                                                    {{highRisk.value}}</option>
+                                                <option value="NONE">None</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="treatmentsDuringDelivery" control-label>Treatments
+                                                During Delivery</label>
+                                            <select chosen-directive="managewpdcontroller.treatmentsDuringDelivery"
+                                                class="form-control cst-form-control" form-control
+                                                ng-model="managewpdcontroller.manageWpdObject.treatmentsDuringDelivery"
+                                                multiple="true" name="treatmentsDuringDelivery"
+                                                id="treatmentsDuringDelivery">
+                                                <option
+                                                    ng-if="!managewpdcontroller.manageWpdObject.treatmentsDuringDelivery.includes('NONE')"
+                                                    value="{{treatment.id}}"
+                                                    ng-repeat="treatment in managewpdcontroller.treatmentsDuringDelivery">
+                                                    {{treatment.value}}</option>
+                                                <option value="NONE">None</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="motherDeliveryDangerSigns" control-label>Danger Signs during
+                                                delivery</label>
+                                            <select chosen-directive="managewpdcontroller.motherDangerSigns"
+                                                class="form-control cst-form-control" form-control
+                                                ng-model="managewpdcontroller.manageWpdObject.motherDangerSigns"
+                                                multiple="true"
+                                                ng-change="managewpdcontroller.isMotherDangerSignOther()"
+                                                name="motherDeliveryDangerSigns" id="motherDeliveryDangerSigns">
+                                                <option
+                                                    ng-if="!managewpdcontroller.manageWpdObject.motherDangerSigns.includes('NONE')"
+                                                    value="{{motherDangerSign.id}}"
+                                                    ng-repeat="motherDangerSign in managewpdcontroller.motherDangerSigns">
+                                                    {{motherDangerSign.value}}</option>
+                                                <option value="-1"
+                                                    ng-if="!managewpdcontroller.manageWpdObject.motherDangerSigns.includes('NONE')">
+                                                    Other</option>
+                                                <option value="NONE">None</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" ng-if="managewpdcontroller.showOtherMotherDangerSign">
+                                            <validate for='motherDeliveryOtherDangerSign'
+                                                required-msg="Please enter other danger sign">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="motherDeliveryOtherDangerSign" control-label>Please
+                                                    mention other danger sign during delivery</label>
+                                                <input type="text" class="form-control cst-form-control" form-control
+                                                    name="motherDeliveryOtherDangerSign"
+                                                    id="motherDeliveryOtherDangerSign"
+                                                    ng-model="managewpdcontroller.manageWpdObject.motherOtherDangerSign">
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.motherDangerSigns.length > 1 || (managewpdcontroller.manageWpdObject.motherDangerSigns.length == 1 && !managewpdcontroller.manageWpdObject.motherDangerSigns.includes('NONE'))">
+                                            <validate for='isMotherReferralDone' required-msg="Please select value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="isMotherReferralDone" name="isMotherReferralDone"
+                                                    id="isMotherReferralDone" class="control-label" control-label>Is
+                                                    mother Referral Done?</label>
+                                                <label style="margin-top:3%" class="control control-radio">Yes
+                                                    <input form-control ng-value="true" name="isMotherReferralDone"
+                                                        type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.isMotherReferralDone"
+                                                        ng-change="managewpdcontroller.motherReferralChanged()"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label style="margin-top:3%" class="control control-radio">No
+                                                    <input form-control ng-value="false" name="isMotherReferralDone"
+                                                        type="radio"
+                                                        ng-model="managewpdcontroller.manageWpdObject.isMotherReferralDone"
+                                                        ng-change="managewpdcontroller.motherReferralChanged()"
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.isMotherReferralDone">
+                                            <validate for='motherReferralInstitutionType' required-msg="Select a value">
+                                                <label for="motherReferralInstitutionType" control-label>Institution
+                                                    Type</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="managewpdcontroller.manageWpdObject.motherReferralInstitutionType"
+                                                    ng-change="managewpdcontroller.retrieveMotherReferralHospitals()"
+                                                    name="motherReferralInstitutionType"
+                                                    id="motherReferralInstitutionType" required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option value="{{institutionType.id}}"
+                                                        ng-repeat="institutionType in managewpdcontroller.referralInstituteTypes">
+                                                        {{institutionType.value}}</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="managewpdcontroller.manageWpdObject.isMotherReferralDone && managewpdcontroller.showMotherReferralHospitals">
+                                            <validate for='motherReferralInfraId' required-msg="Select a value">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    control-label>Hospital</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    chosen-directive name="motherReferralInfraId"
+                                                    ng-model="managewpdcontroller.manageWpdObject.motherReferralInfraId"
+                                                    required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option
+                                                        ng-repeat="institute in managewpdcontroller.motherReferralHospitals"
+                                                        value="{{institute.id}}">{{institute.name}}</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="familyPlanningMethod"
+                                                required-msg=" Select family planning method">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="familyPlanningMethod" control-label>Family Planning Method
+                                                    Used</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="managewpdcontroller.manageWpdObject.familyPlanningMethod"
+                                                    name="familyPlanningMethod" id="familyPlanningMethod">
+                                                    <option value="" selected>--Select--</option>
+                                                    <option value="PPIUCD">PPIUCD</option>
+                                                    <option value="PPTL">PPTL</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-repeat="childDetail in managewpdcontroller.manageWpdObject.childDetails">
+                            <hr>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 class="card-sub-title">
+                                        Child Details
+                                    </h5>
+                                    <div>
+                                        <div class="form-group">
+                                            <validate for='pregnancyOutcome' required-msg="Please select a value">
+                                                <label for="pregnancyOutcome" control-label>Pregnancy Outcome</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="childDetail.pregnancyOutcome" name="pregnancyOutcome"
+                                                    ng-change="managewpdcontroller.pregnancyOutcomeChanged($index, childDetail.pregnancyOutcome)"
+                                                    id="pregnancyOutcome" required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option ng-if="managewpdcontroller.isLiveBirthTerm" value="LBIRTH">
+                                                        Live Birth</option>
+                                                    <option ng-if="managewpdcontroller.isStillBirthTerm" value="SBIRTH">
+                                                        Still Birth</option>
+                                                    <option ng-if="managewpdcontroller.isMtpTerm" value="MTP"
+                                                        ng-if="$index == 0">MTP</option>
+                                                    <option ng-if="managewpdcontroller.isAbortionTerm" value="ABORTION"
+                                                        ng-if="$index == 0">Abortion</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div ng-if="childDetail.pregnancyOutcome === 'MTP'">
+                                            <div class="form-group">
+                                                <validate for='mtpPlace' required-msg="Please select a value">
+                                                    <label for="mtpPlace" control-label>Where was MTP done?</label>
+                                                    <select class="form-control cst-form-control" form-control
+                                                        ng-model="managewpdcontroller.manageWpdObject.mtpPlace"
+                                                        name="mtpPlace" id="mtpPlace" required>
+                                                        <option value="" selected>--Select--</option>
+                                                        <option ng-if="mtpPlace.id != '904' && mtpPlace.id != '897'"
+                                                            value="{{mtpPlace.id}}"
+                                                            ng-repeat="mtpPlace in managewpdcontroller.mtpPlaces">
+                                                            {{mtpPlace.value}}</option>
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for='mtpPerformedBy' required-msg="Please select a value">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="mtpPerformedBy" control-label>Who
+                                                        performed the MTP?</label>
+                                                    <select class="form-control cst-form-control" form-control
+                                                        ng-model="managewpdcontroller.manageWpdObject.mtpPerformedBy"
+                                                        name="mtpPerformedBy" id="mtpPerformedBy" required>
+                                                        <option value="" selected>--Select--</option>
+                                                        <option value="DOCTOR">Doctor</option>
+                                                        <option value="ANM">ANM</option>
+                                                        <option value="STAFF_NURSE">Staff Nurse</option>
+                                                        <option value="SELF">Self with OTC drugs</option>
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                        <div
+                                            ng-if="childDetail.pregnancyOutcome === 'LBIRTH' || childDetail.pregnancyOutcome === 'SBIRTH'">
+                                            <div class="form-group" ng-if="childDetail.pregnancyOutcome === 'LBIRTH'">
+                                                <validate for='childName' required-msg="Enter name">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="childName" control-label>Child
+                                                        Name</label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control name="childName" id="childName"
+                                                        ng-model="childDetail.name" required>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for='childGender' required-msg="Select Gender">
+                                                    <label for="childGender" name='childGender' id='childGender'
+                                                        class="control-label" control-label>Gender</label>
+                                                    <label class="control control-radio">Male
+                                                        <input value="M" name="{{$index}}male" type="radio"
+                                                            ng-model="childDetail.childGender" form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <label class="control control-radio">Female
+                                                        <input value="F" name="{{$index}}female" type="radio"
+                                                            ng-model="childDetail.childGender" form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <label class="control control-radio">Transgender
+                                                        <input value="T" name="{{$index}}transgender" type="radio"
+                                                            ng-model="childDetail.childGender" form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group" ng-if="childDetail.pregnancyOutcome === 'LBIRTH'">
+                                                <validate for='typeOfDelivery' required-msg="Please select a value"
+                                                    max-msg="Please enter valid weight(Between 0.1-4.5)"
+                                                    min-msg="Please enter valid weight(Between 0.1-4.5)">
+                                                    <label for="childBirthWeight" control-label>Birth Weight (in
+                                                        kgs)</label>
+                                                    <input type="text" numbers-only decimalallowed="true" max="4.5"
+                                                        min="0.1" class="form-control cst-form-control" form-control
+                                                        name="childBirthWeight" id="childBirthWeight"
+                                                        ng-model="childDetail.childBirthWeight" required>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                        <div
+                                            ng-if="childDetail.pregnancyOutcome === 'LBIRTH' || childDetail.pregnancyOutcome === 'SBIRTH'">
+                                            <div class="form-group">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="congenitalDeformityPresent" control-label>Congenital
+                                                    Deformity Present</label>
+                                                <select chosen-directive="managewpdcontroller.congenitalDeformities"
+                                                    class="form-control cst-form-control" form-control
+                                                    ng-model="childDetail.congenitalDeformityPresent" multiple="true"
+                                                    ng-change="managewpdcontroller.isCongenitalDeformityOther(childDetail)"
+                                                    name="congenitalDeformityPresent" id="congenitalDeformityPresent">
+                                                    <option
+                                                        ng-if="!childDetail.congenitalDeformityPresent.includes('NONE')"
+                                                        value="{{congenitalDeformity.id}}"
+                                                        ng-repeat="congenitalDeformity in managewpdcontroller.congenitalDeformities">
+                                                        {{congenitalDeformity.value}}</option>
+                                                    <option
+                                                        ng-if="!childDetail.congenitalDeformityPresent.includes('NONE')"
+                                                        value="-1">Other</option>
+                                                    <option value="NONE">None</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group" ng-if="childDetail.showOtherCongenitalDeformity">
+                                                <validate for='congenitalDeformityOther'
+                                                    required-msg="Please enter other congenital deformity">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="congenitalDeformityOther" control-label>Please
+                                                        mention other congenital deformity</label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control name="congenitalDeformityOther"
+                                                        id="congenitalDeformityOther"
+                                                        ng-model="childDetail.congenitalDeformityOther">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                        <div ng-if="childDetail.pregnancyOutcome === 'LBIRTH'">
+                                            <div>
+                                                <div class="form-group">
+                                                    <validate for='isBcgGiven' required-msg="Select Value">
+                                                        <label for="isBcgGiven" class="control-label" control-label>Is
+                                                            BCG
+                                                            given?</label>
+                                                        <label class="control control-radio">Yes
+                                                            <input ng-value="true" name="{{$index}}bcgYes" type="radio"
+                                                                ng-change="managewpdcontroller.bcgGivenChanged(childDetail)"
+                                                                ng-model="childDetail.isBcgGiven" form-control required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <label class="control control-radio">No
+                                                            <input ng-value="false" name="{{$index}}bcgNo" type="radio"
+                                                                ng-change="managewpdcontroller.bcgGivenChanged(childDetail)"
+                                                                ng-model="childDetail.isBcgGiven" form-control required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div style="margin-bottom: 3%" class="form-group"
+                                                    ng-if="childDetail.isBcgGiven">
+                                                    <validate for='bcgDate' required-msg="Select Date"
+                                                        vaccine-msg="Invalid Vaccination Date">
+                                                        <label style="vertical-align: middle;white-space: initial"
+                                                            for="bcgDate" control-label>Date
+                                                            of giving BCG</label>
+                                                        <input type="text" style="float: inherit;" datepicker
+                                                            tabindex="8" name="bcgDate" form-control
+                                                            ng-model="childDetail.bcgDate"
+                                                            ng-change="managewpdcontroller.checkImmunisationValidation(managewpdcontroller.manageWpdObject.deliveryDate, childDetail.bcgDate, managewpdcontroller.immunisations.IMMUNISATION_BCG)"
+                                                            required min-date='managewpdcontroller.minVaccinationDate'
+                                                            max-date='managewpdcontroller.maxBCGDate'>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="form-group">
+                                                    <validate for='isOpvGiven' required-msg="Select Value">
+                                                        <label for="isOpvGiven" class="control-label" control-label>Is
+                                                            OPV
+                                                            given?<span class="required-asterisk">*</span></label>
+                                                        <label class="control control-radio">Yes
+                                                            <input ng-value="true" name="{{$index}}opvYes" type="radio"
+                                                                ng-change="managewpdcontroller.opvGivenChanged(childDetail)"
+                                                                ng-model="childDetail.isOpvGiven" form-control required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <label class="control control-radio">No
+                                                            <input ng-value="false" name="{{$index}}opvNo" type="radio"
+                                                                ng-change="managewpdcontroller.opvGivenChanged(childDetail)"
+                                                                ng-model="childDetail.isOpvGiven" form-control required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div style="margin-bottom: 3%" class="form-group"
+                                                    ng-if="childDetail.isOpvGiven">
+                                                    <validate for='opvDate' required-msg="Select Date"
+                                                        vaccine-msg="Invalid Vaccination Date">
+                                                        <label style="vertical-align: middle;white-space: initial"
+                                                            for="opvDate" control-label>Date
+                                                            of giving OPV</label>
+                                                        <input type="text" style="float: inherit;" datepicker
+                                                            tabindex="8" name="opvDate" form-control
+                                                            ng-model="childDetail.opvDate"
+                                                            ng-change="managewpdcontroller.checkImmunisationValidation(managewpdcontroller.manageWpdObject.deliveryDate, childDetail.opvDate, managewpdcontroller.immunisations.IMMUNISATION_OPV_0)"
+                                                            required min-date='managewpdcontroller.minVaccinationDate'
+                                                            max-date='managewpdcontroller.maxOPVDate'>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="form-group">
+                                                    <validate for='isHepatitisBGiven' required-msg="Select Value">
+                                                        <label for="isHepatitisBGiven" class="control-label"
+                                                            control-label>Is
+                                                            Hepatitis B given?<span
+                                                                class="required-asterisk">*</span></label>
+                                                        <label class="control control-radio">Yes
+                                                            <input ng-value="true" name="{{$index}}hepYes" type="radio"
+                                                                ng-change="managewpdcontroller.hepatitisBGivenChanged(childDetail)"
+                                                                ng-model="childDetail.isHepatitisBGiven" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <label class="control control-radio">No
+                                                            <input ng-value="false" name="{{$index}}hepNo" type="radio"
+                                                                ng-change="managewpdcontroller.hepatitisBGivenChanged(childDetail)"
+                                                                ng-model="childDetail.isHepatitisBGiven" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div style="margin-bottom: 3%" class="form-group"
+                                                    ng-if="childDetail.isHepatitisBGiven">
+                                                    <validate for='hepatitisBDate' required-msg="Select Date"
+                                                        vaccine-msg="Invalid Vaccination Date">
+                                                        <label style="vertical-align: middle;white-space: initial"
+                                                            for="hepatitisBDate" control-label>Date
+                                                            of giving Hepatitis B</label>
+                                                        <input type="text" style="float: inherit;" datepicker
+                                                            tabindex="8" name="hepatitisBDate" form-control
+                                                            ng-model="childDetail.hepatitisBDate"
+                                                            ng-change="managewpdcontroller.checkImmunisationValidation(managewpdcontroller.manageWpdObject.deliveryDate, childDetail.hepatitisBDate, managewpdcontroller.immunisations.IMMUNISATION_HEPATITIS_B_0)"
+                                                            required min-date='managewpdcontroller.minVaccinationDate'
+                                                            max-date='managewpdcontroller.maxHepatitisBDate'>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for='isVitaminKGiven' required-msg="Select Value">
+                                                    <label for="isVitaminKGiven" class="control-label" control-label>Is
+                                                        Vitamin
+                                                        K given?</label>
+                                                    <label class="control control-radio">Yes
+                                                        <input ng-value="true" name="{{$index}}vitYes" type="radio"
+                                                            ng-change="managewpdcontroller.vitaminKGivenChanged(childDetail)"
+                                                            ng-model="childDetail.isVitaminKGiven" form-control
+                                                            required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <label class="control control-radio">No
+                                                        <input ng-value="false" name="{{$index}}vitNo" type="radio"
+                                                            ng-change="managewpdcontroller.vitaminKGivenChanged(childDetail)"
+                                                            ng-model="childDetail.isVitaminKGiven" required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div style="margin-bottom: 3%" class="form-group"
+                                                ng-if="childDetail.isVitaminKGiven">
+                                                <validate for='vitaminKDate' required-msg="Select Date"
+                                                    vaccine-msg="Invalid Vaccination Date">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="vitaminKDate" control-label>Date
+                                                        of giving Vitamin K</label>
+                                                    <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                        name="vitaminKDate" form-control
+                                                        ng-model="childDetail.vitaminKDate"
+                                                        ng-change="managewpdcontroller.checkImmunisationValidation(managewpdcontroller.manageWpdObject.deliveryDate, childDetail.vitaminKDate, managewpdcontroller.immunisations.IMMUNISATION_VITAMIN_K)"
+                                                        required min-date='managewpdcontroller.minVaccinationDate'
+                                                        max-date='managewpdcontroller.maxVitaminKDate'>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div>
+                                        <div ng-if="childDetail.pregnancyOutcome === 'LBIRTH'">
+                                            <div class="form-group">
+                                                <validate for='childCry' required-msg="Select Value">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="childCry" class="control-label" control-label>Did
+                                                        baby cry at the time of birth?</label>
+                                                    <label class="control control-radio">Yes
+                                                        <input ng-value="true" name="{{$index}}cryYes" type="radio"
+                                                            ng-model="childDetail.childCry" form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <label class="control control-radio">No
+                                                        <input ng-value="false" name="{{$index}}cryNo" type="radio"
+                                                            ng-model="childDetail.childCry" form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for='breastFeeding' required-msg="Select Value">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="breastFeeding" class="control-label"
+                                                        control-label>Breastfeeding
+                                                        in 1 hour of delivery?</label>
+                                                    <label class="control control-radio">Yes
+                                                        <input value="true" name="{{$index}}feedYes" type="radio"
+                                                            ng-model="childDetail.breastFeeding" form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <label class="control control-radio">No
+                                                        <input value="false" name="{{$index}}feedNo" type="radio"
+                                                            ng-model="childDetail.breastFeeding" form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for='kangarooCare' required-msg="Select Value">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="kangarooCare" class="control-label" control-label>Kangaroo
+                                                        Care Initiated?</label>
+                                                    <label class="control control-radio">Yes
+                                                        <input value="true" name="{{$index}}kangarooCareYes"
+                                                            type="radio" ng-model="childDetail.kangarooCare"
+                                                            form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <label class="control control-radio">No
+                                                        <input value="false" name="{{$index}}kangarooCareNo"
+                                                            type="radio" ng-model="childDetail.kangarooCare"
+                                                            form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for='breastCrawl' required-msg="Select Value">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="breastCrawl" class="control-label" control-label>Breast
+                                                        crawl done?</label>
+                                                    <label class="control control-radio">Yes
+                                                        <input value="true" name="{{$index}}breastCrawlYes" type="radio"
+                                                            ng-model="childDetail.breastCrawl" form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <label class="control control-radio">No
+                                                        <input value="false" name="{{$index}}breastCrawlNo" type="radio"
+                                                            ng-model="childDetail.breastCrawl" form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="childDangerSigns" control-label>Child
+                                                    Danger Signs</label>
+                                                <select chosen-directive="managewpdcontroller.childDangerSigns"
+                                                    class="form-control cst-form-control" form-control
+                                                    ng-model="childDetail.childDangerSigns" multiple="true"
+                                                    ng-change="managewpdcontroller.isChildDangerSignOther(childDetail)"
+                                                    name="childDangerSigns" id="childDangerSigns">
+                                                    <option ng-if="!childDetail.childDangerSigns.includes('NONE')"
+                                                        value="{{childDangerSign.id}}"
+                                                        ng-repeat="childDangerSign in managewpdcontroller.childDangerSigns">
+                                                        {{childDangerSign.value}}</option>
+                                                    <option ng-if="!childDetail.childDangerSigns.includes('NONE')"
+                                                        value="-1">Other</option>
+                                                    <option value="NONE">None</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group" ng-if="childDetail.showOtherChildDangerSign">
+                                                <validate for='childOtherDangerSign'
+                                                    required-msg="Please enter other danger sign">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="childOtherDangerSign" control-label>Child's
+                                                        other danger sign</label>
+                                                    <input type="text" class="form-control cst-form-control"
+                                                        form-control name="childOtherDangerSign"
+                                                        id="motherDeliveryOtherDangerSign"
+                                                        ng-model="childDetail.childOtherDangerSign">
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div class="form-group">
+                                                <validate for='childReferral' required-msg="Please select a value"
+                                                    ng-if="childDetail.childDangerSigns.length > 1 || (childDetail.childDangerSigns.length == 1 && !childDetail.childDangerSigns.includes('NONE'))">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="childReferral" name='childReferral' id='childReferral'
+                                                        class="control-label" control-label>Is
+                                                        Child Referral Done?</label>
+                                                    <label class="control control-radio">Yes
+                                                        <input ng-value="true" name="{{$index}}childReferral"
+                                                            type="radio" ng-model="childDetail.childReferral"
+                                                            form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <label class="control control-radio">No
+                                                        <input ng-value="false" name="{{$index}}childReferral"
+                                                            type="radio" ng-model="childDetail.childReferral"
+                                                            form-control required>
+                                                        <div class="control_indicator"></div>
+                                                    </label>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                            <div ng-if="childDetail.childReferral">
+                                                <div class="form-group">
+                                                    <validate for='childReferralReason'
+                                                        required-msg="Please select a value">
+                                                        <label for="childReferralReason" control-label>Child Referral
+                                                            Reason</label>
+                                                        <select class="form-control cst-form-control" form-control
+                                                            ng-model="childDetail.childReferralReason"
+                                                            name="childReferralReason" id="childReferralReason"
+                                                            required>
+                                                            <option value="" selected>--Select--</option>
+                                                            <option value="{{reason.value}}"
+                                                                ng-repeat="reason in managewpdcontroller.childReferralReason">
+                                                                {{reason.value}}</option>
+                                                        </select>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div class="form-group">
+                                                    <validate for='childReferralTransport'
+                                                        required-msg="Please select a value">
+                                                        <label for="childReferralTransport" control-label>Mode of
+                                                            Transport</label>
+                                                        <select class="form-control cst-form-control" form-control
+                                                            ng-model="childDetail.childReferralTransport"
+                                                            name="childReferralTransport" id="childReferralTransport"
+                                                            required>
+                                                            <option value="" selected>--Select--</option>
+                                                            <option value="Hospital Vehicle">Hospital Vehicle</option>
+                                                            <option value="108">108</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div class="form-group">
+                                                    <validate for='childReferralInstitutionType'
+                                                        required-msg="Select a value">
+                                                        <label for="childReferralInstitutionType"
+                                                            control-label>Institution Type</label>
+                                                        <select class="form-control cst-form-control" form-control
+                                                            ng-model="childDetail.childReferralInstitutionType"
+                                                            ng-change="managewpdcontroller.retrieveChildReferralHospitals(childDetail)"
+                                                            name="childReferralInstitutionType"
+                                                            id="childReferralInstitutionType" required>
+                                                            <option value="" selected>--Select--</option>
+                                                            <option value="{{institutionType.id}}"
+                                                                ng-repeat="institutionType in managewpdcontroller.referralInstituteTypes">
+                                                                {{institutionType.value}}</option>
+                                                        </select>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div class="form-group"
+                                                    ng-if="childDetail.childReferralInstitutionType != null && childDetail.showReferralHospitals">
+                                                    <validate for='childReferralInfraId' required-msg="Select a value">
+                                                        <label style="vertical-align: middle;white-space: initial"
+                                                            control-label>Hospital</label>
+                                                        <select class="form-control cst-form-control" form-control
+                                                            chosen-directive name="childReferralInfraId"
+                                                            ng-model="childDetail.childReferralInfraId" required>
+                                                            <option value="" selected>--Select--</option>
+                                                            <option
+                                                                ng-repeat="institute in childDetail.childReferralHospitals"
+                                                                value="{{institute.id}}">{{institute.name}}</option>
+                                                        </select>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            ng-if="childDetail.pregnancyOutcome === 'LBIRTH' || childDetail.pregnancyOutcome === 'SBIRTH'">
+                                            <div class="form-group">
+                                                <validate for='multipleBirthValue' required-msg="Please select a value">
+                                                    <label style="vertical-align: middle;white-space: initial"
+                                                        for="multipleBirthValue" control-label>Is
+                                                        it a multiple birth case?</label>
+                                                    <select class="form-control cst-form-control" form-control
+                                                        ng-model="childDetail.multipleBirthValue"
+                                                        ng-change="managewpdcontroller.changeNumberOfChilds(childDetail, $index)"
+                                                        name="multipleBirthValue" id="multipleBirthValue" required>
+                                                        <option value="" selected>--Select--</option>
+                                                        <option value="yes">Yes, there are more children to be added
+                                                        </option>
+                                                        <option value="no">No, there are no more children to be added
+                                                        </option>
+                                                    </select>
+                                                    <placeholder></placeholder>
+                                                </validate>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-3">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary"
+                                    ng-click="managewpdcontroller.saveWpd(managewpdForm)"><span
+                                        class="fa fa-floppy-o"></i> Save & Continue</button>
+                                <button class="btn btn-secondary" ng-click="managewpdcontroller.goBack()">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

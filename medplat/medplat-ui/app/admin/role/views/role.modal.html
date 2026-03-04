@@ -1,0 +1,151 @@
+<div class="modal-header">
+    <h4 class="text" ng-if="$ctrl.createRoleFlag">Add Role</h4>
+    <h4 class="text" ng-if="$ctrl.updateRoleFlag">Update Role: <strong>{{::$ctrl.roleForUpdate.name}}</strong></h4>
+    <button type="button" class="close" ng-click="$ctrl.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form role="form" name="$ctrl.roleUpdateForm" novalidate>
+        <div class="inline-form">
+            <div class="form-group">
+                <validate for='rolename' required-msg="Enter Role Name">
+                    <label for="rolename" control-label>Role Name</label>
+                    <input type="text" class="form-control cst-form-control" form-control placeholder="Role name"
+                        maxlength="50" name="rolename" id="rolename" ng-model="$ctrl.roleForUpdate.name" required>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group">
+                <validate for='code' required-msg="Enter Location Type">
+                    <label for="code" control-label data-toggle="tooltip"
+                        title="The OU level where users of this role perform their job function">Location</label>
+                    <select chosen-directive="$ctrl.locationTypeList" class="form-control cst-form-control" form-control
+                        name="code" id="code" ng-model="$ctrl.roleForUpdate.locationTypes" multiple="true"
+                        ng-options="locationTypes as locationTypes.name for locationTypes in $ctrl.locationTypeList track by locationTypes.type">
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group">
+                <label for="maxposition" data-toggle="tooltip"
+                    title="This is the maximum no of users that can be created at one location of this role type">Max
+                    position</label>
+                <input type="text" class="form-control cst-form-control" numbers-only name="maxposition" maxlength="3"
+                    ng-model="$ctrl.roleForUpdate.maxPosition" />
+            </div>
+            <div class="form-group">
+                <label for="maxhealthinfra" data-toggle="tooltip">Max
+                    health infrastructure</label>
+                <input type="text" class="form-control cst-form-control" numbers-only name="maxhealthinfra" maxlength="3"
+                    ng-model="$ctrl.roleForUpdate.maxHealthInfra" />
+            </div>
+            <div class="form-group">
+                <validate for='rolename' required-msg="Select Role Type">
+                    <label for="roleType" control-label data-toggle="tooltip"
+                    title="Please select Role Type">
+                    Role Type</label>
+                    <select class="form-control cst-form-control" chosen-directive="$ctrl.roleTypeList"
+                    form-control ng-model="$ctrl.roleForUpdate.roleType" name="roleType" 
+                    id="roleType" ng-options="roleType for roleType in $ctrl.roleTypeList" required>
+                    <option value="">Select Role Type</option>
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group">
+                <label data-toggle="tooltip"
+                    title="These fields are Mandatory when creating users of this role type">Mandatory
+                    Fields</label>
+                <label class="control control-checkbox">Last Name
+                    <input type="checkbox" ng-model="$ctrl.roleForUpdate.isLastNameMandatory">
+                    <div class="control_indicator"></div>
+                </label>
+                <label class="control control-checkbox">Email
+                    <input type="checkbox" ng-model="$ctrl.roleForUpdate.isEmailMandatory">
+                    <div class="control_indicator"></div>
+                </label>
+                <!-- <label class="control control-checkbox">Aadhar Number
+                    <input type="checkbox" ng-model="$ctrl.roleForUpdate.isAadharNumMandatory">
+                    <div class="control_indicator"></div>
+                </label> -->
+                <label class="control control-checkbox">Contact Number
+                    <input type="checkbox" ng-model="$ctrl.roleForUpdate.isContactNumMandatory">
+                    <div class="control_indicator"></div>
+                </label>
+                <label class="control control-checkbox">Convox Id
+                    <input type="checkbox" ng-model="$ctrl.roleForUpdate.isConvoxIdMandatory">
+                    <div class="control_indicator"></div>
+                </label><br>
+                <label class="control control-checkbox" style="margin-left: 160px;">Health Infra
+                    <input type="checkbox" ng-model="$ctrl.roleForUpdate.isHealthInfraMandatory">
+                    <div class="control_indicator"></div>
+                </label>
+                <label class="control control-checkbox">Geo Location
+                    <input type="checkbox" ng-model="$ctrl.roleForUpdate.isGeolocationMandatory">
+                    <div class="control_indicator"></div>
+                </label>
+            </div>
+            <div class="form-group">
+                <validate for='role' required-msg="Enter Managed By">
+                    <label for="role" control-label data-toggle="tooltip"
+                        title="Please select the roles that shall be managed by this role">Can
+                        Manage Role</label>
+                    <select chosen-directive="$ctrl.managedRoleList" class="form-control cst-form-control" form-control
+                        ng-model="$ctrl.roleForUpdate.roleIds" multiple="true" id="role" name="role"
+                        ng-options="role.id as role.name for role in $ctrl.managedRoleList| orderBy :'name'">
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group">
+                <validate for='role' required-msg="Enter Managed By">
+                    <label for="role" control-label data-toggle="tooltip"
+                        title="Please select the teams that shall be managed by this role">
+                        Can Manage Team</label>
+                    <select chosen-directive="$ctrl.teamTypes" class="form-control cst-form-control" form-control
+                        ng-model="$ctrl.roleForUpdate.manageByTeamTypeIds" multiple="true" id="role" name="role"
+                        ng-options="team.id as team.type for team in $ctrl.teamTypes| orderBy :'type'">
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group d-flex align-items-center" ng-if="!$ctrl.roleForUpdate.id">
+                <label for="exampleFormControlInput1">Self Manage</label>
+                <label class="control control-checkbox">
+                    <input type="checkbox" ng-model="$ctrl.roleForUpdate.canSelfManage" />
+                    <div class="control_indicator"></div>
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="hi" control-label data-toggle="tooltip"
+                    title="Please select the institute to be associated with the role">Health Infrastructure
+                    <br>Type</label>
+                <select chosen-directive="$ctrl.infrastructureList" class="form-control cst-form-control" form-control
+                    ng-model="$ctrl.roleForUpdate.healthInfrastructureIds" multiple="true" id="hi" name="hi"
+                    ng-options="infrastructure.id as infrastructure.value for infrastructure in $ctrl.infrastructureList| orderBy :'value'">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cat" control-label data-toggle="tooltip"
+                    title="Please select the category to be associated with the role">
+                    Category</label>
+                <select chosen-directive="$ctrl.categoryList" class="form-control cst-form-control" form-control
+                    ng-model="$ctrl.roleForUpdate.categoryIds" multiple="true" id="cat" name="cat"
+                    ng-options="cat.id as cat.value for cat in $ctrl.categoryList| orderBy :'value'">
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-if="$ctrl.updateRoleFlag" ng-click="$ctrl.ok($ctrl.roleForUpdate)">
+        Update Role
+    </button>
+    <button type="submit" class="btn btn-primary" ng-if="$ctrl.createRoleFlag" ng-click="$ctrl.ok($ctrl.roleForUpdate)">
+        Add Role
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="$ctrl.cancel()">
+        Close
+    </button>
+</div>

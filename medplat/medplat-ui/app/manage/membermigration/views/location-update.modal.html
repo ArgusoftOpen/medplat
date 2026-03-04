@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h4 class="text">Update Migrated Location</h4>
+    <button type="button" class="close" ng-click="$ctrl.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form role="form" name="$ctrl.roleUpdateForm" novalidate>
+    <div class="modal-body">
+        <div class="inline-form">
+            <div class="form-group">
+                <location-directive ng-model="locationId" required-upto-level="4"
+                    selected-location="$ctrl.selectedLocation" on-change="$ctrl.fetchVillages();$ctrl.fetchAshaArea()"
+                    fetch-upto-level="6" fetch-according-to-user-aoi="true">
+                </location-directive>
+            </div>
+            <div class="form-group mt-1">
+                <validate for="villageV" ng-if="$ctrl.selectedLocation.finalSelected.level >= 4">
+                    <label control-label>Villages/Anganwadi Area</label>
+                    <select name="villageV" form-control class="form-control cst-form-control"
+                        ng-model="$ctrl.villageId" required="true" ng-change="$ctrl.villageId != '' ? ctrl.villageSelected = true : ctrl.villageSelected = false;
+                                            $ctrl.fetchAshaArea();"
+                        ng-options="village.id as village.name for village in $ctrl.villages">
+                        <option value="">Select</option>
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+            <div class="form-group mt-1">
+                <validate for="ashaAreaA" ng-if="$ctrl.selectedLocation.finalSelected.level >= 4">
+                    <label control-label>ASHA Area/Area
+                    </label>
+                    <select name="ashaAreaA" form-control class="form-control cst-form-control"
+                        ng-model="$ctrl.ashaAreaId"
+                        ng-change="$ctrl.ashaAreaId != '' ? $ctrl.ashaAreaSelected = true : $ctrl.ashaAreaSelected = false; $ctrl.selecteVillageBasedOnArea();"
+                        ng-options="ashaArea.areaparentid as ashaArea.name for ashaArea in $ctrl.ashaAreas">
+                        <option value="">Select</option>
+                    </select>
+                    <placeholder></placeholder>
+                </validate>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-click="$ctrl.update($ctrl.villageId)">Update</button>
+        <button type="button" class="btn btn-secondary" ng-click="$ctrl.cancel()">Close</button>
+    </div>
+</form>

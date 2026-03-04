@@ -1,0 +1,235 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div ng-if="fpchangesearch.memberDetails.length === 0">
+                <div class="no-data-placeholder">
+                    <h5>No Record Found!</h5>
+                </div>
+            </div>
+            <div class="cst-table table-responsive table-set-height" style="overflow: auto;" id="member-scroll"
+                ng-if="fpchangesearch.memberDetails.length > 0">
+                <table aria-describedby="table"
+                    class="table table-sm table-striped table-bordered filter-table table-fixed header-fixed"
+                    style="table-layout: auto">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th id="srno" class="white-space-unset">#</th>
+                            <th id="memberId" class="white-space-unset">Member ID</th>
+                            <th id="memberName" class="white-space-unset">Member Name</th>
+                            <th id="location" class="white-space-unset">Location</th>
+                            <th id="fhwDetails" class="white-space-unset">FHW Name and Number</th>
+                            <th id="ashaDetails" class="white-space-unset">ASHA Details</th>
+                            <th id="lmpDate" class="white-space-unset">LMP Date</th>
+                            <th id="age" class="white-space-unset">Age</th>
+                            <th id="yearsSinceMarriage" class="white-space-unset">Years since marriage</th>
+                            <th id="noOfLiveChildren" class="white-space-unset">No of Live Children Boys / Girls</th>
+                            <th id="ageOfLastChild" class="white-space-unset">Age of Last Child</th>
+                            <th id="currentFpMethod" class="white-space-unset">Current FP Method</th>
+                            <th id="action" class="white-space-unset" style="text-align: center" colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody" infinite-scroll-distance="0"
+                        infinite-scroll='fpchangesearch.retrieveFilteredMembers(false,false)'
+                        infinite-scroll-container='"#member-scroll"' infinite-scroll-immediate-check="true">
+                        <tr ng-repeat="member in fpchangesearch.memberDetails">
+                            <td>
+                                {{$index + 1}}
+                            </td>
+                            <td>{{member.uniqueHealthId}}</td>
+                            <td>{{member.memberName}}</td>
+                            <td>{{member.location}}</td>
+                            <td ng-if="member.fhwName.trim()">{{member.fhwName}}
+                                <span ng-if="member.fhwNumber">({{member.fhwNumber}})
+                                </span>
+                            </td>
+                            <td ng-if="!member.fhwName.trim()">N.A</td>
+                            <td ng-bind="member.ashaDetails|emptylabel"></td>
+                            <td>{{member.lmpDate| date:'dd/MM/yyyy' | emptylabel}}</td>
+                            <td>{{member.memberAge.replace('mons', 'months') | emptylabel}}</td>
+                            <td>{{member.memberWedding| emptylabel}}</td>
+                            <td>{{member.liveChildrenBoys}}/{{member.liveChildrenGirls}}</td>
+                            <td>{{member.lastChildAge| emptylabel}}</td>
+                            <td>{{member.memberCurrentFp|familyplanning|emptylabel}}
+                                <span ng-if="member.memberFpOperateDate != null">
+                                    ({{member.memberFpOperateDate| date:'dd/MM/yyyy'}})
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" ng-click="fpchangesearch.iucdRemoval(member)"
+                                    ng-disabled="member.memberFpOperateDate == null || (member.memberCurrentFp !== 'IUCD5' && member.memberCurrentFp !== 'IUCD10' && member.memberCurrentFp !== 'PPIUCD' && member.memberCurrentFp !== 'PAIUCD')">
+                                    IUCD Removal
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" ng-click="fpchangesearch.changeFpMethod(member)">
+                                    Change FP Method
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="large-div filter-div">
+    <span style="left:-66px" class="filter-toggle" ng-click="fpchangesearch.toggleFilter()">Search</span>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">Search Members</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <form name="fpchangesearch.searchForm" novalidate>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>Search By: </label>
+                        <label class="control control-radio"> Member ID
+                            <input type="radio" name="search" icheck ng-model="fpchangesearch.search.searchBy"
+                                ng-change="fpchangesearch.resetSearchString()" value="member id" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Family ID
+                            <input type="radio" name="search" icheck ng-model="fpchangesearch.search.searchBy"
+                                ng-change="fpchangesearch.resetSearchString()" value="family id" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Mobile Number
+                            <input type="radio" name="search" icheck ng-model="fpchangesearch.search.searchBy"
+                                ng-change="fpchangesearch.resetSearchString()" value="mobile number" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <br>
+                        <label style="margin-left: 9%" class="control control-radio"> Organization Unit
+                            <input type="radio" name="search" icheck ng-model="fpchangesearch.search.searchBy"
+                                ng-change="fpchangesearch.resetSearchString()" value="organization unit" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Search by village name
+                            <input type="radio" name="search" icheck ng-model="fpchangesearch.search.searchBy"
+                                ng-change="fpchangesearch.resetSearchString()" value="village name" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio"> Name
+                            <input type="radio" name="search" icheck ng-model="fpchangesearch.search.searchBy"
+                                ng-change="fpchangesearch.resetSearchString()" value="name" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <br>
+                        <label style="margin-left: 9%; margin-top: 10px;"
+                            class="control control-radio mb-8"> Abha Number
+                            <input type="radio" name="search" icheck
+                                ng-model="fpchangesearch.search.searchBy"
+                                ng-change="fpchangesearch.resetSearchString()" value="abha number" />
+                            <div class="control_indicator"></div>
+                        </label>
+                        <label class="control control-radio mb-8"> Abha Address
+                            <input type="radio" name="search" icheck
+                                ng-model="fpchangesearch.search.searchBy"
+                                ng-change="fpchangesearch.resetSearchString()"
+                                value="abha address" />
+                            <div class="control_indicator"></div>
+                            </label>
+                        <div class="form-group" ng-if="fpchangesearch.search.searchBy === 'name'">
+                            <location-directive template-type="'twoPart'" ng-model="fpchangesearch.selectedLocationId"
+                                selected-location="fpchangesearch.selectedLocation" required-upto-level="4"
+                                template-type="'inline'" fetch-according-to-user-aoi="true"> </location-directive>
+                        </div>
+                        <div class="form-group" ng-if="fpchangesearch.search.searchBy === 'organization unit'">
+                            <location-directive template-type="'twoPart'" ng-model="fpchangesearch.selectedLocationId"
+                                selected-location="fpchangesearch.selectedLocation" required-upto-level="4"
+                                template-type="'inline'" fetch-according-to-user-aoi="false"> </location-directive>
+                        </div>
+                        <div class="form-group" ng-if="fpchangesearch.search.searchBy === 'village name'">
+                            <label>Search village</label>
+                            <selectize class="form-control cst-form-control disabled-input"
+                                ng-model='fpchangesearch.selectedLocationId'
+                                config='fpchangesearch.locationSelectizePnc'>
+                                <option value=''>Select</option>
+                            </selectize>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid Number'
+                                ng-if="fpchangesearch.search.searchBy === 'mobile number'">
+                                <input type="number" name="searchString" form-control
+                                    ng-model="fpchangesearch.search.searchString" placeholder='Enter contact number'
+                                    class="form-control" maxlength="10" minlength="10" required />
+                            </validate>
+                            <label style="margin-top:2%" class="form-group control control-checkbox"
+                                ng-if="fpchangesearch.search.searchBy === 'mobile number'">
+                                <input ng-model="fpchangesearch.search.familyMobileNumber" type="checkbox">
+                                <div class="control_indicator checkbox-success"></div>
+                                Search mobile number in family
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <validate for='searchString' pattern-msg="Select Date"
+                                ng-if="fpchangesearch.search.searchBy === 'lmp' || fpchangesearch.search.searchBy === 'edd'">
+                                <input type="text" style="width: 50%;float:left" datepicker tabindex="8"
+                                    name="searchString" form-control
+                                    min-date="fpchangesearch.search.searchBy === 'lmp'?fpchangesearch.minLmpSearchDate:fpchangesearch.minEddSearchDate"
+                                    ng-model="fpchangesearch.search.searchString" required>
+                            </validate>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="fpchangesearch.search.searchBy === 'member id' || fpchangesearch.search.searchBy === 'woman id' || fpchangesearch.search.searchBy === 'family id' || fpchangesearch.search.searchBy === 'aadhar number'">
+                                <input type="text" name="searchString" form-control
+                                    ng-model="fpchangesearch.search.searchString"
+                                    placeholder="Enter {{fpchangesearch.search.searchBy}}" class="form-control"
+                                    required />
+                            </validate>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="fpchangesearch.search.searchBy === 'name'">
+                                <input style="width:30%;float:left;margin:4px" type="text" name="firstName" form-control
+                                    ng-model="fpchangesearch.search.firstName" placeholder="Enter first Name"
+                                    class="form-control" required />
+                            </validate>
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="fpchangesearch.search.searchBy === 'name'">
+                                <input style="width:30%;float:left;margin:4px" type="text" name="middleName"
+                                    form-control ng-model="fpchangesearch.search.middleName"
+                                    placeholder="Enter middle Name" class="form-control" />
+                            </validate>
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="fpchangesearch.search.searchBy === 'name'">
+                                <input style="width:30%;float:left;margin:4px" type="text" name="lastName" form-control
+                                    ng-model="fpchangesearch.search.lastName" placeholder="Enter last Name"
+                                    class="form-control" required />
+                            </validate>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="fpchangesearch.search.searchBy === 'abha number'">
+                                <input type="text" name="searchString" form-control
+                                    ng-model="fpchangesearch.search.searchString" placeholder="Enter Abha Number"
+                                    class="form-control" minlength="17" required />
+                            </validate>
+                        </div>
+                        <div style="margin-top: 10px">
+                            <validate for="searchString" pattern-msg='Enter Valid details'
+                                ng-if="fpchangesearch.search.searchBy === 'abha address'">
+                                <input type="text" name="searchString" form-control
+                                    ng-model="fpchangesearch.search.searchString" placeholder="Enter Abha Address"
+                                    class="form-control" required />
+                            </validate>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary close-filter"
+                            ng-click="fpchangesearch.toggleFilter()">Close</button>
+                        <button type="submit" class="btn btn-primary search-filter"
+                            ng-click="fpchangesearch.retrieveFilteredMembers(true,true)">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="cst-backdrop"></div>

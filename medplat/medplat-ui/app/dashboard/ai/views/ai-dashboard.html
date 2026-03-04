@@ -1,0 +1,416 @@
+<div class="ai-dashboard-page" ng-controller="AIDashboardController">
+
+  <!-- Panel backdrop -->
+  <div class="panel-backdrop" ng-class="{open: showNlpPanel || showInsightsPanel}" ng-click="closePanels()"></div>
+
+  <!-- ========================================================
+       HEADER
+       ======================================================== -->
+  <div class="med-dash-header">
+    <div>
+      <p class="dash-title" ng-if="dashboard">
+        <i class="fa fa-tachometer"></i> {{ dashboard.dashboardName }}
+      </p>
+      <p class="dash-title" ng-if="!dashboard && !loading"><i class="fa fa-tachometer"></i> Dashboard</p>
+      <p class="dash-subtitle">
+        <span ng-if="dashboard">{{ dashboard.dashboardType }}</span>
+        <span ng-if="dashboard && dashboard.widgets"> · {{ dashboard.widgets.length }} widgets</span>
+      </p>
+    </div>
+    <div class="header-actions">
+      <span class="role-badge" ng-class="getRoleBadgeClass(currentRole)">{{ currentRole || 'USER' }}</span>
+      <button class="btn-header" ng-click="refreshDashboard()" title="Refresh all widgets">
+        <i class="fa fa-refresh" ng-class="{'fa-spin': loading}"></i>
+        <span class="hidden-xs"> Refresh</span>
+      </button>
+      <button class="btn-header" ng-click="showInsightsPanel = !showInsightsPanel; showNlpPanel = false"
+              title="AI Insights" ng-if="dashboard && dashboard.aiEnabled">
+        <i class="fa fa-magic"></i>
+        <span class="hidden-xs"> Insights</span>
+        <span ng-if="criticalInsightCount > 0"
+              style="background:#C62828; border-radius:10px; padding:1px 6px; font-size:11px; margin-left:4px;">
+          {{ criticalInsightCount }}
+        </span>
+      </button>
+      <button class="btn-header" ng-click="editDashboard()" title="Edit Dashboard" ng-if="dashboard">
+        <i class="fa fa-edit"></i>
+        <span class="hidden-xs"> Edit</span>
+      </button>
+      <button class="btn-header" ng-click="exportDashboard()" title="Export" ng-if="dashboard">
+        <i class="fa fa-download"></i>
+      </button>
+      <button class="btn-header btn-header-accent" ng-click="goToDashboardList()">
+        <i class="fa fa-th-large"></i>
+        <span class="hidden-xs"> All Dashboards</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       CRITICAL ALERT STRIP
+       ======================================================== -->
+  <div class="critical-alert-strip" ng-if="criticalInsightCount > 0">
+    <i class="fa fa-exclamation-triangle"></i>
+    <span class="alert-count">{{ criticalInsightCount }}</span>
+    <span>critical insight{{ criticalInsightCount !== 1 ? 's' : '' }} detected —</span>
+    <a href="#" ng-click="showInsightsPanel = true; $event.preventDefault()"
+       style="color:inherit; text-decoration:underline; font-weight:600;">View now</a>
+  </div>
+
+  <!-- ========================================================
+       NLP SEARCH BAR
+       ======================================================== -->
+  <div class="nlp-bar-wrap">
+    <form ng-submit="processNlpBarQuery()" style="margin:0;">
+      <div class="nlp-bar">
+        <i class="fa fa-magic nlp-icon"></i>
+        <input type="text"
+               ng-model="nlpBarQuery"
+               placeholder="Ask a question about your data… e.g. 'Show patient trend last 30 days'"
+               autocomplete="off"
+               ng-focus="showNlpSuggestions = true"
+               ng-blur="hideSuggestionsDelay()">
+        <button type="submit" class="nlp-submit" ng-disabled="nlpLoading">
+          <span ng-if="!nlpLoading"><i class="fa fa-search"></i> Ask</span>
+          <span ng-if="nlpLoading"><i class="fa fa-spinner fa-spin"></i></span>
+        </button>
+      </div>
+    </form>
+    <!-- Quick suggestion chips -->
+    <div class="nlp-chips">
+      <span class="nlp-chip" ng-repeat="chip in nlpQuickChips | limitTo: 5"
+            ng-click="runNlpChip(chip)">
+        {{ chip }}
+      </span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       FILTER BAR
+       ======================================================== -->
+  <div class="filter-bar" ng-if="dashboard && availableFilters.length > 0">
+    <label><i class="fa fa-filter"></i> Filters:</label>
+    <div ng-repeat="filter in activeFilters" style="display:flex; align-items:center; gap:4px;">
+      <label style="font-size:12px; margin:0; color:#6C757D;">{{ filter.name }}:</label>
+      <select class="filter-select" ng-model="filter.value"
+              ng-options="opt for opt in filter.options">
+        <option value="">All</option>
+      </select>
+    </div>
+    <input type="date" class="filter-select" ng-model="filterDateFrom" title="From date">
+    <input type="date" class="filter-select" ng-model="filterDateTo" title="To date">
+    <button class="btn-apply-filters" ng-click="applyFilters()">
+      <i class="fa fa-check"></i> Apply
+    </button>
+    <button class="btn-clear-filters" ng-click="clearFilters()">Clear</button>
+    <span style="margin-left:auto; font-size:12px; color:#6C757D;" ng-if="lastRefreshed">
+      <i class="fa fa-clock-o"></i> Updated {{ lastRefreshed | date:'HH:mm:ss' }}
+    </span>
+  </div>
+
+  <!-- Page loading -->
+  <div class="page-loading" ng-if="loading">
+    <div class="spinner-ring"></div>
+    <p>Loading dashboard…</p>
+  </div>
+
+  <!-- ========================================================
+       DASHBOARD CONTENT
+       ======================================================== -->
+  <div ng-if="!loading">
+
+    <!-- KPI Summary Row (role-based top metrics) -->
+    <div class="kpi-summary-row" ng-if="summaryKpis && summaryKpis.length > 0">
+      <div class="kpi-summary-card" ng-repeat="kpi in summaryKpis">
+        <div class="kpi-icon" ng-class="kpi.colorClass">
+          <i class="fa" ng-class="kpi.icon"></i>
+        </div>
+        <div class="kpi-info">
+          <div class="kpi-val">{{ kpi.value }}</div>
+          <div class="kpi-label">{{ kpi.label }}</div>
+          <div class="kpi-trend" ng-class="kpi.change >= 0 ? 'up' : 'down'">
+            <i class="fa" ng-class="kpi.change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down'"></i>
+            {{ (kpi.change || 0) | number:1 }}%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Suggestions Bar -->
+    <div class="ai-suggestions-bar" ng-if="aiSuggestions && aiSuggestions.length > 0">
+      <i class="fa fa-lightbulb-o ai-icon"></i>
+      <span class="ai-label">AI Suggests</span>
+      <span class="suggestion-pill" ng-repeat="s in aiSuggestions | limitTo: 4"
+            ng-click="runNlpChip(s)" title="Click to explore">
+        {{ s }}
+      </span>
+      <span style="margin-left:auto; font-size:11px; color:#7986CB; cursor:pointer;"
+            ng-click="refreshSuggestions()">
+        <i class="fa fa-refresh"></i> Refresh
+      </span>
+    </div>
+
+    <!-- Main Widget Grid -->
+    <div class="dashboard-main">
+      <div class="widget-grid-area"
+           ng-if="widgets && widgets.length > 0"
+           dnd-list="widgets"
+           dnd-allowed-types="['widget']">
+        <div ng-repeat="widget in widgets"
+             class="widget-cell"
+             ng-class="getWidgetSpanClass(widget.gridWidth)"
+             ng-style="widget.gridHeight ? {'min-height': widget.gridHeight + 'px'} : {}"
+             dnd-draggable="widget"
+             dnd-type="'widget'"
+             dnd-moved="widgets.splice($index,1)"
+             dnd-selected="selectedWidget = widget"
+             ng-click="selectWidget(widget)">
+          <ai-dashboard-widget widget="widget" insights="widget.insights"></ai-dashboard-widget>
+        </div>
+        <li class="dnd-placeholder" style="list-style:none; grid-column:span 4; display:flex; align-items:center; justify-content:center; border:2px dashed #1976D2; border-radius:10px; min-height:180px; color:#1976D2; font-size:13px;">
+          <i class="fa fa-plus" style="margin-right:6px;"></i> Drop here
+        </li>
+      </div>
+
+      <!-- Empty dashboard state -->
+      <div class="dash-empty-state" ng-if="!widgets || widgets.length === 0">
+        <div class="empty-icon"><i class="fa fa-bar-chart"></i></div>
+        <h4>No widgets yet</h4>
+        <p>Use the Dashboard Builder to add charts, tables, and KPIs.</p>
+        <div style="display:flex; gap:12px; justify-content:center; margin-top:16px; flex-wrap:wrap;">
+          <button class="btn-config-apply" style="width:auto; padding:10px 24px;" ng-click="editDashboard()">
+            <i class="fa fa-pencil"></i> Open Builder
+          </button>
+          <button class="btn-dash-action" style="padding:10px 24px; border-radius:6px;"
+                  ng-click="showNlpPanel = true">
+            <i class="fa fa-magic"></i> Generate with NLP
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========================================================
+       FLOATING ACTION BUTTON
+       ======================================================== -->
+  <div ng-if="dashboard">
+    <div class="fab-menu" ng-if="showFab">
+      <div class="fab-item" ng-click="editDashboard(); showFab=false">
+        <div class="fab-item-icon"><i class="fa fa-plus"></i></div>
+        Add Widget
+      </div>
+      <div class="fab-item" ng-click="showNlpPanel = true; showFab=false">
+        <div class="fab-item-icon" style="background:#6A1B9A;"><i class="fa fa-magic"></i></div>
+        Ask AI
+      </div>
+      <div class="fab-item" ng-click="showInsightsPanel = true; showFab=false">
+        <div class="fab-item-icon" style="background:#F57F17;"><i class="fa fa-lightbulb-o"></i></div>
+        View Insights
+      </div>
+    </div>
+    <button class="fab" ng-click="showFab = !showFab" title="Quick actions">
+      <i class="fa" ng-class="showFab ? 'fa-times' : 'fa-plus'"></i>
+    </button>
+  </div>
+
+  <!-- ========================================================
+       NLP RESPONSE PANEL (slide-in from right)
+       ======================================================== -->
+  <div class="nlp-panel-overlay" ng-class="{open: showNlpPanel}">
+    <div class="nlp-panel-header">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <i class="fa fa-magic"></i>
+        <h5>Natural Language Query</h5>
+      </div>
+      <button class="btn-wh" style="color:#fff;" ng-click="showNlpPanel = false">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    <div class="nlp-panel-body" ng-controller="NLPQueryController">
+      <p style="font-size:13px; color:#6C757D; margin-bottom:16px;">
+        Ask anything about your data in plain language.
+      </p>
+
+      <!-- Query input -->
+      <div style="position:relative; margin-bottom:12px;">
+        <input type="text" ng-model="query"
+               placeholder="e.g. Show patient count by department"
+               style="width:100%; border:2px solid #1565C0; border-radius:8px; padding:10px 14px; font-size:14px;"
+               ng-keyup="$event.keyCode===13 && processQuery()">
+        <button style="position:absolute; right:8px; top:50%; transform:translateY(-50%);
+                        background:#1565C0; color:#fff; border:none; border-radius:6px;
+                        padding:5px 14px; cursor:pointer; font-size:13px;"
+                ng-click="processQuery()" ng-disabled="loading">
+          <i class="fa" ng-class="loading ? 'fa-spinner fa-spin' : 'fa-search'"></i>
+        </button>
+      </div>
+
+      <!-- Example queries -->
+      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px;">
+        <span class="nlp-chip" ng-repeat="s in querySuggestions | limitTo:5" ng-click="query=s; processQuery()">
+          {{ s }}
+        </span>
+      </div>
+
+      <!-- Loading -->
+      <div style="text-align:center; padding:24px; color:#6C757D;" ng-if="loading">
+        <i class="fa fa-spinner fa-spin" style="font-size:24px;"></i>
+        <p style="margin-top:10px; font-size:13px;">Processing your query…</p>
+      </div>
+
+      <!-- Response -->
+      <div ng-if="response && !loading">
+        <div class="nlp-intent-tag">Intent: {{ response.queryType }}</div>
+
+        <!-- Confidence -->
+        <div style="margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+            <span style="color:#6C757D;">Confidence</span>
+            <span style="font-weight:600; color:#1565C0;">{{ getConfidenceIndicator() }} ({{ (confidenceScore*100)|number:0 }}%)</span>
+          </div>
+          <div class="confidence-bar">
+            <div class="confidence-fill" ng-style="{width: (confidenceScore*100)+'%'}"></div>
+          </div>
+        </div>
+
+        <!-- Clarification questions -->
+        <div ng-if="clarificationQuestions && clarificationQuestions.length > 0"
+             style="background:#FFF8E1; border:1px solid #FFE082; border-radius:8px; padding:12px; margin-bottom:14px;">
+          <div style="font-size:12px; font-weight:700; color:#F57F17; margin-bottom:8px;">
+            <i class="fa fa-question-circle"></i> Please clarify:
+          </div>
+          <ul style="margin:0; padding-left:16px;">
+            <li ng-repeat="q in clarificationQuestions" style="font-size:13px; margin-bottom:4px;">{{ q }}</li>
+          </ul>
+        </div>
+
+        <!-- Suggested widget -->
+        <div class="nlp-suggestion-card" ng-if="suggestedWidget">
+          <h6><i class="fa fa-magic"></i> Suggested Widget</h6>
+          <div style="display:flex; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
+            <span class="dash-card-tag">{{ suggestedWidget.widgetType }}</span>
+            <span class="dash-card-tag" ng-if="suggestedWidget.title">{{ suggestedWidget.title }}</span>
+          </div>
+          <p style="font-size:12px; color:#388E3C; margin:0 0 10px;">
+            {{ suggestedWidget.description || 'This widget will visualize your requested data.' }}
+          </p>
+          <button class="btn-config-apply" ng-click="applySuggestedWidget()">
+            <i class="fa fa-plus"></i> Add to Dashboard
+          </button>
+        </div>
+
+        <!-- Raw data results -->
+        <div ng-if="response.queryData" style="margin-top:14px;">
+          <div style="font-size:12px; font-weight:700; color:#6C757D; margin-bottom:8px;">Query Results</div>
+          <div style="background:#F5F7FA; border-radius:6px; padding:12px; max-height:200px; overflow:auto; font-size:12px; font-family:monospace;">
+            {{ response.queryData | json }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       AI INSIGHTS PANEL (slide-in from right)
+       ======================================================== -->
+  <div class="insights-panel" ng-class="{open: showInsightsPanel}">
+    <div class="insights-panel-header">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <i class="fa fa-lightbulb-o"></i>
+        <h5>AI Insights</h5>
+      </div>
+      <button class="btn-wh" style="color:#fff;" ng-click="showInsightsPanel = false">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    <!-- Insight filters -->
+    <div class="insights-filters" ng-controller="AIInsightsController">
+      <select ng-model="severityFilter" class="filter-select">
+        <option value="ALL">All Severities</option>
+        <option value="LOW">Low</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="HIGH">High</option>
+        <option value="CRITICAL">Critical</option>
+      </select>
+      <select ng-model="typeFilter" class="filter-select">
+        <option value="ALL">All Types</option>
+        <option value="ANOMALY">Anomaly</option>
+        <option value="FORECAST">Forecast</option>
+        <option value="TREND">Trend</option>
+        <option value="RECOMMENDATION">Recommendation</option>
+        <option value="CORRELATION">Correlation</option>
+      </select>
+    </div>
+    <div class="insights-list" ng-controller="AIInsightsController">
+      <div ng-if="filteredInsights.length === 0"
+           style="text-align:center; padding:40px; color:#6C757D;">
+        <i class="fa fa-check-circle" style="font-size:32px; color:#2E7D32; margin-bottom:10px; display:block;"></i>
+        <div style="font-size:13px;">No insights for selected filters</div>
+      </div>
+      <div class="insight-item" ng-repeat="insight in filteredInsights"
+           ng-class="insight.severity">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+          <div class="insight-item-title">{{ insight.title }}</div>
+          <span class="insight-badge-type">{{ insight.insightType }}</span>
+        </div>
+        <div class="insight-item-desc">{{ insight.description }}</div>
+        <div class="insight-item-meta">
+          <span>Confidence: {{ (insight.confidenceScore*100)|number:0 }}%</span>
+          <span ng-if="insight.severity">
+            <i class="fa fa-circle" style="font-size:8px;"></i> {{ insight.severity }}
+          </span>
+          <span ng-if="insight.isAcknowledged" style="color:#2E7D32;">
+            <i class="fa fa-check"></i> Acknowledged
+          </span>
+        </div>
+        <div ng-if="insight.recommendedAction"
+             style="background:#E8F5E9; border-radius:4px; padding:6px 10px; margin-top:8px; font-size:12px; color:#2E7D32;">
+          <i class="fa fa-arrow-right"></i> {{ insight.recommendedAction }}
+        </div>
+        <div class="insight-item-actions">
+          <button class="btn-insight ack"
+                  ng-click="acknowledgeInsight(insight)"
+                  ng-disabled="insight.isAcknowledged">
+            <i class="fa fa-check"></i> {{ insight.isAcknowledged ? 'Acknowledged' : 'Acknowledge' }}
+          </button>
+          <button class="btn-insight resolve"
+                  ng-click="resolveInsight(insight)"
+                  ng-disabled="insight.isResolved">
+            <i class="fa fa-check-circle"></i> {{ insight.isResolved ? 'Resolved' : 'Resolve' }}
+          </button>
+          <button class="btn-insight" ng-click="setFeedback(insight, 'USEFUL')">
+            <i class="fa fa-thumbs-up"></i>
+          </button>
+          <button class="btn-insight" ng-click="setFeedback(insight, 'NOT_USEFUL')">
+            <i class="fa fa-thumbs-down"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       WIDGET FULLSCREEN MODAL
+       ======================================================== -->
+  <div ng-if="expandedWidget"
+       style="position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1100;
+              display:flex; align-items:center; justify-content:center;"
+       ng-click="expandedWidget = null">
+    <div ng-click="$event.stopPropagation()"
+         style="background:#fff; border-radius:12px; width:90vw; max-width:900px;
+                height:80vh; display:flex; flex-direction:column; overflow:hidden;
+                box-shadow:0 10px 40px rgba(0,0,0,0.25);">
+      <div style="padding:16px 20px; border-bottom:1px solid #DEE2E6; display:flex; justify-content:space-between; align-items:center;">
+        <h5 style="margin:0; font-size:16px; font-weight:600;">{{ expandedWidget.title }}</h5>
+        <button class="btn-wh" ng-click="expandedWidget = null" style="font-size:18px;">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div style="flex:1; padding:20px; overflow:auto;">
+        <ai-dashboard-widget widget="expandedWidget" insights="expandedWidget.insights"></ai-dashboard-widget>
+      </div>
+    </div>
+  </div>
+
+</div>

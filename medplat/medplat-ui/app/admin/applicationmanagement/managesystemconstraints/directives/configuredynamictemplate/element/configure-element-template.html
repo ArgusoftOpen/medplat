@@ -1,0 +1,45 @@
+<style>
+    .mb-10 {
+        margin-bottom: 10px !important;
+    }
+
+    .p-4px {
+        padding: 4px !important;
+    }
+</style>
+<configure-card-template-directive ng-if="element.type === 'CARD'" class="{{cardClasses}}" config="element.config"
+    on-child-web-component-changed="onChildWebComponentChangedDir(childWebComponent, elements, element, parentComponentType)"
+    elements="element.elements" sibling-elements="siblingElements" element-index="elementIndex"
+    form-field-list="formFieldList">
+</configure-card-template-directive>
+<configure-row-template-directive ng-if="element.type === 'ROW'" class="{{rowClasses}}" config="element.config"
+    on-child-web-component-changed="onChildWebComponentChangedDir(childWebComponent, elements, element, parentComponentType)"
+    elements="element.elements" sibling-elements="siblingElements" element-index="elementIndex"
+    form-field-list="formFieldList">
+</configure-row-template-directive>
+<configure-col-template-directive ng-if="element.type === 'COL'" class="{{colClasses}}" config="element.config"
+    on-child-web-component-changed="onChildWebComponentChangedDir(childWebComponent, elements, element, parentComponentType)"
+    elements="element.elements" sibling-elements="siblingElements" element-index="elementIndex"
+    form-field-list="formFieldList">
+</configure-col-template-directive>
+<div ng-if="element.type === 'CUSTOM_HTML'">
+    <input type="text" form-control class="form-control cst-form-control" ng-model="element.config.html">
+</div>
+<div ng-if="element.type === 'TECHO_FORM_FIELD'">
+    <div class="card cst-card">
+        <div class="card-title mb-0 p-4px">
+            <div class="float-left lh-29">
+                <strong class="text">
+                    &#60;&#60; Field &#62;&#62;
+                </strong>
+                {{(element.config.fieldName || element.config.fieldKey) + (element.config.fieldType ? ' | ' +
+                element.config.fieldType : '')}}
+            </div>
+            <div class="float-right p-0" style="display: inline-flex;">
+                <em class="cursor-pointer fa fa-edit fa-2x text-info mr-2" uib-tooltip="Edit Web Component Config"
+                    ng-click="manageFieldConfig(element.config)">
+                </em>
+            </div>
+        </div>
+    </div>
+</div>

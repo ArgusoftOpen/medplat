@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- for sewa app -->
+    <color name="colorPrimaryDark">#d32f2f</color>
+    <color name="colorAccent">#00c853</color>
+    <color name="transparent_blue">#322100c8</color>
+    <color name="pregnancyStatusTextSelected">#39b54f</color>
+    <color name="answer">#000</color>
+
+    <!-- for techo app -->
+    <color name="colorPrimary">#245eae</color>
+    <color name="colorSecondary">#24ae92</color>
+    <color name="labelColor">#183e47</color>
+    <!--    <color name="listTextColor">#0000</color>-->
+    <color name="textColor">#4d4d4d</color>
+    <color name="white">#ffffff</color>
+    <color name="white_less_opacity">#66FFFFFF</color>
+    <color name="yellow">#fcbb23</color>
+    <color name="logoColor">#d4663b</color>
+    <color name="black">#000000</color>
+    <color name="detailsBackground">#eaf3ff</color>
+    <color name="detailsBackgroundBorder">#d2dff3</color>
+
+    <!-- new techo colors -->
+    <color name="gradientTopLeft">#1463bc</color>
+    <color name="gradientBottomRight">#0e94cf</color>
+
+    <color name="bodyBackground">#fcfcff</color>
+    <color name="buttonBackground">#0d99d1</color>
+    <color name="activeListBackground">#126fc1</color>
+    <color name="listSeparatorBackground">#e4e8f1</color>
+    <color name="lastUpdateLabelBackground">#dff1f9</color>
+    <color name="notificationBadgeBackground">#ec005e</color>
+    <color name="notificationCardBorder">#ebebeb</color>
+    <color name="notificationCardSelectedBorder">#88bbff</color>
+    <color name="notificationCardSelectedBackground">#eaf3ff</color>
+    <color name="taskDueBackground">#ffecec</color>
+
+    <color name="spinnerBorderUnselected">#b8c3d6</color>
+    <color name="spinnerBorderSelected">#245eae</color>
+
+    <color name="lastUpdateLabelTextColor">#58616e</color>
+    <color name="toolbarTitleColor">#fff</color>
+    <color name="buttonTextColor">#fff</color>
+    <color name="labelTextColor">#0a458f</color>
+    <color name="listTitleColor">#1176c3</color>
+    <color name="listTextColor">#686f7c</color>
+    <color name="listTextSelectedColor">#000000</color>
+    <color name="checkboxTextSelectedColor">#1275c3</color>
+    <color name="orTextColor">#cad1db</color>
+    <color name="placeHolderTextColor">#cad1db</color>
+    <color name="versionTextColor">#484f53</color>
+    <color name="detailsTextColor">#4a4f55</color>
+    <color name="hofTextColor">#307006</color>
+    <color name="pregnantWomenTextColor">#ff0000</color>
+    <color name="childrenTextColor">#0069c6</color>
+    <color name="notificationBadgeTextColor">#fff</color>
+
+    <color name="training">#ddf6ff</color>
+
+    <color name="transparent">#00000000</color>
+
+    <!--    Video View-->
+    <color name="video_view_titlebar">#7f000000</color>
+    <color name="video_view_light_gray">#ffF0F0F0</color>
+    <color name="extra_light_gray">#67F0F0F0</color>
+
+    <!--    Lms Related colors    -->
+    <color name="lms_correct_background">#9fe2a7</color>
+    <color name="lms_incorrect_background">#feb7b7</color>
+
+    <color name="rb_correct_text">#26652d</color>
+    <color name="rb_incorrect_text">#c85d5d</color>
+
+    <color name="cb_tick_correct">#529d5b</color>
+    <color name="cb_tick_incorrect">#f35f5f</color>
+
+    <color name="lms_answer_layout">#f3f7fb</color>
+
+    <color name="lms_blanks_text">#415e69</color>
+    <color name="lms_instruction_text">#b5bfc9</color>
+    <color name="lightYellow">#FFEB3B</color>
+    <color name="orange">#EE7D19</color>
+    <color name="expired_medicine_background">#f5e4e4</color>
+    <color name="normal">#70CE98</color>
+    <color name="dark_green">#009688</color>
+    <color name="high_risk">#F95F5F</color>
+    <color name="low_opacity_light_gray">#66F0F0F0</color>
+    <color name="low_opacity_white">#33FFFFFF</color>
+    <color name="gray">#919191</color>
+</resources>

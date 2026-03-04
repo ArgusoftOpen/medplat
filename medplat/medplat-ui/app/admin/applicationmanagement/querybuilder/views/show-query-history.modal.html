@@ -1,0 +1,61 @@
+<style>
+    .overflow-ellipsis {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row" ng-if="mdctrl.loaded === true">
+        <div class="col-12 padding-left-right-0">
+            <div class="cst-table table-responsive">
+                <table aria-describedby="table"
+                    class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th id="version" style="width: 5%;">Version</th>
+                            <th id="Description" style="width: 30%;">Description</th>
+                            <th id="Query" style="width: 65%;">Query</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody">
+                        <tr ng-repeat="history in mdctrl.historyList" ng-if="mdctrl.historyList.length > 0">
+                            <td> {{ mdctrl.historyList.length - $index}} </td>
+                            <td>
+                                <strong>Code : </strong>{{history.oldCode| emptylabel }}<br />
+                                <strong>Date Time :
+                                </strong>{{history.action_tstamp_tx| date:'dd/MM/yyyy hh:mm:ss a'}}<br />
+                                <strong>Description : </strong>{{history.oldDescription| emptylabel }}<br />
+                                <strong>Status : </strong>{{history.oldState| emptylabel }}<br />
+                                <strong>Parameters : </strong>{{history.oldParams| emptylabel }}<br />
+                                <strong>Returns Result Set : </strong>{{history.oldReturnsResultSet| yesOrNo }}<br />
+                                <strong>Is Public : </strong>{{history.oldIsPublic| yesOrNo }}<br />
+                                <strong>CRUD Op : </strong>
+                                <span ng-if="history.action === 'I'">Insert</span>
+                                <span ng-if="history.action === 'U'">Update</span>
+                                <span ng-if="history.action === 'D'">Delete</span>
+                                <span ng-if="history.action === 'T'">Truncate</span>
+                                <span
+                                    ng-if="history.action === 'null' || history.action === undefined  || history.action === null ">N/A</span>
+                                <br />
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" ng-click="mdctrl.copyQuery(history.oldQuery)">Copy
+                                    Query</button>
+                                <span style="white-space: pre-wrap;">{{history.oldQuery}}</span>
+                            </td>
+                        </tr>
+                        <tr ng-if="(!mdctrl.historyList || mdctrl.historyList.length === 0)">
+                            <td colspan="6">No queries History</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-12 padding-left-right-0">
+            <div class="float-right padding-20">
+                <button class="btn btn-secondary" ng-click="mdctrl.cancel()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

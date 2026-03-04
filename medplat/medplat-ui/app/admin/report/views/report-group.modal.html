@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h4 class="text">
+        {{(groupModal.groupParam.id?'Edit Group':'Add Group')}}
+    </h4>
+    <button type="button" class="close" ng-click="groupModal.close()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form novalidate name="groupModal.groupForm">
+    <div class="modal-body">
+        <div class="form-group">
+            <validate for="menutype" required-msg="Select menu type">
+                <label for="menutype" class="control-label" control-label>Menu Type</label>
+                <select class="form-control cst-form-control" id="parentgroup" name="menutype" form-control required
+                    ng-model="groupModal.groupParam.type" ng-change="groupModal.retrieveGroups()"
+                    ng-options="menutype as menutype|titlecase for menutype in groupModal.menuTypes">
+                    <option value="">None</option>
+                </select>
+                <placeholder></placeholder>
+            </validate>
+        </div>
+        <div class="form-group">
+            <label for="parentgroup" class="control-label">Parent Group</label>
+            <select class="form-control cst-form-control" id="parentgroup" name="parentgroup"
+                ng-model="groupModal.groupParam.parentGroup" chosen-directive="groupModal.options"
+                ng-options="option.id as option.groupName for option in groupModal.options| orderBy:'groupName'">
+                <option value="">None</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <validate for="groupName" required-msg="Enter group name">
+                <label for="groupName" class="control-label col-xs-6 no-padding" control-label>Group Name</label>
+                <input type="text" class="form-control cst-form-control" required id="groupName"
+                    placeholder="Enter group name" name="groupName" form-control maxlength="100"
+                    ng-model="groupModal.groupParam.groupName" />
+                <placeholder class="col-xs-6 no-padding text-right"></placeholder>
+            </validate>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default btn-sm" type="button" ng-click="groupModal.close()">Close</button>
+        <button class="btn btn-primary btn-sm" type="submit" ng-click="groupModal.save()">Save</button>
+    </div>
+</form>

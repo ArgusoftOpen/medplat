@@ -1,0 +1,44 @@
+<div class="modal-header">
+    <h4 class="text">{{fmconf.message}} </h4>
+    <button type="button" class="close" ng-click="fmconf.cancel()">
+        <span aria-hidden="true">×</span>
+    </button>
+
+</div>
+<div class="modal-body">
+    <div>
+        <table class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+            <thead class="cst-thead">
+                <tr>
+                    <th>Family Id</th>
+                    <th>Member Names</th>
+                    <th>HOF</th>
+                </tr>
+            </thead>
+            <tbody class="cst-tbody">
+                <tr ng-repeat=" family in  fmconf.familyDetails" ng-if="fmconf.familyDetails.length > 0">
+                    <td ng-bind="family.familyId"></td>
+                    <td>
+                        <span ng-repeat="member in family.members" ng-if="family.members.length > 0">
+                            <span ng-bind="member.firstName + ' ' + member.middleName + ' ' + member.lastName"></span>
+                            <span ng-if="$index !== (family.members.length - 1)">,</span>
+                        </span>
+                        <span ng-if="family.members.length === 0">N.A</span>
+                    </td>
+                    <td>
+                        <span ng-if="!family.hof">N.A</span>
+                        <span
+                            ng-bind="(family.hof.firstName + ' ' + family.hof.middleName + ' ' + family.hof.lastName)"></span>
+                    </td>
+                </tr>
+                <tr ng-if="fmconf.familyDetails.length === 0">
+                    <td colspan="3">No Family Available!</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="fmconf.ok()">Move</button>
+    <button type="button" class="btn btn-secondary" ng-click="fmconf.cancel()">Cancel</button>
+</div>

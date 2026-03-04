@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/listview_selector"
+    android:orientation="horizontal">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/list_text_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:padding="10dp"
+        android:textAppearance="@style/ListTextView"
+        android:textColor="@color/listview_text_color_selector"
+        android:textSize="14sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/list_text_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:text="@string/dash"
+        android:textAppearance="@style/ListTextView"
+        android:textColor="@color/listview_text_color_selector"
+        android:textSize="14sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/list_text_regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:padding="10dp"
+        android:textAppearance="@style/ListTextView"
+        android:textColor="@color/listview_text_color_selector"
+        android:ellipsize="end"
+        android:textSize="14sp" />
+</LinearLayout>
+
+    <!--    android:minHeight="?android:attr/listPreferredItemHeight"-->

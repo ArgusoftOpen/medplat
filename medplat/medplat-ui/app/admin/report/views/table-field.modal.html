@@ -1,0 +1,113 @@
+<div ng-form="rl.newFieldForm">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="filter-div-title">{{rl.editMode?'Edit':'Add'}} Field</h5>
+        </div>
+    </div>
+    <div class="filter-div-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <validate for="fieldName" required-msg="Enter field name"
+                        nameExist-msg="The field with same name exist. Please enter another field name">
+                        <label for="exampleFormControlInput1" control-label>Field/Parameter Name</label>
+                        <input type="text" class="form-control cst-form-control" name="fieldName" ng-trim="false"
+                            required maxlength="100" ng-model="rl.newField.fieldName" form-control
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <validate for="customStyle" required-msg="Enter field name"
+                        nameExist-msg="The field with same name exist. Please enter another field name">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <label for="exampleFormControlInput1" control-label>Custom Style</label>
+                                <div class="col-xl-2 float-right">
+                                    <em popover-placement="'top'"
+                                        uib-popover="Use @fieldName@ for row field name. Like..{'property1':@fieldName1@>@fieldName2@?'value1':'value2','property2':'value3'}}"
+                                        popover-trigger="'mouseenter'" class="fa fa-question-circle-o">
+                                    </em>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control cst-form-control" name="customStyle"
+                            ng-model="rl.newField.customStyle" ng-pattern="" form-control
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <placeholder></placeholder>
+                    </validate>
+                </div>
+                <div class="form-group">
+                    <label control-label class="control control-checkbox">Is Link
+                        <input checked="checked" type="checkbox" ng-model="rl.newField.isLink"
+                            ng-change="rl.newField.customState=''; rl.newField.customParam=''"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                        <div class="control_indicator"></div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div ng-if='rl.newField.isLink'>
+                        <validate for='navigationState' required-msg='Select navigation state'>
+                            <label for="exampleFormControlInput1" control-label>Navigation State</label>
+                            <select form-control class="form-control cst-form-control" name='navigationState'
+                                ng-options='navigationState.menuConfig.navigationState as navigationState.name for navigationState in rl.navigationStates'
+                                ng-model='rl.newField.navigationState'
+                                ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                <option value=""> Custom</option>
+                            </select>
+                            <placeholder></placeholder>
+                        </validate>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div
+                        ng-if='rl.newField.isLink && (!rl.newField.navigationState || rl.newField.navigationState == "")'>
+                        <label for="exampleFormControlInput1" control-label> State</label>
+                        <input type="text" ng-model='rl.newField.customState' class="form-control cst-form-control"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div
+                        ng-if='rl.newField.isLink && (rl.newField.navigationState || rl.newField.navigationState != "")'>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <label for="exampleFormControlInput1" control-label> Parameters</label>
+                                <div class="col-xl-1 float-right">
+                                    <em popover-placement="'top'"
+                                        uib-popover="Use @fieldName@ for row field name and $fieldName$ for value of field from filter. Like.. {'param1':@fieldName1@,'param2':$fieldName2$}"
+                                        popover-trigger="'mouseenter'" class="fa fa-question-circle-o">
+                                    </em>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="text" ng-model='rl.newField.customParam' class="form-control cst-form-control"
+                            ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                    </div>
+                </div>
+                <div class="form-group"
+                    ng-if='rl.newField.isLink && (rl.newField.navigationState || rl.newField.navigationState != "")'>
+                    <label>To be Shown On location level</label>
+                    <input type="text" ng-model='rl.newField.locationLevelForLink' class="form-control cst-form-control"
+                        ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label control-label class="control control-checkbox">Is Reference Column
+                        <input checked="checked" type="checkbox" ng-model="rl.newField.isReferenceColumn">
+                        <div class="control_indicator"></div>
+                    </label>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr>
+                <div class="form-group text-right">
+                    <button class="btn btn-secondary" ng-click="rl.toggleFilter()">Cancel</button>
+                    <button class="btn btn-primary"
+                        ng-click="rl.addFieldToTableContainer()">{{rl.editMode?'Save':'Add'}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

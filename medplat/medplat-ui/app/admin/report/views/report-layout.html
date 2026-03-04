@@ -1,0 +1,543 @@
+<script>
+    $('.cst-popover-toggle').on('click', function () {
+        $(this).parent().find('.cst-popover').fadeToggle();
+    });
+</script>
+<div class="container-fluid" ng-if="rl.featureJson.basic || rl.featureJson.advanced">
+    <div class="row" ng-form="rl.manageTemplateForm">
+        <div class="col-12 mb-15">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Add/Edit Report</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-15">
+                        <div class="col-12 col-lg-6 col-xl-2">
+                            <div class="form-group">
+                                <validate for='name' required-msg="Enter report name">
+                                    <label for="name" control-label>Report Name</label>
+                                    <input type="text" class="form-control cst-form-control" form-control
+                                        placeholder="e.g. Daily Report" name="name" id="name"
+                                        ng-model="rl.reportObj.name" required>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2">
+                            <div class="form-group">
+                                <validate for='type' required-msg="Select report type">
+                                    <label for="type" control-label>Layout</label>
+                                    <select name="type" class="form-control" form-control
+                                        ng-options="layoutObj.key as layoutObj.value for layoutObj in rl.layouts|orderBy:'value'"
+                                        ng-model="rl.reportObj.configJson.layout"
+                                        ng-disabled='rl.editMode || (rl.featureJson.basic && !rl.featureJson.advanced)'
+                                        ng-change="rl.layoutChanged()" required>
+                                    </select>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2">
+                            <div class="form-group">
+                                <validate for="menuType" required-msg="Select menu type">
+                                    <label for="menuType" control-label>Menu Type</label>
+                                    <select id="reportgroup" name="menuType" class="form-control cst-form-control"
+                                        form-control ng-model="rl.reportObj.menuType" chosen-directive="rl.menuTypes"
+                                        ng-options="option as option|titlecase for option in rl.menuTypes"
+                                        ng-change="rl.retrieveGroups()">
+                                        <option value="">None</option>
+                                    </select>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2">
+                            <div class="form-group">
+                                <validate for="exampleFormControlInput1" required-msg="Select group name">
+                                    <label for="exampleFormControlInput1" control-label>Group Name</label>
+                                    <select id="reportgroup" name="reportgroup" class="form-control cst-form-control"
+                                        chosen-options="rl.chosenOptions" ng-model="rl.reportObj.parentGroupId"
+                                        chosen-directive="rl.parentGroup" form-control
+                                        ng-options="option.id as option.groupName for option in rl.parentGroup"
+                                        ng-change="rl.onParentGroupChanged()">
+                                        <option value="">None</option>
+                                    </select>
+                                    <span class="text-danger" ng-if="rl.isMenuUnselected">
+                                        Please select menu type to add group
+                                    </span>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2">
+                            <div class="form-group">
+                                <validate for="exampleFormControlInput1" required-msg="Select subgroup">
+                                    <label for="exampleFormControlInput1" control-label>Sub Group</label>
+                                    <select id="reportsubgroup" name="reportsubgroup"
+                                        class="form-control cst-form-control" chosen-directive="rl.subGroup"
+                                        form-control chosen-options="rl.chosenOptionsForSubGroup"
+                                        ng-model="rl.reportObj.subGroupId"
+                                        ng-options="option.id as option.groupName for option in rl.subGroup"
+                                        ng-change="rl.onSubGroupChanged()">
+                                        <option value="">None</option>
+                                    </select>
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2">
+                            <div class="form-group">
+                                <validate for='code' required-msg="Enter code">
+                                    <label for="code" control-label>Code</label>
+                                    <input type="text" class="form-control cst-form-control" form-control name="code"
+                                        id="name" remove-spaces ng-trim="false" maxlength="20"
+                                        ng-change="rl.reportObj.code = rl.reportObj.code.toLowerCase()"
+                                        ng-model="rl.reportObj.code" required
+                                        ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                    <placeholder></placeholder>
+                                </validate>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 mt-15">
+                            <div class="form-group">
+                                <label control-label class="control control-checkbox">Is Back Button Required
+                                    <input checked="checked" type="checkbox"
+                                        ng-model="rl.reportObj.configJson.isBackButtonRequired">
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label control-label class="control control-checkbox">Show Date as On
+                                    <input checked="checked" type="checkbox"
+                                        ng-model="rl.reportObj.configJson.showDateAsOn">
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 mt-15">
+                            <div class="form-group">
+                                <label control-label class="control control-checkbox">Filter to be open by default
+                                    <input checked="checked" type="checkbox"
+                                        ng-model="rl.reportObj.configJson.isFilterOpen">
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label control-label class="control control-checkbox">Is Support Offline Download
+                                    <input checked="checked" type="checkbox"
+                                        ng-model="rl.reportObj.configJson.isSupportOffline">
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 mt-15">
+                            <div class="form-group">
+                                <label control-label class="control control-checkbox">Print Option
+                                    <input checked="checked" type="checkbox"
+                                        ng-model="rl.reportObj.configJson.isPrintOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label control-label class="control control-checkbox">Excel Option
+                                    <input checked="checked" type="checkbox"
+                                        ng-model="rl.reportObj.configJson.isExcelOption">
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 mt-15">
+                            <div class="form-group">
+                                <label control-label class="control control-checkbox">Provide Search
+                                    <input checked="checked" type="checkbox"
+                                        ng-model="rl.reportObj.configJson.isProvideSearch"
+                                        ng-change="rl.searchOptionChanged()">
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 mt-15">
+                            <div class="form-group">
+                                <label for="name" control-label>Location level(Print and excel)</label>
+                                <input type="text" class="form-control cst-form-control" form-control numbers-only
+                                    name="locationLevel" id="locationLevel"
+                                    ng-model="rl.reportObj.configJson.locationLevel">
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="rl.reportObj.configJson.isPrintOption">
+                        <hr>
+                        <div class="row mb-15">
+                            <div class="col-12">
+                                <h4 class="card-sub-title">Print Configurations
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row mb-15">
+                            <div class="col-12 col-lg-6 col-xl-2">
+                                <div class="form-group">
+                                    <validate for='numberOfRecordsPerPage' required-msg="Enter Value"
+                                        min-msg="Min value 1 allowed">
+                                        <label for='numberOfRecordsPerPage' control-label
+                                            style="white-space: initial; line-height: 1.5;">
+                                            Number of Records Per Page
+                                        </label>
+                                        <input type="number" form-control class="form-control cst-form-control"
+                                            name="numberOfRecordsPerPage" id="numberOfRecordsPerPage"
+                                            ng-model="rl.reportObj.configJson.numberOfRecordsPerPage" min="1" required>
+                                        <placeholder>
+                                        </placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-2">
+                                <div class="form-group">
+                                    <validate for='numberOfColumnPerPage' required-msg="Enter Value"
+                                        min-msg="Min value {{rl.minNumberOfColumnPerPage}} allowed">
+                                        <label for='numberOfColumnPerPage' control-label
+                                            style="white-space: initial; line-height: 1.5;">
+                                            Number of Column Per Page
+                                        </label>
+                                        <input type="number" form-control class="form-control cst-form-control"
+                                            name="numberOfColumnPerPage" id="numberOfColumnPerPage"
+                                            ng-model="rl.reportObj.configJson.numberOfColumnPerPage"
+                                            min="{{rl.minNumberOfColumnPerPage}}" required>
+                                        <placeholder>
+                                        </placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-2">
+                                <div class="form-group">
+                                    <validate for='orientation' required-msg="Select orientation">
+                                        <label for="orientation" class="control-label" control-label>
+                                            Orientation
+                                        </label>
+                                        <br>
+                                        <label class="control control-radio mt-10">Portrait
+                                            <input id='orientation' ng-value="false" name="orientation" form-control
+                                                type="radio" required ng-model="rl.reportObj.configJson.isLandscape">
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <label class="control control-radio mt-10">Landscape
+                                            <input id='orientation' ng-value="true" name="orientation" form-control
+                                                type="radio" required ng-model="rl.reportObj.configJson.isLandscape">
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                        <placeholder></placeholder>
+                                    </validate>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="display-note">
+                            <p style="margin-bottom: 8px;"><strong>Note:</strong></p>
+                            <ul style="padding-left: 30px;">
+                                <li>
+                                    Preferred <strong>Number of Records Per Page</strong> for Portrait orientation is 20
+                                    and
+                                    for Landscape orientation is 15.
+                                </li>
+                                <li>
+                                    Preferred maximum <strong>Number of Column Per Page</strong> is 10.
+                                </li>
+                                <li>
+                                    <strong>Number of Column Per Page</strong> should be greater than total number of
+                                    repeatable column (i.e. Reference Column).
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-15">
+                        <div class="col-12">
+                            <h4 class="card-sub-title">Add Filter Fields
+                                <button class="btn btn-primary pull-right "
+                                    ng-click="rl.toggleFilter(); rl.tableConfiguration = false"
+                                    ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                    Add
+                                </button>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row mb-15">
+                        <div class="col-12">
+                            <div class="cst-table table-responsive">
+                                <table class="table table-sm table-striped table-bordered header-fixed">
+                                    <thead>
+                                        <th>
+                                        </th>
+                                        <th>
+                                            Field name
+                                        </th>
+                                        <th>
+                                            Display name
+                                        </th>
+                                        <th>
+                                            Field Type
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </thead>
+                                    <tbody jq-sortable sort-data="rl.reportObj.configJson.containers.fieldsContainer">
+                                        <tr jq-sortable-item
+                                            ng-repeat="field in rl.reportObj.configJson.containers.fieldsContainer">
+                                            <td jq-sortable-handle>
+                                                <em class="ion-android-more-vertical"></em>
+                                            </td>
+                                            <td>
+                                                {{field.fieldName}}
+                                            </td>
+                                            <td>
+                                                {{field.displayName}}
+                                            </td>
+                                            <td>
+                                                {{field.fieldType}}
+                                            </td>
+                                            <td class="action-cell">
+                                                <ul class="action-item">
+                                                    <li
+                                                        ng-click="rl.toggleFilter(field,$index); rl.tableConfiguration = false">
+                                                        <a class="action-icon edit-icon">
+                                                        </a>
+                                                    </li>
+                                                    <li ng-if="rl.featureJson.advanced">
+                                                        <a ng-click="rl.deleteField($index, field.fieldName)"
+                                                            class="action-icon delete-icon">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            ng-if="!rl.reportObj.configJson.containers.fieldsContainer || rl.reportObj.configJson.containers.fieldsContainer.length == 0">
+                                            <td colspan="4">
+                                                No filter fields configured
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div ng-repeat="field in rl.reportObj.configJson.containers.fieldsContainer">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-15">
+                        <div class="col-12">
+                            <h4 class="card-sub-title">Add Table Data</h4>
+                        </div>
+                    </div>
+                    <div class="row mb-15">
+                        <div class="col-12">
+                            <h4 class="card-sub-title">Configure Table Fields
+                                <button class="btn btn-primary pull-right " ng-click="rl.toggleFilter();
+                                    rl.tableConfiguration = true"
+                                    ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">Add</button>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row  mb-15 ">
+                        <div class="col-12">
+                            <div class="cst-table table-responsive">
+                                <table class="table table-sm table-striped table-bordered header-fixed">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Field name
+                                            </th>
+                                            <th style="width: 35%">
+                                                Style
+                                            </th>
+                                            <th style="width: 35%">
+                                                State
+                                            </th>
+                                            <th>
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="field in rl.reportObj.configJson.containers.tableFieldContainer">
+                                            <td>
+                                                {{field.fieldName}}
+                                            </td>
+                                            <td>
+                                                {{field.customStyle|emptylabel}}
+                                            </td>
+                                            <td>
+                                                {{field.customState|emptylabel}}
+                                            </td>
+                                            <td class="action-cell">
+                                                <ul class="action-item">
+                                                    <li ng-click="rl.toggleFilter(field,$index);
+                                                            rl.tableConfiguration = true">
+                                                        <a class="action-icon edit-icon">
+                                                        </a>
+                                                    </li>
+                                                    <li ng-if="rl.featureJson.advanced">
+                                                        <a ng-click="rl.deleteField($index, field.fieldName, true)"
+                                                            class="action-icon delete-icon">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            ng-if="!rl.reportObj.configJson.containers.tableFieldContainer || rl.reportObj.configJson.containers.tableFieldContainer.length == 0">
+                                            <td colspan="4">
+                                                No table fields configured
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-15">
+                        <div class="col-12 col-lg-6 col-xl-2 mt-15">
+                            <div class="form-group">
+                                <label control-label class="control control-checkbox">HTML DATA
+                                    <input checked="checked" type="checkbox" ng-model="rl.reportObj.configJson.htmlData"
+                                        ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 mt-15">
+                            <div class="form-group">
+                                <label control-label class="control control-checkbox">Colspan Data
+                                    <input checked="checked" type="checkbox"
+                                        ng-model="rl.reportObj.configJson.colspanData"
+                                        ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)">
+                                    <div class="control_indicator"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 inline-form">
+                            <div style="margin-bottom: 30px;">
+                                <span ng-if="rl.reportObj.configJson.isProvideSearch == true">
+                                    <strong>PLEASE NOTE : In order to have search feature please add #searchstring# parameter in your
+                                        query
+                                        <br>
+                                        I.e - select * from table_name where #searchstring#, select * from table_name
+                                        where age>18 and #searchstring#
+                                        <br>
+                                        Also, make sure "Provide search" is ticked above
+                                        <br>
+                                        only for Report layout with Pagination
+                                    </strong>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <validate for="tableQuery" required-msg="Enter table query">
+                                    <div class="row">
+                                        <div class="col-xl-2">
+                                            <label for="exampleFormControlInput1" control-label>Query for Table</label>
+                                        </div>
+                                        <div class="col-xl-10">
+                                            <div class="row">
+                                                <div class="col-xl-11">
+                                                    <textarea class="form-control cst-form-control" style="width: 100%"
+                                                        rows="8" form-control name="tableQuery" required
+                                                        ng-model="rl.reportObj.configJson.containers.tableContainer[0].query"
+                                                        ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)"></textarea>
+                                                    <div>
+                                                        <span
+                                                            ng-repeat="implicitParam in rl.availableImplicitParameters track by $index">
+                                                            <strong>{{implicitParam}}</strong>
+                                                        </span>
+                                                        <span
+                                                            ng-bind="rl.reportObj.configJson.containers.tableContainer[0].errorMsg"
+                                                            class="text-danger"></span>
+                                                    </div>
+                                                    <placeholder></placeholder>
+                                                </div>
+                                                <div class="col-xl-1 float-right">
+                                                    <em popover-placement="'top'"
+                                                        uib-popover="Use #fieldName# for implicit parameters."
+                                                        popover-trigger="'mouseenter'" class="fa fa-question-circle-o">
+                                                    </em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </validate>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="rl.reportObj.configJson.htmlData" class="row">
+                        <div class="col-12 inline-form">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xl-2">
+                                        <label for="exampleFormControlInput1" control-label>HTML data </label>
+                                    </div>
+                                    <div class="col-xl-10">
+                                        <div class="row">
+                                            <div class="col-xl-11">
+                                                <textarea class="form-control cst-form-control" style="width: 100%"
+                                                    rows="8" form-control name="tableQuery"
+                                                    ng-model="rl.reportObj.configJson.containers.tableContainer[0].htmlData"
+                                                    ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)"></textarea>
+                                            </div>
+                                            <div class="col-xl-1 float-right">
+                                                <em popover-placement="'top'"
+                                                    uib-popover="Use #table# to split the html data below and above the table."
+                                                    popover-trigger="'mouseenter'" class="fa fa-question-circle-o">
+                                                </em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="rl.reportObj.configJson.colspanData" class="row">
+                        <div class="col-12 inline-form">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xl-2">
+                                        <label for="exampleFormControlInput1" control-label>
+                                            HTML data for colspan
+                                        </label>
+                                    </div>
+                                    <div class="col-xl-10">
+                                        <div class="row">
+                                            <div class="col-xl-11">
+                                                <textarea class="form-control cst-form-control" style="width: 100%"
+                                                    rows="8" form-control name="tableQuery"
+                                                    ng-model="rl.reportObj.configJson.containers.tableContainer[0].dataColspan"
+                                                    ng-disabled="(rl.featureJson.basic && !rl.featureJson.advanced)"></textarea>
+                                            </div>
+                                            <div class="col-xl-1 float-right">
+                                                <em popover-placement="'top'"
+                                                    uib-popover="Use only <th> tags for colspan row"
+                                                    popover-trigger="'mouseenter'" class="fa fa-question-circle-o">
+                                                </em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <!-- <button class="btn btn-secondary" ui-sref="techo.report.all">Cancel</button> -->
+                    <button class="btn btn-secondary">Cancel</button>
+                    <button class="btn btn-primary" ng-click="rl.saveReport()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="filter-div">
+        <div ng-include='"app/admin/report/views/field-popover.html"' ng-if='!rl.tableConfiguration'></div>
+        <div ng-include="'app/admin/report/views/table-field.modal.html'" ng-if='rl.tableConfiguration'></div>
+    </div>
+    <div class="cst-backdrop"></div>
+</div>

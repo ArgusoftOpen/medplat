@@ -1,0 +1,76 @@
+<span ng-switch="::fieldType" ng-class="::{'link':config.isNavigationLink}" ui-sref-if="::config.navigationState!=null"
+    ui-sref-val="::config.navigationState">
+    <span ng-switch-when="combo" ng-bind="data[fieldName].displayName | emptylabel"></span>
+    <span ng-switch-when="multiselect">
+        <span ng-if="data[fieldName].length > 0">
+            <span ng-repeat="data in data[fieldName]">
+                <span ng-if="$index === 0" ng-bind="data.displayName"></span>
+                <span ng-if="$index !== 0">,{{data.displayName}}</span>
+            </span>
+        </span>
+        <span ng-if="data[::fieldName].length <= 0">
+            N.A
+        </span>
+    </span>
+    <span ng-switch-when="date" ng-bind="::displayObject| date:angularDateFormat"></span>
+    <span ng-switch-when="boolean"
+        ng-bind="data[fieldName] | yesOrNo :config.configJson.yesValue:config.configJson.noValue |emptylabel"></span>
+    <span ng-switch-when="address" ng-bind="::data[fieldName] | address"></span>
+    <span ng-switch-when="person" ng-bind="::data[fieldName] | fullname"></span>
+    <span ng-switch-when="group" ng-bind="::data[fieldName] | assetGroupName"></span>
+    <span ng-switch-when="resourcecategoryitem">
+        <span ng-if='::data.resourceCategoryItemDto.item' ng-bind="::data.resourceCategoryItemDto.item"></span>
+        <span ng-if='::!data.resourceCategoryItemDto.item' ng-bind="::displayObject"></span>
+    </span>
+    <span ng-switch-when="enum">
+        <span ng-bind="::displayObject|titlecase"></span>
+    </span>
+    <span ng-switch-default>
+        <span ng-bind="::displayObject"></span>
+    </span>
+    <span ng-switch-when="autocomplete">
+        <span ng-bind="::displayObject"></span>
+    </span>
+    <span ng-switch-when="currency">
+        <span ng-if="data[fieldName]"
+            ng-bind="config.resourceCategoryItemFieldDto.configJson.currencyUnit + ' ' + data[fieldName]"></span>
+        <span ng-if="!data[fieldName]">N.A</span>
+    </span>
+    <span ng-switch-when="image">
+        <img alt="image" ng-if="data[fieldName].id"
+            ng-src="{{apiPath + '/document/file/original?item_id=' + data[fieldName].id+'&doc_type=asset'+ '&access_token=' + authToken}}"
+            class="img-responsive bordered-image">
+        <img alt="image" ng-if="!data[fieldName].id" src="images/no-image.jpg" class="img-responsive bordered-image">
+    </span>
+    <span ng-switch-when="file">
+        <file-name data="::data.fileNameDto"></file-name>
+    </span>
+    <span ng-switch-when="fileList">
+        <span ng-if="::data.fileNames" ng-repeat="file in ::data.fileNames">
+            <file-name data="::file"></file-name><span ng-if="::($index < data.fileNames.length - 1)">,<br /></span>
+        </span>
+        <span ng-if="::!data.fileNames">
+            <file-name ng-if="data.fileNameDto" data="::data.fileNameDto"></file-name>
+            <file-name ng-if="!data.fileNameDto" data="::data[fieldName].fileNameDto"></file-name>
+        </span>
+    </span>
+    <span ng-switch-when="imageList">
+        <span ng-repeat="image in ::data.imageList">
+            <div><strong>{{image.title}}</strong></div>
+            <img alt="image" ng-if="image.imageId"
+                ng-src="{{apiPath + '/document/file/original?item_id=' + image.imageId + '&doc_type=asset'+ '&access_token=' + authToken}}"
+                class="img-responsive bordered-image">
+            <img alt="image" ng-if="!image.imageId" src="images/no-image.jpg" class="img-responsive bordered-image">
+        </span>
+    </span>
+    <span ng-switch-when="priority"
+        ng-class="::{'label label-danger text-white' :data.priority === 'High', 'label label-info text-white' :data.priority === 'Low', 'label label-warning text-white' :data.priority === 'Medium'}">
+        {{::data.priority}}
+    </span>
+    <span ng-switch-when="organization">
+        {{::data.organizationsDto.code}}-{{data.organizationsDto.name}},{{data.organizationsDto.address|address}}
+    </span>
+    <span ng-switch-when="numberToWords">
+        {{data[fieldName]|words}}
+    </span>
+</span>

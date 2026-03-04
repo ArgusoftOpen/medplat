@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="360dp"
+    android:layout_height="344dp"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/breast_dg"
+        android:contentDescription="@string/breast_examination" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox1"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="120dp"
+        android:checked="false"
+        android:tag="1" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox12"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="112dp"
+        android:checked="false"
+        android:tag="12" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox2"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="148dp"
+        android:checked="false"
+        android:tag="2" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox3"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="183dp"
+        android:checked="false"
+        android:tag="3" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox11"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="122dp"
+        android:checked="false"
+        android:tag="11" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox10"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="147dp"
+        android:checked="false"
+        android:tag="10" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox5"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/breast_chkBox4"
+        android:layout_marginStart="-31dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/breast_chkBox1"
+        android:checked="false"
+        android:tag="5" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox4"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/breast_chkBox11"
+        android:layout_marginStart="-19dp"
+        android:layout_marginTop="92dp"
+        android:layout_toEndOf="@+id/breast_chkBox5"
+        android:checked="false"
+        android:tag="4" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox13"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/breast_chkBox11"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="-118dp"
+        android:layout_toStartOf="@+id/breast_chkBox10"
+        android:checked="false"
+        android:tag="13" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox9"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/breast_chkBox11"
+        android:layout_marginStart="-36dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/breast_chkBox10"
+        android:checked="false"
+        android:tag="9" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox14"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/breast_chkBox11"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-36dp"
+        android:layout_marginEnd="65dp"
+        android:checked="false"
+        android:tag="14" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox15"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/breast_chkBox11"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="50dp"
+        android:checked="false"
+        android:tag="15" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox7"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox11"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="68dp"
+        android:checked="false"
+        android:tag="7" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox6"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox11"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="56dp"
+        android:checked="false"
+        android:tag="6" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox8"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="-29dp"
+        android:layout_marginTop="-40dp"
+        android:layout_toEndOf="@+id/breast_chkBox10"
+        android:checked="false"
+        android:tag="8" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox17"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-40dp"
+        android:layout_marginEnd="52dp"
+        android:checked="false"
+        android:tag="17" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox16"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox15"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="-72dp"
+        android:checked="false"
+        android:tag="16" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox26"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox15"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="-42dp"
+        android:layout_marginTop="-74dp"
+        android:checked="false"
+        android:tag="26" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox22"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox15"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="-89dp"
+        android:layout_marginTop="-72dp"
+        android:checked="false"
+        android:tag="22" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox23"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox15"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="-85dp"
+        android:layout_marginTop="-108dp"
+        android:checked="false"
+        android:tag="23" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox21"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox15"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="-82dp"
+        android:layout_marginTop="-42dp"
+        android:checked="false"
+        android:tag="21" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox20"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox15"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="-69dp"
+        android:layout_marginTop="-10dp"
+        android:checked="false"
+        android:tag="20" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox19"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox15"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="-42dp"
+        android:layout_marginTop="0dp"
+        android:checked="false"
+        android:tag="19" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox18"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox15"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="-17dp"
+        android:layout_marginTop="-10dp"
+        android:checked="false"
+        android:tag="18" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox24"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox15"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="-68dp"
+        android:layout_marginTop="-137dp"
+        android:checked="false"
+        android:tag="24" />
+
+    <CheckBox
+        android:id="@+id/breast_chkBox25"
+        style="@style/CustomCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breast_chkBox15"
+        android:layout_alignTop="@+id/breast_chkBox6"
+        android:layout_marginStart="-45dp"
+        android:layout_marginTop="-146dp"
+        android:checked="false"
+        android:tag="25" />
+
+</RelativeLayout>

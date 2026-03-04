@@ -1,0 +1,59 @@
+<div class="container-fluid users">
+    <div class="row">
+        <div class="col-12 mb-15">
+            <div class="section-title">
+                <h4 class="text">Announcements</h4>
+                <div class="float-right">
+                    <button class="btn btn-primary " ui-sref="techo.manage.announcement"> Add </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mb-15" ng-if="!userscontroller.noRolesAssignedToShow" id="printableDiv">
+            <div class="cst-table table-responsive" style="overflow: auto;max-height: calc(100vh - 191px)"
+                id="user-scroll">
+                <table class="table table-sm table-striped filter-table table-auto table-bordered header-fixed">
+                    <thead class="cst-thead">
+                        <tr>
+                            <th>#</th>
+                            <th>Subject</th>
+                            <th>Date of Publish</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cst-tbody" infinite-scroll-distance="0"
+                        infinite-scroll='announcementscontroller.getAnnouncementsByCriteria(true)'
+                        infinite-scroll-container='"#user-scroll"' infinite-scroll-immediate-check="true">
+                        <tr ng-repeat="announcement in announcementscontroller.announcementsList| orderBy:'-fromDate'">
+                            <td>{{$index + 1}}</td>
+                            <td>{{announcement.subject}}</td>
+                            <td>{{announcement.fromDate|date}}</td>
+                            <td>{{announcement.isActive?'Active':'Inactive'}}</td>
+
+                            <td class="action-cell no-print">
+                                <ul class="action-item">
+                                    <li><a href="javascript:void(0)" class="action-icon edit-icon"
+                                            ui-sref="techo.manage.announcement({id : announcement.id})"></a></li>
+                                    <li class="dropdown-toggle" id="moreDropdown" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" class="action-icon more-icon"></a>
+                                        <ul class="dropdown-menu dropdown-menu-right more-action-dropdown"
+                                            aria-labelledby="moreDropdown">
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                    ng-click="announcementscontroller.toggleStatus(announcement)">
+                                                    <strong>Mark as </strong>
+                                                    {{announcement.isActive?'Inactive':'Active'}}</a></li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

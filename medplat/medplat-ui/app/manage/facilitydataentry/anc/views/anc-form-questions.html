@@ -1,0 +1,1307 @@
+<style>
+    .anc-que-form.inline-form .form-group label:not(.control-radio):not(.dont-set-width) {
+        width: 200px !important;
+    }
+
+    .anc-que-form.inline-form .form-group .cst-form-control:not(.dont-set-width),
+    .anc-que-form.inline-form .form-group .input-group,
+    .anc-que-form.inline-form .chosen-container,
+    .anc-que-form.inline-form .selectize-control {
+        width: calc(100% - 212px) !important
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">Record Details</h4>
+                    </div>
+                </div>
+                <div class="card-body inline-form">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="card-sub-title">
+                                Member Information
+                            </h5>
+                            <div>
+                                <div class="form-group">
+                                    <label for="memberId" control-label>Member ID (Family ID)</label>
+                                    <label style="width:auto">{{ancque.memberDetails.uniqueHealthId}}
+                                        ({{ancque.memberDetails.familyId}})</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberName" control-label>Member Name</label>
+                                    <label style="width:auto">{{ancque.memberDetails.firstName}}
+                                        {{ancque.memberDetails.middleName}} {{ancque.memberDetails.lastName}}</label>
+                                </div>
+                                <div class="form-group" ng-if="ancque.ancQueData.isMobileNumberAvailable">
+                                    <label for="mobileNumber" control-label>Mobile Number</label>
+                                    <label style="width:auto">{{ancque.memberDetails.mobileNumber}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberLocation" control-label>Location Hierarchy</label>
+                                    <label
+                                        style="width:auto;white-space: inherit">{{ancque.memberDetails.locationHierarchy| emptylabel}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberCaste" control-label>Caste</label>
+                                    <label style="width:auto">{{ancque.memberDetails.caste| emptylabel}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label control-label>Beneficiary Eligibility</label>
+                                    <label style="width:auto">{{ancque.memberDetails.benefits}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label control-label>BPL</label>
+                                    <label style="width:auto">{{ancque.ancQueData.bpl}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <div class="form-group" style="margin-top: 4%;">
+                                    <label for="memberLmp" control-label>LMP</label>
+                                    <label
+                                        style="width:auto">{{ancque.memberDetails.lmpDate| date:'dd/MM/yyyy' | emptylabel}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberEdd" control-label>EDD</label>
+                                    <label
+                                        style="width:auto">{{ancque.memberDetails.edd| date:'dd/MM/yyyy' | emptylabel}}</label>
+                                </div>
+                                <div class="form-group" ng-if="ancque.ancQueData.isAccountNumberAvailable">
+                                    <label for="memberAccountNumber" control-label>Account Number</label>
+                                    <label style="width:auto">Available</label>
+                                </div>
+                                <div class="form-group" ng-if="ancque.ancQueData.isIfscAvailable">
+                                    <label for="memberIfsc" control-label>IFSC</label>
+                                    <label style="width:auto">Available</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberAnm" control-label>FHW Name and Phone Number</label>
+                                    <label style="width:auto">{{ancque.memberDetails.anmInfo| emptylabel}}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="memberAsha" control-label>ASHA Name and Phone Number</label>
+                                    <label style="width:auto">{{ancque.memberDetails.ashaInfo| emptylabel}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card" ng-if="ancque.previousAncInfo.length > 0">
+                <div id="card10" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse10" ng-click="toggle10 = !toggle10" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Previous ANC Information">Previous ANC Information</span>
+
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle10,'ion-minus':toggle10}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse10">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="anv_information-form" id="anc_information-form">
+                                    <table aria-describedby="table"
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th id="id">Family ID</th>
+                                                <th>ABHA Number</th>
+                                                <th id="id">Service Date</th>
+                                                <th id="id">Location Name</th>
+                                                <th id="id">LMP</th>
+                                                <th id="id">Weight(in KG)</th>
+                                                <th id="id">Is JSY Beneficiary</th>
+                                                <th id="id">Is KPSY Beneficiary</th>
+                                                <th id="id">Is IAY Beneficiary</th>
+                                                <th id="id">IS Chiranjeevi Yojna Beneficiary</th>
+                                                <th id="id">ANC Place</th>
+                                                <th id="id">Systolic BP</th>
+                                                <th id="id">Diastolic BP</th>
+                                                <th id="id">Member Height</th>
+                                                <th id="id">Foetal Height</th>
+                                                <th id="id">Foetal Heart Sound</th>
+                                                <th id="id">IFA Tablets Given</th>
+                                                <th id="id">FA Tablets Given</th>
+                                                <th id="id">Calcium Tablets Given</th>
+                                                <th id="id">HBsAg Test</th>
+                                                <th id="id">Blood Sugar Test</th>
+                                                <th id="id">Is Urine Test Done</th>
+                                                <th id="id">Is Albendazole Given</th>
+                                                <th id="id">Member Status</th>
+                                                <th id="id">EDD/Expected Delivery </th>
+                                                <th id="id">Death Date</th>
+                                                <th id="id">VDRL Test</th>
+                                                <th id="id">HIV Test</th>
+                                                <th id="id">Place Of Death</th>
+                                                <th id="id">Haemoglobin Count</th>
+                                                <th id="id">Death Reason</th>
+                                                <th id="id">JSY Payment Done</th>
+                                                <th id="id">Last Delivery Outcome</th>
+                                                <th id="id">Expected Delivery Place</th>
+                                                <th id="id">Family Planning Method</th>
+                                                <th id="id">Foetal Position</th>
+                                                <th id="id">Other Previous Pregnancy Complication</th>
+                                                <th id="id">Foetal Movement</th>
+                                                <th id="id">Urine Albumin</th>
+                                                <th id="id">Urine Sugar</th>
+                                                <th id="id">Is High Risk Case</th>
+                                                <th id="id">Blood Group</th>
+                                                <th id="id">Sugar Test Before Food</th>
+                                                <th id="id">Sugar Test After Food</th>
+                                                <th id="id">Sickle Cell Test</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="ancInfo in ancque.previousAncInfo">
+                                                <td>
+                                                    {{ancInfo.familyid == null ? '-' : ancInfo.familyid}}
+                                                </td>
+                                                <td>
+                                                    {{healthIdNumber}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.service_date == null ? '-' : ancInfo.service_date| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.locationname == null ? '-' : ancInfo.locationname}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.lmp == null ? '-' : ancInfo.lmp| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.weight == null ? '-' : ancInfo.weight}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.jsy_beneficiary == null ? '-' : ancInfo.jsy_beneficiary == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.kpsy_beneficiary == null ? '-' : ancInfo.kpsy_beneficiary == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.iay_beneficiary == null ? '-' : ancInfo.iay_beneficiary == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.chiranjeevi_yojna_beneficiary == null ? '-' : ancInfo.chiranjeevi_yojna_beneficiary == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.ancplacename == null ? '-' : ancInfo.ancplacename}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.systolic_bp == null ? '-' : ancInfo.systolic_bp}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.diastolic_bp == null ? '-' : ancInfo.diastolic_bp}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.member_height == null ? '-' : ancInfo.member_height}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.foetal_height == null ? '-' : ancInfo.foetal_height}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.foetal_heart_sound == null ? '-' : ancInfo.foetal_heart_sound == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.ifa_tablets_given == null ? '-' : ancInfo.ifa_tablets_given}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.fa_tablets_given == null ? '-' : ancInfo.fa_tablets_given}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.calcium_tablets_given == null ? '-' : ancInfo.calcium_tablets_given}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.hbsag_test == null ? '-' : ancInfo.hbsag_test}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.blood_sugar_test == null ? '-' : ancInfo.blood_sugar_test}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.urine_test_done == null ? '-' : ancInfo.urine_test_done == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.albendazole_given == null ? '-' : ancInfo.albendazole_given == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.member_status == null ? '-' : ancInfo.member_status}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.edd == null ? '-' : ancInfo.edd| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.death_date == null ? '-' : ancInfo.death_date| date:'dd/MM/yyyy  HH:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.vdrl_test == null ? '-' : ancInfo.vdrl_test}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.hiv_test == null ? '-' : ancInfo.hiv_test}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.place_of_death == null ? '-' : ancInfo.place_of_death}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.haemoglobin_count == null ? '-' : ancInfo.haemoglobin_count}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.death_reason == null ? '-' : ancInfo.death_reason}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.jsy_payment_done == null ? '-' : ancInfo.jsy_payment_done}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.last_delivery_outcome == null ? '-' : ancInfo.last_delivery_outcome}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.expected_delivery_place == null ? '-' : ancInfo.expected_delivery_place}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.family_planning_method == null ? '-' : ancInfo.family_planning_method}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.foetal_position == null ? '-' : ancInfo.foetal_position}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.other_previous_pregnancy_complication == null ? '-' : ancInfo.other_previous_pregnancy_complication}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.foetal_movement == null ? '-' : ancInfo.foetal_movement}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.urine_albumin == null ? '-' : ancInfo.urine_albumin}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.urine_sugar == null ? '-' : ancInfo.urine_sugar}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.is_high_risk_case == null ? '-' : ancInfo.is_high_risk_case == true ? 'Yes' : 'No'}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.blood_group == null ? '-' : ancInfo.blood_group}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.sugar_test_before_food_val == null ? '-' : ancInfo.sugar_test_before_food_val}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.sugar_test_after_food_val == null ? '-' : ancInfo.sugar_test_after_food_val}}
+                                                </td>
+                                                <td>
+                                                    {{ancInfo.sickle_cell_test == null ? '-' : ancInfo.sickle_cell_test}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card" ng-if="ancque.previousVaccinations.length > 0">
+                <div id="card10" role="tab" class="card-title collapse-link d-block" data-toggle="collapse"
+                    href="#collapse11" ng-click="toggle10 = !toggle10" style="cursor: pointer">
+                    <h4 class="text">
+                        <span data-toggle="tooltip" title="Previous Vaccinations Given">Previous Vaccinations
+                            Given
+                        </span>
+                        <ul class="control-list">
+                            <li>
+                                <span>
+                                    <em ng-class="{'ion-plus':!toggle10,'ion-minus':toggle10}"></em>
+                                </span>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="collapse" id="collapse11">
+                    <div class="table-section">
+                        <div class="card-body col-12 col-md-12">
+                            <div class="cst-table-responsive">
+                                <form name="anc_vaccination-form" id="anc_vaccination-form">
+                                    <table aria-describedby="table"
+                                        class="table table-sm table-striped filter-table table-fixed table-bordered header-fixed">
+                                        <thead class="cst-thead">
+                                            <tr>
+                                                <th id="id">Vaccination</th>
+                                                <th id="id">Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cst-tbody">
+                                            <tr ng-repeat="vaccine in ancque.previousVaccinations">
+                                                <td>
+                                                    {{vaccine.immunisation_given == null ? '-' : vaccine.immunisation_given}}
+                                                </td>
+                                                <td>
+                                                    {{vaccine.given_on == null ? '-' : vaccine.given_on| date:'dd/MM/yyyy'}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card cst-card">
+                <div class="card-title">
+                    <div class="float-left">
+                        <h4 class="text">ANC Visit details</h4>
+                    </div>
+                </div>
+                <div class="card-body anc-que-form inline-form">
+                    <form role="form" name="ancque.ancqueForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <div class="form-group">
+                                        <validate for='isAlive' required-msg=" Select a value">
+                                            <label style="vertical-align: middle;white-space: initial" for="isAlive"
+                                                name="isAlive" class="control-label" control-label>Is
+                                                Member Alive?</label>
+                                            <label class="control control-radio" style="margin-top: 1%">Yes
+                                                <input ng-value="true" name="isAlive" type="radio"
+                                                    ng-model="ancque.isAlive" ng-change="ancque.isAliveChanged()"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio" style="margin-top: 1%">No
+                                                <input ng-value="false" name="isAlive" type="radio"
+                                                    ng-model="ancque.isAlive" ng-change="ancque.isAliveChanged()"
+                                                    form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="!ancque.ancQueData.isAccountNumberAvailable">
+                                        <label style="vertical-align: middle;white-space: initial" for="accountNumber"
+                                            uib-tooltip="Account Number" control-label>Account
+                                            Number</label>
+                                        <input type="text" maxlength="20" class="form-control cst-form-control"
+                                            form-control name="accountNumber" id="accountNumber"
+                                            ng-model="ancque.ancQueData.accountNumber">
+                                        <div
+                                            ng-show="ancque.ancqueForm.accountNumber.$touched && ancque.ancqueForm.accountNumber.$invalid">
+                                            <span class="alert alert-danger valid-feedback">Enter valid Account
+                                                Number</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-if="!ancque.ancQueData.isIfscAvailable">
+                                        <label style="vertical-align: middle;white-space: initial" for="ifsc"
+                                            uib-tooltip="IFSC" control-label>IFSC</label>
+                                        <input type="text" maxlength="11" minlength="11"
+                                            class="form-control cst-form-control" form-control name="ifsc" id="ifsc"
+                                            ng-model="ancque.ancQueData.ifsc">
+                                        <div
+                                            ng-show="ancque.ancqueForm.ifsc.$touched && ancque.ancqueForm.ifsc.$invalid">
+                                            <span class="alert alert-danger valid-feedback">Enter valid IFSC</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-if="!ancque.ancQueData.isMobileNumberAvailable">
+                                        <validate for='mobileNumber' maxlength-msg="Invalid mobile number"
+                                            minlength-msg="Invalid mobile number">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                for="mobileNumber" uib-tooltip="Mobile Number" control-label>Mobile
+                                                Number</label>
+                                            <input type="text" numbers-only max-length="10" min-length="10"
+                                                class="form-control cst-form-control" form-control name="mobileNumber"
+                                                id="mobileNumber" ng-model="ancque.ancQueData.mobileNumber">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" style="margin-top: 2%">
+                                        <validate for='serviceDate' required-msg="Select Date">
+                                            <label style="vertical-align: middle;white-space: initial" for="serviceDate"
+                                                uib-tooltip="Service Date*" control-label>Service
+                                                Date</label>
+                                            <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                name="serviceDate" form-control ng-model="ancque.ancQueData.serviceDate"
+                                                ng-change="ancque.serviceDateChanged()" min-date="ancque.minServiceDate"
+                                                max-date="ancque.today" required>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" style="margin-top: 3%">
+                                        <validate for='deliveryPlace' required-msg="Select a value">
+                                            <label for="deliveryPlace" uib-tooltip="Place of Visit*" control-label>Place
+                                                of Visit</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="ancque.ancQueData.deliveryPlace"
+                                                ng-change="ancque.deliveryPlaceChanged()" name="deliveryPlace"
+                                                id="deliveryPlace" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="THISHOSP">This Hospital</option>
+                                                <option value="HOSP">Another Institution</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="ancque.ancQueData.deliveryPlace === 'HOSP'">
+                                        <validate for='institutionType' required-msg="Select a value">
+                                            <label for="institutionType" control-label
+                                                uib-tooltip="Institution Type*">Institution Type</label>
+                                            <select class="form-control cst-form-control" form-control
+                                                ng-model="ancque.ancQueData.institutionType"
+                                                ng-change="ancque.retrieveHospitalsByInstitutionType()"
+                                                name="institutionType" id="institutionType" required>
+                                                <option value="" selected>--Select--</option>
+                                                <option value="{{institutionType.id}}"
+                                                    ng-repeat="institutionType in ancque.institutionTypes">
+                                                    {{institutionType.value}}</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group selectize-wpd-input"
+                                        ng-if="ancque.ancQueData.deliveryPlace === 'HOSP' && ancque.showOtherInstitutes">
+                                        <validate for='hospital' required-msg="Select a value">
+                                            <label uib-tooltip="Hospital*" control-label>Hospital</label>
+                                            <selectize name="hospital"
+                                                class="form-control dont-set-width cst-form-control" form-control
+                                                ng-model='ancque.ancQueData.institute'
+                                                ng-change="ancque.retrieveRolesForInstitute()"
+                                                config='ancque.selectizeObjectForOtherInstitute' required>
+                                                <option value=''>--Select--</option>
+                                            </selectize>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="ancque.ancQueData.deliveryPlace === 'THISHOSP'">
+                                        <validate for='hospital' required-msg="Select a value">
+                                            <label style="vertical-align: middle;white-space: initial"
+                                                uib-tooltip="Hospital*" control-label>Hospital</label>
+                                            <select class="form-control cst-form-control" form-control chosen-directive
+                                                name="hospital"
+                                                ng-options="institute as institute.name for institute in ancque.institutes"
+                                                ng-model="ancque.ancQueData.institute"
+                                                ng-change="ancque.retrieveRolesForInstitute()"
+                                                ng-disabled="ancque.institutes.length == 1" required>
+                                                <option value="" selected>--Select--</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div ng-if="ancque.isAlive == false">
+                                        <div class="form-group">
+                                            <validate for='deathDate' required-msg="Select Date">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="deathDate" control-label>Death
+                                                    Date</label>
+                                                <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                    name="deathDate" form-control ng-model="ancque.ancQueData.deathDate"
+                                                    max-date="ancque.ancQueData.serviceDate" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for='placeOfDeath' required-msg="Select a value">
+                                                <label for="placeOfDeath" control-label>Death Place</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="ancque.ancQueData.placeOfDeath" name="placeOfDeath"
+                                                    id="placeOfDeath" required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option value="HOME">Home</option>
+                                                    <option value="ON_THE_WAY">On the way</option>
+                                                    <option value="HOSP">Hospital</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for='deathReason' required-msg="Select a value">
+                                                <label for="deathReason" control-label>Death Reason</label>
+                                                <select class="form-control cst-form-control" form-control
+                                                    ng-model="ancque.ancQueData.deathReason" name="deathReason"
+                                                    id="deathReason" required>
+                                                    <option value="" selected>--Select--</option>
+                                                    <option value="{{deathReason.id}}"
+                                                        ng-repeat="deathReason in ancque.deathReasons">
+                                                        {{deathReason.value}}</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                    <div ng-if="ancque.isAlive">
+                                        <div class="form-group">
+                                            <validate for="bloodGroup" required-msg="Blood-Group is required">
+                                                <label for="bloodGroup" control-label uib-tooltip="Blood Group*">Blood
+                                                    Group</label>
+                                                <select name="bloodGroup" form-control
+                                                    class="form-control cst-form-control"
+                                                    ng-model="ancque.ancQueData.bloodGroup"
+                                                    ng-options="bloodGroup as bloodGroup for bloodGroup in ancque.bloodGroups"
+                                                    required>
+                                                    <option value="">Select Blood Group</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label for="jsyBeneficiary" control-label
+                                                    uib-tooltip="JSY Beneficiary">JSY
+                                                    Beneficiary</label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="jsyBeneficiary" type="radio"
+                                                        ng-model="ancque.ancQueData.jsyBeneficiary">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="jsyBeneficiary" type="radio"
+                                                        ng-model="ancque.ancQueData.jsyBeneficiary">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+                                            <div class="form-group" ng-if="ancque.ancQueData.jsyBeneficiary">
+                                                <label for="jsyPaymentDone" control-label
+                                                    uib-tooltip="JSY Payment Done">JSY
+                                                    Payment
+                                                    Done</label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="jsyPaymentDone" type="radio"
+                                                        ng-model="ancque.ancQueData.jsyPaymentDone">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="jsyPaymentDone" type="radio"
+                                                        ng-model="ancque.ancQueData.jsyPaymentDone">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="kpsyBeneficiary" control-label
+                                                    uib-tooltip="KPSY Beneficiary">KPSY
+                                                    Beneficiary</label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="kpsyBeneficiary" type="radio"
+                                                        ng-model="ancque.ancQueData.kpsyBeneficiary">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="kpsyBeneficiary" type="radio"
+                                                        ng-model="ancque.ancQueData.kpsyBeneficiary">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="iayBeneficiary" control-label
+                                                    uib-tooltip="IAY Beneficiary">IAY
+                                                    Beneficiary</label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="iayBeneficiary" type="radio"
+                                                        ng-model="ancque.ancQueData.iayBeneficiary">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="iayBeneficiary" type="radio"
+                                                        ng-model="ancque.ancQueData.iayBeneficiary">
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="hbsagTest" required-msg=" HBsAg Test is requied">
+                                                <label for="hbsagTest" control-label uib-tooltip="HBsAg Test*">HBsAg
+                                                    Test</label>
+                                                <select name="hbsagTest" form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.hbsagTest"
+                                                    ng-options="key as value for (key,value) in ancque.hbsAgtestOptions"
+                                                    required>
+                                                    <option value="">Select HBsAg Test</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="vdrlTest" required-msg="Please VDRL Test Result">
+                                                <label for="vdrlTest" control-label uib-tooltip="VDRL Test*">VDRL
+                                                    Test</label>
+                                                <select name="vdrlTest" form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.vdrlTest"
+                                                    ng-options="key as value for (key,value) in ancque.vdrlTestValues"
+                                                    required>
+                                                    <option value="">Select VDRL Test Result</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="hivTest" required-msg="Please Select HIV Test Result">
+                                                <label for="hivTest" control-label uib-tooltip="HIV Test*">HIV
+                                                    Test</label>
+                                                <select name="hivTest" form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.hivTest"
+                                                    ng-options="key as value for (key,value) in ancque.hivTestValues"
+                                                    required>
+                                                    <option value="">Select HIV Test Result</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="sickleCellTest"
+                                                required-msg="Please Select Sickle Cell Result">
+                                                <label for="sickleCellTest" control-label
+                                                    uib-tooltip="Sickle Cell Test*">Sickle Cell
+                                                    Test</label>
+                                                <select name="sickleCellTest" form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.sickleCellTest" required>
+                                                    <option value="">Select Sickle Cell Test Result</option>
+                                                    <option value="NOT_DONE">Not Done</option>
+                                                    <option value="NEGATIVE">Negative</option>
+                                                    <option value="SOCIAL_CELL_TRAIT">Sickle Cell Trait</option>
+                                                    <option value="SICKLE_CELL_DISEASE">Sickle Cell Disease</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="ancque.ancQueData.sickleCellTest === 'SICKLE_CELL_DISEASE' && ancque.showIfa">
+                                            <validate for="ifaTabletsGiven" required-msg="Please enter valid answer"
+                                                max-msg="Enter value between 0-60" min-msg="Enter value between 0-60">
+                                                <label for="ifaTabletsGiven" control-label
+                                                    uib-tooltip="Number of IFA Tablets Given*">Number of IFA Tablets
+                                                    Given</label>
+                                                <input name="ifaTabletsGiven" type="text" numbers-only form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.ifaTabletsGiven" max="60" min="0"
+                                                    required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group" ng-if="!ancque.showIfa">
+                                            <validate for="faTabletsGiven" required-msg="Please enter valid answer"
+                                                max-msg="Enter value between 0-360" min-msg="Enter value between 0-360">
+                                                <label for="faTabletsGiven" control-label
+                                                    uib-tooltip="Number of FA Tablets Given*">Number of FA Tablets
+                                                    Given</label>
+                                                <input name="faTabletsGiven" type="text" numbers-only form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.faTabletsGiven" max="360" min="0"
+                                                    required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group" ng-if="ancque.showCalcium">
+                                            <validate for="calciumTablet" required-msg="Please enter valid answer"
+                                                max-msg="Please enter value between 0 and 360"
+                                                min-msg="Please enter value between 0 and 360">
+                                                <label for="calciumTabletsGiven" control-label
+                                                    uib-tooltip="Number of Calcium Tablets Given*">Number of Calcium
+                                                    Tablets
+                                                    Given</label>
+                                                <input name="calciumTabletsGiven" type="text" numbers-only form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.calciumTabletsGiven" max="360" min="0"
+                                                    required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group" ng-if="ancque.ancQueData.visitmorethan3">
+                                            <validate for='albendazoleGiven'
+                                                required-msg="Is Albendazole Tablets given?">
+                                                <label for="albendazoleGiven" control-label
+                                                    uib-tooltip="Albendanzole Tablets (400 mg)*">Albendanzole Tablets
+                                                    (400
+                                                    mg)</label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="albendazoleGiven" type="radio"
+                                                        ng-model="ancque.ancQueData.albendazoleGiven" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="albendazoleGiven" type="radio"
+                                                        ng-model="ancque.ancQueData.albendazoleGiven" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+
+                                        <div class="form-group" ng-if="ancque.ancQueData.pregnantInLast3Years">
+                                            <div class="form-group" ng-if="!ancque.ancQueData.isTTBoosterNotGiven">
+                                                <div class="form-group">
+                                                    <validate for='ttBoosterGiven' required-msg="Is TT Booster given?">
+                                                        <label for="ttBoosterGiven" control-label
+                                                            uib-tooltip="Is TT Booster given?*">
+                                                            Is TT Booster given?
+                                                        </label>
+                                                        <label class="control control-radio">Yes
+                                                            <input ng-value="true" name="ttBoosterGiven" type="radio"
+                                                                ng-model="ancque.ancQueData.ttBoosterGiven" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <label class="control control-radio">No
+                                                            <input ng-value="false" name="ttBoosterGiven" type="radio"
+                                                                ng-model="ancque.ancQueData.ttBoosterGiven" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div class="form-group" ng-if="ancque.ancQueData.ttBoosterGiven">
+                                                    <validate for="ttBoosterDate"
+                                                        required-msg="Please Select TT Booster Date">
+                                                        <label for="ttBoosterDate"
+                                                            uib-tooltip="Select TT Booster given on date*">Select TT
+                                                            Booster
+                                                            given on date</label>
+                                                        <input name="ttBoosterDate" type="text" style="float:right;"
+                                                            datepicker ng-model="ancque.ancQueData.ttBoosterDate"
+                                                            max-date='ancque.vaccinationMaxDate'
+                                                            min-date='ancque.memberDetails.lmpDate' form-control
+                                                            required>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-if="!ancque.ancQueData.pregnantInLast3Years">
+                                            <div class="form-group" ng-if="ancque.ancQueData.isTT1NotGiven">
+                                                <div class="form-group">
+                                                    <validate for='tt1Given' required-msg="Is TT1 given?">
+                                                        <label for="tt1Given" control-label
+                                                            uib-tooltip="Is TT1 given?*">
+                                                            Is TT1 given?
+                                                        </label>
+                                                        <label class="control control-radio">Yes
+                                                            <input ng-value="true" name="tt1Given" type="radio"
+                                                                ng-model="ancque.ancQueData.tt1Given" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <label class="control control-radio">No
+                                                            <input ng-value="false" name="tt1Given" type="radio"
+                                                                ng-model="ancque.ancQueData.tt1Given" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div class="form-group" ng-if="ancque.ancQueData.tt1Given">
+                                                    <validate for="tt1date" required-msg="Please Select TT1 Date">
+                                                        <label for="tt1date"
+                                                            uib-tooltip="Select TT1 given on date*">Select
+                                                            TT1 given on date</label>
+                                                        <input name="tt1date" type="text" style="float:right;"
+                                                            datepicker ng-model="ancque.ancQueData.tt1date"
+                                                            max-date='ancque.vaccinationMaxDate'
+                                                            min-date='ancque.memberDetails.lmpDate' form-control
+                                                            required>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                            <div class="form-group"
+                                                ng-if="!ancque.ancQueData.isTT1NotGiven && ancque.ancQueData.isTT2NotGiven">
+                                                <div class="form-group">
+                                                    <validate for='tt2Given' required-msg="Is TT2 given?">
+                                                        <label for="tt2Given" control-label
+                                                            uib-tooltip="Is TT2 given?*">
+                                                            Is TT2 given?
+                                                        </label>
+                                                        <label class="control control-radio">Yes
+                                                            <input ng-value="true" name="tt2Given" type="radio"
+                                                                ng-model="ancque.ancQueData.tt2Given" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <label class="control control-radio">No
+                                                            <input ng-value="false" name="tt2Given" type="radio"
+                                                                ng-model="ancque.ancQueData.tt2Given" form-control
+                                                                required>
+                                                            <div class="control_indicator"></div>
+                                                        </label>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                                <div class="form-group" ng-if="ancque.ancQueData.tt2Given">
+                                                    <validate for="tt2date" required-msg="Please Select TT2 Date">
+                                                        <label for="tt2date" uib-tooltip="Select TT2 given on date*">
+                                                            Select TT2 given on date
+                                                        </label>
+                                                        <input name="tt2date" type="text" style="float:right;"
+                                                            datepicker ng-model="ancque.ancQueData.tt2date"
+                                                            max-date='ancque.vaccinationMaxDate'
+                                                            min-date='ancque.minTT2Date' form-control required>
+                                                        <placeholder></placeholder>
+                                                    </validate>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for='bloodTransfusion' required-msg="Select a value">
+                                                <label for="bloodTransfusion" control-label
+                                                    uib-tooltip="Is Blood Transfusion Done?*">
+                                                    Is Blood Transfusion Done?
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="bloodTransfusion" type="radio"
+                                                        ng-model="ancque.ancQueData.bloodTransfusion" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="bloodTransfusion" type="radio"
+                                                        ng-model="ancque.ancQueData.bloodTransfusion" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="ironDefAnemiaInj"
+                                                required-msg="Please Select Iron Deficiency Anemia Injection">
+                                                <label for="ironDefAnemiaInj" control-label
+                                                    uib-tooltip="Iron Deficiency Anemia Injection*">
+                                                    Iron Deficiency Anemia Injection
+                                                </label>
+                                                <select name="ironDefAnemiaInj" form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-change="ancque.ironDefAnemiaInjChanged()"
+                                                    ng-model="ancque.ancQueData.ironDefAnemiaInj" required>
+                                                    <option value="">Select Iron Deficiency Anemia Injection</option>
+                                                    <option value="IRON_SUCROSE">Iron Sucrose</option>
+                                                    <option value="FCM">FCM</option>
+                                                    <option value="NONE">None</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group" style="margin-top: 2%"
+                                            ng-if="ancque.ancQueData.ironDefAnemiaInj === 'IRON_SUCROSE'">
+                                            <validate for='ironDefAnemiaInjDueDate' required-msg="Select Date">
+                                                <label for="ironDefAnemiaInjDueDate" control-label
+                                                    uib-tooltip="Due date of Iron Deficiency Anemia Injection*">
+                                                    Due date of Iron Deficiency Anemia Injection
+                                                </label>
+                                                <input type="text" style="float: inherit;" datepicker tabindex="8"
+                                                    name="ironDefAnemiaInjDueDate" form-control
+                                                    ng-model="ancque.ancQueData.ironDefAnemiaInjDueDate"
+                                                    min-date="ancque.minInjDate" max-date="ancque.maxInjDate" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for='tt2Given' required-msg="Is Referral Done?">
+                                                <label for="referralDone" control-label
+                                                    uib-tooltip="Is referral done?*">
+                                                    Is referral done?
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="referralDone" type="radio"
+                                                        ng-model="ancque.ancQueData.referralDone" form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="referralDone" type="radio"
+                                                        ng-model="ancque.ancQueData.referralDone" form-control required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group" ng-if="ancque.ancQueData.referralDone">
+                                            <label for="referralPlace">
+                                                <strong>Referral place</strong>
+                                            </label>
+                                            <infrastructure-directive ng-model="ancque.referralInfraDetails"
+                                                disabled="false" show-delivery-place="false" type-of-delivery=""
+                                                institutes-to-fetch="'ANOTHER'">
+                                            </infrastructure-directive>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <validate for="referralPlace" required-msg="Please select referral place">
+                                                <label for="expectedDeliveryPlace" control-label
+                                                    uib-tooltip="Expected place of delivery*">
+                                                    Expected place of delivery
+                                                </label>
+                                                <select name="expectedDeliveryPlace" form-control
+                                                    chosen-directive="ancque.expectedDeliveryPlaces"
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.expectedDeliveryPlace"
+                                                    ng-options="key as value for (key,value) in ancque.expectedDeliveryPlaces"
+                                                    required>
+                                                    <option value="">Select Expected Delivery Place</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div ng-if="ancque.isAlive">
+                                    <div class="form-group">
+                                        <validate for="memberHeight" required-msg="Please enter valid height"
+                                            max-msg="Please enter valid height(Between 60-250)"
+                                            min-msg="Please enter valid height(Between 60-250)">
+                                            <label for="memberHeight" control-label uib-tooltip="Height (in cm)">Height
+                                                (in cm)</label>
+                                            <input name="memberHeight" type="text" numbers-only form-control
+                                                class="form-control  cst-form-control"
+                                                ng-model="ancque.ancQueData.memberHeight" max="250" min="60">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for="weight" max-msg="Please enter valid weight(Between 30-150)"
+                                            min-msg="Please enter valid weight(Between 30-150)">
+                                            <label for="weight" control-label uib-tooltip="Weight">Weight</label>
+                                            <input name="weight" type="text" numbers-only decimalallowed="true"
+                                                form-control class="form-control  cst-form-control"
+                                                ng-model="ancque.ancQueData.weight" max="150" min="30">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for="haemoglobinCount" required-msg="Please enter valid Haemoglobin"
+                                            max-msg="Please enter valid Haemoglobin(Between 2-18)"
+                                            min-msg="Please enter valid Haemoglobin(Between 2-18)">
+                                            <label for="haemoglobinCount" control-label
+                                                uib-tooltip="Haemoglobin">Haemoglobin</label>
+                                            <input name="haemoglobinCount" type="text" numbers-only form-control
+                                                class="form-control  cst-form-control"
+                                                ng-model="ancque.ancQueData.haemoglobinCount" max="18" min="2">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='systolicBp'
+                                            max-msg="Please enter valid Systolic BP(Between 60-300)"
+                                            min-msg="Please enter valid Systolic BP(Between 60-300)">
+                                            <label control-label uib-tooltip="Systolic Blood Pressure"
+                                                for="systolicBp">Systolic Blood
+                                                Pressure</label>
+                                            <input name="systolicBp" type='text' numbers-only
+                                                class='form-control cst-form-control' form-control
+                                                ng-model="ancque.ancQueData.systolicBp" min="60" max="300">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for='diastolicBp'
+                                            max-msg="Please enter valid Diastolic BP(Between 40-150)"
+                                            min-msg="Please enter valid Diastolic BP(Between 40-150)">
+                                            <label control-label uib-tooltip="Diastolic Blood Pressure"
+                                                for='diastolicBp'>Diastolic Blood
+                                                Pressure</label>
+                                            <input type='text' numbers-only name="diastolicBp"
+                                                class='form-control cst-form-control' form-control
+                                                ng-model="ancque.ancQueData.diastolicBp" min="40" max="150">
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="ancque.ancQueData.lmpDateIsOutside140">
+                                        <div class="form-group">
+                                            <validate for='foetalMovement' required-msg="Please select Foetal Movement">
+                                                <label style="vertical-align: middle;white-space: initial"
+                                                    for="foetalMovement" control-label uib-tooltip="Foetal Movement*">
+                                                    Foetal Movement
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="foetalMovement" type="radio"
+                                                        ng-model="ancque.ancQueData.foetalMovement" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="foetalMovement" type="radio"
+                                                        ng-model="ancque.ancQueData.foetalMovement" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="foetalHeight" required-msg="Please enter Foetal Height"
+                                                max-msg="Please enter valid foetal height(Between 20-40)"
+                                                min-msg="Please enter valid foetal height(Between 20-40)">
+                                                <label for="foetalHeight" control-label uib-tooltip="Fundal Height*">
+                                                    Fundal Height
+                                                </label>
+                                                <input name="foetalHeight" type="text" numbers-only form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.foetalHeight" min="20" max="40"
+                                                    required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="foetalHeartSound"
+                                                required-msg="Please select Foetal Heart Sound">
+                                                <label for="foetalHeartSound" control-label
+                                                    uib-tooltip="Foetal Heart Sound*">
+                                                    Foetal Heart Sound
+                                                </label>
+                                                <label class="control control-radio">Yes
+                                                    <input ng-value="true" name="foetalHeartSound" type="radio"
+                                                        ng-model="ancque.ancQueData.foetalHeartSound" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <label class="control control-radio">No
+                                                    <input ng-value="false" name="foetalHeartSound" type="radio"
+                                                        ng-model="ancque.ancQueData.foetalHeartSound" form-control
+                                                        required>
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="foetalPosition" required-msg="Please Select Foetal Position">
+                                                <label for="foetalPosition" control-label
+                                                    uib-tooltip="Foetal Position*">
+                                                    Foetal Position
+                                                </label>
+                                                <select name="foetalPosition" form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.foetalPosition"
+                                                    ng-options="key as value for (key,value) in ancque.foetalPositions"
+                                                    required>
+                                                    <option value="">Select Foetal Position </option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for="bloodSugarTest" required-msg="Blood Sugar Test is requied">
+                                            <label for="bloodSugarTest" control-label uib-tooltip="Blood Sugar Test*">
+                                                Blood Sugar Test
+                                            </label>
+                                            <select name="bloodSugarTest" form-control
+                                                class="form-control  cst-form-control"
+                                                ng-model="ancque.ancQueData.bloodSugarTest"
+                                                ng-options="status.key as status.value for status in ancque.bloodSugarTestOptions"
+                                                required
+                                                ng-change="ancque.onBloodSugarTestChange(ancque.ancQueData.bloodSugarTest)">
+                                                <option value="">Select Sugar Test</option>
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="ancque.ancQueData.bloodSugarTestIsDone">
+                                        <div class="form-group" ng-if="ancque.ancQueData.bloodSugarTestIsDoneAfterFood">
+                                            <validate for="sugarTestAfterFoodValue"
+                                                required-msg="Please enter valid answer"
+                                                max-msg="Please enter value between 10 and 600"
+                                                min-msg="Please enter value between 10 and 600">
+                                                <label for="sugarTestAfterFoodValue" control-label
+                                                    uib-tooltip="Blood Sugar Test Value*">Blood Sugar Test Value</label>
+                                                <input name="sugarTestAfterFoodValue" type="text" numbers-only
+                                                    form-control class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.sugarTestAfterFoodValue" max="600"
+                                                    min="10" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group"
+                                            ng-if="!ancque.ancQueData.bloodSugarTestIsDoneAfterFood">
+                                            <validate for="sugarTestBeforeFoodValue"
+                                                required-msg="Please enter valid answer"
+                                                max-msg="Please enter value between 10 and 600"
+                                                min-msg="Please enter value between 10 and 600">
+                                                <label for="sugarTestBeforeFoodValue" control-label
+                                                    uib-tooltip="Blood Sugar Test Value*">Blood Sugar Test Value</label>
+                                                <input name="sugarTestBeforeFoodValue" type="text" numbers-only
+                                                    form-control class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.sugarTestBeforeFoodValue" max="600"
+                                                    min="10" required>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for="urineTestDone" required-msg="Is Urine Test Done?">
+                                            <label for="urineTestDone" control-label uib-tooltip="Is urine test done?*">
+                                                Is urine test done?
+                                            </label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="urineTestDone" type="radio"
+                                                    ng-model="ancque.ancQueData.urineTestDone" form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="urineTest" type="radio"
+                                                    ng-model="ancque.ancQueData.urineTestDone" form-control required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="ancque.ancQueData.urineTestDone">
+                                        <div class="form-group">
+                                            <validate for="urineAlbumin" required-msg="Please Select Albumin value">
+                                                <label for="urineAlbumin" control-label uib-tooltip="Urine Albumin*">
+                                                    Urine Albumin
+                                                </label>
+                                                <select name="urineAlbumin" form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.urineAlbumin"
+                                                    ng-options="key as value for (key,value) in ancque.albuminSugarTestValues"
+                                                    required>
+                                                    <option value="">Select Albumin Value</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="urineSugar" required-msg="Please Select Sugar value">
+                                                <label for="urineSugar" control-label uib-tooltip="Urine Sugar*">Urine
+                                                    Sugar</label>
+                                                <select name="urineSugar" form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.urineSugar"
+                                                    ng-options="key as value for (key,value) in ancque.albuminSugarTestValues"
+                                                    required>
+                                                    <option value="">Select Sugar Value</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-if="ancque.ancQueData.showLastDeliveryOutcome">
+                                        <div class="form-group">
+                                            <validate for="lastDeliveryOutcome"
+                                                required-msg="Last Delivery Outcome is required">
+                                                <label for="lastDeliveryOutcome" control-label
+                                                    uib-tooltip="Last Delivery Outcome*">
+                                                    Last Delivery Outcome
+                                                </label>
+                                                <select name="lastDeliveryOutcome" form-control
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.lastDeliveryOutcome"
+                                                    ng-options="key as value for (key,value) in ancque.pregnancyOutcomes"
+                                                    required>
+                                                    <option value="">Select Last Delivery Outcome</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                        <div class="form-group">
+                                            <validate for="previousPregnancyComplication"
+                                                required-msg="Did the woman have any of the listed complications during previous pregnancy?">
+                                                <label for="previousPregnancyComplication" control-label
+                                                    uib-tooltip="Presence of complication during any previous pregnancy">
+                                                    Presence of complication during any previous pregnancy
+                                                </label>
+                                                <select name="previousPregnancyComplication" form-control multiple
+                                                    chosen-directive="ancque.pregnencyComplications"
+                                                    class="form-control  cst-form-control"
+                                                    ng-model="ancque.ancQueData.pregnencyComplication"
+                                                    ng-options="key as value for (key,value) in ancque.pregnencyComplications">
+                                                    <option value="">Select Presence of complication</option>
+                                                </select>
+                                                <placeholder></placeholder>
+                                            </validate>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for="dangerousSignIds"
+                                            required-msg=" Please select Danger Signs of Mother">
+                                            <label for="dangerousSignIds" control-label uib-tooltip="Dangerous Signs">
+                                                Dangerous Signs
+                                            </label>
+                                            <select name="dangerousSignIds" form-control multiple
+                                                chosen-directive="ancque.dangerSignsMotherValues"
+                                                class="form-control  cst-form-control"
+                                                ng-model="ancque.ancQueData.dangerousSignIds"
+                                                ng-options="sign.id as sign.value for sign in ancque.dangerSignsMotherValues"
+                                                ng-change="ancque.dangerSignsChanged()">
+                                            </select>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="ancque.showOtherDangerSign">
+                                        <label style="vertical-align: middle;white-space: initial"
+                                            for="otherDangerousSign" control-label>Other Danger Sign</label>
+                                        <input type="text" class="form-control cst-form-control" form-control
+                                            name="otherDangerousSign" id="otherDangerousSign"
+                                            ng-model="ancque.ancQueData.otherDangerousSign">
+                                    </div>
+                                    <div class="form-group">
+                                        <validate for="examinedByGynecologist" required-msg="Please select the value">
+                                            <label for="examinedByGynecologist" control-label
+                                                uib-tooltip="Examined under PMSMA?*">
+                                                Examined under PMSMA?
+                                            </label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="examinedByGynecologist" type="radio"
+                                                    ng-model="ancque.ancQueData.examinedByGynecologist" form-control
+                                                    required="">
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="examinedByGynecologist" type="radio"
+                                                    ng-model="ancque.ancQueData.examinedByGynecologist" form-control
+                                                    required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                    <div class="form-group" ng-if="ancque.isApplicableForInjCorticosteroid">
+                                        <validate for="isInjCorticosteroidGiven" required-msg="Please select the value">
+                                            <label for="isInjCorticosteroidGiven" control-label
+                                                uib-tooltip="Is Inj. Corticosteroid given?*">Is Inj. Corticosteroid
+                                                given?</label>
+                                            <label class="control control-radio">Yes
+                                                <input ng-value="true" name="isInjCorticosteroidGiven" type="radio"
+                                                    ng-model="ancque.ancQueData.isInjCorticosteroidGiven" form-control
+                                                    required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <label class="control control-radio">No
+                                                <input ng-value="false" name="isInjCorticosteroidGiven" type="radio"
+                                                    ng-model="ancque.ancQueData.isInjCorticosteroidGiven" form-control
+                                                    required>
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                            <placeholder></placeholder>
+                                        </validate>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-3">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary" ng-click="ancque.saveAnc()">
+                                    <em class="fa fa-floppy-o"></em> Save & Continue</button>
+                                <button class="btn btn-secondary" ng-click="ancque.goBack()">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
