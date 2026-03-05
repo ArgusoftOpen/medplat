@@ -2285,6 +2285,16 @@
                         'location.service',
                     ])
                 })
+                .state('techo.manage.navigationdashboard', {
+                    url: '/navigationdashboard',
+                    title: 'Navigation Dashboard',
+                    templateUrl: 'app/manage/navigationdashboard/views/navigation-dashboard.html',
+                    controller: 'NavigationDashboardController as navDashboardCtrl',
+                    resolve: load([
+                        'navigation-dashboard.controller',
+                        'query.service'
+                    ])
+                })
                 .state('techo.manage.mobileFeatureManagement', {
                     url: '/mobile-feature-management',
                     title: 'Mobile Feature Management',

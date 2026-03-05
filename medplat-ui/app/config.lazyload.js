@@ -428,6 +428,7 @@
             'update-feature.modal.controller': ["app/manage/mobileMenuManagement/controllers/update-feature.modal.controller.js"],
             'performance-dashboard.controller': ['app/manage/performancedashboard/controllers/performance-dashboard.controller.js'],
             'performance-dashboard.constant': ['app/manage/performancedashboard/constants/performance-dashboard.constant.js'],
+            'navigation-dashboard.controller': ['app/manage/navigationdashboard/controllers/navigation-dashboard.controller.js'],
             'location-type.controller': ['app/manage/locationtype/controllers/location-type.controller.js'],
             'manage-location-type.controller': ['app/manage/locationtype/controllers/manage-location-type.controller.js'],
             'manage-location-type-dynamic.controller': ['app/manage/locationtype/dynamic/controllers/manage-location-type.controller.js'],
