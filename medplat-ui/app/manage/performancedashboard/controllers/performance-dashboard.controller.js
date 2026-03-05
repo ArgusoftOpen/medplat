@@ -1,5 +1,5 @@
 (function () {
-    function DashboardController(Mask, QueryDAO, GeneralUtil ,DASHBOARDConst, $http) {
+    function DashboardController(Mask, QueryDAO, GeneralUtil, DASHBOARDConst, $http) {
         var dashboardCtrl = this;
         dashboardCtrl.duration = DASHBOARDConst.duration;
         dashboardCtrl.indicators = DASHBOARDConst.indicators;
@@ -130,6 +130,29 @@
 
         dashboardCtrl.lineChartOptions = {
             legend: { display: true },
+        };
+
+        dashboardCtrl.ticketChartLabels = ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"];
+        dashboardCtrl.ticketChartSeries = ['Total Tickets', 'Resolved Tickets'];
+        dashboardCtrl.ticketChartData = [
+            [45, 52, 60, 75, 82, 73],
+            [30, 42, 55, 68, 70, 60]
+        ];
+        dashboardCtrl.ticketChartColors = ['#2196F3', '#4CAF50'];
+        dashboardCtrl.ticketChartOptions = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
         };
 
         dashboardCtrl.selectedIndicator = "Population Indicators";

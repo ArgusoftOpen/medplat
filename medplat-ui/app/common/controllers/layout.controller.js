@@ -3,9 +3,16 @@
     angular.module('imtecho.controllers')
         .controller('LayoutController', LayoutController);
 
-    function LayoutController($filter, $state, AuthenticateService, $uibModal, $interval, Mask, UserDAO, GeneralUtil) {
+    function LayoutController($filter, $state, AuthenticateService, $uibModal, $interval, Mask, UserDAO, GeneralUtil, $translate, NotificationService) {
         var layout = this;
         layout.currentState = $state;
+        layout.currentLang = $translate.use() || 'en';
+
+        layout.changeLanguage = function (langKey) {
+            $translate.use(langKey);
+            layout.currentLang = langKey;
+        };
+
         function init() {
             layout.userDetail;
             layout.userObj = {};
@@ -230,5 +237,7 @@
         };
 
         init();
+        NotificationService.startSimulating();
     }
+    LayoutController.$inject = ['$filter', '$state', 'AuthenticateService', '$uibModal', '$interval', 'Mask', 'UserDAO', 'GeneralUtil', '$translate', 'NotificationService'];
 })();

@@ -32,6 +32,10 @@ angular.module('imtecho').constant("DASHBOARDConst", {
             key: "NCD",
             id: "ncdScale"
         },
+        {
+            key: "Ticket Trends",
+            id: "ticketScale"
+        },
 
     ]
 });

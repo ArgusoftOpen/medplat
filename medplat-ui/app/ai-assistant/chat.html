@@ -1,0 +1,142 @@
+<div class="ai-assistant-fab" ng-click="chat.toggleChat()" ng-hide="chat.showChat">
+    <img src="img/fhs-icon.png" alt="AI ANM">
+</div>
+
+<div class="ai-assistant-container" ng-show="chat.showChat">
+    <div class="chat-header">
+        <h5>{{ 'CHAT.TITLE' | translate }} (AI ANM)</h5>
+        <button class="close-btn" ng-click="chat.toggleChat()">&times;</button>
+    </div>
+    <div class="chat-body" id="chat-messages">
+        <div ng-repeat="msg in chat.messages" class="message"
+            ng-class="{'user-msg': msg.sender === 'user', 'ai-msg': msg.sender === 'ai'}">
+            <div class="msg-content">{{ msg.text }}</div>
+            <div class="msg-time">{{ msg.timestamp | date:'shortTime' }}</div>
+        </div>
+    </div>
+    <div class="chat-footer">
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="chat.newMessage"
+                placeholder="{{ 'CHAT.PLACEHOLDER' | translate }}" ng-keypress="chat.checkEnter($event)">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" ng-click="chat.sendMessage()">
+                    {{ 'CHAT.SEND' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .ai-assistant-fab {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #007bff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        z-index: 1050;
+        transition: transform 0.3s;
+    }
+
+    .ai-assistant-fab:hover {
+        transform: scale(1.1);
+    }
+
+    .ai-assistant-fab img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .ai-assistant-container {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 350px;
+        height: 500px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        z-index: 1050;
+        overflow: hidden;
+    }
+
+    .chat-header {
+        background: #007bff;
+        color: white;
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chat-header h5 {
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .chat-body {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        background: #f8f9fa;
+    }
+
+    .message {
+        margin-bottom: 10px;
+        max-width: 80%;
+    }
+
+    .msg-content {
+        padding: 8px 12px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        position: relative;
+    }
+
+    .user-msg {
+        margin-left: auto;
+        text-align: right;
+    }
+
+    .user-msg .msg-content {
+        background: #007bff;
+        color: white;
+        border-bottom-right-radius: 0;
+    }
+
+    .ai-msg .msg-content {
+        background: white;
+        color: #333;
+        border: 1px solid #ddd;
+        border-bottom-left-radius: 0;
+    }
+
+    .msg-time {
+        font-size: 0.75rem;
+        color: #999;
+        margin-top: 2px;
+    }
+
+    .chat-footer {
+        padding: 10px;
+        border-top: 1px solid #ddd;
+        background: white;
+    }
+</style>

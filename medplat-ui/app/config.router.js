@@ -56,7 +56,7 @@
                         'formvalidation.directive'
                     ])
                 })
-                
+
                 .state('techo', {
                     url: "/techo",
                     abstract: true,
@@ -136,7 +136,9 @@
                         'generate-dynamic-template.directives',
                         'listvalue.modal',
                         'search.directive',
-                        'search.constants'
+                        'search.constants',
+                        'ai-assistant.controller',
+                        'notification.service'
                     ])
                 })
                 .state('techo.dashboard', {
@@ -228,7 +230,16 @@
                         'announcement.service',
                     ])
                 })
-                
+                .state('techo.manage.reportissue', {
+                    url: '/reportissue',
+                    title: 'Report Issue',
+                    templateUrl: 'app/manage/issue-reporting/report-issue.html',
+                    controller: 'ReportIssueController as ctrl',
+                    resolve: load([
+                        'report-issue.controller'
+                    ])
+                })
+
                 .state('techo.manage.memberinformation', {
                     url: '/memberinformation/:uniqueHealthId',
                     title: 'Member Information',
@@ -287,7 +298,7 @@
                         'alasql',
                     ])
                 })
-                
+
                 .state('techo.manage.mobilemangementinfo', {
                     url: '/mobileManagementInfo',
                     title: 'Mobile management',
@@ -352,7 +363,7 @@
                         'mobile-library.service',
                     ])
                 })
-                
+
                 .state('techo.manage.uploadDocument', {
                     url: '/uploadDocument',
                     title: 'Upload Document',
@@ -472,7 +483,7 @@
                         // 'ndhm-hip-util-service'
                     ])
                 })
-               
+
                 .state('techo.manage.outPatientTreatmentSearch', {
                     url: '/outpatienttreatment/search',
                     title: 'Out-Patient Treatment (OPD)',
@@ -597,7 +608,7 @@
                         'reverseIterate.filter',
                     ])
                 })
-                
+
                 .state('techo.manage.npcblist', {
                     url: '/npcb',
                     title: 'National Programme For Control of Blindness',
@@ -622,7 +633,7 @@
                         'authentication.service',
                     ])
                 })
-                
+
                 .state('techo.manage.cerebralpalsy', {
                     url: '/cerebralpalsy/:id',
                     title: 'Suspected CP Child Details',
@@ -636,7 +647,7 @@
                         'anganwadi.service'
                     ])
                 })
-                
+
                 .state('techo.manage.laboratorytests', {
                     url: '/laboratorytests/:id',
                     title: 'Laboratory Tests Update',
@@ -671,7 +682,7 @@
                         'statecapitalize.filter'
                     ])
                 })
-               
+
                 .state('techo.manage.addNotificationConfiguration', {
                     url: '/admin/applicationmanagement/notification/add',
                     title: 'Add Notification configuration',
@@ -730,7 +741,7 @@
                         // 'ngmap'
                     ])
                 })
-                
+
                 .state('techo.dashboard.fhsreport', {
                     url: '/fhsreport/:locationId/:userId',
                     title: 'FHS Report',
@@ -760,7 +771,7 @@
                         'alasql'
                     ])
                 })
-                
+
                 .state('techo.training.dashboardDetails', {
                     url: '/dashboarddetails/:trainerId/:trainingId/:trainingDate',
                     title: 'Training Dashboard Details',
@@ -800,7 +811,7 @@
                         'training-schedule.service'
                     ])
                 })
-                
+
                 .state('techo.dashboard.gvkCallEffectivenessReports', {
                     url: '/gvkCallEffectivenessReports',
                     templateUrl: 'app/manage/gvkcallcenterreport/calleffectivessreprot/views/gvk-call-effectiveness-reports.html',
@@ -841,7 +852,7 @@
                         'ago-from-date.filter'
                     ])
                 })
-                
+
                 .state('techo.report', {
                     url: '/report',
                     template: '<ui-view></ui-view>',
@@ -893,7 +904,7 @@
                         'syncWithServerService'
                     ])
                 })
-                
+
                 .state('techo.report.groups', {
                     url: '/groups',
                     title: 'Groups',
@@ -1028,7 +1039,7 @@
                         'event-exception.modal.controller'
                     ])
                 })
-                
+
                 .state('techo.manage.location', {
                     url: '/location',
                     title: 'Manage Location',
@@ -1111,7 +1122,7 @@
                         'multi-media-player.controller'
                     ])
                 })
-                
+
                 .state('techo.manage.familymoving', {
                     url: '/familymoving',
                     title: 'Family Moving',
@@ -1125,7 +1136,7 @@
                         'anganwadi.service'
                     ])
                 })
-                
+
                 .state('techo.manage.createsync', {
                     url: '/createsync',
                     title: 'Create RCH Data Sync Request',
@@ -1208,7 +1219,7 @@
                         'sicklecell.service',
                     ])
                 })
-                
+
                 .state('techo.manage.medicinesdynamic', {
                     url: '/medicinesdynamic/:id',
                     title: 'Medicines given as per protocol',
@@ -1229,7 +1240,7 @@
                         'child-screening.service'
                     ])
                 })
-                
+
                 .state('techo.manage.managelocationtypedynamic', {
                     url: '/managelocationtypedynamic/:id',
                     title: 'Manage Location Type',
@@ -1241,7 +1252,7 @@
                         'location.service',
                     ])
                 })
-                
+
                 .state('techo.manage.npcbexaminedynamic', {
                     url: '/npcb/examinedynamic/:action/:id',
                     title: 'NPCB Examination',
@@ -1288,7 +1299,7 @@
                         'health-infrastructure-service'
                     ])
                 })
-                
+
                 .state('techo.manage.ancSearch', {
                     url: '/ancsearch',
                     title: 'ANC Service Visit',
@@ -2588,7 +2599,7 @@
                         'ncd-member-detail-dnhdd.controller',
                         'ncd-dnhdd.service',
                         'referral-dnhdd.component'
-                        
+
                     ])
                 })
                 .state('techo.ncd.membersdnhdd', {
@@ -2604,7 +2615,7 @@
                         'alasql'
                     ])
                 })
-                
+
 
             function load(srcs, callback, fetchUser, fetchConstant) {
                 var depObj = {

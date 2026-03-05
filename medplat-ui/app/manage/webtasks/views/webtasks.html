@@ -117,6 +117,7 @@
                         <th>#</th>
                         <th ng-repeat="header in webtasks.taskheaders" ng-bind="header"
                             ng-if="header !== 'modal_name' && header !== 'url_name' && header !== 'id'"></th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -127,6 +128,12 @@
                         <td>{{$index + 1}}</td>
                         <td ng-repeat="detail in task.details" ng-bind-html="detail | trustAsHtml"
                             ng-if="webtasks.taskheaders[$index] !== 'modal_name' && webtasks.taskheaders[$index] !== 'url_name' && webtasks.taskheaders[$index] !== 'id'">
+                        </td>
+                        <td>
+                            <span class="badge"
+                                ng-class="{'badge-warning': task.status === 'Open', 'badge-info': task.status === 'In Progress', 'badge-success': task.status === 'Resolved'}">
+                                {{task.status || 'Open'}}
+                            </span>
                         </td>
                         <td class="action-cell no-print">
                             <ul class="action-item"
@@ -229,8 +236,8 @@
                                         <div ng-if="webtasks.selectedTaskForAction.isOtherDetailsRequired">
                                             <form role="form" name="webtasks.otherDetails" novalidate>
                                                 <validate for="otherDetails" required-msg=" other Details">
-                                                    <textarea class="form-control cst-form-control" maxlength="99" form-control
-                                                        form-control rows="2" cols="40" name="otherDetails"
+                                                    <textarea class="form-control cst-form-control" maxlength="99"
+                                                        form-control form-control rows="2" cols="40" name="otherDetails"
                                                         id="otherDetails"
                                                         ng-model="webtasks.selectedTaskForAction.otherDetail"
                                                         ng-required="webtasks.selectedTaskForAction.isOtherDetails"></textarea>
