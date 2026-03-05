@@ -20,9 +20,18 @@
         'ui.mask',
         'daterangepicker',
         'textAngular',
+        'pascalprecht.translate',
         'config'
     ]);
-    as.config(function (AuthenticateServiceProvider, MaskProvider) {
+    as.config(function (AuthenticateServiceProvider, MaskProvider, $translateProvider) {
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'app/languages/',
+            suffix: '.json'
+        });
+        $translateProvider.preferredLanguage('en');
+        $translateProvider.fallbackLanguage('en');
+        $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+
         MaskProvider.setTemplate('<i class ="fa fa-cog fa-spin fa-2x"></i>');
         AuthenticateServiceProvider.setClientDetails('imtecho-ui', 'imtecho-ui-secret');
     });

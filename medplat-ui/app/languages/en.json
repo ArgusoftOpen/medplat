@@ -1,0 +1,17 @@
+{
+    "LOGIN": {
+        "TITLE": "Login",
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "SUBMIT": "Sign In"
+    },
+    "DASHBOARD": {
+        "TITLE": "Dashboard",
+        "WELCOME": "Welcome to Medplat"
+    },
+    "CHAT": {
+        "TITLE": "AI Assistant",
+        "PLACEHOLDER": "How can I help you today?",
+        "SEND": "Send"
+    }
+}

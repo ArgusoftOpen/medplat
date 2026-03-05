@@ -31,6 +31,18 @@
                 </ul>
             </div>
         </li>
+        <li class="user dropdown" uib-dropdown dropdown-append-to-body uib-dropdown-toggle>
+            <a type="" class="nav-link">
+                <i class="fa fa-language"></i> {{layout.currentLang | uppercase}}
+            </a>
+            <div class="user-data dropdown-menu dropdown-menu-right" uib-dropdown-menu>
+                <ul>
+                    <li ng-click="layout.changeLanguage('en')"><a href="javascript:void(0)">English</a></li>
+                    <li ng-click="layout.changeLanguage('hi')"><a href="javascript:void(0)">हिन्दी (Hindi)</a></li>
+                    <li ng-click="layout.changeLanguage('gu')"><a href="javascript:void(0)">ગુજરાતી (Gujarati)</a></li>
+                </ul>
+            </div>
+        </li>
         <li class="user  dropdown" uib-dropdown dropdown-append-to-body uib-dropdown-toggle>
             <a type="" data-test="user-dropdown">
                 <span class="user-image"><img alt="image" src="img/default.jpg" class="img-fluid"></span>
@@ -170,6 +182,12 @@
             </a>
             <div class="position-wrapper">
                 <ul ng-if="layout.menuList.manage.length > 0" class="cst-scrollbar sub-menu">
+                    <li>
+                        <a href="javascript:void(0)" ui-sref="techo.manage.reportissue"
+                            data-test="sub-menu-report-issue" ui-sref-opts="{clearSessionStorage:true}">
+                            Report Issue
+                        </a>
+                    </li>
                     <li ng-repeat="menu in layout.menuList.manage" ng-class="{'has-sub':menu.isGroup}">
                         <a ng-if='menu.isGroup || menu.isSubGroup' data-test="sub-menu-{{menu.name}}">
                             {{menu.name}}
@@ -228,6 +246,9 @@
     role="main">
     <ui-view></ui-view>
 </main>
+<div ng-controller="ChatController as chat">
+    <div ng-include="'app/ai-assistant/chat.html'"></div>
+</div>
 <footer class="hr-footer">
     <!-- <ul class="logo-list">
         <li ng-repeat="imageData in layout.logoImages">
@@ -237,9 +258,10 @@
         </li>
     </ul> -->
     <p style="text-align: justify;">
-        <i>A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators especially in a public health context</i>
+        <i>A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators
+            especially in a public health context</i>
     </p>
-        <!-- <a href="http://www.argusoft.com/" target="_blank" border="0">
+    <!-- <a href="http://www.argusoft.com/" target="_blank" border="0">
         <img alt="image" class="argus-logo" src="img/medplat.png" style="height: 50px;">
     </a> -->
 </footer>

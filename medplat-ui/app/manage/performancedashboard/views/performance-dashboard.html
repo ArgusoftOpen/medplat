@@ -496,6 +496,47 @@
                 </table>
             </div>
         </div>
+        <!--Ticket Trends-->
+        <div class="col-12 padding-left-right-0" ng-show="dashboardCtrl.selectedIndicator.key ==='Ticket Trends'">
+            <div class="card p-4 mt-3">
+                <h4 class="mb-4">Ticket Resolution Trends (AI ANM & Support)</h4>
+                <div style="height: 400px; width: 100%;">
+                    <canvas id="ticketTrendChart" class="chart chart-line" chart-data="dashboardCtrl.ticketChartData"
+                        chart-labels="dashboardCtrl.ticketChartLabels" chart-series="dashboardCtrl.ticketChartSeries"
+                        chart-options="dashboardCtrl.ticketChartOptions" chart-colors="dashboardCtrl.ticketChartColors">
+                    </canvas>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="info-box bg-blue">
+                            <span class="info-box-icon"><i class="fa fa-ticket"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Tickets</span>
+                                <span class="info-box-number">387</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info-box bg-green">
+                            <span class="info-box-icon"><i class="fa fa-check"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Resolved</span>
+                                <span class="info-box-number">312</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info-box bg-yellow">
+                            <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Pending</span>
+                                <span class="info-box-number">75</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="filter-div" ng-if="!dashboardCtrl.noRolesAssignedToShow">
         <span class="filter-toggle" ng-click="dashboardCtrl.toggleFilter()">Filter</span>
