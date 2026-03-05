@@ -16,17 +16,9 @@
 <meta http-equiv="Permissions-Policy"
     content="geolocation=(), midi=(), camera=(), usb=(), magnetometer=(), accelerometer=(), vr=(), xr=(), sync-xhr=(), microphone=(), payment=(), fullscreen=(), unsized-media=(), autoplay=(), speaker=(), ambient-light-sensor=(), encrypted-media=(), usb=()">
 
-  <!-- Title -->
   <title ng-bind-template="{{appName}} {{currentState.title}}"></title>
   <link rel="shortcut icon" href="{{'img/' + implementation + 'favicon.ico'}}" type="image/ico" />
-  <!--CSS-->
-
-  <!--Ng-Table CSS-->
-  <!-- <link rel="stylesheet" href="node_modules/ng-table/bundles/ng-table.min.css"> -->
-  <!--Font and Icons-->
-  <!-- Bootstrap v4.0.0-alpha.6 -->
   <link href="styles/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <!-- Fonts and Icons from Local -->
   <link href="styles/fonts/font-file.css" rel="stylesheet" type="text/css" />
   <link href="styles/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <link href="styles/css/iconmoon.css" rel="stylesheet" type="text/css" />
@@ -36,9 +28,7 @@
   <link href="bower_components/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" />
   <link href="third_party/jquery.loadmask/jquery.loadmask.css?version=v$VERSION$" rel="stylesheet" type="text/css" />
 
-  <!-- Custom CSS -->
   <link href="styles/css/developer.css" rel="stylesheet" type="text/css" />
-  <!-- text-angular css -->
   <link rel='stylesheet' href='bower_components/textAngular/dist/textAngular.css'>
 
   <link href="styles/css/chosen.css" rel="stylesheet" type="text/css" />
@@ -46,16 +36,63 @@
   <link href="styles/css/developer.css" rel="stylesheet" type="text/css" />
 
   <link href="styles/css/scroll.css" rel="stylesheet" type="text/css" />
-  <!--Responsive CSS-->
   <link href="styles/css/responsive.css" rel="stylesheet" type="text/css" />
   <link href="bower_components/AngularJS-Toaster/toaster.min.css" rel="stylesheet" type="text/css" />
-  <!--SCRIPTS-->
+  <style>
+    .chatbot-box {
+      position: fixed; bottom: 20px; right: 20px; width: 320px; z-index: 10000;
+      background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      font-family: Arial, sans-serif; overflow: hidden;
+    }
+    .chat-header { background: #007bff; color: white; padding: 12px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;}
+    .chat-body { height: 260px; overflow-y: auto; padding: 15px; background: #f8f9fa; }
+    .chat-footer { display: flex; padding: 10px; border-top: 1px solid #ddd; background: white; align-items: center; }
+    .chat-input { flex: 1; border: 1px solid #ccc; padding: 8px; border-radius: 20px; outline: none; margin: 0 5px; }
+    .icon-btn { cursor: pointer; font-size: 18px; color: #666; background: none; border: none; padding: 5px; }
+    .send-btn { background: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; }
+  </style>
 
 </head>
 
 <body mask isdefault="true">
   <toaster-container toaster-options="$root.toastOptions"></toaster-container>
   <ui-view> </ui-view>
+
+  <div class="chatbot-box">
+    <div class="chat-header">
+      <span>MedPlat Assistant</span>
+      <div style="display: flex; align-items: center; gap: 5px;">
+        <select style="font-size: 10px; background: #007bff; color: white; border: 1px solid white; border-radius: 5px; cursor: pointer;">
+          <option>English</option>
+          <option selected>Telugu</option>
+          <option>Hindi</option>
+        </select>
+        <span style="cursor:pointer; font-size: 20px; margin-left: 5px;">×</span>
+      </div>
+    </div>
+    
+    <div style="padding: 5px 10px; background: #fff3cd; font-size: 12px; border-bottom: 1px solid #ffeeba;">
+      <a href="#" style="color: #856404; text-decoration: none; font-weight: bold;">📋 View My Tickets (Ticket Status ikkada chudandi)</a>
+    </div>
+
+    <div class="chat-body" id="chatWindow">
+      <div ng-repeat="msg in chatMessages" 
+           ng-style="{'text-align': msg.type == 'user' ? 'right' : 'left'}">
+        <p ng-style="{'background': msg.type == 'user' ? '#dcf8c6' : '#e2e2e2'}" 
+           style="display:inline-block; padding:8px; border-radius:8px; margin-bottom:5px; font-size:13px; max-width: 80%;">
+           <strong>{{msg.type == 'user' ? 'You' : 'Bot'}}:</strong> {{msg.text}}
+        </p>
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <button class="icon-btn" title="Attach File">📎</button>
+      <input type="text" class="chat-input" placeholder="Ikkada type cheyandi..." ng-model="userMsg" ng-keypress="($event.which === 13) && aiAssistantResponse()">
+      <button class="icon-btn" title="Voice Input">🎤</button>
+      <button class="send-btn" ng-click="aiAssistantResponse()">Send</button>
+    </div>
+  </div>
+
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/moment/moment.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
@@ -74,7 +111,6 @@
   <script src="third_party/popper.min.js?version=v$VERSION$"></script>
   <script src="third_party/bootstrap.min.js?version=v$VERSION$"></script>
   <script src="third_party/leaflet.js?version=v$VERSION$"></script>
-  <!-- text angular  -->
   <script src='bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
   <script src='bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
   <script src='bower_components/textAngular/dist/textAngular.min.js'></script>
@@ -87,7 +123,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.js"></script>
   <script src="https://d3js.org/topojson.v1.min.js"></script>
 
-  <!-- <script src="node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script> -->
   <script src="app/_init.js"></script>
   <script src="app/common/services/util/navigation.service.js"></script>
   <script src="app/common/services/util/uuid-generator.js"></script>
@@ -118,15 +153,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
-
-
-  <!-- Date Range Picker -->
   <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
   <script src="bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
   <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" href="third_party/leaflet.css" />
 
-
 </body>
-
 </html>
