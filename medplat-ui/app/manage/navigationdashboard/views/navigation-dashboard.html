@@ -1,0 +1,264 @@
+<div class="navigation-dashboard">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="page-title">Navigation Dashboard</h2>
+            <p class="page-description">Quick access to all modules and system overview</p>
+        </div>
+    </div>
+
+    <!-- Quick Access Cards -->
+    <div class="row">
+        <div class="col-12">
+            <h3 class="section-title">Quick Access</h3>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4" ng-repeat="item in navDashboardCtrl.quickAccessItems">
+            <div class="card dashboard-card card-{{item.color}}" ng-click="navDashboardCtrl.navigateTo(item.state)">
+                <div class="card-body text-center">
+                    <div class="card-icon">
+                        <i class="fa {{item.icon}} fa-3x"></i>
+                    </div>
+                    <h5 class="card-title">{{item.title}}</h5>
+                    <p class="card-text">{{item.description}}</p>
+                    <button class="btn btn-outline-{{item.color}} btn-sm">
+                        <i class="fa fa-arrow-right"></i> Access
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Statistics -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3 class="section-title">System Overview</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-primary">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="stat-details">
+                    <h4>{{navDashboardCtrl.systemStats.totalUsers}}</h4>
+                    <p>Total Users</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-success">
+                    <i class="fa fa-user-check"></i>
+                </div>
+                <div class="stat-details">
+                    <h4>{{navDashboardCtrl.systemStats.activeUsers}}</h4>
+                    <p>Active Users</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-info">
+                    <i class="fa fa-sync-alt"></i>
+                </div>
+                <div class="stat-details">
+                    <h4>{{navDashboardCtrl.systemStats.dataSynced}}</h4>
+                    <p>Data Synced</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-warning">
+                    <i class="fa fa-heart"></i>
+                </div>
+                <div class="stat-details">
+                    <h4>{{navDashboardCtrl.systemStats.systemHealth}}</h4>
+                    <p>System Health</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activities -->
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Recent Activities</h5>
+                    <button class="btn btn-sm btn-outline-primary" ng-click="navDashboardCtrl.refreshData()">
+                        <i class="fa fa-refresh"></i> Refresh
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="activity-item" ng-repeat="activity in navDashboardCtrl.recentActivities">
+                        <div class="activity-icon activity-{{activity.type}}">
+                            <i class="fa {{activity.icon}}"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h6>{{activity.title}}</h6>
+                            <small class="text-muted">{{activity.time}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fa fa-plus-circle text-primary"></i> Create New Report
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fa fa-download text-success"></i> Export Data
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fa fa-cog text-info"></i> System Settings
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fa fa-question-circle text-warning"></i> Help & Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.navigation-dashboard {
+    padding: 20px;
+}
+
+.page-title {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.page-description {
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    color: #34495e;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.dashboard-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.card-icon {
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.card-primary .card-icon { color: #007bff; }
+.card-success .card-icon { color: #28a745; }
+.card-info .card-icon { color: #17a2b8; }
+.card-warning .card-icon { color: #ffc107; }
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.stat-details h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.stat-details p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.activity-success { background: #28a745; }
+.activity-info { background: #17a2b8; }
+.activity-warning { background: #ffc107; }
+
+.activity-content h6 {
+    margin: 0;
+    font-weight: 500;
+}
+
+.activity-content small {
+    font-size: 0.8rem;
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+</style>
