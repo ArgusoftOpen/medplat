@@ -421,6 +421,7 @@
             'report-offline.constant': ['app/manage/reportoffline/constants/report-offline.constant.js'],
             'dashboardpoc.controller': ['app/manage/dashboard/controllers/dashboard.controller.js'],
             'dashboardpoc.constant': ['app/manage/dashboard/constants/dashboard.constant.js'],
+            'navigation-dashboard.controller': ['app/dashboard/navigation-dashboard.controller.js'],
             'mobile-feature-management.controller': ["app/manage/mobileFeatureManagement/controllers/mobile-feature-management.controller.js"],
             'mobile-feature.modal.controller': ["app/manage/mobileFeatureManagement/controllers/mobile-feature.modal.controller.js"],
             'mobile-menu-management.controller': ["app/manage/mobileMenuManagement/controllers/mobile-menu-management.controller.js"],
