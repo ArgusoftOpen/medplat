@@ -1,0 +1,141 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="page-title">Navigation Dashboard</h2>
+        </div>
+    </div>
+    
+    <div class="row dashboard-cards">
+        <div class="col-md-3 col-sm-6">
+            <div class="dashboard-card" ui-sref="techo.dashboard.webtasks">
+                <div class="card-icon">
+                    <i class="fa fa-tasks"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Web Tasks</h3>
+                    <p>Manage and view web tasks</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="dashboard-card" ui-sref="techo.dashboard.fhs">
+                <div class="card-icon">
+                    <i class="fa fa-heartbeat"></i>
+                </div>
+                <div class="card-content">
+                    <h3>FHS Dashboard</h3>
+                    <p>Field Health System overview</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="dashboard-card" ui-sref="techo.manage.lmsdashboard">
+                <div class="card-icon">
+                    <i class="fa fa-graduation-cap"></i>
+                </div>
+                <div class="card-content">
+                    <h3>LMS Dashboard</h3>
+                    <p>Learning Management System</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="dashboard-card" ui-sref="techo.dashboard.callcenter">
+                <div class="card-icon">
+                    <i class="fa fa-phone"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Call Center</h3>
+                    <p>Call Center operations</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row dashboard-cards">
+        <div class="col-md-3 col-sm-6">
+            <div class="dashboard-card" ui-sref="techo.manage.districtperformancedashboard">
+                <div class="card-icon">
+                    <i class="fa fa-chart-bar"></i>
+                </div>
+                <div class="card-content">
+                    <h3>District Performance</h3>
+                    <p>View district statistics</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="dashboard-card" ui-sref="techo.dashboard.cccverification">
+                <div class="card-icon">
+                    <i class="fa fa-shield-alt"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Command Center</h3>
+                    <p>Command & Control Center</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="dashboard-card" ui-sref="techo.training.dashboardDetails">
+                <div class="card-icon">
+                    <i class="fa fa-chalkboard-teacher"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Training Dashboard</h3>
+                    <p>Training analytics and reports</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="dashboard-card" ui-sref="techo.admin.users">
+                <div class="card-icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="card-content">
+                    <h3>User Management</h3>
+                    <p>Manage users and roles</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="quick-stats">
+                <h3>Quick Overview</h3>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stat-box">
+                            <h4>Active Users</h4>
+                            <span class="stat-number">{{dashboardCtrl.activeUsers}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-box">
+                            <h4>Pending Tasks</h4>
+                            <span class="stat-number">{{dashboardCtrl.pendingTasks}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-box">
+                            <h4>Today's Activities</h4>
+                            <span class="stat-number">{{dashboardCtrl.todayActivities}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-box">
+                            <h4>System Health</h4>
+                            <span class="stat-number health-good">Good</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

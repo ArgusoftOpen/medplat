@@ -144,6 +144,17 @@
                     abstract: true,
                     template: '<ui-view></ui-view>'
                 })
+                .state('techo.dashboard.navigation', {
+                    url: '/navigation',
+                    title: 'Navigation Dashboard',
+                    templateUrl: 'app/dashboard/views/navigation-dashboard.html',
+                    controller: 'NavigationDashboardController as dashboardCtrl',
+                    resolve: load([
+                        'navigation-dashboard.controller',
+                        'bootstrap',
+                        'generalutil.service'
+                    ])
+                })
                 .state('techo.admin', {
                     url: "/admin",
                     abstract: true,
