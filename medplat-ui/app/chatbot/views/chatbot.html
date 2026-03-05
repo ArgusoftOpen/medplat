@@ -1,0 +1,164 @@
+<div class="chatbot-container">
+    <div class="chatbot-header">
+        <div class="title">
+            <img src="img/fhs-icon.png" alt="AI" class="ai-icon">
+            AI ANM Assistant
+        </div>
+        <div class="actions">
+            <select ng-model="chatbot.selectedLanguage" ng-change="chatbot.changeLanguage()" class="lang-select">
+                <option ng-repeat="lang in chatbot.languages" value="{{lang.code}}">{{lang.name}}</option>
+            </select>
+            <button class="btn btn-sm btn-outline-light" ng-click="chatbot.closeChat()">
+                <em class="fa fa-times"></em>
+            </button>
+        </div>
+    </div>
+
+    <div class="chatbot-messages" id="message-container">
+        <div ng-repeat="msg in chatbot.messages" class="message-wrapper" ng-class="{'user': msg.sender === 'You'}">
+            <div class="message-bubble" ng-class="{'ai': msg.sender !== 'You'}">
+                <div class="sender-name">{{msg.sender}}</div>
+                <div class="text">{{msg.text}}</div>
+                <div class="options" ng-if="msg.isFlow">
+                    <button ng-repeat="opt in msg.options" class="btn btn-xs btn-primary m-1"
+                        ng-click="chatbot.selectOption(opt)">
+                        {{opt}}
+                    </button>
+                </div>
+                <div class="time">{{msg.time | date:'h:mm a'}}</div>
+            </div>
+        </div>
+        <div class="message-wrapper" ng-if="chatbot.isTyping">
+            <div class="message-bubble ai italic">AI ANM is typing...</div>
+        </div>
+    </div>
+
+    <div class="chatbot-input-area">
+        <div class="quick-actions">
+            <button class="btn btn-xs btn-outline-primary" ng-click="chatbot.reportIssue()">Report Issue</button>
+            <button class="btn btn-xs btn-outline-primary" ui-sref="techo.chatbot.tickets">My Tickets</button>
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Type your message..." ng-model="chatbot.newMessage"
+                ng-keypress="$event.keyCode === 13 && chatbot.sendMessage()">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" ng-click="chatbot.sendMessage()">
+                    <em class="fa fa-paper-plane"></em>
+                </button>
+            </div>
+        </div>
+        <div class="voice-attachment-btns">
+            <button class="btn btn-link p-0 mr-2"><em class="fa fa-microphone"></em></button>
+            <button class="btn btn-link p-0"><em class="fa fa-paperclip"></em></button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .chatbot-container {
+        height: calc(100vh - 120px);
+        display: flex;
+        flex-direction: column;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatbot-header {
+        background: #007bff;
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .ai-icon {
+        width: 25px;
+        height: 25px;
+        margin-right: 10px;
+        background: white;
+        border-radius: 50%;
+        padding: 2px;
+    }
+
+    .lang-select {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        margin-right: 10px;
+        font-size: 12px;
+    }
+
+    .chatbot-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .message-wrapper {
+        display: flex;
+        margin-bottom: 15px;
+    }
+
+    .message-wrapper.user {
+        justify-content: flex-end;
+    }
+
+    .message-bubble {
+        max-width: 70%;
+        padding: 10px 15px;
+        border-radius: 15px;
+        position: relative;
+        background: #e9ecef;
+    }
+
+    .message-bubble.ai {
+        background: #fff;
+        border: 1px solid #dee2e6;
+    }
+
+    .message-wrapper.user .message-bubble {
+        background: #007bff;
+        color: white;
+        border-radius: 15px 15px 0 15px;
+    }
+
+    .sender-name {
+        font-size: 10px;
+        font-weight: bold;
+        margin-bottom: 2px;
+    }
+
+    .time {
+        font-size: 8px;
+        text-align: right;
+        margin-top: 5px;
+        opacity: 0.7;
+    }
+
+    .chatbot-input-area {
+        padding: 15px;
+        background: white;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .quick-actions {
+        margin-bottom: 10px;
+    }
+
+    .voice-attachment-btns {
+        margin-top: 5px;
+        display: flex;
+    }
+
+    .italic {
+        font-style: italic;
+    }
+</style>

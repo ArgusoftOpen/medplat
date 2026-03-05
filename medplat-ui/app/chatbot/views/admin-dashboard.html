@@ -1,0 +1,59 @@
+<div class="admin-dashboard container-fluid p-4">
+    <h2 class="mb-4">Chatbot Performance Dashboard</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center p-3 shadow-sm">
+                <div class="text-muted small">Total Tickets</div>
+                <div class="h3 mb-0">{{adminDash.stats.totalTickets}}</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center p-3 shadow-sm text-success">
+                <div class="text-muted small">Resolved</div>
+                <div class="h3 mb-0">{{adminDash.stats.resolvedTickets}}</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center p-3 shadow-sm text-primary">
+                <div class="text-muted small">Avg. Resolution</div>
+                <div class="h3 mb-0">{{adminDash.stats.avgResolutionTime}}</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center p-3 shadow-sm text-warning">
+                <div class="text-muted small">User Rating</div>
+                <div class="h3 mb-0">{{adminDash.stats.userSatisfaction}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white"><strong>Issue Trends by Category</strong></div>
+                <div class="card-body">
+                    <div ng-repeat="trend in adminDash.trends" class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>{{trend.category}}</span>
+                            <span>{{trend.count}}</span>
+                        </div>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar" role="progressbar"
+                                style="width: {{ (trend.count / 154) * 100 }}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white"><strong>Chatbot Accuracy Rate</strong></div>
+                <div class="card-body text-center">
+                    <div style="font-size: 48px; color: #28a745;">92%</div>
+                    <p class="text-muted">Based on 1,200+ automated interactions this month.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
