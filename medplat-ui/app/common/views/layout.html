@@ -228,6 +228,41 @@
     role="main">
     <ui-view></ui-view>
 </main>
+
+<!-- Chatbot Floating Action Button -->
+<div class="chatbot-fab" ui-sref="techo.chatbot" title="Support Chatbot">
+    <img src="img/fhs-icon.png" alt="Chat" style="width: 30px; height: 30px;">
+    <span class="badge badge-danger notification-badge" ng-if="layout.unreadNotifications > 0">{{layout.unreadNotifications}}</span>
+</div>
+
+<style>
+.chatbot-fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #007bff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.2s, background-color 0.2s;
+}
+.chatbot-fab:hover {
+    transform: scale(1.1);
+    background-color: #0056b3;
+}
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 12px;
+}
+</style>
 <footer class="hr-footer">
     <!-- <ul class="logo-list">
         <li ng-repeat="imageData in layout.logoImages">
