@@ -1,13 +1,28 @@
 (function (angular) {
-    function LoginController(AuthenticateService, $rootScope, $state, States, Mask, GeneralUtil) {
+function LoginController(AuthenticateService, $rootScope, $state, States, Mask, GeneralUtil, $translate) {
         var login = this;
         login.user = {};
         login.as = { user: {} };
         login.showSystemNotice = false;
         login.hideAppLink = false;
         login.env =  GeneralUtil.getEnv();
+         login.currentLang = $translate.use() || 'en';
+        login.languages = [
+            { code: 'en', name: 'English' },
+            { code: 'hi', name: 'हिन्दी' }
+        ];
         
+        login.changeLanguage = function(langCode) {
+            $translate.use(langCode);
+            login.currentLang = langCode;
+            localStorage.setItem('preferredLanguage', langCode);
+        };
         login.init = () => {
+             var savedLang = localStorage.getItem('preferredLanguage');
+            if(savedLang) {
+                $translate.use(savedLang);
+                login.currentLang = savedLang;
+            }
             [login.imagesPath, login.logoImages] = GeneralUtil.getLogoImages();
             Mask.show();
             AuthenticateService.getSystemNotice().then((response) => {
@@ -107,5 +122,8 @@
 
         login.init();
     }
+    
+    LoginController.$inject = ['AuthenticateService', '$rootScope', '$state', 'States', 'Mask', 'GeneralUtil', '$translate'];
+    
     angular.module('imtecho.controllers').controller('LoginController', LoginController);
 })(window.angular);

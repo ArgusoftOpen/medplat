@@ -1,0 +1,11 @@
+{
+    "LOGIN": {
+        "TITLE": "Login",
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "SUBMIT": "Submit",
+        "LOST_PASSWORD": "Lost your password?",
+        "DESCRIPTION": "A low code comprehensive Primary Healthcare management Platform",
+        "PLEASE_NOTE": "Please Note:"
+    }
+}
