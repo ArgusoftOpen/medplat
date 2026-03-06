@@ -26,3 +26,14 @@ replay_pid*
 /medplat-ui/nbproject/private/
 /medplat-ui/bower_components/
 /medplat-ui/node_modules/
+
+# Local development artifacts
+/node_modules/
+/package-lock.json
+/package.json
+/usr/
+/medplat-android/.gradle/
+/medplat-web/bower_components/
+
+# Build output / generated files
+/medplat-ui/dist/

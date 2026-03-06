@@ -20,12 +20,24 @@
         'ui.mask',
         'daterangepicker',
         'textAngular',
-        'config'
+        'config',
+        "pascalprecht.translate"
     ]);
     as.config(function (AuthenticateServiceProvider, MaskProvider) {
         MaskProvider.setTemplate('<i class ="fa fa-cog fa-spin fa-2x"></i>');
         AuthenticateServiceProvider.setClientDetails('imtecho-ui', 'imtecho-ui-secret');
     });
+    as.config(['$translateProvider', function ($translateProvider) {
+
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'app/locales/',
+        suffix: '.json'
+    });
+
+    $translateProvider.preferredLanguage('en');
+    $translateProvider.fallbackLanguage('en');
+    $translateProvider.useSanitizeValueStrategy(null);
+    }]);
     as.run(function ($rootScope, AuthenticateService, $state, toaster, Mask, Navigation, $http, APP_CONFIG, UUIDgenerator, $stateParams) {
         $rootScope.isLoggedIn = false;
         $rootScope.isLocked = false;
