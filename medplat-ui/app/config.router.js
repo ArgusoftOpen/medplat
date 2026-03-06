@@ -144,6 +144,16 @@
                     abstract: true,
                     template: '<ui-view></ui-view>'
                 })
+                .state('techo.dashboard.home', {
+                    url: '',
+                    title: 'Dashboard',
+                    templateUrl: 'app/dashboard/views/dashboard.html',
+                    controller: 'DashboardController as dashboard',
+                    resolve: load([
+                        'main-dashboard.controller',
+                        'main-dashboard.service'
+                    ])
+                })
                 .state('techo.admin', {
                     url: "/admin",
                     abstract: true,

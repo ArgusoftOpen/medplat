@@ -1,0 +1,267 @@
+<div class="dashboard-container" ng-init="vm.$onInit()">
+    <!-- Header -->
+    <div class="dashboard-header">
+        <div class="row">
+            <div class="col-md-8">
+                <h2><i class="fa fa-tachometer-alt"></i> Dashboard</h2>
+                <p class="text-muted">Welcome to MEDPlat Dashboard - Your healthcare management hub</p>
+            </div>
+            <div class="col-md-4 text-right">
+                <button class="btn btn-primary" ng-click="vm.refreshDashboard()">
+                    <i class="fa fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div ng-if="vm.loading" class="text-center padding-20">
+        <i class="fa fa-spinner fa-spin fa-3x"></i>
+        <p>Loading dashboard data...</p>
+    </div>
+
+    <!-- Error State -->
+    <div ng-if="vm.error" class="alert alert-danger">
+        <i class="fa fa-exclamation-triangle"></i> {{vm.error}}
+    </div>
+
+    <!-- Dashboard Content -->
+    <div ng-if="!vm.loading && !vm.error">
+        <!-- Quick Stats -->
+        <div class="row margin-bottom-20">
+            <div class="col-md-3" ng-repeat="stat in vm.dashboardData.quickStats">
+                <div class="stat-card stat-card-{{stat.color}}">
+                    <div class="stat-card-body">
+                        <div class="stat-icon">
+                            <i class="fa {{stat.icon}}"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>{{stat.value}}</h3>
+                            <p>{{stat.title}}</p>
+                            <small class="stat-trend">{{stat.trend}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="row">
+            <!-- Module Access -->
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-th-large"></i> Quick Access</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6" ng-repeat="module in vm.dashboardData.modules">
+                                <div class="module-card" ng-click="vm.navigateToModule(module.key)">
+                                    <div class="module-icon">
+                                        <i class="fa {{module.icon}} fa-3x"></i>
+                                    </div>
+                                    <div class="module-info">
+                                        <h5>{{module.name}}</h5>
+                                        <p class="text-muted">{{module.description}}</p>
+                                        <small><i class="fa fa-users"></i> {{module.users}} users</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-history"></i> Recent Activities</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="activity-list">
+                            <div class="activity-item" ng-repeat="activity in vm.dashboardData.recentActivities">
+                                <div class="activity-icon">
+                                    <i class="fa fa-circle" ng-class="getActivityIconClass(activity.type)"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>{{activity.description}}</p>
+                                    <small class="text-muted">{{activity.timestamp | date:'short'}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="row margin-top-20">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-chart-bar"></i> System Overview</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="summary-item">
+                                    <h5>Total Users</h5>
+                                    <h2>{{vm.dashboardData.summary.totalUsers}}</h2>
+                                    <small class="text-success">Active: {{vm.dashboardData.summary.activeUsers}}</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="summary-item">
+                                    <h5>Total Records</h5>
+                                    <h2>{{vm.dashboardData.summary.totalRecords}}</h2>
+                                    <small class="text-info">Today: {{vm.dashboardData.summary.todayRecords}}</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="summary-item">
+                                    <h5>System Status</h5>
+                                    <h2 class="text-success">Healthy</h2>
+                                    <small class="text-muted">All systems operational</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="summary-item">
+                                    <h5>Last Update</h5>
+                                    <h2>{{vm.dashboardData.summary.lastUpdate | date:'shortTime'}}</h2>
+                                    <small class="text-muted">{{vm.dashboardData.summary.lastUpdate | date:'shortDate'}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard Styles -->
+<style>
+.dashboard-container {
+    padding: 20px;
+}
+
+.dashboard-header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-card-body {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.stat-icon {
+    font-size: 2em;
+    margin-right: 15px;
+    opacity: 0.8;
+}
+
+.stat-card-blue .stat-icon { color: #007bff; }
+.stat-card-green .stat-icon { color: #28a745; }
+.stat-card-orange .stat-icon { color: #fd7e14; }
+
+.stat-content h3 {
+    margin: 0;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.stat-content p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.stat-trend {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.module-card {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.module-card:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.module-icon {
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.module-info h5 {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.activity-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.activity-content p {
+    margin: 0 0 5px 0;
+}
+
+.summary-item {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.summary-item h2 {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.padding-20 { padding: 20px; }
+.margin-bottom-20 { margin-bottom: 20px; }
+.margin-top-20 { margin-top: 20px; }
+</style>
