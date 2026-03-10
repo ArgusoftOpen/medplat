@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MedPlat Recurring Events</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h2>MEDPLAT</h2>
+</header>
+
+<div class="container">
+
+<h1>Recurring Event Scheduler</h1>
+<p class="subtitle">Schedule events with recurrence rules</p>
+
+<form id="eventForm" class="grid-form">
+
+<div class="field">
+<label>Event Title</label>
+<input type="text" id="title" placeholder="Example: Team Meeting" required>
+</div>
+
+<div class="field">
+<label>Recurrence Type</label>
+<select id="recurrence_type">
+<option value="none">No Recurrence</option>
+<option value="daily">Daily</option>
+<option value="weekly">Weekly</option>
+<option value="monthly">Monthly</option>
+</select>
+</div>
+
+<div class="field">
+<label>Event Date</label>
+<input type="date" id="event_date" required>
+</div>
+
+<div class="field">
+<label>Event Time</label>
+<input type="time" id="event_time" required>
+</div>
+
+<div class="field">
+<label>Repeat Interval</label>
+<input type="number" id="interval_value" value="1" min="1">
+</div>
+
+<div class="field">
+<label>End Date</label>
+<input type="date" id="end_date">
+</div>
+
+<button type="submit" class="submit-btn">Create Event</button>
+
+</form>
+
+<div id="successMsg"></div>
+
+</div>
+
+<script>
+
+document.getElementById("eventForm")
+.addEventListener("submit", async (e)=>{
+
+e.preventDefault()
+
+const date=document.getElementById("event_date").value
+const time=document.getElementById("event_time").value
+const start_time=date+"T"+time
+
+const data={
+title:document.getElementById("title").value,
+start_time:start_time,
+recurrence_type:document.getElementById("recurrence_type").value,
+interval_value:document.getElementById("interval_value").value,
+end_date:document.getElementById("end_date").value
+}
+
+await fetch("/event",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+})
+
+document.getElementById("successMsg").innerText=":) Event Created Successfully!"
+
+})
+
+</script>
+
+</body>
+</html>
