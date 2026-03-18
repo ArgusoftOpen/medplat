@@ -45,17 +45,21 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | b
 RUN /bin/bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION"
 ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/bin
 ENV PATH $NODE_PATH:$PATH
-
+# Demo change for PR testing
 RUN npm install --location=global npm@8.11.0
 
 # Install global dependencies - bower
 RUN npm install --location=global bower -y 
+# Demo change for certificate PR
+
 
 # Copy application code to the working directory
-COPY entrypoint.sh /usr/
+COPY entrypoint.sh /usr/entrypoint.sh
 
 EXPOSE 8181
 
 RUN chmod +x /usr/entrypoint.sh
 
 ENTRYPOINT [ "/usr/entrypoint.sh" ]
+# Certificate PR demo change
+
