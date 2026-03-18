@@ -1,7 +1,7 @@
 <div class="login-wrapper">
     <div class="login-form text-center">
         <img alt="image" src="img/medplat.png" style="height: 60px;">
-        <h3 class="login-header">Login</h3>
+        <h3 class="login-header">LOGIN</h3>
         <div class="text-center bottom-spacer-10">
             <div class="list-group-item-text alert alert-danger" ng-show="login.user.hasAuthError">
                 {{login.user.errorMessage}} 
@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <validate for='username' required-msg="*Username is required">
                         <input data-test="username" type="text" autocomplete="off" class="form-control cst-form-control"
-                            form-control style="width:calc(100% - 1px)" placeholder="Username" name="username"
+                            form-control style="width:calc(100% - 1px)" placeholder="USERNAME" name="username"
                             id="username" ng-model="login.user.username" required>
                         <placeholder></placeholder>
                     </validate>
@@ -21,35 +21,20 @@
                     <validate for='password' required-msg="*Password is required">
                         <input data-test="password" type="password" autocomplete="new-password"
                             class="form-control cst-form-control" form-control style="width:calc(100% - 1px)"
-                            placeholder="Password" name="password" id="password" ng-model="login.user.password"
+                            placeholder="PASSWORD" name="password" id="password" ng-model="login.user.password"
                             required>
                         <placeholder></placeholder>
                     </validate>
                 </div>
                 <div class="form-group text-center">
                     <button data-test="login-btn" type="submit" class="btn btn-primary btn-block btn-login"
-                        ng-click="login.doLogin()">Login</button>
-                    <a ui-sref="resetpassword" class="link">Lost your password?</a>
+                        ng-click="login.doLogin()">LOGIN</button>
+                    <a ui-sref="resetpassword" class="link">LOST YOUR PASSWORD?</a>
                     <div ng-if="!login.hideAppLink && login.version != null">
-                        <!-- <a class="link" href="{{login.link}}" download>
-                            <span style="color: red; padding-right: 5px">
-                                (New)
-                            </span>
-                            <em class="fa fa-download" aria-hidden="false"></em>
-                            Download Mobile Application ({{login.version | emptylabel}})
-                        </a> -->
                         <div ng-if="login.release_date != null">
-                            <!-- <p style="color:#87CEFA ;">Release Date: {{login.release_date | emptylabel}} </p> -->
                         </div>
                     </div>
                     <div ng-if="!login.hideAppLink && login.version == null">
-                        <!-- <a class="link" href="{{login.link}}" download>
-                            <span style="color: red; padding-right: 5px">
-                                (New)
-                            </span>
-                            <em class="fa fa-download" aria-hidden="false"></em>
-                            Download Mobile Application
-                        </a> -->
                     </div>
                     <hr class="login-hr">
                 </div>
@@ -64,10 +49,7 @@
                 <p style="text-align: justify;">
                     <i>A low code comprehensive Primary Healthcare management Platform to track, manage and improve SDG 3 indicators especially in a public health context</i>
                 </p>
-                                <hr class="login-hr">
-                <!-- <a href="http://www.argusoft.com/" target="_blank" border="0"> <img alt="image" src="img/medplat.png"
-                        style="height: 50px;" class="mx-auto d-block">
-                </a> -->
+                <hr class="login-hr">
             </form>
         </div>
     </div>
